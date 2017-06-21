@@ -30,3 +30,12 @@ span.icontitle {
     color: white;
     text-transform: uppercase;
 }
+.col-sm-4 {
+}
+
+.col-sm-4.picture {
+    height: 480px;
+    overflow: hidden;
+    padding-right: 0px;
+    padding-left: 0px;
+}
