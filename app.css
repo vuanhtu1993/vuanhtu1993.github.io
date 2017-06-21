@@ -1,0 +1,32 @@
+.ui-menu-color01 {
+    background-color: #1abc9c !important; }
+
+.ui-menu-color02 {
+    background-color: #3498db !important; }
+
+.ui-menu-color03 {
+    background-color: #9b59b6 !important; }
+
+.ui-menu-color04 {
+    background-color: #e67e22 !important; }
+
+.ui-menu-color05 {
+    background-color: #e74c3c !important; }
+
+.ui-menu-color06 {
+    background-color: #d9a81d !important; }
+.row.menu-items {
+    height: 160px;
+}
+
+span.glyphicon.glyphicon-flag {
+    color: white;
+    font-size: 40px;
+    padding-top: 40px;
+}
+
+span.icontitle {
+    font-size: 18px;
+    color: white;
+    text-transform: uppercase;
+}
