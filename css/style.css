@@ -1,0 +1,114 @@
+body #col1 {
+  background-color: #00aeef;
+  color: white;
+  height: 40px;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  margin-left: 15px; }
+body #col2 {
+  background: darkgrey;
+  margin-left: 10px; }
+body .demo_list li {
+  border: solid 1px blue; }
+
+@font-face {
+  font-family: font1;
+  src: url(../font/helvetica-neue.ttf); }
+.A4 {
+  width: 595px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: Roboto;
+  font-size: 12px; }
+  .A4 .name_cv {
+    font-size: 20px;
+    font-family: Raleway; }
+  .A4 .carrier_cv {
+    font-size: 10px;
+    font-family: Raleway; }
+  .A4 #anhthe {
+    text-align: center; }
+    .A4 #anhthe .anh {
+      width: 40%; }
+  .A4 #html {
+    background-color: black;
+    height: 6px;
+    opacity: 0.62; }
+  .A4 #_html {
+    background-color: grey;
+    height: 6px;
+    opacity: 0.42; }
+  .A4 #namhoc {
+    padding-left: 0;
+    padding-right: 0; }
+  .A4 div#info {
+    margin-top: 20px; }
+    .A4 div#info .infomation {
+      text-transform: uppercase;
+      border-bottom: solid 1px grey;
+      margin-bottom: 10px; }
+    .A4 div#info .date {
+      margin-top: 4px; }
+  .A4 div#purpose {
+    margin-top: 20px; }
+    .A4 div#purpose .purpose_title {
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      border-bottom: 1px solid grey; }
+  .A4 div#skills {
+    margin-top: 20px; }
+    .A4 div#skills .skills_title {
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      border-bottom: 1px solid grey; }
+    .A4 div#skills .html {
+      margin-top: 14px; }
+  .A4 div#projects {
+    margin-top: 20px; }
+    .A4 div#projects .projects_title {
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px; }
+    .A4 div#projects .project1 {
+      margin-top: 5px; }
+  .A4 .certification {
+    margin-top: 20px; }
+    .A4 .certification .certification_title {
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px; }
+  .A4 .experience {
+    margin-top: 10px; }
+    .A4 .experience .experience_title {
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px; }
+  .A4 .soft_skills {
+    margin-top: 10px; }
+    .A4 .soft_skills .soft_skills_title {
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px; }
+  .A4 .activity {
+    margin-top: 10px; }
+    .A4 .activity .activity_title {
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px; }
+  .A4 .footer {
+    margin-top: 20px; }
+
+.background {
+  height: 2000px;
+  background-color: darkgray; }
+  .background .fixed_div {
+    border: 1px solid black;
+    position: fixed;
+    top: 10px;
+    left: 100px; }
+
+/*# sourceMappingURL=style.css.map */

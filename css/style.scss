@@ -1,0 +1,154 @@
+body {
+  #col1 {
+    background-color: #00aeef;
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+
+  }
+  #col2 {
+    background: darkgrey;
+    margin-left: 10px;
+  }
+  .demo_list {
+    li {
+      border: solid 1px blue;
+    }
+  }
+
+}
+
+@font-face {
+  font-family: font1;
+  src: url(../font/helvetica-neue.ttf);
+}
+
+.A4 {
+  width: 595px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: Roboto;
+  font-size: 12px;
+
+  .name_cv {
+    font-size: 20px;
+    font-family: Raleway;
+  }
+  .carrier_cv {
+    font-size: 10px;
+    font-family: Raleway;
+  }
+
+  #anhthe {
+    text-align: center;
+    .anh {
+      width: 40%;
+    }
+  }
+  #html {
+    background-color: black;
+    height: 6px;
+    opacity: 0.62;
+  }
+  #_html {
+    background-color: grey;
+    height: 6px;
+    opacity: 0.42;
+  }
+  #namhoc {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  div#info {
+    margin-top: 20px;
+    .infomation{
+      text-transform: uppercase;
+      border-bottom: solid 1px grey;
+      margin-bottom: 10px;
+    }
+    .date{
+      margin-top: 4px;
+    }
+  }
+  div#purpose {
+    margin-top: 20px;
+    .purpose_title{
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      border-bottom: 1px solid grey;
+    }
+  }
+  div#skills {
+    margin-top: 20px;
+    .skills_title{
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+    }
+    .html {
+      margin-top: 14px;
+    }
+  }
+  div#projects {
+    margin-top: 20px;
+    .projects_title{
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px;
+    }
+    .project1 {
+      margin-top: 5px;
+    }
+  }
+  .certification {
+    margin-top: 20px;
+    .certification_title{
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px;
+    }
+  }
+  .experience {
+    margin-top: 10px;
+    .experience_title{
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px;
+    }
+  }
+  .soft_skills {
+    margin-top: 10px;
+    .soft_skills_title{
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px;
+    }
+  }
+  .activity {
+    margin-top: 10px;
+    .activity_title{
+      text-transform: uppercase;
+      border-bottom: 1px solid grey;
+      margin-bottom: 10px;
+    }
+  }
+  .footer {
+    margin-top: 20px;
+  }
+}
+.background{
+  height: 2000px;
+  background-color: darkgray;
+  .fixed_div{
+    border: 1px solid black;
+    position: fixed;
+    top:10px;
+    left: 100px;
+  }
+}
