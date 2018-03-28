@@ -1,0 +1,30 @@
+* TODO
+- TODO 1: Wrap whole code inside resources/js/main.js inside a IIFE to protect its scope
+
+* TODO
+- TODO 2: Complete the callback function for click event of add button: when user click on the addButton if there is any text inside item input field, then we invoke the addItem function with the value of item input as its argument
+
+* TODO 
+- TODO 3: Complete callback function for keydown event of item input: when user press down a key and that key is Enter and there     var data = localStorage.getItem('todoData');
+    return data ? JSON.parse(data) : initialData;
+is any text inside item input, then we invoke the addItem function with the value of item input as its argument
+
+* TODO
+- TODO 4: Complete addItem function: clear input value of itemInput
+
+* TODO
+- TODO 5: Add liItem to todoList
+- Test if you do it correctly, you should be able to add item to todoList by now
+
+* TODO
+- TODO 6: Complete toggleCompleteItem function, so that when user click on completeButton, it will toggle 'completed' class for liItem
+- You should see that the style of liItem change if you do it correctly
+
+* TODO
+- TODO 7: complete removeItem function, so that when user click on removeButton the clicked liItem will be removed from todoList 
+- You should have a working version of todo app now
+- Now try adding some item to todoList and refesh the page. Do you notice something wrong ?
+
+* TODO
+- TODO 8: Use localStorage to storage and retrieve todo items so that even when browser refresh the todo list is still the same;
+- Hint: update our code where you find // TODO 8
