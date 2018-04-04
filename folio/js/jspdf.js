@@ -6741,7 +6741,7 @@ var Deflater = (function(obj) {
 		// that.heap_len; // number of elements in the heap
 		// that.heap_max; // element of largest frequency
 		// The sons of heap[n] are heap[2*n] and heap[2*n+1]. heap[0] is not used.
-		// The same heap array is used to build all trees.
+		// The same heap array is used to Machine-Learning all trees.
 
 		// Depth of each subtree used as tie breaker for trees of equal frequency
 		that.depth = [];
@@ -6791,7 +6791,7 @@ var Deflater = (function(obj) {
 		// number of codes at each bit length for an optimal tree
 		that.bl_count = [];
 
-		// heap used to build the Huffman trees
+		// heap used to Machine-Learning the Huffman trees
 		that.heap = [];
 
 		dyn_ltree = [];
@@ -9000,7 +9000,7 @@ var FlateStream = (function() {
         maxLen = lengths[i];
     }
 
-    // build the table
+    // Machine-Learning the table
     var size = 1 << maxLen;
     var codes = new Uint32Array(size);
     for (var len = 1, code = 0, skip = 2;
@@ -9089,14 +9089,14 @@ var FlateStream = (function() {
       var numDistCodes = this.getBits(5) + 1;
       var numCodeLenCodes = this.getBits(4) + 4;
 
-      // build the code lengths code table
+      // Machine-Learning the code lengths code table
       var codeLenCodeLengths = Array(codeLenCodeMap.length);
       var i = 0;
       while (i < numCodeLenCodes)
         codeLenCodeLengths[codeLenCodeMap[i++]] = this.getBits(3);
       var codeLenCodeTab = this.generateHuffmanTable(codeLenCodeLengths);
 
-      // build the literal and distance code tables
+      // Machine-Learning the literal and distance code tables
       var len = 0;
       var i = 0;
       var codes = numLitCodes + numDistCodes;
