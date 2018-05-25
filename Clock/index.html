@@ -4,7 +4,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src=" https://css-tricks.com/examples/CSS3Clock/jquery-1.2.6.min.js"></script>
     <title>Clock Real-time</title>
     <style>
         * {
@@ -62,7 +61,8 @@
     var sdegree = seconds * 6;
     var srotate = "rotate(" + sdegree + "deg)";
 
-    $("#sec").css({"-moz-transform" : srotate, "-webkit-transform" : srotate});
+    document.getElementById("sec").style.transform = srotate;
+    document.getElementById("sec").style.WebkitTransform = srotate;
 
   }, 1000 );
 
@@ -73,7 +73,8 @@
     var hdegree = hours * 30 + (mins / 2);
     var hrotate = "rotate(" + hdegree + "deg)";
 
-    $("#hour").css({"-moz-transform" : hrotate, "-webkit-transform" : hrotate});
+    document.getElementById("hour").style.transform = hrotate;
+    document.getElementById("hour").style.WebkitTransform = hrotate;
 
   }, 1000 );
 
@@ -83,7 +84,8 @@
     var mdegree = mins * 6;
     var mrotate = "rotate(" + mdegree + "deg)";
 
-    $("#min").css({"-moz-transform" : mrotate, "-webkit-transform" : mrotate});
+    document.getElementById("min").style.transform = mrotate;
+    document.getElementById("min").style.WebkitTransform = mrotate;
 
   }, 1000 );
 </script>
