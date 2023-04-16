@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[2597],{674:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/iterate-object","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

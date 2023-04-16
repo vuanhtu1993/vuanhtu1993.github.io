@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[5387],{5834:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/api-service","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

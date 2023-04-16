@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[2645],{3491:s=>{s.exports=JSON.parse('{"label":"Oh My Zsh","permalink":"/blog/tags/oh-my-zsh","allTagsPath":"/blog/tags","count":1}')}}]);

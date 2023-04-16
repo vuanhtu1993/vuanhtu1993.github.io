@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[4539],{2274:s=>{s.exports=JSON.parse('{"label":"Component","permalink":"/blog/tags/component","allTagsPath":"/blog/tags","count":1}')}}]);

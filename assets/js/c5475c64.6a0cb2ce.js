@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[5294],{2026:e=>{e.exports=JSON.parse('{"label":"Regex","permalink":"/blog/tags/regex","allTagsPath":"/blog/tags","count":1}')}}]);

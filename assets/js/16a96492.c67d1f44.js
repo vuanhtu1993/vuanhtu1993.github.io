@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[1768],{1392:s=>{s.exports=JSON.parse('{"label":"Es6","permalink":"/blog/tags/es-6","allTagsPath":"/blog/tags","count":1}')}}]);
