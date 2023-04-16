@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[822],{5022:t=>{t.exports=JSON.parse('{"permalink":"/vuanhtu1993.github.io/blog/tags/documentation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
