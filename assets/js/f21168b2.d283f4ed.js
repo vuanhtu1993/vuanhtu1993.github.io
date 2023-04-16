@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[407],{5918:t=>{t.exports=JSON.parse('{"label":"chatGPT","permalink":"/vuanhtu1993.github.io/blog/tags/chat-gpt","allTagsPath":"/vuanhtu1993.github.io/blog/tags","count":1}')}}]);
