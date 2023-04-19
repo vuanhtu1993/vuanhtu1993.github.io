@@ -4,10 +4,25 @@
         <title>Welcome to my stories Blog</title>
         <link>https://vuanhtu1993.github.io/blog</link>
         <description>Welcome to my stories Blog</description>
-        <lastBuildDate>Sat, 15 Apr 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 18 Apr 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Prompt engineering là gì ?]]></title>
+            <link>https://vuanhtu1993.github.io/blog/what is prompt engineering</link>
+            <guid>https://vuanhtu1993.github.io/blog/what is prompt engineering</guid>
+            <pubDate>Tue, 18 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[1. Prompt là gì ?]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-prompt-là-gì-">1. Prompt là gì ?<a href="#1-prompt-là-gì-" class="hash-link" aria-label="Direct link to 1. Prompt là gì ?" title="Direct link to 1. Prompt là gì ?">​</a></h2><p><img loading="lazy" alt="Untitled" src="/assets/images/Untitled-319a602ce93969c23c9ffe6c6b598828.png" width="975" height="340" class="img_ev3q"></p><p><strong>Định nghĩa:</strong> Prompt là một cấu trúc câu (có quy tắc) đóng vai trò là đầu vào của một mô hình ngôn ngữ (lang uage model)→ Nhằm sinh ra phản hồi (response) mong muốn.</p><p><img loading="lazy" alt="Untitled" src="/assets/images/Untitled 1-07972f8e2cd9aa63aed04cf249dcf0b4.png" width="1413" height="677" class="img_ev3q"></p><p>Màn hình chính của chatGPT đã chứa rất nhiều ví dụ về prompt</p><p>Phản hồi của mô hình <strong>phụ thuộc rất lớn</strong> vào cách bạn thiết kế prompts. Điều này có nghĩa là bạn cần đảm bảo cung cấp prompts có được thiết kế tốt, nếu không phản hồi nhận lại sẽ không như mong muốn</p><blockquote><p>Whole concept of garbage in, garbage out.
+If your prompt is garbage, your response will be garbage, and the model won't really do that well.</p></blockquote><h3 class="anchor anchorWithStickyNavbar_LWe7" id="tối-ưu-hoá-prompt-prompt-optimization">Tối ưu hoá prompt (Prompt optimization)<a href="#tối-ưu-hoá-prompt-prompt-optimization" class="hash-link" aria-label="Direct link to Tối ưu hoá prompt (Prompt optimization)" title="Direct link to Tối ưu hoá prompt (Prompt optimization)">​</a></h3><p>Hãy nhận xét ví dụ bên dưới</p><p><strong>Câu hỏi:</strong> Viết cho tôi một bài kiểm tra kỹ năng excel
+<strong>ChatGPT trả lời:</strong></p><p><img loading="lazy" alt="Untitled" src="/assets/images/Untitled 2-690b3f2ec870e26386480374afbe0397.png" width="954" height="766" class="img_ev3q"></p><p>Nhận xét: Kết quả tương đối tốt đúng không nào, đề bài rất chi tiết thậm chí trích nguồn và câu hỏi cũng rất rõ ràng. Tuy nhiên đề bài quá chung chung và không đáp ứng được nhu cầu thực tế → <strong>Cần thiết là rõ các yêu cầu</strong>: đối tượng hướng đến là ai , dạng câu hỏi là gì, đáp án ra sao ?  </p><p>Hãy cùng viết lại câu hỏi này theo prompt như sau: </p><p><img loading="lazy" alt="Untitled" src="/assets/images/Untitled-e4fa836207083d11d351dfb21f1eb47f.svg" width="3142" height="1247" class="img_ev3q"></p><p>Kết quả ổn hơn rồi đúng không, hãy tìm cách tối ưu hoá hơn nữa nhé.</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="quy-tắc-viết-prompt-sao-cho-tốt">Quy tắc viết Prompt sao cho tốt:<a href="#quy-tắc-viết-prompt-sao-cho-tốt" class="hash-link" aria-label="Direct link to Quy tắc viết Prompt sao cho tốt:" title="Direct link to Quy tắc viết Prompt sao cho tốt:">​</a></h3><ol><li>Hãy thật chi tiết và rõ ràng ← Ngữ nghĩa phức tạp các bạn đưa vào model không thể tiếp thu được.</li><li>Cung cấp cho mô hình các ví dụ cụ thể thay vì giả định</li><li>Vì chatGPT khác với goolge, các mô hình học thường có độ trễ nên không nên đặt những câu hỏi mang tính thông tin đến thời điểm hiện tại</li></ol><p>Với các mô hình xử lý ngôn ngữ tự nhiên như GPT-3, rất có thể một công việc mới được hình thành trong tương lai để tạo ra các prompts tốt cho mô hình có kết quả phản hồi tốt. </p><p>Cuối cùng hãy nhớ rằng:</p><blockquote><p>The quality of the prompt is crucial to the quality of the response that the model generates. A well-crafted prompt will help the model understand what is expected of it and generate an appropriate response. On the other hand, a poorly crafted prompt can lead to a poor response or even an error.</p></blockquote><p>Peach.</p><p>Reference:</p><ol><li><a href="https://docs.cohere.ai/docs/prompt-engineering" target="_blank" rel="noopener noreferrer">https://docs.cohere.ai/docs/prompt-engineering</a></li><li><a href="https://en.wikipedia.org/wiki/Prompt_engineering" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Prompt_engineering</a></li></ol>]]></content:encoded>
+            <category>chatGPT</category>
+            <category>documentation</category>
+            <category>hackathon</category>
+            <category>GPT-3</category>
+            <category>Prompt</category>
+        </item>
         <item>
             <title><![CDATA[Giới thiệu OpenAI và GPT-3]]></title>
             <link>https://vuanhtu1993.github.io/blog/Giới thiệu OpenAI và GPT-3</link>
