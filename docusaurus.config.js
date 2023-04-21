@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Welcome to my stories',
+  title: 'Anhhtus stories',
   tagline: 'Blog',
   favicon: 'img/favicon.ico',
 

@@ -1,5 +1,5 @@
 ---
-slug: what is prompt engineering
+slug: what-is-prompt-engineering
 title: Prompt engineering là gì ?
 authors: [anhhtus]
 tags: [chatGPT, documentation, hackathon, GPT-3, Prompt]
