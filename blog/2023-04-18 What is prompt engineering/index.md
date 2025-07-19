@@ -9,11 +9,11 @@ tags: [chatGPT, documentation, hackathon, GPT-3, Prompt]
 
 ## 1. Prompt là gì ?
 
-![Untitled](Prompt%20engineering%20la%CC%80%20gi%CC%80%202ccdf79c63644ae88ea08feae555addf/Untitled.png)
+![Untitled](./Untitled.png)
 
 **Định nghĩa:** Prompt là một cấu trúc câu (có quy tắc) đóng vai trò là đầu vào của một mô hình ngôn ngữ (lang uage model)→ Nhằm sinh ra phản hồi (response) mong muốn.
 <!--truncate-->
-![Untitled](Prompt%20engineering%20la%CC%80%20gi%CC%80%202ccdf79c63644ae88ea08feae555addf/Untitled%201.png)
+![Untitled](./Untitled%201.png)
 
 Màn hình chính của chatGPT đã chứa rất nhiều ví dụ về prompt
 
@@ -30,7 +30,7 @@ Hãy nhận xét ví dụ bên dưới
 **Câu hỏi:** Viết cho tôi một bài kiểm tra kỹ năng excel
 **ChatGPT trả lời:**
 
-![Untitled](Prompt%20engineering%20la%CC%80%20gi%CC%80%202ccdf79c63644ae88ea08feae555addf/Untitled%202.png)
+![Untitled](./Untitled%202.png)
 
 Nhận xét: Kết quả tương đối tốt đúng không nào, đề bài rất chi tiết thậm chí trích nguồn và câu hỏi cũng rất rõ ràng. Tuy nhiên đề bài quá chung chung và không đáp ứng được nhu cầu thực tế → **Cần thiết là rõ các yêu cầu**: đối tượng hướng đến là ai , dạng câu hỏi là gì, đáp án ra sao ?  
 
