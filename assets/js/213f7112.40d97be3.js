@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[3298],{3024:e=>{e.exports=JSON.parse('{"label":"cong-nghe-phan-mem","permalink":"/blog/tags/cong-nghe-phan-mem","allTagsPath":"/blog/tags","count":1}')}}]);
