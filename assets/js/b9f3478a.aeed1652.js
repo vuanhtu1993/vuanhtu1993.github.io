@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[9504],{4282:s=>{s.exports=JSON.parse('{"label":"Scrum","permalink":"/blog/tags/scrum","allTagsPath":"/blog/tags","count":1}')}}]);

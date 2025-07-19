@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[9530],{7532:s=>{s.exports=JSON.parse('{"label":"Agile","permalink":"/blog/tags/agile","allTagsPath":"/blog/tags","count":1}')}}]);
