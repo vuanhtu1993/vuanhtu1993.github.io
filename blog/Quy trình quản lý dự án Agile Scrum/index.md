@@ -42,7 +42,7 @@ description: "Quy trình quản lý dự án Agile Scrum"
 | Phản hồi | Phản hồi chậm, thường xuyên chỉ sau khi hoàn thành một giai đoạn | Phản hồi nhanh chóng, liên tục trong suốt quá trình dự án |
 | Sản phẩm | Giao hàng cuối cùng sau khi tất cả các giai đoạn hoàn thành | Giao hàng liên tục, có thể có sản phẩm chức năng sau mỗi chu kỳ |
 
-![Untitled](Quy%20tri%CC%80nh%20qua%CC%89n%20ly%CC%81%20du%CC%9B%CC%A3%20a%CC%81n%20Agile%20Scrum%20ee1dcba32a7644db9eca6b8d5d63fa91/Untitled.png)
+![Untitled](./Untitled.png)
 
 ### Agile Manifesto
 
@@ -59,7 +59,7 @@ Scrum là khung làm việc (framework) giúp đội nhóm giải quyết các v
 
 ### Scrum 3 Pillars
 
-![Untitled](Quy%20tri%CC%80nh%20qua%CC%89n%20ly%CC%81%20du%CC%9B%CC%A3%20a%CC%81n%20Agile%20Scrum%20ee1dcba32a7644db9eca6b8d5d63fa91/Untitled%201.png)
+![Untitled](./Untitled%201.png)
 
 1. Transparency - Tính trong suốt: Mọi thông tin trong dự án đều là công khai và ai cũng có thể xem được cứ không bị phân tầng
 2. Inspection - Tính kiểm tra: Mọi thời điểm có thể kiểm tra được tiến độ dự án, còn bao lâu nữa đến mục tiêu và phải được kiểm tra thường xuyên
@@ -67,7 +67,7 @@ Scrum là khung làm việc (framework) giúp đội nhóm giải quyết các v
 
 ### Scrum 5 values
 
-![Untitled](Quy%20tri%CC%80nh%20qua%CC%89n%20ly%CC%81%20du%CC%9B%CC%A3%20a%CC%81n%20Agile%20Scrum%20ee1dcba32a7644db9eca6b8d5d63fa91/Untitled%202.png)
+![Untitled](./Untitled%202.png)
 
 ## Scrum definition
 
