@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[5308],{9240:s=>{s.exports=JSON.parse('{"label":"OLTP","permalink":"/blog/tags/oltp","allTagsPath":"/blog/tags","count":1}')}}]);
