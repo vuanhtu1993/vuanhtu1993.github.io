@@ -5,6 +5,12 @@
  */
 
 /* You can override the default Infima variables here. */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 @font-face {
   font-family: Ysabeau;
@@ -143,4 +149,26 @@ a {
 
 .mt-12 {
   margin-top: 48px;
+}
+
+.education {
+  margin-bottom: 20px;
+}
+
+.degree {
+  font-weight: bold;
+}
+
+.italics {
+  font-style: italic;
+}
+
+.job-experience {
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 20px;
 }

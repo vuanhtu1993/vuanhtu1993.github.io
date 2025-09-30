@@ -41,6 +41,46 @@ export default function Home() {
           <SuperHero>Vũ Anh Tú</SuperHero>
           <span style={{ fontFamily: "Ysabeau", fontSize: 20, fontWeight: 'bold', color: "#616d81" }} ref={el}></span>
           <div className='mt-2' />
+          <div>
+            {/* divider */}
+            <hr style={{ borderTop: '10px solid #388967', width: '50px', marginLeft: 0 }} />
+            <h1 class="section-title">Học vấn</h1>
+            <div class="education">
+              <h3 class="degree">Học viện kỹ thuật quân sự (Bachelor)</h3>
+              <p>Chuyên ngành: Điện tử viễn thông</p>
+            </div>
+
+            <div class="education">
+              <h3 class="degree">Học viện kỹ thuật quân sự (Post graduate)</h3>
+              <p>Chuyên ngành: Hệ thống thông tin</p>
+              <p class="italics">Thesis: Single image Super-Resolution using a GANs deep learning model</p>
+            </div>
+          </div>
+
+          <div>
+            {/* divider */}
+            <hr style={{ borderTop: '10px solid #388967', width: '50px', marginLeft: 0 }} />
+            <h1 class="section-title">Kinh nghiệm làm việc</h1>
+            <div class="job-experience">
+              <h3>1. Lập trình viên Front-end tại FPT Software</h3>
+            </div>
+            <div class="job-experience">
+              <h3>2. Quản lý dự án tại Viettel Solution</h3>
+            </div>
+            <div class="job-experience">
+              <h3>3. Giảng viên khoa CNTT Đại học Thăng Long</h3>
+            </div>
+            <div class="job-experience">
+              <h3>4. Technical trainer tại FSA</h3>
+              <ul>
+                <li class='italics'>Giảng dạy các khoá học về Data Analytics</li>
+                <li class='italics'>Giảng dạy khoá học về AI programming</li>
+                <li class='italics'>Giảng dạy các khoá học lập trình web Fullstack (Node.js + React.js)</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr style={{ borderTop: '10px solid #388967', width: '50px', marginLeft: 0 }} />
           <SubHero>Tôi có sự tò mò vô hạn về AI, hơn hết là Deep Learning. Tôi đam mê tạo ra các ứng dụng thông minh
             để phục vụ con người trong nhiều lĩnh vực
           </SubHero>
