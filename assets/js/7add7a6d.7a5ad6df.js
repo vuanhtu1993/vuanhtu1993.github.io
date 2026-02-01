@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[1308],{9002:s=>{s.exports=JSON.parse('{"label":"Forward refs","permalink":"/blog/tags/forward-refs","allTagsPath":"/blog/tags","count":1}')}}]);

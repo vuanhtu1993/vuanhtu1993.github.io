@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[3841],{4092:a=>{a.exports=JSON.parse('{"label":"Data Transformation","permalink":"/blog/tags/data-transformation","allTagsPath":"/blog/tags","count":1}')}}]);

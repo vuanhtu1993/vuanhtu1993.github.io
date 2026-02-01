@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkstory=self.webpackChunkstory||[]).push([[2999],{4931:a=>{a.exports=JSON.parse('{"label":"Database Normalization","permalink":"/blog/tags/database-normalization","allTagsPath":"/blog/tags","count":1}')}}]);
