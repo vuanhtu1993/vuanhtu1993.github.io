@@ -11,6 +11,8 @@ description: "Tìm hiểu NestJS từ cơ bản đến nâng cao: khái niệm, 
 
 > 🎯 **Mục tiêu tuần này**: Hiểu Redis data structures, tích hợp Redis vào NestJS cho real-time state management
 
+<!--truncate-->
+
 ---
 
 ## 1. CHỨC NĂNG CẦN HOÀN THÀNH

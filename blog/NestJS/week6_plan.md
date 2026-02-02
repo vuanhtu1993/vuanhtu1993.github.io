@@ -11,6 +11,8 @@ description: "Tìm hiểu NestJS từ cơ bản đến nâng cao: khái niệm, 
 
 > 🎯 **Mục tiêu tuần cuối**: Hoàn thiện ứng dụng, viết tests, documentation, và có thể demo/giải thích toàn bộ
 
+<!--truncate-->
+
 ---
 
 ## 1. CHỨC NĂNG CẦN HOÀN THÀNH

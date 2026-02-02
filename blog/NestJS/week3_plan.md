@@ -11,6 +11,8 @@ description: "Tìm hiểu NestJS từ cơ bản đến nâng cao: khái niệm, 
 
 > 🎯 **Mục tiêu tuần này**: Hiểu sâu WebSocket protocol, Socket.io, và NestJS Gateway pattern
 
+<!--truncate-->
+
 ---
 
 ## 1. CHỨC NĂNG CẦN HOÀN THÀNH

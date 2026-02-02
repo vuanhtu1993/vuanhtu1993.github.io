@@ -10,6 +10,8 @@ description: "Tìm hiểu NestJS từ cơ bản đến nâng cao: khái niệm, 
 
 > 🎯 **Mục tiêu tuần này**: Thiết lập database layer với TypeORM, hiểu sâu JWT authentication trong NestJS
 
+<!--truncate-->
+
 ---
 
 ## 1. CHỨC NĂNG CẦN HOÀN THÀNH

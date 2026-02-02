@@ -11,6 +11,8 @@ description: "Tìm hiểu NestJS từ cơ bản đến nâng cao: khái niệm, 
 
 > 🎯 **Mục tiêu tuần này**: Hoàn thiện game logic, scoring algorithm, và chơi được 1 game hoàn chỉnh
 
+<!--truncate-->
+
 ---
 
 ## 1. CHỨC NĂNG CẦN HOÀN THÀNH
