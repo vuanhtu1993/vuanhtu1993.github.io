@@ -454,7 +454,7 @@ export class AuthController {
 |---|---------|-------------|
 | 1 | Database có bảng users? | Kiểm tra PostgreSQL với psql hoặc pgAdmin |
 | 2 | Register user mới được không? | POST /auth/register → 201 Created |
-| 3 | Login nhận được JWT? | POST /auth/login → { access_token: "..." } |
+| 3 | Login nhận được JWT? | POST /auth/login → `{ access_token: "..." }` |
 | 4 | Protected route hoạt động? | GET /auth/profile với Bearer token |
 | 5 | Validation có bắt lỗi? | POST với email invalid → 400 Bad Request |
 
