@@ -24,4 +24,4 @@ chrome-user-data
 *.swp
 *.swo
 .docusaurus
-.agent
+# .agent
