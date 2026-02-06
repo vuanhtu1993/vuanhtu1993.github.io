@@ -1,5 +1,5 @@
 ---
-description: Quy trình tạo bài blog Docusaurus từ kiến thức đầu vào, sử dụng research, fact-check, create-report, review-report skills
+description: Quy trình tạo bài blog Docusaurus từ kiến thức đầu vào, sử dụng research, fact-check, create-tech-lecture, review-report skills
 ---
 
 # Workflow: Create Blog for Docusaurus
@@ -45,15 +45,18 @@ Tags: [Danh sách tags]
 
 ---
 
-## Bước 3: Tạo nội dung (Create-Report Skill)
+## Bước 3: Tạo nội dung (Create-Tech-Lecture Skill)
 
 // turbo
-1. Sử dụng `create-report` skill:
-   - Đọc SKILL.md: `.agent/skills/create-report/SKILL.md`
-   - Chọn template phù hợp (thường là Standard)
-   - Tạo nội dung với Mermaid diagrams, code snippets
+1. Sử dụng `create-tech-lecture` skill:
+   - Đọc SKILL.md: `.agent/skills/create-tech-lecture/SKILL.md`
+   - Chọn template theo mục tiêu:
+     - **Concept**: Giải thích khái niệm → `templates/concept.md`
+     - **Tutorial**: Hướng dẫn thực hành → `templates/tutorial.md`
+     - **Architecture**: So sánh/Phân tích → `templates/architecture.md`
+   - Áp dụng quy trình sư phạm: Hook → Analogy → Deep Dive → Visual → Practice → Pitfalls
 
-2. Output: Bản nháp báo cáo
+2. Output: Bản nháp bài giảng với ẩn dụ, code mẫu, và common pitfalls
 
 ---
 
@@ -162,7 +165,7 @@ npm run serve
 |------|--------------|--------|
 | 1 | research | Research notes |
 | 2 | fact-check | Verified claims |
-| 3 | create-report | Draft content |
+| 3 | create-tech-lecture | Draft content (Concept/Tutorial/Architecture) |
 | 4 | review-report | QA report |
 | 5 | Manual | MDX file |
 | 6 | npm run build | Build check |
