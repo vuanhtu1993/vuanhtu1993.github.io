@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkstory=globalThis.webpackChunkstory||[]).push([[4640],{13294(a){a.exports=JSON.parse('{"tag":{"label":"erd","permalink":"/blog/tags/erd","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/erd","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
