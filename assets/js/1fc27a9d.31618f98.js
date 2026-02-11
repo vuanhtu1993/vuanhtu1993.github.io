@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkstory=globalThis.webpackChunkstory||[]).push([[6626],{85623(a){a.exports=JSON.parse('{"tag":{"label":"ioc","permalink":"/blog/tags/ioc","allTagsPath":"/blog/tags","count":2,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/ioc","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
