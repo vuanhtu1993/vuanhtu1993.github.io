@@ -1,5 +1,5 @@
 ---
-description: Quy trình tạo documentation cho Docusaurus từ kiến thức đầu vào, sử dụng research, fact-check, create-tech-lecture, review-report skills
+description: Quy trình tạo documentation cho Docusaurus từ kiến thức đầu vào, sử dụng research, fact-check, create-finance-lecture, review-report skills
 ---
 
 # Workflow: Create Docs for Docusaurus
@@ -49,18 +49,19 @@ Sidebar Position: [Vị trí trong sidebar, số nguyên]
 
 ---
 
-## Bước 3: Tạo nội dung (Create-Tech-Lecture Skill)
+## Bước 3: Tạo nội dung (Create-Finance-Lecture Skill)
 
 // turbo
-1. Sử dụng `create-tech-lecture` skill:
-   - Đọc SKILL.md: `.agent/skills/create-tech-lecture/SKILL.md`
+1. Sử dụng `create-finance-lecture` skill:
+   - Đọc SKILL.md: `.agent/skills/create-finance-lecture/SKILL.md`
    - Chọn template theo mục tiêu:
-     - **Concept**: Giải thích khái niệm → `templates/concept.md`
-     - **Tutorial**: Hướng dẫn thực hành → `templates/tutorial.md`
-     - **Architecture**: So sánh/Phân tích → `templates/architecture.md`
-   - Áp dụng quy trình sư phạm: Hook → Analogy → Deep Dive → Visual → Practice → Pitfalls
+     - **Concept 101**: Giải mã khái niệm → `templates/concept.md`
+     - **Strategy/How-to**: Hướng dẫn chiến lược → `templates/strategy.md`
+     - **Comparative**: So sánh & Lựa chọn → `templates/comparative.md`
+     - **Market Analysis**: Đọc vị thị trường → `templates/market-analysis.md`
+   - Áp dụng quy trình sư phạm: Hook → Analogy → Deep Dive → Practice → Risk & Pitfalls → MECE Mindmap
 
-2. Output: Bản nháp bài giảng với ẩn dụ, code mẫu, và common pitfalls
+2. Output: Bản nháp bài giảng với ẩn dụ đời sống, cảnh báo rủi ro, và MECE Mindmap
 
 ---
 
@@ -191,7 +192,7 @@ git push origin [branch-name]
 | 0 | Input | Topic, Category, Position |
 | 1 | research | Research notes |
 | 2 | fact-check | Verified claims |
-| 3 | create-tech-lecture | Draft content (Concept/Tutorial/Architecture) |
+| 3 | create-finance-lecture | Draft content (Concept/Strategy/Comparative/Market) |
 | 4 | review-report | QA report |
 | 5 | Manual | MD file + _category_.json |
 | 6 | npm run build | Build check |
