@@ -13,17 +13,17 @@ Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật chuyên sâu 
 flowchart LR
     A[🎣 Hook] --> B[🔄 Analogy]
     B --> C[🔬 Deep Dive]
-    C --> D[📊 Visual]
-    D --> E[💻 Practice]
-    E --> F[⚠️ Pitfalls]
+    C --> D[� Practice]
+    D --> E[⚠️ Pitfalls]
+    E --> F[🧩 MECE Mindmap]
 ```
 
 1. **Hook (Thu hút):** Bắt đầu bằng vấn đề thực tế hoặc câu hỏi gợi mở
 2. **Analogy (Ẩn dụ):** Giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật
-3. **Technical Deep Dive:** Phân tích kiến trúc, code, luồng dữ liệu
-4. **Visual (Trực quan):** Sơ đồ hóa bằng Mermaid
-5. **Practice (Thực hành):** Code mẫu với chú thích
-6. **Pitfalls (Cảnh báo):** Lỗi thường gặp + Best Practices
+3. **Deep Dive & Visual:** Phân tích kiến trúc, code, luồng dữ liệu (kết hợp Mermaid Flowchart/Sequence)
+4. **Practice (Thực hành):** Code mẫu với chú thích "Why"
+5. **Pitfalls (Cảnh báo):** Lỗi thường gặp + Best Practices
+6. **MECE Mindmap (Tổng hợp):** Sơ đồ tư duy tóm tắt toàn bộ kiến thức để review
 
 ## Phân loại bài viết
 
@@ -80,3 +80,34 @@ func main() {
 | Cấu trúc class/module | `classDiagram` |
 | Entity relationships | `erDiagram` |
 | Timeline/Roadmap | `gantt` |
+| Mindmap (Review) | `mindmap` |
+
+## Quy tắc Mindmap (MECE Integration)
+
+Cuối mỗi bài viết, **BẮT BUỘC** tạo một sơ đồ tư duy bằng Mermaid để tổng hợp kiến thức.
+Mindmap phải tuân thủ nguyên tắc **MECE** (Mutually Exclusive Collectively Exhaustive - Không trùng lặp, Đủ ý) với 4 nhánh chính cố định:
+
+```mermaid
+mindmap
+  root((Tên Công Nghệ))
+    Khái niệm cốt lõi
+      (Định nghĩa ngắn gọn)
+      (Vấn đề giải quyết)
+    Core Components
+      (Thành phần A)
+      (Thành phần B)
+      (Cơ chế hoạt động)
+    Use Cases
+      (Khi nào dùng)
+      (Khi nào KHÔNG dùng)
+      (Ví dụ thực tế)
+    Best Practices
+      (Convention)
+      (Security)
+      (Performance)
+```
+
+**Lưu ý cho Mindmap:**
+1. Dùng từ khóa ngắn gọn (**Keywords only**).
+2. Không viết câu dài dòng.
+3. Đảm bảo các nhánh con của "Core Components" không bị lẫn sang "Use Cases".
