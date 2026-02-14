@@ -1,7 +1,7 @@
 ---
 title: "Giải Mã Big O Notation: Độ Phức Tạp Thuật Toán Với TypeScript"
 description: "Hướng dẫn chi tiết về Big O, cách tính độ phức tạp thuật toán và ví dụ minh họa bằng TypeScript dễ hiểu cho người mới bắt đầu."
-authors: [vuanhtu1993]
+authors: [anhhtus]
 tags: [algorithms, typescript, big-o, optimization]
 image: https://upload.wikimedia.org/wikipedia/commons/3/39/Big_O_notation.png
 ---
