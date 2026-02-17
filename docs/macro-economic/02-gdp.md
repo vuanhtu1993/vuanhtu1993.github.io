@@ -91,24 +91,24 @@ Khi nhìn vào GDP và chu kỳ, chúng ta phân bổ vào các nhóm ngành ch�
 ```mermaid
 mindmap
   root((GDP & Chu Kỳ Kinh Tế))
-    Definition (Khái niệm)
-      Tổng giá trị sản phẩm cuối cùng
-      Phạm vi lãnh thổ (Gồm cả FDI)
-      Không tính hàng trung gian
-    Formula (Công thức)
-      C: Tiêu dùng gia đình (Lớn nhất)
-      I: Đầu tư tư nhân (Máy móc, tồn kho)
-      G: Chi tiêu chính phủ (Cầu đường, lương)
-      NX: Xuất khẩu ròng (X - M)
-    4 Seasons (4 Mùa)
-      Mùa Xuân (Tăng trưởng): Tấn công (Cổ phiếu, BĐS)
-      Mùa Hè (Quá nhiệt): Thận trọng (Giảm nợ, mua Vàng)
-      Mùa Thu (Suy giảm): Phòng thủ (Tiền mặt, Cổ phiếu điện nước)
-      Mùa Đông (Suy thoái): Săn hàng (Gom tài sản giá rẻ)
-    Key Rules (Lưu ý)
-      Mua cổ phiếu/đất đai cũ KHÔNG tính vào GDP
-      Trợ cấp thất nghiệp KHÔNG tính vào GDP
-      Tồn kho ĐƯỢC tính vào GDP
+    def["Definition (Khái niệm)"]
+      val["Tổng giá trị sản phẩm cuối cùng"]
+      scope["Phạm vi lãnh thổ (Gồm cả FDI)"]
+      exclude["Không tính hàng trung gian"]
+    formula["Formula (Công thức)"]
+      C["C: Tiêu dùng gia đình (Lớn nhất)"]
+      I["I: Đầu tư tư nhân (Máy móc, tồn kho)"]
+      G["G: Chi tiêu chính phủ (Cầu đường, lương)"]
+      NX["NX: Xuất khẩu ròng (X - M)"]
+    seasons["4 Seasons (4 Mùa)"]
+      spring["Mùa Xuân (Tăng trưởng): Tấn công (Cổ phiếu, BĐS)"]
+      summer["Mùa Hè (Quá nhiệt): Thận trọng (Giảm nợ, mua Vàng)"]
+      autumn["Mùa Thu (Suy giảm): Phòng thủ (Tiền mặt, Cổ phiếu điện nước)"]
+      winter["Mùa Đông (Suy thoái): Săn hàng (Gom tài sản giá rẻ)"]
+    rules["Key Rules (Lưu ý)"]
+      rule1["Mua cổ phiếu/đất đai cũ KHÔNG tính vào GDP"]
+      rule2["Trợ cấp thất nghiệp KHÔNG tính vào GDP"]
+      rule3["Tồn kho ĐƯỢC tính vào GDP"]
 ```
 
 > [!TIP]

@@ -164,13 +164,13 @@ mindmap
       Focus on Worst Case
       Time vs Space Complexity
     Common Notations
-      (O_1) Constant Time
-      (O_log_n) Binary Search
-      (O_n) Simple Loop
-      (O_n_log_n) Merge Sort
-      (O_n_2) Nested Loops
-      (O_2_n) Recursive Fibonacci
-      (O_n_factorial) Permutations
+      O1["(O_1) Constant Time"]
+      Olog["(O_log_n) Binary Search"]
+      On["(O_n) Simple Loop"]
+      Onlog["(O_n_log_n) Merge Sort"]
+      On2["(O_n_2) Nested Loops"]
+      O2n["(O_2_n) Recursive Fibonacci"]
+      Onfact["(O_n_factorial) Permutations"]
     Key Takeaways
       Ignore Constants
       Consider Input Size

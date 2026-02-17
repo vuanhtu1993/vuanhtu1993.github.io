@@ -80,7 +80,7 @@ func main() {
 | Cấu trúc class/module | `classDiagram` |
 | Entity relationships | `erDiagram` |
 | Timeline/Roadmap | `gantt` |
-| Mindmap (Review) | `mindmap` |
+| Mindmap (Review) | `mindmap` (Lưu ý: Phải dùng cú pháp `id["Label"]` để tránh lỗi ký tự đặc biệt) |
 
 ## Quy tắc Mindmap (MECE Integration)
 
@@ -90,21 +90,21 @@ Mindmap phải tuân thủ nguyên tắc **MECE** (Mutually Exclusive Collective
 ```mermaid
 mindmap
   root((Tên Công Nghệ))
-    Khái niệm cốt lõi
-      (Định nghĩa ngắn gọn)
-      (Vấn đề giải quyết)
-    Core Components
-      (Thành phần A)
-      (Thành phần B)
-      (Cơ chế hoạt động)
-    Use Cases
-      (Khi nào dùng)
-      (Khi nào KHÔNG dùng)
-      (Ví dụ thực tế)
-    Best Practices
-      (Convention)
-      (Security)
-      (Performance)
+    Concept["Khái niệm cốt lõi"]
+      def["(Định nghĩa ngắn gọn)"]
+      prob["(Vấn đề giải quyết)"]
+    Components["Core Components"]
+      compA["(Thành phần A)"]
+      compB["(Thành phần B)"]
+      mech["(Cơ chế hoạt động)"]
+    UseCases["Use Cases"]
+      when["(Khi nào dùng)"]
+      notwhen["(Khi nào KHÔNG dùng)"]
+      example["(Ví dụ thực tế)"]
+    BestPractices["Best Practices"]
+      conv["(Convention)"]
+      sec["(Security)"]
+      perf["(Performance)"]
 ```
 
 **Lưu ý cho Mindmap:**

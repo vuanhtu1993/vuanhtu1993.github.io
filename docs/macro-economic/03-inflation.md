@@ -83,22 +83,22 @@ Lạm phát giống như cơn thủy triều dâng, bạn phải biết cách "k
 ```mermaid
 mindmap
   root((Lạm Phát - Inflation))
-    Concept (Bản chất)
+    Concept["Concept (Bản chất)"]
       Sự tăng giá chung
       Tiền mất sức mua
-      Mức lý tưởng: 2-4%
-    Measurement (Đo lường)
-      CPI (Giỏ hàng cố định): Phổ biến
-      PCE (Giỏ hàng linh hoạt): Chính xác hơn
-    Key Drivers (Nguyên nhân)
-      Cầu kéo (Nhu cầu > Cung)
-      Chi phí đẩy (Nguyên liệu tăng)
-      Kỳ vọng (Tâm lý đám đông)
-      Tiền tệ (Bơm tiền/Lãi suất thấp)
-    Action Plan (Hành động)
-      Business (Hợp đồng trượt giá, Kho bãi)
-      Invest (Cổ phiếu thiết yếu, BĐS dòng tiền)
-      Hedge (Vàng khi lãi thực âm)
+      Target["Mức lý tưởng: 2-4%"]
+    Measurement["Measurement (Đo lường)"]
+      CPI["CPI (Giỏ hàng cố định): Phổ biến"]
+      PCE["PCE (Giỏ hàng linh hoạt): Chính xác hơn"]
+    KeyDrivers["Key Drivers (Nguyên nhân)"]
+      Demand["Cầu kéo (Nhu cầu > Cung)"]
+      Cost["Chi phí đẩy (Nguyên liệu tăng)"]
+      Expect["Kỳ vọng (Tâm lý đám đông)"]
+      Money["Tiền tệ (Bơm tiền/Lãi suất thấp)"]
+    ActionPlan["Action Plan (Hành động)"]
+      Business["Business (Hợp đồng trượt giá, Kho bãi)"]
+      Invest["Invest (Cổ phiếu thiết yếu, BĐS dòng tiền)"]
+      Hedge["Hedge (Vàng khi lãi thực âm)"]
 ```
 
 > [!WARNING]

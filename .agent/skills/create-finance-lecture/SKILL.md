@@ -73,6 +73,7 @@ Sử dụng Mermaid để visual hóa dữ liệu tài chính:
 - **Pie Chart:** Dùng cho phân bổ danh mục đầu tư (Asset Allocation).
 - **XYChart (Bar/Line):** Dùng để minh họa lãi suất kép, tăng trưởng giá, hoặc so sánh lợi nhuận.
 - **QuadrantChart:** Dùng cho ma trận Rủi ro/Lợi nhuận (Risk/Reward Matrix).
+- **Lưu ý quan trọng:** Với mọi diagram (đặc biệt là Mindmap), PHẢI đặt nội dung text trong dấu ngoặc kép `""` và gán ID nếu cần thiết để tránh lỗi cú pháp với các ký tự đặc biệt `()`, `[]`, v.v. Ví dụ: `id["Nội dung (có ngoặc)"]`.
 
 ## Quy tắc Mindmap (MECE Integration)
 
@@ -82,21 +83,21 @@ Mindmap phải tuân thủ nguyên tắc MECE với 4 nhánh chính cố định
 ```mermaid
 mindmap
   root((Tên Chủ Đề))
-    Core Concept (Bản chất)
-      (Định nghĩa đời thường)
-      (Ý nghĩa tài chính)
-    Key Components (Thành phần/Cơ chế)
-      (Yếu tố A)
-      (Yếu tố B)
-      (Công thức tính - nếu có)
-    Action Plan (Ứng dụng)
-      (Khi nào Mua/Dùng)
-      (Khi nào Bán/Tránh)
-      (Chiến lược phù hợp)
-    Risk Management (Quản trị rủi ro)
-      (Rủi ro lớn nhất)
-      (Cách phòng vệ)
-      (Sai lầm thường gặp)
+    Concept["Core Concept (Bản chất)"]
+      def["(Định nghĩa đời thường)"]
+      meaning["(Ý nghĩa tài chính)"]
+    Components["Key Components (Thành phần/Cơ chế)"]
+      factorA["(Yếu tố A)"]
+      factorB["(Yếu tố B)"]
+      formula["(Công thức tính - nếu có)"]
+    Action["Action Plan (Ứng dụng)"]
+      whenBuy["(Khi nào Mua/Dùng)"]
+      whenSell["(Khi nào Bán/Tránh)"]
+      strategy["(Chiến lược phù hợp)"]
+    Risk["Risk Management (Quản trị rủi ro)"]
+      biggest["(Rủi ro lớn nhất)"]
+      defense["(Cách phòng vệ)"]
+      mistake["(Sai lầm thường gặp)"]
 ```
 
 ## Template Yêu cầu (Prompt mẫu để gọi Skill)
