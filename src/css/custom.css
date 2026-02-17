@@ -42,16 +42,64 @@
   font-weight: bold;
 }
 
+@font-face {
+  font-family: SNPro;
+  src: url('./fonts/SNPro-VariableFont_wght.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: SNPro;
+  src: url('./fonts/SNPro-Italic-VariableFont_wght.ttf');
+  font-weight: italic;
+}
+
+@font-face {
+  font-family: SourceCodePro;
+  src: url('./fonts/SourceCodePro-VariableFont_wght.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: LibertinusMath;
+  src: url('./fonts/LibertinusMath-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Niramit;
+  src: url('./fonts/Niramit-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Niramit;
+  src: url('./fonts/Niramit-SemiBold.ttf');
+  font-weight: semi-bold;
+}
+
+@font-face {
+  font-family: Niramit;
+  src: url('./fonts/Niramit-Bold.ttf');
+  font-weight: bold;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-a {
-  font-family: Ysabeau;
+p,
+a,
+ul,
+ol {
+  font-family: Niramit;
 }
 
+code {
+  font-family: SourceCodePro !important;
+}
 
 :root {
   --ifm-color-primary: #2e8555;
