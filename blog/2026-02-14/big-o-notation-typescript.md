@@ -42,12 +42,12 @@ Dưới đây là 7 mức độ phức tạp thường gặp, sắp xếp từ *
 
 ```mermaid
 graph LR
-    A[O(1)] --> B[O(log n)]
-    B --> C[O(n)]
-    C --> D[O(n log n)]
-    D --> E[O(n^2)]
-    E --> F[O(2^n)]
-    F --> G[O(n!)]
+    A["O(1)"] --> B["O(log n)"]
+    B --> C["O(n)"]
+    C --> D["O(n log n)"]
+    D --> E["O(n^2)"]
+    E --> F["O(2^n)"]
+    F --> G["O(n!)"]
     style A fill:#4caf50,stroke:#333
     style B fill:#8bc34a,stroke:#333
     style C fill:#ffeb3b,stroke:#333
