@@ -1,7 +1,7 @@
 ---
 id: money-vs-assets
-title: Tiền vs Tài Sản: Cuộc Đua giữ Giá Trị
-description: Phân biệt bản chất cốt lõi giữa Tiền (Money) và Tài sản (Assets) để xây dựng tư duy đầu tư dài hạn.
+title: "Tiền vs Tài Sản: Cuộc Đua giữ Giá Trị"
+description: "Phân biệt bản chất cốt lõi giữa Tiền (Money) và Tài sản (Assets) để xây dựng tư duy đầu tư dài hạn."
 tags: [real-estate, finance-fundamental, money, assets]
 ---
 
