@@ -5,7 +5,7 @@ description: "Skill chuyên tạo bài giảng/báo cáo kỹ thuật IT chuyên
 
 # Create Tech Lecture Skill
 
-Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật chuyên sâu nhưng dễ hiểu.
+Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật chuyên sâu có độ dài trung bình nhưng dễ hiểu.
 
 ## Quy trình tư duy sư phạm (Pedagogical Flow)
 
@@ -19,7 +19,7 @@ flowchart LR
 ```
 
 1. **Hook (Thu hút):** Bắt đầu bằng vấn đề thực tế hoặc câu hỏi gợi mở
-2. **Analogy (Ẩn dụ):** Giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật
+2. **Analogy (Ẩn dụ):** Giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật - Lấy ẩn dụng gần gũi với sinh viên
 3. **Deep Dive & Visual:** Phân tích kiến trúc, code, luồng dữ liệu (kết hợp Mermaid Flowchart/Sequence)
 4. **Practice (Thực hành):** Code mẫu với chú thích "Why"
 5. **Pitfalls (Cảnh báo):** Lỗi thường gặp + Best Practices
