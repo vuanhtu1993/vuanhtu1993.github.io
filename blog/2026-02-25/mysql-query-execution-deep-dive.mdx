@@ -39,26 +39,26 @@ Kiến trúc MySQL luôn tự hào về sự phân tách rạch ròi giữa 2 t�
 
 ```mermaid
 flowchart TD
-    Client((Client Application))
+    Client(("Client Application"))
     
     subgraph "Server Layer (Não bộ)"
-        Conn[Connection / Thread Handling]
-        Parser[Parser & Preprocessor (Bison)]
-        Opt[Optimizer (Cost-based, Histograms)]
-        Exec[Executor (Iterator Model)]
+        Conn["Connection / Thread Handling"]
+        Parser["Parser & Preprocessor (Bison)"]
+        Opt["Optimizer (Cost-based, Histograms)"]
+        Exec["Executor (Iterator Model)"]
     end
     
     subgraph "InnoDB Storage Engine Layer (Cơ bắp)"
-        BP[Buffer Pool (Memory Cache)]
-        Log[Redo/Undo Logs]
-        Disk[(Data Files on Disk)]
+        BP["Buffer Pool (Memory Cache)"]
+        Log["Redo/Undo Logs"]
+        Disk[("Data Files on Disk")]
     end
     
-    Client -->|SQL| Conn
+    Client -->|"SQL"| Conn
     Conn --> Parser
     Parser --> Opt
     Opt --> Exec
-    Exec <-->|Handler API| BP
+    Exec <-->|"Handler API"| BP
     BP <--> Disk
 ```
 
@@ -152,7 +152,7 @@ SELECT * FROM users WHERE phone = '0987654321';
 
 ```mermaid
 mindmap
-  root((MySQL Execution Process))
+  root(("MySQL Execution Process"))
     Concept["Khái niệm cốt lõi"]
       def["Quy trình biến câu SQL text thành dữ liệu vật lý."]
       prob["Giúp Dev tối ưu performance và gỡ lỗi chậm."]

@@ -81,6 +81,7 @@ func main() {
 | Entity relationships | `erDiagram` |
 | Timeline/Roadmap | `gantt` |
 | Mindmap (Review) | `mindmap` (Lưu ý: Phải dùng cú pháp `id["Label"]` để tránh lỗi ký tự đặc biệt) |
+**Sử dụng skill *mermaid-expert* để kiểm tra cú pháp mermaid trước khi xuất ra**
 
 ## Quy tắc Mindmap (MECE Integration)
 
