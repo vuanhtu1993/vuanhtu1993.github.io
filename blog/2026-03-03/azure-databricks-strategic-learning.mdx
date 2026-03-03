@@ -182,7 +182,7 @@ suspicious.writeStream.format("delta").outputMode("append").start("/data/fraud-a
 
 # Xem inventory data của 7 ngày trước
 df_last_week = spark.read.format("delta") \
-    .option("versionAsOf", 30) \  # Version 30 = 7 ngày trước
+    .option("versionAsOf", 30) \
     .load("/data/inventory")
 
 # So sánh với hiện tại để phát hiện xu hướng
@@ -199,19 +199,19 @@ df_current = spark.read.format("delta").load("/data/inventory")
 
 ```mermaid
 flowchart LR
-    subgraph "Giai đoạn 1 - Nền tảng\n(Tháng 1-2)"
-        A1["📚 Hiểu Lakehouse\n& Databricks Workspace"]
-        A2["⚡ Apache Spark cơ bản\n(PySpark, SQL)"]
+    subgraph "Giai đoan 1 - Nen tang (Thang 1-2)"
+        A1["📚 Hieu Lakehouse\n& Databricks Workspace"]
+        A2["⚡ Apache Spark co ban\n(PySpark, SQL)"]
         A3["🗂️ Delta Lake 101\n(CRUD, Time Travel)"]
     end
 
-    subgraph "Giai đoạn 2 - Chuyên sâu\n(Tháng 3-5)"
+    subgraph "Giai doan 2 - Chuyen sau (Thang 3-5)"
         B1["🔧 ETL Pipelines\n(Lakeflow/DLT)"]
         B2["📊 Databricks SQL\n(Dashboard, BI)"]
-        B3["🤖 MLflow cơ bản\n(Tracking, Registry)"]
+        B3["🤖 MLflow co ban\n(Tracking, Registry)"]
     end
 
-    subgraph "Giai đoạn 3 - Chuyên gia\n(Tháng 6+)"
+    subgraph "Giai doan 3 - Chuyen gia (Thang 6+)"
         C1["🛡️ Unity Catalog\n(Governance)"]
         C2["🚀 MLOps Production\n(Deploy, Monitor)"]
         C3["🎗️ Certification\n(DE/DA/ML Associate)"]
@@ -259,20 +259,20 @@ flowchart LR
 
 ```mermaid
 gantt
-    title Lộ trình 12 tuần - Data Engineer Associate
+    title Lo trinh 12 tuan - Data Engineer Associate
     dateFormat  YYYY-MM-DD
-    section Nền tảng
-    Databricks Architecture & Setup     :a1, 2026-03-03, 1w
-    Apache Spark Fundamentals           :a2, after a1, 2w
+    section Nen tang
+    Databricks Architecture and Setup     :a1, 2026-03-03, 1w
+    Apache Spark Fundamentals             :a2, after a1, 2w
     section Delta Lake
-    Delta Lake Core Features            :b1, after a2, 2w
-    Delta Lake Advanced                 :b2, after b1, 1w
-    section Pipelines & ETL
-    Build Data Pipelines                :c1, after b2, 2w
-    Databricks Workflows                :c2, after c1, 1w
-    section Governance & Ôn thi
-    Unity Catalog                       :d1, after c2, 1w
-    Practice Exams + Review             :d2, after d1, 2w
+    Delta Lake Core Features              :b1, after a2, 2w
+    Delta Lake Advanced                   :b2, after b1, 1w
+    section Pipelines and ETL
+    Build Data Pipelines                  :c1, after b2, 2w
+    Databricks Workflows                  :c2, after c1, 1w
+    section Governance and On thi
+    Unity Catalog                         :d1, after c2, 1w
+    Practice Exams and Review             :d2, after d1, 2w
 ```
 
 ### Nguồn học miễn phí/giá rẻ (Ưu tiên)
@@ -327,9 +327,9 @@ Certification chỉ là tờ giấy. Skills mới tạo ra giá trị. Hãy buil
 ```mermaid
 mindmap
   root(("Azure Databricks"))
-    Concept["Khái niệm cốt lõi"]
+    Concept["Khai niem cot loi"]
       def["Lakehouse Platform\n(Lake + Warehouse = 1)"]
-      prob["Giải quyết: Data silo,\nETL phức tạp, AI-ready"]
+      prob["Giai quyet: Data silo,\nETL phuc tap, AI-ready"]
       arch["Control Plane vs Compute Plane"]
     Components["Core Components"]
       spark["Apache Spark\n(Distributed Processing)"]
@@ -337,13 +337,13 @@ mindmap
       mlflow["MLflow\n(ML Lifecycle)"]
       unity["Unity Catalog\n(Governance)"]
     UseCases["Use Cases"]
-      when["Khi cần: ETL phức tạp,\nML + Analytics cùng lúc"]
-      notwhen["Không dùng: Chỉ cần SQL BI đơn giản\n→ Dùng Snowflake thay thế"]
+      when["Khi can: ETL phuc tap,\nML + Analytics cung luc"]
+      notwhen["Khong dung: Chi can SQL BI don gian\n-> Dung Snowflake thay the"]
       example["Banking: Fraud Detection\nRetail: Inventory AI"]
     BestPractices["Best Practices"]
-      conv["Học Spark trước, Databricks sau"]
-      sec["Unity Catalog cho mọi workspace"]
-      perf["Auto-terminate cluster để tiết kiệm"]
+      conv["Hoc Spark truoc, Databricks sau"]
+      sec["Unity Catalog cho moi workspace"]
+      perf["Auto-terminate cluster de tiet kiem"]
 ```
 
 ---
