@@ -50,7 +50,7 @@ graph LR
 
 ```mermaid
 graph TD
-    OL["☁️ OneLake\nStorage (50GB × $0.023/GB/mo)"] --> WS["🔵 Fabric Workspace"]
+    OL["☁️ OneLake\nStorage (50GB x $0.023/GB/mo)"] --> WS["🔵 Fabric Workspace"]
     WS --> DE["⚡ Data Engineering\nSpark Notebooks"]
     WS --> DF["🔀 Data Factory\nPipelines"]
     WS --> DW["🏭 Synapse Data Warehouse"]
@@ -101,7 +101,7 @@ AWS giống như **"mua đồ Lego rời"** — bạn mua từng tập riêng (S
 
 ```mermaid
 graph LR
-    S3["🪣 Amazon S3\nRaw/Staged/Serving\n50GB × $0.023/GB/mo"] --> GLUE["⚙️ AWS Glue\nETL Jobs\n$0.44/DPU-hr"]
+    S3["🪣 Amazon S3\nRaw/Staged/Serving\n50GB x $0.023/GB/mo"] --> GLUE["⚙️ AWS Glue\nETL Jobs\n$0.44/DPU-hr"]
     S3 --> EMR["⚡ EMR Serverless\nSpark Jobs\n$0.052/vCPU-hr"]
     GLUE --> ATHENA["🔍 Amazon Athena\nSQL Queries\n$5/TB scanned"]
     EMR --> ATHENA
@@ -163,14 +163,13 @@ Azure Databricks như **"thuê Ferrari để học lái xe"** — mạnh nhất 
 ```mermaid
 graph TD
     ADLS["🏞️ ADLS Gen2\nStorage 50GB\n$0.019/GB/mo"] --> ADB["⚡ Azure Databricks\nWorkspace"]
-    ADB --> AP["🔵 All-Purpose Compute\n$0.40 DBU/hr\n+ VM: $0.476/hr"]
-    ADB --> JC["🟢 Job Compute\n$0.15 DBU/hr\n+ VM: $0.476/hr"]
+    ADB --> AP["🔵 All-Purpose Compute\n$0.40 DBU/hr + VM $0.476/hr"]
+    ADB --> JC["🟢 Job Compute\n$0.15 DBU/hr + VM $0.476/hr"]
     AP --> DLT["🔀 Delta Live Tables\nETL Pipeline"]
     JC --> DLT
     DLT --> SERVE["📊 SQL Warehouse\nServing Layer"]
 
-    VN["🔒 VNet\n$0.01-0.02/hr/hr"] --> ADB
-    IP["🌐 Public IP\n$0.005/hr"] --> ADB
+    VN["🔒 VNet + Public IP"] --> ADB
 
     style ADLS fill:#0089D6,color:#fff
     style ADB fill:#1B3A6B,color:#fff
@@ -309,9 +308,9 @@ graph LR
 graph TD
     S1["Bước 1: Tạo Fabric Trial\nF64 miễn phí 60 ngày"] --> S2["Bước 2: Share workspace\nVới học viên qua link"]
     S2 --> S3["Bước 3: Dạy 30 giờ\nwithin 60 ngày trial"]
-    S3 --> S4{Trial hết hạn?}
-    S4 -- Còn thời gian --> S5["Tiếp tục học"]
-    S4 -- Hết hạn --> S6["Chuyển sang F2 paid\n~$12/student"]
+    S3 --> S4{"Trial hết hạn?"}
+    S4 -- "Còn thời gian" --> S5["Tiếp tục học"]
+    S4 -- "Hết hạn" --> S6["Chuyển sang F2 paid\n~$12/student"]
 
     style S1 fill:#0078D4,color:#fff
     style S6 fill:#FF9900,color:#fff
@@ -367,7 +366,7 @@ cluster_config = {
 
 ```mermaid
 graph TD
-    Q1{Ngân sách\nkhoá học?} --> B1["Không có / Rất hạn chế\n→ Microsoft Fabric Trial\n$0/student 🏆"]
+    Q1{"Ngân sách\nkhoá học?"} --> B1["Không có / Rất hạn chế\n→ Microsoft Fabric Trial\n$0/student 🏆"]
     Q1 --> B2["Có ngân sách nhỏ\n$5-15/student\n→ AWS + EMR Serverless"]
     Q1 --> B3["Ngân sách tốt\n$15-30/student\n→ Azure Databricks Job Compute"]
 
@@ -396,12 +395,12 @@ mindmap
       emr["EMR Serverless: ~$9/student"]
       glue["Glue: ~$26/student (đắt hơn)"]
       s3["S3: $0.023/GB/mo"]
-      best_for2["Best for: Market demand, Loosely coupled learning"]
+      best_for2["Best for: Market demand, Loosely coupled"]
     Databricks["Azure Databricks"]
       job["Job Compute: ~$19/student"]
       ap["All-Purpose: ~$25/student"]
       adls["ADLS Gen2: $0.019/GB"]
-      best_for3["Best for: Enterprise Spark, Certification track"]
+      best_for3["Best for: Enterprise Spark, Cert track"]
     Optimize["💡 FinOps Tips"]
       pause["Pause/Auto-terminate clusters"]
       spot["Spot Instances: -60-80%"]
