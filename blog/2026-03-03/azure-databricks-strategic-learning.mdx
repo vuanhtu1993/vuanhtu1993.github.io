@@ -37,9 +37,9 @@ Cả nhà máy này được thuê theo giờ trên **Azure Cloud**, không cầ
 ```mermaid
 flowchart TD
     subgraph "Control Plane (Managed by Databricks)"
-        A["🖥️ Web Application\n(Notebook UI, Jobs)"]
-        B["⚙️ Compute Orchestration\n(Cluster Management)"]
-        C["🛡️ Unity Catalog\n(Data Governance)"]
+        A["🖥️ Web Application<br>(Notebook UI, Jobs)"]
+        B["⚙️ Compute Orchestration<br>(Cluster Management)"]
+        C["🛡️ Unity Catalog<br>(Data Governance)"]
     end
 
     subgraph "Compute Plane (Azure Subscription của bạn)"
@@ -48,7 +48,7 @@ flowchart TD
             E["💾 Azure Data Lake Storage"]
         end
         subgraph "Serverless Compute"
-            F["⚡ Serverless Pool\n(Auto-managed)"]
+            F["⚡ Serverless Pool<br>(Auto-managed)"]
         end
     end
 
@@ -79,13 +79,13 @@ Trước khi có Lakehouse, các công ty phải duy trì **2 hệ thống riên
 ```mermaid
 flowchart LR
     subgraph "Thế giới cũ (Tốn kém & Phức tạp)"
-        L1["📦 Data Lake\n(Giá rẻ, linh hoạt\nnhưng thiếu ACID)"]
-        L2["🏛️ Data Warehouse\n(Có ACID, BI tốt\nnhưng đắt & rigid)"]
-        L1 <-- "ETL mệt mỏi\n🔄 Copy data" --> L2
+        L1["📦 Data Lake<br>(Giá rẻ, linh hoạt<br>nhưng thiếu ACID)"]
+        L2["🏛️ Data Warehouse<br>(Có ACID, BI tốt<br>nhưng đắt & rigid)"]
+        L1 <-- "ETL mệt mỏi<br>🔄 Copy data" --> L2
     end
 
     subgraph "Lakehouse (Azure Databricks)"
-        L3["🏠 Delta Lake\n✅ ACID Transactions\n✅ Schema Enforcement\n✅ Time Travel\n✅ Giá rẻ như Data Lake\n✅ Query nhanh như Warehouse"]
+        L3["🏠 Delta Lake<br>✅ ACID Transactions<br>✅ Schema Enforcement<br>✅ Time Travel<br>✅ Giá rẻ như Data Lake<br>✅ Query nhanh như Warehouse"]
     end
 
     L1 -. "Tiến hóa" .-> L3
@@ -108,13 +108,13 @@ flowchart LR
 ```mermaid
 flowchart TD
     Q1{"Bạn cần gì?"}
-    Q1 --> Q2{"Data Engineering\n+ ML phức tạp?"}
-    Q1 --> Q3{"Chỉ cần SQL BI\nđơn giản?"}
-    Q1 --> Q4{"Kiểm soát\ninfra tối đa?"}
+    Q1 --> Q2{"Data Engineering<br>+ ML phức tạp?"}
+    Q1 --> Q3{"Chỉ cần SQL BI<br>đơn giản?"}
+    Q1 --> Q4{"Kiểm soát<br>infra tối đa?"}
 
-    Q2 --> R1["✅ Azure Databricks\n(Lakehouse + ML + Streaming)"]
-    Q3 --> R2["⚠️ Snowflake\n(Tối ưu cho SQL analytics)"]
-    Q4 --> R3["⚠️ AWS EMR\n(Nếu đang dùng AWS ecosystem)"]
+    Q2 --> R1["✅ Azure Databricks<br>(Lakehouse + ML + Streaming)"]
+    Q3 --> R2["⚠️ Snowflake<br>(Tối ưu cho SQL analytics)"]
+    Q4 --> R3["⚠️ AWS EMR<br>(Nếu đang dùng AWS ecosystem)"]
 
     style R1 fill:#107c10,color:#fff
     style R2 fill:#f7c84a,color:#000
@@ -199,22 +199,22 @@ df_current = spark.read.format("delta").load("/data/inventory")
 
 ```mermaid
 flowchart LR
-    subgraph "Giai đoan 1 - Nen tang (Thang 1-2)"
-        A1["📚 Hieu Lakehouse\n& Databricks Workspace"]
-        A2["⚡ Apache Spark co ban\n(PySpark, SQL)"]
-        A3["🗂️ Delta Lake 101\n(CRUD, Time Travel)"]
+    subgraph "Giai doan 1 - Nen tang (Thang 1-2)"
+        A1["📚 Hieu Lakehouse<br>& Databricks Workspace"]
+        A2["⚡ Apache Spark co ban<br>(PySpark, SQL)"]
+        A3["🗂️ Delta Lake 101<br>(CRUD, Time Travel)"]
     end
 
     subgraph "Giai doan 2 - Chuyen sau (Thang 3-5)"
-        B1["🔧 ETL Pipelines\n(Lakeflow/DLT)"]
-        B2["📊 Databricks SQL\n(Dashboard, BI)"]
-        B3["🤖 MLflow co ban\n(Tracking, Registry)"]
+        B1["🔧 ETL Pipelines<br>(Lakeflow/DLT)"]
+        B2["📊 Databricks SQL<br>(Dashboard, BI)"]
+        B3["🤖 MLflow co ban<br>(Tracking, Registry)"]
     end
 
     subgraph "Giai doan 3 - Chuyen gia (Thang 6+)"
-        C1["🛡️ Unity Catalog\n(Governance)"]
-        C2["🚀 MLOps Production\n(Deploy, Monitor)"]
-        C3["🎗️ Certification\n(DE/DA/ML Associate)"]
+        C1["🛡️ Unity Catalog<br>(Governance)"]
+        C2["🚀 MLOps Production<br>(Deploy, Monitor)"]
+        C3["🎗️ Certification<br>(DE/DA/ML Associate)"]
     end
 
     A1 --> A2 --> A3
@@ -328,18 +328,18 @@ Certification chỉ là tờ giấy. Skills mới tạo ra giá trị. Hãy buil
 mindmap
   root(("Azure Databricks"))
     Concept["Khai niem cot loi"]
-      def["Lakehouse Platform\n(Lake + Warehouse = 1)"]
-      prob["Giai quyet: Data silo,\nETL phuc tap, AI-ready"]
+      def["Lakehouse Platform<br>(Lake + Warehouse = 1)"]
+      prob["Giai quyet: Data silo,<br>ETL phuc tap, AI-ready"]
       arch["Control Plane vs Compute Plane"]
     Components["Core Components"]
-      spark["Apache Spark\n(Distributed Processing)"]
-      delta["Delta Lake\n(ACID, Time Travel)"]
-      mlflow["MLflow\n(ML Lifecycle)"]
-      unity["Unity Catalog\n(Governance)"]
+      spark["Apache Spark<br>(Distributed Processing)"]
+      delta["Delta Lake<br>(ACID, Time Travel)"]
+      mlflow["MLflow<br>(ML Lifecycle)"]
+      unity["Unity Catalog<br>(Governance)"]
     UseCases["Use Cases"]
-      when["Khi can: ETL phuc tap,\nML + Analytics cung luc"]
-      notwhen["Khong dung: Chi can SQL BI don gian\n-> Dung Snowflake thay the"]
-      example["Banking: Fraud Detection\nRetail: Inventory AI"]
+      when["Khi can: ETL phuc tap,<br>ML + Analytics cung luc"]
+      notwhen["Khong dung: Chi can SQL BI<br>-> Snowflake thay the"]
+      example["Banking: Fraud Detection<br>Retail: Inventory AI"]
     BestPractices["Best Practices"]
       conv["Hoc Spark truoc, Databricks sau"]
       sec["Unity Catalog cho moi workspace"]

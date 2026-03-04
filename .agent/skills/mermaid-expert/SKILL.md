@@ -27,6 +27,13 @@ Các ký tự `()`, `[]`, `{}`, `"`, `#` rất dễ gây lỗi parser nếu khô
 *   **Dấu ngoặc kép trong label:** Dùng HTML entity `#quot;`. Ví dụ: `id["Nói: #quot;Hello#quot;"]`
 *   **Icon/Emoji:** Hỗ trợ tốt trong ngoặc kép. `id["🚀 Keep moving"]`
 
+### Rule #4: ALWAYS Use `<br>` for Line Breaks (KHÔNG dùng `\n`)
+Dùng `\n` trong label **sẽ render ra chữ `\n`** thay vì xuống dòng thật sự, gây mất chữ khi node bị tràn.
+*   ❌ Sai: `A["Web Application\nNotebook UI"]` → Hiển thị `\n` như văn bản
+*   ✅ Đúng: `A["Web Application<br>Notebook UI"]` → Xuống dòng thật
+
+**Áp dụng cho tất cả diagram types:** flowchart, graph, sequenceDiagram node labels.
+
 ---
 
 ## 🏗️ Robust Templates (Mẫu An Toàn)
@@ -52,11 +59,11 @@ Dùng `graph TD` (trên xuống) hoặc `graph LR` (trái sang).
 
 ```mermaid
 graph TD
-    Start["Bắt đầu (Start)"] --> Step1["Bước 1: Làm gì đó?"]
+    Start["Bắt đầu<br>(Start)"] --> Step1["Bước 1:<br>Làm gì đó?"]
     Step1 --> Decision{"Có lỗi không?"}
-    Decision -- "Có" --> Fix["Sửa lỗi (Fix)"]
+    Decision -- "Có" --> Fix["Sửa lỗi<br>(Fix)"]
     Fix --> Step1
-    Decision -- "Không" --> End["Kết thúc (End)"]
+    Decision -- "Không" --> End["Kết thúc<br>(End)"]
     
     %% Styling (Optional)
     style Start fill:#f9f,stroke:#333
@@ -142,3 +149,10 @@ erDiagram
 ### Lỗi 3: Text bị cắt hoặc hiển thị sai
 *   **Nguyên nhân:** Dùng ký tự lạ hoặc conflict HTML.
 *   **Cách sửa:** Dùng HTML Entity hoặc bỏ bớt ký tự đặc biệt.
+
+### Lỗi 4: `\n` hiển thị thành chữ, node bị tràn chữ ra ngoài
+*   **Nguyên nhân:** Dùng `\n` để xuống dòng trong Mermaid — **không được hỗ trợ trong hầu hết diagram types**.
+*   **Triệu chứng:** Label hiển thị `Web Application\nNotebook UI` thay vì xuống dòng; subgraph title bị cắt.
+*   **Cách sửa:** Thay tất cả `\n` bằng `<br>` trong node labels.
+    *   Sai: `id["Web Application\nNotebook UI"]`
+    *   Đúng: `id["Web Application<br>Notebook UI"]`
