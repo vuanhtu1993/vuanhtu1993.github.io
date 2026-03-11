@@ -127,7 +127,7 @@ V.   Dự báo & Rủi ro (2 kịch bản: Cơ sở + Rủi ro)
    - Mọi nhận định **phải** có số liệu hỗ trợ (không nhận định chay)
    - **Bảng Dashboard** phải đủ 9 chỉ số với đủ 5 cột (T-1, T, MoM, YoY, Nhận định)
    - **Kịch bản Rủi ro** phải nêu ít nhất 1 "thiên nga đen" (tail risk) tiềm tàng
-   - Cuối báo cáo có **Mermaid diagram** tóm tắt rủi ro/cơ hội
+   - Cuối báo cáo có **Mermaid diagram** tóm tắt rủi ro/cơ hội. **KHI VẼ MERMAID: BẮT BUỘC ĐỌC VÀ ÁP DỤNG SKILL MẪU TẠI `.agent/skills/mermaid-expert/SKILL.md` ĐỂ TRÁNH LỖI SYNTAX.**
 
 4. Output: Bản nháp báo cáo hoàn chỉnh
 
