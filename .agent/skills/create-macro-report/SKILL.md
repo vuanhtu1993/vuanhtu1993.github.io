@@ -18,7 +18,114 @@ Skill hướng dẫn soạn thảo **Báo cáo Chiến lược Vĩ mô Việt Na
 
 ---
 
+## Xử lý Dữ liệu từ Báo cáo Chiến lược CTCK (SSI / MBS / TCBS)
+
+> **Bối cảnh:** Trước khi soạn báo cáo, dữ liệu đã được extract từ PDF CTCK (Bước 1A trong workflow). Skill này hướng dẫn cách **đọc, tích hợp và trích dẫn** đúng cách.
+
+### Bản đồ chỉ số: Tên trong PDF → Dashboard
+
+Các CTCK thường dùng tên viết tắt hoặc tiếng Việt thuần. Mapping chuẩn:
+
+| Tên thường gặp trong PDF CTCK | Tên chuẩn trong Dashboard | Ghi chú |
+|:---|:---|:---|
+| `PMI sản xuất` / `Chỉ số PMI` | PMI Manufacturing | Lấy con số điểm (VD: 51.5) |
+| `IIP` / `Sản xuất công nghiệp` / `%svck` | IIP (%YoY) | Chú ý: svck = so với cùng kỳ = YoY |
+| `Tổng mức bán lẻ & DVTD` | Retail & Consumer Services (%YoY) | |
+| `XK` / `Kim ngạch xuất khẩu` | Xuất khẩu (tỷ USD) | Lấy cả số tuyệt đối lẫn %YoY |
+| `NK` / `Kim ngạch nhập khẩu` | Nhập khẩu (tỷ USD) | |
+| `Thặng dư/thâm hụt thương mại` / `CCTM` | Cán cân thương mại (tỷ USD) | +: Thặng dư, -: Thâm hụt |
+| `Vốn FDI giải ngân` / `FDI thực hiện` | FDI giải ngân (tỷ USD, YTD) | **KHÔNG** nhầm với FDI đăng ký |
+| `CPI` | CPI chung (%YoY) | Kiểm tra: MoM hay YoY? |
+| `Lạm phát lõi` / `CPI lõi` | Core CPI (%YoY) | |
+| `Tăng trưởng tín dụng` / `Dư nợ tín dụng` | Tín dụng (%YTD) | Lũy kế từ đầu năm |
+| `LS liên ngân hàng` / `LS qua đêm` | Lãi suất liên NH overnight (%) | |
+| `Tỷ giá trung tâm` / `USD/VND` | Tỷ giá USD/VND | Dùng tỷ giá trung tâm SBV |
+| `OMO bơm/hút` | OMO ròng (tỷ VND) | +: bơm tiền, -: hút tiền |
+
+### Quy tắc Ưu tiên Nguồn (Source Hierarchy)
+
+Khi có xung đột số liệu giữa các nguồn:
+
+```
+Tier 1 - Nguồn gốc (ĐỘ TIN CẬY CAO NHẤT):
+  ① GSO → CPI, IIP, Bán lẻ, GDP
+  ② SBV → Tỷ giá, Tín dụng, OMO, Lãi suất
+  ③ Tổng cục Hải quan → Xuất/Nhập khẩu
+  ④ MPI/Cục Đầu tư nước ngoài → FDI
+  ⑤ S&P Global → PMI
+
+Tier 2 - Báo cáo CTCK (Phân tích + Tổng hợp):
+  ⑥ SSI Research → Ưu tiên nếu có bảng số liệu rõ ràng
+  ⑦ MBS Research → Ưu tiên nếu số liệu khác SSI (ghi nhận cả hai)
+  ⑧ TCBS Research → Tham chiếu thêm
+
+Tier 3 - Báo chí / Truyền thông (Kiểm tra chéo):
+  ⑨ CafeF, VnEconomy, Cafebiz → Chỉ dùng khi không có nguồn Tier 1/2
+```
+
+**Quy tắc xung đột:** Nếu SSI và MBS có số liệu khác nhau cho cùng chỉ số:
+1. Kiểm tra nguồn gốc mà mỗi CTCK trích dẫn
+2. Ưu tiên con số từ nguồn Tier 1
+3. Nếu cả hai đều trích từ Tier 1 và vẫn lệch → ghi chú: *"số liệu chưa thống nhất, tham chiếu từ [nguồn A] và [nguồn B]"*
+
+### Cách Trích Dẫn Chuẩn
+
+```
+# Nguồn từ CTCK:
+Theo SSI Research (Báo cáo Chiến lược Tháng 02/2026, tr.4)
+
+# Nguồn gốc sau khi verify:
+Theo GSO (công bố ngày 29/02/2026), được SSI Research tổng hợp
+
+# Khi số liệu chưa được verify:
+PMI tháng 02/2026 đạt 51.5 điểm (nguồn: SSI Research - cần xác minh S&P Global)
+```
+
+### Checklist Trước Khi Dùng Dữ liệu PDF
+
+Trước khi điền vào Bảng Macro Dashboard, kiểm tra:
+
+- [ ] Số liệu là **tháng T** hay **tháng T-1**? (Báo cáo tháng 2 thường có số liệu tháng 1)
+- [ ] Đơn vị có nhất quán? (%, tỷ USD, hay nghìn tỷ VND?)
+- [ ] `svck` = YoY hay MoM? (Đọc kỹ chú thích trong bảng)
+- [ ] FDI: đã phân biệt rõ **đăng ký** vs **giải ngân** chưa?
+- [ ] CPI: là **%MoM** hay **%YoY**? (Các CTCK thường dùng cả hai)
+
+---
+
 ## Cấu trúc Báo cáo (Report Blueprint)
+
+### 🎯 0. MỤC TIÊU CHÍNH PHỦ NĂM [YYYY] *(Section bắt buộc — luôn đặt đầu báo cáo)*
+
+**Mục đích:** Cung cấp "la bàn" để so sánh mọi con số thực tế với đích đến cả năm — giúp người đọc nhanh chóng đánh giá tiến độ và hành động.
+
+**Template:**
+
+```markdown
+## 🎯 MỤC TIÊU CHÍNH PHỦ VIỆT NAM NĂM [YYYY]
+
+> **Nguồn:** Nghị quyết [số]/[năm]/QH (Quốc hội) & Nghị quyết 01/NQ-CP (Chính phủ)
+
+| # | Chỉ tiêu | Mục tiêu [YYYY] | Thực tế T[N]/[YYYY] | Trạng thái |
+|:---:|:---|:---:|:---:|:---:|
+| 1 | **Tăng trưởng GDP** | **[mục tiêu]%** | [số thực tế hoặc "Chờ Q[n]"] | [emoji] |
+| 2 | **CPI bình quân** | **≤ [%]** | [YoY tháng T] | [emoji] |
+| 3 | **Tổng kim ngạch XK** | **[tỷ USD]** (+[%] YoY) | [tỷ/tháng] | [emoji] |
+| 4 | **Cán cân thương mại** | XS > [tỷ USD] | [+/-] tỷ | [emoji] |
+| 5 | **FDI giải ngân** | **~[tỷ] USD** | [tỷ/tháng] | [emoji] |
+| 6 | **GDP bình quân đầu người** | **[USD]** | — | 🕐 CNA |
+| 7 | **Tỷ lệ thất nghiệp đô thị** | **< [%]** | — | 🕐 CNA |
+| 8 | **Tăng trưởng tín dụng** | **~[%]** | [% YTD] | [emoji] |
+
+> **Cách đọc:** 🟢 Đúng hướng | 🟡 Cần theo dõi | 🔴 Lệch mục tiêu | 🕐 Chưa đánh giá được
+```
+
+**Quy tắc cập nhật cột "Thực tế":**
+- Annualize số tháng cho các chỉ tiêu cả năm (VD: XK tháng 1 × 12 ≈ pace cả năm)
+- GDP Q1: điền khi GSO công bố (thường cuối tháng 3)
+- Trạng thái 🟡 khi thực tế đang ở 80-95% tốc độ cần để đạt mục tiêu
+
+---
 
 ### I. EXECUTIVE SUMMARY
 

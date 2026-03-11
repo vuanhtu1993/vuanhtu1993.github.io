@@ -1,0 +1,22 @@
+# Dữ liệu vĩ mô tháng 2026-01
+> **Nguồn:** SSI Research, TCBS Research  
+> **Trích xuất lúc:** 2026-03-11T13:46:57.243190  
+> ⚠️ *Dữ liệu được extract tự động bằng regex/pdfplumber — cần fact-check trước khi dùng.*
+
+## Bảng Macro Dashboard
+
+| Chỉ số | Giá trị | Đơn vị | Độ tin cậy | Nguồn | Ghi chú |
+|:-------|:-------:|:------:|:----------:|:------|:--------|
+| **PMI Manufacturing** | 50.0 | điểm | ✅ | TCBS Research |  |
+| **IIP** | 7.0 | %YoY | ✅ | SSI Research |  |
+| **Tổng mức bán lẻ** | 9.2 | %YoY | ⚠️ | SSI Research / TCBS Research | ⚠️ Conflict: {'SSI Research': 9.2, 'TCBS Research': 3.9} |
+| **Xuất khẩu** | 930.0 | tỷ USD | ⚠️ | SSI Research / TCBS Research | ⚠️ Conflict: {'SSI Research': 930.0, 'TCBS Research': 100.0} |
+| **Nhập khẩu** | 930.0 | tỷ USD | ⚠️ | SSI Research / TCBS Research | ⚠️ Conflict: {'SSI Research': 930.0, 'TCBS Research': 186.0} |
+| **Cán cân TM** | 20.0 | tỷ USD | ⚠️ | SSI Research / TCBS Research | ⚠️ Conflict: {'SSI Research': 20.0, 'TCBS Research': 134.0} |
+| **CPI** | 7.0 | %YoY | ⚠️ | SSI Research / TCBS Research | ⚠️ Conflict: {'SSI Research': 7.0, 'TCBS Research': 3.31} |
+| **CPI** | 0.19 | %MoM | ✅ | SSI Research |  |
+| **Tăng trưởng tín dụng** | 17.65 | %YTD | ⚠️ | SSI Research / TCBS Research | ⚠️ Conflict: {'SSI Research': 17.65, 'TCBS Research': 19.0} |
+| **Tỷ giá USD/VND** | 2026.0 | VND | ✅ | SSI Research / TCBS Research |  |
+
+---
+> *Made by Anh Tu - Share to be share*

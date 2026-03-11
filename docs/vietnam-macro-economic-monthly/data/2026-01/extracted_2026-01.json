@@ -1,0 +1,256 @@
+{
+  "month": "2026-01",
+  "generated_at": "2026-03-11T13:46:57.243190",
+  "sources": [
+    {
+      "file": "Bao cao Chien luoc Thi truong_Thang 1 2026_SSIResearch.pdf",
+      "source": "SSI Research",
+      "page_count": 7,
+      "indicators": {
+        "CPI_YoY": {
+          "label": "CPI",
+          "value": 7.0,
+          "unit": "%YoY",
+          "confidence": "high",
+          "source": "table_page_5"
+        },
+        "CPI_MoM": {
+          "label": "CPI",
+          "value": 0.19,
+          "unit": "%MoM",
+          "confidence": "medium",
+          "raw_match": "0,19"
+        },
+        "Export": {
+          "label": "Xuất khẩu",
+          "value": 930.0,
+          "unit": "tỷ USD",
+          "confidence": "medium",
+          "raw_match": "930"
+        },
+        "Import": {
+          "label": "Nhập khẩu",
+          "value": 930.0,
+          "unit": "tỷ USD",
+          "confidence": "medium",
+          "raw_match": "930"
+        },
+        "Trade_Balance": {
+          "label": "Cán cân TM",
+          "value": 20.0,
+          "unit": "tỷ USD",
+          "confidence": "medium",
+          "raw_match": "20"
+        },
+        "Credit_Growth": {
+          "label": "Tăng trưởng tín dụng",
+          "value": 17.65,
+          "unit": "%YTD",
+          "confidence": "medium",
+          "raw_match": "17,65"
+        },
+        "Exchange_Rate": {
+          "label": "Tỷ giá USD/VND",
+          "value": 2026.0,
+          "unit": "VND",
+          "confidence": "medium",
+          "raw_match": "2026"
+        },
+        "Retail_Sales": {
+          "label": "Tổng mức bán lẻ",
+          "value": 9.2,
+          "unit": "%YoY",
+          "confidence": "medium",
+          "raw_match": "9,2"
+        },
+        "IIP": {
+          "label": "IIP",
+          "value": 7.0,
+          "unit": "%YoY",
+          "confidence": "high",
+          "source": "table_page_5"
+        }
+      }
+    },
+    {
+      "file": "VietnamOutlook_20260115_TV-1.pdf",
+      "source": "TCBS Research",
+      "page_count": 9,
+      "indicators": {
+        "PMI": {
+          "label": "PMI Manufacturing",
+          "value": 50.0,
+          "unit": "điểm",
+          "confidence": "medium",
+          "raw_match": "50"
+        },
+        "CPI_YoY": {
+          "label": "CPI",
+          "value": 3.31,
+          "unit": "%YoY",
+          "confidence": "medium",
+          "raw_match": "3.31"
+        },
+        "Export": {
+          "label": "Xuất khẩu",
+          "value": 100.0,
+          "unit": "tỷ USD",
+          "confidence": "high",
+          "source": "table_page_4"
+        },
+        "Import": {
+          "label": "Nhập khẩu",
+          "value": 186.0,
+          "unit": "tỷ USD",
+          "confidence": "medium",
+          "raw_match": "186"
+        },
+        "Trade_Balance": {
+          "label": "Cán cân TM",
+          "value": 134.0,
+          "unit": "tỷ USD",
+          "confidence": "medium",
+          "raw_match": "134"
+        },
+        "Credit_Growth": {
+          "label": "Tăng trưởng tín dụng",
+          "value": 19.0,
+          "unit": "%YTD",
+          "confidence": "medium",
+          "raw_match": "19"
+        },
+        "Exchange_Rate": {
+          "label": "Tỷ giá USD/VND",
+          "value": 2025.0,
+          "unit": "VND",
+          "confidence": "medium",
+          "raw_match": "2025"
+        },
+        "Retail_Sales": {
+          "label": "Tổng mức bán lẻ",
+          "value": 3.9,
+          "unit": "%YoY",
+          "confidence": "medium",
+          "raw_match": "3.9"
+        }
+      }
+    }
+  ],
+  "merged": {
+    "CPI_YoY": {
+      "label": "CPI",
+      "unit": "%YoY",
+      "values": {
+        "SSI Research": 7.0,
+        "TCBS Research": 3.31
+      },
+      "conflict": true,
+      "final_value": 7.0,
+      "final_source": "SSI Research"
+    },
+    "CPI_MoM": {
+      "label": "CPI",
+      "unit": "%MoM",
+      "values": {
+        "SSI Research": 0.19
+      },
+      "conflict": false,
+      "final_value": 0.19,
+      "final_source": "SSI Research"
+    },
+    "Export": {
+      "label": "Xuất khẩu",
+      "unit": "tỷ USD",
+      "values": {
+        "SSI Research": 930.0,
+        "TCBS Research": 100.0
+      },
+      "conflict": true,
+      "final_value": 930.0,
+      "final_source": "SSI Research"
+    },
+    "Import": {
+      "label": "Nhập khẩu",
+      "unit": "tỷ USD",
+      "values": {
+        "SSI Research": 930.0,
+        "TCBS Research": 186.0
+      },
+      "conflict": true,
+      "final_value": 930.0,
+      "final_source": "SSI Research"
+    },
+    "Trade_Balance": {
+      "label": "Cán cân TM",
+      "unit": "tỷ USD",
+      "values": {
+        "SSI Research": 20.0,
+        "TCBS Research": 134.0
+      },
+      "conflict": true,
+      "final_value": 20.0,
+      "final_source": "SSI Research"
+    },
+    "Credit_Growth": {
+      "label": "Tăng trưởng tín dụng",
+      "unit": "%YTD",
+      "values": {
+        "SSI Research": 17.65,
+        "TCBS Research": 19.0
+      },
+      "conflict": true,
+      "final_value": 17.65,
+      "final_source": "SSI Research"
+    },
+    "Exchange_Rate": {
+      "label": "Tỷ giá USD/VND",
+      "unit": "VND",
+      "values": {
+        "SSI Research": 2026.0,
+        "TCBS Research": 2025.0
+      },
+      "conflict": false,
+      "final_value": 2026.0,
+      "final_source": "SSI Research"
+    },
+    "Retail_Sales": {
+      "label": "Tổng mức bán lẻ",
+      "unit": "%YoY",
+      "values": {
+        "SSI Research": 9.2,
+        "TCBS Research": 3.9
+      },
+      "conflict": true,
+      "final_value": 9.2,
+      "final_source": "SSI Research"
+    },
+    "IIP": {
+      "label": "IIP",
+      "unit": "%YoY",
+      "values": {
+        "SSI Research": 7.0
+      },
+      "conflict": false,
+      "final_value": 7.0,
+      "final_source": "SSI Research"
+    },
+    "PMI": {
+      "label": "PMI Manufacturing",
+      "unit": "điểm",
+      "values": {
+        "TCBS Research": 50.0
+      },
+      "conflict": false,
+      "final_value": 50.0,
+      "final_source": "TCBS Research"
+    }
+  },
+  "conflicts": [
+    "CPI_YoY",
+    "Export",
+    "Import",
+    "Trade_Balance",
+    "Credit_Growth",
+    "Retail_Sales"
+  ]
+}

@@ -202,7 +202,7 @@ npm run serve
 
 ---
 
-## Bước 7: Xác nhận và Push lên GitHub (GitHub MCP)
+## Bước 7 (Bỏ qua): Xác nhận và Push lên GitHub (GitHub MCP)
 
 1. **Hỏi người dùng xác nhận:**
    - "Bạn đã xem preview chưa? Số liệu và nhận định OK chưa?"
