@@ -120,6 +120,20 @@ NestJS không dùng AOP framework thuần túy (như AspectJ của Java), nhưng
 
 ### Request Lifecycle — "Chuỗi Trạm Kiểm Soát"
 
+Để hình dung rõ nhất về vòng đời của một Request trong NestJS và cách các "Trạm Kiểm Soát" phân bổ, hãy xem qua sơ đồ trực quan dưới đây:
+
+![AOP in NestJS Request Lifecycle](/img/aop-nestjs-lifecycle.png)
+
+> **Phân tích sơ đồ:**
+> 1. **Middleware (1)**: Đón đầu Request đầu tiên trước khi đi vào hệ thống.
+> 2. **Guard (2)**: Đứng ngay sau đó để quyết định (Authorization) xem Request có quyền đi thẳng tiếp hay không.
+> 3. **Interceptor (4 - Trước khi Handler xử lý)**: Can thiệp, biến đổi request trước khi chạm đến logic chính.
+> 4. **Pipe (3) & Handler (3)**: Pipe làm nhiệm vụ chuẩn hóa (Transform) và kiểm tra (Validate) dữ liệu, sau đó mới thả vào Controller Handler.
+> 5. **Interceptor (4 - Sau khi Handler xử lý)**: Sau khi Controller tính toán xong, Interceptor lại "chặn" một lần nữa để bọc/biến đổi Response.
+> 6. **Exception Filter (5)**: Đứng như một chốt chặn an toàn cuối — nếu bất kỳ bước nào bên trên ném ra lỗi (Throw Exception), filter sẽ bắt lại và định dạng lỗi chuẩn chỉ thành Response.
+
+Nếu nhìn dưới góc độ sơ đồ tuần tự (Sequence Diagram), luồng đi sẽ diễn ra như thế này:
+
 ```mermaid
 sequenceDiagram
     autonumber
