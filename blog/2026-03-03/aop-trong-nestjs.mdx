@@ -122,7 +122,27 @@ NestJS không dùng AOP framework thuần túy (như AspectJ của Java), nhưng
 
 Để hình dung rõ nhất về vòng đời của một Request trong NestJS và cách các "Trạm Kiểm Soát" phân bổ, hãy xem qua sơ đồ trực quan dưới đây:
 
-![AOP in NestJS Request Lifecycle](/img/aop-nestjs-lifecycle.png)
+```mermaid
+graph TD
+    classDef mw fill:#f9c2ff,stroke:#d070db,stroke-width:2px,color:#000;
+    classDef gd fill:#c2f0ff,stroke:#5ebdcf,stroke-width:2px,color:#000;
+    classDef in fill:#ffe8a1,stroke:#d1ae41,stroke-width:2px,color:#000;
+    classDef pp fill:#c5f0c5,stroke:#62b562,stroke-width:2px,color:#000;
+    classDef hl fill:#ffffff,stroke:#333,stroke-width:2px,color:#000;
+    classDef ef fill:#ffc2c2,stroke:#d66565,stroke-width:2px,color:#000;
+    
+    Req([🌐 Incoming Request]) --> MW[1. Middleware]:::mw
+    MW --> GD[2. Guard]:::gd
+    GD --> InBefore[3. Interceptor Before]:::in
+    InBefore --> PP[4. Pipe]:::pp
+    PP --> Handler((5. Controller Handler)):::hl
+    
+    Handler -- Trả kết quả --> InAfter[6. Interceptor After]:::in
+    InAfter --> Res([✅ Server Response])
+    
+    Handler -. Ném Exception .-> EF[7. Exception Filter]:::ef
+    EF -.-> ErrRes([❌ Error Response])
+```
 
 > **Phân tích sơ đồ:**
 > 1. **Middleware (1)**: Đón đầu Request đầu tiên trước khi đi vào hệ thống.
@@ -180,6 +200,22 @@ Incoming Request
 
 ### 1. Middleware — "Người Gác Cổng Đầu Tiên"
 
+```mermaid
+graph LR
+    classDef comp fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;
+    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;
+    classDef module fill:#e8f5e9,stroke:#4caf50,color:#000;
+    
+    Req([🌐 Request]) --> MW:::comp
+    
+    subgraph MW [1. Middleware - Tiền xử lý]
+        direction LR
+        GlobalMW(Global Scope):::global --> ModuleMW(Module Scope):::module
+    end
+    
+    MW --> Next([Tiếp tục luồng...])
+```
+
 Middleware là tầng xử lý **đầu tiên**, trước cả guards. Nó gần giống với Express.js middleware — có access vào `req`, `res`, và `next()`.
 
 **Khi nào dùng Middleware?**
@@ -229,6 +265,24 @@ export class AppModule implements NestModule {
 ---
 
 ### 2. Guards — "Người Canh Gác Authorization"
+
+```mermaid
+graph LR
+    classDef comp fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;
+    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;
+    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;
+    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;
+    
+    Req([Từ Middleware]) --> GD:::comp
+    
+    subgraph GD [2. Guard - Trạm gác phân quyền]
+        direction LR
+        GlobalGuard(Global Scope):::global --> ControllerGuard(Controller Scope):::controller --> RouteGuard(Method Scope):::route
+    end
+    
+    GD -- Cho phép --> Next([Đến Interceptor...])
+    GD -. Từ chối .-> Error([❌ 403 Forbidden])
+```
 
 Guards quyết định liệu request có được **phép tiếp tục** hay không. Chúng implement interface `CanActivate` và trả về `boolean`.
 
@@ -300,6 +354,32 @@ healthCheck() {
 ---
 
 ### 3. Interceptors — "Người Bao Quanh Tất Cả"
+
+```mermaid
+graph TD
+    classDef req fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;
+    classDef res fill:#4a90e2,stroke:#2b3440,stroke-width:2px,color:#fff;
+    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;
+    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;
+    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;
+    
+    Req([Từ Guard]) --> IntPre:::req
+    
+    subgraph IntPre [3. Interceptor Pre - Can thiệp trước]
+        direction LR
+        GlobalIntPre(Global Scope):::global --> ControllerIntPre(Controller Scope):::controller --> RouteIntPre(Method Scope):::route
+    end
+    
+    IntPre --> Next([Đến Pipe & Handler...])
+    HandlerReturn([Kết quả từ Handler]) --> IntPost:::res
+    
+    subgraph IntPost [5. Interceptor Post - Gói Response]
+        direction RL
+        RouteIntPost(Method Scope):::route --> ControllerIntPost(Controller Scope):::controller --> GlobalIntPost(Global Scope):::global
+    end
+    
+    IntPost --> Res([✅ Response gửi về Client])
+```
 
 Interceptors là thành phần **mạnh mẽ nhất** trong AOP toolkit của NestJS. Chúng có thể:
 - **Thêm logic trước VÀ sau** route handler
@@ -397,6 +477,24 @@ export class CacheInterceptor implements NestInterceptor {
 
 ### 4. Pipes — "Người Biến Đổi Và Gác Cổng Dữ Liệu"
 
+```mermaid
+graph LR
+    classDef comp fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;
+    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;
+    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;
+    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;
+    
+    Req([Data từ Request]) --> PP:::comp
+    
+    subgraph PP [4. Pipe - Bộ lọc dữ liệu tinh]
+        direction LR
+        GlobalPipe(Global Scope):::global --> ControllerPipe(Controller Scope):::controller --> RoutePipe(Method Scope):::route --> ParamPipe(Tham số):::route
+    end
+    
+    PP -- Dữ liệu chuẩn --> HTTPHandler((Xử lý HTTP <br/>Controller & Service))
+    PP -. Data lỗi .-> Error([❌ 400 Bad Request])
+```
+
 Pipes xử lý **data transformation** và **data validation** cho input của route handler. Chúng chạy sau interceptors, ngay trước khi data được truyền vào controller method.
 
 **Hai nhiệm vụ của Pipes:**
@@ -475,6 +573,23 @@ create(@Body() createUserDto: CreateUserDto) {
 ---
 
 ### 5. Exception Filters — "Đội Cứu Hộ"
+
+```mermaid
+graph RL
+    classDef err fill:#f44336,stroke:#b71c1c,stroke-width:2px,color:#fff;
+    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;
+    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;
+    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;
+    
+    HTTPHandler((Lỗi phát sinh <br/>Throw Exception)) -.-> EF:::err
+    
+    subgraph EF [6. Exception Filter - Xử lý sự cố]
+        direction RL
+        RouteEF(Method/Route Scope):::route -.-> ControllerEF(Controller Scope):::controller -.-> GlobalEF(Global Scope):::global
+    end
+    
+    EF -.-> ErrorResponse([❌ Định dạng chuẩn lỗi <br/>Response Thất bại])
+```
 
 Exception Filters là tầng **catch exception** cuối cùng. Mọi lỗi không được xử lý sẽ chạy đến đây để được format thành response thống nhất.
 
