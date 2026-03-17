@@ -40,21 +40,7 @@ Dùng `\n` trong label **sẽ render ra chữ `\n`** thay vì xuống dòng th�
 
 Copy và điền vào các mẫu này để đảm bảo không lỗi.
 
-### 1. Mindmap (Sơ đồ tư duy)
-**Lưu ý:** Mindmap rất nhạy cảm với dấu ngoặc đơn `()`. Bắt buộc dùng `id["Label"]`.
-
-```mermaid
-mindmap
-  root((Root Topic))
-    Branch1["Main Branch 1"]
-      Sub1["Sub-item (với ngoặc)"]
-      Sub2["Sub-item #2"]
-    Branch2["Main Branch 2"]
-      Sub3["Sub-item với icon 🚀"]
-      Sub4["Sub-item dài dòng..."]
-```
-
-### 2. Flowchart (Lưu đồ)
+### 1. Flowchart (Lưu đồ)
 Dùng `graph TD` (trên xuống) hoặc `graph LR` (trái sang).
 
 ```mermaid
@@ -70,7 +56,7 @@ graph TD
     style End fill:#9f9,stroke:#333
 ```
 
-### 3. Sequence Diagram (Biểu đồ tuần tự)
+### 2. Sequence Diagram (Biểu đồ tuần tự)
 Sử dụng `participant as` để tách biệt ID và Label.
 
 ```mermaid
@@ -89,7 +75,100 @@ sequenceDiagram
     FE-->>User: Redirect to Dashboard
 ```
 
-### 4. Quadrant Chart (Biểu đồ 4 góc)
+### 3. Class Diagram (Biểu đồ lớp)
+Dùng biểu đồ lớp để diễn tả hướng đối tượng, thuộc tính (+), và phương thức (+).
+
+```mermaid
+classDiagram
+    class Animal {
+        +int age
+        +String gender
+        +isMammal()
+        +mate()
+    }
+    class Duck {
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish {
+        +int sizeInFt
+        +canEat()
+    }
+    Animal <|-- Duck
+    Animal <|-- Fish
+```
+
+### 4. State Diagram (Biểu đồ trạng thái)
+Sử dụng `stateDiagram-v2` cho syntax mới nhất.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving : "Bắt đầu di chuyển"
+    Moving --> Still : "Dừng lại"
+    Moving --> Crash : "Va chạm"
+    Crash --> [*]
+```
+
+### 5. Entity Relationship Diagram (ER Diagram)
+Dùng `||--o{` cho quan hệ. Text mô tả quan hệ phải có dấu ngoặc kép.
+
+```mermaid
+erDiagram
+    USER ||--o{ ORDER : "đặt (places)"
+    USER {
+        string username "Tên đăng nhập"
+        string email
+    }
+    ORDER ||--|{ LINE_ITEM : "chứa (contains)"
+    ORDER {
+        int order_id
+        string delivery_address
+    }
+```
+
+### 6. User Journey (Hành trình người dùng)
+Biểu đồ trải nghiệm/hành trình giúp hiển thị cảm xúc của người dùng.
+
+```mermaid
+journey
+    title "Hành trình mua hàng (Shopping Journey)"
+    section "Tìm kiếm"
+      "Xem sản phẩm": 5: "Người dùng (User)"
+      "Đọc review": 3: "Người dùng (User)"
+    section "Mua hàng"
+      "Thêm vào giỏ": 4: "Người dùng (User)"
+      "Thanh toán": 2: "Người dùng (User)", "Hệ thống (System)"
+```
+
+### 7. Gantt (Biểu đồ Gantt)
+Hiển thị lịch trình và tiến độ dự án.
+
+```mermaid
+gantt
+    title "Kế hoạch dự án (Project Plan)"
+    dateFormat  YYYY-MM-DD
+    section "Giai đoạn 1"
+    "Nghiên cứu": done, des1, 2026-03-01, 2026-03-05
+    "Thiết kế UI/UX": active, des2, 2026-03-06, 5d
+    section "Giai đoạn 2"
+    "Phát triển tính năng": crit, dev1, after des2, 10d
+    "Kiểm thử": dev2, after dev1, 3d
+```
+
+### 8. Pie Chart (Biểu đồ tròn)
+
+```mermaid
+pie title "Phân bổ ngôn ngữ lập trình"
+    "JavaScript" : 40
+    "TypeScript" : 30
+    "Python" : 15
+    "Khác" : 15
+```
+
+### 9. Quadrant Chart (Biểu đồ 4 góc)
 **Cảnh báo:** Quadrant Chart hiện tại **KHÔNG** hỗ trợ tốt dấu ngoặc kép trong text trục (axis labels). Hãy dùng từ đơn giản cho trục.
 
 ```mermaid
@@ -109,21 +188,212 @@ quadrantChart
     "Dự án D": [0.78, 0.34]
 ```
 
-### 5. ER Diagram (Sơ đồ thực thể)
-Dùng `||--o{` cho quan hệ. Text mô tả quan hệ phải có dấu ngoặc kép.
+### 10. Requirement Diagram (Biểu đồ yêu cầu)
+Dùng để truy xuất nguồn gốc yêu cầu (Requirements Traceability).
 
 ```mermaid
-erDiagram
-    USER ||--o{ ORDER : "đặt (places)"
-    USER {
-        string username "Tên đăng nhập"
-        string email
+requirementDiagram
+    requirement "Xác thực người dùng" {
+        id: "REQ-001"
+        text: "Hệ thống phải cho phép người dùng đăng nhập."
+        risk: high
+        verifymethod: test
     }
-    ORDER ||--|{ LINE_ITEM : "chứa (contains)"
-    ORDER {
-        int order_id
-        string delivery_address
+    element "Auth Module" {
+        type: "component"
     }
+    "Auth Module" - satisfies -> "Xác thực người dùng"
+```
+
+### 11. GitGraph (Git) Diagram
+Sơ đồ nhánh Git và luồng commit lịch sử.
+
+```mermaid
+gitGraph
+    commit id: "Khởi tạo"
+    branch "feature/login"
+    checkout "feature/login"
+    commit id: "Thêm giao diện"
+    commit id: "Xử lý API"
+    checkout main
+    merge "feature/login"
+    commit id: "Release v1.0"
+```
+
+### 12. C4 Diagram 🦺⚠️
+Biểu đồ kiến trúc phần mềm (C4 Context/Container/Component). *Lưu ý: Dễ gây lỗi nếu đặt tên tham số sai.*
+
+```mermaid
+C4Context
+    title "Hệ thống E-commerce"
+    Person(customer, "Khách hàng", "Người mua sắm trực tuyến")
+    System(ecommerce, "Hệ thống E-commerce", "Cho phép mua bán sản phẩm")
+    System_Ext(mail, "Hệ thống Email", "Gửi email xác nhận")
+    
+    Rel(customer, ecommerce, "Sử dụng", "HTTPS")
+    Rel(ecommerce, mail, "Gửi email bằng", "SMTP")
+```
+
+### 13. Mindmaps (Sơ đồ tư duy)
+**Lưu ý:** Mindmap rất nhạy cảm với dấu ngoặc đơn `()`. Bắt buộc dùng `id["Label"]`.
+
+```mermaid
+mindmap
+  root((Root Topic))
+    Branch1["Main Branch 1"]
+      Sub1["Sub-item (với ngoặc)"]
+      Sub2["Sub-item #2"]
+    Branch2["Main Branch 2"]
+      Sub3["Sub-item với icon 🚀"]
+      Sub4["Sub-item dài dòng..."]
+```
+
+### 14. Timeline (Dòng thời gian)
+Dùng cho timeline sự kiện lịch sử hoặc roadmap dự án.
+
+```mermaid
+timeline
+    title "Lịch sử phát triển dự án"
+    2026-Q1 : "Khởi động dự án" : "Giai đoạn nghiên cứu"
+    2026-Q2 : "Phát triển MVP" : "Hoàn thiện core feature"
+    2026-Q3 : "Testing & QA" : "Sửa lỗi và tối ưu"
+    2026-Q4 : "Release" : "Ra mắt phiên bản 1.0"
+```
+
+### 15. ZenUML
+Viết Sequence Diagram rút gọn bằng ZenUML. *(Lưu ý: Parser nhạy cảm với chuỗi rỗng).*
+
+```mermaid
+zenuml
+    title Đăng nhập
+    
+    User->AuthService: Gửi thông tin đăng nhập
+    if (Thông tin == "Hợp lệ") {
+        AuthService->User: Trả về Trang chủ
+    } else {
+        AuthService->User: Báo lỗi Đăng nhập
+    }
+```
+
+### 16. Sankey 🔥
+Biểu đồ hiển thị luồng dữ liệu (Sankey). Format: `"Nguồn", "Đích", Giá trị`.
+
+```mermaid
+sankey-beta
+    "Doanh thu tổng","Chi phí hoạt động",40
+    "Doanh thu tổng","Lương nhân viên",30
+    "Doanh thu tổng","Lợi nhuận",30
+    "Chi phí hoạt động","Marketing",15
+    "Chi phí hoạt động","Hàng hóa",25
+```
+
+### 17. XY Chart 🔥
+Tạo biểu đồ Line và Bar kết hợp.
+
+```mermaid
+xychart-beta
+    title "Doanh thu theo quy (Triệu VNĐ)"
+    x-axis ["Q1", "Q2", "Q3", "Q4"]
+    y-axis "Doanh thu" 0 --> 100
+    bar [40, 60, 80, 50]
+    line [40, 60, 80, 50]
+```
+
+### 18. Block Diagram 🔥
+Sơ đồ khối định tuyến dạng lưới columns/rows.
+
+```mermaid
+block-beta
+    columns 2
+    FE["Frontend"] BE["Backend"]
+    DB["Database"] Cache["Redis"]
+    FE -- "API" --> BE
+    BE -- "SQL" --> DB
+```
+
+### 19. Packet 🔥
+Biểu diễn cấu trúc frame/gói tin mạng.
+
+```mermaid
+packet-beta
+    title "IPv4 Header"
+    0-3: "Version"
+    4-7: "IHL"
+    8-15: "TOS"
+    16-31: "Total Length"
+    32-47: "Identification"
+    48-50: "Flags"
+    51-63: "Fragment Offset"
+```
+
+### 20. Kanban 🔥
+Bảng Kanban experimental quản lý công việc. (Experimental - Cẩn thận lỗi plugin cũ).
+
+```mermaid
+kanban
+  Todo
+    [Tạo dự án mới]
+    [Viết tài liệu]
+  In Progress
+    [Code tính năng A]
+  Done
+    [Setup CI/CD]
+```
+
+### 21. Architecture 🔥
+Kiến trúc cloud computing/server (Architecture Beta).
+
+```mermaid
+architecture-beta
+    group api(cloud)[API]
+    
+    service db(database)[Database] in api
+    service server(server)[Server] in api
+    service ui(internet)[Frontend]
+    
+    ui:R -- L:server
+    server:R -- L:db
+```
+
+### 22. Radar 🔥
+Biểu đồ lục giác/đa giác hiển thị matrix đánh giá.
+
+```mermaid
+radar-beta
+    title "Đánh giá hiệu suất"
+    "Tính năng"
+    "Bảo mật"
+    "Hiệu năng"
+    "UI/UX"
+    "Bảo trì"
+```
+
+### 23. Treemap 🔥
+Tạo biểu đồ dạng khối vuông phân cấp tỉ lệ data.
+
+```mermaid
+treemap-beta
+    title "Phân bổ phân vùng máy chủ"
+    "Disk_1"
+        "Database": 50
+        "Logs": 30
+        "System": 20
+    "Disk_2"
+        "Storage": 80
+        "Archives": 20
+```
+
+### 24. Venn 🔥
+Biểu diễn tập hợp logic giao nhau.
+
+```mermaid
+venn-beta
+    title "Ví dụ Biểu đồ Venn"
+    set A
+    set B
+    set C
+    union A B
+    union B C
 ```
 
 ---

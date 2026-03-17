@@ -8,6 +8,8 @@ description: "Khám phá Aspect-Oriented Programming (AOP) trong NestJS — hi�
 
 # AOP trong NestJS: Kiến trúc "Chặn Đứng" Cross-Cutting Concerns
 
+<!--truncate-->
+
 ## 🎣 Hook: Bạn đã bao giờ thấy code như thế này chưa?
 
 ```typescript
@@ -81,38 +83,6 @@ Trong NestJS:
 | Caching | Cache response từ database |
 | Error Handling | Format lỗi thống nhất |
 | Performance Monitoring | Đo thời gian xử lý |
-
-### Bộ từ vựng AOP
-
-Để hiểu AOP, bạn cần nắm 4 khái niệm:
-
-```mermaid
-graph TD
-    A["🎯 Joinpoint\n(Điểm có thể chặn)"] --> B["📍 Pointcut\n(Điểm được chọn để chặn)"]
-    B --> C["⚙️ Advice\n(Logic sẽ thực hiện tại điểm đó)"]
-    C --> D["📦 Aspect\n(Joinpoint + Pointcut + Advice)"]
-
-    style A fill:#4A90D9,color:#fff
-    style B fill:#7B68EE,color:#fff
-    style C fill:#20B2AA,color:#fff
-    style D fill:#FF6B6B,color:#fff
-```
-
-| Khái niệm | Định nghĩa | Ví dụ trong NestJS |
-|---|---|---|
-| **Joinpoint** | Điểm trong quá trình thực thi có thể "chặn" được | Trước/sau khi controller method chạy |
-| **Pointcut** | Tập hợp joinpoints được chọn | `@UseInterceptors(LoggingInterceptor)` |
-| **Advice** | Logic được thực thi tại pointcut | Code trong `intercept()` method |
-| **Aspect** | Gói gọn cả pointcut + advice | Class `LoggingInterceptor` |
-
-**Các loại Advice:**
-
-- **`Before`** — Chạy TRƯỚC joinpoint (ví dụ: validate input)
-- **`After Returning`** — Chạy sau joinpoint khi **thành công** (ví dụ: log response)
-- **`After Throwing`** — Chạy sau joinpoint khi **có exception** (ví dụ: error logging)
-- **`Around`** — Bao quanh cả trước và sau, có thể *ngăn* joinpoint thực thi (ví dụ: caching)
-
----
 
 ## 🏗️ NestJS Hiện Thực Hóa AOP Như Thế Nào?
 

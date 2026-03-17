@@ -20,9 +20,9 @@ flowchart LR
 
 1. **Hook (Thu hút):** Bắt đầu bằng vấn đề thực tế hoặc câu hỏi gợi mở
 2. **Analogy (Ẩn dụ):** Giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật - Lấy ẩn dụng gần gũi với sinh viên
-3. **Deep Dive & Visual:** Phân tích kiến trúc, code, luồng dữ liệu (kết hợp Mermaid Flowchart/Sequence)
+3. **Deep Dive & Visual:** Phân tích kiến trúc, code, luồng dữ liệu (kết hợp với các loại Mermaid phù hợp **sử dụng skill mermaid-expert để xác định loại mermaid phù hợp và kiểm tra cú pháp mermaid trước khi xuất ra**)
 4. **Practice (Thực hành):** Code mẫu với chú thích "Why"
-5. **Pitfalls (Cảnh báo):** Lỗi thường gặp + Best Practices
+5. **Usecase (Trường hợp sử dụng):** Khi nào dùng + Khi nào không dùng + Ví dụ thực tế
 6. **MECE Mindmap (Tổng hợp):** Sơ đồ tư duy tóm tắt toàn bộ kiến thức để review
 
 ## Phân loại bài viết
@@ -66,7 +66,7 @@ func main() {
 ## Văn phong bắt buộc
 
 - **Analogy First:** Mọi concept mới PHẢI có ẩn dụ đời sống
-- **Giải thích thuật ngữ** ngay lần đầu xuất hiện
+- **Giải thích thuật ngữ** Giữ nguyên thuật ngữ tiếng anh, giải thích ngay lần đầu xuất hiện
 - **Paragraph ngắn:** Tối đa 4-5 dòng/đoạn
 - **Sử dụng emoji** để đánh dấu mục quan trọng (⚠️, ✅, ❌, 💡)
 - **Trade-off rõ ràng:** Luôn chỉ ra đánh đổi của giải pháp
