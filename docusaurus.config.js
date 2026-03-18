@@ -77,6 +77,21 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/social_card.jpg',
+      algolia: {
+        // App ID do Algolia cung cấp sau khi bạn được duyệt account Docsearch
+        appId: 'W95VTU3G1X',
+
+        // Public API key: an toàn khi commit lên Github 
+        apiKey: 'ba56a847029d79091a82d46758b7aeae',
+
+        indexName: 'anhtus stories',
+
+        // Tùy chọn: contextualSearch mặc định là true. Cho phép lọc kết quả theo phiên bản docs hoặc ngôn ngữ 
+        contextualSearch: true,
+
+        // Tùy chọn: tự động tạo route `search` cho toàn bộ blog
+        searchPagePath: 'search',
+      },
       navbar: {
         title: "",
         logo: {

@@ -5,7 +5,7 @@ description: "Skill chuyên tạo bài giảng/báo cáo kỹ thuật IT chuyên
 
 # Create Tech Lecture Skill
 
-Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật chuyên sâu có độ dài trung bình nhưng dễ hiểu.
+Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật chuyên sâu có độ dài trung bình và dễ hiểu.
 
 ## Quy trình tư duy sư phạm (Pedagogical Flow)
 
@@ -19,7 +19,7 @@ flowchart LR
 ```
 
 1. **Hook (Thu hút):** Bắt đầu bằng vấn đề thực tế hoặc câu hỏi gợi mở
-2. **Analogy (Ẩn dụ):** Giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật - Lấy ẩn dụng gần gũi với sinh viên
+2. **Analogy (Ẩn dụ):** Trình bày khái niệm cốt lõi trước, sau đó giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật
 3. **Deep Dive & Visual:** Phân tích kiến trúc, code, luồng dữ liệu (kết hợp với các loại Mermaid phù hợp **sử dụng skill mermaid-expert để xác định loại mermaid phù hợp và kiểm tra cú pháp mermaid trước khi xuất ra**)
 4. **Practice (Thực hành):** Code mẫu với chú thích "Why"
 5. **Usecase (Trường hợp sử dụng):** Khi nào dùng + Khi nào không dùng + Ví dụ thực tế
@@ -65,7 +65,7 @@ func main() {
 
 ## Văn phong bắt buộc
 
-- **Analogy First:** Mọi concept mới PHẢI có ẩn dụ đời sống
+- **Analogy First:** Trình bày khái niệm cốt lõi trước, sau đó giải thích concept bằng hình ảnh đời thường TRƯỚC KHI đi vào kỹ thuật
 - **Giải thích thuật ngữ** Giữ nguyên thuật ngữ tiếng anh, giải thích ngay lần đầu xuất hiện
 - **Paragraph ngắn:** Tối đa 4-5 dòng/đoạn
 - **Sử dụng emoji** để đánh dấu mục quan trọng (⚠️, ✅, ❌, 💡)
