@@ -805,7 +805,7 @@ providers: [
 
 ## 🔗 Tiếp theo
 
-**[Phần 5: SOLID Principles →](./part5_solid_principles)**
+**[Phần 5: SOLID Principles →](./05-solid.md)**
 
 Trong phần tiếp theo, chúng ta sẽ:
 - Hiểu 5 nguyên tắc SOLID

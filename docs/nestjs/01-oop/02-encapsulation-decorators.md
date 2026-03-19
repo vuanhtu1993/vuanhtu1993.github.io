@@ -17,7 +17,7 @@ description: "Hiểu sâu Encapsulation (đóng gói) và Decorators trong NestJ
 
 ## 📌 Recap từ Phần 1
 
-Trong [Phần 1](./part1_oop_foundation), chúng ta đã:
+Trong [Phần 1](./01-foundation.md), chúng ta đã:
 - Chuyển từ functional sang class-based `UserService`
 - Hiểu `this` keyword và constructor injection
 - Thấy decorator `@Injectable()` nhưng chưa giải thích
@@ -589,7 +589,7 @@ function CatchError(): MethodDecorator {
 
 ## 🔗 Tiếp theo
 
-**[Phần 3: Interface & Abstract Class →](./part3_interface_abstract)**
+**[Phần 3: Interface & Abstract Class →](./03-interface-abstract.md)**
 
 Trong phần tiếp theo, chúng ta sẽ:
 - Hiểu Interface vs Abstract Class

@@ -807,7 +807,7 @@ class PaymentService {
 
 ## 🔗 Tiếp theo
 
-**[Phần 6: Design Patterns →](./part6_design_patterns)**
+**[Phần 6: Design Patterns →](./06-design-patterns.md)**
 
 Trong phần cuối, chúng ta sẽ:
 - Factory Pattern với `useFactory`

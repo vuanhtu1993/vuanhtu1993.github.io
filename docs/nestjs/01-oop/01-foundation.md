@@ -482,7 +482,7 @@ const getTotalValue = () => {
 
 ## 🔗 Tiếp theo
 
-**[Phần 2: Encapsulation & Decorators Magic →](./part2_encapsulation_decorators)**
+**[Phần 2: Encapsulation & Decorators Magic →](./02-encapsulation-decorators.md)**
 
 Trong phần tiếp theo, chúng ta sẽ:
 - Hiểu encapsulation trong TypeScript

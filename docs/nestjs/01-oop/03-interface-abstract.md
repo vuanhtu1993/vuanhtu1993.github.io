@@ -583,7 +583,7 @@ abstract class BaseNotificationService implements INotificationService {
 
 ## 🔗 Tiếp theo
 
-**[Phần 4: Dependency Injection - IoC Container →](./part4_dependency_injection)**
+**[Phần 4: Dependency Injection - IoC Container →](./04-dependency-injection.md)**
 
 Trong phần tiếp theo, chúng ta sẽ:
 - Hiểu DI và IoC Container

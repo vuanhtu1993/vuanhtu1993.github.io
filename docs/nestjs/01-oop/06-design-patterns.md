@@ -797,9 +797,9 @@ graph LR
 Nếu bạn thấy hữu ích, hãy share cho đồng nghiệp cũng đang chuyển từ React/Node sang NestJS!
 
 **Series OOP trong NestJS:**
-1. [Foundation - Từ Function đến Class](./part1_oop_foundation)
-2. [Encapsulation & Decorators](./part2_encapsulation_decorators)
-3. [Interface vs Abstract Class](./part3_interface_abstract)
-4. [Dependency Injection](./part4_dependency_injection)
-5. [SOLID Principles](./part5_solid_principles)
+1. [Foundation - Từ Function đến Class](./01-foundation.md)
+2. [Encapsulation & Decorators](./02-encapsulation-decorators.md)
+3. [Interface vs Abstract Class](./03-interface-abstract.md)
+4. [Dependency Injection](./04-dependency-injection.md)
+5. [SOLID Principles](./05-solid.md)
 6. **Design Patterns (bài này)**
