@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkstory=globalThis.webpackChunkstory||[]).push([[3],{74477(a){a.exports=JSON.parse('{"tag":{"label":"room","permalink":"/blog/tags/room","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/room","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
