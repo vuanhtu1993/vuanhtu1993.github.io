@@ -12,7 +12,7 @@ description: "Hiểu rõ hệ thống file-based routing của Next.js App Route
 - ✅ **Hiểu** được tại sao Next.js dùng file-system routing và lợi thế của nó
 - ✅ **Phân biệt** được `page.tsx`, `layout.tsx`, và `loading.tsx` dùng khi nào
 - ✅ **Tự tay** tạo được nested routes và dynamic segments từ đầu
-- ✅ **Giải thích** được cơ chế prefetching + client-side transition giúp navigation "cảm giác" nhanh như SPA
+- ✅ **Nắm được cơ bản** về cơ chế chuyển trang bằng `<Link>`
 
 ### Yêu cầu đầu vào (Prerequisites):
 - 🔹 Biết cơ bản React component (JSX, props)
@@ -340,26 +340,11 @@ export default async function Layout({ children }) {
 
 Dynamic routes cần fetch data từ server → user sẽ thấy màn hình trắng trong khi chờ. Luôn tạo `loading.tsx` cho route nào có dynamic data.
 
-### Cơ chế Prefetching hoạt động như thế nào?
+### Cơ chế Navigation & Prefetching hoạt động như thế nào?
 
-```mermaid
-sequenceDiagram
-    participant Browser as 🌐 Browser
-    participant Server as ⚙️ Next.js Server
-    
-    Browser->>Browser: Render trang /blog (có Link đến /blog/my-post)
-    Browser->>Server: Prefetch /blog/my-post (link vào viewport)
-    Server-->>Browser: RSC Payload của /blog/my-post (cached)
-    Note over Browser: User chưa click gì cả
-    
-    Browser->>Browser: User click Link
-    Browser->>Browser: Client-side transition (instant!)
-    Note over Browser: Không reload trang, dùng data đã prefetch
-```
+Việc chuyển trang trong Next.js bằng `<Link>` mang lại cảm giác tức thì (instant) nhờ sự kết hợp của **Prefetching** (tải trước dữ liệu) và **Client-side transition** (chỉ cập nhật phần DOM thay đổi).
 
-- **Static Route:** Toàn bộ route được prefetch.
-- **Dynamic Route:** Chỉ prefetch `loading.tsx` (skeleton) + shared layouts để tránh tốn tài nguyên server.
-
+> 👉 **Deep Dive:** Cơ chế chi tiết, cách Next.js cache Router trên client, và phân biệt Hard vs Soft Navigation được giải thích chuyên sâu ở bài: **[5. Kỹ thuật Navigation & Prefetching](./05-linking-and-navigating.md)**.
 ---
 
 ## 🧩 MECE Mindmap — Tổng hợp kiến thức
@@ -387,7 +372,7 @@ mindmap
       when["Dùng layout cho UI chung"]
       notwhen["Không dùng a tag internal"]
       pitfall["Await params trong Next 15"]
-      prefetch["loading.tsx cho dynamic routes"]
+      linkvsatag["Dùng Link thay vì thẻ a"]
 ```
 
 ---
