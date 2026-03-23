@@ -103,7 +103,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tài chính cá nhân',
+            label: 'Khoá học',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
