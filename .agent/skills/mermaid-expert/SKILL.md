@@ -34,7 +34,26 @@ Dùng `\n` trong label **sẽ render ra chữ `\n`** thay vì xuống dòng th�
 
 **Áp dụng cho tất cả diagram types:** flowchart, graph, sequenceDiagram node labels.
 
+### Rule #5: Mindmap — Parser riêng, KHÔNG như Flowchart ⚠️
+Mindmap có cú pháp **HOÀN TOÀN KHÁC** so với `graph`/`flowchart`. **3 điều bắt buộc:**
+
+1.  **Root node:** Chỉ dùng `root((Text))` hoặc `root[Text]`. **TUYỆT ĐỐI KHÔNG** dùng `root(["Text"])` — kết hợp `()` và `[]` gây crash ngay.
+2.  **Leaf nodes:** Dùng **text trần** (không ngoặc) là an toàn nhất. `["Text"]` cũng được nhưng **không dùng** `id["Text"]` pattern như flowchart.
+3.  **Ký tự nguy hiểm trong text trần:** Em dash `—`, dấu phẩy `,`, colon `:` trong text trần có thể gây lỗi. Thay bằng gạch ngang `-` hoặc xóa bỏ.
+
+```mermaid
+mindmap
+  root((Main Topic))
+    Branch A
+      Leaf item 1
+      Sub item 2
+    Branch B
+      sub item 1
+      sub item 2
+```
+
 ---
+
 
 ## 🏗️ Robust Templates (Mẫu An Toàn)
 
@@ -426,3 +445,12 @@ venn-beta
 *   **Cách sửa:** Thay tất cả `\n` bằng `<br>` trong node labels.
     *   Sai: `id["Web Application\nNotebook UI"]`
     *   Đúng: `id["Web Application<br>Notebook UI"]`
+
+### Lỗi 5: Mindmap crash ngay lập tức — không render được gì
+*   **Nguyên nhân:** Dùng `root(["Text"])` — kết hợp sai `()` và `[]` mà mindmap parser không chấp nhận.
+*   **Triệu chứng:** Diagram trắng hoàn toàn hoặc báo lỗi khi render.
+*   **Cách sửa:**
+    *   Sai: `root(["Next.js Navigation"])`
+    *   Đúng: `root((Next.js Navigation))` — hình tròn kép
+    *   Hoặc: `root[Next.js Navigation]` — hình vuông
+

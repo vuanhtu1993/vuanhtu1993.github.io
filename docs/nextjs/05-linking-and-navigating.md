@@ -107,7 +107,7 @@ sequenceDiagram
     participant Browser as "Trình duyệt"
     participant Server as "Next.js Server"
 
-    User->>Browser: Scroll, Link vào Viewport
+    User->>Browser: Scroll - Link vào Viewport
     Browser->>Server: Prefetch /blog (ngầm, background)
     Server-->>Browser: Trả về RSC Payload (cache)
 
@@ -214,6 +214,43 @@ export default async function BlogPage() {
 | **TTFB** (Time to First Byte) | Thời gian server gửi byte đầu tiên | Gửi layout/skeleton ngay, không chờ toàn trang |
 | **FCP** (First Contentful Paint) | Lần đầu user thấy nội dung | Skeleton xuất hiện gần như ngay lập tức |
 | **TTI** (Time to Interactive) | Thời gian trang phản hồi được sự kiện | Layout vẫn interactive trong khi content load |
+
+**Quy trình Streaming & Hydration (Hậu trường chi tiết):**
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Browser as "Người dùng (Browser)"
+    participant NextJS as "Next.js Server (App Router)"
+    participant DB as "Database / API"
+
+    Note over Browser, DB: BƯỚC 1: KHỞI TẠO REQUEST & STREAMING
+    Browser->>NextJS: Gửi HTTP Request (VD: truy cập /blog/123)
+    NextJS->>NextJS: Bắt đầu dựng (render) React Components
+    NextJS->>DB: Gặp 'await fetch()' trong Server ⏳
+    Note over NextJS: Phát hiện Component đang chờ data.<br>Kích hoạt Streaming nhờ file 'loading.tsx'
+    NextJS-->>Browser: Trả ngay HTML+CSS của Root Layout & Skeleton
+    
+    Note left of Browser: [FIRST CONTENTFUL PAINT - FCP]<br>Khung Layout hiện ngay tắp lự!<br>Tránh lỗi màn hình trắng.
+
+    Note over Browser, NextJS: BƯỚC 2: TẢI JS & HYDRATION LAYOUT
+    NextJS-->>Browser: Gửi file JavaScript thu gọn (cho Client)
+    Browser->>Browser: THỦY HỢP (HYDRATION): Khởi chạy JS, gắn sự kiện
+    
+    Note left of Browser: [TIME TO INTERACTIVE - TTI]<br>Sidebar đã có thể TƯƠNG TÁC<br>dù nội dung chính vẫn đang quay (Loading).
+
+    Note over Browser, DB: BƯỚC 3: DATA SẴN SÀNG & CẬP NHẬT UI
+    DB-->>NextJS: Trả về dữ liệu bài viết (Sau 2-3s)
+    NextJS->>NextJS: Dựng xong HTML tĩnh cho Page Component
+    NextJS-->>Browser: Stream đoạn HTML thực tế này xuống trình duyệt
+    Browser->>Browser: Tự động XÓA Skeleton và gán HTML mới vào.
+
+    Note over Browser, NextJS: BƯỚC 4: HYDRATION NỘI DUNG CHÍNH (NẾU CÓ)
+    NextJS-->>Browser: Trả nốt JS của các nút bấm bên trong thân bài
+    Browser->>Browser: THỦY HỢP LẦN 2: Bơm JS cho nội dung bài viết.
+    
+    Note left of Browser: 🎉 QUÁ TRÌNH TẢI TRANG HOÀN TẤT
+```
 
 :::tip Tip nâng cao
 Bạn cũng có thể dùng `<Suspense>` trực tiếp trong JSX để stream từng component riêng lẻ, không cần phải stream cả trang:
@@ -523,36 +560,36 @@ import { useRouter } from 'next/navigation'
 
 ```mermaid
 mindmap
-  root(["Next.js Navigation"])
-    WHY["❓ WHY"]
-      mpa["MPA: SEO tốt, UX tệ"]
-      spa["SPA: UX mượt, SEO kém"]
-      goal["Mục tiêu: Tốt nhất cả hai"]
-    WHAT["📖 WHAT — 4 Cơ Chế"]
-      sr["Server Rendering"]
-        pre["Prerendering - Build time"]
-        dyn["Dynamic Rendering - Request time"]
-      pf["Prefetching"]
-        static["Static: Full prefetch"]
-        dynamic["Dynamic: Partial prefetch"]
-      stream["Streaming"]
-        loading["loading.tsx"]
-        suspense["Suspense boundary"]
-        cwv["TTFB, FCP, TTI"]
-      cst["Client-side Transitions"]
-        partial["Partial Rendering"]
-        sharedlayout["Giữ Shared Layout"]
-    HOW["🔨 HOW — Code"]
-      link["Link component"]
-      router["useRouter.push()"]
-      gsp["generateStaticParams"]
-      loadingtsx["loading.tsx"]
-    WHATIF["🚀 WHAT IF — Pitfalls"]
-      noloading["Thiếu loading.tsx"]
-      overfetch["Prefetch 1000 items"]
-      slownet["Mạng chậm - useLinkStatus"]
-      hydration["Hydration delay"]
-      wrongimport["Nhầm next/router"]
+  root((Next.js Navigation))
+    WHY
+      MPA - SEO tot UX te
+      SPA - UX muot SEO kem
+      Muc tieu - Tot nhat ca hai
+    WHAT
+      Server Rendering
+        Prerendering - Build time
+        Dynamic Rendering - Request time
+      Prefetching
+        Static - Full prefetch
+        Dynamic - Partial prefetch
+      Streaming
+        loading.tsx
+        Suspense boundary
+        TTFB / FCP / TTI
+      Client-side Transitions
+        Partial Rendering
+        Giu Shared Layout
+    HOW
+      Link component
+      useRouter.push
+      generateStaticParams
+      loading.tsx
+    WHAT IF
+      Thieu loading.tsx
+      Prefetch 1000 items
+      Mang cham - useLinkStatus
+      Hydration delay
+      Nham next router
 ```
 
 ---
