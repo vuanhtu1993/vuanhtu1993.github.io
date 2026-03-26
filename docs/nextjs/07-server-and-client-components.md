@@ -1,6 +1,6 @@
 ---
-sidebar_position: 6
-title: "Server và Client Components"
+sidebar_position: 7
+title: "7. Server và Client Components"
 description: "Hiểu rõ sự khác biệt giữa Server Component và Client Component trong Next.js App Router — khi nào dùng, cơ chế hoạt động, và cách kết hợp chúng hiệu quả."
 tags: [nextjs, react, server-components, client-components, RSC]
 ---
@@ -15,7 +15,7 @@ tags: [nextjs, react, server-components, client-components, RSC]
 
 - ✅ **Giải thích** được tại sao Next.js App Router lại có hai loại component khác nhau
 - ✅ **Phân biệt** được khi nào dùng Server Component và khi nào dùng Client Component
-- ✅ **Hiểu** cơ chế RSC Payload, Hydration và quá trình render hai phía
+- ✅ **Hiểu** khái niệm Network Boundary, cơ chế RSC Payload, Hydration và quá trình render hai phía
 - ✅ **Tự tay** kết hợp (interleave) Server và Client Components trong một ứng dụng thực tế
 - ✅ **Tránh** được các lỗi phổ biến: environment poisoning, context không hoạt động trong Server Component
 
@@ -64,6 +64,45 @@ Hãy tưởng tượng một nhà hàng:
 
 Một bữa ăn ngon (ứng dụng tốt) cần cả hai: **bếp chuẩn bị sẵn** rồi **bàn phục vụ tương tác**.
 
+### Khái niệm "Network Boundary" (Biên mạng)
+
+**Network Boundary** là ranh giới logic chia tách vùng code chạy độc quyền trên Server và vùng code chạy trên Client. Trong Next.js, đường biên này được thiết lập thông qua chỉ thị `'use client'`.
+
+Trở lại ẩn dụ nhà hàng: **Network Boundary chính là quầy giao món (Counter)**. 
+Khách hàng (Client) có thể tự do tương tác tại bàn ăn, nhưng tuyệt đối không thể bước qua quầy để vào khu vực bếp (Server). Tương tự, đầu bếp chỉ ở trong bếp để xử lý nguyên liệu thô (Database) và đưa ra "thành phẩm" (RSC Payload) qua quầy giao món.
+
+Khi bạn đặt `'use client'` ở đầu một file, bạn đang thiết lập một Network Boundary. Từ điểm đánh dấu đó trở xuống trên cây component, mọi thứ (bao gồm các component con được import) đều bước qua ranh giới và trở thành Client Components.
+
+```mermaid
+graph TD
+    subgraph Server_Zone ["🍳 Khu vực Bếp (Server Zone) - Không lộ code"]
+        DB[(Database)]
+        SC_Layout["Layout<br>(Server Component)"]
+        SC_Page["Page hiển thị danh sách<br>(Server Component)"]
+        SC_Layout --> SC_Page
+        DB -. "Lấy dữ liệu" .-> SC_Page
+    end
+
+    Boundary{{"🚧 NETWORK BOUNDARY 🚧<br>('use client')"}}
+
+    subgraph Client_Zone ["🍽️ Bàn phục vụ (Client Zone) - JS Bundle"]
+        CC_Interactive["Interactive Wrapper<br>(Client Component)"]
+        CC_Button["Nút Like/Share<br>(Client Component)"]
+        CC_Interactive --> CC_Button
+    end
+
+    SC_Page -. "Truyền Dữ liệu (Props)" .-> Boundary
+    Boundary -.-> CC_Interactive
+
+    style Server_Zone fill:#e8f4fd,stroke:#1a73e8,stroke-width:2px;
+    style Client_Zone fill:#fef9e7,stroke:#f39c12,stroke-width:2px;
+    style Boundary fill:#f8d7da,stroke:#dc3545,stroke-width:2px,stroke-dasharray: 5 5,color:#721c24;
+```
+
+📌 **Quy tắc khi đi qua Boundary:**
+Vì Network Boundary là ranh giới giữa hai môi trường hoàn toàn khác nhau (Node.js/Edge và Browser), dữ liệu khi truyền qua đây (từ Server Component xuống Client Component) bắt buộc phải là **Serializable** (có thể chuyển hóa thành định dạng chuỗi JSON). 
+👉 Đó là lý do bạn **không thể** truyền biến `function`, thực thể class như `Date`, hay các đối tượng phức tạp không thể JSON-hóa qua ranh giới này.
+
 ### Định nghĩa kỹ thuật
 
 | | Server Component | Client Component |
@@ -78,28 +117,48 @@ Một bữa ăn ngon (ứng dụng tốt) cần cả hai: **bếp chuẩn bị s
 
 ```mermaid
 graph TD
-    subgraph Server["🖥️ Server"]
+    subgraph ServerZone["🖥️ Server (Build / Request time)"]
         SC["Server Components<br>(mặc định)"]
         DB[("Database / API")]
-        SC -->|"fetch data"| DB
-        SC -->|"render"| RSC["RSC Payload<br>(compact binary)"]
-        SC -->|"prerender"| HTML["HTML tĩnh"]
+        SC -->|"1. fetch data"| DB
+        SC -->|"2. render ra"| RSC["RSC Payload<br>(compact binary)"]
+        CC_ref["Client Components<br>(JS reference only)"]
+        RSC -->|"3. kết hợp"| Prerender["Prerender Engine"]
+        CC_ref -->|"3. kết hợp"| Prerender
+        Prerender -->|"4. xuất ra"| HTML["HTML tĩnh<br>(non-interactive)"]
     end
 
-    subgraph Client["🌐 Trình duyệt (Browser)"]
-        CC["Client Components<br>('use client')"]
-        Hydrate["Hydration<br>(gắn event handlers)"]
-        Interactive["UI có tương tác"]
+    Cache[("🗄️ Router Cache<br>(RSC Payload)<br>prefetch + store")]
+
+    subgraph FirstLoad["🌐 First Load — Lần mở trang đầu tiên"]
+        direction TB
+        FL1["① Hiển thị HTML ngay<br>(non-interactive)"]
+        FL2["② RSC Payload reconcile<br>cây Server + Client"]
+        FL3["③ JS hydrate Client Components<br>(gắn event handlers)"]
+        FL4["✅ UI có tương tác"]
+        FL1 --> FL2 --> FL3 --> FL4
     end
 
-    HTML -->|"1. Hiển thị ngay"| Client
-    RSC -->|"2. Reconcile"| Hydrate
-    CC -->|"3. JavaScript"| Hydrate
-    Hydrate --> Interactive
+    subgraph SubNav["🔁 Subsequent Navigations — Điều hướng tiếp theo"]
+        direction TB
+        SN1["Cache HIT<br>RSC Payload sẵn có"]
+        SN2["Client Components render<br>hoàn toàn trên client<br>(không cần HTML từ server)"]
+        SN1 --> SN2
+    end
 
-    style Server fill:#e8f4fd,stroke:#1a73e8
-    style Client fill:#fef9e7,stroke:#f39c12
+    HTML -->|"gửi về browser"| FL1
+    RSC -->|"gửi về browser"| FL2
+    RSC -->|"lưu vào cache"| Cache
+    Cache -->|"cache HIT<br>(instant navigation)"| SN1
+
+    style ServerZone fill:#e8f4fd,stroke:#1a73e8,stroke-width:2px
+    style FirstLoad fill:#fef9e7,stroke:#f39c12,stroke-width:2px
+    style SubNav fill:#f0f0f0,stroke:#666,stroke-width:2px
+    style Cache fill:#fde8ff,stroke:#9b59b6,stroke-width:2px
     style RSC fill:#d5f5e3,stroke:#27ae60
+    style HTML fill:#d5f5e3,stroke:#27ae60
+    style Prerender fill:#fff3cd,stroke:#f0ad4e
+    style SN1 fill:#d5f5e3,stroke:#27ae60
 ```
 
 ### RSC Payload là gì?
@@ -127,7 +186,6 @@ Hydration (React "thổi hồn")
     ↓
 UI có tương tác (onClick, onChange hoạt động)
 ```
-
 ---
 
 ## 🔨 HOW — Làm thế nào để dùng?
@@ -160,6 +218,17 @@ sequenceDiagram
 ```
 
 ### Bước 1: Server Component (mặc định)
+
+> **💡 Đánh giá Ưu điểm của Server Component:**
+> - **Fetch data:** Xảy ra trực tiếp trên Server trong quá trình build, tiết kiệm độ trễ so với fetch ở Client. Điều này giảm thiểu thời gian rendering, tăng UX đáng kể.
+> - **Bảo mật tuyệt đối:** Hoạt động như một "két sắt". Server Component cho phép truy xuất trực tiếp các data nhạy cảm (như Database tokens, API Keys bí mật) hoặc thực thi logic nghiệp vụ lõi mà không bị "lộ" mã nguồn xuống máy Client.
+> - **Tối ưu Caching:** Kết quả render (RSC Payload/HTML tĩnh) có khả năng được cache lại trên Server và dùng chéo cho nhiều người dùng khác nhau → Giảm tải Server vì không cần render lại ở mỗi request.
+> - **Bundle Size tí hon:** Trình duyệt từ chối tải mọi thư viện JS khổng lồ chỉ dùng để sinh HTML. Bundle size JS gửi xuống máy Client được vứt bỏ tối đa.
+> - **SEO và FCP hoàn hảo:** Tốc độ load trang lần đầu cực nhanh, chỉ số FCP (First Contentful Paint) thấp kỷ lục do người dùng thấy ngay content được server đưa xuống tức khắc. Hỗ trợ mạnh mẽ cho Search Engine Optimization và Social Network Shareability.
+> - **Hỗ trợ Streaming:** Thay vì phải chờ server render xong toàn bộ trang mới đổ xuống trình duyệt, Server Components cho phép đổ (stream) dần từng phần UI nhỏ xuống khi nó sẵn sàng.
+> 
+> 👉 **TÔN CHỈ (Rule of Thumb):** Luôn luôn **ưu tiên dùng Server Component** làm chế độ mặc định khi có thể! Chỉ khi nào component đó cần sự sống/tương tác đặc thù (hooks, rải sự kiện DOM,...) thì mới dùng Client Component.
+
 
 Layouts và Pages trong App Router **mặc định là Server Components**. Bạn không cần làm gì thêm:
 
@@ -194,6 +263,25 @@ export default async function Page({
 ```
 
 ### Bước 2: Tạo Client Component
+**Next.js Client Component (Được Prerender)**
+Tên là "Client" nhưng trong Next.js, **mặc định tất cả component đều được render sẵn thành HTML tĩnh** (kể cả Server lẫn Client Component) tại thời điểm build hoặc request (Static/Dynamic Rendering trên server).
+- **Quá trình:** Server trả về nguyên một bảng HTML đã có đầy đủ nội dung (Prerendered). Trình duyệt hiển thị nội dung đó ngay lập tức. Cùng lúc, đoạn JS chứa logic của Client Component mới được tải về để chạy lại vòng đời React (Hydration) nhằm đồng bộ state, effect, và gắn sự kiện.
+
+> **💡 Nhận định:**
+> - **Render tối thiểu 2 lần:** Bất kỳ Client Component nào trong Next.js đều trải qua **ít nhất 2 lần render**: 1 lần mộc (trên Server/Build) để lấy giao diện HTML tĩnh, và 1+ lần (trên Client) để bơm tương tác.
+> - **Tăng UX ban đầu:** Người dùng thấy nội dung ngay lập tức nhờ HTML có sẵn.
+> - **Độ trễ tương tác (Interaction Delay):** Dù nhìn thấy nút bấm ngay, nhưng người dùng **không thể tương tác ngay** cho đến khi trình duyệt tải xong JS và hoàn tất quá trình Hydration.
+
+#### Đánh giá Ưu / Nhược điểm của Client Component
+
+**✅ Ưu điểm:**
+- **Sức mạnh tương tác:** Giữ nguyên toàn bộ sức mạnh của React (`useState`, `useEffect`, event listeners) và các API của trình duyệt (Window, LocalStorage).
+- **Giảm gánh nặng cho Server:** Mặc dù được prerender bề mặt, nhưng nếu một component có logic tính toán cực kỳ phức tạp thì việc xử lý event/state phía Client sẽ giúp tận dụng CPU thiết bị của người dùng, làm Server "nhẹ gánh" hơn.
+
+**❌ Nhược điểm:**
+- **Ảnh hưởng SEO:** Các nội dung **chỉ xuất hiện sau khi gọi API ở phía client** (ví dụ fetch data trong `useEffect`) sẽ không có mặt trong file HTML ban đầu, làm Bot Google khó đọc.
+- **Tăng Bundle Size:** Càng nhiều Client Component, lượng Javascript dính kèm gửi xuống trình duyệt càng lớn, làm chậm thời gian tải trang.
+- **Phụ thuộc thiết bị người dùng:** Nếu thiết bị của người dùng (điện thoại cũ) yếu, quá trình tải và chạy đống JS khổng lồ để Hydrate sẽ bị treo máy, lag cục bộ.
 
 Thêm `'use client'` ở **đầu file**, trước tất cả import:
 
@@ -500,7 +588,7 @@ export function getScrollPosition() {
 }
 ```
 
-#### Pitfall 2: Truyền non-serializable props
+#### Pitfall 2: Truyền non-serializable props qua Network Boundary
 
 ```typescript
 // ❌ Sai — Function không thể serialize
@@ -544,6 +632,7 @@ mindmap
       security["Bảo mật - giữ secrets trên server"]
       ux["UX - hiển thị nhanh với HTML sẵn"]
     WHAT["📖 WHAT"]
+      networkBoundary["Network Boundary (Biên mạng)"]
       sc["Server Component"]
         async["Async - fetch data trực tiếp"]
         rsc["Output: RSC Payload"]
