@@ -109,21 +109,6 @@ Cấu hình `launch.json` cho dự án NestJS (bỏ qua bước chạy tay `npm 
       "restart": true,
       "console": "integratedTerminal",
       "autoAttachChildProcesses": true
-    },
-    {
-      "type": "node",
-      "request": "attach",
-      "name": "🔌 Attach to NestJS (Port 9229)",
-      "address": "127.0.0.1",
-      "port": 9229,
-      "restart": true,
-      "cwd": "${workspaceFolder}/quizzi-nest",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/**/*.js"
-      ]
     }
   ]
 }
