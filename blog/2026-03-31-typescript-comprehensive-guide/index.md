@@ -8,6 +8,8 @@ description: "Hướng dẫn toàn diện TypeScript từ Types, Generics, Decor
 
 > **Đây là tài liệu Reference Guide / Cheat Sheet cho đội ngũ lập trình viên.** Bài viết được cấu trúc như một cuốn sổ tay tra cứu nhanh, mỗi phần đều có: Khái niệm cốt lõi → Vấn đề giải quyết → Code thực chiến → Best practices.
 
+<!-- truncate -->
+
 ## 📋 Agenda
 
 **Thời gian đọc ước tính:** ~35 phút

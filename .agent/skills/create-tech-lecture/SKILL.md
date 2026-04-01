@@ -1,11 +1,11 @@
 ---
 name: create-tech-lecture
-description: "Skill chuyên tạo bài giảng/báo cáo kỹ thuật IT chuyên sâu với văn phong sư phạm, gần gũi. Sử dụng khi cần giải thích concept khó (Docker, Kubernetes, Design Patterns...), so sánh công nghệ (React vs Vue, SQL vs NoSQL...), hoặc hướng dẫn thực hành (Tutorial). Tối ưu cho đối tượng Intern/Junior bằng phương pháp 4MAT System + Analogy First."
+description: "Skill chuyên tạo bài giảng/báo cáo kỹ thuật IT chuyên sâu với văn phong sư phạm, gần gũi. Sử dụng khi cần giải thích concept khó (Docker, Kubernetes, Design Patterns...), so sánh công nghệ (React vs Vue, SQL vs NoSQL...), hoặc hướng dẫn thực hành (Tutorial). Tối ưu cho đối tượng Intern/Junior bằng phương pháp 4MAT System + Direct & Visual First."
 ---
 
 # Create Tech Lecture Skill
 
-Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật chuyên sâu có độ dài trung bình và dễ hiểu, áp dụng hệ thống **4MAT** để phục vụ đầy đủ 4 kiểu người học.
+Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật đi thẳng vào trọng tâm, tinh gọn và dễ hiểu, áp dụng hệ thống **4MAT** để phục vụ đủ 4 kiểu người học.
 
 ## Phần 1: Agenda & Learning Outcomes (BẮT BUỘC)
 
@@ -52,63 +52,68 @@ flowchart LR
 ```
 
 ### 🔴 WHY — Tại sao tôi phải học cái này?
-**Mục tiêu:** Tạo động lực học tập bằng cách kết nối với thực tế.
+**Mục tiêu:** Nêu bật vấn đề kỹ thuật cốt lõi và giá trị giải quyết nội tại.
 
-Tương đương bước **Hook** trong quy trình cũ. Dành cho người học cần *lý do* trước khi hành động.
+Đi thẳng vào **Problem Statement** (Vấn đề kỹ thuật) và **Solution** (Công nghệ này giải quyết nó như thế nào) một cách ngắn gọn, súc tích.
 
 **Phải bao gồm:**
-- Vấn đề thực tế mà người đọc đã/sẽ gặp ("Bạn đã bao giờ...?")
-- Con số hoặc dữ kiện gây ấn tượng (nếu có)
-- Mối liên hệ với công việc hàng ngày hoặc career path của Junior/Intern
+- **Problem Statement:** Nêu định dạng cấu trúc vấn đề bằng bullet points trực tiếp.
+- **Solution:** Giá trị cốt lõi / Cách thức khái niệm/công nghệ này mang lại để xử lý bài toán trên.
+- Tránh lối dẫn dắt kể chuyện dài dòng ("Bạn đã bao giờ...").
 
 **Ví dụ:**
 ```markdown
-## ❓ Tại sao cần Docker?
+## ❓ Vấn đề & Giải pháp của Docker
 
-Bạn đã bao giờ code chạy ngon trên máy mình nhưng lên production thì... báo lỗi? 
-Đây là vấn đề kinh điển mà 7/10 junior developer gặp phải trong 3 tháng đầu đi làm.
+**Vấn đề (Problem Statement):**
+- Môi trường phát triển không đồng nhất (chạy trên máy Dev nhưng lỗi khi release Production).
+- Xung đột version thư viện khi chạy nhiều project trên cùng một server máy chủ.
 
-Docker sinh ra để giải quyết chính xác bài toán đó...
+**Giải pháp (Solution):**
+Docker cung cấp nền tảng **containerization**, giúp định nghĩa và đóng gói ứng dụng cùng mọi dependencies vào một container độc lập. Nhanh gọn và đảm bảo môi trường nhất quán tuyệt đối ở mọi nơi cài đặt.
 ```
 
 ---
 
 ### 🟢 WHAT — Nó là cái gì?
-**Mục tiêu:** Xây dựng mental model vững chắc trước khi đi vào kỹ thuật.
+**Mục tiêu:** Đưa ra định nghĩa kỹ thuật chính xác và trực quan hóa kiến trúc/luồng hoạt động.
 
-Tương đương bước **Analogy + Deep Dive** trong quy trình cũ. Dành cho người học thích *lý thuyết và hiểu bản chất*.
+Đi thẳng vào trọng tâm kỹ thuật kết hợp với minh họa sơ đồ. Dành cho người học muốn nắm bắt bản chất cốt lõi ngay lập tức thay vì đọc văn xuôi dài dòng.
 
 **Phải bao gồm:**
-1. **Analogy (Ẩn dụ đời thường):** Giải thích concept bằng hình ảnh quen thuộc TRƯỚC KHI dùng thuật ngữ kỹ thuật
-2. **Định nghĩa chính xác:** Sau khi có ẩn dụ, mới đưa ra định nghĩa kỹ thuật
-3. **Kiến trúc/Sơ đồ:** Mermaid diagram phù hợp (dùng skill `mermaid-expert` để kiểm tra)
-4. **Giải thích thuật ngữ:** Giữ nguyên tiếng Anh, giải thích ngay lần đầu xuất hiện
+1. **Định nghĩa kỹ thuật:** Đưa ra khái niệm chính xác, súc tích ngay từ đầu.
+2. **Trực quan hóa (Visual First):** LUÔN sử dụng sơ đồ Mermaid (Architecture/Flow) để minh họa cơ chế hoạt động, thay cho lời văn thuyết minh.
+3. **Giải thích thuật ngữ:** Giữ nguyên tiếng Việt/tiếng Anh, giải thích nhanh trong ngoặc đơn hoặc liệt kê gọn gàng.
+*(Lưu ý: Hạn chế tối đa việc lạm dụng ẩn dụ. Chỉ dùng 1-2 câu "ví như" nếu concept thực sự quá trừu tượng và khó mường tượng).*
 
 **Ví dụ:**
 ```markdown
-## 📖 Docker là gì?
+## 📖 Docker hoạt động như thế nào?
 
-**Hãy tưởng tượng** Docker như một chiếc hộp vận chuyển tiêu chuẩn (container) trong logistics.
-Dù hàng hóa bên trong là gì — quần áo, điện tử, hay thực phẩm — chiếc hộp đó luôn có cùng
-kích thước, cùng giao diện, và có thể xếp lên bất kỳ con tàu nào.
+**Định nghĩa:** Docker là một nền tảng tạo, chạy và quản lý ứng dụng bên trong các Container (môi trường cô lập) dựa trên nhân Linux.
 
-**Về mặt kỹ thuật:** Docker là nền tảng containerization cho phép đóng gói ứng dụng cùng
-toàn bộ dependencies (thư viện phụ thuộc) vào một đơn vị độc lập gọi là *container*...
+**Kiến trúc cốt lõi:**
+```mermaid
+flowchart LR
+    A[Dockerfile] -->|build| B(Docker Image)
+    B -->|run| C[(Docker Container)]
+```
+- **Image:** Template hệ thống chứa ứng dụng và thư viện liên quan.
+- **Container:** Một instance thực thể đang chạy được sinh ra từ Image.
 ```
 
 ---
 
 ### 🔵 HOW — Làm nó như thế nào?
-**Mục tiêu:** Người đọc tự tay làm được sau khi đọc xong phần này.
+**Mục tiêu:** Người đọc hình dung và thực hành được ngay lập tức với ví dụ tinh gọn.
 
-Tương đương bước **Practice** trong quy trình cũ. Dành cho người học thực hành.
+Tập trung vào core logic kỹ thuật. Triển khai theo module.
 
 **Phải bao gồm:**
-- **Code có chú thích WHY** (không phải WHAT)
-- **Tên file rõ ràng** ở đầu mỗi snippet
-- **Dùng snippet thay vì full code** — chỉ highlight phần quan trọng
-- **Thứ tự từng bước** nếu là tutorial
-- **Output mong đợi** để người đọc tự kiểm tra
+- **Code ngắn gọn, trực diện (Concise Examples):** Tinh lược mọi boilerplate không liên quan (như import thừa, cấu hình không trọng tâm), chỉ lấy phần cốt lõi.
+- **Code có chú thích WHY** (Tại sao viết thế này) thay vì WHAT (Đoạn này làm gì).
+- **Tên file rõ ràng** ở đầu mỗi snippet.
+- **Output mong đợi** để người đọc tự kiểm tra.
 
 **Ví dụ:**
 ```markdown
@@ -119,13 +124,13 @@ Tương đương bước **Practice** trong quy trình cũ. Dành cho người h
 ```dockerfile
 # filename: Dockerfile
 
-# Dùng Node 20 LTS vì đây là phiên bản ổn định nhất hiện tại
+# Dùng Node 20 LTS vì đây là phiên bản ổn định nhất
 FROM node:20-alpine
 
 WORKDIR /app
 
 # Copy package.json TRƯỚC khi copy source code
-# → Docker cache layer này, giúp rebuild nhanh hơn khi chỉ đổi code
+# → Tận dụng Docker cache layer, giúp rebuild siêu nhanh nếu chỉ thay đổi mã nguồn
 COPY package*.json ./
 RUN npm ci --only=production
 
@@ -231,35 +236,32 @@ x = 10
 MAX_RETRIES = 10
 ```
 
-**Snippet thay vì Full Code:**
+**Concise Examples (Tinh gọn tối đa code):**
 ```go
-// ... (các import statements)
-
+// ... (các import statements đã được rút gọn lại)
 func main() {
-    // 👇 Đây là phần quan trọng cần giải thích
+    // 👇 Khởi tạo router bằng Gin framework (Trọng tâm)
     router := gin.Default()
     router.GET("/ping", pingHandler)
-    
-    // ... (phần còn lại)
 }
 ```
 
 ### Văn phong bắt buộc
 
-- **Analogy First:** Giải thích bằng ẩn dụ đời thường TRƯỚC KHI đi vào kỹ thuật
-- **Giải thích thuật ngữ:** Giữ nguyên tiếng Anh, giải thích ngay lần đầu xuất hiện
-- **Paragraph ngắn:** Tối đa 4-5 dòng/đoạn
-- **Dùng emoji** để đánh dấu mục quan trọng (⚠️, ✅, ❌, 💡)
-- **Trade-off rõ ràng:** Luôn chỉ ra đánh đổi của giải pháp
+- **Direct & Visual First:** Đi thẳng vào định nghĩa kỹ thuật, tận dụng tối đa sơ đồ (Mermaid) minh họa kiến trúc thay cho văn xuôi giải thích dài dòng.
+- **Bullet Points:** Ưu tiên gạch đầu dòng ngắn gọn để trình bày ý tứ thay vì viết đoạn văn (paragraph) quá tràng giang đại hải.
+- **Giải thích thuật ngữ:** Giữ nguyên tiếng Anh, giải thích ngay lần đầu xuất hiện ngắn gọn.
+- **Dùng emoji** để đánh dấu mục quan trọng (⚠️, ✅, ❌, 💡).
+- **Trade-off rõ ràng:** Luôn chỉ ra đánh đổi của giải pháp. Thay vì tốn thời gian chứng minh sự hoàn hảo tuyệt đối công nghệ, hãy đưa góc nhìn đa chiều.
 
 ---
 
 ## Checklist trước khi xuất bài
 
-- [ ] Có **Agenda** với Learning Outcomes rõ ràng (dùng động từ hành động)?
-- [ ] Phần **WHY** tạo được động lực, kết nối với vấn đề thực tế?
-- [ ] Phần **WHAT** có ẩn dụ đời thường trước khi dùng thuật ngữ kỹ thuật?
-- [ ] Phần **HOW** có code snippet với chú thích WHY và tên file rõ ràng?
-- [ ] Phần **WHAT IF** có bảng so sánh và ít nhất 2 pitfalls?
-- [ ] Có **MECE Mindmap** ở cuối bài?
-- [ ] Mermaid syntax đã được kiểm tra bằng skill `mermaid-expert`?
+- [ ] Bài viết có đi thẳng vào **Problem Statement** & **Solution** (trọng tâm) thay vì kể chuyện dài dòng ở phần **WHY** không?
+- [ ] Phần **WHAT** có định nghĩa kỹ thuật chuẩn xác và sơ đồ trực quan (Mermaid) minh họa thay cho văn xuôi dày đặc không?
+- [ ] Các đoạn code ví dụ (**HOW**) đã được lược bỏ các boilerplate thừa, giữ mức tinh gọn, đi thẳng vào cốt lõi logic lập trình chưa?
+- [ ] Tham số và tính năng đánh đổi trong **WHAT IF** có liệt kê rõ ràng không?
+- [ ] Có **MECE Mindmap** nằm ở dưới cùng của bài?
+- [ ] Giọng văn có tuân thủ cấu trúc gọn gàng, chia bullet point dễ theo dõi?
+- [ ] Mermaid syntax đã có sự kiểm duyệt của skill `mermaid-expert` khi thiết kế?

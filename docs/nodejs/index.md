@@ -11,7 +11,7 @@ tags: [nodejs, typescript, expressjs, postgresql, rest-api, backend]
 
 ## 📋 Agenda
 
-**Thời gian học ước tính:** ~12 buổi (mỗi buổi 2–3 giờ)
+**Thời gian học ước tính:** ~13 buổi (mỗi buổi 2–3 giờ)
 
 ### Sau khoá học này, bạn sẽ:
 
@@ -45,7 +45,7 @@ npx json-server db.json
 
 > 💡 **Câu hỏi đặt ra:** Nếu chúng ta xây dựng lại `json-server` nhưng dùng **PostgreSQL thật** làm lớp lưu trữ thì sẽ như thế nào?
 
-Đó chính là dự án xuyên suốt 12 buổi học của chúng ta. Không học chay — học bằng cách **build một sản phẩm thật sự**.
+Đó chính là dự án xuyên suốt 13 buổi học của chúng ta. Không học chay — học bằng cách **build một sản phẩm thật sự**.
 
 ---
 
@@ -99,7 +99,7 @@ ORM như Prisma yêu cầu bạn định nghĩa model từ trước (ví dụ: `
 
 ---
 
-## 🗺️ Lộ Trình Học (12 Buổi)
+## 🗺️ Lộ Trình Học (13 Buổi)
 
 ```mermaid
 gantt
@@ -122,12 +122,15 @@ gantt
     section Nâng Cao
     B7 - Relationship - Expand    : 2026-03-08, 1d
     B8 - Relationship - Embed     : 2026-03-09, 1d
-    B9 - Error và Testing         : 2026-03-10, 1d
+
+    section Bảo Mật & Testing
+    B9 - AuthN và AuthZ           : 2026-03-10, 1d
+    B10 - Error và Testing        : 2026-03-11, 1d
 
     section Hoàn Thiện
-    B10 - Auto-Migration          : 2026-03-11, 1d
-    B11 - Docker                  : 2026-03-12, 1d
-    B12 - Deploy lên Cloud        : 2026-03-13, 1d
+    B11 - Auto-Migration          : 2026-03-12, 1d
+    B12 - Docker                  : 2026-03-13, 1d
+    B13 - Deploy lên Cloud        : 2026-03-14, 1d
 ```
 
 ### Phân Chia Theo Giai Đoạn
@@ -138,7 +141,7 @@ graph LR
     P2["⚙️ Giai đoạn 2<br>CRUD Cơ bản<br>(Buổi 3-4)"]
     P3["🔍 Giai đoạn 3<br>Advanced GET<br>(Buổi 5-6)"]
     P4["🔗 Giai đoạn 4<br>Relationships<br>(Buổi 7-8)"]
-    P5["🛡️ Giai đoạn 5<br>Production Ready<br>(Buổi 9-12)"]
+    P5["🛡️ Giai đoạn 5<br>Production Ready<br>(Buổi 9-13)"]
 
     P1 --> P2 --> P3 --> P4 --> P5
 
@@ -153,7 +156,7 @@ graph LR
 
 ## 🔨 HOW — Tính Năng Cuối Khoá
 
-Sau 12 buổi, hệ thống của bạn hỗ trợ toàn bộ các tính năng sau:
+Sau 13 buổi, hệ thống của bạn hỗ trợ toàn bộ các tính năng sau:
 
 ### 📌 Dynamic CRUD — Tự động với MỌI bảng
 
@@ -262,6 +265,7 @@ mindmap
       Pagination và Sorting
       Filtering và Full-text Search
       Relationship Expand và Embed
+      AuthN và AuthZ (JWT)
     WHATIF["🚀 WHAT IF"]
       Khi nào phù hợp dùng
       SQL Injection risks

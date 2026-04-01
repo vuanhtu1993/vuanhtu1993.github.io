@@ -1,7 +1,7 @@
 # 🎯 Kế Hoạch Khoá Học: Build Your Own JSON Server
 
 > **Dự án xuyên suốt:** Clone lại `json-server` bằng Node.js + TypeScript + Express.js + PostgreSQL.
-> **Tổng thời gian:** 12 buổi × 2.5 giờ = ~30 giờ học.
+> **Tổng thời gian:** 13 buổi (khoảng 33 giờ học).
 > **Đối tượng:** Intern / Junior đã biết JavaScript cơ bản (ES6+).
 
 ---
@@ -36,10 +36,11 @@
 | **6** | Filtering & Full-text Search | Advanced GET | 2.5h |
 | **7** | Relationship — Expand (lấy dữ liệu cha) | Nâng Cao | 3h |
 | **8** | Relationship — Embed (lấy dữ liệu con) | Nâng Cao | 3h |
-| **9** | Error Handling, Validation & Testing | Production | 3h |
-| **10** | Auto-Migration hoàn chỉnh & Tổng kết | Production | 3h |
-| **11** | Docker hóa ứng dụng | Deployment | 2.5h |
-| **12** | Deploy lên Cloud | Deployment | 2.5h |
+| **9** | Authentication & Authorization (JWT) | Bảo Mật | 3h |
+| **10** | Error Handling, Validation & Testing | Production | 3h |
+| **11** | Auto-Migration hoàn chỉnh & Tổng kết | Production | 3h |
+| **12** | Docker hóa ứng dụng | Deployment | 2.5h |
+| **13** | Deploy lên Cloud | Deployment | 2.5h |
 
 ---
 
@@ -620,7 +621,7 @@ GET /posts?_page=1&_limit=10&_sort=created_at&_order=desc
 
 ---
 
-### Buổi 6: [WHAT IF] — Advanced GET: Filtering & Full-text Search
+### Buổi 7: [WHAT IF] — Advanced GET: Filtering & Full-text Search
 
 **Thời gian:** ~2.5 giờ | **Hình thức:** Coding Together
 
@@ -819,7 +820,123 @@ export async function applyEmbed(
 
 ---
 
-### Buổi 9: [WHAT IF] — Error Handling, Validation & Testing
+### Buổi 9: [HOW] — Authentication & Authorization (JWT & Role-based)
+
+**Thời gian:** ~3 giờ | **Hình thức:** Coding Together
+
+#### 🎯 Mục tiêu học viên đạt được
+- Phân biệt rõ AuthN (Xác thực) và AuthZ (Phân quyền).
+- Tự tay implement luồng Đăng nhập, cấp phát token JWT.
+- Xây dựng Middleware để bảo vệ Route và phân quyền Role-based (VD: Chỉ Admin mới được xóa bài).
+
+#### 📖 Nội dung lý thuyết (40 phút)
+**Authentication vs Authorization:**
+```text
+Ẩn dụ: Vé vào cửa công viên nước.
+- AuthN: Bạn đưa tiền (Email/Password) ở quầy bán vé. Nhân viên kiểm tra và đeo cho bạn Vòng Tay (JWT).
+- AuthZ: Bạn muốn chơi cầu trượt cảm giác mạnh (DELETE /posts), người soát vé chỉ cần nhìn Vòng Tay của bạn xem có đúng màu (Role Admin) hay không, không bắt bạn phải ra quầy mua vé lại.
+```
+
+**Cấu trúc JWT:** Header, Payload, Signature. (Giải thích tại sao client và hacker đọc được payload nhưng không thể tự chế tạo/giả mạo được do không có Secret Key).
+
+#### 💻 Coding (110 phút)
+
+**Cài đặt thư viện**
+```bash
+npm install jsonwebtoken bcrypt
+npm install -D @types/jsonwebtoken @types/bcrypt
+```
+
+**1. Hàm Hash Password và Generate Token (`src/utils/auth.ts`)**
+```typescript
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key';
+
+export const hashPassword = (password: string) => bcrypt.hash(password, 10);
+export const comparePassword = (password: string, hash: string) => bcrypt.compare(password, hash);
+export const generateToken = (payload: object) => jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+```
+
+**2. Route Login**
+```typescript
+// src/routes/auth.route.ts
+import { Router } from 'express';
+import { db } from '../db/knex';
+import { comparePassword, generateToken } from '../utils/auth';
+
+const router = Router();
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await db('users').where({ email }).first();
+  
+  if (!user || !(await comparePassword(password, user.password))) {
+    return res.status(401).json({ error: 'Sai email hoặc mật khẩu' });
+  }
+
+  // Payload không lọt thông tin nhạy cảm (không để password vào đây)
+  const token = generateToken({ id: user.id, role: user.role });
+  return res.json({ token, role: user.role });
+});
+
+export default router;
+```
+
+**3. Authentication Middleware (`src/middlewares/auth.middleware.ts`)**
+```typescript
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key';
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any; // Mở rộng Request để chứa payload user
+    }
+  }
+}
+
+export function authenticate(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Thiếu hoặc sai định dạng Token' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  try {
+    req.user = jwt.verify(token, JWT_SECRET); // Xác thực chữ ký và lấy payload
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Token không hợp lệ hoặc đã hết hạn' });
+  }
+}
+```
+
+**4. Authorization Middleware**
+```typescript
+export function authorize(roles: string[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    // Chỉ cho phép đi qua nếu user có role nằm trong danh sách roles truyền vào
+    if (!req.user || !roles.includes(req.user.role)) {
+      return res.status(403).json({ error: 'Forbidden: Bạn không có quyền truy cập' });
+    }
+    next();
+  };
+}
+```
+
+#### 📝 Bài tập cuối buổi
+1. Tự thêm data mẫu vào bảng `users` với cột `email`, `password` (đã hash), `role` (`admin` hoặc `user`).
+2. Thêm middleware `authenticate` vào các route tạo/sửa/xóa (POST, PUT, PATCH, DELETE).
+3. Thêm middleware `authorize(['admin'])` vào route DELETE.
+4. Dùng Postman test: Xóa bài viết mà không có token -> Lỗi 401. Có token nhưng role "user" -> Lỗi 403.
+
+---
+
+### Buổi 10: [WHAT IF] — Error Handling, Validation & Testing
 
 **Thời gian:** ~3 giờ | **Hình thức:** Coding Together
 
@@ -900,7 +1017,7 @@ describe('GET /:resource', () => {
 
 ---
 
-### Buổi 10: [WHAT/HOW] — Auto-Migration hoàn chỉnh & Tổng kết
+### Buổi 11: [WHAT/HOW] — Auto-Migration hoàn chỉnh & Tổng kết
 
 **Thời gian:** ~3 giờ | **Hình thức:** Coding Together
 
@@ -965,7 +1082,7 @@ export async function runMigration(dbJsonPath = './db.json') {
 
 ---
 
-### Buổi 11: [HOW] — Docker hóa ứng dụng
+### Buổi 12: [HOW] — Docker hóa ứng dụng
 
 **Thời gian:** ~2.5 giờ | **Hình thức:** Coding Together
 
@@ -1034,7 +1151,7 @@ volumes:
 
 ---
 
-### Buổi 12: [WHAT IF] — Deploy lên Cloud
+### Buổi 13: [WHAT IF] — Deploy lên Cloud
 
 **Thời gian:** ~2.5 giờ | **Hình thức:** Live Demo + Thực hành
 
