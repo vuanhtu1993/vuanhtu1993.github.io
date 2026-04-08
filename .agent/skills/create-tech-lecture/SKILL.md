@@ -42,9 +42,9 @@ Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật đi thẳng v
 
 ```mermaid
 flowchart LR
-    A["❓ WHY\n(Động lực)"] --> B["📖 WHAT\n(Lý thuyết)"]
-    B --> C["🔨 HOW\n(Thực hành)"]
-    C --> D["🚀 WHAT IF\n(Khám phá)"]
+    A["❓ WHY<br>(Động lực)"] --> B["📖 WHAT<br>(Lý thuyết)"]
+    B --> C["🔨 HOW<br>Thực hành)"]
+    C --> D["🚀 WHAT IF<br>(Khám phá)"]
     style A fill:#ff6b6b,color:#fff
     style B fill:#4ecdc4,color:#fff
     style C fill:#45b7d1,color:#fff

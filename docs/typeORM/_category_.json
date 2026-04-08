@@ -1,0 +1,8 @@
+{
+  "label": "TypeORM",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "9. Cẩm nang TypeORM toàn tập dành cho Node.js/NestJS/TypeScript Developer — từ Data Source, Entity, Migrations đến Query Builder và Transactions."
+  }
+}
