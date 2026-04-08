@@ -1,0 +1,8 @@
+{
+  "label": "10. Prisma ORM",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "10. Cẩm nang Prisma ORM toàn tập — từ Schema, Prisma Client, Migrate đến Best Practices và Error Handling dành cho Developer."
+  }
+}
