@@ -108,17 +108,6 @@ sequenceDiagram
 - 🌍 **CDN-able** — Có thể deploy lên Cloudflare, Vercel Edge, AWS CloudFront
 - 📊 **SEO hoàn hảo** — Bot Google đọc được HTML đầy đủ ngay lần đầu
 
-**Khi nào Next.js tự động chọn Static?**
-
-Next.js tự động chọn Static Rendering **khi không phát hiện Dynamic Signals** trong route:
-
-| Dynamic Signal | Ý nghĩa |
-|---|---|
-| `cookies()`, `headers()` | Dữ liệu phụ thuộc request |
-| `searchParams` prop | Query string thay đổi mỗi request |
-| `fetch()` không có cache | Dữ liệu luôn mới |
-| `noStore()` từ `unstable_noStore` | Opt-out cache tường minh |
-
 ---
 
 ## 2️⃣ Dynamic Rendering (Tương đương SSR)
@@ -197,6 +186,15 @@ export default async function PricesPage() {
   return <div>{prices.btc}</div>
 }
 ```
+
+Next.js tự động chọn Static Rendering **khi không phát hiện Dynamic Signals** trong route:
+
+| Dynamic Signal | Ý nghĩa |
+|---|---|
+| `cookies()`, `headers()` | Dữ liệu phụ thuộc request |
+| `searchParams` prop | Query string thay đổi mỗi request |
+| `fetch()` không có cache | Dữ liệu luôn mới |
+| `noStore()` từ `unstable_noStore` | Opt-out cache tường minh |
 
 ---
 
