@@ -25,3 +25,6 @@ chrome-user-data
 *.swo
 .docusaurus
 # .agent
+
+# Env
+.env
