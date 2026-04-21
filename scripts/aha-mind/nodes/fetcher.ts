@@ -31,7 +31,7 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
 
     // Convert HTML directly from readability output to Markdown text clean
     const cleanContent = turndownService.turndown(articleParsed.content);
-    
+
     const article: Article = {
       title: articleParsed.title || "Untitled",
       link: state.articleUrl,
@@ -40,7 +40,7 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
     };
 
     console.log(`[Fetcher] Successfully fetched and parsed article: ${article.title}`);
-    return { 
+    return {
       rawArticles: [article], // Keeping this for backward compatibility
       articleToProcess: article
     };
