@@ -49,19 +49,9 @@ Sidebar Position: [Vị trí trong sidebar, số nguyên]
 
 ---
 
-## Bước 3: Tạo nội dung (Create-Finance-Lecture Skill)
-
-// turbo
-1. Sử dụng `create-finance-lecture` skill:
-   - Đọc SKILL.md: `.agent/skills/create-finance-lecture/SKILL.md`
-   - Chọn template theo mục tiêu:
-     - **Concept 101**: Giải mã khái niệm → `templates/concept.md`
-     - **Strategy/How-to**: Hướng dẫn chiến lược → `templates/strategy.md`
-     - **Comparative**: So sánh & Lựa chọn → `templates/comparative.md`
-     - **Market Analysis**: Đọc vị thị trường → `templates/market-analysis.md`
-   - Áp dụng quy trình sư phạm: Hook → Analogy → Deep Dive → Practice → Risk & Pitfalls → MECE Mindmap
-
-2. Output: Bản nháp bài giảng với ẩn dụ đời sống, cảnh báo rủi ro, và MECE Mindmap
+## Bước 3: Tạo nội dung (sử dụng `create-tech-lecture` skill)
+1. Sử dụng `create-tech-lecture` skill để tạo bài viết về technical
+- Đọc SKILL.md: `.agent/skills/create-tech-lecture/SKILL.md`
 
 ---
 

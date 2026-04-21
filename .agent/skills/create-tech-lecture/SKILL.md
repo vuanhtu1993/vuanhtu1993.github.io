@@ -175,36 +175,8 @@ Sẽ copy cả `node_modules` (hàng GB) vào image → build chậm kinh khủn
 
 ---
 
-## Phần 3: Kết thúc bài — MECE Mindmap (BẮT BUỘC)
-
-Cuối mỗi bài viết, **BẮT BUỘC** tạo sơ đồ tư duy Mermaid tổng hợp kiến thức theo nguyên tắc **MECE** (Mutually Exclusive, Collectively Exhaustive).
-
-4 nhánh chính cố định khớp với 4 pha của 4MAT:
-
-```mermaid
-mindmap
-  root((Tên Công Nghệ))
-    WHY["❓ WHY"]
-      prob["(Vấn đề giải quyết)"]
-      context["(Bối cảnh ra đời)"]
-    WHAT["📖 WHAT"]
-      def["(Định nghĩa)"]
-      arch["(Kiến trúc)"]
-      components["(Thành phần chính)"]
-    HOW["🔨 HOW"]
-      setup["(Cài đặt / Setup)"]
-      usage["(Cách dùng cơ bản)"]
-      pattern["(Pattern phổ biến)"]
-    WHATIF["🚀 WHAT IF"]
-      when["(Khi nào dùng)"]
-      notwhen["(Khi nào KHÔNG)"]
-      pitfalls["(Bẫy hay gặp)"]
-```
-
-**Lưu ý:**
-- Dùng từ khóa ngắn gọn (**Keywords only**), không viết câu dài
-- **Sử dụng skill `mermaid-expert`** để kiểm tra cú pháp trước khi xuất ra
-
+## Phần 3: Kết thúc bài — Câu hỏi thảo luận
+** Thường là câu hỏi sâu sắc, được đúc rút và trả lời sau khi đã hiểu rõ các khái niệm trong bài
 ---
 
 ## Phần 4: Phân loại bài viết
@@ -262,6 +234,5 @@ func main() {
 - [ ] Phần **WHAT** có định nghĩa kỹ thuật chuẩn xác và sơ đồ trực quan (Mermaid) minh họa thay cho văn xuôi dày đặc không?
 - [ ] Các đoạn code ví dụ (**HOW**) đã được lược bỏ các boilerplate thừa, giữ mức tinh gọn, đi thẳng vào cốt lõi logic lập trình chưa?
 - [ ] Tham số và tính năng đánh đổi trong **WHAT IF** có liệt kê rõ ràng không?
-- [ ] Có **MECE Mindmap** nằm ở dưới cùng của bài?
 - [ ] Giọng văn có tuân thủ cấu trúc gọn gàng, chia bullet point dễ theo dõi?
 - [ ] Mermaid syntax đã có sự kiểm duyệt của skill `mermaid-expert` khi thiết kế?
