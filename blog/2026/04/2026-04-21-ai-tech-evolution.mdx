@@ -44,11 +44,11 @@ Trước khi đi vào từng giai đoạn, hãy nhìn toàn cảnh. Đây không
 
 ```mermaid
 flowchart TD
-    A["🧠 Phase 1\nLLM Ra Đời\n(2017-2021)"]
-    B["💬 Phase 2\nChatGPT + Prompting\n(2022-2023)"]
-    C["🤖 Phase 3\nAI Agent\n(2023-2025)"]
-    D["🎼 Phase 4\nAgent Orchestra\n(2025-2027)"]
-    E["🔮 Phase 5\nTương Lai\n(2027+)"]
+    A["🧠 Phase 1<br>LLM Ra Đời<br>(2017-2021)"]
+    B["💬 Phase 2<br>ChatGPT + Prompting<br>(2022-2023)"]
+    C["🤖 Phase 3<br>AI Agent<br>(2023-2025)"]
+    D["🎼 Phase 4<br>Agent Orchestra<br>(2025-2027)"]
+    E["🔮 Phase 5<br>Tương Lai<br>(2027+)"]
 
     A -->|"Pain point: Model 'thông minh nhưng thô'"| B
     B -->|"Pain point: Hallucination + No real-time data"| C
@@ -79,9 +79,9 @@ Năm 2017, Google Brain công bố kiến trúc **Transformer** ("Attention Is A
 ```mermaid
 flowchart LR
     subgraph "Kiến trúc Transformer"
-        IN["📝 Input Text\n\"Con mèo ngồi\""]
-        ATT["🔍 Self-Attention\nTừ nào liên quan\nđến từ nào?"]
-        OUT["📤 Output\n\"...trên thảm\""]
+        IN["📝 Input Text<br>\"Con mèo ngồi\""]
+        ATT["🔍 Self-Attention<br>Từ nào liên quan<br>đến từ nào?"]
+        OUT["📤 Output<br>\"...trên thảm\""]
     end
     IN --> ATT --> OUT
 ```
@@ -124,9 +124,9 @@ Doanh nghiệp bắt đầu muốn dùng ChatGPT cho công việc thực tế. V
 flowchart TD
     PROB["Doanh nghiệp muốn\ndùng LLM cho thực tế"]
 
-    W1["🧠 Bức tường 1: Hallucination\nModel tự tin bịa đặt thông tin\nkhông tồn tại"]
-    W2["📅 Bức tường 2: Knowledge Cutoff\nModel không biết gì sau\nngày training kết thúc"]
-    W3["🏢 Bức tường 3: No Domain Knowledge\nModel không biết SOP, sản phẩm,\nhay quy trình nội bộ của công ty"]
+    W1["🧠 Bức tường 1: Hallucination<br>Model tự tin bịa đặt thông tin<br>không tồn tại"]
+    W2["📅 Bức tường 2: Knowledge Cutoff<br>Model không biết gì sau<br>ngày training kết thúc"]
+    W3["🏢 Bức tường 3: No Domain Knowledge<br>Model không biết SOP, sản phẩm,<br>hay quy trình nội bộ của công ty"]
 
     PROB --> W1
     PROB --> W2
@@ -137,7 +137,7 @@ flowchart TD
 
 ---
 
-## 🤖 Phase 3: AI Agent — "Từ Phản Ứng Đến Hành Động"
+## 🤖 Phase 3: Enabling Technologies - Mở rộng khả năng của AI
 
 ### Enabling Technologies: Không Phải 1 Phase, Mà Là Layer Xuyên Suốt
 
@@ -146,16 +146,16 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph TOOLS["🔧 Enabling Technologies Layer"]
-        FC["⚡ Function Calling\n(2023)\nLLM gọi được API ngoài"]
-        RAG["🔍 RAG\n(2023)\nGrounding với\ndata thực tế"]
-        FT["🎯 Fine-tuning\n(2022-nay)\nDomain expertise\nvào model"]
-        MCP["🔌 MCP\n(2024)\nChuẩn hóa\ntool access"]
+        FC["⚡ Function Calling<br>(2023)<br>LLM gọi được API ngoài"]
+        RAG["🔍 RAG<br>(2023)<br>Grounding với<br>data thực tế"]
+        FT["🎯 Fine-tuning<br>(2022-nay)<br>Domain expertise<br>vào model"]
+        MCP["🔌 MCP<br>(2024)<br>Chuẩn hóa<br>tool access"]
     end
 
-    FC -->|"LLM có thể hành động"| AGENT["🤖 AI Agent"]
+    FC -->|"LLM có thể hành động"| AGENT["🧠 LLM"]
     RAG -->|"LLM có memory thực"| AGENT
     FT -->|"LLM hiểu domain"| AGENT
-    MCP -->|"Kết nối 50+ tools\nkhông cần custom code"| AGENT
+    MCP -->|"Kết nối 50+ tools<br>không cần custom code"| AGENT
 
     style AGENT fill:#e74c3c,stroke:#2d3436,color:#fff
     style FC fill:#74b9ff,stroke:#2d3436,color:#2d3436
@@ -174,8 +174,8 @@ flowchart LR
 
 - **MCP — Model Context Protocol (Anthropic, 11/2024):** Giải bài toán "N Agent × M Tools = N×M integrations thủ công". MCP đóng vai trò như **USB-C** — một chuẩn kết nối thống nhất. Agent nào cũng nói chuyện với tool nào qua cùng 1 giao thức.
 
-### Bài Toán Cần Giải Quyết: Thoát Khỏi "Reactive Mode"
-
+## 🤖 Phase 4: AI Agent - Từ Phản Ứng Đến Hành Động
+### Bài toán cần giải quyết
 Khi đã có đủ tools, câu hỏi mới xuất hiện:
 
 *"AI giờ có data, có đồ nghề — nhưng tại sao lúc nào cũng phải ngồi đợi tôi ra lệnh từng bước?"*
@@ -184,11 +184,11 @@ Khi đã có đủ tools, câu hỏi mới xuất hiện:
 
 ```mermaid
 flowchart LR
-    P["👁 Perceive\nNhận task\nvà context"] --> T["🧠 Think\nPhân tích,\nlập kế hoạch"]
-    T --> A["⚡ Act\nGọi tool,\nthực thi bước"]
-    A --> O["🔍 Observe\nKiểm tra\nkết quả"]
+    P["👁 Perceive<br>Nhận task<br>và context"] --> T["🧠 Think<br>Phân tích,<br>lập kế hoạch"]
+    T --> A["⚡ Act<br>Gọi tool,<br>thực thi bước"]
+    A --> O["🔍 Observe<br>Kiểm tra<br>kết quả"]
     O -->|"Chưa xong"| T
-    O -->|"Hoàn thành"| R["✅ Report\nBáo cáo\ncho người dùng"]
+    O -->|"Hoàn thành"| R["✅ Report<br>Báo cáo<br>cho người dùng"]
 ```
 
 **Ví dụ thực tế — Cursor (AI Coding Agent):**
@@ -208,7 +208,7 @@ Một Agent "biết tuốt" sẽ mediocre ở tất cả. Cần có **sự phân
 
 ---
 
-## 🎼 Phase 4: Agent Orchestra — "Dàn Nhạc Giao Hưởng"
+## 🎼 Phase 5: Agent Orchestra — "Dàn Nhạc Giao Hưởng"
 
 ### Bài Toán Cần Giải Quyết
 
@@ -218,13 +218,13 @@ Giống như trong một dàn nhạc — không ai mong chờ một người v�
 
 ```mermaid
 flowchart TB
-    USER["👤 Người dùng\n'Phân tích market và ra chiến lược'"]
-    ORCH["🎼 Orchestrator Agent\nNhận task, phân vai,\nquản lý flow"]
+    USER["👤 Người dùng<br>'Phân tích market và ra chiến lược'"]
+    ORCH["🎼 Orchestrator Agent<br>Nhận task, phân vai,<br>quản lý flow"]
 
-    R_AGT["🔍 Research Agent\nChuyên thu thập thông tin"]
-    A_AGT["📊 Analysis Agent\nChuyên phân tích số liệu"]
-    W_AGT["✍️ Writing Agent\nChuyên soạn thảo văn bản"]
-    QA_AGT["🛡️ QA Agent\nChuyên kiểm tra chất lượng"]
+    R_AGT["🔍 Research Agent<br>Chuyên thu thập thông tin"]
+    A_AGT["📊 Analysis Agent<br>Chuyên phân tích số liệu"]
+    W_AGT["✍️ Writing Agent<br>Chuyên soạn thảo văn bản"]
+    QA_AGT["🛡️ QA Agent<br>Chuyên kiểm tra chất lượng"]
 
     USER --> ORCH
     ORCH --> R_AGT
@@ -264,7 +264,7 @@ flowchart TB
 
 ---
 
-## 🔮 Phase 5: Tương Lai — 3 Kịch Bản Đang Tranh Luận
+## 🔮 Phase 6: Future — 3 Kịch Bản Đang Tranh Luận
 
 Không ai biết chắc tương lai sẽ ra sao. Nhưng ngành đang nghiêng về **3 hướng khác nhau**, không hướng nào là chắc chắn.
 
@@ -320,10 +320,10 @@ Thay vì một con đường, AI phân nhánh thành **hai thị trường hoàn
 
 ```mermaid
 flowchart BT
-    LLM["🧠 LLM\n(Engine)"]
-    AGENT["🤖 Agent\n= LLM + Tools + Loop"]
-    MULTI["🎼 Multi-Agent\n= Agents + Orchestration"]
-    FUTURE["🔮 Future\n= Multi-Agent + Physical + Governance"]
+    LLM["🧠 LLM<br>(Engine)"]
+    AGENT["🤖 Agent<br>= LLM + Tools + Loop"]
+    MULTI["🎼 Multi-Agent<br>= Agents + Orchestration"]
+    FUTURE["🔮 Future<br>= Multi-Agent + Physical + Governance"]
 
     LLM --> AGENT --> MULTI --> FUTURE
 ```
