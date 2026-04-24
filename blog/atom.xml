@@ -542,8 +542,8 @@ File <code>.env.production</code> chứa secrets → KHÔNG BAO GIỜ commit lê
 </li>
 <li class=""><a href="https://vuanhtu1993.github.io/blog/2026/03/31/typescript-comprehensive-guide#2-combining-types" class="">Combining Types</a>
 <ul>
-<li class=""><a href="https://vuanhtu1993.github.io/blog/2026/03/31/typescript-comprehensive-guide#21-union-types" class="">Union Types</a></li>
-<li class=""><a href="https://vuanhtu1993.github.io/blog/2026/03/31/typescript-comprehensive-guide#22-intersection-types" class="">Intersection Types</a></li>
+<li class=""><a href="https://vuanhtu1993.github.io/blog/2026/03/31/typescript-comprehensive-guide#21-union-types-" class="">Union Types</a></li>
+<li class=""><a href="https://vuanhtu1993.github.io/blog/2026/03/31/typescript-comprehensive-guide#22-intersection-types-" class="">Intersection Types</a></li>
 </ul>
 </li>
 <li class=""><a href="https://vuanhtu1993.github.io/blog/2026/03/31/typescript-comprehensive-guide#3-type-guards--narrowing" class="">Type Guards / Narrowing</a></li>
