@@ -1,0 +1,8 @@
+{
+  "label": "Phần 4: Production Ready",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Đưa AI Agent lên production — monitoring, safety guardrails, cost optimization, và Capstone Project tổng hợp."
+  }
+}
