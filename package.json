@@ -12,7 +12,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "aha-mind": "tsx scripts/aha-mind/pipeline.ts"
+    "aha-mind:blog": "tsx scripts/aha-mind/pipeline.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
