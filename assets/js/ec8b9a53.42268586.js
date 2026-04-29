@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkstory=globalThis.webpackChunkstory||[]).push([[9619],{45451(a){a.exports=JSON.parse('{"tag":{"label":"ibm","permalink":"/blog/tags/ibm","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/ibm","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkstory=globalThis.webpackChunkstory||[]).push([[8664],{44090(a){a.exports=JSON.parse('{"tag":{"label":"edi","permalink":"/blog/tags/edi","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/edi","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

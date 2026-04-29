@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkstory=globalThis.webpackChunkstory||[]).push([[8508],{51413(a){a.exports=JSON.parse('{"tag":{"label":"osi","permalink":"/blog/tags/osi","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/osi","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
