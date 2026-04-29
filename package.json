@@ -25,9 +25,13 @@
     "@langchain/openai": "^1.4.4",
     "@mdx-js/react": "^3.1.0",
     "@mozilla/readability": "^0.6.0",
+    "@napi-rs/canvas": "^0.1.100",
+    "canvas": "^3.2.3",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",
     "jsdom": "^29.0.2",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^5.7.284",
     "prism-react-renderer": "^2.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -41,6 +45,7 @@
     "@docusaurus/module-type-aliases": "^3.7.0",
     "@types/jsdom": "^28.0.1",
     "@types/mozilla-readability": "^0.2.1",
+    "@types/pdf-parse": "^1.1.5",
     "tsx": "^4.21.0"
   },
   "browserslist": {
