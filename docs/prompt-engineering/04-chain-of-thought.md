@@ -343,7 +343,7 @@ mindmap
       Không dùng cho simple tasks
 ```
 
-**Bài tiếp theo:** [Bài 5 — Tree of Thoughts & Prompt Chaining: Khi Một Prompt Không Đủ →](./05-tree-of-thoughts-chaining)
+**Bài tiếp theo:** [Bài 5 — Tree of Thoughts & Prompt Chaining: Khi Một Prompt Không Đủ →](./05-tree-of-thoughts-chaining.md)
 
 ---
 

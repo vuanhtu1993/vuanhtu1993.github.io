@@ -294,7 +294,7 @@ Tìm hiểu một AI agent framework thực tế (LangChain, LlamaIndex, hoặc 
 | **Reflexion** | Self-reflection để improve qua iterations | Tasks cần high accuracy, có thể retry |
 | **ART** | Automatic tool selection từ library | Production agents, không muốn handcraft prompts |
 
-**Bài tiếp theo:** [Bài 7 — RAG & Context Engineering: Cấp Cho AI "Bộ Nhớ Dài Hạn" →](./07-rag-context-engineering)
+**Bài tiếp theo:** [Bài 7 — RAG & Context Engineering: Cấp Cho AI "Bộ Nhớ Dài Hạn" →](./07-rag-context-engineering.md)
 
 ---
 

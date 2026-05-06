@@ -280,7 +280,7 @@ Dùng AI để cải thiện một prompt bạn đã viết ở các bài trư�
 | Tree of Thoughts | Task cần explore & backtrack | Very High | Very High |
 | Meta Prompting | Tối ưu prompt tự động | Medium | Medium |
 
-**Bài tiếp theo:** [Bài 6 — ReAct & Reflexion: AI Biết Tự Kiểm Tra và Sửa Lỗi →](./06-react-reflexion)
+**Bài tiếp theo:** [Bài 6 — ReAct & Reflexion: AI Biết Tự Kiểm Tra và Sửa Lỗi →](./06-react-reflexion.md)
 
 ---
 

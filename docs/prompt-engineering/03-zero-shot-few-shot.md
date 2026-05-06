@@ -326,7 +326,7 @@ mindmap
 | Nhược điểm | Ít control | Tốn tokens |
 | Fail case | Task phức tạp | Reasoning nhiều bước |
 
-**Bài tiếp theo:** [Bài 4 — Chain-of-Thought: Dạy AI "Suy Nghĩ Từng Bước" →](./04-chain-of-thought)
+**Bài tiếp theo:** [Bài 4 — Chain-of-Thought: Dạy AI "Suy Nghĩ Từng Bước" →](./04-chain-of-thought.md)
 
 ---
 

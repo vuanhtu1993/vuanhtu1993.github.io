@@ -344,7 +344,7 @@ mindmap
       Fine-tune for behavior
 ```
 
-**Bài tiếp theo:** [Bài 8 — Adversarial Prompting & Production Best Practices →](./08-adversarial-production)
+**Bài tiếp theo:** [Bài 8 — Adversarial Prompting & Production Best Practices →](./08-adversarial-production.md)
 
 ---
 

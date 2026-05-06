@@ -305,7 +305,7 @@ mindmap
       Max Tokens kiểm soát length & cost
 ```
 
-**Bài tiếp theo:** [Bài 2 — Basics of Prompting: Nghệ Thuật Đặt Câu Hỏi Cho AI →](./02-basics-of-prompting)
+**Bài tiếp theo:** [Bài 2 — Basics of Prompting: Nghệ Thuật Đặt Câu Hỏi Cho AI →](./02-basics-of-prompting.md)
 
 ---
 

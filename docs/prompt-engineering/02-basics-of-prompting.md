@@ -405,7 +405,7 @@ Giải thích API
 | Show examples (few-shot) | Format phức tạp, output đặc biệt |
 | Nói "làm gì" thay vì "không làm gì" | Khi cần control tone/style |
 
-**Bài tiếp theo:** [Bài 3 — Zero-Shot & Few-Shot: Hai Kỹ Thuật Nền Tảng →](./03-zero-shot-few-shot)
+**Bài tiếp theo:** [Bài 3 — Zero-Shot & Few-Shot: Hai Kỹ Thuật Nền Tảng →](./03-zero-shot-few-shot.md)
 
 ---
 
