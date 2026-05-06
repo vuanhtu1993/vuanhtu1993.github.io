@@ -1,0 +1,8 @@
+{
+  "label": "13. 🎯 Prompt Engineering",
+  "position": 13,
+  "link": {
+    "type": "generated-index",
+    "description": "Chuỗi bài học chuyên sâu về Prompt Engineering từ cơ bản đến nâng cao: từ kỹ thuật nền tảng Zero-shot/Few-shot, đến Chain-of-Thought Reasoning, Tree of Thoughts, ReAct Agents, RAG, và Production Best Practices. Dựa trên DAIR.AI Prompt Engineering Guide."
+  }
+}

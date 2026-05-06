@@ -1,5 +1,5 @@
 ---
-title: "Tiến Hóa Công Nghệ AI (2020→Tương Lai): Từng Bước Giải Quyết Từng Bài Toán"
+title: "Tiến Hóa Công Nghệ AI (2017→Tương Lai)"
 date: "2026-04-21"
 authors: [anhhtus]
 tags: [ai, technology-trends, llm, ai-agents, multi-agent, generative-ai]
@@ -11,20 +11,20 @@ description: "Hiểu toàn bộ hành trình AI — từ LLM, ChatGPT, Prompt En
 **Thời gian đọc ước tính:** ~12 phút
 
 ### Sau bài này, bạn sẽ:
-- ✅ **Hiểu** được vì sao mỗi "làn sóng" AI ra đời — không phải vì hype, mà vì pain point thực sự.
-- ✅ **Phân tích** được vai trò của RAG, MCP, Function Calling, Fine-tuning: chúng là **công cụ xuyên suốt**, không phải một "era" riêng biệt.
-- ✅ **Tranh luận** được 3 kịch bản tương lai khác nhau của AI — không phải chỉ có 1 con đường tươi hồng.
-- ✅ **Tự hỏi** được: "Team mình đang ở Phase nào? Cần chuẩn bị gì cho phase tiếp?"
+- **Hiểu** được vì sao mỗi "làn sóng" AI ra đời — không phải vì hype, mà vì pain point thực sự.
+- **Phân tích** được vai trò của RAG, MCP, Function Calling, Fine-tuning: chúng là **công cụ xuyên suốt**, không phải một "era" riêng biệt.
+- **Tranh luận** được 3 kịch bản tương lai khác nhau của AI — không phải chỉ có 1 con đường tươi hồng.
+- **Tự hỏi** được: "Team mình đang ở Phase nào? Cần chuẩn bị gì cho phase tiếp?"
 
 ### Prerequisites:
-- 🔹 Biết sơ lược về LLM, Chatbot, và AI Coding tools.
-- 🔹 Sẵn sàng bị đặt câu hỏi ngược lại 😄
+- Biết sơ lược về LLM, Chatbot, và AI Coding tools.
+- Sẵn sàng bị đặt câu hỏi ngược lại 😄
 
 <!--truncate-->
 
 ---
 
-## ❓ Tại Sao Phải Hiểu Về Timeline AI?
+## Đặt Vấn Đề
 
 **Vấn đề:**
 - Công nghệ AI đang thay đổi quá nhanh: Tuần này MCP, tuần sau AI Agent, tháng sau Multi-Agent… Dev và Leader không biết đâu là hype và đâu là thực sự quan trọng.
@@ -44,7 +44,7 @@ Trước khi đi vào từng giai đoạn, hãy nhìn toàn cảnh. Đây không
 
 ```mermaid
 flowchart TD
-    A["🧠 Phase 1<br>LLM Ra Đời<br>(2017-2021)"]
+    A["🧠 Phase 1<br>LLM Ra Đời - Base model<br>(2017-2021)"]
     B["💬 Phase 2<br>ChatGPT + Prompting<br>(2022-2023)"]
     C["🤖 Phase 3<br>AI Agent<br>(2023-2025)"]
     D["🎼 Phase 4<br>Agent Orchestra<br>(2025-2027)"]
@@ -64,7 +64,7 @@ flowchart TD
 
 ---
 
-## 🧠 Phase 1: LLM Ra Đời — "Máy Tính Biết Nói"
+## 🧠 Phase 1: LLM Ra Đời
 
 ### Bài toán cần giải quyết
 
@@ -78,7 +78,7 @@ Năm 2017, Google Brain công bố kiến trúc **Transformer** ("Attention Is A
 
 ```mermaid
 flowchart LR
-    subgraph "Kiến trúc Transformer"
+    subgraph "NLP hoạt động"
         IN["📝 Input Text<br>\"Con mèo ngồi\""]
         ATT["🔍 Self-Attention<br>Từ nào liên quan<br>đến từ nào?"]
         OUT["📤 Output<br>\"...trên thảm\""]
@@ -89,15 +89,15 @@ flowchart LR
 - **2020:** GPT-3 ra đời (175 tỷ tham số). Lần đầu tiên một model có thể viết văn, dịch, code... chỉ bằng cách đọc hàng nghìn tỷ từ từ internet.
 - **Nhưng có một vấn đề nghiêm trọng:** GPT-3 khi được hỏi "Cách làm bom xăng?" sẽ vui vẻ trả lời. Nó thông minh nhưng không có **giá trị quan** (values). Nó không biết cái gì nên nói và cái gì không.
 
-### 📌 Pain Point — Cầu Nối Sang Phase 2
+### Pain Point — Vấn đề phát sinh
 
-> ⚠️ **GPT-3 thô và nguy hiểm.** Model có thể viết bất kỳ thứ gì — kể cả nội dung độc hại, sai lệch. Đồng thời, interface vẫn là API kỹ thuật, người thường không thể tiếp cận.
+> **GPT-3 thô và nguy hiểm.** Model có thể viết bất kỳ thứ gì — kể cả nội dung độc hại, sai lệch. Đồng thời, interface vẫn là API kỹ thuật, người thường không thể tiếp cận.
 
 **Giải pháp được sinh ra:** **RLHF (Reinforcement Learning from Human Feedback)** — kỹ thuật "thuần hóa" model bằng cách cho người đánh giá phản hồi tốt/xấu, rồi model tự học qua đó. RLHF là mảnh ghép còn thiếu để biến GPT-3 thành ChatGPT.
 
 ---
 
-## 💬 Phase 2: ChatGPT & Prompt Engineering — "AI Cho Mọi Người"
+## Phase 2: ChatGPT & Prompt Engineering — "AI Cho Mọi Người"
 
 ### Bài toán cần giải quyết
 
@@ -116,13 +116,13 @@ Cùng với đó, cộng đồng developer khám phá ra: *cách bạn hỏi ả
 | **Chain-of-Thought (CoT)** | "Hãy suy nghĩ từng bước" | Toán học, logic phức tạp |
 | **Role Prompting** | "Bạn là senior dev với 10 năm kinh nghiệm..." | Cần tone/expertise cụ thể |
 
-### 📌 Pain Point — Cầu Nối Sang Phase 3
+### Pain Point — Vấn đề phát sinh
 
 Doanh nghiệp bắt đầu muốn dùng ChatGPT cho công việc thực tế. Và họ va ngay vào **3 bức tường**:
 
 ```mermaid
 flowchart TD
-    PROB["Doanh nghiệp muốn\ndùng LLM cho thực tế"]
+    PROB["Doanh nghiệp muốn<br>dùng LLM cho thực tế"]
 
     W1["🧠 Bức tường 1: Hallucination<br>Model tự tin bịa đặt thông tin<br>không tồn tại"]
     W2["📅 Bức tường 2: Knowledge Cutoff<br>Model không biết gì sau<br>ngày training kết thúc"]
@@ -133,11 +133,11 @@ flowchart TD
     PROB --> W3
 ```
 
-> ⚠️ **Vấn đề cốt lõi:** LLM là một "bộ não khổng lồ nhưng bị cô lập". Nó không thể tự tìm kiếm thêm thông tin. Nó không thể gọi API. Nó không có tác vụ — chỉ có phản hồi. Và đây là lúc các **Enabling Technologies** ra đời.
+> **Vấn đề cốt lõi:** LLM là một "bộ não khổng lồ nhưng bị cô lập". Nó không thể tự tìm kiếm thêm thông tin. Nó không thể gọi API. Nó không có tác vụ — chỉ có phản hồi. Và đây là lúc các **Enabling Technologies** ra đời.
 
 ---
 
-## 🤖 Phase 3: Enabling Technologies - Mở rộng khả năng của AI
+## Phase 3: Enabling Technologies - Mở rộng khả năng của AI
 
 ### Enabling Technologies: Không Phải 1 Phase, Mà Là Layer Xuyên Suốt
 
@@ -174,7 +174,7 @@ flowchart LR
 
 - **MCP — Model Context Protocol (Anthropic, 11/2024):** Giải bài toán "N Agent × M Tools = N×M integrations thủ công". MCP đóng vai trò như **USB-C** — một chuẩn kết nối thống nhất. Agent nào cũng nói chuyện với tool nào qua cùng 1 giao thức.
 
-## 🤖 Phase 4: AI Agent - Từ Phản Ứng Đến Hành Động
+## Phase 4: AI Agent - Từ Hỏi Đáp Đến Hành Động
 ### Bài toán cần giải quyết
 Khi đã có đủ tools, câu hỏi mới xuất hiện:
 
@@ -198,7 +198,7 @@ flowchart LR
 4. *Observe:* Chạy test → test fail → quay lại Think
 5. *Report:* "Đã fix, dưới đây là explanation"
 
-### 📌 Pain Point — Cầu Nối Sang Phase 4
+### Pain Point — Vấn đề phát sinh
 
 Một con Agent giỏi trong domain của nó. Nhưng task thực tế của doanh nghiệp phức tạp hơn nhiều:
 
@@ -254,7 +254,7 @@ flowchart TB
 
 **3. Governed Autonomy — Tự chủ Có Giám Sát:** Với quyền lực lớn hơn (nhiều agent, nhiều tool, nhiều action) đến trách nhiệm lớn hơn. Governance không còn là "add-on" — nó phải được build-in vào kiến trúc.
 
-### 📌 Pain Point — Cầu Nối Sang Phase 5
+### Pain Point — Vấn đề phát sinh
 
 ```
 ❓ Ai chịu trách nhiệm khi một agent trong chuỗi làm sai?
@@ -264,7 +264,7 @@ flowchart TB
 
 ---
 
-## 🔮 Phase 6: Future — 3 Kịch Bản Đang Tranh Luận
+## Phase 6: Future — 3 Kịch Bản Đang Tranh Luận
 
 Không ai biết chắc tương lai sẽ ra sao. Nhưng ngành đang nghiêng về **3 hướng khác nhau**, không hướng nào là chắc chắn.
 
@@ -312,7 +312,7 @@ Thay vì một con đường, AI phân nhánh thành **hai thị trường hoàn
 
 ---
 
-## 💡 Đúc Kết: Mental Model Cho Developer
+## Đúc Kết: Mental Model Cho Developer
 
 ### Nguyên Tắc Cốt Lõi
 

@@ -220,3 +220,84 @@ ul {
   margin: 0;
   padding-left: 20px;
 }
+
+/* Nút Xuất PDF */
+.print-pdf-button {
+  float: right;
+  position: relative;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
+.print-pdf-button:hover {
+  background-color: var(--ifm-color-primary-dark);
+}
+
+/* Ẩn nút PDF khi đang in */
+@media print {
+  .print-pdf-button {
+    display: none !important;
+  }
+
+  /* Cấu hình trang in */
+  @page {
+    margin: 1.5cm;
+  }
+
+  /* Reset màu nền và chữ về chuẩn in ấn để tiết kiệm mực */
+  body,
+  .print-content,
+  article,
+  main {
+    background: transparent !important;
+    color: black !important;
+  }
+
+  /* Ẩn các thành phần không liên quan của Docusaurus */
+  .theme-doc-sidebar-container,
+  .theme-doc-toc-desktop,
+  .navbar,
+  .footer,
+  .pagination-nav,
+  .theme-doc-footer {
+    display: none !important;
+  }
+
+  /* Điều chỉnh layout để full width */
+  .main-wrapper,
+  .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Fix lỗi ngắt trang (tránh ngắt trang giữa hình ảnh hoặc code block) */
+  img,
+  pre,
+  blockquote,
+  table,
+  figure {
+    page-break-inside: avoid;
+  }
+
+  h2,
+  h3,
+  h4 {
+    page-break-after: avoid;
+  }
+}

@@ -223,8 +223,65 @@ func main() {
 - **Direct & Visual First:** Đi thẳng vào định nghĩa kỹ thuật, tận dụng tối đa sơ đồ (Mermaid) minh họa kiến trúc thay cho văn xuôi giải thích dài dòng.
 - **Bullet Points:** Ưu tiên gạch đầu dòng ngắn gọn để trình bày ý tứ thay vì viết đoạn văn (paragraph) quá tràng giang đại hải.
 - **Giải thích thuật ngữ:** Giữ nguyên tiếng Anh, giải thích ngay lần đầu xuất hiện ngắn gọn.
-- **Dùng emoji** để đánh dấu mục quan trọng (⚠️, ✅, ❌, 💡).
+- **Phân vùng Emoji vs. Admonition** (xem chi tiết ở Phần 6 bên dưới).
 - **Trade-off rõ ràng:** Luôn chỉ ra đánh đổi của giải pháp. Thay vì tốn thời gian chứng minh sự hoàn hảo tuyệt đối công nghệ, hãy đưa góc nhìn đa chiều.
+
+---
+
+## Phần 6: Quy tắc Formatting Chuyên Nghiệp — Emoji vs. Admonition
+
+Đây là điểm phân biệt **bài blog cá nhân** và **bài nghiên cứu kỹ thuật**. Emoji trong heading gây cảm giác thiếu học thuật; Admonition của Docusaurus mang lại cấu trúc rõ ràng và tính nhất quán cao hơn.
+
+### Nguyên tắc phân vùng
+
+| Vị trí | Dùng Emoji | Dùng Admonition | Lý do |
+|--------|:-----------:|:---------------:|-------|
+| **Heading `##`, `###`** | ❌ Không | — | Emoji trong heading làm giảm tính học thuật |
+| **Callout quan trọng** | ❌ Không | ✅ `:::note`, `:::tip`, `:::warning`, `:::danger` | Admonition có màu sắc, icon, và semantic rõ hơn |
+| **Bảng so sánh** | ✅ `✅` `❌` | — | Ký hiệu ngữ nghĩa ngắn gọn, phù hợp trong cell |
+| **Inline cảnh báo** | ✅ `⚠️` trước text | — | Chỉ 1 emoji, không lạm dụng |
+| **Mermaid node label** | ✅ Giữ nguyên | — | Tăng khả năng đọc của diagram |
+
+### Bộ Admonition chuẩn cho bài kỹ thuật
+
+```markdown
+:::note Định nghĩa / Nguyên lý nền
+Thông tin bối cảnh hoặc lý thuyết cần nắm trước.
+:::
+
+:::tip Trade-off / Best Practice
+Gợi ý thực tiễn, lời khuyên tối ưu hoá.
+:::
+
+:::warning Cảnh báo kỹ thuật
+Gotcha, pitfall hay gặp, hành vi không mong đợi.
+:::
+
+:::danger Lỗi nghiêm trọng / Anti-pattern
+Vi phạm bảo mật, dữ liệu không nhất quán, không bao giờ làm thế này.
+:::
+
+:::info Nguồn gốc / Lịch sử
+Paper, RFC, lý do ra đời của công nghệ.
+:::
+```
+
+### Ví dụ — Trước và Sau
+
+```markdown
+# ❌ Trước (Blog style — thiếu chuyên nghiệp)
+### 🌟 Nâng cấp: AI Agents
+### ✅ Trade-off
+⚠️ Lưu ý: Kỹ thuật này chỉ hiệu quả với model lớn.
+
+# ✅ Sau (Research style)
+### Nâng cấp: AI Agents
+### Phân tích Trade-off
+
+:::warning Giới hạn kỹ thuật
+Kỹ thuật này chỉ hiệu quả với model từ 70B parameters trở lên.
+:::
+```
 
 ---
 
@@ -235,4 +292,6 @@ func main() {
 - [ ] Các đoạn code ví dụ (**HOW**) đã được lược bỏ các boilerplate thừa, giữ mức tinh gọn, đi thẳng vào cốt lõi logic lập trình chưa?
 - [ ] Tham số và tính năng đánh đổi trong **WHAT IF** có liệt kê rõ ràng không?
 - [ ] Giọng văn có tuân thủ cấu trúc gọn gàng, chia bullet point dễ theo dõi?
+- [ ] **Emoji không xuất hiện trong heading `##`, `###`** — dùng Admonition thay thế?
+- [ ] **Callout quan trọng dùng Admonition** (`:::note`, `:::tip`, `:::warning`, `:::danger`) thay vì inline emoji?
 - [ ] Mermaid syntax đã có sự kiểm duyệt của skill `mermaid-expert` khi thiết kế?
