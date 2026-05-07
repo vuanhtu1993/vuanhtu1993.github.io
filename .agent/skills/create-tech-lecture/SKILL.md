@@ -1,6 +1,6 @@
 ---
 name: create-tech-lecture
-description: "Skill chuyên tạo bài giảng/báo cáo kỹ thuật IT chuyên sâu với văn phong sư phạm, gần gũi. Sử dụng khi cần giải thích concept khó (Docker, Kubernetes, Design Patterns...), so sánh công nghệ (React vs Vue, SQL vs NoSQL...), hoặc hướng dẫn thực hành (Tutorial). Tối ưu cho đối tượng Intern/Junior bằng phương pháp 4MAT System + Direct & Visual First."
+description: "Skill chuyên tạo bài viết kỹ thuật IT **tiếng anh** chuyên sâu với văn phong sư phạm, gần gũi. Sử dụng khi cần giải thích concept khó (Docker, Kubernetes, Design Patterns...), so sánh công nghệ (React vs Vue, SQL vs NoSQL...), hoặc hướng dẫn thực hành (Tutorial). Tối ưu cho đối tượng Intern/Junior bằng phương pháp 4MAT System + Direct & Visual First."
 ---
 
 # Create Tech Lecture Skill
@@ -18,21 +18,31 @@ Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật đi thẳng v
 
 **Thời gian đọc ước tính:** ~X phút
 
-### Sau bài này, bạn sẽ:
+### Learning outcome:
 - ✅ **Hiểu** được [khái niệm cốt lõi A] là gì và tại sao nó tồn tại
 - ✅ **Giải thích** được [khái niệm B] bằng ngôn ngữ đơn giản cho người khác
 - ✅ **Tự tay** làm được [task thực hành C] từ đầu
 - ✅ **Phân biệt** được khi nào dùng [X] và khi nào không nên dùng [X]
 
-### Yêu cầu đầu vào (Prerequisites):
-- 🔹 Biết cơ bản về [kiến thức A]
-- 🔹 Đã từng [hành động B] ít nhất một lần
 ```
 
 ### Quy tắc viết Learning Outcomes
 - Dùng **động từ hành động** (theo Bloom's Taxonomy): *hiểu, giải thích, tự tay làm, phân biệt, áp dụng, thiết kế*
 - **Tối đa 4-5 outcomes** — nhiều hơn sẽ gây choáng ngợp
 - Outcomes phải **đo lường được** — tránh viết mơ hồ như "hiểu sâu về X"
+
+### Template Thuật ngữ (Glossary)
+
+**Bắt buộc nếu bài viết có >3 thuật ngữ chuyên ngành.** Đặt ngay sau Agenda để trang bị trước cho người học về từ vựng trong bài viết.
+
+```markdown
+## 📖 Giải nghĩa thuật ngữ
+
+| Thuật ngữ | Giải thích nhanh |
+| :--- | :--- |
+| **Term A** | Nghĩa tiếng Việt + Giải thích chi tiết. |
+| **Term B** | Nghĩa tiếng Việt + Giải thích chi tiết. |
+```
 
 ---
 
@@ -51,15 +61,13 @@ flowchart LR
     style D fill:#96ceb4,color:#fff
 ```
 
-### 🔴 WHY — Tại sao tôi phải học cái này?
-**Mục tiêu:** Nêu bật vấn đề kỹ thuật cốt lõi và giá trị giải quyết nội tại.
+### 🔴 WHY — Vấn đề kỹ thuật
+**Mục tiêu:** Nêu bật bài toán cốt lõi. Tài liệu chuyên nghiệp không dùng câu hỏi tu từ hay dẫn dắt cảm xúc.
 
-Đi thẳng vào **Problem Statement** (Vấn đề kỹ thuật) và **Solution** (Công nghệ này giải quyết nó như thế nào) một cách ngắn gọn, súc tích.
-
-**Phải bao gồm:**
-- **Problem Statement:** Nêu định dạng cấu trúc vấn đề bằng bullet points trực tiếp.
-- **Solution:** Giá trị cốt lõi / Cách thức khái niệm/công nghệ này mang lại để xử lý bài toán trên.
-- Tránh lối dẫn dắt kể chuyện dài dòng ("Bạn đã bao giờ...").
+**Quy tắc viết:**
+- **Problem Statement:** Liệt kê các nỗi đau (pain points) kỹ thuật dưới dạng số thứ tự hoặc bullet points.
+- **Solution:** Trình bày ngắn gọn cách công nghệ này giải quyết vấn đề.
+- **CẤM:** Không dùng "Bạn đã bao giờ...", "Chắc hẳn bạn đang...". Đi thẳng vào: "Thực trạng kỹ thuật hiện nay..." hoặc "Vấn đề phát sinh khi..."
 
 **Ví dụ:**
 ```markdown
@@ -83,8 +91,8 @@ Docker cung cấp nền tảng **containerization**, giúp định nghĩa và đ
 **Phải bao gồm:**
 1. **Định nghĩa kỹ thuật:** Đưa ra khái niệm chính xác, súc tích ngay từ đầu.
 2. **Trực quan hóa (Visual First):** LUÔN sử dụng sơ đồ Mermaid (Architecture/Flow) để minh họa cơ chế hoạt động, thay cho lời văn thuyết minh.
-3. **Giải thích thuật ngữ:** Giữ nguyên tiếng Việt/tiếng Anh, giải thích nhanh trong ngoặc đơn hoặc liệt kê gọn gàng.
-*(Lưu ý: Hạn chế tối đa việc lạm dụng ẩn dụ. Chỉ dùng 1-2 câu "ví như" nếu concept thực sự quá trừu tượng và khó mường tượng).*
+3. **Definition Anatomy (Giải phẫu định nghĩa):** Sau khi đưa ra định nghĩa chính, hãy thực hiện "mổ xẻ" từng từ khóa quan trọng để người học hiểu rõ bản chất cấu thành thay vì chỉ dịch nghĩa đơn thuần.
+*(Lưu ý: Hạn chế tối đa việc lạm dụng ẩn dụ. Chỉ dùng 1-2 câu "ví như" nếu concept thực sự quá trừu tượng).*
 
 **Ví dụ:**
 ```markdown
@@ -139,57 +147,16 @@ EXPOSE 3000
 
 CMD ["node", "server.js"]
 ```
-```
-
----
-
-### 🟡 WHAT IF — Chuyện gì xảy ra nếu...?
-**Mục tiêu:** Mở rộng tư duy, kích thích khám phá và ứng dụng thực tế.
-
-Tương đương bước **Usecase + Pitfalls** trong quy trình cũ. Dành cho người học thích *khám phá và tư duy phản biện*.
-
-**Phải bao gồm:**
-- **Khi nào DÙNG vs KHÔNG DÙNG** — Trade-off rõ ràng
-- **Common Pitfalls (Bẫy hay gặp)** — Lỗi điển hình mà Junior hay mắc
-- **"What if tôi không dùng X?"** — Phương án thay thế
-- **Ví dụ thực tế** — Công ty nào dùng, bài toán nào phù hợp
-
-**Ví dụ:**
-```markdown
-## 🚀 Docker — Khi nào dùng, khi nào không?
-
-| ✅ NÊN dùng | ❌ KHÔNG nên dùng |
-|-------------|------------------|
-| Team > 2 người, cần môi trường nhất quán | Script chạy 1 lần, không cần isolate |
-| Microservices với nhiều services | Ứng dụng cần access trực tiếp phần cứng |
-| CI/CD pipeline | Prototype cá nhân đơn giản |
-
-### ⚠️ Pitfalls hay gặp
-
-**1. Chạy process với quyền root trong container**
-Đây là lỗ hổng bảo mật nghiêm trọng. Luôn thêm `USER node` trước `CMD`.
-
-**2. Không dùng `.dockerignore`**
-Sẽ copy cả `node_modules` (hàng GB) vào image → build chậm kinh khủng.
-```
 
 ---
 
 ## Phần 3: Kết thúc bài — Câu hỏi thảo luận
 ** Thường là câu hỏi sâu sắc, được đúc rút và trả lời sau khi đã hiểu rõ các khái niệm trong bài
+** Đưa các Pitfalls thành các câu hỏi thảo luận mở
+** Dẫn chứng các usecase hoặc best practice đã thành công trên thực tế (có dẫn chứng nguồn)
 ---
 
-## Phần 4: Phân loại bài viết
-
-| Loại | Mục tiêu | Khi nào dùng |
-|------|----------|--------------|
-| **Concept Explained** | Giải thích khái niệm | "Docker là gì?", "OAuth hoạt động thế nào?" |
-| **Tutorial / Guide** | Hướng dẫn làm | "Build API với Go", "Setup CI/CD" |
-| **Architecture Review** | So sánh/Phân tích | "Microservices vs Monolith", "Chọn database" |
-
----
-
-## Phần 5: Quy tắc Code & Văn phong
+## Phần 4: Quy tắc Code & Văn phong
 
 ### Quy tắc Code
 
@@ -220,78 +187,30 @@ func main() {
 
 ### Văn phong bắt buộc
 
-- **Direct & Visual First:** Đi thẳng vào định nghĩa kỹ thuật, tận dụng tối đa sơ đồ (Mermaid) minh họa kiến trúc thay cho văn xuôi giải thích dài dòng.
+- **Direct & Visual First:** Sử dụng tiếng anh đơn giản, dễ hiểu. Đi thẳng vào định nghĩa kỹ thuật, tận dụng tối đa sơ đồ (Mermaid) minh họa kiến trúc thay cho văn xuôi giải thích dài dòng.
 - **Bullet Points:** Ưu tiên gạch đầu dòng ngắn gọn để trình bày ý tứ thay vì viết đoạn văn (paragraph) quá tràng giang đại hải.
-- **Giải thích thuật ngữ:** Giữ nguyên tiếng Anh, giải thích ngay lần đầu xuất hiện ngắn gọn.
-- **Phân vùng Emoji vs. Admonition** (xem chi tiết ở Phần 6 bên dưới).
-- **Trade-off rõ ràng:** Luôn chỉ ra đánh đổi của giải pháp. Thay vì tốn thời gian chứng minh sự hoàn hảo tuyệt đối công nghệ, hãy đưa góc nhìn đa chiều.
-
----
-
-## Phần 6: Quy tắc Formatting Chuyên Nghiệp — Emoji vs. Admonition
-
-Đây là điểm phân biệt **bài blog cá nhân** và **bài nghiên cứu kỹ thuật**. Emoji trong heading gây cảm giác thiếu học thuật; Admonition của Docusaurus mang lại cấu trúc rõ ràng và tính nhất quán cao hơn.
-
-### Nguyên tắc phân vùng
-
-| Vị trí | Dùng Emoji | Dùng Admonition | Lý do |
-|--------|:-----------:|:---------------:|-------|
-| **Heading `##`, `###`** | ❌ Không | — | Emoji trong heading làm giảm tính học thuật |
-| **Callout quan trọng** | ❌ Không | ✅ `:::note`, `:::tip`, `:::warning`, `:::danger` | Admonition có màu sắc, icon, và semantic rõ hơn |
-| **Bảng so sánh** | ✅ `✅` `❌` | — | Ký hiệu ngữ nghĩa ngắn gọn, phù hợp trong cell |
-| **Inline cảnh báo** | ✅ `⚠️` trước text | — | Chỉ 1 emoji, không lạm dụng |
-| **Mermaid node label** | ✅ Giữ nguyên | — | Tăng khả năng đọc của diagram |
-
-### Bộ Admonition chuẩn cho bài kỹ thuật
-
-```markdown
-:::note Định nghĩa / Nguyên lý nền
-Thông tin bối cảnh hoặc lý thuyết cần nắm trước.
-:::
-
-:::tip Trade-off / Best Practice
-Gợi ý thực tiễn, lời khuyên tối ưu hoá.
-:::
-
-:::warning Cảnh báo kỹ thuật
-Gotcha, pitfall hay gặp, hành vi không mong đợi.
-:::
-
-:::danger Lỗi nghiêm trọng / Anti-pattern
-Vi phạm bảo mật, dữ liệu không nhất quán, không bao giờ làm thế này.
-:::
-
-:::info Nguồn gốc / Lịch sử
-Paper, RFC, lý do ra đời của công nghệ.
-:::
-```
-
-### Ví dụ — Trước và Sau
-
-```markdown
-# ❌ Trước (Blog style — thiếu chuyên nghiệp)
-### 🌟 Nâng cấp: AI Agents
-### ✅ Trade-off
-⚠️ Lưu ý: Kỹ thuật này chỉ hiệu quả với model lớn.
-
-# ✅ Sau (Research style)
-### Nâng cấp: AI Agents
-### Phân tích Trade-off
-
-:::warning Giới hạn kỹ thuật
-Kỹ thuật này chỉ hiệu quả với model từ 70B parameters trở lên.
-:::
-```
+- **Chiến lược thuật ngữ:** 
+    1. **Mapping:** Liệt kê giải nghĩa nhanh ở đầu bài viết (sau Agenda).
+    2. **Anatomy:** "Giải phẫu" bản chất kỹ thuật của từ khóa ở phần WHAT.
+    3. **Consistency:** Giữ nguyên thuật ngữ tiếng Anh khi nhắc lại trong bài viết.
+- **Ưu tiên hình ảnh và sơ đồ** để minh họa kiến trúc và luồng hoạt động thay vì văn xuôi giải thích dài dòng.
+- **Quy tắc Heading & Emoji:**
+    1. **Tuyệt đối KHÔNG dùng emoji** trong toàn bộ bài viết (kể cả trong heading, list hay callout).
+    2. **Đánh số Heading:** Sử dụng hệ thống số thứ tự (1., 1.1., 1.2., 2., ...) cho các mục để tăng tính học thuật và dễ trích dẫn.
+- **Xóa dấu vết AI (AI-free Signature):**
+    1. **Cấm từ ngữ sáo rỗng:** "Tuyệt vời", "mạnh mẽ", "đáng kinh ngạc", "thú vị", "hãy cùng tìm hiểu", "trong bài viết này".
+    2. **Cấm kiểu kết bài AI:** Không dùng "Tóm lại là...", "Hi vọng bài viết này giúp ích...", "Chúc bạn học tốt". Kết bài bằng bảng so sánh, Discussion Questions hoặc References.
+    3. **Tư duy phản biện:** Luôn trình bày các giới hạn (limitations) và đánh đổi (trade-offs) thay vì chỉ khen ngợi công nghệ.
 
 ---
 
 ## Checklist trước khi xuất bài
 
-- [ ] Bài viết có đi thẳng vào **Problem Statement** & **Solution** (trọng tâm) thay vì kể chuyện dài dòng ở phần **WHY** không?
-- [ ] Phần **WHAT** có định nghĩa kỹ thuật chuẩn xác và sơ đồ trực quan (Mermaid) minh họa thay cho văn xuôi dày đặc không?
-- [ ] Các đoạn code ví dụ (**HOW**) đã được lược bỏ các boilerplate thừa, giữ mức tinh gọn, đi thẳng vào cốt lõi logic lập trình chưa?
-- [ ] Tham số và tính năng đánh đổi trong **WHAT IF** có liệt kê rõ ràng không?
-- [ ] Giọng văn có tuân thủ cấu trúc gọn gàng, chia bullet point dễ theo dõi?
-- [ ] **Emoji không xuất hiện trong heading `##`, `###`** — dùng Admonition thay thế?
-- [ ] **Callout quan trọng dùng Admonition** (`:::note`, `:::tip`, `:::warning`, `:::danger`) thay vì inline emoji?
-- [ ] Mermaid syntax đã có sự kiểm duyệt của skill `mermaid-expert` khi thiết kế?
+- [ ] Bài viết đã loại bỏ hoàn toàn **Emoji** chưa?
+- [ ] Các Heading đã được **đánh số thứ tự** (1., 1.1, ...) chưa?
+- [ ] Có xuất hiện các **cụm từ sáo rỗng** của AI (ví dụ: "Trong bài viết này chúng ta sẽ...") không? (Nếu có -> Xóa).
+- [ ] Phần **WHY** có đi thẳng vào thực trạng kỹ thuật, bỏ qua các câu hỏi tu từ dẫn dắt không?
+- [ ] Đã có bảng **Giải nghĩa thuật ngữ** ngay sau Agenda chưa?
+- [ ] Phần **WHAT** đã thực hiện **Definition Anatomy** và có sơ đồ Mermaid chưa?
+- [ ] Phần kết bài có bị rơi vào kiểu "Tổng kết/Chào tạm biệt" của AI không?
+- [ ] Mermaid syntax đã được kiểm duyệt bởi `mermaid-expert`?
