@@ -1,0 +1,233 @@
+Azure AI Fundamentals - Training Schedule,,,,,,,,
+Training Unit/Chapter,,Sessions,Content,Learning Objectives,Delivery Type,Duration (mins),Training Format,"Training Materials / Logistics & General Notes
+(Required, For Reference, etc.)"
+,"Workshop #0: Course Introduction
+",1,"- Introduction to the course content
+- Introduction to learning materials and resources
+- Guidance on learning methods and study approach
+- Overview of the learning roadmap
+- Overview of the AI-900 certification exam",H5AI,Seminar/Workshop,30.00,Virtual training,Slide: 0_Course_Introduction
+,Overview of AI concepts,1,Overview of AI concepts,K1AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/
+,"Workshop #1: Introduction to AI
+",1,"- Define Artificial Intelligence (AI) and its importance
+- Distinguish between AI, Machine Learning (ML), and Deep Learning (DL)
+- Identify common AI workloads and real-world use cases
+- Recognize the impact and potential of AI in business and society",K1AI,Seminar/Workshop,45.00,Virtual training,Slide: 1_Introduction_to_AI
+,"Workshop #1: Introduction to AI
+",1,"- Define Artificial Intelligence (AI) and its importance
+- Distinguish between AI, Machine Learning (ML), and Deep Learning (DL)
+- Identify common AI workloads and real-world use cases
+- Recognize the impact and potential of AI in business and society",K1AI,Guides/Review,45.00,Virtual training,Slide: 1_Introduction_to_AI
+,Sefl-study: Introduction to AI,1,Sefl-study: Introduction to AI,K1AI,Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Get started with AI in Microsoft Foundry,2,Get started with AI in Microsoft Foundry,K1AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-ai-in-foundry/
+,Lab: Get started with AI in Microsoft Foundry,2,Get started with AI in Microsoft Foundry,H1AI,Assignment/Lab,60.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-ai-in-foundry/
+,Workshop #2: Azure AI Fundamentals,2,"- Identify and describe the main Azure AI services and their use cases
+- Understand how to choose the right AI service for different business scenarios",K1AI,Seminar/Workshop,60.00,Virtual training,Slide: 2_Azure_AI_Fundamentals
+,Workshop #2: Azure AI Fundamentals,2,"- Identify and describe the main Azure AI services and their use cases
+- Understand how to choose the right AI service for different business scenarios",K1AI,Guides/Review,60.00,Virtual training,Slide: 2_Azure_AI_Fundamentals
+,Sefl-study: Azure AI Fundamentals,2,Sefl-study: Azure AI Fundamentals,H1AI,Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Introduction to machine learning concepts,3,Introduction to machine learning concepts,K1AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/fundamentals-machine-learning/
+,Workshop #3: Machine Learning Fundamentals,3,"- Define what Machine Learning is and why it matters
+- Differentiate supervised, unsupervised, and other learning types
+- Identify common machine learning problem types and real-world examples
+- Explain the machine learning lifecycle and best practices
+ - See how these ML concepts fit into the overall Azure AI Fundamentals (AI-900) exam scope",K2AI,Seminar/Workshop,60.00,Virtual training,Slide: 3_Machine_Learning_Fundamentals
+,Workshop #3: Machine Learning Fundamentals,3,"- Define what Machine Learning is and why it matters
+- Differentiate supervised, unsupervised, and other learning types
+- Identify common machine learning problem types and real-world examples
+- Explain the machine learning lifecycle and best practices
+ - See how these ML concepts fit into the overall Azure AI Fundamentals (AI-900) exam scope",K2AI,Guides/Review,60.00,Virtual training,Slide: 3_Machine_Learning_Fundamentals
+,Self-study: Machine Learning,3,Self-study: Machine Learning,"H2AI, H3AI",Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Get started with machine learning in Azure,4,Get started with machine learning in Azure,K2AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/design-machine-learning-model-training-solution/
+,Workshop #4: Azure Machine Learning,4,"- Explain what Azure Machine Learning is and its main use cases
+- Describe key features and benefits of the service
+- Recognize when to use custom ML vs prebuilt AI
+- Understand how Azure ML supports responsible, secure, and collaborative ML",K3AI,Seminar/Workshop,60.00,Virtual training,Slide: 4_Azure_Machine_Learning_Fundamentals
+,Workshop #4: Azure Machine Learning,4,"- Explain what Azure Machine Learning is and its main use cases
+- Describe key features and benefits of the service
+- Recognize when to use custom ML vs prebuilt AI
+- Understand how Azure ML supports responsible, secure, and collaborative ML",K3AI,Guides/Review,60.00,Virtual training,Slide: 4_Azure_Machine_Learning_Fundamentals
+,Self-study: Azure Machine Learning,4,Self-study: Azure Machine Learning,"H2AI, H3AI",Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Lab: Azure Machine Learning,4,Lab: Azure Machine Learning,H3AI,Assignment/Lab,60.00,Online,https://learn.microsoft.com/en-gb/training/modules/design-machine-learning-model-training-solution/
+,Introduction to text analysis concepts,5,Introduction to text analysis concepts,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/introduction-language/
+,Get started with natural language processing in Microsoft Foundry,5,Get started with natural language processing in Microsoft Foundry,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-language-azure/
+,Introduction to AI speech concepts,5,Introduction to AI speech concepts,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/introduction-ai-speech/
+,Get started with speech in Microsoft Foundry,5,Get started with speech in Microsoft Foundry,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/recognize-synthesize-speech/
+,Lab: Natural Language Processing,5,Lab: Natural Language Processing,H3AI,Assignment/Lab,60.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-language-azure/
+,Workshop #5: Natural Language Processing,5,"- Understand core NLP concepts and their importance
+- Identify common language and speech workloads
+- Recognize Azure AI services for Language and Speech
+- Distinguish when to use prebuilt AI services vs custom ML
+- Understand real-world use cases and responsible AI considerations for NLP",K3AI,Seminar/Workshop,60.00,Virtual training,Slide: 5_Natural_Language_Processing
+,Workshop #5: Natural Language Processing,5,"- Understand core NLP concepts and their importance
+- Identify common language and speech workloads
+- Recognize Azure AI services for Language and Speech
+- Distinguish when to use prebuilt AI services vs custom ML
+- Understand real-world use cases and responsible AI considerations for NLP",K3AI,Guides/Review,60.00,Virtual training,Slide: 5_Natural_Language_Processing
+,Self-study: Natual Language Processing,5,Self-study: Natual Language Processing,"H2AI, H3AI",Assignment/Lab,60.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Lab: Speech processing,5,Lab: Speech processing,H3AI,Assignment/Lab,60.00,Online,https://learn.microsoft.com/en-gb/training/modules/introduction-ai-speech/
+,Introduction to computer vision concepts,6,Introduction to computer vision concepts,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/introduction-computer-vision/
+,Get started with computer vision in Microsoft Foundry,6,Get started with computer vision in Microsoft Foundry,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-computer-vision-azure/
+,Lab: Computer Vision in Microsoft Foundry,6,Lab: Computer Vision in Microsoft Foundry,H3AI,Assignment/Lab,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-computer-vision-azure/
+,Introduction to AI-powered information extraction concepts,6,Introduction to AI-powered information extraction concepts,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/introduction-information-extraction/
+,Get started with AI-powered information extraction in Microsoft Foundry,6,Get started with AI-powered information extraction in Microsoft Foundry,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/ai-information-extraction/
+,Lab: AI-powered information extraction in Microsoft Foundry,6,Lab: AI-powered information extraction in Microsoft Foundry,H3AI,Assignment/Lab,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/ai-information-extraction/
+,Workshop #6: Computer Vision,6,"- Understand core Computer Vision concepts and their importance
+- Identify common vision workloads and tasks
+- Recognize Azure AI services for Vision
+- Distinguish when to use prebuilt AI services vs custom ML
+- Understand real-world use cases and responsible AI considerations for vision",K3AI,Seminar/Workshop,60.00,Virtual training,Slide: 6_Computer_Vision
+,Workshop #6: Computer Vision,6,"- Understand core Computer Vision concepts and their importance
+- Identify common vision workloads and tasks
+- Recognize Azure AI services for Vision
+- Distinguish when to use prebuilt AI services vs custom ML
+- Understand real-world use cases and responsible AI considerations for vision",K3AI,Guides/Review,60.00,Virtual training,Slide: 6_Computer_Vision
+,Self-study: Computer Vision,6,Self-study: Computer Vision,"H2AI, H3AI",Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Introduction to generative AI and agents,7,Introduction to generative AI and agents,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/fundamentals-generative-ai/
+,Get started with generative AI in Microsoft Foundry,7,Get started with generative AI in Microsoft Foundry,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-generative-ai-azure/
+,Lab: Get started with generative AI in Microsoft Foundry,7,Get started with generative AI in Microsoft Foundry,H3AI,Assignment/Lab,60.00,Online,https://learn.microsoft.com/en-gb/training/modules/get-started-generative-ai-azure/
+,Workshop #7: Generative AI,7,"- Understand the concept of Generative AI and its impact
+- Identify common Generative AI use cases
+- Recognize Azure OpenAI Service capabilities
+- Understand responsible AI and limitations of generative models
+- Apply best practices for using generative AI in business",K3AI,Seminar/Workshop,60.00,Virtual training,Slide: 7_Generative_AI
+,Workshop #7: Generative AI,7,"- Understand the concept of Generative AI and its impact
+- Identify common Generative AI use cases
+- Recognize Azure OpenAI Service capabilities
+- Understand responsible AI and limitations of generative models
+- Apply best practices for using generative AI in business",K3AI,Guides/Review,60.00,Virtual training,Slide: 7_Generative_AI
+,Self-study: Generative AI,7,Self-study: Generative AI,"H2AI, H3AI",Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Explore responsible AI,8,Explore responsible AI,K3AI,Concept/Lecture,45.00,Online,https://learn.microsoft.com/en-gb/training/modules/responsible-ai/
+,Workshop #8: Responsible AI,8,"- Understand the concept and importance of Responsible AI
+- Describe Microsoft’s Responsible AI principles
+- Recognize real-world examples for each principle
+- Apply Responsible AI practices in AI projects
+- Identify Azure tools and resources for implementing Responsible AI",K3AI,Seminar/Workshop,60.00,Virtual training,Slide: 8_Responsible_AI
+,Workshop #8: Responsible AI,8,"- Understand the concept and importance of Responsible AI
+- Describe Microsoft’s Responsible AI principles
+- Recognize real-world examples for each principle
+- Apply Responsible AI practices in AI projects
+- Identify Azure tools and resources for implementing Responsible AI",H4AI,Guides/Review,60.00,Virtual training,Slide: 8_Responsible_AI
+,Self-study: Responsible AI,8,Self-study: Responsible AI,H4AI,Assignment/Lab,120.00,Offline,"1. Tài liệu chính thức từ Microsoft:
+- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+- Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com
+- Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+2. Link khóa học online:
+- Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+- Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+- Youtube: search với từ khóa ""AI-900""
+ 
+3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta
+- Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML)
+- Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể
+- Notebooks: File tóm tắt sau mỗi workshop
+- Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật"
+,Final Assessment,8,Final Assessment,H5AI,Final Mock,45.00,Online,https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+,,,,,,,,
+,,,,,Concept/Lecture,675.00,23%,
+,,,,,Assignment/Lab,1290.00,44%,
+,,,,,Guides/Review,465.00,16%,
+,,,,,Final Audit,0.00,0%,
+,,,,,Final Mock,45.00,2%,
+,,,,,Seminar/Workshop,465.00,16%,
+,,,,,Class Meeting,0.00,0%,
+,,,,,Total,2940.0,100%,

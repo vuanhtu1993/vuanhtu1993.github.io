@@ -12,7 +12,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "aha-mind:blog": "tsx scripts/aha-mind/pipeline.ts"
+    "aha-mind:blog": "tsx scripts/aha-mind/blog_agent/pipeline.ts",
+    "aha-mind:syllabus": "tsx scripts/aha-mind/syllabus_agent/pipeline.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
@@ -21,6 +22,7 @@
     "@docusaurus/preset-classic": "^3.7.0",
     "@docusaurus/theme-mermaid": "^3.9.2",
     "@langchain/core": "^1.1.40",
+    "@langchain/google-genai": "^2.1.30",
     "@langchain/langgraph": "^1.2.9",
     "@langchain/openai": "^1.4.4",
     "@mdx-js/react": "^3.1.0",
@@ -28,6 +30,7 @@
     "@napi-rs/canvas": "^0.1.100",
     "canvas": "^3.2.3",
     "clsx": "^2.1.1",
+    "csv-stringify": "^6.7.0",
     "dotenv": "^17.4.2",
     "jsdom": "^29.0.2",
     "pdf-parse": "^1.1.1",
@@ -40,6 +43,7 @@
     "styled-components": "^6.1.0",
     "turndown": "^7.2.4",
     "typed.js": "^2.0.15",
+    "xlsx": "^0.18.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {

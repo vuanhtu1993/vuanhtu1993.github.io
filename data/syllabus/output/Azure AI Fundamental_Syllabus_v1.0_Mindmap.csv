@@ -1,0 +1,448 @@
+Azure AI Fundamentals
+	Topic Code: AI-900
+	Version: 1.0
+	Technical Group: AI
+	Training Audience
+		- AI beginners (no programming experience required)
+		- IT Professionals transitioning to AI field
+		- Business Analysts, Product Managers who need to understand AI
+		- Developers, Data Scientists seeking foundational certification
+		- Anyone wanting to understand AI and prepare for AI-900 certification
+	Course Objectives: Provide foundational knowledge of Artificial Intelligence (AI) and Azure AI services, preparing students for the Microsoft Certified: Azure AI Fundamentals (AI-900) certification exam.
+	Detailed Objectives
+		In details, after completing the course, trainees will:
+		1. Fundamental AI Concepts & Azure AI Overview
+			- Define and distinguish AI, Machine Learning, Deep Learning
+			- Understand AI workload types: Computer Vision, NLP, Conversational AI, Generative AI
+			- Master Microsoft's 6 Responsible AI principles
+			- Identify real-world AI applications in enterprise
+			- Distinguish Azure AI Services categories and use cases
+			- Choose appropriate services for scenarios
+			- Deploy and manage AI services on Azure
+		2. Machine Learning Fundamentals
+			- Distinguish Supervised, Unsupervised, and Reinforcement Learning
+			- Understand ML lifecycle: Data → Training → Evaluation → Deployment
+			- Apply model evaluation metrics: Accuracy, Precision, Recall, F1, RMSE, R²
+			- Identify and address overfitting, underfitting
+		3. Computer Vision, NLP, Generative AI Workloads
+			- Define and distinguish Computer Vision, NLP workloads
+			- Choose appropriate solutions for real-world problems
+			- Implement Computer Vision tasks using Azure Vision Services
+			- Implement NLP tasks using Azure Language Services
+		4. Responsible AI Principles
+			- Understand importance of Responsible AI
+			- Apply Microsoft's 6 Responsible AI principles in projects
+			- Use Azure tools for fairness, interpretability, transparency
+			- Identify and mitigate bias in AI models
+			- Ensure privacy, security, and accountability in AI solutions
+		5. Certification Readiness
+			- Master 100% of AI-900 exam content
+			- Familiarize with exam question formats
+			- Confidently achieve score ≥700/1000 (passing score)
+	Knowledge & Skill Objectives
+		Understand fundamental AI concepts (K1AI): Demonstrate the ability to explain core Artificial Intelligence concepts, key terminologies, major application areas, and the role of AI in digital transformation initiatives.
+		Understand fundamental Machine Learning concepts (K2AI): Demonstrate the ability to explain essential Machine Learning paradigms, learning workflows, data requirements, and commonly used evaluation metrics.
+		Understand Azure AI services and capabilities (K3AI): Identify and describe core Azure AI services, their primary functions, and typical enterprise use cases.
+		Select appropriate Machine Learning approaches (H1AI): Analyze problem statements and select suitable Machine Learning models aligned with business and technical requirements.
+		Select appropriate Azure AI services (H2AI): Evaluate AI scenarios and recommend appropriate Azure AI services to design effective and scalable solutions.
+		Make informed AI solution decisions (H3AI): Assess real-world situations and justify the selection of Azure AI services based on constraints, risks, and expected outcomes.
+		Apply Responsible AI principles (H4AI): Integrate Responsible AI principles (fairness, reliability, security, privacy, transparency, accountability) into the design and deployment of AI solutions.
+		Achieve AI-900 certification readiness (H5AI): Demonstrate readiness to sit for and successfully obtain the Microsoft Azure AI Fundamentals (AI-900) certification.
+	Topic Outline
+		1. Introduction to AI
+		2. Azure AI Fundamentals
+		3. Machine Learning Fundamentals
+		4. Azure Machine Learning Fundamentals
+		5. Natural Language Processing
+		6. Computer Vision
+		7. Generative AI
+		8. Responsible AI
+	Schedule
+		Workshop #0: Course Introduction
+			Content: - Introduction to the course content; - Introduction to learning materials and resources; - Guidance on learning methods and study approach; - Overview of the learning roadmap; - Overview of the AI-900 certification exam
+			Learning Objectives: H5AI
+			Delivery Type: Seminar/Workshop
+			Duration (mins): 30.00
+			Training Format: Virtual training
+			Training Materials / Logistics & General Notes: Slide: 0_Course_Introduction
+		1. Introduction to AI
+			Overview of AI concepts
+				Content: Overview of AI concepts
+				Learning Objectives: K1AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/
+			Workshop #1: Introduction to AI (Seminar/Workshop)
+				Content: - Define Artificial Intelligence (AI) and its importance; - Distinguish between AI, Machine Learning (ML), and Deep Learning (DL); - Identify common AI workloads and real-world use cases; - Recognize the impact and potential of AI in business and society
+				Learning Objectives: K1AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 45.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 1_Introduction_to_AI
+			Workshop #1: Introduction to AI (Guides/Review)
+				Content: - Define Artificial Intelligence (AI) and its importance; - Distinguish between AI, Machine Learning (ML), and Deep Learning (DL); - Identify common AI workloads and real-world use cases; - Recognize the impact and potential of AI in business and society
+				Learning Objectives: K1AI
+				Delivery Type: Guides/Review
+				Duration (mins): 45.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 1_Introduction_to_AI
+			Sefl-study: Introduction to AI
+				Content: Sefl-study: Introduction to AI
+				Learning Objectives: K1AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+		2. Azure AI Fundamentals
+			Get started with AI in Microsoft Foundry
+				Content: Get started with AI in Microsoft Foundry
+				Learning Objectives: K1AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-ai-in-foundry/
+			Lab: Get started with AI in Microsoft Foundry
+				Content: Get started with AI in Microsoft Foundry
+				Learning Objectives: H1AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 60.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-ai-in-foundry/
+			Workshop #2: Azure AI Fundamentals (Seminar/Workshop)
+				Content: - Identify and describe the main Azure AI services and their use cases; - Understand how to choose the right AI service for different business scenarios
+				Learning Objectives: K1AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 2_Azure_AI_Fundamentals
+			Workshop #2: Azure AI Fundamentals (Guides/Review)
+				Content: - Identify and describe the main Azure AI services and their use cases; - Understand how to choose the right AI service for different business scenarios
+				Learning Objectives: K1AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 2_Azure_AI_Fundamentals
+			Sefl-study: Azure AI Fundamentals
+				Content: Sefl-study: Azure AI Fundamentals
+				Learning Objectives: H1AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+		3. Machine Learning Fundamentals
+			Introduction to machine learning concepts
+				Content: Introduction to machine learning concepts
+				Learning Objectives: K1AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/fundamentals-machine-learning/
+			Workshop #3: Machine Learning Fundamentals (Seminar/Workshop)
+				Content: - Define what Machine Learning is and why it matters; - Differentiate supervised, unsupervised, and other learning types; - Identify common machine learning problem types and real-world examples; - Explain the machine learning lifecycle and best practices; - See how these ML concepts fit into the overall Azure AI Fundamentals (AI-900) exam scope
+				Learning Objectives: K2AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 3_Machine_Learning_Fundamentals
+			Workshop #3: Machine Learning Fundamentals (Guides/Review)
+				Content: - Define what Machine Learning is and why it matters; - Differentiate supervised, unsupervised, and other learning types; - Identify common machine learning problem types and real-world examples; - Explain the machine learning lifecycle and best practices; - See how these ML concepts fit into the overall Azure AI Fundamentals (AI-900) exam scope
+				Learning Objectives: K2AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 3_Machine_Learning_Fundamentals
+			Self-study: Machine Learning
+				Content: Self-study: Machine Learning
+				Learning Objectives: H2AI, H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+		4. Azure Machine Learning Fundamentals
+			Get started with machine learning in Azure
+				Content: Get started with machine learning in Azure
+				Learning Objectives: K2AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/design-machine-learning-model-training-solution/
+			Workshop #4: Azure Machine Learning (Seminar/Workshop)
+				Content: - Explain what Azure Machine Learning is and its main use cases; - Describe key features and benefits of the service; - Recognize when to use custom ML vs prebuilt AI; - Understand how Azure ML supports responsible, secure, and collaborative ML
+				Learning Objectives: K3AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 4_Azure_Machine_Learning_Fundamentals
+			Workshop #4: Azure Machine Learning (Guides/Review)
+				Content: - Explain what Azure Machine Learning is and its main use cases; - Describe key features and benefits of the service; - Recognize when to use custom ML vs prebuilt AI; - Understand how Azure ML supports responsible, secure, and collaborative ML
+				Learning Objectives: K3AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 4_Azure_Machine_Learning_Fundamentals
+			Self-study: Azure Machine Learning
+				Content: Self-study: Azure Machine Learning
+				Learning Objectives: H2AI, H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+			Lab: Azure Machine Learning
+				Content: Lab: Azure Machine Learning
+				Learning Objectives: H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 60.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/design-machine-learning-model-training-solution/
+		5. Natural Language Processing
+			Introduction to text analysis concepts
+				Content: Introduction to text analysis concepts
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/introduction-language/
+			Get started with natural language processing in Microsoft Foundry
+				Content: Get started with natural language processing in Microsoft Foundry
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-language-azure/
+			Introduction to AI speech concepts
+				Content: Introduction to AI speech concepts
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/introduction-ai-speech/
+			Get started with speech in Microsoft Foundry
+				Content: Get started with speech in Microsoft Foundry
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/recognize-synthesize-speech/
+			Lab: Natural Language Processing
+				Content: Lab: Natural Language Processing
+				Learning Objectives: H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 60.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-language-azure/
+			Workshop #5: Natural Language Processing (Seminar/Workshop)
+				Content: - Understand core NLP concepts and their importance; - Identify common language and speech workloads; - Recognize Azure AI services for Language and Speech; - Distinguish when to use prebuilt AI services vs custom ML; - Understand real-world use cases and responsible AI considerations for NLP
+				Learning Objectives: K3AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 5_Natural_Language_Processing
+			Workshop #5: Natural Language Processing (Guides/Review)
+				Content: - Understand core NLP concepts and their importance; - Identify common language and speech workloads; - Recognize Azure AI services for Language and Speech; - Distinguish when to use prebuilt AI services vs custom ML; - Understand real-world use cases and responsible AI considerations for NLP
+				Learning Objectives: K3AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 5_Natural_Language_Processing
+			Self-study: Natual Language Processing
+				Content: Self-study: Natual Language Processing
+				Learning Objectives: H2AI, H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 60.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+			Lab: Speech processing
+				Content: Lab: Speech processing
+				Learning Objectives: H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 60.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/introduction-ai-speech/
+		6. Computer Vision
+			Introduction to computer vision concepts
+				Content: Introduction to computer vision concepts
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/introduction-computer-vision/
+			Get started with computer vision in Microsoft Foundry
+				Content: Get started with computer vision in Microsoft Foundry
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-computer-vision-azure/
+			Lab: Computer Vision in Microsoft Foundry
+				Content: Lab: Computer Vision in Microsoft Foundry
+				Learning Objectives: H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-computer-vision-azure/
+			Introduction to AI-powered information extraction concepts
+				Content: Introduction to AI-powered information extraction concepts
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/introduction-information-extraction/
+			Get started with AI-powered information extraction in Microsoft Foundry
+				Content: Get started with AI-powered information extraction in Microsoft Foundry
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/ai-information-extraction/
+			Lab: AI-powered information extraction in Microsoft Foundry
+				Content: Lab: AI-powered information extraction in Microsoft Foundry
+				Learning Objectives: H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/ai-information-extraction/
+			Workshop #6: Computer Vision (Seminar/Workshop)
+				Content: - Understand core Computer Vision concepts and their importance; - Identify common vision workloads and tasks; - Recognize Azure AI services for Vision; - Distinguish when to use prebuilt AI services vs custom ML; - Understand real-world use cases and responsible AI considerations for vision
+				Learning Objectives: K3AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 6_Computer_Vision
+			Workshop #6: Computer Vision (Guides/Review)
+				Content: - Understand core Computer Vision concepts and their importance; - Identify common vision workloads and tasks; - Recognize Azure AI services for Vision; - Distinguish when to use prebuilt AI services vs custom ML; - Understand real-world use cases and responsible AI considerations for vision
+				Learning Objectives: K3AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 6_Computer_Vision
+			Self-study: Computer Vision
+				Content: Self-study: Computer Vision
+				Learning Objectives: H2AI, H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+		7. Generative AI
+			Introduction to generative AI and agents
+				Content: Introduction to generative AI and agents
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/fundamentals-generative-ai/
+			Get started with generative AI in Microsoft Foundry
+				Content: Get started with generative AI in Microsoft Foundry
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-generative-ai-azure/
+			Lab: Get started with generative AI in Microsoft Foundry
+				Content: Get started with generative AI in Microsoft Foundry
+				Learning Objectives: H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 60.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/get-started-generative-ai-azure/
+			Workshop #7: Generative AI (Seminar/Workshop)
+				Content: - Understand the concept of Generative AI and its impact; - Identify common Generative AI use cases; - Recognize Azure OpenAI Service capabilities; - Understand responsible AI and limitations of generative models; - Apply best practices for using generative AI in business
+				Learning Objectives: K3AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 7_Generative_AI
+			Workshop #7: Generative AI (Guides/Review)
+				Content: - Understand the concept of Generative AI and its impact; - Identify common Generative AI use cases; - Recognize Azure OpenAI Service capabilities; - Understand responsible AI and limitations of generative models; - Apply best practices for using generative AI in business
+				Learning Objectives: K3AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 7_Generative_AI
+			Self-study: Generative AI
+				Content: Self-study: Generative AI
+				Learning Objectives: H2AI, H3AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+		8. Responsible AI
+			Explore responsible AI
+				Content: Explore responsible AI
+				Learning Objectives: K3AI
+				Delivery Type: Concept/Lecture
+				Duration (mins): 45.00
+				Training Format: Online
+				Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-gb/training/modules/responsible-ai/
+			Workshop #8: Responsible AI (Seminar/Workshop)
+				Content: - Understand the concept and importance of Responsible AI; - Describe Microsoft’s Responsible AI principles; - Recognize real-world examples for each principle; - Apply Responsible AI practices in AI projects; - Identify Azure tools and resources for implementing Responsible AI
+				Learning Objectives: K3AI
+				Delivery Type: Seminar/Workshop
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 8_Responsible_AI
+			Workshop #8: Responsible AI (Guides/Review)
+				Content: - Understand the concept and importance of Responsible AI; - Describe Microsoft’s Responsible AI principles; - Recognize real-world examples for each principle; - Apply Responsible AI practices in AI projects; - Identify Azure tools and resources for implementing Responsible AI
+				Learning Objectives: H4AI
+				Delivery Type: Guides/Review
+				Duration (mins): 60.00
+				Training Format: Virtual training
+				Training Materials / Logistics & General Notes: Slide: 8_Responsible_AI
+			Self-study: Responsible AI
+				Content: Self-study: Responsible AI
+				Learning Objectives: H4AI
+				Delivery Type: Assignment/Lab
+				Duration (mins): 120.00
+				Training Format: Offline
+				Training Materials / Logistics & General Notes: 1. Tài liệu chính thức từ Microsoft: - Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/; - Azure Portal dùng để thực hành (cần chờ tài khoản từ IT cấp, hoặc tự tạo tài khoản cá nhân, sử dụng tài khoản sinh viên nếu có): https://portal.azure.com; - Link bài Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification; 2. Link khóa học online: - Linkedin (lý thuyết): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138; - Linkedin (thi thử): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138; - Youtube: search với từ khóa ""AI-900""; 3. Tài liệu nội bộ khóa học: https://fptsoftware362-my.sharepoint.com/:f:/r/personal/thaott29_fpt_com/Documents/Kh%C3%B3a%20h%E1%BB%8Dc%20Azure%20AI%20Fundamentals%20(AI-900)/T%C3%A0i%20li%E1%BB%87u%20kh%C3%B3a%20h%E1%BB%8Dc?csf=1&web=1&e=fPhsta; - Slides: Bản HTML (trong các buổi workshop) và bản PDF (xuất từ HTML); - Text books: eBook về các chủ đề có liên quan, dành cho bạn nào muốn tìm hiểu sâu cho từng vấn đề cụ thể; - Notebooks: File tóm tắt sau mỗi workshop; - Dumps: Bộ câu hỏi luyện tập tương tự đề thi thật
+		Final Assessment
+			Content: Final Assessment
+			Learning Objectives: H5AI
+			Delivery Type: Final Mock
+			Duration (mins): 45.00
+			Training Format: Online
+			Training Materials / Logistics & General Notes: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+	Time Allocation
+		Concept/Lecture: 23% (Concepts, theory, 8 sessions)
+		Assignment/Lab: 44% (Assignment, Lab)
+		Guides/Review: 16% (Quiz, assignment review; Assignment guides)
+		Seminar/Workshop: 16% (Seminar, Workshop)
+		Class Meeting: 0% (Daily class meeting)
+		Audit: 0% (Final quiz)
+		Review mock final: 2% (Review Mock Project)
+	Training Materials & Environments
+		Text book
+			1. Speech and Language Processing.pdf
+			2. Foundations of Statistical Natural Language Processing.pdf
+			3. Pattern Recognition and Machine Learning.pdf
+			4. Neural Network Methods in Natural Language Processing.pdf
+			5. Practical Natural Language Processing.pdf
+			6. AI_RMF_Playbook.pdf
+			7. Chip_Huyen_Designing_Machine_Learning_Systems_An_Iterative_Process.pdf
+			8. Dive into Deep Learning.pdf
+			9. Machine Learning Yearning-VN.pdf
+			10. Natural Language Processing with Python.pdf
+			11. Neural-Networks-Overview-365-Data-Science-Course Notes.pdf
+			12. storytelling-with-data-cole-nussbaumer-knaflic.pdf
+		References
+			- Microsoft Learn: https://learn.microsoft.com/training/paths/get-started-with-artificial-intelligence-on-azure/
+			- Azure Portal: https://portal.azure.com
+			- Practice Assessment for Exam AI-900: Microsoft Azure AI Fundamentals: https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/practice/assessment?assessment-type=practice&assessmentId=26&practice-assessment-type=certification
+			- Linkedin (theory): https://www.linkedin.com/learning/microsoft-azure-ai-fundamentals-ai-900-cert-prep-by-microsoft-press?u=441943138
+			- Linkedin (Practice Assessment): https://www.linkedin.com/learning/practice-exam-1-for-azure-ai-fundamentals-ai-900?u=441943138
+			- Linkedin (Practice Assessment): https://www.linkedin.com/learning/practice-exam-2-for-azure-ai-fundamentals-ai-900?u=441943138
+		Technical requirements: N/A
+	Assessment Scheme
+		Mini Test: 3 (30%)
+		Assignments: 1 (70%, Online practice assessment from Microsoft.)
+		Pass Criteria: 7
+	Training Delivery Principles
+		Trainees: TBD
+		Trainer: Trainer has strong knowledge of AI and Azure and holds the Azure AI Fundamentals certification.
+		Training
+			- Trainee do self-learning and do practice
+			- Trainee be required to complete online learning according to MOOC links provided
+			- Trainer supports answering questions, guiding exercises and review
+		Re-Test: 0
+		Waiver Criteria: Students pass the audit; Trainer Audit: rank B
+		Others: N/A
