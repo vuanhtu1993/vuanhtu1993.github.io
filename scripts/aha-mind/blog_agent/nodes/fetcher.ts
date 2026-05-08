@@ -10,12 +10,28 @@ import * as crypto from "crypto";
 const pdfParse = require("pdf-parse");
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
 import { createCanvas } from "@napi-rs/canvas";
+import * as dns from "node:dns";
+
+// Force IPv4 first to avoid IPv6 timeout issues with Cloudflare/Medium
+dns.setDefaultResultOrder("ipv4first");
 
 const STANDARD_FONT_DATA_URL = path.join(process.cwd(), "node_modules", "pdfjs-dist", "standard_fonts") + "/";
 
 const turndownService = new TurndownService({
   headingStyle: 'atx',
   codeBlockStyle: 'fenced'
+});
+
+// Đảm bảo Turndown không bỏ qua thẻ img
+turndownService.addRule('img', {
+  filter: 'img',
+  replacement: function (content, node: any) {
+    const src = node.getAttribute('src');
+    const alt = node.getAttribute('alt') || '';
+    const title = node.getAttribute('title') || '';
+    const titlePart = title ? ` "${title}"` : '';
+    return src ? `![${alt}](${src}${titlePart})` : '';
+  }
 });
 
 // ============================================================
@@ -60,7 +76,7 @@ const extractPdfImages = async (
   console.log("[Fetcher/PDF] Starting page rendering...");
 
   // pdfjs cần Uint8Array, không phải Buffer
-  const loadingTask = pdfjs.getDocument({ 
+  const loadingTask = pdfjs.getDocument({
     data: new Uint8Array(buffer),
     standardFontDataUrl: STANDARD_FONT_DATA_URL,
   });
@@ -137,7 +153,12 @@ const extractPdfTitle = (info: Record<string, any>, url: string): string => {
 const fetchPdfContent = async (url: string): Promise<Article | null> => {
   console.log(`[Fetcher/PDF] Downloading: ${url}`);
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept": "application/pdf,*/*;q=0.8"
+    }
+  });
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} when fetching PDF`);
   }
@@ -176,7 +197,7 @@ const fetchPdfContent = async (url: string): Promise<Article | null> => {
   // LLM sẽ thấy cả text và biết có ảnh đính kèm
   const imageSection = imagePaths.length > 0
     ? "\n\n---\n\n## 📸 Hình ảnh từ tài liệu\n\n" +
-      imagePaths.map((p, i) => `![Trang ${i + 1}](${p})`).join("\n\n")
+    imagePaths.map((p, i) => `![Trang ${i + 1}](${p})`).join("\n\n")
     : "";
 
   const fullContent = sanitizedText.trim() + imageSection;
@@ -224,8 +245,46 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
 
     // ── HTML BRANCH (logic gốc, không thay đổi) ─────────────
     console.log(`[Fetcher] Fetching exact article from ${state.articleUrl}`);
-    const response = await fetch(state.articleUrl);
-    const html = await response.text();
+
+    let response;
+    let html = "";
+    let isJinaFallback = false;
+
+    try {
+      response = await fetch(state.articleUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "Accept-Language": "en-US,en;q=0.5"
+        },
+        // @ts-ignore - undici/fetch supports signal
+        signal: AbortSignal.timeout(15000)
+      });
+
+      // Force Jina for Medium even if fetch succeeds, because direct fetch often returns incomplete content/paywall
+      if (state.articleUrl.includes("medium.com")) {
+        console.log("[Fetcher] Medium detected. Forcing Jina Reader for better extraction...");
+        throw new Error("Force Jina for Medium");
+      }
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      html = await response.text();
+    } catch (fetchError: any) {
+      console.warn(`[Fetcher] Direct fetch failed: ${fetchError.message}. Attempting Jina Reader fallback...`);
+
+      const jinaUrl = `https://r.jina.ai/${state.articleUrl}`;
+      const jinaResponse = await fetch(jinaUrl, {
+        headers: { "X-Return-Format": "html" } // Request HTML to keep pipeline compatibility
+      });
+
+      if (!jinaResponse.ok) {
+        throw new Error(`Both direct fetch and Jina fallback failed. (Jina: ${jinaResponse.status})`);
+      }
+
+      html = await jinaResponse.text();
+      isJinaFallback = true;
+      console.log("[Fetcher] Successfully fetched content via Jina Reader.");
+    }
 
     // Parse HTML with jsdom
     const doc = new JSDOM(html, { url: state.articleUrl });
@@ -240,6 +299,7 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
     // Phân tích nội dung đã được lọc để kiếm ảnh và download
     const contentDoc = new JSDOM(articleParsed.content || "", { url: state.articleUrl });
     const images = contentDoc.window.document.querySelectorAll("img");
+    console.log(`[Fetcher] Processing ${images.length} image tags in DOM...`);
 
     if (images.length > 0) {
       const outputDir = path.join(process.cwd(), "blog", "aha-mind", "assets");
@@ -247,14 +307,16 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
         fs.mkdirSync(outputDir, { recursive: true });
       }
 
-      console.log(`[Fetcher] Found ${images.length} images. Downloading to local...`);
       for (let i = 0; i < images.length; i++) {
         const img = images[i];
-        
+
         // Ưu tiên các attribue chuẩn của Lazyload (data-src, data-original) trước khi móc src
         let originalSrc = img.getAttribute("data-src") || img.getAttribute("data-original") || img.getAttribute("src") || img.getAttribute("srcset");
-        
-        if (!originalSrc) continue;
+
+        if (!originalSrc) {
+          console.warn(`[Fetcher] Image ${i} has no src/data-src, skipping.`);
+          continue;
+        }
 
         let parsedSrc = originalSrc;
         // Bóc URL đầu tiên nếu thẻ chứa cấu trúc srcset (phân tách bởi khoảng trắng)
@@ -272,14 +334,19 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
         try {
           // Resolve dạng tuyệt đối
           absoluteUrl = new URL(parsedSrc, state.articleUrl).href;
-          
+
           const imgResponse = await fetch(absoluteUrl);
           if (!imgResponse.ok) throw new Error(`HTTP ${imgResponse.status}`);
-          
+
           const arrayBuffer = await imgResponse.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
-          
-          if (buffer.length === 0) throw new Error("Empty image buffer");
+
+          if (buffer.length < 500) {
+            // Thường là icon hoặc ảnh lỗi (như trường hợp 990 bytes) -> Bỏ qua để đỡ rác
+            console.warn(`[Fetcher] Image ${i} too small (${buffer.length} bytes), skipping.`);
+            img.remove();
+            continue;
+          }
 
           // Xác định extension file
           const contentType = imgResponse.headers.get("content-type") || "";
@@ -288,17 +355,17 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
           else if (contentType.includes("gif")) ext = ".gif";
           else if (contentType.includes("webp")) ext = ".webp";
           else if (contentType.includes("svg")) ext = ".svg";
-          
+
           // Mã hoá tên file để chống trùng lặp
           const hash = crypto.createHash("md5").update(absoluteUrl).digest("hex").slice(0, 8);
           const fileName = `img-${hash}${ext}`;
           const filePath = path.join(outputDir, fileName);
-          
+
           fs.writeFileSync(filePath, buffer);
-          
+
           // Inject đường dẫn cục bộ ngược lại cho Docusaurus
           img.setAttribute("src", `./assets/${fileName}`);
-          
+
           // Dọn dẹp thuộc tính nhiễu
           img.removeAttribute("srcset");
           img.removeAttribute("data-src");
@@ -308,7 +375,7 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
           console.log(`[Fetcher] Downloaded image: ${fileName}`);
         } catch (imgError) {
           console.error(`[Fetcher] Lỗi tải ảnh (${parsedSrc}):`, (imgError as Error).message);
-          
+
           // QUAN TRỌNG: Nếu ảnh lỗi tải về & không inject được `./assets/...` 
           // phải thiết lập nó về dạng tuyệt đối hoặc gỡ thẻ để Docusaurus ko báo lỗi "Module not found" lúc dev rỗng.
           if (absoluteUrl && absoluteUrl.startsWith("http")) {
@@ -320,8 +387,18 @@ export const fetchRssNode = async (state: AhaMindState): Promise<Partial<AhaMind
       }
     }
 
-    // Convert HTML trực tiếp từ DOM đã sửa đổi sang Markdown
-    const cleanContent = turndownService.turndown(contentDoc.window.document.body.innerHTML);
+    // Convert sang Markdown từ DOM đã xử lý
+    let cleanContent = turndownService.turndown(contentDoc.window.document.body);
+    
+    // Xử lý các rác từ Jina Reader hoặc Medium
+    cleanContent = cleanContent
+      .replace(/Press enter or click to view image in full size/gi, "")
+      .replace(/\n{3,}/g, "\n\n") // Xử lý xuống hàng dư thừa
+      .trim();
+    
+    console.log(`[Fetcher] Markdown content length: ${cleanContent.length}`);
+    const imgCountInMd = (cleanContent.match(/!\[/g) || []).length;
+    console.log(`[Fetcher] Found ${imgCountInMd} images in final Markdown.`);
 
     const article: Article = {
       title: articleParsed.title || "Untitled",

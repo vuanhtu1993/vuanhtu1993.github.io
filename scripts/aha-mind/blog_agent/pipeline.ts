@@ -1,13 +1,13 @@
+import * as dotenv from "dotenv";
+// Load biến môi trường từ .env ngay lập tức
+dotenv.config();
+
 import { StateGraph, MemorySaver, START, END } from "@langchain/langgraph";
 import { StateAnnotation } from "./state";
 import { fetchRssNode } from "./nodes/fetcher";
 import { cefrAnalyzerNode } from "./nodes/analyzer";
 import { mdxFormatterNode } from "./nodes/formatter";
 import { fileWriterNode } from "./nodes/writer";
-import * as dotenv from "dotenv";
-
-// Load biến môi trường từ .env
-dotenv.config();
 
 // Cấu phần đồ thị tuần tự
 const workflow = new StateGraph(StateAnnotation)
