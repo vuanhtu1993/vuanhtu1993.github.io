@@ -53,8 +53,9 @@ export const cefrAnalyzerNode = async (state: AhaMindState): Promise<Partial<Aha
     const structuredModel = model.withStructuredOutput(terminologySchema);
     const chain = promptTemplate.pipe(structuredModel);
 
-    // Giới hạn content nếu quá dài để tiết kiệm token và tránh lỗi context window
-    const truncatedContent = state.articleToProcess.content.substring(0, 20000);
+    // Tăng giới hạn content để tận dụng context window lớn của Gemini 1.5 Flash (1M tokens)
+    // 50,000 chars ~ 12k-15k tokens, thoải mái cho hầu hết bài blog kỹ thuật.
+    const truncatedContent = state.articleToProcess.content.substring(0, 50000);
 
     const response = await chain.invoke({
       title: state.articleToProcess.title,

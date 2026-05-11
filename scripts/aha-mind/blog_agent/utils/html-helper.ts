@@ -1,0 +1,124 @@
+import { Readability } from "@mozilla/readability";
+import { JSDOM } from "jsdom";
+// @ts-ignore
+import TurndownService from "turndown";
+import * as fs from "fs";
+import * as path from "path";
+import * as crypto from "crypto";
+import { Article } from "../state";
+
+const turndownService = new TurndownService({
+  headingStyle: 'atx',
+  codeBlockStyle: 'fenced'
+});
+
+turndownService.addRule('img', {
+  filter: 'img',
+  replacement: (content, node: any) => {
+    const src = node.getAttribute('src');
+    const alt = node.getAttribute('alt') || '';
+    const title = node.getAttribute('title') || '';
+    const titlePart = title ? ` "${title}"` : '';
+    return src ? `![${alt}](${src}${titlePart})` : '';
+  }
+});
+
+/**
+ * Tải ảnh và lưu cục bộ.
+ */
+const downloadImage = async (img: HTMLImageElement, baseUrl: string, outputDir: string): Promise<void> => {
+  let originalSrc = img.getAttribute("data-src") || img.getAttribute("data-original") || img.getAttribute("src") || img.getAttribute("srcset");
+  if (!originalSrc) return;
+
+  const match = originalSrc.trim().match(/^(\S+)/);
+  let parsedSrc = match ? match[1] : originalSrc;
+  if (parsedSrc.endsWith(',')) parsedSrc = parsedSrc.slice(0, -1);
+
+  try {
+    const absoluteUrl = new URL(parsedSrc, baseUrl).href;
+    const response = await fetch(absoluteUrl);
+    if (!response.ok) return;
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 500) {
+      img.remove();
+      return;
+    }
+
+    const contentType = response.headers.get("content-type") || "";
+    let ext = ".jpg";
+    if (contentType.includes("png")) ext = ".png";
+    else if (contentType.includes("gif")) ext = ".gif";
+    else if (contentType.includes("webp")) ext = ".webp";
+    else if (contentType.includes("svg")) ext = ".svg";
+
+    const hash = crypto.createHash("md5").update(absoluteUrl).digest("hex").slice(0, 8);
+    const fileName = `img-${hash}${ext}`;
+    const filePath = path.join(outputDir, fileName);
+
+    fs.writeFileSync(filePath, buffer);
+    img.setAttribute("src", `./assets/${fileName}`);
+    img.removeAttribute("srcset");
+    img.removeAttribute("data-src");
+    img.removeAttribute("data-original");
+    img.removeAttribute("loading");
+
+    console.log(`[HTML-Helper] Downloaded image: ${fileName}`);
+  } catch (error) {
+    console.error(`[HTML-Helper] Error downloading image:`, (error as Error).message);
+    // Fallback to absolute URL if possible, otherwise remove
+    const absoluteUrl = new URL(parsedSrc, baseUrl).href;
+    if (absoluteUrl.startsWith("http")) img.setAttribute("src", absoluteUrl);
+    else img.remove();
+  }
+};
+
+/**
+ * Fetch HTML với Jina fallback.
+ */
+export const fetchHtmlContent = async (url: string): Promise<Article | null> => {
+  let html = "";
+  try {
+    if (url.includes("medium.com")) throw new Error("Force Jina for Medium");
+
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      },
+      // @ts-ignore
+      signal: AbortSignal.timeout(15000)
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    html = await response.text();
+  } catch (error) {
+    console.warn(`[HTML-Helper] Direct fetch failed or bypassed. Using Jina Reader...`);
+    const jinaResponse = await fetch(`https://r.jina.ai/${url}`, { headers: { "X-Return-Format": "html" } });
+    if (!jinaResponse.ok) throw new Error("Jina fallback failed");
+    html = await jinaResponse.text();
+  }
+
+  const doc = new JSDOM(html, { url });
+  const articleParsed = new Readability(doc.window.document).parse();
+  if (!articleParsed) return null;
+
+  const contentDoc = new JSDOM(articleParsed.content || "", { url });
+  const images = contentDoc.window.document.querySelectorAll("img");
+  
+  if (images.length > 0) {
+    const outputDir = path.join(process.cwd(), "blog", "aha-mind", "assets");
+    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+    await Promise.all(Array.from(images).map(img => downloadImage(img as any, url, outputDir)));
+  }
+
+  let cleanContent = turndownService.turndown(contentDoc.window.document.body);
+  cleanContent = cleanContent.replace(/Press enter or click to view image in full size/gi, "").replace(/\n{3,}/g, "\n\n").trim();
+
+  return {
+    title: articleParsed.title || "Untitled",
+    link: url,
+    content: cleanContent,
+    pubDate: new Date().toISOString()
+  };
+};

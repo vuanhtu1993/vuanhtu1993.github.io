@@ -9,20 +9,30 @@ export const mdxFormatterNode = async (state: AhaMindState): Promise<Partial<Aha
 
   let content = state.articleToProcess.content;
 
-  // Thay thế các từ vựng bằng Component <Term />
-  // Note: Cách replace này trong MVP khá đơn giản (find & replace), 
-  // có thể thay cả bên trong URL hoặc thành phần khác. MVP tạm chấp nhận.
-  for (const term of state.extractedTerms) {
-    const popupContent = `${term.explanation}${term.analogy ? ` (Ví dụ: ${term.analogy})` : ''}`.replace(/"/g, "'");
+  // Sắp xếp từ vựng theo độ dài giảm dần để tránh thay thế từ ngắn nằm trong từ dài (ví dụ: 'API' vs 'API Gateway')
+  const sortedTerms = [...state.extractedTerms].sort((a, b) => b.word.length - a.word.length);
 
-    // Regex phức tạp hơn: Bỏ qua nếu từ nằm trong cấu trúc Markdown Image ![alt](url) hoặc Link [text](url)
-    // Chúng ta sẽ tìm cả cấu trúc link/image HOẶC từ cần tìm. 
-    // Nếu khớp link/image thì giữ nguyên, nếu khớp từ thì mới bọc <Term />
-    const regex = new RegExp(`(!?\\[.*?\\]\\(.*?\\))|\\b(${term.word})\\b`, 'gi');
-    
-    let replacedFirst = false; // Chỉ replace từ đầu tiên xuất hiện để tránh spam
+  // Thay thế các từ vựng bằng Component <Term />
+  for (const term of sortedTerms) {
+    const popupContent = `${term.explanation}${term.analogy ? ` (Ví dụ: ${term.analogy})` : ""}`.replace(/"/g, "'");
+
+    // Escape các ký tự đặc biệt trong từ vựng để dùng trong Regex
+    const escapedWord = term.word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    /**
+     * Regex cải tiến:
+     * 1. (```[\s\S]*?```) : Bỏ qua Code blocks (fenced)
+     * 2. (`[^`\n]+`)      : Bỏ qua Inline code
+     * 3. (!?\[.*?\]\(.*?\)) : Bỏ qua Markdown Image/Link
+     * 4. \b(word)\b       : Tìm từ vựng chính xác (case-insensitive)
+     */
+    const regex = new RegExp(`(\`\`\`[\\s\\S]*?\`\`\`|\`[^\`\\n]+\`|!?\\[.*?\\]\\(.*?\\))|\\b(${escapedWord})\\b`, "gi");
+
+    let replacedFirst = false;
     content = content.replace(regex, (match, group1, group2) => {
-      if (group1) return group1; // Trả về nguyên vẹn nếu là link hoặc ảnh
+      // Nếu khớp group1 (code, link, image) thì trả về nguyên vẹn
+      if (group1) return group1;
+      // Nếu khớp group2 (từ vựng) và chưa replace lần nào trong bài
       if (!replacedFirst && group2) {
         replacedFirst = true;
         return `<Term definition="${popupContent}">${group2}</Term>`;

@@ -27,8 +27,8 @@ const app = workflow.compile({ checkpointer: new MemorySaver() });
 async function runPipeline() {
   console.log("🚀 Bắt đầu Aha! Mind Pipeline...");
 
-  if (!process.env.OPENAI_API_KEY) {
-    console.warn("⚠️ Cảnh báo: OPENAI_API_KEY chưa được cấu hình. Node Analyze có thể sẽ thất bại.");
+  if (!process.env.GOOGLE_API_KEY) {
+    console.warn("⚠️ Cảnh báo: GOOGLE_API_KEY chưa được cấu hình. Node Analyze có thể sẽ thất bại.");
   }
 
   const urlArg = process.argv[2];
