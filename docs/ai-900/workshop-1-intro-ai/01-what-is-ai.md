@@ -71,7 +71,7 @@ mindmap
       Code
 ```
 
-Each capability maps directly to an **AI Workload** covered in [Workshop 1.3 — AI Workloads](./03-ai-workloads).
+Each capability maps directly to an **AI Workload** covered in [Workshop 1.3 — AI Workloads](./03-ai-workloads.md).
 
 ---
 

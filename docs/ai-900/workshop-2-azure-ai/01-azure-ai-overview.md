@@ -121,7 +121,7 @@ Workshop 2 covers the core prebuilt AI services, organized by the AI workload th
 | **Safety** | Azure AI Content Safety | Detect & filter harmful content |
 | **Multimodal** | Azure AI Content Understanding | Extract insights from multimodal *(đa phương thức — text, ảnh, audio, video)* unstructured data |
 
-Each service is covered in detail in [Workshop 2.2 — Azure AI Services](./02-azure-ai-services).
+Each service is covered in detail in [Workshop 2.2 — Azure AI Services](./02-azure-ai-services.md).
 
 ---
 
