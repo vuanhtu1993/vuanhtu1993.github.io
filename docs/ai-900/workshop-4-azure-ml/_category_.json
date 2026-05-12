@@ -1,0 +1,8 @@
+{
+  "label": "Workshop 4: Azure Machine Learning",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Azure Machine Learning service — AutoML, Designer, Notebooks, model deployment, and the prebuilt AI vs custom ML decision framework."
+  }
+}

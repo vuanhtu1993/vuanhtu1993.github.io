@@ -1,0 +1,8 @@
+{
+  "label": "AI-900: Azure AI Fundamentals",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "A structured learning series for the Microsoft AI-900 Azure AI Fundamentals certification. Covers core AI concepts, Azure AI services, Machine Learning, NLP, Computer Vision, Generative AI, and Responsible AI."
+  }
+}

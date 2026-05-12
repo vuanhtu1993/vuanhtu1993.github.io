@@ -1,0 +1,8 @@
+{
+  "label": "Workshop 2: Azure AI Fundamentals",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "An overview of Microsoft Azure's AI service ecosystem — what services exist, what problems they solve, and how to select the right one for a given business scenario."
+  }
+}

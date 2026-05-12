@@ -1,0 +1,8 @@
+{
+  "label": "Workshop 5: Natural Language Processing",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "NLP fundamentals — how machines understand human language, the NLP pipeline, and Azure AI Language and Speech services in depth."
+  }
+}

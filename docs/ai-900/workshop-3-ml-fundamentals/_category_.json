@@ -1,0 +1,8 @@
+{
+  "label": "Workshop 3: Machine Learning Fundamentals",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Core machine learning concepts — learning types, terminology, lifecycle, and evaluation — that underpin the Azure AI-900 certification."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Workshop 7: Generative AI",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Generative AI fundamentals — LLMs, how they work, Azure OpenAI Service, prompt engineering, RAG, and responsible AI for generative systems."
+  }
+}

@@ -31,17 +31,23 @@ Skill hỗ trợ giảng viên CNTT tạo bài viết kỹ thuật đi thẳng v
 - **Tối đa 4-5 outcomes** — nhiều hơn sẽ gây choáng ngợp
 - Outcomes phải **đo lường được** — tránh viết mơ hồ như "hiểu sâu về X"
 
-### Template Thuật ngữ (Glossary)
+### Template Thuật ngữ & Từ vựng (Glossary & Vocabulary)
 
-**Bắt buộc nếu bài viết có >3 thuật ngữ chuyên ngành.** Đặt ngay sau Agenda để trang bị trước cho người học về từ vựng trong bài viết.
+**Bắt buộc nếu bài viết có >3 thuật ngữ chuyên ngành hoặc nhiều từ vựng tiếng Anh khó (B1+).** Đặt ngay sau Agenda để trang bị trước cho người học về từ vựng, giúp họ vừa hiểu kỹ thuật vừa học thêm tiếng Anh.
 
 ```markdown
-## 📖 Giải nghĩa thuật ngữ
+## 📖 Glossary & Vocabulary
 
-| Thuật ngữ | Giải thích nhanh |
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
 | :--- | :--- |
-| **Term A** | Nghĩa tiếng Việt + Giải thích chi tiết. |
-| **Term B** | Nghĩa tiếng Việt + Giải thích chi tiết. |
+| **Term A** | Nghĩa tiếng Việt + Giải thích chi tiết bản chất. |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Seamlessly (adv)** | Một cách mượt mà, không gián đoạn. |
+| **Overhead (n)** | Chi phí phát sinh (về tài nguyên/thời gian). |
 ```
 
 ---
@@ -189,10 +195,12 @@ func main() {
 
 - **Direct & Visual First:** Sử dụng tiếng anh đơn giản, dễ hiểu. Đi thẳng vào định nghĩa kỹ thuật, tận dụng tối đa sơ đồ (Mermaid) minh họa kiến trúc thay cho văn xuôi giải thích dài dòng.
 - **Bullet Points:** Ưu tiên gạch đầu dòng ngắn gọn để trình bày ý tứ thay vì viết đoạn văn (paragraph) quá tràng giang đại hải.
-- **Chiến lược thuật ngữ:** 
-    1. **Mapping:** Liệt kê giải nghĩa nhanh ở đầu bài viết (sau Agenda).
-    2. **Anatomy:** "Giải phẫu" bản chất kỹ thuật của từ khóa ở phần WHAT.
-    3. **Consistency:** Giữ nguyên thuật ngữ tiếng Anh khi nhắc lại trong bài viết.
+- **Chiến lược thuật ngữ & Hỗ trợ ngôn ngữ (Vocabulary Support):** Vì bài viết bằng tiếng Anh nhưng hướng tới người học muốn dễ hiểu và trau dồi ngoại ngữ:
+    1. **Glossary & Vocabulary:** Cung cấp bảng từ vựng B1+ và thuật ngữ chuyên ngành ở đầu bài.
+    2. **Inline Translation:** Lần đầu tiên xuất hiện thuật ngữ hoặc từ khó, hãy kèm nghĩa tiếng Việt trong ngoặc đơn: `Scalability (*Khả năng mở rộng*)`.
+    3. **Vocabulary Box:** Trước những đoạn văn tiếng Anh dài hoặc phức tạp, có thể dùng Callout Docusaurus `:::info 📝 Vocabulary Note` để giải thích nhanh các từ vựng sẽ xuất hiện.
+    4. **Definition Anatomy:** Ở phần WHAT, khi "giải phẫu" định nghĩa, hãy dịch sát nghĩa từng từ cấu thành sang tiếng Việt để người học nắm rõ gốc gác từ vựng.
+    5. **Consistency:** Khi đã giải thích 1 lần, các lần sau giữ nguyên từ tiếng Anh để người học quen mắt và tăng phản xạ đọc.
 - **Ưu tiên hình ảnh và sơ đồ** để minh họa kiến trúc và luồng hoạt động thay vì văn xuôi giải thích dài dòng.
 - **Quy tắc Heading & Emoji:**
     1. **Tuyệt đối KHÔNG dùng emoji** trong toàn bộ bài viết (kể cả trong heading, list hay callout).
@@ -210,7 +218,8 @@ func main() {
 - [ ] Các Heading đã được **đánh số thứ tự** (1., 1.1, ...) chưa?
 - [ ] Có xuất hiện các **cụm từ sáo rỗng** của AI (ví dụ: "Trong bài viết này chúng ta sẽ...") không? (Nếu có -> Xóa).
 - [ ] Phần **WHY** có đi thẳng vào thực trạng kỹ thuật, bỏ qua các câu hỏi tu từ dẫn dắt không?
-- [ ] Đã có bảng **Giải nghĩa thuật ngữ** ngay sau Agenda chưa?
+- [ ] Đã có bảng **Glossary & Vocabulary** ngay sau Agenda để hỗ trợ từ vựng B1+ và thuật ngữ chuyên ngành chưa?
+- [ ] Các từ khóa khó đã được **Inline Translation** (dịch trong ngoặc đơn) ở lần xuất hiện đầu tiên chưa?
 - [ ] Phần **WHAT** đã thực hiện **Definition Anatomy** và có sơ đồ Mermaid chưa?
 - [ ] Phần kết bài có bị rơi vào kiểu "Tổng kết/Chào tạm biệt" của AI không?
 - [ ] Mermaid syntax đã được kiểm duyệt bởi `mermaid-expert`?
