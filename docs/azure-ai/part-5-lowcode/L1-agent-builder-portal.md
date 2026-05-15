@@ -1,267 +1,277 @@
 ---
 sidebar_position: 16
-description: "Low-Code L1: Tạo AI Agent hoàn toàn qua Azure AI Foundry Portal — không cần code. Cấu hình Model, Instructions, Tools và test trong Playground ngay trên trình duyệt."
+description: "Low-Code L1: Tạo Prompt Agent đầu tiên trên Microsoft Foundry (New) — không cần code. Cấu hình Instructions, chọn Model, gắn Tools và test trong Playground."
 ---
 
-# Bài L1: Agent Builder Portal — Tạo Agent Không Cần Code
+# L1: Building Your First Prompt Agent
 
 ## 📋 Agenda
 
-**Thời gian đọc ước tính:** ~20 phút | 🖱️ Thực hành trên Portal
+**Estimated reading time:** ~20 minutes | Hands-on Portal Lab
 
-### Sau bài này, bạn sẽ:
-- ✅ **Điều hướng** được Azure AI Foundry Portal thành thạo
-- ✅ **Tạo** AI Agent hoàn chỉnh chỉ bằng click và gõ text
-- ✅ **Cấu hình** Instructions, chọn Model, gắn Tools qua UI
-- ✅ **Test** agent trong Playground ngay trên trình duyệt
+### Learning outcomes:
 
-### Yêu cầu:
-- 🔹 Có tài khoản Azure (bài Bài 02 đã hướng dẫn tạo)
-- 🔹 Đã có Azure AI Foundry Hub + Project (Bài 02)
-- 🔹 KHÔNG cần Python, KHÔNG cần SDK
+- ✅ **Navigate** the New Foundry portal (Build → Agents section)
+- ✅ **Create** a fully functional Prompt Agent using only the portal UI
+- ✅ **Configure** Instructions, Model deployment, and basic Tools
+- ✅ **Test** and iterate on agent behavior in the Playground
 
-:::info Dành cho ai?
-Bài này dành cho học viên **Business Analyst, Product Manager, IT Admin, Power User** — những người muốn build và quản lý AI Agent mà không cần background lập trình. Nếu bạn đã học qua Bài 05 (Python), bài này sẽ giúp bạn thấy "hậu trường" của những gì code đã làm.
+### Prerequisites:
+
+- Azure account with active subscription
+- Microsoft Foundry project created (see L0 for New Foundry toggle)
+- A model deployed in your project (e.g., GPT-4o)
+- No Python, no SDK required
+
+:::info Who is this for?
+Business Analysts, Product Managers, IT Admins, and Power Users who want to build and manage AI Agents without a programming background.
 :::
 
 ---
 
-## ❓ Vấn đề & Giải pháp
+## 1. Problem Statement
 
-**Rào cản của Python track (Bài 05-15):**
-- Cần biết Python, SDK, và cấu trúc code
-- Cần setup môi trường (venv, .env, az login)
-- Khó chia sẻ với team non-technical để test
+### 1.1. Gap between idea and implementation
 
-**Low-Code Path giải quyết:**
-- Tạo agent ngay trên trình duyệt — zero setup
-- Chia sẻ knowledge base chỉ bằng upload file
-- Deploy lên Teams chỉ bằng vài click
+Non-technical teams identify the most valuable AI use cases — customer support automation, internal HR Q&A, policy lookup — but have historically depended on developers to implement them. The cycle: business requirement → developer backlog → sprint planning → implementation creates weeks of delay for what is fundamentally a configuration problem.
+
+### 1.2. Solution: Prompt Agent as Configuration
+
+A Prompt Agent in Microsoft Foundry (New) is entirely defined by three configuration items:
+
+- **Instructions** — the system prompt that defines agent behavior
+- **Model** — the LLM that processes requests
+- **Tools** — capabilities the agent can invoke (search, code execution, connectors)
+
+No infrastructure provisioning. No SDK. No environment setup.
 
 ---
 
-## 📖 So sánh: Python Track vs Low-Code Track
+## 2. What Is a Prompt Agent?
+
+### 2.1. Technical Definition
+
+A **Prompt Agent** (*Agent Lời nhắc*) is a stateless, single-LLM agent declaratively defined by a model selection, a system prompt, and an optional set of tools. It processes one conversational turn at a time, invoking tools as needed, and returns a response.
 
 ```mermaid
-graph LR
-    subgraph PY["🐍 Python Track (Bài 05-15)"]
-        P1["create_agent()"]
-        P2["upload_file()"]
-        P3["create_vector_store()"]
-        P4["create_and_process_run()"]
-        P1 --> P2 --> P3 --> P4
-    end
+flowchart LR
+    U["User Message"]
+    PA["Prompt Agent\n(Instructions + Model + Tools)"]
+    T["Tools\n(File Search / Code Interpreter\n/ MCP / Connectors)"]
+    R["Agent Response"]
 
-    subgraph LC["🖱️ Low-Code Track (Bài L1-L4)"]
-        L1["+ Create Agent button"]
-        L2["Upload files UI"]
-        L3["Knowledge Base config UI"]
-        L4["▶ Run in Playground"]
-        L1 --> L2 --> L3 --> L4
-    end
+    U --> PA
+    PA --> T
+    T --> PA
+    PA --> R
 
-    PY <-->|"tạo ra CÙNG một Agent<br>trên Azure AI Agent Service"| LC
-
-    style PY fill:#dbeafe
-    style LC fill:#dcfce7
+    style PA fill:#dbeafe,stroke:#3b82f6
+    style T fill:#dcfce7
 ```
 
-**Điểm mấu chốt:** Dù dùng Python hay Portal, kết quả đều là **cùng một Agent** chạy trên Azure AI Agent Service với cùng một REST API.
+### 2.2. Definition Anatomy
+
+| Term | Vietnamese Meaning | Technical Role |
+|---|---|---|
+| **Prompt** | Lời nhắc, hướng dẫn | The system instruction that shapes agent behavior and persona |
+| **Agent** | Tác nhân | An entity that takes action based on input — in this case, generates text and calls tools |
+| **Declarative** | Khai báo | You define *what* the agent should do (in text), not *how* to implement it in code |
+| **Stateless** | Không lưu trạng thái | Each conversation thread is isolated; no memory across sessions by default (unless Memory tool is added) |
 
 ---
 
-## 🖱️ Hướng dẫn từng bước: Tạo Agent trên Portal
+## 3. Lab: Creating a Prompt Agent
 
-### Bước 1: Vào Agents Section
+### 3.1. Navigate to Agents
 
 ```
-🌐 Mở trình duyệt → https://ai.azure.com
-  → Đăng nhập bằng tài khoản Azure
-  → Chọn đúng Project (tạo ở Bài 02)
-  → Menu trái → "Agents"
-  → Click "➕ Create agent"
+ai.azure.com
+  → Verify "New Foundry" toggle is ON (portal banner)
+  → Select your Foundry Project
+  → Left navigation: Build section → "Agents"
+  → Click "Create agent"
 ```
 
-:::tip Không thấy menu "Agents"?
-Kiểm tra: Project của bạn đã được kết nối với một Model Deployment chưa? Vào **Models + endpoints** → nếu chưa có GPT-4o → Deploy một deployment mới theo hướng dẫn Bài 02.
+:::warning Toggle kiểm tra
+Nếu bạn thấy menu "Hub", "Prompt Flow" hoặc "Deployments" ở sidebar bên trái — bạn đang ở Foundry Classic, không phải New Foundry. Tìm toggle ở top banner và bật ON.
 :::
 
----
+### 3.2. Configure Agent Identity
 
-### Bước 2: Cấu hình Agent Identity
-
-Màn hình **"Create agent"** gồm 4 khu vực chính:
+The **Create agent** panel displays these configuration areas:
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  [1] Agent Name    [Customer Support Bot]           │
-│  [2] Deployment    [gpt-4o ▼]                       │
-│  [3] Instructions  [Text area — system prompt]      │
-│  [4] Tools         [+ Add tool ▼]                   │
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  Agent Name       [Customer Support Bot              ]      │
+│  Model            [gpt-4o ▼]                                │
+│  Instructions     [Text area ─ system prompt         ]      │
+│                                                             │
+│  Tools & Knowledge     [+ Add ▼]                            │
+│  Memory                [Off ▼]                              │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**Điền thông tin:**
-
-| Field | Giá trị mẫu | Ghi chú |
+| Field | Sample Value | Notes |
 |---|---|---|
-| **Agent Name** | `Customer Support Bot` | Tên hiển thị, có thể đổi sau |
-| **Deployment** | `gpt-4o` | Chọn từ dropdown — model đã deploy ở Bài 02 |
-| **Instructions** | *(xem bên dưới)* | System prompt — linh hồn của agent |
+| **Agent Name** | `Customer Support Bot` | Display name, editable later |
+| **Model** | `gpt-4o` | Select from deployed models in your project |
+| **Instructions** | *(see below)* | System prompt — defines agent identity and constraints |
 
-**Instructions mẫu — Customer Support Bot:**
+**Sample Instructions — Customer Support Agent:**
 
 ```
-Bạn là nhân viên hỗ trợ khách hàng thân thiện của công ty ABC Technology.
+You are a friendly customer support representative for ABC Technology.
 
-Nhiệm vụ:
-- Trả lời câu hỏi về sản phẩm và dịch vụ
-- Hướng dẫn quy trình đổi trả, bảo hành
-- Chuyển tiếp đến bộ phận chuyên môn khi cần
+Responsibilities:
+- Answer questions about products and services
+- Guide customers through return and warranty processes
+- Escalate to a human agent for complex cases
 
-Phong cách:
-- Thân thiện, lịch sự, chuyên nghiệp
-- Luôn xưng "bạn" với khách hàng
-- Trả lời bằng tiếng Việt
-- Tối đa 200 từ mỗi câu trả lời
+Communication style:
+- Professional, polite, and helpful
+- Respond in Vietnamese when the customer writes in Vietnamese
+- Keep responses under 200 words
 
-Giới hạn:
-- Không cung cấp thông tin tài chính hoặc pháp lý cụ thể
-- Không hứa hẹn điều gì ngoài phạm vi chính sách công ty
-- Nếu không chắc chắn → đề nghị khách gọi hotline 1800-xxxx
+Constraints:
+- Do not provide specific financial or legal advice
+- Do not make promises outside company policy
+- If uncertain, ask the customer to call hotline 1800-xxxx
 ```
 
----
+:::tip Instructions là System Prompt
+Trong thuật ngữ kỹ thuật, Instructions chính là **System Prompt** — đoạn hướng dẫn được gửi đến LLM trước mỗi conversation để định hình persona và hành vi. Đây là "linh hồn" của agent — viết càng rõ ràng, agent càng hoạt động đúng ý.
+:::
 
-### Bước 3: Gắn Tools
+### 3.3. Add Tools
 
-Click **"+ Add tool"** để hiện menu dropdown:
+Click **"+ Add"** next to Tools & Knowledge. In New Foundry, this opens the **Tools Tab** — not a simple dropdown:
 
 ```mermaid
 graph TD
-    ADD["➕ Add tool"]
-    ADD --> FS["📁 File search<br>(RAG từ documents)"]
-    ADD --> CI["💻 Code interpreter<br>(Chạy Python, tạo chart)"]
-    ADD --> FN["⚡ Function<br>(Gọi external API)"]
-    ADD --> WS["🌐 Bing Web Search<br>(Tìm kiếm internet)"]
+    ADD["+ Add Tool"]
+    ADD --> FS["File Search\n(RAG from uploaded documents)"]
+    ADD --> CI["Code Interpreter\n(Run Python, generate charts)"]
+    ADD --> MCP["MCP Server\n(Connect to external tools via URL)"]
+    ADD --> CON["Connectors\n(SharePoint, Fabric, Salesforce, SAP...)"]
+    ADD --> BING["Bing Search\n(Real-time internet search)"]
 
     style FS fill:#dcfce7
-    style CI fill:#dbeafe
+    style MCP fill:#f3e8ff
+    style CON fill:#dbeafe
 ```
 
-**Với Customer Support Bot → chọn "File search":**
+**For a Customer Support Bot → select "File Search":**
 
-1. Click **"File search"**
-2. Panel mới xuất hiện: **"Knowledge Base"**
-3. Click **"+ New vector store"**
-4. Đặt tên: `company-policies-kb`
-5. Click **"Upload files"**
-6. Chọn files từ máy tính (PDF, Word, Markdown, TXT)
-7. Click **"Upload and index"** → đợi thanh progress hoàn thành
-8. Click **"Save"**
+1. Click **"File Search"**
+2. Panel expands: **"Knowledge"** section appears
+3. Click **"+ Add a data source"**
+4. Choose: **"Upload files"** (for quick start) or **"Azure AI Search"** (for production)
+5. Upload your policy documents (PDF, Word, Markdown, TXT)
+6. Wait for indexing to complete (30 seconds to 3 minutes)
+7. Click **"Save"**
 
-:::info Indexing mất bao lâu?
-Thường 30 giây đến 2 phút tùy kích thước file. Trong lúc đợi, màn hình hiển thị badge "In progress". Khi chuyển sang "Completed" → sẵn sàng dùng.
+:::info Sự khác biệt với Classic
+Trong Foundry Classic, bạn phải tạo Vector Store riêng rồi attach vào agent. Trong New Foundry, Knowledge management được tích hợp trực tiếp vào agent configuration — ít bước hơn, ít context-switching hơn.
 :::
 
----
+### 3.4. Test in Playground
 
-### Bước 4: Test trong Playground
-
-Click **"Open in playground"** ở góc trên phải.
-
-Màn hình Playground gồm:
+Click **"Playground"** (top navigation, or inline button). The Playground in New Foundry:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  ⚙️ Configuration (trái)    │  💬 Chat (phải)           │
-│  ─────────────────────────  │  ─────────────────────    │
-│  Model: gpt-4o              │                           │
-│  Temperature: 1.0 [─────]   │  [Send a message...]      │
-│  Max tokens: 4096           │                           │
-│  Instructions (editable)    │  🔄 Clear chat            │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  Agent Config (left panel)        Chat (right panel)        │
+│  ─────────────────────────────    ─────────────────────     │
+│  Instructions (editable live)     [Type a message...]       │
+│                                                             │
+│  Model: gpt-4o                    🔄 Clear chat             │
+│  Temperature: 0.7                                           │
+│  Max tokens: 4096                 Tool call trace ▼         │
+│  Tools: [File Search ✓]                                     │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**Test thử:**
+**Test the agent:**
 
-| Bạn gõ | Agent nên trả lời |
+| Input | Expected behavior |
 |---|---|
-| "Xin chào, bạn có thể giúp gì cho tôi?" | Lời chào + giới thiệu |
-| "Chính sách đổi trả của công ty là gì?" | Thông tin từ documents đã upload |
-| "Phí ship bao nhiêu?" | Nội dung từ file chính sách vận chuyển |
-| "Bạn có thể thăng cổ phiếu cho tôi không?" | Từ chối lịch sự, ngoài phạm vi |
+| "Hello, what can you help me with?" | Greeting + service introduction |
+| "What is your return policy?" | Answer from uploaded documents |
+| "Can you predict stock prices?" | Polite refusal — outside scope |
+| "I need to speak to a human" | Escalation response per instructions |
 
----
+### 3.5. Iterating on Instructions
 
-### Bước 5: Tinh chỉnh Instructions
-
-**Iteration cycle trong Playground — đây là superpower của low-code:**
+The test-refine cycle is the core workflow for non-technical builders:
 
 ```mermaid
 graph LR
-    TEST["💬 Test câu hỏi"]
-    RESULT["Kết quả chưa ý"]
-    EDIT["✏️ Sửa Instructions<br>(trực tiếp trên UI)"]
-    RETEST["💬 Test lại ngay"]
-    OK["✅ Hài lòng"]
+    T["Test a question"]
+    O["Observe output"]
+    R["Refine Instructions\n(edit live in left panel)"]
+    RT["Re-test immediately"]
 
-    TEST --> RESULT --> EDIT --> RETEST --> TEST
-    RETEST -->|"good enough"| OK
+    T --> O --> R --> RT --> T
+    RT -->|"satisfactory"| S["Save Agent"]
 
-    style OK fill:#dcfce7
+    style S fill:#dcfce7
 ```
 
-**Tips tinh chỉnh phổ biến:**
+**Common refinement patterns:**
 
 ```
-Nếu agent trả lời quá dài:
-  → Thêm vào Instructions: "Trả lời tối đa 100 từ"
+Agent answers too long
+  → Add to Instructions: "Keep responses under 100 words."
 
-Nếu agent hay bịa thông tin:
-  → Thêm: "Chỉ trả lời dựa trên tài liệu đã được cung cấp"
+Agent fabricates information not in documents
+  → Add: "Only answer based on provided knowledge documents."
 
-Nếu agent quá cứng nhắc:
-  → Điều chỉnh Temperature: tăng từ 1.0 lên 1.2
+Agent is off-topic
+  → Add: "Only answer questions about [company] products and services."
 
-Nếu agent lạc chủ đề:
-  → Thêm: "Chỉ trả lời câu hỏi liên quan đến sản phẩm và dịch vụ của công ty"
+Agent tone too formal
+  → Add: "Use a conversational, friendly tone as if speaking to a friend."
 ```
 
----
+### 3.6. Save and Retrieve Agent ID
 
-### Bước 6: Save Agent
+Click **"Save"**. Your agent now has:
 
-Click **"Save"** ở góc trên. Agent của bạn giờ đã:
-- Có một **Agent ID** duy nhất trên Azure
-- Accessible qua **REST API**
-- Sẵn sàng để Deploy (Bài L3)
+- A unique **Agent ID** in Entra Agent ID (new in New Foundry — see L4 for governance details)
+- A REST API endpoint for programmatic access
+- An entry in the Foundry Control Plane for monitoring
 
-:::tip Layy Agent ID ở đâu?
-Agents → click vào agent vừa tạo → sidebar phải → **Properties** → copy **Agent ID**. ID này dùng để gọi agent qua API hoặc SDK Python (bài code track).
+```
+Build → Agents → [Your Agent] → Properties (right panel)
+  → Agent ID: agt_xxxxxxxxxxxx
+  → Endpoint: https://your-project.foundry.azure.com/agents/agt_xxxx
+```
+
+:::tip Agent ID format thay đổi
+Trong Foundry Classic, Agent ID có dạng `asst_xxxxxxxxxx` (OpenAI Assistants format). Trong New Foundry, format mới là `agt_xxxxxxxxxxxx` với Entra Agent ID backing. Đây là sự thay đổi quan trọng nếu bạn có code cũ hardcode Agent ID.
 :::
 
 ---
 
-## 📖 So sánh: Temperature & Tuning Params
+## 4. Configuration Parameters
 
-| Parameter | Thấp | Cao | Khuyến nghị |
+| Parameter | Range | Effect | Recommended |
 |---|---|---|---|
-| **Temperature** (0-2) | Nhất quán, literal | Sáng tạo, đa dạng | 0.7-1.0 cho support bot |
-| **Max Tokens** | Trả lời ngắn | Trả lời dài | 500-1000 cho chatbot |
-| **Top P** (0-1) | Conservative | Diverse | Để mặc định 0.95 |
+| **Temperature** | 0.0 – 2.0 | Low = consistent; High = creative | 0.7 for support bots |
+| **Max tokens** | 256 – 16384 | Controls max response length | 500–1000 for chatbots |
+| **Top P** | 0.0 – 1.0 | Diversity of word sampling | Leave at 0.95 |
 
 ---
 
-## 💬 Câu hỏi thảo luận
+## 5. Discussion
 
-> **"Agent tạo qua Portal và agent tạo bằng Python SDK — cái nào 'thật' hơn?"**  
+> **"Prompt Agent vs a ChatGPT Custom GPT — what is the actual difference?"**
 >
-> *Cả hai đều như nhau!* Portal là giao diện đồ họa của **chính API** mà SDK đang gọi phía sau. Khi bạn click "Create agent" trên portal, thực chất Azure đang: tạo HTTP POST đến `agents/` endpoint với JSON body chứa model, instructions, tools — y hệt điều Python SDK làm trong `create_agent()`. Không có cái nào "thật hơn" — chỉ là cách tiếp cận khác nhau cho cùng kết quả.
+> *Both solve the same surface problem but differ fundamentally in deployment context.* A Custom GPT runs inside OpenAI's infrastructure, limited to OpenAI's tool ecosystem, and governed by OpenAI's terms. A Foundry Prompt Agent runs inside your Azure subscription, governed by your organization's Conditional Access policies, authenticated via Microsoft Entra, and auditable via the Foundry Control Plane. For enterprise use cases — especially where data sovereignty, compliance, or integration with internal systems (SharePoint, SAP, Dynamics) matters — a Foundry agent is not equivalent to a Custom GPT. They are structurally different products at the same user experience surface.
 
 ---
 
-**Bài tiếp theo:** Bài L2 — Knowledge Base UI →
+**Next:** L2 — Tools Tab & Knowledge Management →
 
 ---
 
