@@ -236,15 +236,15 @@ Build → Agents → [Your Agent] → Tools section
   → "+ Add"
   → "Custom" → "Model Context Protocol (MCP)" → "Create"
   → Fill in:
-      Server Label: github-issues
-      Server URL: https://mcp.ai.azure.com/servers/github
+      Server Label: outlook-mail
+      Server URL: https://mcp.ai.azure.com/servers/outlook
       Authentication: Microsoft Entra ID
   → Click "Connect"
   → Verify: server appears in Tools list with green status
 ```
 
 :::tip Managed vs Custom MCP
-Microsoft provides **hosted MCP servers** at `mcp.ai.azure.com` for common services (GitHub, Azure DevOps, etc.) — these are pre-authenticated and maintained by Microsoft. For custom internal APIs, your team can host a private MCP server and provide the URL.
+Microsoft provides **hosted MCP servers** at `mcp.ai.azure.com` for common services (Outlook, OneDrive, Azure DevOps, v.v.) — these are pre-authenticated and maintained by Microsoft. For custom internal APIs, your team can host a private MCP server and provide the URL.
 :::
 
 ### 4.3. Manage Exposed Tools
@@ -254,10 +254,10 @@ Once an MCP server is connected, you can control which tools the agent can call:
 ```
 Tools Tab → [MCP Server Name] → "Manage tools"
   → Toggle individual tools ON/OFF
-  → Example: GitHub MCP exposes:
-      ✅ list_issues (enabled)
-      ✅ create_comment (enabled)
-      ❌ delete_repository (disabled — safety)
+  → Example: Outlook MCP exposes:
+      ✅ send_email (enabled)
+      ✅ read_recent_emails (enabled)
+      ❌ delete_email (disabled — safety)
 ```
 
 This granular control follows the **principle of least privilege** (*nguyên tắc quyền tối thiểu*) — agents only have access to the tools they genuinely need.
@@ -279,7 +279,7 @@ Công ty TechCorp muốn triển khai một **Internal Innovation Assistant** �
 - Trả lời câu hỏi dựa trên tài liệu nội bộ (research reports, policy, technical specs)
 - Tra cứu thông tin công nghệ mới nhất trên internet theo thời gian thực
 - Phân tích dữ liệu từ file CSV khi nhân viên upload
-- Tìm kiếm issue và tài nguyên kỹ thuật từ GitHub qua MCP
+- Gửi email báo cáo kết quả phân tích hoặc thông báo cho team qua MCP
 - Nhớ ngữ cảnh người dùng xuyên suốt session làm việc
 
 **Expected Output — Đầu ra kỳ vọng:**
@@ -290,7 +290,7 @@ Sau khi hoàn thành lab, agent của bạn phải:
 ✅ [Tool: File Search]     Trả lời câu hỏi từ tài liệu nội bộ đã upload
 ✅ [Tool: Bing Search]     Cung cấp thông tin công nghệ cập nhật từ internet
 ✅ [Tool: Code Interpreter] Đọc và phân tích file CSV, tạo biểu đồ thống kê
-✅ [Tool: MCP - GitHub]    Tìm kiếm và liệt kê issues từ repository GitHub
+✅ [Tool: MCP - Outlook]   Gửi email báo cáo nội dung tóm tắt cho đồng nghiệp
 ✅ [Memory: Enabled]       Nhớ tên và role của người dùng trong session
 ✅ [Instructions]          Từ chối trả lời câu hỏi ngoài phạm vi innovation/R&D
 ```
@@ -302,7 +302,7 @@ Sau khi hoàn thành lab, agent của bạn phải:
 | Agent trả lời đúng từ tài liệu nội bộ | Hỏi thông tin có trong file đã upload |
 | Agent tìm kiếm web khi cần thông tin mới | Hỏi về công nghệ/sự kiện sau ngày upload tài liệu |
 | Agent phân tích được CSV | Upload file dữ liệu, yêu cầu tóm tắt và tạo chart |
-| Agent tìm GitHub issues | Yêu cầu "list open issues in repo X" |
+| Agent gửi được email | Yêu cầu "gửi email báo cáo cho email abc@xyz.com" |
 | Agent nhớ ngữ cảnh trong session | Giới thiệu tên → hỏi lại 5 tin sau → agent vẫn nhớ |
 | Agent từ chối câu hỏi ngoài phạm vi | Hỏi về tài chính cá nhân, giải trí → từ chối lịch sự |
 
@@ -324,14 +324,14 @@ graph TD
         FS["File Search\nKB: internal-rd-docs\n(PDF reports, specs)"]
         BING["Bing Search\nReal-time web lookup"]
         CI["Code Interpreter\nCSV analysis + charting"]
-        MCP_GH["MCP: GitHub\nmcp.ai.azure.com/servers/github\nlist_issues, search_code"]
+        MCP_OUTLOOK["MCP: Outlook\nmcp.ai.azure.com/servers/outlook\nsend_email, read_emails"]
     end
 
     USER --> AGENT
     AGENT --> FS
     AGENT --> BING
     AGENT --> CI
-    AGENT --> MCP_GH
+    AGENT --> MCP_OUTLOOK
     MEM --> AGENT
 
     style AGENT fill:#dbeafe,stroke:#3b82f6
@@ -446,8 +446,8 @@ Core responsibilities:
    when the user needs up-to-date information not covered in internal documents
 3. Analyze data files (CSV, Excel) when uploaded — provide summaries, statistics, and
    generate charts when requested
-4. Search GitHub repositories for issues, code references, and technical resources
-   when asked by engineers
+4. Send emails to team members with summaries or action items when requested,
+   using the connected Outlook MCP tool. Always ask for confirmation before sending.
 
 Memory behavior:
 - Remember the user's name and role for the entire session
@@ -526,7 +526,7 @@ Code Interpreter cho phép agent:
 
 ---
 
-#### Bước 6 — Kết nối MCP Server (GitHub)
+#### Bước 6 — Kết nối MCP Server (Outlook)
 
 ```
 Agent config → Tools & Knowledge → "+ Add"
@@ -537,20 +537,19 @@ Agent config → Tools & Knowledge → "+ Add"
 
 | Field | Value |
 |---|---|
-| **Server Label** | `github-mcp` |
-| **Server URL** | `https://mcp.ai.azure.com/servers/github` |
+| **Server Label** | `outlook-mcp` |
+| **Server URL** | `https://mcp.ai.azure.com/servers/outlook` |
 | **Authentication** | `Microsoft Entra ID` |
 
 Click **"Connect"** → đợi status xanh → **"Manage tools"**:
 
 ```
 Enabled tools:
-  ✅ search_repositories
-  ✅ list_issues
-  ✅ get_issue
-  ✅ search_code
-  ❌ create_issue    (disable — read-only for this lab)
-  ❌ delete_file     (disable — safety)
+  ✅ send_email
+  ✅ read_recent_emails
+  ✅ search_emails
+  ❌ delete_email    (disable — safety constraint)
+  ❌ forward_email   (disable)
 ```
 
 Click **"Save"**.
@@ -580,7 +579,7 @@ Trước khi test, verify lại toàn bộ Tools list:
 │  ✅ File Search   techcorp-rd-internal-docs (2)    │
 │  ✅ Bing Search   Enabled                          │
 │  ✅ Code Interpreter  Enabled                      │
-│  ✅ MCP: github-mcp   Connected (4 tools)          │
+│  ✅ MCP: outlook-mcp  Connected (3 tools)          │
 │  ✅ Memory        Session memory ON                │
 │                                                    │
 │  Model: GPT-4o  |  Temp: 0.7  |  Max tokens: 2048  │
@@ -628,13 +627,13 @@ Expected: Agent đọc CSV, tóm tắt (X projects active, Y completed...),
           tạo bar chart và hiển thị dưới dạng hình ảnh trong chat.
 ```
 
-**Test 5 — MCP GitHub:**
+**Test 5 — MCP Outlook:**
 ```
-User: "Search GitHub for open issues related to 'azure-ai-foundry'
-      in the microsoft organization."
+User: "Send an email to manager@techcorp.com summarizing the
+      Project Falcon budget we just discussed."
 
-Expected: Agent gọi GitHub MCP → list_issues hoặc search_repositories →
-          trả về danh sách issues với title, number, và URL.
+Expected: Agent sẽ hỏi xác nhận nội dung email trước khi gửi. Sau khi bạn
+          đồng ý, agent gọi Outlook MCP → send_email → báo cáo đã gửi thành công.
 ```
 
 **Test 6 — Memory persistence:**
