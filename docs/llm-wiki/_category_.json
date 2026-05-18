@@ -1,8 +1,0 @@
-{
-  "label": "LLM Wiki (Second Brain)",
-  "position": 19,
-  "link": {
-    "type": "generated-index",
-    "description": "Hướng dẫn xây dựng hệ thống quản trị tri thức cá nhân (Second Brain) với LLM Wiki."
-  }
-}
