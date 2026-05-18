@@ -13,7 +13,9 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "aha-mind:blog": "tsx scripts/aha-mind/blog_agent/pipeline.ts",
-    "aha-mind:syllabus": "tsx scripts/aha-mind/syllabus_agent/pipeline.ts"
+    "aha-mind:syllabus": "tsx scripts/aha-mind/syllabus_agent/pipeline.ts",
+    "aha-mind:dump": "tsx scripts/aha-mind/dump_agent/pipeline.ts",
+    "aha-mind:mcp": "tsx scripts/aha-mind/mcp-server.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
@@ -26,6 +28,7 @@
     "@langchain/langgraph": "^1.2.9",
     "@langchain/openai": "^1.4.4",
     "@mdx-js/react": "^3.1.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@mozilla/readability": "^0.6.0",
     "@napi-rs/canvas": "^0.1.100",
     "canvas": "^3.2.3",

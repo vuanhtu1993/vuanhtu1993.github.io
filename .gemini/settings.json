@@ -1,0 +1,11 @@
+{
+    "mcp": {
+        "aha-mind": {
+            "command": "npm",
+            "args": [
+                "run",
+                "aha-mind:mcp"
+            ]
+        }
+    }
+}
