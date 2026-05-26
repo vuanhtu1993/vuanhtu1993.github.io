@@ -22,11 +22,55 @@ Hãy cùng **"giải phẫu"** định nghĩa này:
 
 ---
 
-## 2. Các Kiến trúc Mạng Nơ-ron Dành Cho Văn Bản (Sequential Models)
+## 2. Bước Đột Phá: Từ "Đếm Từ" sang "Hiểu Nghĩa" — Word Embeddings
+
+Trước khi đi vào các mạng nơ-ron phức tạp, cần hiểu bước đột phá nền tảng mà Deep Learning mang lại cho NLP: **Word Embeddings (Biểu diễn từ bằng vector)**.
+
+### Tại sao cần Word Embeddings?
+
+Ở thời Statistical Era, BoW/TF-IDF biểu diễn từ bằng các **Sparse Vector** (vector thưa):
+*   Từ điển có 50,000 từ → mỗi từ là một vector có 50,000 chiều
+*   Vector của từ "mèo": `[0, 0, 0, ..., 1, ..., 0, 0]` — chỉ có 1 đvị = 1, còn lại đều = 0
+*   Hai từ "mèo" và "chó" hoàn toàn không có quan hệ gì trong không gian vector này
+
+Với **Dense Embeddings**, mỗi từ được ánh xạ thành vector có 100–300 chiều, và những từ có nghĩa gần nhau sẽ **nằm gần nhau trong không gian vector**:
+
+```
+                Phụ nữ -------- Nữ hoàng
+                   |                  |
+                   |                  |   (các vector song song nhau)
+                Đàn ông --------- Vua
+```
+
+### Word2Vec (2013 — Google)
+
+Word2Vec là mô hình huấn luyện **dự đoán từ** để học embedding. Có 2 kiến trúc:
+
+| Kiến trúc | Nguyên lý | Phù hợp |
+|------------|-----------|----------|
+| **CBOW** (Continuous Bag of Words) | Dùng các từ xung quanh để dự đoán từ trung tâm | Corpus lớn, từ phổ biến |
+| **Skip-gram** | Dùng từ trung tâm để dự đoán các từ xung quanh | Từ hiếm, corpus nhỏ |
+
+**Ví dụ:** Trong quá trình huấn luyện trên hàng tỷ câu, mô hình liên tục thấy *"vó ngựa"* và *"bờ biển"* xuất hiện cạnh từ *"ngựa"*. Vì vậy, vector của *"ngựa"* sẽ học cách "đẩy" gần các khái niệm liên quan trong không gian.
+
+### GloVe (2014 — Stanford)
+
+**GloVe (Global Vectors for Word Representation)** khác Word2Vec ở phương pháp:
+*   Word2Vec học từ **cửa sổ cục bộ (local window)** — chỉ nhìn các từ láng giềng.
+*   GloVe học từ **ma trận đồng xuất hiện toàn cục (global co-occurrence matrix)** — đếm tất cả cặp từ xuất hiện cùng nhau trong toàn bộ corpus.
+
+**Kết quả:** GloVe thường cho embedding tốt hơn cho các mối quan hệ **ngữ nghĩa (semantic)** (Vua–Nữ hoàng), trong khi Word2Vec Skip-gram tốt hơn cho mối quan hệ **cú pháp (syntactic)** (run–running).
+
+> **Hạn chế chứng kiến:**
+> Cả Word2Vec và GloVe đều tạo ra **Static Embeddings** (vector tĩnh). Từ *"bank"* luôn có một vector duy nhất dù nó có nghĩa là *"ngân hàng"* hay *"bờ sông"*. Điều này được khắc phục bởi Contextual Embeddings của BERT ở Module 3.
+
+---
+
+## 3. Các Kiến trúc Mạng Nơ-ron Dành Cho Văn Bản (Sequential Models)
 
 Văn bản là một loại **Dữ liệu tuần tự (Sequential Data)**. Từ đứng sau phụ thuộc vào từ đứng trước. Ví dụ: *"Hôm nay trời mưa to nên tôi mang..."* $\rightarrow$ Bộ não bạn tự đoán được từ tiếp theo có thể là *"ô"* hoặc *"áo mưa"*.
 
-Để xử lý dữ liệu tuần tự, Deep Learning ra mắt một "gia đình" các mô hình đặc biệt.
+Không chỉ có RNN và LSTM, Deep Learning còn mang đến một kiến trúc đáng ngạc nhiên khác cho văn bản.
 
 ### 2.1. RNN (Recurrent Neural Network - Mạng nơ-ron hồi quy)
 
@@ -58,6 +102,13 @@ graph LR
 
 > **Critical Thinking:** 
 > Dù LSTM/GRU rất mạnh, nhưng chúng có một **điểm yếu cốt tử**: Chúng bắt buộc phải đọc từ trái sang phải một cách **tuần tự**. Bạn không thể bắt chúng đọc từ thứ 10 nếu chưa đọc xong 9 từ trước đó. Điều này khiến chúng **không thể chạy song song (parallel computing)** trên GPU, làm cho việc huấn luyện cực kỳ mất thời gian. Đây chính là lý do Transformer (Module 3) sau này đánh bại LSTM.
+
+### 3.3. CNN for NLP (Convolutional Neural Networks cho Văn Bản)
+
+CNN nổi tiếng trong xử lý hình ảnh, nhưng chúng cũng được áp dụng hiệu quả vào NLP bằng cách trượt cửa sổ (filter/kernel) qua các từ để phát hiện các **cụm từ (n-gram features)** quan trọng.
+
+*   **Thế mạnh:** Rất nhanh (có thể song song hóa tuyệt vời), hiệu quả với các tác vụ **phân loại văn bản** (Sentiment Analysis, Spam Detection).
+*   **Hạn chế:** Chỉ phát hiện được các mẫu cục bộ trong cửa sổ cố định, không nắm bắt được phụ thuộc dài như LSTM.
 
 ---
 
@@ -138,9 +189,10 @@ SimpleTextClassifier(
 ## 5. Tổng kết
 
 Trong Module 2, chúng ta đã hiểu được:
-1.  **Sức mạnh của Deep Learning**: Cho phép máy tự động học đặc trưng ngôn ngữ thông qua Embeddings.
+1.  **Bước đột phá của Word Embeddings**: Chuyển từ vector thưa (Sparse) sang vector dày đặc (Dense) nơi ý nghĩa được mã hóa thành không gian toán học. **Word2Vec** và **GloVe** là nền tảng.
 2.  **Mô hình tuần tự (RNN/LSTM/GRU)**: Được thiết kế riêng cho ngôn ngữ vì khả năng lưu trữ ngữ cảnh từ trái sang phải.
-3.  **Hạn chế cốt lõi**: LSTM/GRU học tuần tự nên chậm và khó song song hóa.
+3.  **CNN for NLP**: Phân loại văn bản nhanh nhưng chỉ nắm bắt cục bộ.
+4.  **Hạn chế cốt lõi**: LSTM/GRU học tuần tự nên chậm và khó song song hóa. Static Embeddings không phân biệt được đa nghĩa.
 
 Để vượt qua giới hạn tính toán tuần tự này, các nhà khoa học của Google đã tạo ra một "vụ nổ Big Bang" trong thế giới NLP. Đó chính là kiến trúc **Transformer**. Chúng ta sẽ khám phá nó ở **Module 3**.
 

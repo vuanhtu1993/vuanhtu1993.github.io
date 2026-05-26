@@ -78,6 +78,7 @@ const downloadImage = async (img: HTMLImageElement, baseUrl: string, outputDir: 
  */
 export const fetchHtmlContent = async (url: string): Promise<Article | null> => {
   let html = "";
+  let usedJina = false;
   try {
     if (url.includes("medium.com")) throw new Error("Force Jina for Medium");
 
@@ -97,10 +98,30 @@ export const fetchHtmlContent = async (url: string): Promise<Article | null> => 
     const jinaResponse = await fetch(`https://r.jina.ai/${url}`, { headers: { "X-Return-Format": "html" } });
     if (!jinaResponse.ok) throw new Error("Jina fallback failed");
     html = await jinaResponse.text();
+    usedJina = true;
   }
 
-  const doc = new JSDOM(html, { url });
-  const articleParsed = new Readability(doc.window.document).parse();
+  let doc = new JSDOM(html, { url });
+  let articleParsed = new Readability(doc.window.document).parse();
+
+  // Nếu không parse được hoặc nội dung quá ngắn (dưới 200 ký tự, thường gặp ở SPA)
+  // và chưa sử dụng Jina Reader, tiến hành fallback sang Jina Reader.
+  if ((!articleParsed || !articleParsed.textContent || articleParsed.textContent.trim().length < 200) && !usedJina) {
+    console.warn(`[HTML-Helper] Content parsed is empty or too short. Retrying via Jina Reader to support client-side rendering (SPA)...`);
+    try {
+      const jinaResponse = await fetch(`https://r.jina.ai/${url}`, { headers: { "X-Return-Format": "html" } });
+      if (jinaResponse.ok) {
+        html = await jinaResponse.text();
+        doc = new JSDOM(html, { url });
+        articleParsed = new Readability(doc.window.document).parse();
+      } else {
+        console.error(`[HTML-Helper] Jina fallback failed with status: ${jinaResponse.status}`);
+      }
+    } catch (jinaError) {
+      console.error(`[HTML-Helper] Jina fallback failed after empty content:`, (jinaError as Error).message);
+    }
+  }
+
   if (!articleParsed) return null;
 
   const contentDoc = new JSDOM(articleParsed.content || "", { url });

@@ -63,6 +63,37 @@ mindmap
 
 ---
 
+## 2.1. BERT vs GPT — Hai Trường Phái Của Modern NLP
+
+Khi nói đến Transformer, có **2 hướng tư duy kiến trúc** được áp dụng khác nhau, dẫn đến 2 dòng mô hình lớn nhất hiện nay:
+
+| Tiêu chí | **BERT** (Google, 2018) | **GPT** (OpenAI, 2018) |
+| :--- | :--- | :--- |
+| **Kiến trúc** | Encoder-only | Decoder-only |
+| **Hướng Attention** | **Hai chiều (Bidirectional)** — nhìn cả từ trước và sau | **Một chiều (Unidirectional)** — chỉ nhìn từ trước đến hiện tại |
+| **Mục tiêu huấn luyện** | Dự đoán từ **bị che** (Masked Language Model) | Dự đoán **từ tiếp theo** (Causal Language Model) |
+| **Điểm mạnh** | Hiểu ngữ cảnh sâu, xuất sắc ở các tác vụ **phân loại, NER** | Sinh văn bản tự nhiên, xuất sắc ở **hỏi đáp, dịch, tóm tắt** |
+| **Áp dụng** | Tìm kiếm Google, NER, phân loại tài liệu | ChatGPT, Claude, GitHub Copilot |
+
+**Ví dụ minh họa cách huấn luyện:**
+
+```
+[BERT - Masked Language Model]
+Input:  "Con [MASK] đang chạy trong vườn."
+Output: Dự đoán: "mèo", "chó", "gà"...
+→ BERT nhìn cả 2 phía: ["đang chạy trong vườn"] và ["Con"] để đoán.
+
+[GPT - Causal Language Model]
+Input:  "Con mèo đang"
+Output: Dự đoán từ tiếp theo: "chạy", "ngủ", "ngồi"...
+→ GPT chỉ nhìn về bên trái (đã có), không biết bên phải.
+```
+
+> **Critical Thinking:**
+> Không có mô hình nào tốt hơn tuyệt đối. BERT thống trị các bài toán **hiểu ngôn ngữ (NLU)**, còn GPT thống trị các bài toán **sinh ngôn ngữ (NLG)**. Trên thực tế, các LLM hiện đại như Claude hay Gemini đã kết hợp ưu điểm của cả hai.
+
+---
+
 ## 3. Hiểu rõ Token, Context và Prompting
 
 Để sử dụng LLM hiệu quả, bạn cần nắm vững 3 khái niệm cốt lõi này.
@@ -87,6 +118,17 @@ Một prompt tốt thường có cấu trúc:
 3.  **Task (Nhiệm vụ):** "Hãy tìm ra lỗi và viết lại đoạn code này..."
 4.  **Format (Định dạng output):** "...trình bày dưới dạng danh sách gạch đầu dòng, kèm theo code blocks."
 
+### 3.4. Zero-shot và Few-shot Learning
+
+Đây là một trong những khả năng **kỳ diệu nhất** của LLMs — thứ mà các mô hình thống kê cũ không bao giờ làm được:
+
+| Loại | Định nghĩa | Ví dụ Prompt |
+| :--- | :--- | :--- |
+| **Zero-shot** | Yêu cầu LLM thực hiện nhiệm vụ hoàn toàn mới, **không có ví dụ** nào trong prompt | *"Phân loại câu sau là Tích cực hay Tiêu cực: 'Món ăn thật tệ hại'"* |
+| **Few-shot** | Cung cấp **một vài ví dụ (shots)** trước rồi hỏi, giúp LLM hiểu format/pattern mong muốn | *"Ví dụ 1: 'Ngon quá' → Tích cực. Ví dụ 2: 'Không có gì đặc sắc' → Trung tính. Giờ hãy phân loại: 'Món ăn thật tệ hại'"* |
+
+**Tại sao LLM có khả năng này?** Vì được huấn luyện trên kích thước dữ liệu khổng lồ, LLM đã "thấy" gần như mọi cấu trúc nhiệm vụ được con người viết ra. Nó có khả năng **suy luận theo mẫu (In-context Learning)** chỉ từ mô tả và ví dụ trong prompt, không cần cập nhật tham số của mô hình.
+
 ---
 
 ## 4. RAG vs Fine-Tuning: Chọn hướng đi nào? (Critical Thinking)
@@ -109,9 +151,10 @@ Khi bạn muốn đưa dữ liệu riêng của công ty (Ví dụ: Tài liệu 
 ## 5. Tổng kết
 
 *   **Transformer** đã thay đổi luật chơi nhờ cơ chế **Self-Attention** cho phép tính toán song song.
-*   Sự kết hợp giữa Transformer, lượng dữ liệu khổng lồ và sức mạnh GPU đã sinh ra các **LLMs**.
+*   **BERT** (Bidirectional Encoder) xuất sắc về hiểu ngôn ngữ (NLU); **GPT** (Causal Decoder) xuất sắc về sinh văn bản (NLG). Các LLM hiện đại kết hợp cả hai.
 *   LLM giao tiếp bằng **Tokens**, có bộ nhớ giới hạn là **Context Window**, và được điều khiển bởi **Prompting**.
-*   Để dạy LLM kiến thức nội bộ của bạn, **RAG** là lựa chọn ưu tiên hàng đầu.
+*   Khả năng **Zero-shot/Few-shot** là bước nhảy vọt từ mô hình cũ (luôn cần dữ liệu huấn luyện chuyên biệt) sang mô hình thông minh thực sự (đọc hiểu yêu cầu và suy luận ngay từ đầu).
+*   Để đưa dữ liệu nội bộ vào LLM, **RAG** là lựa chọn ưu tiên hàng đầu.
 
 Chính vì RAG quá quan trọng và đang là tiêu chuẩn của ngành AI hiện nay, trong **Module 4**, chúng ta sẽ đi sâu vào việc giải phẫu và tự tay xây dựng một hệ thống RAG cơ bản!
 
