@@ -1,0 +1,178 @@
+---
+slug: aha-mind-generative-ai-for-beginners-03-using-generative-ai-responsibly-readme-md-at-main-microsoft-generative-ai-for-beginners
+title: "generative-ai-for-beginners/03-using-generative-ai-responsibly/README.md at main · microsoft/generative-ai-for-beginners"
+date: 2026-05-30
+authors: [anhhtus]
+tags: [aha-mind, auto-generated, daily-digest]
+---
+
+import Term from '@site/src/components/Term';
+
+> Bài viết được biên dịch tự động bởi **Aha! Mind Socratic Engine**. Nguồn bài viết: [Link gốc](https://github.com/microsoft/generative-ai-for-beginners/blob/main/03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)
+
+<!-- truncate -->
+[![Using Generative AI Responsibly](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780159187/github-page/cffxasdhvcbsw9hpekja.png)](https://youtu.be/YOp-e1GjZdA?si=7Wv4wu3x44L1DCVj)
+
+> _Click the image above to view video of this lesson_
+
+It's easy to be fascinated with AI and <Term definition="Trí tuệ nhân tạo tạo sinh, có khả năng tự sáng tạo ra nội dung mới (văn bản, hình ảnh, mã nguồn) dựa trên dữ liệu đã học, thay vì chỉ phân tích dữ liệu cũ. (Ví dụ: Giống như một họa sĩ tài ba có thể vẽ một bức tranh hoàn toàn mới sau khi đã ngắm hàng triệu bức tranh khác.)">generative AI</Term> in particular, but you need to consider how you would use it responsibly. You need to consider things like how to ensure the output is fair, non-harmful and more. This chapter aims to provide you with the mentioned context, what to consider, and how to take active steps to improve your AI usage.
+
+## Introduction
+
+[](#introduction)
+
+This lesson will cover:
+
+*   Why you should prioritize Responsible AI when building Generative AI applications.
+*   Core principles of Responsible AI and how they relate to Generative AI.
+*   How to put these Responsible AI principles into practice through strategy and tooling.
+
+## Learning Goals
+
+[](#learning-goals)
+
+After completing this lesson you will know:
+
+*   The importance of Responsible AI when building Generative AI applications.
+*   When to think and apply the core principles of Responsible AI when building Generative AI applications.
+*   What tools and strategies are available to you to put the concept of Responsible AI into practice.
+
+## Responsible AI Principles
+
+[](#responsible-ai-principles)
+
+The excitement of Generative AI has never been higher. This excitement has brought a lot of new developers, attention, and funding to this space. While this is very positive for anyone looking to build products and companies using Generative AI, it is also important we proceed responsibly.
+
+Throughout this course, we are focusing on building our startup and our AI education product. We’ll use the principles of Responsible AI: Fairness, <Term definition="Tính bao trùm hoặc toàn diện, đảm bảo công nghệ AI được thiết kế để phục vụ và tôn trọng tất cả mọi người, không phân biệt chủng tộc, giới tính, hay hoàn cảnh xã hội. (Ví dụ: Giống như việc xây dựng một tòa nhà có cả lối đi dốc cho người đi xe lăn và chữ nổi cho người khiếm thị, đảm bảo ai cũng có thể tiếp cận.)">Inclusiveness</Term>, <Term definition="Độ tin cậy, khả năng hoạt động ổn định, nhất quán và chính xác của hệ thống phần mềm trong nhiều điều kiện khác nhau mà không xảy ra lỗi. (Ví dụ: Giống như một chiếc xe máy Honda cũ, dù mưa gió hay đường ngập nước thì đề một phát là nổ máy ngay.)">Reliability</Term>/Safety, Security & Privacy, <Term definition="Tính minh bạch, rõ ràng, cho phép người dùng hiểu được cách thức hoạt động, nguồn dữ liệu và lý do tại sao AI lại đưa ra một quyết định cụ thể. (Ví dụ: Giống như một chiếc đồng hồ cơ có mặt kính trong suốt, giúp bạn nhìn rõ từng bánh răng đang chuyển động bên trong để tạo nên tiếng tích tắc.)">Transparency</Term> and <Term definition="Trách nhiệm giải trình, nghĩa là một cá nhân hoặc tổ chức phải chịu trách nhiệm hoàn toàn về kết quả, hành động và quyết định của hệ thống AI do mình tạo ra. (Ví dụ: Giống như việc thuyền trưởng phải là người chịu trách nhiệm cuối cùng nếu con tàu đi chệch hướng hoặc va vào đá ngầm, dù bánh lái do thủy thủ điều khiển.)">Accountability</Term>. With these principles, we will explore how they relate to our use of Generative AI in our products.
+
+## Why Should You Prioritize Responsible AI
+
+[](#why-should-you-prioritize-responsible-ai)
+
+When building a product, taking a <Term definition="Phương pháp tiếp cận lấy con người làm trung tâm, đặt trải nghiệm, lợi ích và sự an toàn của người dùng lên hàng đầu khi thiết kế sản phẩm. (Ví dụ: Giống như việc thiết kế một chiếc ghế công thái học ôm sát đường cong cột sống của người ngồi, thay vì chỉ chú trọng vào vẻ ngoài bóng bẩy của nó.)">human-centric approach</Term> by keeping your user's best interest in mind leads to the best results.
+
+The uniqueness of Generative AI is its power to create helpful answers, information, guidance, and content for users. This can be done without many manual steps which can lead to very impressive results. Without proper planning and strategies, it can also unfortunately lead to some harmful results for your users, your product, and society as a whole.
+
+Let's look at some (but not all) of these potentially harmful results:
+
+### <Term definition="Hiện tượng ảo tưởng của mô hình ngôn ngữ lớn (LLM), khi nó tự tin đưa ra các thông tin hoàn toàn sai sự thật hoặc vô nghĩa nhưng nghe rất thuyết phục. (Ví dụ: Giống như một người say rượu nói năng cực kỳ tự tin và lưu loát về một sự kiện lịch sử chưa từng xảy ra.)">Hallucinations</Term>
+
+[](#hallucinations)
+
+Hallucinations are a term used to describe when an LLM produces content that is either completely <Term definition="Vô nghĩa, ngớ ngẩn, không có logic hoặc không dựa trên bất kỳ thực tế hợp lý nào. (Ví dụ: Giống như việc ghép các từ ngẫu nhiên lại thành một câu như Quả chuối đang lái xe tăng trên mặt trăng.)">nonsensical</Term> or something we know is factually wrong based on other sources of information.
+
+Let's take for example we build a feature for our startup that allows students to ask historical questions to a model. A student asks the question `Who was the sole survivor of Titanic?`
+
+The model produces a response such as the one below:
+
+[![Prompt saying "Who was the sole survivor of the Titanic"](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780159186/github-page/m4ppymkhsp6qspeunrf5.webp)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/03-using-generative-ai-responsibly/images/ChatGPT-titanic-survivor-prompt.webp?WT.mc_id=academic-105485-koreyst)
+
+> _(Source: [Flying bisons](https://flyingbisons.com/?WT.mc_id=academic-105485-koreyst))_
+
+This is a very confident and thorough answer. Unfortunately, it is incorrect. Even with a minimal amount of research, one would discover there was more than one survivor of the Titanic disaster. For a student who is just starting to research this topic, this answer can be persuasive enough to not be questioned and treated as fact. The consequences of this can lead to the AI system being unreliable and negatively impact the reputation of our startup.
+
+With each iteration of any given LLM, we have seen performance improvements around minimizing hallucinations. Even with this improvement, we as application builders and users still need to remain aware of these limitations.
+
+### Harmful Content
+
+[](#harmful-content)
+
+We covered in the earlier section when an LLM produces incorrect or nonsensical responses. Another risk we need to be aware of is when a model responds with harmful content.
+
+Harmful content can be defined as:
+
+*   Providing instructions or encouraging self-harm or harm to certain groups.
+*   Hateful or <Term definition="Có tính chất hạ thấp danh dự, làm nhục hoặc gây tổn hại đến lòng tự trọng của một ai đó. (Ví dụ: Giống như việc chế giễu ngoại hình của một người trước đám đông để làm họ cảm thấy xấu hổ.)">demeaning</Term> content.
+*   Guiding the planning of any type of attack or violent acts.
+*   Providing instructions on how to find illegal content or commit illegal acts.
+*   Displaying sexually explicit content.
+
+For our startup, we want to make sure we have the right tools and strategies in place to prevent this type of content from being seen by students.
+
+### Lack of Fairness
+
+[](#lack-of-fairness)
+
+Fairness is defined as “ensuring that an AI system is free from <Term definition="Định kiến hoặc sự thiên vị có sẵn trong dữ liệu huấn luyện, khiến AI đưa ra các quyết định bất công hoặc lệch lạc về một đối tượng cụ thể. (Ví dụ: Giống như một trọng tài bóng đá thiên vị luôn thổi phạt một đội chỉ vì ông ta không thích màu áo của họ.)">bias</Term> and discrimination and that they treat everyone fairly and equally.” In the world of Generative AI, we want to ensure that exclusionary worldviews of <Term definition="Các nhóm người yếu thế hoặc bị gạt ra ngoài lề xã hội, ít có tiếng nói và quyền lợi hơn so với đa số (ví dụ: người khuyết tật, người dân tộc thiểu số). (Ví dụ: Giống như những học sinh ngồi ở góc khuất cuối lớp học, ít khi được giáo viên chú ý hay gọi phát biểu.)">marginalized groups</Term> are not reinforced by the model’s output.
+
+These types of outputs are not only destructive to building positive product experiences for our users, but they also cause further societal harm. As application builders, we should always keep a wide and diverse user base in mind when building solutions with Generative AI.
+
+## How to Use Generative AI Responsibly
+
+[](#how-to-use-generative-ai-responsibly)
+
+Now that we have identified the importance of Responsible Generative AI, let's look at 4 steps we can take to build our AI solutions responsibly:
+
+[![Mitigate Cycle](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780159187/github-page/pyezbuibdvpd6ixkgczx.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/03-using-generative-ai-responsibly/images/<Term definition="Giảm thiểu, làm dịu đi mức độ nghiêm trọng hoặc tác hại của một vấn đề hoặc rủi ro trước khi nó gây ra hậu quả lớn. (Ví dụ: Giống như việc bạn mặc áo phao và thắt dây an toàn để giảm thiểu chấn thương khi đi tàu lượn siêu tốc.)">mitigate</Term>-cycle.png?WT.mc_id=academic-105485-koreyst)
+
+### Measure Potential Harms
+
+[](#measure-potential-harms)
+
+In software testing, we test the expected actions of a user on an application. Similarly, testing a diverse set of prompts users are most likely going to use is a good way to measure potential harm.
+
+Since our startup is building an education product, it would be good to prepare a list of education-related prompts. This could be to cover a certain subject, historical facts, and prompts about student life.
+
+### Mitigate Potential Harms
+
+[](#mitigate-potential-harms)
+
+It is now time to find ways where we can prevent or limit the potential harm caused by the model and its responses. We can look at this in 4 different layers:
+
+[![Mitigation Layers](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780159187/github-page/nygesitdvzd9z9w3xt7y.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/03-using-generative-ai-responsibly/images/mitigation-layers.png?WT.mc_id=academic-105485-koreyst)
+
+*   **Model**. Choosing the right model for the right use case. Larger and more complex models like GPT-4 can cause more of a risk of harmful content when applied to smaller and more specific use cases. Using your training data to <Term definition="Tinh chỉnh một mô hình AI đã được huấn luyện sẵn (pre-trained) bằng cách huấn luyện thêm trên một tập dữ liệu nhỏ, chuyên biệt để nó phục vụ tốt một tác vụ cụ thể. (Ví dụ: Giống như việc một bác sĩ đa khoa đi học thêm một khóa chuyên sâu về tim mạch để trở thành chuyên gia mổ tim.)">fine-tune</Term> also reduces the risk of harmful content.
+    
+*   **Safety System**. A safety system is a set of tools and configurations on the platform serving the model that help mitigate harm. An example of this is the content filtering system on the Azure OpenAI service. Systems should also detect <Term definition="Các cuộc tấn công bẻ khóa bằng cách sử dụng các câu lệnh (prompt) được thiết kế khéo léo để lừa AI vượt qua các rào cản bảo mật và quy tắc đạo đức của nó. (Ví dụ: Giống như việc dùng những lời đường mật hoặc mẹo tâm lý để lừa người bảo vệ mở cửa kho báu mà không cần chìa khóa.)">jailbreak attacks</Term> and unwanted activity like requests from bots.
+    
+*   **<Term definition="Câu lệnh hệ thống (system prompt) cấp cao được thiết lập sẵn để định hình hành vi, giọng điệu, giới hạn và vai trò của AI trước khi người dùng nhập câu hỏi của họ. (Ví dụ: Giống như việc lập trình luật chơi hoặc bản tính cho một diễn viên trước khi họ bước lên sân khấu ứng biến với khán giả.)">Metaprompt</Term>**. Metaprompts and <Term definition="Kỹ thuật neo đậu thông tin, buộc AI phải đối chiếu và chỉ sử dụng các nguồn dữ liệu thực tế, đáng tin cậy được cung cấp sẵn để trả lời, thay vì tự suy diễn lung tung. (Ví dụ: Giống như việc yêu cầu một học sinh làm bài kiểm tra open-book (sách mở) và chỉ được chép thông tin từ đúng cuốn sách giáo khoa đó.)">grounding</Term> are ways we can direct or limit the model based on certain behaviors and information. This could be using system inputs to define certain limits of the model. In addition, providing outputs that are more relevant to the scope or domain of the system.
+    
+
+It can also be using techniques like Retrieval Augmented Generation (RAG) to have the model only pull information from a selection of trusted sources. There is a lesson later in this course for [building search applications](https://github.com/microsoft/generative-ai-for-beginners/blob/main/08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)
+
+*   **User Experience**. The final layer is where the user interacts directly with the model through our application’s interface in some way. In this way we can design the UI/UX to limit the user on the types of inputs they can send to the model as well as text or images displayed to the user. When deploying the AI application, we also must be transparent about what our Generative AI application can and can’t do.
+
+We have an entire lesson dedicated to [Designing UX for AI Applications](https://github.com/microsoft/generative-ai-for-beginners/blob/main/12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+
+*   **Evaluate model**. Working with LLMs can be challenging because we don’t always have control over the data the model was trained on. Regardless, we should always evaluate the model’s performance and outputs. It’s still important to measure the model’s accuracy, similarity, groundedness, and relevance of the output. This helps provide transparency and trust to <Term definition="Các bên liên quan trực tiếp hoặc gián tiếp đến một dự án, có lợi ích hoặc chịu ảnh hưởng bởi kết quả của dự án đó (như khách hàng, nhà đầu tư, lập trình viên). (Ví dụ: Giống như những người cùng chung tiền mua một mảnh đất; bất kỳ quyết định xây dựng nào trên mảnh đất đó đều ảnh hưởng đến túi tiền của họ.)">stakeholders</Term> and users.
+
+### Operate a Responsible Generative AI solution
+
+[](#operate-a-responsible-generative-ai-solution)
+
+Building an operational practice around your AI applications is the final stage. This includes partnering with other parts of our startup like Legal and Security to ensure we are <Term definition="Tuân thủ đầy đủ các quy định, luật pháp, tiêu chuẩn kỹ thuật hoặc chính sách được đề ra bởi các cơ quan quản lý. (Ví dụ: Giống như việc người tham gia giao thông dừng lại khi đèn đỏ và đội mũ bảo hiểm để không bị cảnh sát phạt.)">compliant</Term> with all regulatory policies. Before launching, we also want to build plans around delivery, handling incidents, and <Term definition="Hành động khôi phục hệ thống phần mềm hoặc cơ sở dữ liệu về trạng thái ổn định trước đó khi phiên bản mới gặp lỗi nghiêm trọng. (Ví dụ: Giống như việc bạn nhấn nút Undo (Ctrl+Z) để quay lại bước trước đó khi lỡ tay xóa mất một đoạn văn quan trọng.)">rollback</Term> to prevent any harm to our users from growing.
+
+## Tools
+
+[](#tools)
+
+While the work of developing Responsible AI solutions may seem like a lot, it is work well worth the effort. As the area of Generative AI grows, more tooling to help developers efficiently integrate responsibility into their workflows will mature. For example, the [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview?WT.mc_id=academic-105485-koreyst) can help detect harmful content and images via an API request.
+
+## Knowledge check
+
+[](#knowledge-check)
+
+What are some things you need to care about to ensure responsible AI usage?
+
+1.  That the answer is correct.
+2.  Harmful usage, that AI isn't used for criminal purposes.
+3.  Ensuring the AI is free from bias and discrimination.
+
+A: 2 and 3 are correct. Responsible AI helps you consider how to mitigate harmful effects and biases and more.
+
+## 🚀 Challenge
+
+[](#-challenge)
+
+Read up on [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview?WT.mc_id=academic-105485-koreyst) and see what you can adopt for your usage.
+
+## Great Work, Continue Your Learning
+
+[](#great-work-continue-your-learning)
+
+After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+
+Head over to Lesson 4 where we will look at [Prompt Engineering Fundamentals](https://github.com/microsoft/generative-ai-for-beginners/blob/main/04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+*Made by Anh Tu - Share to be share*

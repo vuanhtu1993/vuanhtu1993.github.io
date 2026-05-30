@@ -41,6 +41,16 @@ export const mdxFormatterNode = async (state: AhaMindState): Promise<Partial<Aha
     });
   }
 
+  // Escape { và } ngoài các block code để không bị MDX acorn parser hiểu nhầm là JS expression
+  const parts = content.split(/(```[\s\S]*?```|`[^`\n]+`)/g);
+  content = parts.map((part, index) => {
+    // index chẵn là normal text, index lẻ là code block
+    if (index % 2 === 0) {
+      return part.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+    }
+    return part;
+  }).join('');
+
   // Tạo slug từ tiêu đề
   const slug = state.articleToProcess.title
     .toLowerCase()

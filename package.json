@@ -32,6 +32,7 @@
     "@mozilla/readability": "^0.6.0",
     "@napi-rs/canvas": "^0.1.100",
     "canvas": "^3.2.3",
+    "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",
     "csv-stringify": "^6.7.0",
     "dotenv": "^17.4.2",

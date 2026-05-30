@@ -6,6 +6,16 @@ import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
 import { Article } from "../state";
+import { v2 as cloudinary } from "cloudinary";
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const turndownService = new TurndownService({
   headingStyle: 'atx',
@@ -24,9 +34,9 @@ turndownService.addRule('img', {
 });
 
 /**
- * Tải ảnh và lưu cục bộ.
+ * Tải ảnh và upload lên Cloudinary.
  */
-const downloadImage = async (img: HTMLImageElement, baseUrl: string, outputDir: string): Promise<void> => {
+const downloadImage = async (img: HTMLImageElement, baseUrl: string): Promise<void> => {
   let originalSrc = img.getAttribute("data-src") || img.getAttribute("data-original") || img.getAttribute("src") || img.getAttribute("srcset");
   if (!originalSrc) return;
 
@@ -45,27 +55,27 @@ const downloadImage = async (img: HTMLImageElement, baseUrl: string, outputDir: 
       return;
     }
 
-    const contentType = response.headers.get("content-type") || "";
-    let ext = ".jpg";
-    if (contentType.includes("png")) ext = ".png";
-    else if (contentType.includes("gif")) ext = ".gif";
-    else if (contentType.includes("webp")) ext = ".webp";
-    else if (contentType.includes("svg")) ext = ".svg";
+    // Upload buffer to Cloudinary
+    const cloudinaryResult: any = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { folder: "github-page" },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      uploadStream.end(buffer);
+    });
 
-    const hash = crypto.createHash("md5").update(absoluteUrl).digest("hex").slice(0, 8);
-    const fileName = `img-${hash}${ext}`;
-    const filePath = path.join(outputDir, fileName);
-
-    fs.writeFileSync(filePath, buffer);
-    img.setAttribute("src", `./assets/${fileName}`);
+    img.setAttribute("src", cloudinaryResult.secure_url);
     img.removeAttribute("srcset");
     img.removeAttribute("data-src");
     img.removeAttribute("data-original");
     img.removeAttribute("loading");
 
-    console.log(`[HTML-Helper] Downloaded image: ${fileName}`);
+    console.log(`[HTML-Helper] Uploaded image to Cloudinary: ${cloudinaryResult.secure_url}`);
   } catch (error) {
-    console.error(`[HTML-Helper] Error downloading image:`, (error as Error).message);
+    console.error(`[HTML-Helper] Error downloading/uploading image:`, (error as Error).message);
     // Fallback to absolute URL if possible, otherwise remove
     const absoluteUrl = new URL(parsedSrc, baseUrl).href;
     if (absoluteUrl.startsWith("http")) img.setAttribute("src", absoluteUrl);
@@ -126,11 +136,9 @@ export const fetchHtmlContent = async (url: string): Promise<Article | null> => 
 
   const contentDoc = new JSDOM(articleParsed.content || "", { url });
   const images = contentDoc.window.document.querySelectorAll("img");
-  
+
   if (images.length > 0) {
-    const outputDir = path.join(process.cwd(), "blog", "aha-mind", "assets");
-    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
-    await Promise.all(Array.from(images).map(img => downloadImage(img as any, url, outputDir)));
+    await Promise.all(Array.from(images).map(img => downloadImage(img as any, url)));
   }
 
   let cleanContent = turndownService.turndown(contentDoc.window.document.body);

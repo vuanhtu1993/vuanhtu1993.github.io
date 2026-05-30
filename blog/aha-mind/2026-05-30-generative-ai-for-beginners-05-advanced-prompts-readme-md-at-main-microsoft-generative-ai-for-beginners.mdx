@@ -1,0 +1,667 @@
+---
+slug: aha-mind-generative-ai-for-beginners-05-advanced-prompts-readme-md-at-main-microsoft-generative-ai-for-beginners
+title: "generative-ai-for-beginners/05-advanced-prompts/README.md at main · microsoft/generative-ai-for-beginners"
+date: 2026-05-30
+authors: [anhhtus]
+tags: [aha-mind, auto-generated, daily-digest]
+---
+
+import Term from '@site/src/components/Term';
+
+> Bài viết được biên dịch tự động bởi **Aha! Mind Socratic Engine**. Nguồn bài viết: [Link gốc](https://github.com/microsoft/generative-ai-for-beginners/blob/main/05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst)
+
+<!-- truncate -->
+## Creating Advanced prompts
+
+[](#creating-advanced-prompts)
+
+[![Creating Advanced Prompts](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160383/github-page/dsol9njfdepicowhbweb.png)](https://youtu.be/BAjzkaCdRok?si=NmUIyRf7-cDgbjtt)
+
+Let's recap some learnings from the previous chapter:
+
+> Prompt _engineering_ is the process by which we **guide the model towards more relevant responses** by providing more useful instructions or context.
+
+There are also two steps to writing prompts: constructing the prompt, by providing relevant context, and _optimization_, how to gradually improve the prompt.
+
+At this point, we have some basic understanding of how to write prompts, but we need to go deeper. In this chapter, you will go from trying out various prompts to understanding why one prompt is better than another. You will learn how to construct prompts following some basic techniques that can be applied to any LLM.
+
+## Introduction
+
+[](#introduction)
+
+In this chapter, we will cover the following topics:
+
+*   Extend your knowledge of <Term definition="Kỹ thuật thiết kế và tối ưu hóa câu lệnh đầu vào để điều hướng mô hình AI (như LLM) đưa ra câu trả lời chính xác và phù hợp nhất. (Ví dụ: Giống như cách bạn học cách giao tiếp và đưa ra chỉ thị rõ ràng cho một trợ lý mới để họ làm đúng ý bạn ngay từ đầu.)">prompt engineering</Term> by applying different techniques to your prompts.
+*   Configuring your prompts to vary the output.
+
+## Learning goals
+
+[](#learning-goals)
+
+After completing this lesson, you'll be able to:
+
+*   Apply prompt engineering techniques that improve the outcome of your prompts.
+*   Perform prompting that is either varied or <Term definition="Tính chất định trước, nghĩa là với cùng một đầu vào và cùng một điều kiện, hệ thống sẽ luôn trả về một kết quả duy nhất giống hệt nhau. (Ví dụ: Giống như phép toán 1 + 1 luôn bằng 2, không bao giờ thay đổi dù bạn có thực hiện lại bao nhiêu lần.)">deterministic</Term>.
+
+## Prompt engineering
+
+[](#prompt-engineering)
+
+Prompt engineering is the process of creating prompts that will produce the desired outcome. There's more to prompt engineering than just writing a text prompt. Prompt engineering is not an engineering discipline, it's more a set of techniques that you can apply to get the desired outcome.
+
+### An example of a prompt
+
+[](#an-example-of-a-prompt)
+
+Let's take a basic prompt like this one:
+
+> Generate 10 questions on geography.
+
+In this prompt, you are actually applying a set of different prompt techniques.
+
+Let's break this down.
+
+*   **Context**, you specify it should be about "geography".
+*   **Limiting the output**, you want no more than 10 questions.
+
+### Limitations of simple prompting
+
+[](#limitations-of-simple-prompting)
+
+You may or may not get the desired outcome. You will get your questions generated, but geography is a big topic and you may not get what you want to due the following reasons:
+
+*   **Big topic**, you don't know if it's going to be about countries, capitals, rivers and so on.
+*   **Format**, what if you wanted the questions to be formatted in a certain way?
+
+As you can see, there's a lot to consider when creating prompts.
+
+So far, we've seen a simple prompt example, but generative AI is capable of much more to help people in a variety of roles and industries. Let's explore some basic techniques next.
+
+### Techniques for prompting
+
+[](#techniques-for-prompting)
+
+First, we need to understand that prompting is an _emergent_ property of an LLM meaning that this is not a feature that is built into the model but rather something we discover as we use the model.
+
+There are some basic techniques that we can use to prompt an LLM. Let's explore them.
+
+*   **<Term definition="Kỹ thuật ra lệnh cho AI thực hiện một nhiệm vụ ngay lập tức mà không cung cấp bất kỳ ví dụ minh họa nào trước đó. (Ví dụ: Giống như việc bạn yêu cầu một người thợ làm bánh 'hãy làm cho tôi một chiếc bánh kem dâu' mà không đưa cho họ xem ảnh mẫu hay công thức cụ thể nào.)">Zero-shot prompting</Term>**, this is the most basic form of prompting. It's a single prompt requesting a response from the LLM based solely on its training data.
+*   **<Term definition="Kỹ thuật cung cấp một vài ví dụ mẫu (đầu vào và đầu ra mong muốn) trong câu lệnh để AI hiểu rõ ngữ cảnh và định dạng cần trả về. (Ví dụ: Giống như việc bạn đưa cho thợ may 2-3 bộ quần áo mẫu và bảo 'hãy may cho tôi một bộ tương tự như thế này nhưng màu xanh'.)">Few-shot prompting</Term>**, this type of prompting guides the LLM by providing 1 or more examples it can rely on to generate its response.
+*   **<Term definition="Kỹ thuật hướng dẫn AI chia nhỏ quá trình suy luận thành từng bước logic trung gian trước khi đưa ra câu trả lời cuối cùng. (Ví dụ: Giống như việc giáo viên yêu cầu học sinh 'phải trình bày các bước giải toán ra nháp' thay vì chỉ ghi mỗi đáp số.)">Chain-of-thought</Term>**, this type of prompting tells the LLM how to break down a problem into steps.
+*   **<Term definition="Kỹ thuật cung cấp thêm các thông tin, sự thật hoặc kiến thức bổ trợ vào câu lệnh để giúp AI trả lời chính xác hơn. (Ví dụ: Giống như việc trước khi bắt luật sư bào chữa, bạn cung cấp sẵn cho họ các điều luật liên quan và hồ sơ tiền án tiền sự của vụ án.)">Generated knowledge</Term>**, to improve the response of a prompt, you can provide generated facts or knowledge additionally to your prompt.
+*   **Least to most**, like chain-of-thought, this technique is about breaking down a problem into a series of steps and then ask these steps to be performed in order.
+*   **<Term definition="Kỹ thuật yêu cầu AI tự đánh giá, tìm lỗi sai trong kết quả vừa tạo ra và tự sửa đổi để nâng cao chất lượng đầu ra. (Ví dụ: Giống như việc một nhà văn tự đọc lại bản thảo của mình, gạch chân những chỗ hành văn chưa hay và viết lại cho mượt mà hơn.)">Self-refine</Term>**, this technique is about critiquing the LLM's output and then asking it to improve.
+*   **<Term definition="Phương pháp đặt câu hỏi liên tục kiểu Socratic để AI tự giải thích sâu hơn từng phần trong câu trả lời của nó, giúp phát hiện và loại bỏ các điểm mâu thuẫn. (Ví dụ: Giống như một thám tử hỏi dồn dập nghi phạm về từng chi tiết nhỏ trong lời khai để xem họ có nói dối hay mâu thuẫn ở đâu không.)">Maieutic prompting</Term>**. What you want here is to ensure the LLM answer is correct and you ask it to explain various parts of the answer. This is a form of self-refine.
+
+### Zero-shot prompting
+
+[](#zero-shot-prompting)
+
+This style of prompting is very simple, it consists of a single prompt. This technique is probably what you're using as you're starting to learn about LLMs. Here's an example:
+
+*   Prompt: "What is Algebra?"
+*   Answer: "Algebra is a branch of mathematics that studies mathematical symbols and the rules for manipulating these symbols."
+
+### Few-shot prompting
+
+[](#few-shot-prompting)
+
+This style of prompting helps the model by providing a few examples along with the request. It consists of a single prompt with additional task-specific data. Here's an example:
+
+*   Prompt: "Write a poem in the style of Shakespeare. Here are a few examples of Shakespearean sonnets.: Sonnet 18: 'Shall I compare thee to a summer's day? Thou art more lovely and more temperate...' Sonnet 116: 'Let me not to the marriage of true minds Admit impediments. Love is not love Which alters when it alteration finds...' Sonnet 132: 'Thine eyes I love, and they, as pitying me, Knowing thy heart torment me with disdain,...' Now, write a sonnet about the beauty of the moon."
+*   Answer: "Upon the sky, the moon doth softly gleam, In silv'ry light that casts its gentle grace,..."
+
+Examples provide the LLM with the context, format or style of the desired output. They help the model understand the specific task and generate more accurate and relevant responses.
+
+### Chain-of-thought
+
+[](#chain-of-thought)
+
+Chain-of-thought is a very interesting technique as it's about taking the LLM through a series of steps. The idea is to instruct the LLM in such a way that it understands how to do something. Consider the following example, with and without chain-of-thought:
+
+```
+- Prompt: "Alice has 5 apples, throws 3 apples, gives 2 to Bob and Bob gives one back, how many apples does Alice have?"
+- Answer: 5
+```
+
+LLM answers with 5, which is incorrect. Correct answer is 1 apple, given the calculation (5 -3 -2 + 1 = 1).
+
+So how can we teach the LLM to do this correctly?
+
+Let's try chain-of-thought. Applying chain-of-thought means:
+
+1.  Give the LLM a similar example.
+2.  Show the calculation, and how to calculate it correctly.
+3.  Provide the original prompt.
+
+Here's how:
+
+*   Prompt: "Lisa has 7 apples, throws 1 apple, gives 4 apples to Bart and Bart gives one back: 7 -1 = 6 6 -4 = 2 2 +1 = 3  
+    Alice has 5 apples, throws 3 apples, gives 2 to Bob and Bob gives one back, how many apples does Alice have?" Answer: 1
+
+Note how we write substantially longer prompts with another example, a calculation and then the original prompt and we arrive at the correct answer 1.
+
+As you can see chain-of-thought is a very powerful technique.
+
+### Generated knowledge
+
+[](#generated-knowledge)
+
+Many times when you want to construct a prompt, you want to do so using your own company's data. You want part of the prompt to be from the company and the other part should be the actual prompt you're interested in.
+
+As an example, this is what your prompt then can look like if you're in the insurance business:
+
+```
+{{company}}: {{company_name}}
+{{products}}:
+{{products_list}}
+Please suggest an insurance given the following budget and requirements:
+Budget: {{budget}}
+Requirements: {{requirements}}
+```
+
+Above, you see how the prompt is constructed using a template. In the template there's a number of variables, denoted by `{{variable}}`, that will be replaced with actual values from a company API.
+
+Here's an example of how the prompt could look like once the variables have been replaced by content from your company:
+
+```
+Insurance company: ACME Insurance
+Insurance products (cost per month):
+- Car, cheap, 500 USD
+- Car, expensive, 1100 USD
+- Home, cheap, 600 USD
+- Home, expensive, 1200 USD
+- Life, cheap, 100 USD
+
+Please suggest an insurance given the following budget and requirements:
+Budget: $1000
+Requirements: Car, Home, and Life insurance
+```
+
+Running this prompt through an LLM will produce a response like this:
+
+```
+Given the budget and requirements, we suggest the following insurance package from ACME Insurance:
+- Car, cheap, 500 USD
+- Home, cheap, 600 USD
+- Life, cheap, 100 USD
+Total cost: $1,200 USD
+```
+
+As you can see, it also suggests the Life insurance, which it shouldn't. This result is an indication that we need to optimize the prompt by changing the prompt to be clearer on what it can allow. After some _trial and error_, we arrive at the following prompt:
+
+```
+Insurance company: ACME Insurance
+Insurance products (cost per month):
+- type: Car, cheap, cost: 500 USD
+- type: Car, expensive, cost: 1100 USD
+- type: Home, cheap, cost: 600 USD
+- type: Home, expensive, cost: 1200 USD
+- type: Life, cheap, cost: 100 USD
+
+Please suggest an insurance given the following budget and requirements:
+Budget: $1000 restrict choice to types: Car, Home
+```
+
+Note how adding _type_ and _cost_ and also using the keyword _restrict_ helps the LLM to understand what we want.
+
+Now we get the following response:
+
+```
+Given the budget and requirements, we suggest the Car, Cheap insurance product which costs 500 USD per month.
+```
+
+The point of this example was to show that even though we're using a basic technique like _generated knowledge_, we still need to optimize the prompt in most cases to get the desired outcome.
+
+### <Term definition="Kỹ thuật chia nhỏ một bài toán phức tạp thành các bài toán con từ dễ đến khó, giải quyết tuần tự từng bước để đi đến kết quả cuối cùng. (Ví dụ: Giống như việc học toán từ cộng trừ cơ bản, sau đó mới học nhân chia, rồi mới giải phương trình phức tạp.)">Least-to-most</Term>
+
+[](#least-to-most)
+
+The idea with Least-to-most prompting is to break down a bigger problem into subproblems. That way, you help guide the LLM on how to "conquer" the bigger problem. A good example could be for data science where you can ask the LLM to divide up a problem like so:
+
+> Prompt: How to perform data science in 5 steps?
+
+With your AI assistant answering with:
+
+1.  Collect data
+2.  Clean data
+3.  Analyze data
+4.  Plot data
+5.  Present data
+
+### Self-refine, <Term definition="Đánh giá, phân tích một cách nghiêm túc và chi tiết để chỉ ra cả điểm tốt lẫn điểm cần cải thiện của một tác phẩm hoặc giải pháp. (Ví dụ: Giống như việc một lập trình viên kỳ cựu thực hiện Code Review để chỉ ra các lỗi bảo mật và tối ưu hóa trong code của bạn.)">critique</Term> the results
+
+[](#self-refine-critique-the-results)
+
+With generative AIs and LLMs, you can't trust the output. You need to verify it. After all, the LLM is just presenting you what's the next most likely thing to say, not what's correct. Therefore, a good idea is to ask the LLM to critique itself, which leads us to the self-refine technique.
+
+How it works is that you follow the following steps:
+
+1.  Initial prompt asking the LLM to solve a problem
+2.  LLM answers
+3.  You critique the answer and ask the AI to improve
+4.  LLM answers again, this time considering the critique and suggest solutions it came up with
+
+You can repeat this process as many times as you want.
+
+Here's an example using this technique:
+
+> Prompt: "Create a Python Web API with routes products and customers"
+
+AI Answer:
+
+import flask
+app \= Flask(\_\_name\_\_)
+
+@app.route('/products')
+def products():
+    return 'Products'
+
+@app.route('/customers')
+def customers():
+    return 'Customers'
+
+> Prompt: suggest 3 improvements of the above code
+
+AI Answer:
+
+```
+Sure, here are three suggestions to improve the code:
+
+Import the correct module: The first line should import Flask instead of flask. The correct import statement should be from flask import Flask.
+
+Add a main function: Add a if __name__ == '__main__': block to the end of the file to run the application when the file is executed.
+
+Use f-strings: Use f-strings to format the return statements in the route functions. For example, return 'Products' can be changed to return f'This is the {request.path} page'.
+```
+
+from flask import Flask, request
+
+app \= Flask(\_\_name\_\_)
+
+@app.route('/products')
+def products():
+    return f'This is the \{request.path\} page'
+
+@app.route('/customers')
+def customers():
+    return f'This is the \{request.path\} page'
+
+if \_\_name\_\_ \== '\_\_main\_\_':
+    app.run()
+
+As you can see, the above AI response is improving the first suggested code thanks to critiquing the first answer.
+
+### Maieutic prompting
+
+[](#maieutic-prompting)
+
+Maieutic prompting is a technique that is similar to self-refine but it's more about asking the LLM to explain itself. The goal is to reduce <Term definition="Những điểm mâu thuẫn, bất nhất, không đồng bộ trước sau như một trong thông tin hoặc hành vi. (Ví dụ: Giống như một người hôm trước nói ghét ăn đồ ngọt nhưng hôm sau lại hào hứng ăn hết cả hộp bánh kem.)">inconsistencies</Term> in the LLM's output so to ensure it arrives at the correct answer. The workflow to follow is:
+
+1.  Ask the LLM to answer a question
+2.  For each part of the answer, ask the LLM to explain it more in depth.
+3.  If there are inconsistencies, discard the parts that are inconsistent.
+
+Repeat 2 and 3 until you've gone through all the parts and you're satisfied with the answer.
+
+Here's an example prompt:
+
+> prompt: How can I create a crisis plan to <Term definition="Giảm thiểu mức độ nghiêm trọng, tác hại hoặc ảnh hưởng xấu của một vấn đề hay rủi ro nào đó. (Ví dụ: Giống như việc bạn uống thuốc giảm đau để xoa dịu cơn nhức răng tạm thời trước khi đi gặp nha sĩ.)">mitigate</Term> a pandemic in 5 steps? LLM answer:
+
+```
+1. Identify the risks
+1. Identify the stakeholders
+1. Identify the resources
+1. Identify the actions
+1. Identify the communication channels
+```
+
+It's identified 5 steps, but can we determine if this is correct? Let's ask the LLM to explain each step:
+
+> prompt: Explain the first step in more detail, what are the risks in detail with a pandemic?
+
+```
+The risks are the following:
+
+- Loss of life
+- Loss of business
+- Loss of reputation
+- Loss of customers
+- Loss of employees
+```
+
+At this point, we want to make sure the LLM is correct so we ask it to explain the first risk in more detail and hope it's consistent with the answer above:
+
+> prompt: In a Pandemic, which is the biggest risk and why?
+
+```
+The biggest risk is loss of life because it's the most important thing to protect.
+```
+
+> What are the two biggest risks in a pandemic?
+
+```
+The two biggest risks are loss of life and loss of business.
+```
+
+At this point, the LLM is consistent and mentions "life" and "business" as the top two risks. We can now continue to the next step and feel fairly confident. However, we shouldn't trust the LLM blindly, we should always verify the output.
+
+## Vary your output
+
+[](#vary-your-output)
+
+LLMs are <Term definition="Tính chất phi định trước (ngẫu nhiên), nghĩa là cùng một đầu vào nhưng hệ thống có thể trả về các kết quả khác nhau ở mỗi lần chạy. (Ví dụ: Giống như việc gieo xúc xắc, mỗi lần gieo bạn sẽ nhận được một kết quả ngẫu nhiên khác nhau dù lực gieo có vẻ giống nhau.)">nondeterministic</Term> by nature, meaning that you will get different results each time you run the same prompt. Try the following prompt for example:
+
+> "Generate code for a Python Web API"
+
+\# Import necessary modules
+import flask
+from flask import request, jsonify
+
+\# Create a Flask app
+app \= flask.Flask(\_\_name\_\_)
+
+\# Create a route for the API
+@app.route('/api', methods\=\['GET'\])
+def api():
+    \# Get the data from the request
+    data \= request.args
+
+    \# Process the data
+    result \= process\_data(data)
+
+    \# Return the result as JSON
+    return jsonify(result)
+
+\# Function to process the data
+def process\_data(data):
+    \# Do something with the data
+    result \= data + 1
+
+    \# Return the result
+    return result
+
+\# Run the app
+if \_\_name\_\_ \== '\_\_main\_\_':
+    app.run()
+
+Running the same prompt again generates a slightly different response:
+
+#import necessary packages
+import flask
+from flask import request, jsonify
+
+#create the Flask application
+app \= flask.Flask(\_\_name\_\_)
+app.config\["DEBUG"\] \= True
+
+#create a list of books
+books \= \[
+    \{'id': 0,
+     'title': 'A Fire Upon the Deep',
+     'author': 'Vernor Vinge',
+     'first\_sentence': 'The coldsleep itself was dreamless.',
+     'year\_published': '1992'\},
+    \{'id': 1,
+     'title': 'The Ones Who Walk Away From Omelas',
+     'author': 'Ursula K. Le Guin',
+     'first\_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.',
+     'published': '1973'\},
+    \{'id': 2,
+     'title': 'Dhalgren',
+     'author': 'Samuel R. Delany',
+     'first\_sentence': 'to wound the autumnal city.',
+     'published': '1975'\}
+\]
+
+#create an endpoint for the API
+@app.route('/', methods\=\['GET'\])
+def home():
+    return '''<h1>Books API</h1>
+<p>A prototype API for retrieving books.</p>'''
+
+#create an endpoint to return all books
+@app.route('/api/v1/resources/books/all', methods\=\['GET'\])
+def api\_all():
+    return jsonify(books)
+
+#create an endpoint to return a single book
+@app.route('/api/v1/resources/books', methods\=\['GET'\])
+def api\_id():
+    #check if an ID was provided as part of the URL
+    #if ID is provided, assign it to a variable
+    #if no ID is provided, display an error
+    if 'id' in request.args:
+        id \= int(request.args\['id'\])
+    else:
+        return "Error: No id field provided. Please specify an id."
+
+    #create an empty list for our results
+    results \= \[\]
+
+    #loop through the data and match results that fit the requested ID
+    #IDs are unique, but other fields might return many results
+    for book in books:
+        if book\['id'\] \== id:
+            results.append(book)
+
+    #use the jsonify function from Flask to convert our list of
+    #Python dictionaries to the JSON format
+    return jsonify(results)
+
+app.run()
+
+> So is the varied output a problem?
+
+Depends on what you're trying to do. If you want a specific response then it's a problem. If you're ok with a varied output like "Generate any 3 questions on geography", then it's not a problem.
+
+### Using <Term definition="Tham số điều khiển mức độ sáng tạo hoặc ngẫu nhiên của câu trả lời từ LLM. Giá trị càng cao thì câu trả lời càng bay bổng, ngẫu nhiên; giá trị càng thấp thì càng chính xác, rập khuôn. (Ví dụ: Giống như núm vặn điều chỉnh độ 'phiêu' của một nhạc sĩ: vặn nhỏ thì chơi đúng nốt trong bản nhạc, vặn to thì bắt đầu ngẫu hứng, biến tấu tự do.)">temperature</Term> to vary your output
+
+[](#using-temperature-to-vary-your-output)
+
+Ok, so we've decided we want to limit the output to be more predictable, that is more deterministic. How do we do that?
+
+Temperature is a value between 0 and 1, where 0 is the most deterministic and 1 is the most varied. The default value is 0.7. Let's see what happens with two runs of the same prompt with temperature set to 0.1:
+
+> "Generate code for a Python Web API"
+
+#import necessary libraries
+import flask
+from flask import request, jsonify
+
+#create an instance of the Flask class
+app \= flask.Flask(\_\_name\_\_)
+
+#create an endpoint for the API
+@app.route('/api/v1/endpoint', methods\=\['GET'\])
+def api\_endpoint():
+    #get the request data
+    data \= request.get\_json()
+
+    #process the data
+    result \= process\_data(data)
+
+    #return the result
+    return jsonify(result)
+
+#function to process the data
+def process\_data(data):
+    #process the data
+    result \= \{'result': 'success'\}
+
+    #return the result
+    return result
+
+#run the Flask app
+if \_\_name\_\_ \== '\_\_main\_\_':
+    app.run()
+
+Running the prompt again gives us this outcome:
+
+#import necessary libraries
+import flask
+from flask import request, jsonify
+
+#create a Flask app
+app \= flask.Flask(\_\_name\_\_)
+
+#create a route for the API
+@app.route('/api', methods\=\['GET'\])
+def api\_call():
+    #get the data from the request
+    data \= request.get\_json()
+
+    #process the data
+    result \= process\_data(data)
+
+    #return the result
+    return jsonify(result)
+
+#define the process\_data function
+def process\_data(data):
+    #do something with the data
+    result \= data + 1
+
+    #return the result
+    return result
+
+#run the app
+if \_\_name\_\_ \== '\_\_main\_\_':
+    app.run()
+
+There's only a tiny difference between these two outputs. Let's do the opposite this time, let's set the temperature to 0.9:
+
+\# Import necessary libraries
+import flask
+from flask import request, jsonify
+
+\# Create a Flask app
+app \= flask.Flask(\_\_name\_\_)
+
+\# Create a route for the API
+@app.route('/api', methods\=\['GET'\])
+def api\_call():
+    \# Get the data from the request
+    data \= request.args
+
+    \# Process the data
+    result \= process\_data(data)
+
+    \# Return the result
+    return jsonify(result)
+
+\# Function to process the data
+def process\_data(data):
+    \# Do something with the data
+    result \= data + 1
+
+    \# Return the result
+    return result
+
+\# Run the app
+if \_\_name\_\_ \== '\_\_main\_\_':
+    app.run()
+
+and the second attempt at 0.9 as temperature value:
+
+import flask
+from flask import request, jsonify
+
+\# create the Flask app
+app \= flask.Flask(\_\_name\_\_)
+app.config\['DEBUG'\] \= True
+
+\# create some test data
+books \= \[
+    \{'id': 0, 'title': 'A Fire Upon The Deep', 'author': 'Vernor Vinge', 'first\_sentence': 'The coldsleep itself was dreamless.', 'year\_published': '1992'\},
+    \{'id': 1, 'title': 'The Ones Who Walk Away From Omelas', 'author': 'Ursula K. Le Guin', 'first\_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.', 'published': '1973'\},
+    \{'id': 2, 'title': 'Dhalgren', 'author': 'Samuel R. Delany', 'first\_sentence': 'to wound the autumnal city.', 'published': '1975'\}
+\]
+
+\# create an endpoint
+@app.route('/', methods\=\['GET'\])
+def home():
+    return '''<h1>Welcome to our book API!</h1>'''
+
+@app.route('/api/v1/resources/books
+
+As you can see, the results couldn't be more varied.
+
+> Note, that there are more parameters you can change to vary the output, like top-k, top-p, <Term definition="Cơ chế phạt (giảm xác suất lựa chọn) đối với các từ hoặc cụm từ đã xuất hiện trước đó nhằm ngăn AI lặp đi lặp lại một nội dung nhàm chán. (Ví dụ: Giống như việc trừ điểm một học sinh nếu trong bài văn họ cứ dùng đi dùng lại một từ duy nhất để diễn tả một ý.)">repetition penalty</Term>, length penalty and diversity penalty but these are outside the scope of this curriculum.
+
+## Good practices
+
+[](#good-practices)
+
+There are many practices you can apply to try to get what you want. You will find your own style as you use prompting more and more.
+
+Additionally to the techniques we've covered, there are some good practices to consider when prompting an LLM.
+
+Here are some good practices to consider:
+
+*   **Specify context**. Context matters, the more you can specify like domain, topic, etc. the better.
+*   Limit the output. If you want a specific number of items or a specific length, specify it.
+*   **Specify both what and how**. Remember to mention both what you want and how you want it, for example "Create a Python Web API with routes products and customers, divide it into 3 files".
+*   **Use templates**. Often, you will want to <Term definition="Làm phong phú, giàu có thêm nội dung hoặc giá trị bằng cách bổ sung thêm các chi tiết, dữ liệu chất lượng cao. (Ví dụ: Giống như việc bạn thêm gia vị, nước dùng hầm xương vào nồi canh nhạt nhẽo để món ăn đậm đà, ngon miệng hơn.)">enrich</Term> your prompts with data from your company. Use templates to do this. Templates can have variables that you replace with actual data.
+*   **Spell correctly**. LLMs might provide you with a correct response, but if you spell correctly, you will get a better response.
+
+## Assignment
+
+[](#assignment)
+
+Here's code in Python showing how to build a simple API using Flask:
+
+from flask import Flask, request
+
+app \= Flask(\_\_name\_\_)
+
+@app.route('/')
+def hello():
+    name \= request.args.get('name', 'World')
+    return f'Hello, \{name\}!'
+
+if \_\_name\_\_ \== '\_\_main\_\_':
+    app.run()
+
+Use an AI assistant like GitHub Copilot or ChatGPT and apply the "self-refine" technique to improve the code.
+
+## Solution
+
+[](#solution)
+
+Please attempt to solve the assignment by adding suitable prompts to the code.
+
+Tip
+
+Phrase a prompt to ask it to improve, it's a good idea to limit how many improvements. You can also ask to improve it in a certain way, for example architecture, performance, security, etc.
+
+[Solution](https://github.com/microsoft/generative-ai-for-beginners/blob/main/05-advanced-prompts/python/aoai-solution.py?WT.mc_id=academic-105485-koreyst)
+
+## Knowledge check
+
+[](#knowledge-check)
+
+Why would I use chain-of-thought prompting? Show me 1 correct response and 2 incorrect responses.
+
+1.  To teach the LLM how to solve a problem.
+2.  B, To teach the LLM to find errors in code.
+3.  C, To instruct the LLM to come up with different solutions.
+
+A: 1, because chain-of-thought is about showing the LLM how to solve a problem by providing it with a series of steps, and similar problems and how they were solved.
+
+## 🚀 Challenge
+
+[](#-challenge)
+
+You just used the self-refine technique in the assignment. Take any program you built and consider what improvements you would want to apply to it. Now use the self-refine technique to apply the proposed changes. What did you think the result, better or worse?
+
+## Great Work! Continue Your Learning
+
+[](#great-work-continue-your-learning)
+
+After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
+
+Head over to Lesson 6 where we will apply our knowledge of Prompt Engineering by [building text generation apps](https://github.com/microsoft/generative-ai-for-beginners/blob/main/06-text-generation-apps/README.md?WT.mc_id=academic-105485-koreyst)
+
+---
+*Made by Anh Tu - Share to be share*
