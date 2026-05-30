@@ -250,8 +250,9 @@ Here's an example using this technique:
 
 AI Answer:
 
+```python
 import flask
-app \= Flask(\_\_name\_\_)
+app = Flask(__name__)
 
 @app.route('/products')
 def products():
@@ -261,6 +262,7 @@ def products():
 def customers():
     return 'Customers'
 
+```
 > Prompt: suggest 3 improvements of the above code
 
 AI Answer:
@@ -275,20 +277,22 @@ Add a main function: Add a if __name__ == '__main__': block to the end of the fi
 Use f-strings: Use f-strings to format the return statements in the route functions. For example, return 'Products' can be changed to return f'This is the {request.path} page'.
 ```
 
+```python
 from flask import Flask, request
 
-app \= Flask(\_\_name\_\_)
+app = Flask(__name__)
 
 @app.route('/products')
 def products():
-    return f'This is the \{request.path\} page'
+    return f'This is the {request.path} page'
 
 @app.route('/customers')
 def customers():
-    return f'This is the \{request.path\} page'
+    return f'This is the {request.path} page'
 
-if \_\_name\_\_ \== '\_\_main\_\_':
+if __name__ == '__main__':
     app.run()
+```
 
 As you can see, the above AI response is improving the first suggested code thanks to critiquing the first answer.
 
@@ -354,95 +358,98 @@ LLMs are <Term definition="Tính chất phi định trước (ngẫu nhiên), ng
 
 > "Generate code for a Python Web API"
 
+```python
 \# Import necessary modules
 import flask
 from flask import request, jsonify
 
-\# Create a Flask app
-app \= flask.Flask(\_\_name\_\_)
+# Create a Flask app
+app = flask.Flask(__name__)
 
-\# Create a route for the API
-@app.route('/api', methods\=\['GET'\])
+# Create a route for the API
+@app.route('/api', methods=\['GET'\])
 def api():
-    \# Get the data from the request
-    data \= request.args
+    # Get the data from the request
+    data = request.args
 
-    \# Process the data
-    result \= process\_data(data)
+    # Process the data
+    result = process_data(data)
 
-    \# Return the result as JSON
+    # Return the result as JSON
     return jsonify(result)
 
-\# Function to process the data
-def process\_data(data):
-    \# Do something with the data
-    result \= data + 1
+# Function to process the data
+def process_data(data):
+    # Do something with the data
+    result = data + 1
 
-    \# Return the result
+    # Return the result
     return result
 
-\# Run the app
-if \_\_name\_\_ \== '\_\_main\_\_':
+# Run the app
+if __name__ == '__main__':
     app.run()
+```
 
 Running the same prompt again generates a slightly different response:
 
+```python
 #import necessary packages
 import flask
 from flask import request, jsonify
 
 #create the Flask application
-app \= flask.Flask(\_\_name\_\_)
-app.config\["DEBUG"\] \= True
+app = flask.Flask(__name__)
+app.config\["DEBUG"\] = True
 
 #create a list of books
-books \= \[
-    \{'id': 0,
+books = \[
+    {'id': 0,
      'title': 'A Fire Upon the Deep',
      'author': 'Vernor Vinge',
-     'first\_sentence': 'The coldsleep itself was dreamless.',
-     'year\_published': '1992'\},
-    \{'id': 1,
+     'first_sentence': 'The coldsleep itself was dreamless.',
+     'year_published': '1992'},
+    {'id': 1,
      'title': 'The Ones Who Walk Away From Omelas',
      'author': 'Ursula K. Le Guin',
-     'first\_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.',
-     'published': '1973'\},
-    \{'id': 2,
+     'first_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.',
+     'published': '1973'},
+    {'id': 2,
      'title': 'Dhalgren',
      'author': 'Samuel R. Delany',
-     'first\_sentence': 'to wound the autumnal city.',
-     'published': '1975'\}
+     'first_sentence': 'to wound the autumnal city.',
+     'published': '1975'}
 \]
 
 #create an endpoint for the API
-@app.route('/', methods\=\['GET'\])
+@app.route('/', methods=\['GET'\])
 def home():
     return '''<h1>Books API</h1>
 <p>A prototype API for retrieving books.</p>'''
 
 #create an endpoint to return all books
-@app.route('/api/v1/resources/books/all', methods\=\['GET'\])
-def api\_all():
+@app.route('/api/v1/resources/books/all', methods=\['GET'\])
+def api_all():
     return jsonify(books)
 
 #create an endpoint to return a single book
-@app.route('/api/v1/resources/books', methods\=\['GET'\])
-def api\_id():
+@app.route('/api/v1/resources/books', methods=\['GET'\])
+def api_id():
     #check if an ID was provided as part of the URL
     #if ID is provided, assign it to a variable
     #if no ID is provided, display an error
     if 'id' in request.args:
-        id \= int(request.args\['id'\])
+        id = int(request.args\['id'\])
     else:
         return "Error: No id field provided. Please specify an id."
 
     #create an empty list for our results
-    results \= \[\]
+    results = \[\]
 
     #loop through the data and match results that fit the requested ID
     #IDs are unique, but other fields might return many results
     for book in books:
-        if book\['id'\] \== id:
+        if book\['id'\] == id:
             results.append(book)
 
     #use the jsonify function from Flask to convert our list of
@@ -450,6 +457,7 @@ def api\_id():
     return jsonify(results)
 
 app.run()
+```
 
 > So is the varied output a problem?
 
@@ -465,125 +473,133 @@ Temperature is a value between 0 and 1, where 0 is the most deterministic and 1 
 
 > "Generate code for a Python Web API"
 
+```python
 #import necessary libraries
 import flask
 from flask import request, jsonify
 
 #create an instance of the Flask class
-app \= flask.Flask(\_\_name\_\_)
+app = flask.Flask(__name__)
 
 #create an endpoint for the API
-@app.route('/api/v1/endpoint', methods\=\['GET'\])
-def api\_endpoint():
+@app.route('/api/v1/endpoint', methods=\['GET'\])
+def api_endpoint():
     #get the request data
-    data \= request.get\_json()
+    data = request.get_json()
 
     #process the data
-    result \= process\_data(data)
+    result = process_data(data)
 
     #return the result
     return jsonify(result)
 
 #function to process the data
-def process\_data(data):
+def process_data(data):
     #process the data
-    result \= \{'result': 'success'\}
+    result = {'result': 'success'}
 
     #return the result
     return result
 
 #run the Flask app
-if \_\_name\_\_ \== '\_\_main\_\_':
+if __name__ == '__main__':
     app.run()
+```
 
 Running the prompt again gives us this outcome:
 
+```python
 #import necessary libraries
 import flask
 from flask import request, jsonify
 
 #create a Flask app
-app \= flask.Flask(\_\_name\_\_)
+app = flask.Flask(__name__)
 
 #create a route for the API
-@app.route('/api', methods\=\['GET'\])
-def api\_call():
+@app.route('/api', methods=\['GET'\])
+def api_call():
     #get the data from the request
-    data \= request.get\_json()
+    data = request.get_json()
 
     #process the data
-    result \= process\_data(data)
+    result = process_data(data)
 
     #return the result
     return jsonify(result)
 
-#define the process\_data function
-def process\_data(data):
+#define the process_data function
+def process_data(data):
     #do something with the data
-    result \= data + 1
+    result = data + 1
 
     #return the result
     return result
 
 #run the app
-if \_\_name\_\_ \== '\_\_main\_\_':
+if __name__ == '__main__':
     app.run()
+```
 
 There's only a tiny difference between these two outputs. Let's do the opposite this time, let's set the temperature to 0.9:
 
+```python
 \# Import necessary libraries
 import flask
 from flask import request, jsonify
 
-\# Create a Flask app
-app \= flask.Flask(\_\_name\_\_)
+# Create a Flask app
+app = flask.Flask(__name__)
 
-\# Create a route for the API
-@app.route('/api', methods\=\['GET'\])
-def api\_call():
-    \# Get the data from the request
-    data \= request.args
+# Create a route for the API
+@app.route('/api', methods=\['GET'\])
+def api_call():
+    # Get the data from the request
+    data = request.args
 
-    \# Process the data
-    result \= process\_data(data)
+    # Process the data
+    result = process_data(data)
 
-    \# Return the result
+    # Return the result
     return jsonify(result)
 
-\# Function to process the data
-def process\_data(data):
-    \# Do something with the data
-    result \= data + 1
+# Function to process the data
+def process_data(data):
+    # Do something with the data
+    result = data + 1
 
-    \# Return the result
+    # Return the result
     return result
 
-\# Run the app
-if \_\_name\_\_ \== '\_\_main\_\_':
+# Run the app
+if __name__ == '__main__':
     app.run()
+```
 
 and the second attempt at 0.9 as temperature value:
 
+```python
 import flask
 from flask import request, jsonify
 
-\# create the Flask app
-app \= flask.Flask(\_\_name\_\_)
-app.config\['DEBUG'\] \= True
+# create the Flask app
+app = flask.Flask(__name__)
+app.config\['DEBUG'\] = True
 
-\# create some test data
-books \= \[
-    \{'id': 0, 'title': 'A Fire Upon The Deep', 'author': 'Vernor Vinge', 'first\_sentence': 'The coldsleep itself was dreamless.', 'year\_published': '1992'\},
-    \{'id': 1, 'title': 'The Ones Who Walk Away From Omelas', 'author': 'Ursula K. Le Guin', 'first\_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.', 'published': '1973'\},
-    \{'id': 2, 'title': 'Dhalgren', 'author': 'Samuel R. Delany', 'first\_sentence': 'to wound the autumnal city.', 'published': '1975'\}
+# create some test data
+books = \[
+    {'id': 0, 'title': 'A Fire Upon The Deep', 'author': 'Vernor Vinge', 'first_sentence': 'The coldsleep itself was dreamless.', 'year_published': '1992'},
+    {'id': 1, 'title': 'The Ones Who Walk Away From Omelas', 'author': 'Ursula K. Le Guin', 'first_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.', 'published': '1973'},
+    {'id': 2, 'title': 'Dhalgren', 'author': 'Samuel R. Delany', 'first_sentence': 'to wound the autumnal city.', 'published': '1975'}
 \]
 
-\# create an endpoint
-@app.route('/', methods\=\['GET'\])
+# create an endpoint
+@app.route('/', methods=\['GET'\])
 def home():
     return '''<h1>Welcome to our book API!</h1>'''
 
 @app.route('/api/v1/resources/books
+```
 
 As you can see, the results couldn't be more varied.
 
@@ -611,17 +627,19 @@ Here are some good practices to consider:
 
 Here's code in Python showing how to build a simple API using Flask:
 
+```python
 from flask import Flask, request
 
-app \= Flask(\_\_name\_\_)
+app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    name \= request.args.get('name', 'World')
-    return f'Hello, \{name\}!'
+    name = request.args.get('name', 'World')
+    return f'Hello, {name}!'
 
-if \_\_name\_\_ \== '\_\_main\_\_':
+if __name__ == '__main__':
     app.run()
+```
 
 Use an AI assistant like GitHub Copilot or ChatGPT and apply the "self-refine" technique to improve the code.
 

@@ -33,6 +33,26 @@ turndownService.addRule('img', {
   }
 });
 
+// Xử lý các code block đặc thù từ GitHub (có chứa raw data trong thuộc tính data-snippet-clipboard-copy-content)
+turndownService.addRule('githubCodeBlock', {
+  filter: function(node: any) {
+    return node.nodeName === 'DIV' && node.hasAttribute('data-snippet-clipboard-copy-content');
+  },
+  replacement: function(content: string, node: any) {
+    const code = node.getAttribute('data-snippet-clipboard-copy-content');
+    return '\n\n```\n' + code + '\n```\n\n';
+  }
+});
+
+// Xử lý fallback cho thẻ <pre> phòng trường hợp code block không có data-snippet
+turndownService.addRule('genericPre', {
+  filter: 'pre',
+  replacement: function(content: string, node: any) {
+    // Trích xuất textContent nguyên bản để giữ format, bỏ qua các thẻ <span> highlight bên trong
+    return '\n\n```\n' + node.textContent + '\n```\n\n';
+  }
+});
+
 /**
  * Tải ảnh và upload lên Cloudinary.
  */

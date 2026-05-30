@@ -229,7 +229,9 @@ This is the most commonly used method, but it also requires GPU acceleration. Af
 
 **Ollama** [Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst) is a platform designed to make it easier to run large language models (LLMs) locally on your machine. It supports various models like Llama 3.1, Phi 3, Mistral, and Gemma 2, among others. The platform simplifies the process by bundling model weights, configuration, and data into a single package, making it more accessible for users to customize and create their own models. Ollama is available for macOS, Linux, and Windows. It’s a great tool if you’re looking to experiment with or deploy LLMs without relying on cloud services. Ollama is the most direct way, you just need to execute the following command.
 
+```bash
 ollama run phi3.5
+```
 
 **ONNX Runtime for GenAI**
 
@@ -270,83 +272,91 @@ To get started with ONNX Runtime for GENAI, you can follow these steps:
 
 [](#install-onnx-runtime)
 
+```bash
 pip install onnxruntime
+```
 
 ### Install the Generative AI Extensions:
 
 [](#install-the-generative-ai-extensions)
 
-pip install onnxruntime\-genai
+```bash
+pip install onnxruntime-genai
+```
 
 ### Run a Model: Here’s a simple example in Python:
 
 [](#run-a-model-heres-a-simple-example-in-python)
 
-import onnxruntime\_genai as og
+```python
+import onnxruntime_genai as og
 
-model \= og.Model('path\_to\_your\_model.onnx')
+model = og.Model('path_to_your_model.onnx')
 
-tokenizer \= og.Tokenizer(model)
+tokenizer = og.Tokenizer(model)
 
-input\_text \= "Hello, how are you?"
+input_text = "Hello, how are you?"
 
-input\_tokens \= tokenizer.encode(input\_text)
+input_tokens = tokenizer.encode(input_text)
 
-output\_tokens \= model.generate(input\_tokens)
+output_tokens = model.generate(input_tokens)
 
-output\_text \= tokenizer.decode(output\_tokens)
+output_text = tokenizer.decode(output_tokens)
 
-print(output\_text) 
+print(output_text) 
+```
 
 ### Demo:Using ONNX Runtime GenAI to call Phi-3.5-Vision
 
 [](#demousing-onnx-runtime-genai-to-call-phi-35-vision)
 
-import onnxruntime\_genai as og
+```python
+import onnxruntime_genai as og
 
-model\_path \= './Your Phi-3.5-vision-instruct ONNX Path'
+model_path = './Your Phi-3.5-vision-instruct ONNX Path'
 
-img\_path \= './Your Image Path'
+img_path = './Your Image Path'
 
-model \= og.Model(model\_path)
+model = og.Model(model_path)
 
-processor \= model.create\_multimodal\_processor()
+processor = model.create_multimodal_processor()
 
-tokenizer\_stream \= processor.create\_stream()
+tokenizer_stream = processor.create_stream()
 
-text \= "Your Prompt"
+text = "Your Prompt"
 
-prompt \= "<|user|>\\n"
+prompt = "<|user|>\\n"
 
-prompt += "<|image\_1|>\\n"
+prompt += "<|image_1|>\\n"
 
-prompt += f"\{text\}<|end|>\\n"
+prompt += f"{text}<|end|>\\n"
 
 prompt += "<|assistant|>\\n"
 
-image \= og.Images.open(img\_path)
+image = og.Images.open(img_path)
 
-inputs \= processor(prompt, images\=image)
+inputs = processor(prompt, images=image)
 
-params \= og.GeneratorParams(model)
+params = og.GeneratorParams(model)
 
-params.set\_inputs(inputs)
+params.set_inputs(inputs)
 
-params.set\_search\_options(max\_length\=3072)
+params.set_search_options(max_length=3072)
 
-generator \= og.Generator(model, params)
+generator = og.Generator(model, params)
 
-while not generator.is\_done():
+while not generator.is_done():
 
-    generator.compute\_logits()
+    generator.compute_logits()
     
-    generator.generate\_next\_token()
+    generator.generate_next_token()
 
-    new\_token \= generator.get\_next\_tokens()\[0\]
+    new_token = generator.get_next_tokens()\[0\]
     
-    output \= tokenizer\_stream.decode(new\_token)
+    output = tokenizer_stream.decode(new_token)
     
-    print(tokenizer\_stream.decode(new\_token), end\='', flush\=True)
+    print(tokenizer_stream.decode(new_token), end='', flush=True)
+```
 
 **Others**
 

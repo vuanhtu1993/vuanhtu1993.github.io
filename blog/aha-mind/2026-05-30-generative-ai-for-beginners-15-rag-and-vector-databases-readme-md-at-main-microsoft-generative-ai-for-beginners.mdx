@@ -123,10 +123,12 @@ We store our embeddings in vector databases as LLMs have a limit of the number o
 
 Some popular vector databases include Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant and DeepLake. You can create an Azure Cosmos DB model using Azure CLI with the following command:
 
+```bash
 az login
-az group create -n <resource-group-name\> -l <location\>
-az cosmosdb create -n <cosmos-db-name\> -r <resource-group-name\>
-az cosmosdb list-keys -n <cosmos-db-name\> -g <resource-group-name\>
+az group create -n <resource-group-name> -l <location>
+az cosmosdb create -n <cosmos-db-name> -r <resource-group-name>
+az cosmosdb list-keys -n <cosmos-db-name> -g <resource-group-name>
+```
 
 ### From text to embeddings
 
@@ -134,22 +136,24 @@ az cosmosdb list-keys -n <cosmos-db-name\> -g <resource-group-name\>
 
 Before we store our data, we will need to convert it to vector embeddings before it is stored in the database. If you are working with large documents or long texts, you can chunk them based on queries you expect. Chunking can be done at sentence level, or at a paragraph level. As chunking derives meanings from the words around them, you can add some other context to a chunk, for example, by adding the document title or including some text before or after the chunk. You can chunk the data as follows:
 
-def split\_text(text, max\_length, min\_length):
-    words \= text.split()
-    chunks \= \[\]
-    current\_chunk \= \[\]
+```python
+def split_text(text, max_length, min_length):
+    words = text.split()
+    chunks = \[\]
+    current_chunk = \[\]
 
     for word in words:
-        current\_chunk.append(word)
-        if len(' '.join(current\_chunk)) < max\_length and len(' '.join(current\_chunk)) \> min\_length:
-            chunks.append(' '.join(current\_chunk))
-            current\_chunk \= \[\]
+        current_chunk.append(word)
+        if len(' '.join(current_chunk)) < max_length and len(' '.join(current_chunk)) > min_length:
+            chunks.append(' '.join(current_chunk))
+            current_chunk = \[\]
 
-    \# If the last chunk didn't reach the minimum length, add it anyway
-    if current\_chunk:
-        chunks.append(' '.join(current\_chunk))
+    # If the last chunk didn't reach the minimum length, add it anyway
+    if current_chunk:
+        chunks.append(' '.join(current_chunk))
 
     return chunks
+```
 
 Once chunked, we can then embed our text using different embedding models. Some models you can use include: word2vec, ada-002 by OpenAI, Azure Computer Vision and many more. Selecting a model to use will depend on the languages you're using, the type of content encoded (text/images/audio), the size of input it can encode and length of the embedding output.
 
@@ -192,15 +196,17 @@ We can measure similarity using other alternatives we can use are <Term definiti
 
 When doing retrieval, we will need to build a search index for our knowledge base before we perform search. An index will store our embeddings and can quickly retrieve the most similar chunks even in a large database. We can create our index locally using:
 
+```python
 from sklearn.neighbors import NearestNeighbors
 
-embeddings \= flattened\_df\['embeddings'\].to\_list()
+embeddings = flattened_df\['embeddings'\].to_list()
 
-\# Create the search index
-nbrs \= NearestNeighbors(n\_neighbors\=5, algorithm\='ball\_tree').fit(embeddings)
+# Create the search index
+nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(embeddings)
 
-\# To query the index, you can use the kneighbors method
-distances, indices \= nbrs.kneighbors(embeddings)
+# To query the index, you can use the kneighbors method
+distances, indices = nbrs.kneighbors(embeddings)
+```
 
 ### <Term definition="Bước chấm điểm và sắp xếp lại danh sách kết quả tìm kiếm ban đầu để đưa những kết quả thực sự phù hợp nhất lên trên cùng. (Ví dụ: Giống như việc ban giám khảo chấm điểm lại top 10 thí sinh hoa hậu sau vòng ứng xử để chọn ra top 3 xuất sắc nhất.)">Re-ranking</Term>
 
@@ -208,19 +214,21 @@ distances, indices \= nbrs.kneighbors(embeddings)
 
 Once you have queried the database, you might need to sort the results from the most relevant. A reranking LLM utilizes Machine Learning to improve the relevance of search results by ordering them from the most relevant. Using Azure AI Search, reranking is done automatically for you using a semantic reranker. An example of how reranking works using nearest neighbours:
 
-\# Find the most similar documents
-distances, indices \= nbrs.kneighbors(\[query\_vector\])
+```python
+# Find the most similar documents
+distances, indices = nbrs.kneighbors(\[query_vector\])
 
-index \= \[\]
-\# Print the most similar documents
+index = \[\]
+# Print the most similar documents
 for i in range(3):
-    index \= indices\[0\]\[i\]
+    index = indices\[0\]\[i\]
     for index in indices\[0\]:
-        print(flattened\_df\['chunks'\].iloc\[index\])
-        print(flattened\_df\['path'\].iloc\[index\])
-        print(flattened\_df\['distances'\].iloc\[index\])
+        print(flattened_df\['chunks'\].iloc\[index\])
+        print(flattened_df\['path'\].iloc\[index\])
+        print(flattened_df\['distances'\].iloc\[index\])
     else:
-        print(f"Index \{index\} not found in DataFrame")
+        print(f"Index {index} not found in DataFrame")
+```
 
 ## Bringing it all together
 
@@ -228,40 +236,42 @@ for i in range(3):
 
 The last step is adding our LLM into the mix to be able to get responses that are grounded on our data. We can implement it as follows:
 
-user\_input \= "what is a perceptron?"
+```python
+user_input = "what is a perceptron?"
 
-def chatbot(user\_input):
-    \# Convert the question to a query vector
-    query\_vector \= create\_embeddings(user\_input)
+def chatbot(user_input):
+    # Convert the question to a query vector
+    query_vector = create_embeddings(user_input)
 
-    \# Find the most similar documents
-    distances, indices \= nbrs.kneighbors(\[query\_vector\])
+    # Find the most similar documents
+    distances, indices = nbrs.kneighbors(\[query_vector\])
 
-    \# add documents to query  to provide context
-    history \= \[\]
+    # add documents to query  to provide context
+    history = \[\]
     for index in indices\[0\]:
-        history.append(flattened\_df\['chunks'\].iloc\[index\])
+        history.append(flattened_df\['chunks'\].iloc\[index\])
 
-    \# combine the history and the user input
-    history.append(user\_input)
+    # combine the history and the user input
+    history.append(user_input)
 
-    \# create a message object
-    messages\=\[
-        \{"role": "system", "content": "You are an AI assistant that helps with AI questions."\},
-        \{"role": "user", "content": "\\n\\n".join(history) \}
+    # create a message object
+    messages=\[
+        {"role": "system", "content": "You are an AI assistant that helps with AI questions."},
+        {"role": "user", "content": "\\n\\n".join(history) }
     \]
 
-    \# use chat completion to generate a response
-    response \= openai.chat.completions.create(
-        model\="gpt-4",
-        temperature\=0.7,
-        max\_tokens\=800,
-        messages\=messages
+    # use chat completion to generate a response
+    response = openai.chat.completions.create(
+        model="gpt-4",
+        temperature=0.7,
+        max_tokens=800,
+        messages=messages
     )
 
     return response.choices\[0\].message
 
-chatbot(user\_input)
+chatbot(user_input)
+```
 
 ## Evaluating our application
 
