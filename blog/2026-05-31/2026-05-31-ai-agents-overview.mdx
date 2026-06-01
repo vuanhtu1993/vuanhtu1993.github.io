@@ -1,0 +1,109 @@
+---
+slug: ai-agents-overview
+title: "AI Agents: Khi Trí Tuệ Nhân Tạo Biến Thành 'Người Hành Động'"
+date: 2026-05-31
+authors: [anhhtus]
+tags: [ai, agents, langchain, autogen, taskweaver, jarvis, synthesized]
+description: "AI Agent là gì? So sánh chi tiết 4 Framework phổ biến (LangChain, AutoGen, Taskweaver, JARVIS) giúp biến LLM từ một 'Trợ lý tán gẫu' thành một 'Cỗ máy thực thi'."
+---
+
+import Term from '@site/src/components/Term';
+
+## 1. Agenda
+
+**Thời gian đọc ước tính:** ~15 phút
+
+### Learning outcome:
+- ✅ **Định nghĩa** được AI Agent là gì thông qua 2 yếu tố cốt lõi: State và Tools.
+- ✅ **Phân biệt** được 4 Agent Framework hàng đầu hiện nay.
+- ✅ **Hiểu** được điểm mạnh riêng biệt của từng Framework (Ví dụ: Tại sao lại chọn AutoGen cho đàm phán, nhưng lại chọn TaskWeaver cho phân tích dữ liệu).
+- ✅ **Áp dụng** (Về mặt tư duy) cách thiết kế hệ thống đa tác nhân (Multi-Agent).
+
+<!-- truncate -->
+
+[![Open Source Models](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160569/github-page/ghbsrgvpvyjp7tkvnlmp.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+
+## 2. Glossary & Vocabulary
+
+**2.1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **AI Agents** | Thực thể AI không chỉ có khả năng sinh văn bản (như ChatGPT) mà còn có thể tự lên kế hoạch (Plan), ghi nhớ ngữ cảnh (State) và sử dụng công cụ (Tools) để thực thi hành động. |
+| **State** | Trạng thái/Ngữ cảnh: Trí nhớ của Agent về những hành động nó đã làm, giúp nó đưa ra quyết định cho bước đi tiếp theo thay vì quên sạch sau mỗi câu chat. |
+| **Tools / Plugins** | Công cụ: Các chức năng bên ngoài mà Agent có thể gọi (như gọi API thời tiết, truy xuất Database, chạy mã Python). |
+| **Conversable** | Có tính hội thoại: Khả năng của các Agent có thể trò chuyện với con người hoặc với **các Agent khác** để cùng giải quyết một bài toán phức tạp. |
+| **Code-first** | Ưu tiên mã nguồn: Cách tiếp cận dùng Code (như DataFrame của Pandas) làm ngôn ngữ giao tiếp chính thay vì chỉ dùng văn bản thô (Strings). |
+
+**2.2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Subsequent (adj)** | Xảy ra ngay sau đó (Các hành động tiếp theo của Agent dựa trên State trước đó). |
+| **Visibility (n)** | Tính minh bạch, khả năng "nhìn thấu" bên trong xem Agent đang làm gì và gọi tool nào. |
+| **Initiate (v)** | Khởi xướng, bắt đầu (Ví dụ: User initiate một cuộc hội thoại để Agent bắt đầu làm việc). |
+| **Refine (v)** | Tinh chỉnh, mài giũa lại (Sau khi Agent hoàn thành bản nháp, cần refine để có kết quả cuối cùng). |
+
+## 3. AI Agent là gì? Tại sao lại quan trọng? (WHY & WHAT)
+
+**Vấn đề (Problem Statement):**
+Các mô hình ngôn ngữ lớn (LLMs) như GPT-4 rất giỏi làm thơ, tóm tắt và dịch thuật. Nhưng chúng bị nhốt trong một "chiếc hộp". Nếu bạn nói *"Hãy đặt vé máy bay cho tôi"*, ChatGPT chỉ có thể liệt kê các bước bạn cần làm. Nó là một **Trợ lý (Assistant)**, chứ không phải là **Người thực thi (Agent)**.
+
+**Giải pháp (Solution):**
+**AI Agents** ra đời để phá vỡ chiếc hộp đó. Bằng cách cung cấp cho LLM hai thứ:
+1. **State (Trạng thái):** Khả năng ghi nhớ mục tiêu lớn, và đang ở bước nào của kế hoạch.
+2. **Tools (Công cụ):** "Tay chân" để tác động ra thế giới thực (API, Database, Trình duyệt).
+
+*Ví dụ:* Khi bạn nói *"Đặt vé máy bay"*, Agent sẽ dùng Tool "Check Lịch", nhận thấy bạn rảnh thứ 6. Nó tiếp tục dùng Tool "Tìm vé Skyscanner", và cuối cùng dùng Tool "Thanh toán Stripe" để chốt đơn.
+
+[![Agent Model](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160567/github-page/dbgnmufqajmxnxzx3eof.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/17-ai-agents/images/what-agent.png)
+
+## 4. Bốn AI Agent Framework Đỉnh Cao Hiện Nay (HOW)
+
+Để không phải code mọi thứ từ đầu, chúng ta sử dụng các **Framework**. Dưới đây là 4 đại diện tiêu biểu nhất.
+
+### 4.1. LangChain: "Con dao pha" đa năng
+
+LangChain là Framework nổi tiếng nhất, chuyên cung cấp các khối xây dựng (building blocks) để nối LLM với thế giới bên ngoài.
+
+- **Cơ chế:** Dùng `AgentExecutor` làm bộ não. Nó nhận vào LLM, bộ nhớ (History), và danh sách Tools.
+- **Điểm mạnh:** Cộng đồng khổng lồ. Có sẵn hàng ngàn Tools từ API thời tiết, Wikipedia đến SQL Database. Khả năng **Visibility** rất cao nhờ công cụ LangSmith (nhìn thấu tư duy của Agent).
+
+[![Langchain Agents](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160569/github-page/nb0sfka6budyni1cank5.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/17-ai-agents/images/langchain-agents.png)
+
+### 4.2. AutoGen: Chuyên gia "Multi-Agent" (Nhiều cái đầu cùng suy nghĩ)
+
+Do Microsoft phát triển, AutoGen nổi bật với triết lý: *"Thay vì một Agent làm mọi việc, hãy tạo ra một Team các Agent chuyên biệt trò chuyện với nhau"*.
+
+- **Conversable:** Bạn tạo ra Agent A (Coder) và Agent B (Product Manager). A viết code, B đánh giá code. Chúng tự chat với nhau cho đến khi ra kết quả cuối.
+- **Customizable:** Con người (Human) cũng có thể đóng vai một Agent thông qua `UserProxyAgent`. Bất cứ khi nào Agent AI định thực thi code, nó phải xin phép Agent Con người.
+
+[![AutoGen](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160569/github-page/v14mwcjy3owdd0gktbrr.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/17-ai-agents/images/autogen.png)
+
+### 4.3. Taskweaver: Sát thủ Xử lý Dữ liệu (Code-first)
+
+Nếu LangChain và AutoGen thích giao tiếp bằng văn bản (Strings), thì Taskweaver nói chuyện bằng... DataFrames (Bảng dữ liệu).
+
+- **Cơ chế:** Taskweaver sử dụng một `Planner` để lập kế hoạch. Sau đó, thay vì gọi API thông thường, nó gọi các `Plugins` (là các đoạn code Python thuần).
+- **Điểm mạnh:** Cực kỳ phù hợp cho Data Science, vẽ biểu đồ, hoặc phân tích sự bất thường (Anomaly Detection) trên các file CSV, Excel khổng lồ.
+
+[![Taskweaver](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160569/github-page/spyecrswyxnjst0q2alv.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/17-ai-agents/images/taskweaver.png)
+
+### 4.4. JARVIS: Nhạc trưởng điều phối AI
+
+JARVIS đi theo một triết lý khác: Dùng LLM như một "Nhà điều phối" (Router) để gọi các mô hình AI nhỏ, chuyên biệt khác.
+
+- **Cơ chế:** Bạn hỏi *"Trong bức ảnh này có mấy con mèo?"*. JARVIS (LLM) hiểu rằng nó không biết xem ảnh. Nó tự động gọi một mô hình "Object Detection AI" chuyên biệt, đẩy bức ảnh cho mô hình đó, nhận kết quả và báo lại cho bạn.
+- **Điểm mạnh:** Xử lý đa phương tiện cực tốt (Hình ảnh, Âm thanh, Video) bằng cách ghép nối nhiều Model đặc thù lại với nhau.
+
+[![JARVIS](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160569/github-page/men22inqqxscnwhmwn1j.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/17-ai-agents/images/jarvis.png)
+
+## 5. Câu hỏi thảo luận
+
+1. Giả sử bạn muốn xây dựng một hệ thống Tự động viết Code và Test Bug. Theo bạn, AutoGen (Multi-Agent) hay LangChain (Single Agent + Tools) sẽ là lựa chọn phù hợp hơn? Tại sao?
+2. Sự khác biệt lớn nhất giữa việc dùng Taskweaver để phân tích 1 triệu dòng dữ liệu Excel so với việc ném file Excel đó thẳng vào ChatGPT (Code Interpreter) là gì?
+3. Rủi ro lớn nhất (về mặt bảo mật hoặc chi phí) khi chúng ta cho phép một AI Agent "tự chủ" (Autonomy) gọi các Tool (như gửi email, thanh toán) mà không cần con người duyệt là gì? Cách khắc phục?
+
+## 6. References
+- Dựa trên [Generative AI for Beginners - Microsoft](https://github.com/microsoft/generative-ai-for-beginners/blob/main/17-ai-agents/README.md).
+
+---
+*Made by Anh Tu - Share to be share*

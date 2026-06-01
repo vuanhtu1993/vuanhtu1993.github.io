@@ -1,0 +1,149 @@
+---
+slug: rag-and-vector-databases
+title: "RAG & Vector Databases: Cấy Ghép Dữ Liệu Thực Tế Vào LLM"
+date: 2026-05-31
+authors: [anhhtus]
+tags: [ai, rag, vector-database, embeddings, synthesized]
+description: "Khám phá kỹ thuật Retrieval-Augmented Generation (RAG) giúp khắc phục giới hạn kiến thức của LLM bằng cách kết nối với cơ sở dữ liệu nội bộ."
+---
+
+import Term from '@site/src/components/Term';
+
+## 1. Agenda
+
+**Thời gian đọc ước tính:** ~12 phút
+
+### Learning outcome:
+- ✅ **Hiểu** được tại sao ChatGPT lại không thể trả lời các thông tin nội bộ của công ty bạn và giải pháp khắc phục.
+- ✅ **Giải thích** được cơ chế 3 bước hoạt động của RAG (Ingestion, Retrieval, Augmented Generation).
+- ✅ **Phân biệt** được vai trò của Vector Database và Vector Search so với Keyword Search thông thường.
+- ✅ **Tích hợp** (Về mặt tư duy) RAG vào một ứng dụng thực tế thông qua thư viện Python.
+
+<!-- truncate -->
+
+[![Retrieval Augmented Generation (RAG) and Vector Databases](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160523/github-page/tliohoxwacyvpncnn3a3.png)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
+
+## 2. Glossary & Vocabulary
+
+**2.1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **RAG** | Retrieval-Augmented Generation: Kỹ thuật cải thiện câu trả lời của AI bằng cách truy xuất thông tin từ tài liệu bên ngoài (Retrieval) trước khi tổng hợp và sinh ra câu trả lời (Augmented Generation). |
+| **Knowledge Cutoff** | Điểm giới hạn kiến thức: Mốc thời gian cuối cùng mà dữ liệu huấn luyện của AI được cập nhật (Ví dụ: GPT-4 là tháng 9/2021). |
+| **Vector Database** | Cơ sở dữ liệu Vector: Hệ thống lưu trữ các đoạn văn bản dưới dạng các chuỗi số (embeddings), tối ưu cho tìm kiếm ngữ nghĩa siêu tốc. |
+| **Semantic Search** | Tìm kiếm ngữ nghĩa: Thay vì tìm chính xác chữ "giảm giá", hệ thống có thể tìm ra các câu có chữ "khuyến mãi", "sale" nhờ tính toán khoảng cách vector. |
+| **Chunking** | Chia nhỏ: Kỹ thuật băm nhỏ một tài liệu dài (ví dụ file PDF 100 trang) thành các đoạn ngắn (chunks) vài trăm từ để AI dễ dàng xử lý. |
+
+**2.2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Fabrication (n)** | Sự bịa đặt (Ảo giác - Hallucination của AI khi cố gắng trả lời những gì nó không biết). |
+| **Ingested (v)** | Được nạp vào, "tiêu hóa" (Dữ liệu thô được đưa vào hệ thống để xử lý). |
+| **Delve further into (v)** | Đi sâu vào nghiên cứu, mổ xẻ một vấn đề chi tiết hơn. |
+
+## 3. Vấn đề "Mù Thông Tin" của LLM (WHY)
+
+**Vấn đề (Problem Statement):**
+Các LLM như ChatGPT rất thông minh, nhưng chúng mắc hai điểm yếu chí mạng:
+1. **Lạc hậu:** Kiến thức của chúng dừng lại ở thời điểm được huấn luyện (Knowledge cutoff).
+2. **Thiếu ngữ cảnh nội bộ:** Chúng hoàn toàn không biết bảng lương của công ty bạn, sổ tay nhân sự, hay ghi chép bài giảng riêng của bạn.
+
+Nếu bạn cố hỏi một câu về dữ liệu nội bộ, LLM sẽ rơi vào trạng thái **Fabrication (bịa đặt)** và trả lời sai sự thật.
+
+**Giải pháp (Solution):**
+Thay vì phải **Fine-Tuning** (mất rất nhiều tiền và thời gian để dạy lại AI), chúng ta dùng **RAG**. Ý tưởng là: Trước khi đưa câu hỏi cho AI trả lời, ta đi vào thư viện của công ty, tìm đúng trang sách có chứa đáp án, kẹp trang sách đó vào cùng câu hỏi rồi bảo AI: *"Dựa vào nội dung tài liệu này, hãy trả lời câu hỏi sau"*.
+
+## 4. Cơ chế hoạt động của RAG (WHAT)
+
+### 4.1. Tổng quan quy trình RAG
+[![drawing showing how RAGs work](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160525/github-page/p3bttyjvl2haueov2iay.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/images/how-rag-works.png)
+
+RAG hoạt động dựa trên 3 trụ cột chính:
+1. **Knowledge base (Chuẩn bị dữ liệu):** Tất cả tài liệu PDF, DOCX của bạn được chia nhỏ (Chunking) và biến thành các dãy số (Embeddings) rồi cất vào **Vector Database**.
+2. **Retrieval (Truy xuất):** Khi User hỏi, hệ thống sẽ biến câu hỏi thành Vector, sau đó lao vào Vector Database để tìm (Search) ra 3-5 đoạn văn bản có nghĩa gần giống nhất với câu hỏi.
+3. **Augmented Generation (Sinh văn bản tăng cường):** Gộp câu hỏi của User + 3 đoạn văn bản vừa tìm được, gửi lên LLM để nó đúc kết thành câu trả lời hoàn chỉnh.
+
+### 4.2. Kiến trúc Encoder - Decoder
+[![drawing showing how RAGs architecture](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160522/github-page/aobxefnjnucb5892zdxz.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/images/encoder-decode.png)
+- **Encoder:** Nhiệm vụ mã hóa văn bản tiếng người (Text) thành ngôn ngữ máy (Vector Embeddings).
+- **Decoder:** Nhiệm vụ giải mã Vector trở lại thành văn bản (Sinh câu trả lời).
+
+[![an embedding of the word cat](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160521/github-page/lisw3tqbzpklhz4pnbmz.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/images/cat.png)
+*Hình minh họa: Chữ "cat" được mã hóa thành một mảng vector bằng model `text-embedding-ada-002`.*
+
+## 5. Triển khai RAG vào thực tế (HOW)
+
+Dưới đây là mô phỏng quá trình đưa RAG vào ứng dụng bằng Python.
+
+### Bước 1: Chunking (Băm nhỏ dữ liệu)
+Bạn không thể nạp cả quyển sách 500 trang vào LLM (sẽ bị lỗi tràn Token). Bạn phải cắt nhỏ chúng.
+
+```python
+# filename: chunking.py
+
+def split_text(text, max_length, min_length):
+    # Cắt văn bản ra thành từng mảng từ nhỏ (khoảng 100-200 từ/chunk)
+    # Lưu ý: Cần có kỹ thuật "Overlapping" (gối đầu một vài từ giữa các chunk)
+    # để tránh việc một câu bị cắt làm đôi làm mất đi ý nghĩa.
+    pass
+```
+
+### Bước 2: Tạo Search Index (Truy xuất Vector)
+Giả sử bạn đã mã hóa (Embed) toàn bộ các Chunk và lưu vào Database. Khi User tìm kiếm, hệ thống dùng thuật toán **Nearest Neighbors (K-NN)** đo khoảng cách toán học để tìm ra các Chunk phù hợp nhất.
+
+```python
+# filename: retrieval.py
+from sklearn.neighbors import NearestNeighbors
+
+# Tạo không gian tìm kiếm
+nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(embeddings_in_db)
+
+# Tìm ra 3 đoạn văn bản (chunks) gần giống với câu hỏi của User nhất
+distances, indices = nbrs.kneighbors([user_query_vector])
+```
+*Ghi chú (WHY):* Bằng cách dùng Toán học (Cosine Similarity hoặc Euclidean distance), hệ thống tìm được đoạn văn bản mang "ý nghĩa" trả lời câu hỏi, dù User có gõ sai chính tả hay dùng từ đồng nghĩa.
+
+### Bước 3: Đưa vào LLM (Augmented Generation)
+Tổng hợp lại tất cả để gửi cho LLM.
+
+```python
+# filename: chatbot.py
+
+user_input = "Perceptron là gì?"
+
+def chatbot(user_input):
+    # 1. Biến câu hỏi thành Vector
+    query_vector = create_embeddings(user_input)
+
+    # 2. Tìm các đoạn văn bản (chunks) có liên quan trong Database
+    distances, indices = nbrs.kneighbors([query_vector])
+    
+    history = []
+    for index in indices[0]:
+        history.append(flattened_df['chunks'].iloc[index]) # Lấy text thực tế
+
+    # 3. Gộp tất cả làm Ngữ cảnh (Context)
+    messages=[
+        {"role": "system", "content": "Bạn là AI hỗ trợ. Hãy dùng CÁC TÀI LIỆU DƯỚI ĐÂY để trả lời."},
+        {"role": "user", "content": f"Tài liệu:\n{history}\n\nCâu hỏi: {user_input}" }
+    ]
+
+    # 4. LLM sinh câu trả lời
+    response = openai.chat.completions.create(
+        model="gpt-4",
+        messages=messages
+    )
+    return response.choices[0].message
+```
+
+## 6. Câu hỏi thảo luận
+
+1. So sánh RAG và Fine-tuning. Nếu công ty bạn muốn chatbot biết phong cách nói chuyện (tone of voice) hài hước đặc trưng của sếp, và muốn chatbot biết lịch họp tuần sau, bạn sẽ dùng RAG hay Fine-Tuning cho từng nhu cầu?
+2. Trong quá trình Retrieval (Tìm kiếm), tại sao việc kết hợp cả Keyword Search và Vector Search (**Hybrid Search**) lại mang lại kết quả tốt nhất thay vì chỉ dùng 100% Vector Search?
+3. Đánh giá chất lượng của hệ thống RAG không chỉ phụ thuộc vào LLM. Nếu hệ thống RAG của bạn thường xuyên trả lời sai, nhưng bạn phát hiện ra LLM vẫn làm rất tốt bước tổng hợp văn bản, thì lỗi (bug) có thể nằm ở bước nào trong quy trình?
+
+## 7. References
+- Dựa trên [Generative AI for Beginners - Microsoft](https://github.com/microsoft/generative-ai-for-beginners/blob/main/15-rag-and-vector-databases/README.md).
+
+---
+*Made by Anh Tu - Share to be share*

@@ -1,0 +1,141 @@
+---
+slug: aha-mind-foundation-models-explained
+title: "Foundation Models: Explained"
+date: 2026-05-31
+authors: [anhhtus]
+tags: [aha-mind, auto-generated, daily-digest]
+---
+
+import Term from '@site/src/components/Term';
+
+> Bài viết được biên dịch tự động bởi **Aha! Mind Socratic Engine**. Nguồn bài viết: [Link gốc](https://humanloop.com/blog/foundation-models)
+
+<!-- truncate -->
+By Conor KellyGrowth
+
+## **What are <Term definition="Mô hình AI khổng lồ được huấn luyện trên lượng dữ liệu cực lớn, đóng vai trò như một bộ não đa năng cơ sở để từ đó tùy biến cho nhiều tác vụ khác nhau mà không cần huấn luyện lại từ đầu. (Ví dụ: Giống như móng nhà vững chắc hoặc một người có học thức nền tảng cực rộng, từ đó học thêm nghề gì mới cũng rất nhanh.)">Foundation Models</Term> and How Do They Work?**
+
+This article is an introduction to foundation models, explaining how they work, and the most popular applications for them.
+
+  
+
+### **What is a Foundation Model?**
+
+Foundation models are large <Term definition="Hệ thống thuật toán mô phỏng cách hoạt động của các tế bào thần kinh trong não người để nhận diện các mối quan hệ và xử lý dữ liệu phức tạp. (Ví dụ: Giống như một mạng lưới các bóng đèn kết nối với nhau, bóng này sáng sẽ kích hoạt bóng tiếp theo tùy thuộc vào dòng điện truyền qua.)">neural networks</Term>, trained on large amounts of unlabelled data. Unlike more narrow traditional AI models, foundation models are general-purpose and can be easily adapted to many different tasks without new training data. Examples of Foundation Models include Large Language Models like GPT-4, Claude or Llama as well as large-scale image and audio models.
+
+  
+
+### **How Does a Foundation Model Work?**
+
+Traditionally, machine learning models have been designed to perform narrow, specific tasks. They are trained on highly <Term definition="Tập hợp dữ liệu đã được các chuyên gia chọn lọc, làm sạch, dán nhãn và sắp xếp cẩn thận để phục vụ cho một mục đích huấn luyện AI cụ thể. (Ví dụ: Giống như một thực đơn được đầu bếp chuẩn bị kỹ lưỡng từ khâu chọn nguyên liệu tươi ngon nhất, thay vì một đống đồ ăn hỗn độn ở chợ.)">curated datasets</Term>, limiting their capabilities to a specific context. Typically, a team of in-house data scientists or machine learning engineers are responsible for the development and training of these models. For each task, they need to design and train a new model, <Term definition="Hành động điều chỉnh, thiết kế hoặc biến đổi một hệ thống hoặc mô hình sao cho vừa vặn và đáp ứng chính xác nhu cầu cụ thể của một dự án. (Ví dụ: Giống như việc mang một bộ vest may sẵn ra tiệm để thợ sửa lại cho vừa khít với số đo cơ thể bạn.)">tailoring</Term> it to the unique requirements of that task.
+
+Foundation models take a broader approach. They’re constructed upon a deep neural network architecture which is trained on a large, diverse and _importantly_ unlabeled dataset. This process requires large amounts of data gathering/cleaning, computational resources and technical expertise. However, once the foundation model has completed training, it can be adapted to perform a wide range of tasks and made generally available. This means that any organization can <Term definition="Tận dụng tối đa sức mạnh, ưu thế hoặc tài nguyên sẵn có để đạt được kết quả vượt trội mà không tốn nhiều công sức. (Ví dụ: Giống như việc dùng một chiếc đòn bẩy để nâng một tảng đá khổng lồ mà sức người bình thường không thể tự nhấc nổi.)">leverage</Term> the existing knowledge of a pre-trained foundation model (like GPT-4) and prompt or tune it to perform a specific task rather than training their own model <Term definition="Bắt đầu làm một việc gì đó hoàn toàn từ con số không, không dựa dẫm vào bất kỳ nền tảng hay kết quả có sẵn nào trước đó. (Ví dụ: Giống như việc tự đi mua gạch, cát, xi măng về tự xây nhà thay vì mua một căn hộ chung cư đã hoàn thiện phần thô.)">from scratch</Term>.
+
+Much less machine learning knowledge is required to adapt a foundation model rather than training from scratch so modern [generative AI](https://humanloop.com/blog/how-to-build-the-right-team-for-generative-ai) teams are often made up of <Term definition="Những chuyên gia có kiến thức chuyên sâu và kinh nghiệm thực tế trong một lĩnh vực cụ thể (như y tế, tài chính, luật) chứ không chỉ giỏi về công nghệ. (Ví dụ: Giống như một bác sĩ tim mạch đầu ngành, họ hiểu rõ bệnh lý tim hơn bất kỳ lập trình viên viết phần mềm y tế nào.)">domain experts</Term> and product managers, not necessarily data scientists or machine learning specialists.
+
+![Traditional Machine Learning vs Foundation Models. Source: Armand Ruiz](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780246679/github-page/fqcjhclavu5ybwhwpvn3.jpg)
+
+Traditional Machine Learning vs Foundation Models. Source: Armand Ruiz
+
+  
+
+### **Examples of Foundation Models**
+
+Foundation models have opened a new frontier in artificial intelligence, particularly over the last half-decade as more computing resources have become available. Here are some notable foundation models that have changed the course of progress in artificial intelligence:
+
+#### **BERT (Bidirectional Encoder Representations for Transformers)**
+
+[BERT](https://arxiv.org/abs/1810.04805) was one of the breakthrough models in natural language processing (NLP) in 2018. Traditional language models at the time, such as Word2Vec and GloVe, relied on <Term definition="Chỉ hoạt động hoặc xử lý thông tin theo một chiều duy nhất (từ trái qua phải hoặc từ trước ra sau), không có sự tương tác ngược lại. (Ví dụ: Giống như việc đi trên đường một chiều, bạn chỉ nhìn thấy những gì ở phía trước chứ không thể quay đầu nhìn lại phía sau.)">unidirectional</Term> context, which was inherently limited because it failed to capture the full contextual <Term definition="Những khác biệt hoặc sắc thái cực kỳ nhỏ, tinh tế trong ý nghĩa, cảm xúc hoặc ngữ cảnh mà mắt thường hoặc các bộ lọc thô sơ khó nhận ra. (Ví dụ: Giống như sự khác biệt cực kỳ nhỏ giữa màu đỏ son và đỏ cherry mà chỉ những nhà thiết kế thời trang mới phân biệt được.)">nuances</Term> of language. BERT aimed to overcome these limitations by introducing bi-directional training objectives and used two <Term definition="Phương pháp huấn luyện AI trong đó mô hình tự tìm ra các cấu trúc, quy luật ẩn sâu trong dữ liệu mà không cần con người dán nhãn hay hướng dẫn trước. (Ví dụ: Giống như việc thả một đứa trẻ vào một căn phòng đầy đồ chơi đủ hình dạng, đứa trẻ tự gom những món giống nhau lại một nhóm mà không cần ai chỉ bảo.)">unsupervised learning</Term> objectives - masked language model (MLM) and next-sentence prediction (NSP) for this purpose. The pre-trained BERT model generates token-level <Term definition="Kỹ thuật chuyển đổi các thực thể thế giới thực (như từ ngữ, hình ảnh) thành các chuỗi số (vector) trong không gian nhiều chiều sao cho các thực thể có nghĩa gần nhau sẽ nằm gần nhau. (Ví dụ: Giống như việc định vị tọa độ GPS cho các địa điểm trên bản đồ; các quán ăn cùng phong cách sẽ có tọa độ gần nhau.)">embeddings</Term>, which facilitate contextual language comprehension across a range of natural language processing tasks, including sentiment analysis, text summarization, and semantic similarity.
+
+#### **CLIP (Contrastive Language-Image Pre-Training)**
+
+In 2021, a <Term definition="Khả năng xử lý và kết hợp đồng thời nhiều loại dữ liệu đầu vào khác nhau như văn bản, hình ảnh, âm thanh và video trong cùng một hệ thống AI. (Ví dụ: Giống như một người bình thường vừa nghe nhạc, vừa xem video thuyết minh, vừa đọc phụ đề tiếng Việt cùng một lúc.)">multi-modal</Term> vision and language modal, [CLIP](https://arxiv.org/abs/2103.00020) became popular for its ability to effectively perform tasks it had not been explicitly trained to handle. The model was trained on 400 million image-text pairs with the motive of learning how to connect language and images. It utilized an objective of <Term definition="Phương pháp huấn luyện AI bằng cách dạy nó so sánh để nhận biết điểm giống nhau giữa các thực thể cùng loại và điểm khác biệt giữa các thực thể khác loại. (Ví dụ: Giống như cách dạy trẻ con phân biệt chó và mèo bằng cách đặt hai con cạnh nhau và chỉ ra sự khác nhau về tai, tiếng kêu.)">contrastive learning</Term> to learn language-guided image representations and has now found many applications in image retrieval and image-text matching tasks.
+
+![A depiction of CLIP being used when trainig OpenAI's DALL•E-2. Source: OpenAI](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780246679/github-page/ldlwp8uhtvkjz6nrderm.png)
+
+A depiction of CLIP being used when trainig OpenAI's DALL•E-2. Source: OpenAI
+
+  
+
+#### **GPT (Generative Pre-trained Transformers)**
+
+GPT was first introduced by OpenAI in the paper [Improving Language Understanding by Generative Pre-training](https://openai.com/research/language-unsupervised), which trained a generative language model with unsupervised learning objectives with unlabelled text <Term definition="Một kho dữ liệu văn bản khổng lồ, được thu thập và số hóa từ nhiều nguồn để làm nguyên liệu nghiên cứu ngôn ngữ hoặc huấn luyện AI. (Ví dụ: Giống như toàn bộ sách vở trong một thư viện quốc gia được gom lại để làm tài liệu ôn thi cho học sinh.)">corpus</Term> and then used supervised <Term definition="Quá trình lấy một mô hình AI đã được huấn luyện tổng quát và tiếp tục huấn luyện nhẹ lại trên một tập dữ liệu nhỏ, chuyên biệt để nó làm tốt một tác vụ cụ thể. (Ví dụ: Giống như một bác sĩ đa khoa học thêm một khóa chuyên sâu 6 tháng để trở thành bác sĩ chuyên phẫu thuật thẩm mỹ.)">fine-tuning</Term> for specific tasks with labelled data. This semi-supervised learning approach used in the GPT architecture outperformed previously introduced language models in generative and language understanding tasks, leading to the release of its subsequent series, [GPT-2](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf) and [GPT-3](https://arxiv.org/abs/2005.14165), in 2019 and 2020, respectively. Constructed with a decoder-only style from transformers, GPT was built on learning the next-word prediction objective, which has made it a significant foundation model for many text-generative tasks. Notably, this is the same architecture behind ChatGPT and GPT-4.
+
+  
+
+### **Capabilities of Foundation Models**
+
+Some of the most successful domain-specific applications of foundation models include:
+
+#### **Language Processing**
+
+Since foundation models don’t need labelled data and there’s an abundance of text on the internet, language-based foundation models were some of the earliest to be trained. Natural language preprocessing (NLP) has benefitted from the development of foundation models like GPT and BERT, which capture semantic relations in text. This has helped with tasks such as text generation, classification and summarization and has led to the advances in reasoning capabilities which we see in large language models today.
+
+#### **Visual Comprehension**
+
+These models have found a wide range of use cases in AI problems involving images and their association with other modalities like text. Computer vision foundation models have the capability to understand the content and style of given imagery, which helps them automate and improve tasks like object detection and image classification. Moreover, advanced models that are trained using multimodal data like CLIP and [Kosmos-2](https://arxiv.org/abs/2306.14824) have bridged the gap between images and text by understanding their underlying visual-semantic correspondence.
+
+#### **Code Generation**
+
+One of the most common use cases for generative AI is assisting programmers in writing code samples by acquiring a syntactical and logical understanding of programming languages, for example, Python, Java, SQL, etc. Codey is an example of a coding assistant built on top of the foundation model called [PaLM 2](https://arxiv.org/abs/2305.10403), released by Google to assist in coding functionality or [GitHub Copilot](https://github.com/features/copilot), which is built using OpenAI’s GPT models. Such developments empowered by foundation models show promising growth for the software development sector by helping them with code generation, code debugging, and following structured programming practices.
+
+#### **Speech to Text**
+
+Targeting human speech from multiple languages such as English, French, and Chinese, foundation models have many applications in speech-to-text processes. These advancements are already in use by many companies, including Google, with their family of Universal Speech models. These foundation models exhibit the ability to understand audio prompts and provide textual responses.
+
+  
+
+### **Benefits of Foundation Models**
+
+Apart from the generalization capabilities of foundation models (discussed above), other benefits include:
+
+#### **Low cost to deploy**
+
+Once trained, there’s a variety of cost-effective methods available to reliably deploy a foundation model in an application, these include [prompt engineering](https://humanloop.com/blog/prompt-engineering-101), [fine-tuning](https://humanloop.com/blog/fine-tuning-gpt-3-5) and [retrieval augmented generation](https://humanloop.com/blog/rag-explained). All techniques are significantly cheaper than training a large model from scratch and mixing them can help lead to cutting-edge AI performance. To learn more about this read our guide on [optimizing the performance of LLMs](https://humanloop.com/blog/optimizing-llms).
+
+#### **Enhanced performance**
+
+Foundation models often achieve <Term definition="Thuật ngữ chỉ trình độ phát triển cao nhất, hiện đại nhất và tốt nhất của một công nghệ hoặc sản phẩm tại thời điểm hiện tại. (Ví dụ: Giống như chiếc iPhone đời mới nhất vừa được Apple ra mắt tuần này, sở hữu mọi công nghệ đỉnh cao nhất.)">state-of-the-art</Term> performance on many tasks due to their ability to leverage vast amounts of training data and complex patterns. This often means they’re better placed than specialized models to perform specific tasks. For this reason, we see smaller foundation models being used in the data labelling, generation and cleaning phases for training larger models. A recent example being that Llama 2 was used to [generate the training data](https://www.linkedin.com/posts/humanloop_llama-3s-launch-has-taken-the-internet-by-activity-7188570055058563073-dXfI) for the text-quality classifiers powering Llama 3.
+
+#### **Continuous improvement**
+
+Foundation models are continuously improving, meaning that applications built on top of them can benefit from these improvements by switching to upgraded models. For organizations, this means that over time they can expect models to become more accurate, more efficient, and more robust. It’s important that the back-end of applications remain adaptable so that switching to more advanced models can be achieved without a performance disruption. Integration with [Humanloop](https://humanloop.com/) makes it easy to reliably update the model behind an application without changing any code while comparing the performance before and after.
+
+  
+
+### **Challenges of Foundation Models**
+
+While building a base for different tasks, foundation models face multiple challenges, namely:
+
+#### **Data and computation scarcity**
+
+The recent advancements in foundation models have created a surge in demand for computing power, making it more expensive to train models from scratch. Furthermore, data is becoming an increasingly scarce resource, with companies like [Google paying Reddit $60M per year](https://www.theverge.com/2024/2/22/24080165/google-reddit-ai-training-data) for access to real-time content to train their models.
+
+#### **Bias**
+
+To avoid producing biased results, foundation models must be trained on a well-balanced dataset. This presents a challenge given the vast amount of data on which models like GPT-4 are trained. Following the initial training phase, the model undergoes a Reinforcement Learning from Human Feedback (RLHF) stage, where its responses are refined based on human evaluations to enhance accuracy and performance. This process must be run neutrally to avoid a foundation model being influenced in a single direction, as it will become apparent in <Term definition="Các ứng dụng hoặc tác vụ cụ thể ở giai đoạn sau (như dịch thuật, phân tích cảm xúc) sử dụng kết quả đầu ra của một mô hình nền tảng lớn. (Ví dụ: Giống như việc dùng dòng nước từ đập thủy điện lớn ở thượng nguồn để tưới tiêu cho từng mảnh ruộng nhỏ ở phía dưới.)">downstream tasks</Term> that the model is unreliable.
+
+#### **Lack of standardization**
+
+Currently there is a lack of standardized methods for interpreting the outputs of foundation models. Although [LLM benchmarks](https://humanloop.com/blog/llm-benchmarks) are used to compare LLMs in terms of their general capabilities, understanding how a model will perform within the context of a given application remains a challenge.
+
+Evaluations on Humanloop help to solve this by enabling teams to develop datasets and evalautors customized for their applications, which can be used to rigorously measure and track the performance of LLMs so they can reliably be put into production. Learn more about our approach in our guide to [evaluating LLMs applications](https://humanloop.com/blog/evaluating-llm-apps).
+
+  
+
+### **Why Are Foundation Models Important?**
+
+Recent advancements in the performance of foundation models represent the beginning of one of the biggest technological shifts in history. Foundation models offer a scalable, adaptable framework that revolutionizes how information can be processed, facilitating the creation of globally accessible intelligent systems. Consequently, they have created a new computing <Term definition="Một mô hình, khuôn mẫu tư duy hoặc hệ thống lý thuyết được chấp nhận rộng rãi, định hình cách một ngành khoa học hoặc công nghệ vận hành. (Ví dụ: Giống như sự chuyển đổi từ việc đi xe ngựa sang đi ô tô, thay đổi hoàn toàn cách con người nghĩ về giao thông vận tải.)">paradigm</Term> which is reshaping industries and expanding the boundaries of what humans and machines can achieve.
+
+  
+
+### **Foundation Models on Humanloop**
+
+Humanloop makes it easy for enterprises to test, evaluate, and deploy large language model (LLM) based applications built on foundation models such as GPT-4 and Claude 3.
+
+Our platform for developing and evaluating LLM applications solves the most critical workflows around prompt engineering and model evaluation with an interactive environment where product managers and engineers can work together to find, manage and measure prompts for LLMs. Coupled with this are tools for rigorously monitoring and evaluating performance, both from user feedback and automated evaluations.
+
+To learn more about how we can help you build reliable applications with foundation models, [book a demo](https://humanloop.com/demo) with our team.
+
+---
+*Made by Anh Tu - Share to be share*

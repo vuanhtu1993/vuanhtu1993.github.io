@@ -1,0 +1,110 @@
+---
+slug: small-language-models
+title: "SLM (Small Language Models): Quyền Lực Trong Lòng Bàn Tay"
+date: 2026-05-31
+authors: [anhhtus]
+tags: [ai, slm, llm, phi-3, onnx, synthesized]
+description: "SLM là gì và tại sao chúng ta lại cần những mô hình 'nhỏ bé' trong thời đại của LLM khổng lồ? Tìm hiểu về họ mô hình Phi-3 của Microsoft và cách triển khai SLM."
+---
+
+import Term from '@site/src/components/Term';
+
+## 1. Agenda
+
+**Thời gian đọc ước tính:** ~15 phút
+
+### Learning outcome:
+- ✅ **Định nghĩa** được SLM (Small Language Models) và hiểu được cách thức nén/chắt lọc (distilling) tri thức từ LLM.
+- ✅ **So sánh** 5 điểm khác biệt cốt lõi giữa SLM và LLM (Kích thước, Khả năng hiểu, Tài nguyên, Thiên kiến, Suy luận).
+- ✅ **Khám phá** sức mạnh của họ mô hình Microsoft Phi-3/Phi-3.5 (Instruct, Vision, MoE).
+- ✅ **Nắm bắt** 4 phương thức triển khai SLM (Cloud API, Hugging Face, Ollama, ONNX Runtime).
+
+<!-- truncate -->
+
+## 2. Glossary & Vocabulary
+
+**2.1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **SLM (Small Language Models)** | Mô hình ngôn ngữ nhỏ: Phiên bản thu gọn của LLM, dùng ít tham số hơn nhưng vẫn giữ được khả năng sinh ngôn ngữ tốt nhờ kỹ thuật nén. |
+| **Distillation (Distilling)** | Chắt lọc tri thức: Kỹ thuật dạy một mô hình nhỏ học cách bắt chước kết quả đầu ra của một mô hình lớn (Giống như lấy sổ tay tóm tắt từ một cuốn bách khoa toàn thư). |
+| **Edge Computing** | Điện toán biên: Xử lý dữ liệu ngay tại thiết bị của người dùng (điện thoại, laptop) thay vì gửi lên đám mây (Cloud). |
+| **MoE (Mixture of Experts)** | Hỗn hợp các chuyên gia: Kiến trúc chia nhỏ mạng nơ-ron thành nhiều mạng con (chuyên gia), mỗi mạng con phụ trách một tác vụ cụ thể để tiết kiệm chi phí tính toán. |
+| **ONNX Runtime** | Trình tăng tốc suy luận đa nền tảng, giúp chạy các mô hình AI nhanh hơn trên nhiều loại phần cứng (CPU, GPU) khác nhau. |
+
+**2.2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Computational footprint (n)** | Lượng tài nguyên phần cứng (RAM, GPU) và năng lượng mà hệ thống tiêu thụ. |
+| **Resource-constrained (adj)** | Bị giới hạn nghiêm ngặt về tài nguyên phần cứng. |
+| **Disparity (n)** | Sự chênh lệch, khác biệt lớn (Ví dụ: sự chênh lệch về kích thước giữa GPT-4 và Phi-3). |
+| **Exacerbate (v)** | Làm trầm trọng thêm (Mô hình LLM quá phức tạp có thể làm trầm trọng thêm các thiên kiến - biases). |
+
+## 3. SLM là gì? Sự lên ngôi của những "Gã Khổng Lồ Mini" (WHY & WHAT)
+
+**Vấn đề (Problem Statement):**
+Các Mô hình Ngôn ngữ Lớn (LLM) như GPT-4 hay Claude vô cùng thông minh, nhưng chúng có một **"computational footprint"** khổng lồ. Việc huấn luyện và chạy chúng tốn hàng ngàn GPU và hàng triệu đô la tiền điện. Bạn không thể cài đặt GPT-4 vào một chiếc điện thoại di động hay một thiết bị IoT do **giới hạn tài nguyên (resource-constrained)**.
+
+**Giải pháp (Solution):**
+**Small Language Models (SLM)** ra đời. Đây không phải là làm một mô hình "ngốc nghếch" đi, mà là dùng các kỹ thuật ép xung và nén (như **Distillation**) để chắt lọc những tinh túy nhất từ LLM sang một mô hình chỉ có vài tỷ tham số (thay vì hàng ngàn tỷ). Kết quả là một mô hình AI có thể chạy mượt mà ngay trên laptop hoặc điện thoại (Edge Computing) mà không cần kết nối internet!
+
+[![slm](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160690/github-page/snlg7yvhbxxqwxyav15a.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/19-slm/img/slm.png)
+
+## 4. Cuộc chiến không cân sức: SLM vs. LLM
+
+Mặc dù chung một kiến trúc cơ bản, SLM và LLM khác biệt sâu sắc ở 5 yếu tố:
+
+1. **Size (Kích thước):** GPT-4 ước tính có 1.76 nghìn tỷ tham số, trong khi Mistral 7B hay Phi-3 chỉ có từ 3 đến 7 tỷ tham số.
+2. **Comprehension (Khả năng hiểu):** LLM là "Bách khoa toàn thư" biết tuốt. SLM giống như "Chuyên gia học đường" — giỏi ở những lĩnh vực hẹp, chuyên biệt nhưng không thể bao quát toàn bộ kiến thức nhân loại.
+3. **Computing (Tài nguyên tính toán):** LLM cần trung tâm dữ liệu khổng lồ. SLM có thể được huấn luyện và chạy suy luận (Inference) trên các máy tính cá nhân có GPU tầm trung.
+4. **Bias (Thiên kiến):** LLM dễ bị "ảo giác" và mang nhiều định kiến do "ăn" quá nhiều dữ liệu rác từ internet. SLM thường được huấn luyện bằng các tập dữ liệu nhỏ gọn, sạch sẽ nên ít thiên kiến hơn.
+5. **Inference (Tốc độ suy luận):** Do kích thước nhỏ, SLM phản hồi cực nhanh trên máy cá nhân mà không bị ảnh hưởng bởi đường truyền mạng hay số lượng người dùng truy cập cùng lúc như LLM.
+
+## 5. Case Study: Hệ Sinh Thái Microsoft Phi-3 / 3.5
+
+Microsoft Phi-3 là ví dụ điển hình nhất cho thấy SLM mạnh đến mức nào. Hệ sinh thái này chia làm 3 dòng chính:
+
+[![phi3](https://res.cloudinary.com/dv3vzmogk/image/upload/v1780160691/github-page/vtxcd5empvidzjkt4bo3.png)](https://github.com/microsoft/generative-ai-for-beginners/blob/main/19-slm/img/phi3.png)
+
+### 5.1. Phi-3 / 3.5 Instruct (Chuyên xử lý Text)
+- **Phi-3-mini (3.8B):** Nhỏ nhưng có võ. Thậm chí vượt mặt các mô hình to gấp đôi nó và tiệm cận hiệu năng của GPT-3.5.
+- **Phi-3.5-mini:** Hỗ trợ đa ngôn ngữ (hơn 20 ngôn ngữ) và mở rộng ngữ cảnh (Long Context) vượt trội.
+
+### 5.2. Phi-3 / 3.5 Vision (Đôi mắt của AI)
+Mang sức mạnh xử lý hình ảnh vào SLM (Chỉ 4.2B tham số). Phi-3.5 Vision thậm chí vượt qua Claude-3.5 Sonnet và Gemini 1.5 Flash trong các tác vụ hiểu biểu đồ, bảng biểu (OCR). Nó còn hỗ trợ truyền nhiều ảnh cùng lúc (Multi-frame) để suy luận dạng video.
+
+### 5.3. Phi-3.5-MoE (Mixture of Experts)
+Sử dụng kiến trúc MoE với 16 chuyên gia (mỗi chuyên gia 3.8B). Tuy nhiên, khi chạy thực tế, nó chỉ kích hoạt 6.6B tham số. Điều này giúp nó xử lý toán học và logic xuất sắc ngang các mô hình lớn nhưng tiêu tốn cực ít năng lượng.
+
+## 6. Bốn cách để chạy SLM trong thực tế (HOW)
+
+Làm sao để tích hợp SLM vào ứng dụng của bạn?
+
+1. **Gọi API Cloud:** Dùng GitHub Models, Azure AI Studio hoặc NVIDIA NIM. Bạn không cần lo phần cứng, chỉ cần gọi API là xong. (NVIDIA NIM hỗ trợ Kubernetes tự động mở rộng rất mạnh).
+2. **Hugging Face Transformers (Cần GPU):** Thư viện chuẩn mực nhất hiện nay bằng Python. Phù hợp cho dân nghiên cứu AI để Fine-Tune và test model.
+3. **Ollama (Nhanh, Gọn, Nhẹ):** Cách dễ nhất cho Dev. Cài Ollama, gõ `ollama run phi3.5` ở Terminal, máy tính của bạn sẽ biến thành ChatGPT nội bộ. Không cần biết code!
+4. **ONNX Runtime (Tối ưu thiết bị chéo):** Đây là công cụ tối thượng của Microsoft giúp chạy AI trên điện thoại (Android, iOS) hay Laptop yếu bằng cách tận dụng phần cứng chuyên biệt (NPU).
+
+```python
+# Ví dụ chạy ONNX Runtime siêu tốc
+import onnxruntime_genai as og
+
+model = og.Model('path_to_your_model.onnx')
+tokenizer = og.Tokenizer(model)
+input_tokens = tokenizer.encode("Perceptron là gì?")
+output_tokens = model.generate(input_tokens)
+
+print(tokenizer.decode(output_tokens))
+```
+
+## 7. Câu hỏi thảo luận
+
+1. Một bệnh viện muốn xây dựng hệ thống AI đọc bệnh án để hỗ trợ bác sĩ chẩn đoán, nhưng quy định bảo mật cấm tuyệt đối việc đưa dữ liệu bệnh nhân lên Cloud. Theo bạn, họ nên triển khai LLM (như GPT-4) hay SLM? Bằng công cụ nào?
+2. Kiến trúc **Mixture of Experts (MoE)** giúp tiết kiệm tài nguyên bằng cách nào so với một "Dense model" truyền thống? (Hãy lấy ví dụ về một công ty có nhiều phòng ban để giải thích).
+3. Nếu bạn muốn nhúng một mô hình SLM vào ứng dụng di động (Mobile App) chạy offline, giữa Ollama và ONNX Runtime, giải pháp nào khả thi hơn? Tại sao?
+
+## 8. References
+- Dựa trên [Generative AI for Beginners - Microsoft](https://github.com/microsoft/generative-ai-for-beginners/blob/main/19-slm/README.md).
+
+---
+*Made by Anh Tu - Share to be share*
