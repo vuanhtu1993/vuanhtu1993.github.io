@@ -15,7 +15,8 @@
     "aha-mind:blog": "tsx scripts/aha-mind/blog_agent/pipeline.ts",
     "aha-mind:syllabus": "tsx scripts/aha-mind/syllabus_agent/pipeline.ts",
     "aha-mind:dump": "tsx scripts/aha-mind/dump_agent/pipeline.ts",
-    "aha-mind:mcp": "tsx scripts/aha-mind/mcp-server.ts"
+    "aha-mind:mcp": "tsx scripts/aha-mind/mcp-server.ts",
+    "aha-mind:interpreter": "tsx scripts/aha-mind/interpreter_agent/pipeline.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
