@@ -4,11 +4,17 @@ description: Quy trình tổng hợp (synthesis) 1-3 bài viết đã crawl từ
 
 # Workflow: Summarize Blog
 
-Quy trình **synthesis** — không phải dịch, không phải tóm tắt — mà là **tái cấu trúc học thuật** từ 1-3 bài viết`.
+Quy trình **synthesis** — không phải dịch, không phải tóm tắt — mà là **tái cấu trúc học thuật** từ 1-3 bài viết.
 
 > **Khác biệt cốt lõi so với `create-blog`:**
 > - `create-blog`: AI tự generate nội dung từ topic → Rủi ro hallucination cao
 > - `summarize-aha-blog`: Nguồn nội dung là bài thật đã crawl → AI chỉ làm nhiệm vụ synthesis + reframe học thuật
+
+> **Nguyên tắc vàng (KHÔNG được vi phạm):**
+> - **Giữ nguyên 100% hình ảnh** (Cloudinary URLs) theo đúng vị trí trong bài gốc
+> - **Giữ nguyên 100% code blocks** từ bài gốc, chỉ thêm comment WHY nếu cần
+> - **Giữ nguyên thứ tự nội dung** — synthesis là thêm lớp học thuật lên trên, KHÔNG phải tái cấu trúc lại hoàn toàn
+> - **Giữ nguyên toàn bộ `<Term>` components** từ bài gốc
 
 ---
 
@@ -34,11 +40,13 @@ Tags:         [Danh sách tags]
 
 // turbo
 1. Dùng `view_file` đọc toàn bộ nội dung các file source
-2. Xác định:
+2. Xác định và **liệt kê đầy đủ vào checklist**:
    - **Core Concept**: Khái niệm trung tâm của bài/các bài
    - **Key Claims**: 3-5 luận điểm quan trọng nhất
    - **Unique Insights**: Điểm độc đáo, dữ liệu, số liệu đáng trích dẫn
-   - **Images available**: Liệt kê URL ảnh Cloudinary trong bài (sẽ tái sử dụng)
+   - **Images inventory** *(bắt buộc)*: Liệt kê TẤT CẢ URL ảnh Cloudinary theo thứ tự xuất hiện và vị trí ngữ cảnh của chúng — sẽ tái sử dụng **nguyên vẹn**
+   - **Code blocks inventory** *(bắt buộc)*: Liệt kê tất cả code blocks và ngữ cảnh — giữ nguyên, chỉ thêm comment WHY
+   - **Term components**: Copy toàn bộ `<Term definition="...">text</Term>` — giữ nguyên không chỉnh sửa
    - **Overlap & Gaps**: Nếu nhiều bài — phần nào overlap, phần nào mỗi bài bổ sung thêm gì
 
 3. **KHÔNG** tự thêm thông tin ngoài source. Nếu cần bổ sung, đánh dấu `[Research needed]`.
@@ -51,7 +59,7 @@ Dựa vào nội dung đã phân tích, chọn template phù hợp từ `create-
 
 **Template A — Concept Deep Dive** (cho 1 bài, concept phức tạp):
 ```
-Agenda → Glossary → WHY (Problem) → WHAT (Theory + Mermaid) → HOW (Practice) → Trade-offs → Discussion Questions → References
+Agenda → Glossary → WHY (Problem) → WHAT (Theory + Mermaid) → HOW (Practice + images gốc) → Trade-offs → Discussion Questions → References
 ```
 
 **Template B — Comparative Analysis** (cho 2-3 bài, so sánh nhiều công nghệ/approach):
@@ -63,6 +71,13 @@ Agenda → Glossary → Context → [Tech A Analysis] → [Tech B Analysis] → 
 ```
 Agenda → Glossary → Problem Statement → Architecture Overview (Mermaid) → Component Deep Dive → Data Flow → Trade-offs → Discussion Questions → References
 ```
+
+### Quy tắc khi áp dụng template lên nội dung gốc:
+
+- **Thêm vào đầu bài**: Agenda + Glossary (mới hoàn toàn — không có trong bài gốc)
+- **Giữ nguyên phần HOW/Tutorial**: Toàn bộ hình ảnh, code, các bước hướng dẫn → chỉ thêm heading số thứ tự và comment WHY vào code
+- **Thêm vào cuối bài**: Trade-offs, Discussion Questions, References (mới hoàn toàn)
+- **Thêm Mermaid diagram** ở phần WHAT nếu bài gốc chưa có
 
 ---
 
@@ -93,10 +108,12 @@ Agenda → Glossary → Problem Statement → Architecture Overview (Mermaid) �
   - Nếu chưa có: tự thiết kế dựa trên nội dung text
 - **Definition Anatomy**: giải phẫu từng từ khóa trong định nghĩa
 
-### 3.5. HOW — Practice
-- Lấy code examples từ bài gốc (không tự generate)
-- Thêm comment WHY (tại sao viết thế này)
-- Nêu expected output
+### 3.5. HOW — Practice *(Phần quan trọng nhất — KHÔNG được thay đổi)*
+- **Giữ nguyên toàn bộ hình ảnh** theo đúng vị trí trong bài gốc
+- **Giữ nguyên toàn bộ code blocks** từ bài gốc
+- Có thể thêm comment WHY vào code — nhưng KHÔNG xóa code gốc
+- Giữ nguyên thứ tự các bước, chỉ thêm đánh số heading
+- Giữ nguyên toàn bộ `<Term>` components
 
 ---
 
@@ -104,14 +121,20 @@ Agenda → Glossary → Problem Statement → Architecture Overview (Mermaid) �
 
 Chạy checklist trước khi tạo file:
 
-**Content:**
+**Nội dung gốc được bảo toàn:**
+- [ ] Tất cả Cloudinary image URLs có trong bài gốc đều xuất hiện trong bài output
+- [ ] Tất cả code blocks từ bài gốc được giữ nguyên (chỉ thêm comment, không xóa)
+- [ ] Thứ tự các bước tutorial giữ nguyên như bài gốc
+- [ ] Toàn bộ `<Term>` components từ bài gốc được giữ nguyên
+
+**Nội dung học thuật thêm vào:**
 - [ ] Không có thông tin nào KHÔNG có trong source files (no hallucination)
-- [ ] Các claims quan trọng có trích dẫn nguồn gốc
 - [ ] Trade-offs được trình bày (không chỉ ưu điểm)
 - [ ] Discussion Questions đủ sâu để kích thích critical thinking
+- [ ] Mermaid diagram mới thêm phản ánh đúng kiến trúc trong bài gốc
 
 **Format (theo chuẩn `create-tech-lecture`):**
-- [ ] KHÔNG có Emoji trong bài (kể cả headings)
+- [ ] KHÔNG có Emoji trong bài (kể cả trong headings) — ngoại lệ: giữ emoji nếu có trong **text gốc** của bài, chỉ bỏ khi bạn tự thêm mới
 - [ ] Headings được đánh số thứ tự (1., 1.1., 1.2., ...)
 - [ ] Không có cụm từ AI sáo rỗng ("Trong bài viết này...", "Chúc bạn học tốt")
 - [ ] Mermaid diagram hợp lệ (test bằng mermaid-expert skill nếu cần)

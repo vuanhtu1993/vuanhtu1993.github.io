@@ -69,19 +69,19 @@
 @font-face {
   font-family: Niramit;
   src: url('./fonts/Niramit-Regular.ttf');
-  font-weight: normal;
+  font-weight: 400;
 }
 
 @font-face {
   font-family: Niramit;
   src: url('./fonts/Niramit-SemiBold.ttf');
-  font-weight: semi-bold;
+  font-weight: 600;
 }
 
 @font-face {
   font-family: Niramit;
   src: url('./fonts/Niramit-Bold.ttf');
-  font-weight: bold;
+  font-weight: 700;
 }
 
 h1,
@@ -89,12 +89,8 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p,
-a,
-ul,
-ol {
-  font-family: Niramit;
+h6 {
+  color: var(--ifm-color-primary);
 }
 
 code {
@@ -102,6 +98,9 @@ code {
 }
 
 :root {
+  --ifm-font-family-base: Niramit, sans-serif;
+  --ifm-heading-font-family: Niramit, sans-serif;
+  --ifm-heading-color: var(--ifm-color-primary);
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
