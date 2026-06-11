@@ -1,0 +1,216 @@
+---
+slug: aha-interpreter-system-design-interview-pages-42-50
+title: "[System design interview] Từ trang 42 đến 50"
+date: 2026-06-11
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+# **CHƯƠNG 3: MỘT KHUNG LÀM VIỆC CHO PHỎNG VẤN SYSTEM DESIGN**
+
+Bạn vừa nhận được một buổi phỏng vấn trực tiếp (on-site interview) đáng mơ ước tại công ty trong mơ của mình. Điều phối viên tuyển dụng gửi cho bạn lịch trình trong ngày hôm đó. Khi lướt qua danh sách, bạn cảm thấy khá tự tin cho đến khi mắt bạn dừng lại ở buổi phỏng vấn này - System Design Interview.
+
+Các buổi phỏng vấn System Design thường rất đáng sợ. Câu hỏi có thể mơ hồ như “thiết kế sản phẩm X nổi tiếng?”. Các câu hỏi thường không rõ ràng và có vẻ quá rộng. Sự lo lắng của bạn là điều dễ hiểu. Suy cho cùng, làm sao một người có thể thiết kế một sản phẩm phổ biến chỉ trong một giờ, trong khi sản phẩm đó đã cần hàng trăm, thậm chí hàng nghìn kỹ sư để xây dựng?
+
+Tin tốt là không ai mong đợi bạn làm được điều đó. Thiết kế hệ thống (System Design) trong thế giới thực cực kỳ phức tạp. Ví dụ, tìm kiếm của Google có vẻ đơn giản một cách đánh lừa; tuy nhiên, lượng công nghệ làm nền tảng cho sự đơn giản đó thực sự đáng kinh ngạc. Nếu không ai mong đợi bạn thiết kế một hệ thống thực tế trong một giờ, vậy lợi ích của một buổi phỏng vấn System Design là gì?
+
+Buổi phỏng vấn System Design mô phỏng quá trình giải quyết vấn đề trong đời thực, nơi hai đồng nghiệp cộng tác để giải quyết một vấn đề mơ hồ và đưa ra một giải pháp đáp ứng mục tiêu của họ. Vấn đề là mở (open-ended), và không có câu trả lời hoàn hảo. Thiết kế cuối cùng ít quan trọng hơn so với công sức bạn bỏ ra trong quá trình thiết kế. Điều này cho phép bạn thể hiện kỹ năng thiết kế của mình, bảo vệ các lựa chọn thiết kế và phản hồi các góp ý một cách xây dựng.
+
+Hãy cùng thay đổi góc nhìn và xem xét những gì diễn ra trong đầu người phỏng vấn khi cô ấy bước vào phòng họp để gặp bạn. Mục tiêu chính của người phỏng vấn là đánh giá chính xác năng lực của bạn. Điều cuối cùng cô ấy muốn là đưa ra một đánh giá không rõ ràng vì buổi phỏng vấn diễn ra không tốt và không có đủ tín hiệu. Vậy người phỏng vấn tìm kiếm điều gì trong một buổi phỏng vấn System Design?
+
+Nhiều người nghĩ rằng phỏng vấn System Design chỉ xoay quanh kỹ năng thiết kế kỹ thuật của một người. Nó còn hơn thế rất nhiều. Một buổi phỏng vấn System Design hiệu quả sẽ đưa ra những tín hiệu mạnh mẽ về khả năng cộng tác, làm việc dưới áp lực và giải quyết sự mơ hồ một cách xây dựng của một người. Khả năng đặt câu hỏi tốt cũng là một kỹ năng thiết yếu, và nhiều người phỏng vấn đặc biệt tìm kiếm kỹ năng này.
+
+Một người phỏng vấn giỏi cũng tìm kiếm các dấu hiệu cảnh báo (red flags). Thiết kế quá mức cần thiết (Over-engineering) là một căn bệnh thực sự của nhiều kỹ sư khi họ quá chú trọng vào sự tinh khiết trong thiết kế và bỏ qua các đánh đổi (tradeoffs). Họ thường không nhận thức được chi phí tích lũy của các hệ thống được thiết kế quá mức, và nhiều công ty phải trả giá đắt cho sự thiếu hiểu biết đó. Bạn chắc chắn không muốn thể hiện xu hướng này trong một buổi phỏng vấn System Design. Các dấu hiệu cảnh báo khác bao gồm tư duy hạn hẹp, bướng bỉnh, v.v.
+
+Trong chương này, chúng ta sẽ cùng tìm hiểu một số mẹo hữu ích và giới thiệu một khung làm việc đơn giản, hiệu quả để giải quyết các vấn đề trong phỏng vấn System Design.
+
+## **QUY TRÌNH 4 BƯỚC CHO BUỔI PHỎNG VẤN SYSTEM DESIGN HIỆU QUẢ**
+
+Mỗi buổi phỏng vấn System Design đều khác nhau. Một buổi phỏng vấn System Design tốt là mở (open-ended) và không có giải pháp nào phù hợp cho tất cả (one-size-fits-all). Tuy nhiên, có những bước và điểm chung cần được đề cập trong mọi buổi phỏng vấn System Design.
+
+## **BƯỚC 1 - HIỂU RÕ VẤN ĐỀ VÀ XÁC ĐỊNH PHẠM VI THIẾT KẾ**
+
+"Tại sao con hổ lại gầm?"
+
+Một cánh tay giơ lên ở cuối lớp.
+
+"Vâng, Jimmy?", cô giáo đáp.
+
+"Vì nó ĐÓI."
+
+"Rất tốt, Jimmy."
+
+Trong suốt thời thơ ấu của mình, Jimmy luôn là người đầu tiên trả lời các câu hỏi trong lớp. Bất cứ khi nào cô giáo đặt câu hỏi, luôn có một đứa trẻ trong lớp thích thử trả lời câu hỏi đó, bất kể cậu bé có biết câu trả lời hay không. Đó chính là Jimmy.
+
+Jimmy là một học sinh xuất sắc. Cậu bé tự hào vì biết tất cả các câu trả lời một cách nhanh chóng. Trong các kỳ thi, cậu bé thường là người đầu tiên hoàn thành các câu hỏi. Cậu bé là lựa chọn hàng đầu của giáo viên cho bất kỳ cuộc thi học thuật nào.
+
+**ĐỪNG** giống như Jimmy.
+
+Trong một buổi phỏng vấn System Design, việc đưa ra câu trả lời nhanh chóng mà không suy nghĩ sẽ không mang lại cho bạn điểm cộng nào. Trả lời mà không hiểu rõ các yêu cầu là một dấu hiệu cảnh báo lớn (red flag) vì buổi phỏng vấn không phải là một cuộc thi đố vui. Không có câu trả lời đúng.
+
+Vì vậy, đừng vội vàng đưa ra giải pháp ngay lập tức. Hãy chậm lại. Suy nghĩ kỹ lưỡng và đặt câu hỏi để làm rõ các yêu cầu và giả định. Điều này cực kỳ quan trọng.
+
+Với tư cách là một kỹ sư, chúng ta thích giải quyết các vấn đề khó và đi thẳng vào thiết kế cuối cùng; tuy nhiên, cách tiếp cận này có khả năng khiến bạn thiết kế sai hệ thống. Một trong những kỹ năng quan trọng nhất của một kỹ sư là đặt đúng câu hỏi, đưa ra các giả định phù hợp và thu thập tất cả thông tin cần thiết để xây dựng một hệ thống. Vì vậy, đừng ngại đặt câu hỏi.
+
+Khi bạn đặt câu hỏi, người phỏng vấn sẽ trực tiếp trả lời hoặc yêu cầu bạn đưa ra các giả định của mình. Nếu trường hợp sau xảy ra, hãy ghi lại các giả định của bạn lên bảng trắng hoặc giấy. Bạn có thể cần đến chúng sau này.
+
+Nên hỏi những loại câu hỏi nào? Hãy đặt câu hỏi để hiểu rõ các yêu cầu chính xác. Dưới đây là danh sách các câu hỏi giúp bạn bắt đầu:
+
+  - Chúng ta sẽ xây dựng những tính năng cụ thể nào?
+
+  - Sản phẩm có bao nhiêu người dùng?
+
+  - Công ty dự kiến mở rộng quy mô (scale up) nhanh đến mức nào? Quy mô dự kiến trong 3 tháng, 6 tháng và một năm là bao nhiêu?
+
+  - Ngăn xếp công nghệ (technology stack) của công ty là gì? Chúng ta có thể tận dụng những dịch vụ hiện có nào để đơn giản hóa thiết kế?
+
+**Ví dụ**
+Nếu bạn được yêu cầu thiết kế một hệ thống news feed, bạn sẽ muốn đặt những câu hỏi giúp làm rõ các yêu cầu. Cuộc trò chuyện giữa bạn và người phỏng vấn có thể trông như sau:
+
+**Candidate** : Đây là một ứng dụng di động (mobile app)? Hay một ứng dụng web (web app)? Hay cả hai?
+
+**Interviewer** : Cả hai.
+
+**Candidate** : Những tính năng quan trọng nhất cho sản phẩm là gì?
+**Interviewer** : Khả năng tạo bài đăng và xem news feed của bạn bè.
+
+**Candidate** : News feed được sắp xếp theo thứ tự thời gian đảo ngược (reverse chronological order) hay một thứ tự cụ thể? Thứ tự cụ thể có nghĩa là mỗi bài đăng được gán một trọng số khác nhau. Ví dụ, các bài đăng từ bạn bè thân thiết của bạn quan trọng hơn các bài đăng từ một nhóm.
+**Interviewer** : Để đơn giản, chúng ta hãy giả định news feed được sắp xếp theo thứ tự thời gian đảo ngược.
+
+**Candidate** : Một người dùng có thể có bao nhiêu bạn bè?
+**Interviewer** : 5000
+
+**Candidate** : Lưu lượng truy cập là bao nhiêu?
+**Interviewer** : 10 triệu người dùng hoạt động hàng ngày (DAU).
+
+**Candidate** : Feed có thể chứa hình ảnh, video hay chỉ văn bản?
+**Interviewer** : Nó có thể chứa các tệp đa phương tiện (media files), bao gồm cả hình ảnh và video.
+
+Trên đây là một số câu hỏi mẫu mà bạn có thể hỏi người phỏng vấn. Điều quan trọng là phải hiểu rõ các yêu cầu và làm rõ những điểm mơ hồ.
+---
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và đạt được sự đồng thuận**
+
+Trong bước này, chúng ta đặt mục tiêu phát triển một thiết kế cấp cao và đạt được sự đồng thuận với người phỏng vấn về thiết kế đó. Việc hợp tác với người phỏng vấn trong suốt quá trình là một ý tưởng tuyệt vời.
+
+  - Đưa ra một bản thiết kế sơ bộ ban đầu cho hệ thống. Yêu cầu phản hồi. Hãy xem người phỏng vấn như một đồng đội và cùng nhau làm việc. Nhiều người phỏng vấn giỏi rất thích trò chuyện và tham gia vào quá trình này.
+
+  - Vẽ sơ đồ khối với các thành phần chính lên bảng trắng hoặc giấy. Điều này có thể bao gồm ứng dụng khách (di động/web), API, máy chủ web, nơi lưu trữ dữ liệu (data stores), cache, CDN, hàng đợi thông điệp (message queue), v.v.
+
+  - Thực hiện các tính toán sơ bộ (back-of-the-envelope calculations) để đánh giá xem bản thiết kế của bạn có phù hợp với các ràng buộc về khả năng mở rộng hay không. Hãy suy nghĩ thành tiếng. Trao đổi với người phỏng vấn nếu cần thực hiện tính toán sơ bộ trước khi đi sâu vào nó.
+
+Nếu có thể, hãy xem xét một vài trường hợp sử dụng cụ thể. Điều này sẽ giúp chúng ta định hình thiết kế cấp cao. Cũng có khả năng các trường hợp sử dụng này sẽ giúp chúng ta khám phá ra những trường hợp biên (edge cases) mà chúng ta chưa xem xét.
+
+Chúng ta có nên bao gồm các API endpoint và lược đồ cơ sở dữ liệu ở đây không? Điều này tùy thuộc vào vấn đề. Đối với các bài toán thiết kế lớn như “Thiết kế công cụ tìm kiếm Google”, việc này có vẻ quá chi tiết. Đối với một vấn đề như thiết kế backend cho một trò chơi poker nhiều người chơi, điều này lại khá phù hợp. Hãy trao đổi với người phỏng vấn của bạn.
+
+**Ví dụ**
+Chúng ta hãy sử dụng bài toán “Thiết kế hệ thống bảng tin (news feed)” để minh họa cách tiếp cận thiết kế cấp cao. Ở đây, bạn không cần phải hiểu cách hệ thống hoạt động thực tế. Tất cả các chi tiết sẽ được giải thích trong Chương 11.
+
+Ở cấp độ cao, thiết kế được chia thành hai luồng: đăng bài (feed publishing) và xây dựng bảng tin (news feed building).
+
+  - Đăng bài (Feed publishing): khi người dùng đăng một bài viết, dữ liệu tương ứng sẽ được ghi vào cache/cơ sở dữ liệu, và bài viết đó sẽ được đưa vào bảng tin của bạn bè.
+
+  - Xây dựng bảng tin (Newsfeed building): bảng tin được xây dựng bằng cách tổng hợp các bài viết của bạn bè theo thứ tự thời gian đảo ngược.
+
+Hình 3-1 và Hình 3-2 lần lượt trình bày các thiết kế cấp cao cho luồng đăng bài và luồng xây dựng bảng tin.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160673/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-44-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160676/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-45-0.png)
+
+## **Bước 3 - Đi sâu vào chi tiết thiết kế**
+
+Tại bước này, bạn và người phỏng vấn lẽ ra đã đạt được các mục tiêu sau:
+
+  - Đã thống nhất về các mục tiêu tổng thể và phạm vi tính năng.
+
+  - Đã phác thảo một bản thiết kế cấp cao tổng thể.
+
+  - Đã nhận được phản hồi từ người phỏng vấn về thiết kế cấp cao.
+
+  - Đã có một số ý tưởng ban đầu về các lĩnh vực cần đi sâu vào chi tiết dựa trên phản hồi của người phỏng vấn.
+
+Bạn sẽ làm việc với người phỏng vấn để xác định và ưu tiên các thành phần trong kiến trúc. Điều đáng nhấn mạnh là mỗi cuộc phỏng vấn đều khác nhau. Đôi khi, người phỏng vấn có thể đưa ra gợi ý rằng họ muốn tập trung vào thiết kế cấp cao. Đôi khi, đối với cuộc phỏng vấn ứng viên cấp cao, cuộc thảo luận có thể xoay quanh các đặc tính hiệu suất của hệ thống, có khả năng tập trung vào các nút thắt cổ chai (bottlenecks) và ước tính tài nguyên. Trong hầu hết các trường hợp, người phỏng vấn có thể muốn bạn đi sâu vào chi tiết của một số thành phần hệ thống. Đối với hệ thống rút gọn URL, việc đi sâu vào thiết kế hàm băm (hash function) chuyển đổi URL dài thành URL ngắn là một chủ đề thú vị. Đối với hệ thống trò chuyện, cách giảm độ trễ (latency) và cách hỗ trợ trạng thái trực tuyến/ngoại tuyến là hai chủ đề thú vị.
+
+Quản lý thời gian là điều cần thiết vì rất dễ sa đà vào những chi tiết nhỏ nhặt không chứng minh được năng lực của bạn. Bạn phải trang bị những tín hiệu để thể hiện cho người phỏng vấn thấy. Cố gắng không đi sâu vào những chi tiết không cần thiết. Ví dụ, việc nói chi tiết về thuật toán EdgeRank (tiếng Anh: EdgeRank algorithm) của việc xếp hạng bảng tin Facebook là không lý tưởng trong một buổi phỏng vấn thiết kế hệ thống vì điều này tốn rất nhiều thời gian quý báu và không chứng minh được khả năng của bạn trong việc thiết kế một hệ thống có khả năng mở rộng.
+
+**Ví dụ**
+Tại thời điểm này, chúng ta đã thảo luận về thiết kế cấp cao cho một hệ thống bảng tin, và người phỏng vấn hài lòng với đề xuất của bạn. Tiếp theo, chúng ta sẽ nghiên cứu hai trong số các trường hợp sử dụng quan trọng nhất:
+1. Đăng bài (Feed publishing)
+2. Truy xuất bảng tin (News feed retrieval)
+
+Hình 3-3 và Hình 3-4 hiển thị thiết kế chi tiết cho hai trường hợp sử dụng này, sẽ được giải thích chi tiết trong Chương 11.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160680/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-47-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160684/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-48-0.png)
+
+## **Bước 4 - Tổng kết**
+
+Trong bước cuối cùng này, người phỏng vấn có thể hỏi bạn một vài câu hỏi tiếp theo hoặc cho phép bạn tự do thảo luận về các điểm bổ sung khác. Dưới đây là một vài hướng để bạn tham khảo:
+
+  - Người phỏng vấn có thể muốn bạn xác định các nút thắt cổ chai (bottlenecks) của hệ thống và thảo luận về những cải tiến tiềm năng. Đừng bao giờ nói rằng thiết kế của bạn là hoàn hảo và không có gì có thể cải thiện được. Luôn luôn có điều gì đó để cải thiện. Đây là một cơ hội tuyệt vời để thể hiện tư duy phản biện của bạn và để lại ấn tượng cuối cùng tốt đẹp.
+
+  - Việc tóm tắt lại thiết kế của bạn cho người phỏng vấn có thể hữu ích. Điều này đặc biệt quan trọng nếu bạn đã đề xuất một vài giải pháp. Làm mới trí nhớ của người phỏng vấn có thể hữu ích sau một buổi làm việc dài.
+
+  - Các trường hợp lỗi (lỗi máy chủ, mất mạng, v.v.) là những chủ đề thú vị để thảo luận.
+
+  - Các vấn đề vận hành (operation issues) đáng được đề cập. Bạn giám sát các chỉ số (metrics) và nhật ký lỗi (error logs) như thế nào? Làm thế nào để triển khai hệ thống?
+
+  - Cách xử lý đường cong mở rộng (scale curve) tiếp theo cũng là một chủ đề thú vị. Ví dụ, nếu thiết kế hiện tại của bạn hỗ trợ 1 triệu người dùng, bạn cần thực hiện những thay đổi nào để hỗ trợ 10 triệu người dùng?
+
+  - Đề xuất các cải tiến khác mà bạn cần nếu có thêm thời gian.
+
+Để kết thúc, chúng ta tóm tắt danh sách những điều nên làm và không nên làm.
+
+**Nên làm**
+
+  - Luôn hỏi để làm rõ. Đừng cho rằng giả định của bạn là đúng.
+
+  - Hiểu rõ các yêu cầu của vấn đề.
+
+  - Không có câu trả lời đúng hay câu trả lời tốt nhất. Một giải pháp được thiết kế để giải quyết vấn đề của một startup non trẻ sẽ khác với giải pháp của một công ty đã thành lập với hàng triệu người dùng. Hãy đảm bảo bạn hiểu rõ các yêu cầu.
+
+  - Hãy cho người phỏng vấn biết bạn đang nghĩ gì. Giao tiếp với người phỏng vấn.
+
+  - Đề xuất nhiều cách tiếp cận nếu có thể.
+
+  - Khi bạn đã đồng ý với người phỏng vấn về bản thiết kế sơ bộ, hãy đi sâu vào chi tiết từng thành phần. Thiết kế các thành phần quan trọng nhất trước.
+
+  - Trao đổi ý tưởng với người phỏng vấn. Một người phỏng vấn giỏi sẽ làm việc với bạn như một đồng đội.
+
+  - Đừng bao giờ bỏ cuộc.
+
+**Không nên làm**
+
+  - Đừng không chuẩn bị cho các câu hỏi phỏng vấn điển hình.
+
+  - Đừng vội vàng đưa ra giải pháp mà không làm rõ các yêu cầu và giả định.
+
+  - Đừng đi quá sâu vào chi tiết của một thành phần duy nhất ngay từ đầu. Hãy đưa ra thiết kế cấp cao trước rồi mới đi sâu vào chi tiết.
+
+  - Nếu bạn bị mắc kẹt, đừng ngần ngại hỏi xin gợi ý.
+
+  - Một lần nữa, hãy giao tiếp. Đừng im lặng suy nghĩ.
+
+  - Đừng nghĩ rằng cuộc phỏng vấn của bạn đã kết thúc ngay khi bạn đưa ra thiết kế. Bạn chưa kết thúc cho đến khi người phỏng vấn nói rằng bạn đã xong. Hãy hỏi xin phản hồi sớm và thường xuyên.
+
+## **Phân bổ thời gian cho mỗi bước**
+
+Các câu hỏi phỏng vấn thiết kế hệ thống thường rất rộng, và 45 phút hoặc một giờ là không đủ để bao quát toàn bộ thiết kế. Quản lý thời gian là điều cần thiết. Bạn nên dành bao nhiêu thời gian cho mỗi bước? Sau đây là một hướng dẫn sơ bộ về cách phân bổ thời gian của
+
+---
+
+*Made by Anh Tu - Share to be share*

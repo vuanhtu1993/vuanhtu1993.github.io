@@ -1,0 +1,142 @@
+---
+slug: aha-interpreter-system-design-interview-pages-34-41
+title: "[System design interview] Từ trang 34 đến 41"
+date: 2026-06-11
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+# **CHƯƠNG 2: ƯỚC TÍNH SƠ BỘ**
+
+Trong một buổi phỏng vấn thiết kế hệ thống, đôi khi chúng ta sẽ được yêu cầu ước tính dung lượng hệ thống hoặc các yêu cầu về hiệu năng bằng cách sử dụng phương pháp ước tính sơ bộ (back-of-the-envelope estimation). Theo Jeff Dean, Google Senior Fellow, “các phép tính ước tính sơ bộ là những ước tính chúng ta tạo ra bằng cách kết hợp các thử nghiệm tư duy và các con số hiệu năng phổ biến để có được cảm nhận tốt về những thiết kế nào sẽ đáp ứng yêu cầu của bạn” [1].
+
+Chúng ta cần có hiểu biết tốt về các kiến thức cơ bản về khả năng mở rộng (scalability) để thực hiện ước tính sơ bộ một cách hiệu quả. Các khái niệm sau đây cần được hiểu rõ: lũy thừa của hai [2], các con số độ trễ mà mọi lập trình viên nên biết, và các con số về tính khả dụng.
+
+## **Lũy thừa của hai**
+
+Mặc dù khối lượng dữ liệu có thể trở nên khổng lồ khi làm việc với các hệ thống phân tán, nhưng mọi phép tính đều quay về những kiến thức cơ bản. Để có được các phép tính chính xác, việc biết đơn vị khối lượng dữ liệu sử dụng lũy thừa của 2 là rất quan trọng. Một byte là một chuỗi gồm 8 bit. Một ký tự ASCII sử dụng một byte bộ nhớ (8 bit). Dưới đây là bảng giải thích đơn vị khối lượng dữ liệu (Bảng 2-1).
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160662/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-34-0.png)
+## **Các con số độ trễ mà mọi lập trình viên nên biết**
+
+Tiến sĩ Dean từ Google đã công bố thời gian của các hoạt động máy tính điển hình vào năm 2010 [1]. Một số con số đã lỗi thời do máy tính ngày càng nhanh và mạnh hơn. Tuy nhiên, những con số đó vẫn có thể cho chúng ta hình dung về tốc độ nhanh và chậm của các hoạt động máy tính khác nhau.
+
+Notes
+----------ns = nanosecond, µs = microsecond, ms = millisecond
+1 ns = 10^-9 seconds
+1 µs= 10^-6 seconds = 1,000 ns
+1 ms = 10^-3 seconds = 1,000 µs = 1,000,000 ns
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160664/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-35-0.png)
+Một kỹ sư phần mềm của Google đã xây dựng một công cụ để trực quan hóa các con số của Tiến sĩ Dean. Công cụ này cũng xem xét yếu tố thời gian. Hình 2-1 hiển thị các con số độ trễ được trực quan hóa tính đến năm 2020 (nguồn hình ảnh: tài liệu tham khảo [3]).
+
+Bằng cách phân tích các con số trong Hình 2-1, chúng ta rút ra các kết luận sau:
+
+  - Bộ nhớ (memory) nhanh nhưng ổ đĩa (disk) chậm.
+
+  - Tránh các thao tác tìm kiếm trên đĩa (disk seeks) nếu có thể.
+
+  - Các thuật toán nén đơn giản thì nhanh.
+
+  - Nén dữ liệu trước khi gửi qua internet nếu có thể.
+
+  - Các trung tâm dữ liệu (data centers) thường nằm ở các khu vực khác nhau, và mất thời gian để gửi dữ liệu giữa chúng.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160669/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-36-0.png)
+## **Các con số về tính khả dụng**
+
+Tính khả dụng cao (High availability) là khả năng của một hệ thống hoạt động liên tục trong một khoảng thời gian mong muốn. Tính khả dụng cao được đo bằng phần trăm, với 100% có nghĩa là một dịch vụ không có thời gian ngừng hoạt động (downtime). Hầu hết các dịch vụ nằm trong khoảng từ 99% đến 100%.
+
+Thỏa thuận cấp độ dịch vụ (Service Level Agreement - SLA) là một thuật ngữ thường được sử dụng cho các nhà cung cấp dịch vụ. Đây là một thỏa thuận giữa bạn (nhà cung cấp dịch vụ) và khách hàng của bạn, và thỏa thuận này định nghĩa chính thức mức độ thời gian hoạt động (uptime) mà dịch vụ của bạn sẽ cung cấp. Các nhà cung cấp dịch vụ đám mây như Amazon [4], Google [5] và Microsoft [6] đặt SLA của họ ở mức 99.9% trở lên. Thời gian hoạt động (uptime) theo truyền thống được đo bằng 'số chín' (nines). Càng nhiều số chín, càng tốt. Như thể hiện trong Bảng 2-3, số lượng số chín tương quan với thời gian ngừng hoạt động dự kiến của hệ thống.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160671/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-37-0.png)
+## **Ví dụ: Ước tính QPS và yêu cầu lưu trữ của Twitter**
+
+Xin lưu ý rằng các con số sau đây chỉ dành cho bài tập này và không phải là số liệu thực tế từ Twitter.
+
+Giả định:
+
+  - 300 triệu người dùng hoạt động hàng tháng (monthly active users).
+
+  - 50% người dùng sử dụng Twitter hàng ngày.
+
+  - Người dùng đăng trung bình 2 tweet mỗi ngày.
+
+  - 10% số tweet chứa nội dung đa phương tiện (media).
+
+  - Dữ liệu được lưu trữ trong 5 năm.
+
+Ước tính:
+Ước tính số truy vấn mỗi giây (QPS):
+
+  - Người dùng hoạt động hàng ngày (Daily Active Users - DAU) = 300 triệu * 50% = 150 triệu
+
+  - QPS của Tweet = 150 triệu * 2 tweet / 24 giờ / 3600 giây = ~3500
+
+  - QPS cao điểm (Peek QPS) = 2 * QPS = ~7000
+
+Chúng ta sẽ chỉ ước tính dung lượng lưu trữ đa phương tiện ở đây.
+
+  - Kích thước tweet trung bình:
+
+    - tweet_id 64 byte
+
+     - văn bản 140 byte
+
+    - đa phương tiện 1 MB
+
+  - Dung lượng lưu trữ đa phương tiện: 150 triệu * 2 * 10% * 1 MB = 30 TB mỗi ngày
+
+  - Dung lượng lưu trữ đa phương tiện trong 5 năm: 30 TB * 365 * 5 = ~55 PB
+
+## **Mẹo**
+
+Ước tính sơ bộ (back-of-the-envelope estimation) quan trọng nhất là quy trình thực hiện. Giải quyết vấn đề quan trọng hơn là đạt được kết quả. Người phỏng vấn có thể kiểm tra kỹ năng giải quyết vấn đề của bạn. Dưới đây là một vài lời khuyên để bạn tham khảo:
+
+  - Làm tròn và Ước lượng. Rất khó để thực hiện các phép toán phức tạp trong buổi phỏng vấn. Ví dụ, kết quả của “99987 / 9.1” là bao nhiêu? Không cần thiết phải dành thời gian quý báu để giải quyết các bài toán phức tạp. Độ chính xác không phải là điều được mong đợi. Hãy sử dụng các số tròn và phép ước lượng để tận dụng lợi thế của mình. Câu hỏi chia trên có thể được đơn giản hóa như sau: “100.000 / 10”.
+
+  - Ghi lại các giả định của bạn. Việc ghi lại các giả định là một ý hay để có thể tham chiếu sau này.
+
+  - Ghi rõ đơn vị. Khi bạn viết “5”, nó có nghĩa là 5 KB hay 5 MB? Bạn có thể tự mình bối rối với điều này. Hãy ghi rõ các đơn vị vì “5 MB” giúp loại bỏ sự mơ hồ.
+
+  - Các ước tính sơ bộ (back-of-the-envelope estimations) thường được hỏi: QPS, QPS cao điểm, dung lượng lưu trữ, bộ nhớ đệm (cache), số lượng máy chủ, v.v. Bạn có thể luyện tập các phép tính này khi chuẩn bị cho buổi phỏng vấn. Luyện tập giúp hoàn thiện.
+
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!
+
+# **Tài liệu tham khảo**
+
+[1] J. Dean.Google Pro Tip: Use Back-Of-The-Envelope-Calculations To Choose The Best
+Design:
+http://highscalability.com/blog/2011/1/26/google-pro-tip-use-back-of-the-envelopecalculations-to-choo.html
+
+[2] System design primer: https://github.com/donnemartin/system-design-primer
+
+[3] Latency Numbers Every Programmer Should Know:
+https://colin-scott.github.io/personal_website/research/interactive_latency.html
+
+[4] Amazon Compute Service Level Agreement:
+https://aws.amazon.com/compute/sla/
+
+[5] Compute Engine Service Level Agreement (SLA):
+https://cloud.google.com/compute/sla
+
+[6] SLA summary for Azure services: https://azure.microsoft.com/enus/support/legal/sla/summary/
+---
+
+---
+
+*Made by Anh Tu - Share to be share*

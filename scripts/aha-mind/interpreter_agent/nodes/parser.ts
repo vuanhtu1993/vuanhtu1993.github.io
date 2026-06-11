@@ -11,6 +11,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { execSync } from "child_process";
 import { Chapter, InterpreterState } from "../state";
+import { uploadImageToCloudinary } from "../utils/cloudinary";
 
 // ─── Utility Functions ────────────────────────────────────────────────────────
 
@@ -41,7 +42,7 @@ export const parserNode = async (
   const slug = state.bookMetadata.slug;
   const imageDir = path.resolve(process.cwd(), `blog/aha-interpreter/${slug}/images`);
   const outFile = path.resolve(process.cwd(), `blog/aha-interpreter/${slug}/temp_extract.md`);
-  
+
   if (!fs.existsSync(path.dirname(outFile))) {
     fs.mkdirSync(path.dirname(outFile), { recursive: true });
   }
@@ -53,7 +54,7 @@ export const parserNode = async (
 
   try {
     console.log(`[Parser] ⏳ Chạy script Python (pymupdf4llm)...`);
-    execSync(cmd, { stdio: "inherit" }); 
+    execSync(cmd, { stdio: "inherit" });
   } catch (err: any) {
     throw new Error(`[Parser] ❌ Lỗi khi gọi extract.py: ${err.message}`);
   }
@@ -64,14 +65,42 @@ export const parserNode = async (
 
   let rawContent = fs.readFileSync(outFile, "utf-8");
 
-  // ── Bước 2: Chuẩn hóa đường dẫn ảnh ──
-  // Đổi đường dẫn tuyệt đối của ảnh thành relative path `./images/...` 
-  // Docusaurus MDX cần ảnh ở cùng thư mục hoặc thư mục con.
-  const imageDirForward = imageDir.replace(/\\/g, "/"); 
+  // ── Bước 2: Upload ảnh lên Cloudinary & thay thế đường dẫn ──
+  const imageDirForward = imageDir.replace(/\\/g, "/");
+  const cloudinaryFolder = `aha-interpreter/${slug}`;
+
+  if (fs.existsSync(imageDir)) {
+    const files = fs.readdirSync(imageDir);
+    const imageFiles = files.filter(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg'));
+
+    if (imageFiles.length > 0) {
+      console.log(`[Parser] ☁️ Bắt đầu upload ${imageFiles.length} ảnh lên Cloudinary...`);
+      for (const file of imageFiles) {
+        const localPath = path.join(imageDir, file);
+        try {
+          const cloudinaryUrl = await uploadImageToCloudinary(localPath, cloudinaryFolder);
+          // Thay thế đường dẫn local bằng Cloudinary URL
+          rawContent = rawContent.split(imageDirForward + "/" + file).join(cloudinaryUrl);
+
+          // Đề phòng trường hợp pymupdf4llm trả về đường dẫn dùng backslash trên Windows
+          const backslashPath = path.join(imageDir, file).replace(/\\/g, "\\\\");
+          rawContent = rawContent.split(backslashPath).join(cloudinaryUrl);
+          rawContent = rawContent.split(path.join(imageDir, file)).join(cloudinaryUrl);
+
+        } catch (uploadError) {
+          console.error(`[Parser] ❌ Lỗi khi upload ${file}, giữ nguyên đường dẫn local.`);
+          // Nếu lỗi, đổi sang đường dẫn tương đối (fallback)
+          rawContent = rawContent.split(imageDirForward + "/" + file).join("./images/" + file);
+        }
+      }
+      console.log(`[Parser] ✅ Hoàn tất upload ảnh lên Cloudinary.`);
+    }
+  }
+
+  // Fallback: Đổi các đường dẫn còn sót lại thành relative path `./images/...`
   rawContent = rawContent.split(imageDirForward + "/").join("./images/");
-  // Đề phòng trường hợp script trả về path không có slash cuối
   rawContent = rawContent.split(imageDirForward).join("./images");
-  
+
   // Dọn dẹp file tạm
   fs.unlinkSync(outFile);
 
