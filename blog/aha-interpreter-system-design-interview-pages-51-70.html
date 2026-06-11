@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.1">
+<title data-rh="true">[System design interview] Từ trang 51 đến 70 | Anhhtus stories</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://vuanhtu1993.github.io/img/social_card.jpg"><meta data-rh="true" name="twitter:image" content="https://vuanhtu1993.github.io/img/social_card.jpg"><meta data-rh="true" property="og:url" content="https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="[System design interview] Từ trang 51 đến 70 | Anhhtus stories"><meta data-rh="true" name="description" content="Đây là bản dịch tiếng Việt của &quot;System design interview&quot; (Tác giả: Unknown Author)."><meta data-rh="true" property="og:description" content="Đây là bản dịch tiếng Việt của &quot;System design interview&quot; (Tác giả: Unknown Author)."><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-06-11T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/vuanhtu1993"><meta data-rh="true" property="article:tag" content="aha-interpreter,book-notes,auto-translated"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70"><link data-rh="true" rel="alternate" href="https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70" hreflang="en"><link data-rh="true" rel="alternate" href="https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://W95VTU3G1X-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70","mainEntityOfPage":"https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70","url":"https://vuanhtu1993.github.io/blog/aha-interpreter-system-design-interview-pages-51-70","headline":"[System design interview] Từ trang 51 đến 70","name":"[System design interview] Từ trang 51 đến 70","description":"Đây là bản dịch tiếng Việt của \"System design interview\" (Tác giả: Unknown Author).","datePublished":"2026-06-11T00:00:00.000Z","author":{"@type":"Person","name":"Vũ Anh Tú","description":"Share to be shared","url":"https://github.com/vuanhtu1993","image":"https://avatars.githubusercontent.com/u/29482564?v=4"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://vuanhtu1993.github.io/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Anhhtus stories RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Anhhtus stories Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GQETJJQ2L9"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-GQETJJQ2L9",{anonymize_ip:!0})</script>
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="Anhhtus stories" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.ce678be9.css">
+<script src="/assets/js/runtime~main.b9bb7629.js" defer="defer"></script>
+<script src="/assets/js/main.0d4f3c36.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_DDhr" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpg" alt="My Site Logo" class="themedComponent_u5wZ themedComponent--light_Ndk0"><img src="/img/logo.jpg" alt="My Site Logo" class="themedComponent_u5wZ themedComponent--dark_w55u"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/intro">Khoá học</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_C9hK colorModeToggle_yIjQ"><button class="clean-btn toggleButton_DzTZ toggleButtonDisabled_mXyC" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ lightToggleIcon_YWrO"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ darkToggleIcon_MZ3X"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ systemToggleIcon_tP6m"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_UWWc"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts="Meta+k"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle><path d="m21 21-4.3-4.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_uwMc"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_m1XR thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_H5u9 margin-bottom--md">Các bài viết gần đây</div><div role="group"><h3 class="yearGroupHeading_JJ3l">2026</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/ci-cd-handbook-github-actions-docker-cloud-run">CI/CD Handbook: Continuous Integration, Delivery và Deployment với GitHub Actions, Docker và Google Cloud Run</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run">The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-34-41">[System design interview] Từ trang 34 đến 41</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-42-50">[System design interview] Từ trang 42 đến 50</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-5-33">[System design interview] Từ trang 5 đến 33</a></li><li class="sidebarItem_DzlV"><a aria-current="page" class="sidebarItemLink_kkD1 sidebarItemLinkActive_8RPn" href="/blog/aha-interpreter-system-design-interview-pages-51-70">[System design interview] Từ trang 51 đến 70</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-71-86">[System design interview] Từ trang 71 đến 86</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-87-109">[System design interview] Từ trang 87 đến 109</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-foundational-large-language-models-and-text-generation-pages-21-42">[Foundational Large Language Models and Text Generation] Từ trang 21 đến 42</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-foundational-large-language-models-and-text-generation-pages-8-20">[Foundational Large Language Models and Text Generation] Từ trang 8 đến 20</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/advanced-prompting-techniques">Advanced Prompting: 7 Kỹ Thuật Nâng Cao &amp; Kiểm Soát Đầu Ra</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/ai-agents-overview">AI Agents: Khi Trí Tuệ Nhân Tạo Biến Thành &#x27;Người Hành Động&#x27;</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/building-search-applications">Xây Dựng Ứng Dụng Tìm Kiếm Ngữ Nghĩa Với Text Embeddings</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/fine-tuning-llm">Fine-Tuning LLM: Khi Nào Nên &#x27;Dạy Lại&#x27; AI Từ Bên Trong?</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/foundation-models-explained">Foundation Models: Giải Mã &#x27;Khối Đế&#x27; Của Generative AI</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/generative-ai-application-lifecycle">LLMOps: Quản Trị Vòng Đời Ứng Dụng Generative AI</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/generative-ai-va-llm-nen-tang">Generative AI and Large Language Models: A Technical Foundation</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/integrating-with-function-calling">Tích Hợp Function Calling: Khắc Phục Điểm Yếu Của LLM</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/phan-loai-llm-va-chien-luoc-trien-khai">LLM Taxonomy and Deployment Strategies: A Decision Framework</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/prompt-engineering-fundamentals">Prompt Engineering: Kỹ Thuật Cơ Bản Và Các Nguyên Tắc Thiết Kế</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/rag-and-vector-databases">RAG &amp; Vector Databases: Cấy Ghép Dữ Liệu Thực Tế Vào LLM</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/responsible-ai-principles-and-practice">Responsible AI: From Principles to 4-Layer Mitigation Engineering</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/small-language-models">SLM (Small Language Models): Quyền Lực Trong Lòng Bàn Tay</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-foundation-models-explained">Foundation Models: Explained</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-08-building-search-applications-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/08-building-search-applications/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-01-introduction-to-genai-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/01-introduction-to-genai/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-02-exploring-and-comparing-different-llms-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/02-exploring-and-comparing-different-llms/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-03-using-generative-ai-responsibly-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/03-using-generative-ai-responsibly/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-04-prompt-engineering-fundamentals-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/04-prompt-engineering-fundamentals/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-05-advanced-prompts-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/05-advanced-prompts/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-11-integrating-with-function-calling-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/11-integrating-with-function-calling/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-14-the-generative-ai-application-lifecycle-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/14-the-generative-ai-application-lifecycle/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-15-rag-and-vector-databases-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/15-rag-and-vector-databases/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-17-ai-agents-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/17-ai-agents/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-18-fine-tuning-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/18-fine-tuning/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-19-slm-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/19-slm/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-models-explained">Generative AI Models Explained</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-google-antigravity-2-0-t-ide-sang-n-n-t-ng-agent-first-to-n-di-n">Google Antigravity 2.0: From IDE to a Full-Fledged Agent-First Platform</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-what-is-a-knowledge-graph">What Is a Knowledge Graph?</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-subagents-hooks-scheduled-tasks-agent-management-voice-and-much-more">Subagents, Hooks, Scheduled Tasks, Agent Management, Voice, and Much More</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-evaluate-automl-experiment-results-azure-machine-learning">Evaluate AutoML experiment results - Azure Machine Learning</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-t-t-t-n-t-t-nh-ng-k-thu-t-prompt-engineering-h-u-ch-nh-t-cho-chatgpt">Tất tần tật những kĩ thuật Prompt Engineering hữu ích nhất cho chatGPT</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-how-transformers-work-a-detailed-exploration-of-transformer-architecture">How Transformers Work: A Detailed Exploration of Transformer Architecture</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-transformer-architecture-explained">Transformer Architecture explained</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/05/05/prompt-rag-finetune/Prompt Flow, RAG và Fine-Tuning">Chiến Lược Tối Ưu LLM: Prompt Flow, RAG và Fine-Tuning</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-promptflow-examples-tutorials-flow-fine-tuning-evaluation-promptflow-quality-improvement-md-at-main-microsoft-promptflow">promptflow/examples/tutorials/flow-fine-tuning-evaluation/promptflow-quality-improvement.md at main · microsoft/promptflow</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/04/29/data-structure-hardware-evolution">Lịch sử Cấu trúc Dữ liệu: Từ Rơ-le điện đến CPU Cache</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-a-brief-history-of-data-structures-algorithms-and-tech-interviews">A Brief History of Data Structures, Algorithms, and Tech Interviews</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-understanding-and-using-supervised-fine-tuning-sft-for-language-models">Understanding and Using Supervised Fine-Tuning (SFT) for Language Models</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-how-scientists-are-using-claude-to-accelerate-research-and-discovery">How scientists are using Claude to accelerate research and discovery</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-introducing-sonnet-4-6">Introducing Sonnet 4.6</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/04/21/2026/04/ai-tech-evolution">Tiến Hóa Công Nghệ AI (2017→Tương Lai)</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/04/06/docker-production-nestjs">Docker: Từ Lý Thuyết Đến Production với NestJS</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/31/typescript-comprehensive-guide">TypeScript Thực Chiến: Comprehensive Guide cho Dev Team</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/30/openclaw-mac-mini">Hướng dẫn cài đặt OpenClaw trên Mac Mini &amp; Tích hợp VnStocks API</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/17/aws-network-osi">AWS Network &amp; OSI Model: Bản Đồ &#x27;Nhập Ngũ&#x27; Cloud Cho Lập Trình Viên</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/13/ibm-itx-training">Trở Thành Người Phiên Dịch Dữ Liệu: Lộ Trình Học IBM ITX &amp; EDI Từ Con Số 0</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/12/feynman-technique">Phương pháp Feynman: Bí quyết học tập chủ động và ghi nhớ sâu</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/04/cloud-cost-analytics-engineer">FinOps cho Khoá Học: So Sánh Chi Phí Microsoft Fabric vs AWS vs Azure Databricks</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/03/azure-databricks-strategic-learning">Azure Databricks: Nền tảng phân tích dữ liệu &amp; Kịch bản học tập chiến lược</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/25/database-tuning-indexing-mindset">Database Tuning Mindset &amp; Nghệ Thuật Indexing: Đừng Để Database Của Bạn Thở Oxy!</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/25/mysql-query-execution-deep-dive">Giải Phẫu MySQL 8.0: Tráng Sĩ Xử Lý Câu Lệnh SQL Của Bạn Thế Nào?</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/14/big-o-notation-typescript">Giải Mã Big O Notation: Độ Phức Tạp Thuật Toán Với TypeScript</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/10/design-database">Phân tích và Thiết kế Cơ sở dữ liệu: Hệ thống Quiz Real-time</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/10/planning quizizz real-time">Kế hoạch phát triển dự án: Hệ thống Quizizz Real-time (NestJS)</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/09/index">Design Patterns for Frontend: Hướng dẫn toàn diện với ReactJS + TypeScript</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gemini-cli-micro-tasks">Tối Ưu Hóa Workflow: Biến Gemini CLI Thành Trợ Lý &#x27;Micro&#x27; Đắc Lực</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gemini-cli-sub-agents">Gemini CLI Sub-Agents: Xây Dựng Đội Ngũ Chuyên Gia AI Cho Dự Án Của Bạn</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/05/gemini-cli-features-usage/gemini-cli-overview">Gemini CLI: AI Assistant ngay trong Terminal của bạn</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gemini-cli-features-usage">Gemini CLI: Trợ lý AI Mạnh Mẽ Ngay Trên Terminal Của Bạn</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/openclaw-personal-assistant-deep-dive">OpenClaw Deep Dive: Xây dựng Trợ lý AI Cá nhân Hoàn chỉnh</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/03/ai-agent-skills">AI Agent Skills: Kiến Trúc Meta-Tool Biến LLM Thành Chuyên Gia</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/03/openclaw-personal-agent-future">OpenClaw và Tương Lai của Trợ Lý AI Cá Nhân: Từ Chatbot đến Digital Twin</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/03/ssl-tls-https">SSL/TLS và HTTPS: Hướng Dẫn Toàn Diện Về Bảo Mật Web</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/01/index">GitHub Actions: Hướng Dẫn Toàn Diện Cho Người Mới Bắt Đầu</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2025</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2025/07/22/Pivot và Unpivot trong Power BI 238180e4203980f08444f902b1abcec2">Pivot và Unpivot trong Power BI</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2025/07/21/Database Normalization - Chuẩn hoá cơ sở dư 238180e4203980b7b58ce84d92f5f8f3">Database Normalization - Chuẩn hoá cơ sở dữ liệu</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2025/07/20/Phân biệt OLTP và OLAP 238180e4203980bf851cd94290411b00">Phân biệt OLTP và OLAP</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/cong-nghe-phan-mem">Nhập môn Công nghệ phần mềm</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2023</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gioi-thieu-OpenAI-va-GPT3">Giới thiệu OpenAI và GPT-3</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2019</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Quy trình quản lý dự án Agile Scrum">Quy trình quản lý dự án Agile Scrum</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/How to create API service">Tạo API services bằng “fetch” trong React</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Create custom component in React">Làm sao để customize HTML Element trong React</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Ref in react">Understanding refs in React system</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Introduction Observation State solution">Introduction Observation state management solution</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/How to create React app">3 bước tạo mới dự án React bằng webpack</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Custom terminal with oh my zsh">Làm đẹp terminal for Mac sử dụng “oh my zsh”</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/How to Iterate Over JavaScript Object Entries">5 ways to iterate over javascript object</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Anaconda command">Anaconda tốc ký</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/MongoDB command">Some mongoDB command for beginner</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Webpack and style-loader">Webpack and style-loader for React developer</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Build-in function">Build-in functions xử lý mảng trong javascript</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2018</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Javascript regular expression">Biểu thức chính quy trong javascript</a></li></ul></div></nav></aside><main class="col col--7"><div class="print-pdf-wrapper"><button class="print-pdf-button" title="Xuất PDF"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Xuất PDF</span></button><div class="print-content"><article class=""><header><h1 class="title_doz0">[System design interview] Từ trang 51 đến 70</h1><div class="container_IpfC margin-vert--md"><time datetime="2026-06-11T00:00:00.000Z">June 11, 2026</time> · <!-- -->26 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--12 authorCol_yQln"><div class="avatar margin-bottom--sm"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo authorImage_vRjV" src="https://avatars.githubusercontent.com/u/29482564?v=4" alt="Vũ Anh Tú"></a><div class="avatar__intro authorDetails_bvQM"><div class="avatar__name"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer"><span class="authorName_IqHL" translate="no">Vũ Anh Tú</span></a></div><small class="authorTitle_ndsP" title="Share to be shared">Share to be shared</small><div class="authorSocials_Ll9J"></div></div></div></div></div></header><div id="__blog-post-container" class="markdown"><div class="theme-admonition theme-admonition-info admonition_c_H7 alert alert--info"><div class="admonitionHeading_iDMX"><span class="admonitionIcon_eJoG"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📚 Về bài dịch này</div><div class="admonitionContent_xWuN"><p>Đây là bản dịch tiếng Việt của <strong>&quot;System design interview&quot;</strong> (Tác giả: Unknown Author).
+Bài được dịch tự động bởi <strong>Aha! Mind Interpreter</strong> — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.</p><p>⚠️ <em>Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.</em></p></div></div>
+<hr>
+<h1><strong>CHƯƠNG 4: THIẾT KẾ MỘT RATE LIMITER</strong></h1>
+<p>Trong một hệ thống mạng, một rate limiter được sử dụng để kiểm soát tốc độ lưu lượng truy cập do client hoặc một dịch vụ gửi đi. Trong thế giới HTTP, một rate limiter giới hạn số lượng yêu cầu của client được phép gửi trong một khoảng thời gian xác định. Nếu số lượng yêu cầu API vượt quá ngưỡng được định nghĩa bởi rate limiter, tất cả các cuộc gọi vượt mức sẽ bị chặn. Dưới đây là một vài ví dụ:</p>
+<ul>
+<li class="">
+<p>Một người dùng không thể viết quá 2 bài đăng mỗi giây.</p>
+</li>
+<li class="">
+<p>Bạn có thể tạo tối đa 10 tài khoản mỗi ngày từ cùng một địa chỉ IP.</p>
+</li>
+<li class="">
+<p>Bạn không thể nhận thưởng quá 5 lần mỗi tuần từ cùng một thiết bị.</p>
+</li>
+</ul>
+<p>Trong chương này, chúng ta được yêu cầu thiết kế một rate limiter. Trước khi bắt đầu thiết kế, chúng ta hãy cùng xem xét những lợi ích của việc sử dụng một API rate limiter:</p>
+<ul>
+<li class="">
+<p>Ngăn chặn tình trạng cạn kiệt tài nguyên do tấn công Denial of Service (DoS) [1]. Hầu hết các API được công bố bởi các công ty công nghệ lớn đều áp dụng một hình thức giới hạn tốc độ nào đó. Ví dụ, Twitter giới hạn số lượng tweet là 300 mỗi 3 giờ [2]. Các API của Google Docs có giới hạn mặc định sau: 300 yêu cầu đọc mỗi người dùng mỗi 60 giây [3]. Một rate limiter ngăn chặn các cuộc tấn công DoS, dù là cố ý hay vô ý, bằng cách chặn các cuộc gọi vượt mức.</p>
+</li>
+<li class="">
+<p>Giảm chi phí. Việc giới hạn các yêu cầu vượt mức có nghĩa là cần ít máy chủ hơn và phân bổ nhiều tài nguyên hơn cho các API có độ ưu tiên cao. Giới hạn tốc độ cực kỳ quan trọng đối với các công ty sử dụng các API của bên thứ ba phải trả phí. Ví dụ, chúng ta bị tính phí trên cơ sở mỗi cuộc gọi đối với các API bên ngoài sau: kiểm tra tín dụng, thực hiện thanh to án, truy xuất hồ sơ sức khỏe, v.v. Giới hạn số lượng cuộc gọi là điều cần thiết để giảm chi phí.</p>
+</li>
+<li class="">
+<p>Ngăn chặn máy chủ bị quá tải. Để giảm tải máy chủ, một rate limiter được sử dụng để lọc bỏ các yêu cầu vượt mức do bot hoặc hành vi sai trái của người dùng gây ra.</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="bước-1---hiểu-rõ-vấn-đề-và-xác-định-phạm-vi-thiết-kế"><strong>Bước 1 - Hiểu rõ vấn đề và xác định phạm vi thiết kế</strong><a href="#bước-1---hiểu-rõ-vấn-đề-và-xác-định-phạm-vi-thiết-kế" class="hash-link" aria-label="Direct link to bước-1---hiểu-rõ-vấn-đề-và-xác-định-phạm-vi-thiết-kế" title="Direct link to bước-1---hiểu-rõ-vấn-đề-và-xác-định-phạm-vi-thiết-kế" translate="no">​</a></h2>
+<p>Giới hạn tốc độ có thể được triển khai bằng nhiều thuật toán khác nhau, mỗi thuật toán đều có ưu và nhược điểm riêng. Các tương tác giữa người phỏng vấn và ứng viên giúp làm rõ loại rate limiter mà chúng ta đang cố gắng xây dựng.</p>
+<p><strong>Ứng viên</strong> : Chúng ta sẽ thiết kế loại rate limiter nào? Đó là rate limiter phía client hay rate limiter API phía server?
+<strong>Người phỏng vấn</strong> : Câu hỏi hay. Chúng ta tập trung vào rate limiter API phía server.</p>
+<p><strong>Ứng viên</strong> : Rate limiter có điều tiết các yêu cầu API dựa trên IP, ID người dùng hay các thuộc tính khác không?
+<strong>Người phỏng vấn</strong> : Rate limiter phải đủ linh hoạt để hỗ trợ các bộ quy tắc điều tiết khác nhau.</p>
+<p><strong>Ứng viên</strong> : Quy mô của hệ thống là bao nhiêu? Nó được xây dựng cho một startup hay một công ty lớn với lượng người dùng khổng lồ?
+<strong>Ng ười phỏng vấn</strong> : Hệ thống phải có khả năng xử lý một lượng lớn yêu cầu.</p>
+<p><strong>Ứng viên</strong> : Hệ thống có hoạt động trong môi trường phân tán không?
+<strong>Người phỏng vấn</strong> : Có.</p>
+<p><strong>Ứng viên</strong> : Rate limiter là một dịch vụ riêng biệt hay nên được triển khai trong mã ứng dụng?
+<strong>Người phỏng vấn</strong> : Đó là một quyết định thiết kế tùy thuộc vào bạn.</p>
+<p><strong>Ứng viên</strong> : Chúng ta có cần thông báo cho người dùng bị điều tiết không?
+<strong>Người phỏng vấn</strong> : Có.</p>
+<p><strong>Các yêu cầu</strong>
+Dưới đây là tóm tắt các yêu cầu đối với hệ thống:</p>
+<ul>
+<li class="">
+<p>Giới hạn chính xác các yêu cầu vượt mức.</p>
+</li>
+<li class="">
+<p>Độ trễ thấp (Low latency). Rate limiter không được làm chậm thời gian phản hồi HTTP.</p>
+</li>
+<li class="">
+<p>Sử dụng ít bộ nhớ nhất có thể.</p>
+</li>
+<li class="">
+<p>Giới hạn tốc độ phân tán (Distributed rate limiting). Rate limiter có thể được chia sẻ trên nhiều máy chủ hoặc tiến trình.</p>
+</li>
+<li class="">
+<p>Xử lý ngoại lệ (Exception handling). Hiển thị các ngoại lệ rõ ràng cho người dùng khi yêu cầu của họ bị điều tiết.</p>
+</li>
+<li class="">
+<p>Khả năng chịu lỗi cao (High fault tolerance). Nếu có bất kỳ vấn đề nào với rate limiter (ví dụ, một máy chủ cache bị ngoại tuyến), nó sẽ không ảnh hưởng đến toàn bộ hệ thống.</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="bước-2---đề-xuất-thiết-kế-cấp-cao-và-nhận-được-sự-đồng-thuận"><strong>Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận</strong><a href="#bước-2---đề-xuất-thiết-kế-cấp-cao-và-nhận-được-sự-đồng-thuận" class="hash-link" aria-label="Direct link to bước-2---đề-xuất-thiết-kế-cấp-cao-và-nhận-được-sự-đồng-thuận" title="Direct link to bước-2---đề-xuất-thiết-kế-cấp-cao-và-nhận-được-sự-đồng-thuận" translate="no">​</a></h2>
+<p>Chúng ta hãy giữ mọi thứ đơn giản và sử dụng mô hình client-server cơ bản cho việc</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="các-thuật-toán-giới-hạn-tốc-độ"><strong>Các thuật toán giới hạn tốc độ</strong><a href="#các-thuật-toán-giới-hạn-tốc-độ" class="hash-link" aria-label="Direct link to các-thuật-toán-giới-hạn-tốc-độ" title="Direct link to các-thuật-toán-giới-hạn-tốc-độ" translate="no">​</a></h2>
+<p>Giới hạn tốc độ (rate limiting) có thể được triển khai bằng nhiều thuật toán khác nhau, mỗi thuật toán đều có những ưu và nhược điểm riêng biệt. Mặc dù chương này không tập trung vào các thuật toán, nhưng việc hiểu chúng ở cấp độ cao sẽ giúp chúng ta chọn được thuật toán phù hợp hoặc kết hợp các thuật toán để đáp ứng các trường hợp sử dụng của mình. Dưới đây là danh sách các thuật toán phổ biến:</p>
+<ul>
+<li class="">
+<p>Token bucket</p>
+</li>
+<li class="">
+<p>Leaking bucket</p>
+</li>
+<li class="">
+<p>Fixed window counter</p>
+</li>
+<li class="">
+<p>Sliding window log</p>
+</li>
+<li class="">
+<p>Sliding window counter</p>
+</li>
+</ul>
+<p><strong>Thuật toán Token bucket</strong>
+Thuật toán Token bucket được sử dụng rộng rãi để giới hạn tốc độ. Nó đơn giản, dễ hiểu và được các công ty internet sử dụng phổ biến. Cả Amazon [5] và Stripe [6] đều sử dụng thuật toán này để điều tiết các API requests của họ.</p>
+<p>Thuật toán Token bucket hoạt động như sau:</p>
+<ul>
+<li class="">
+<p>Một token bucket là một thùng chứa có dung lượng được định nghĩa trước. Các token được đưa vào bucket theo tốc độ định sẵn một cách định kỳ. Khi bucket đầy, sẽ không có thêm token nào được thêm vào nữa. Như minh họa trong Hình 4-4, dung lượng của token bucket là 4. Bộ nạp đưa 2 token vào bucket mỗi giây. Khi bucket đầy, các token thừa sẽ bị tràn.</p>
+</li>
+<li class="">
+<p>Mỗi request tiêu thụ một token. Khi một request đến, chúng ta kiểm tra xem có đủ token trong bucket hay không. Hình 4-5 giải thích cách nó hoạt động.</p>
+<ul>
+<li class="">
+<p>Nếu có đủ token, chúng ta lấy một token ra cho mỗi request, và request đó được thông qua.</p>
+</li>
+<li class="">
+<p>Nếu không có đủ token, request sẽ bị loại bỏ.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160694/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-54-0.png" alt="" class="img_AuN4">
+<img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160695/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-55-0.png" alt="" class="img_AuN4"></p>
+<p>Hình 4-6 minh họa cách hoạt động của việc tiêu thụ token, nạp lại và logic giới hạn tốc độ. Trong ví dụ này, kích thước token bucket là 4, và tốc độ nạp lại là 4 token mỗi 1 phút.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160700/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-56-0.png" alt="" class="img_AuN4"></p>
+<p>Thuật toán Token bucket có hai tham số:</p>
+<ul>
+<li class="">
+<p>Kích thước bucket: số lượng token tối đa được phép có trong bucket</p>
+</li>
+<li class="">
+<p>Tốc độ nạp lại: số lượng token được đưa vào bucket m ỗi giây
+Chúng ta cần bao nhiêu bucket? Điều này thay đổi và phụ thuộc vào các quy tắc giới hạn tốc độ. Dưới đây là một vài ví dụ.</p>
+</li>
+<li class="">
+<p>Thông thường, cần có các bucket khác nhau cho các API endpoints khác nhau. Ví dụ, nếu một người dùng được phép tạo 1 bài đăng mỗi giây, thêm 150 bạn bè mỗi ngày và thích 5 bài đăng mỗi giây, thì cần 3 bucket cho mỗi người dùng.</p>
+</li>
+<li class="">
+<p>Nếu chúng ta cần điều tiết các request dựa trên địa chỉ IP, mỗi địa chỉ IP sẽ yêu cầu một bucket.</p>
+</li>
+<li class="">
+<p>Nếu hệ thống cho phép tối đa 10.000 request mỗi giây, việc có một bucket toàn cục được chia sẻ bởi tất cả các request là hợp lý.
+Ưu điểm:</p>
+</li>
+<li class="">
+<p>Thuật toán dễ triển khai.</p>
+</li>
+<li class="">
+<p>Hiệu quả về bộ nhớ.</p>
+</li>
+<li class="">
+<p>Token bucket cho phép xử lý một lưu lượng truy cập đột biến trong thời gian ngắn. Một request có thể được thông qua miễn là còn token.
+Nhược điểm:</p>
+</li>
+<li class="">
+<p>Hai tham số trong thuật toán là kích thước bucket và tốc độ nạp lại token. Tuy nhiên, việc điều chỉnh chúng một cách phù hợp có thể là một thách thức.</p>
+</li>
+</ul>
+<p><strong>Thuật toán Leaking bucket</strong>
+Thuật toán Leaking bucket tương tự như Token bucket ngoại trừ việc các request được xử lý ở một tốc độ cố định. Nó thường được triển khai bằng một hàng đợi theo nguyên tắc vào trước ra trước (FIFO). Thuật toán hoạt động như sau:</p>
+<ul>
+<li class="">
+<p>Khi một request đến, hệ thống kiểm tra xem hàng đợi có đầy không. Nếu chưa đầy, request sẽ được thêm vào hàng đợi.</p>
+</li>
+<li class="">
+<p>Ngược lại, request sẽ bị loại bỏ.</p>
+</li>
+<li class="">
+<p>Các request được lấy ra từ hàng đợi và xử lý theo các khoảng thời gian đều đặn.</p>
+</li>
+</ul>
+<p>Hình 4-7 giải thích cách thuật toán hoạt động.</p>
+<p>Thuật toán Leaking bucket có hai tham số sau:</p>
+<ul>
+<li class="">
+<p>Kích thước bucket: bằng với kích thước hàng đợi. Hàng đợi chứa các request sẽ được xử lý ở một tốc độ cố định.</p>
+</li>
+<li class="">
+<p>Tốc độ thoát (Outflow rate): định nghĩa số lượng request có thể được xử lý ở một tốc độ cố định, thường tính bằng giây.
+Shopify, một công ty thương mại điện tử, sử dụng leaking buckets để giới hạn tốc độ [7].</p>
+</li>
+</ul>
+<p>Ưu điểm:</p>
+<ul>
+<li class="">
+<p>Hiệu quả về bộ nhớ nhờ kích thước hàng đợi giới hạn.</p>
+</li>
+<li class="">
+<p>Các request được xử lý ở một tốc độ cố định, do đó nó phù hợp cho các trường hợp sử dụng cần tốc độ thoát ổn định.</p>
+</li>
+</ul>
+<p>Nhược điểm:</p>
+<ul>
+<li class="">
+<p>Một lưu lượng truy cập đột biến sẽ làm đầy hàng đợi bằng các request cũ, và nếu chúng không được xử lý kịp thời, các request gần đây sẽ bị giới hạn tốc độ.</p>
+</li>
+<li class="">
+<p>Có hai tham số trong thuật toán. Việc điều chỉnh chúng một cách phù hợp có thể không dễ dàng.</p>
+</li>
+</ul>
+<p><strong>Thuật toán Fixed window counter</strong>
+Thuật toán Fixed window counter hoạt động như sau:</p>
+<ul>
+<li class="">
+<p>Thuật toán chia dòng thời gian thành các cửa sổ thời gian có kích thước cố định và gán một bộ đếm cho mỗi cửa sổ.</p>
+</li>
+<li class="">
+<p>Mỗi request sẽ tăng bộ đếm lên một.</p>
+</li>
+<li class="">
+<p>Khi bộ đếm đạt đến ngưỡng được định nghĩa trước, các request mới sẽ bị loại bỏ cho đến khi một cửa sổ thời gian mới bắt đầu.</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160701/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-57-0.png" alt="" class="img_AuN4">
+Hãy sử dụng một ví dụ cụ thể để xem cách nó hoạt động. Trong Hình 4-8, đơn vị thời gian là 1 giây và hệ thống cho phép tối đa 3 request mỗi giây. Trong mỗi cửa sổ 1 giây, nếu nhận được hơn 3 request, các request thừa sẽ bị loại bỏ như trong Hình 4-8.</p>
+<p>Một vấn đề lớn với thuật toán này là lưu lượng truy cập đột biến tại các cạnh của cửa sổ thời gian có thể khiến số lượng request vượt quá hạn mức cho phép được thông qua. Hãy xem xét trường hợp sau:</p>
+<p>Trong Hình 4-9, hệ thống cho phép tối đa 5 request mỗi phút, và hạn mức khả dụng được đặt lại vào phút tròn dễ đọc. Như đã thấy, có năm request trong khoảng từ 2:00:00 đến 2:01:00 và năm request nữa trong khoảng từ 2:01:00 đến 2:02:00. Đối với cửa sổ một phút trong khoảng từ 2:00:30 đến 2:</p>
+<p><strong>Thuật toán bộ đếm cửa sổ trượt (Sliding window counter algorithm)</strong>
+Thuật toán bộ đếm cửa sổ trượt là một phương pháp lai (hybrid approach) kết hợp bộ đếm cửa sổ cố định (fixed window counter) và nhật ký cửa sổ trượt (sliding window log). Thuật toán có thể được triển khai bằng hai cách tiếp cận khác nhau. Chúng ta sẽ giải thích một cách triển khai trong phần này và cung cấp tài liệu tham khảo cho cách triển khai còn lại ở cuối phần. Hình 4-11 minh họa cách thuật toán này hoạt động.</p>
+<p>Giả sử bộ điều tiết tốc độ (rate limiter) cho phép tối đa 7 yêu cầu mỗi phút, và có 5 yêu cầu trong phút trước và 3 yêu cầu trong phút hiện tại. Đối với một yêu cầu mới đến ở vị trí 30% trong phút hiện tại, số lượng yêu cầu trong cửa sổ trượt (rolling window) được tính bằng công thức sau:</p>
+<ul>
+<li class="">Số yêu cầu trong cửa sổ hiện tại <strong>+</strong> số yêu cầu trong cửa sổ trước ***** phần trăm chồng lấn giữa cửa sổ trượt và cửa sổ trước</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160709/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-60-0.png" alt="" class="img_AuN4"></p>
+<ul>
+<li class="">Sử dụng công thức này, chúng ta có 3 + 5 * 0.7% = 6.5 yêu cầu. Tùy thuộc vào trường hợp sử dụng, con số này có thể được làm tròn lên hoặc xuống. Trong ví dụ của chúng ta, nó được làm tròn xuống thành 6.</li>
+</ul>
+<p>Vì bộ điều tiết tốc độ cho phép tối đa 7 yêu cầu mỗi phút, yêu cầu hiện tại có thể được chấp nhận. Tuy nhiên, giới hạn sẽ đạt được sau khi nhận thêm một yêu cầu nữa.</p>
+<p>Do giới hạn về không gian, chúng ta sẽ không thảo luận về cách triển khai còn lại ở đây. Độc giả quan tâm nên tham khảo tài liệu [9]. Thuật toán này không hoàn hảo. Nó có những ưu và nhược điểm.</p>
+<p>Ưu điểm</p>
+<ul>
+<li class="">
+<p>Nó làm mượt các đợt tăng đột biến trong lưu lượng truy cập vì tốc độ dựa trên tốc độ trung bình của cửa sổ trước.</p>
+</li>
+<li class="">
+<p>Hiệu quả về bộ nhớ.</p>
+</li>
+</ul>
+<p>Nhược điểm</p>
+<ul>
+<li class="">Nó chỉ hoạt động hiệu quả với các cửa sổ nhìn lại (look back window) không quá nghiêm ngặt. Đây là một ước tính gần đúng của tốc độ thực tế vì nó giả định các yêu cầu trong cửa s  ổ trước được phân phối đều. Tuy nhiên, vấn đề này có thể không tệ như vẻ ngoài của nó. Theo các thử nghiệm của Cloudflare [10], chỉ 0.003% yêu cầu bị cho phép hoặc điều tiết tốc độ sai trong số 400 triệu yêu cầu.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="kiến-trúc-cấp-cao-high-level-architecture"><strong>Kiến trúc cấp cao (High-level architecture)</strong><a href="#kiến-trúc-cấp-cao-high-level-architecture" class="hash-link" aria-label="Direct link to kiến-trúc-cấp-cao-high-level-architecture" title="Direct link to kiến-trúc-cấp-cao-high-level-architecture" translate="no">​</a></h2>
+<p>Ý tưởng cơ bản của các thuật toán điều tiết tốc độ rất đơn giản. Ở cấp độ cao, chúng ta cần một bộ đếm để theo dõi số lượng yêu cầu được gửi từ cùng một người dùng, địa chỉ IP, v.v. Nếu bộ đếm lớn hơn giới hạn, yêu cầu sẽ bị từ chối.</p>
+<p>Chúng ta nên lưu trữ các bộ đếm ở đâu? Sử dụng cơ sở dữ liệu không phải là một ý hay do tốc độ truy cập đĩa chậm. Bộ nhớ đệm trong bộ nhớ (in-memory cache) được chọn vì nó nhanh và hỗ trợ chiến lược hết hạn dựa trên thời gian. Ví dụ, Redis [11] là một lựa chọn phổ biến để triển khai điều tiết tốc độ. Đây là một kho lưu trữ trong bộ nhớ cung cấp hai lệnh: INCR và EXPIRE.</p>
+<ul>
+<li class="">
+<p>INCR: Tăng bộ đếm đã lưu trữ lên 1.</p>
+</li>
+<li class="">
+<p>EXPIRE: Đặt thời gian chờ cho bộ đếm. Nếu thời gian chờ hết hạn, bộ đếm sẽ tự động bị xóa.</p>
+</li>
+</ul>
+<p>Hình 4-12 cho thấy kiến trúc cấp cao để điều tiết tốc độ, và nó hoạt động như sau:</p>
+<ul>
+<li class="">
+<p>Client gửi yêu cầu đến middleware điều tiết tốc độ.</p>
+</li>
+<li class="">
+<p>Middleware điều tiết tốc độ lấy bộ đếm từ bucket tương ứng trong Redis và</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160710/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-61-0.png" alt="" class="img_AuN4">
+kiểm tra xem giới hạn đã đạt được hay chưa.</p>
+<ul>
+<li class="">
+<p>Nếu giới hạn đã đạt, yêu cầu sẽ bị từ chối.</p>
+</li>
+<li class="">
+<p>Nếu giới hạn chưa đạt, yêu cầu sẽ được gửi đến các API server. Trong khi đó, hệ thống tăng bộ đếm và lưu lại vào Redis.</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="bước-3---đi-sâu-vào-thiết-kế-design-deep-dive"><strong>Bước 3 - Đi sâu vào thiết kế (Design deep dive)</strong><a href="#bước-3---đi-sâu-vào-thiết-kế-design-deep-dive" class="hash-link" aria-label="Direct link to bước-3---đi-sâu-vào-thiết-kế-design-deep-dive" title="Direct link to bước-3---đi-sâu-vào-thiết-kế-design-deep-dive" translate="no">​</a></h2>
+<p>Thiết kế cấp cao trong Hình 4-12 không trả lời các câu hỏi sau:</p>
+<ul>
+<li class="">
+<p>Các quy tắc điều tiết tốc độ được tạo ra như thế nào? Các quy tắc được lưu trữ ở đâu?</p>
+</li>
+<li class="">
+<p>Làm thế nào để xử lý các yêu cầu bị điều tiết tốc độ?</p>
+</li>
+</ul>
+<p>Trong phần này, chúng ta sẽ trả lời các câu hỏi liên quan đến quy tắc điều tiết tốc độ và sau đó xem xét các chiến lược để xử lý các yêu cầu bị điều tiết tốc độ. Cuối cùng, chúng ta sẽ thảo luận về điều tiết tốc độ trong môi trường phân tán, một thiết kế chi tiết, tối ưu hóa hiệu suất và giám sát.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="các-quy-tắc-điều-tiết-tốc-độ-rate-limiting-rules"><strong>Các quy tắc điều tiết tốc độ (Rate limiting rules)</strong><a href="#các-quy-tắc-điều-tiết-tốc-độ-rate-limiting-rules" class="hash-link" aria-label="Direct link to các-quy-tắc-điều-tiết-tốc-độ-rate-limiting-rules" title="Direct link to các-quy-tắc-điều-tiết-tốc-độ-rate-limiting-rules" translate="no">​</a></h2>
+<p>Lyft đã mã nguồn mở thành phần điều tiết tốc độ của họ [12]. Chúng ta sẽ xem xét bên trong thành phần này và xem một số ví dụ về các quy tắc điều tiết tốc độ:</p>
+<p>domain: messaging
+descriptors:</p>
+<ul>
+<li class="">key: message_type
+Value: marketing
+rate_limit:
+unit: day
+requests_per_unit: 5</li>
+</ul>
+<p>Trong ví dụ trên, hệ thống được cấu hình để cho phép tối đa 5 tin nhắn tiếp thị mỗi ngày. Đây là một ví dụ khác:</p>
+<p>domain: auth
+descriptors:</p>
+<ul>
+<li class="">key: auth_type
+Value: login
+rate_limit:
+unit: minute
+requests_per_unit: 5</li>
+</ul>
+<p>Quy tắc này cho thấy client không được phép đăng nhập quá 5 lần trong 1 phút. Các quy tắc thường được viết trong các tệp cấu hình và lưu trên đĩa.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="vượt-quá-giới-hạn-điều-tiết-tốc-độ-exceeding-the-rate-limit"><strong>Vượt quá giới hạn điều tiết tốc độ (Exceeding the rate limit)</strong><a href="#vượt-quá-giới-hạn-điều-tiết-tốc-độ-exceeding-the-rate-limit" class="hash-link" aria-label="Direct link to vượt-quá-giới-hạn-điều-tiết-tốc-độ-exceeding-the-rate-limit" title="Direct link to vượt-quá-giới-hạn-điều-tiết-tốc-độ-exceeding-the-rate-limit" translate="no">​</a></h2>
+<p>Trong trường hợp một yêu cầu bị điều tiết tốc độ, các API trả về mã phản hồi HTTP 429 (too many requests) cho client. Tùy thuộc vào các trường hợp sử dụng, chúng ta có thể đưa các yêu cầu bị điều ti ết tốc độ vào hàng đợi để xử lý sau. Ví dụ, nếu một số đơn hàng bị điều tiết tốc độ do hệ thống quá tải, chúng ta có thể giữ lại các đơn hàng đó để xử lý sau.</p>
+<p><strong>Header của bộ điều tiết tốc độ (Rate limiter headers)</strong>
+Làm thế nào để client biết liệu nó có đang bị điều tiết tốc độ hay không? Và làm thế nào để client biết số lượng yêu cầu còn lại được phép trước khi bị điều tiết tốc độ? Câu trả lời nằm ở các HTTP response header. Bộ điều tiết tốc độ trả về các HTTP header sau cho client:</p>
+<p><em>X-Ratelimit-Remaining</em> : Số lượng yêu cầu còn lại được phép trong cửa sổ.</p>
+<p><em>X-Ratelimit-Limit:</em> Nó cho biết client có thể thực hiện bao nhiêu cuộc gọi mỗi cửa sổ thời gian.</p>
+<p><em>X-Ratelimit-Retry-After:</em> Số giây phải đợi cho đến khi bạn có thể thực hiện lại yêu cầu mà không bị điều tiết tốc độ.</p>
+<p>Khi người dùng đã gửi quá nhiều yêu cầu, lỗi 429 too many requests và header <em>X-Ratelimit-Retry-After</em> sẽ được trả về cho client.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="thiết-kế-chi-tiết-detailed-design"><strong>Thiết kế chi tiết (Detailed design)</strong><a href="#thiết-kế-chi-tiết-detailed-design" class="hash-link" aria-label="Direct link to thiết-kế-chi-tiết-detailed-design" title="Direct link to thiết-kế-chi-tiết-detailed-design" translate="no">​</a></h2>
+<p>Hình 4-13 trình bày một thiết kế chi tiết của hệ thống.</p>
+<ul>
+<li class="">
+<p>Các quy tắc được lưu trữ trên đĩa. Các worker thường xuyên lấy các quy tắc từ đĩa và lưu trữ chúng trong bộ nhớ đệm (cache).</p>
+</li>
+<li class="">
+<p>Khi client gửi yêu cầu đến server, yêu cầu sẽ được gửi đến middleware đi ều tiết tốc độ trước tiên.</p>
+</li>
+<li class="">
+<p>Middleware điều tiết tốc độ tải các quy tắc từ bộ nhớ đệm. Nó lấy các bộ đếm và dấu thời gian của yêu cầu cuối cùng từ Redis cache. Dựa trên phản hồi, bộ điều tiết tốc độ quyết định:</p>
+<ul>
+<li class="">
+<p>nếu yêu cầu không bị điều tiết tốc độ, nó sẽ được chuyển tiếp đến các API server.</p>
+</li>
+<li class="">
+<p>nếu yêu cầu bị điều tiết tốc độ, bộ điều tiết tốc độ sẽ trả về lỗi 429 too many requests cho client. Trong khi đó, yêu cầu sẽ bị loại bỏ hoặc chuyển tiếp đến hàng đợi.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160712/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-64-0.png" alt="" class="img_AuN4"></p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160712/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-64-0.png" alt="" class="img_AuN4"></p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="rate-limiter-trong-môi-trường-phân-tán"><strong>Rate limiter trong môi trường phân tán</strong><a href="#rate-limiter-trong-môi-trường-phân-tán" class="hash-link" aria-label="Direct link to rate-limiter-trong-môi-trường-phân-tán" title="Direct link to rate-limiter-trong-môi-trường-phân-tán" translate="no">​</a></h2>
+<p>Xây dựng một rate limiter hoạt động trong môi trường máy chủ đơn lẻ không khó. Tuy nhiên, mở rộng hệ thống để hỗ trợ nhiều máy chủ và các luồng đồng thời (tiếng Anh: concurrent threads) lại là một vấn đề khác. Có hai thách thức:</p>
+<ul>
+<li class="">Race condition</li>
+<li class="">Vấn đề đồng bộ hóa (tiếng Anh: synchronization issue)</li>
+</ul>
+<p><strong>Race condition</strong>
+Như đã thảo luận trước đó, rate limiter hoạt động ở cấp độ cao như sau:</p>
+<ul>
+<li class="">Đọc giá trị <em>counter</em> từ Redis.</li>
+<li class="">Kiểm tra xem ( <em>counter + 1</em> ) có vượt quá ngưỡng hay không.</li>
+<li class="">Nếu không, tăng giá trị counter lên 1 trong Redis.</li>
+</ul>
+<p>Race condition có thể xảy ra trong môi trường có tính đồng thời cao (tiếng Anh: highly concurrent environment) như minh họa trong Hình 4-14.</p>
+<p>Giả sử giá trị <em>counter</em> trong Redis là 3. Nếu hai yêu cầu cùng lúc đọc giá trị <em>counter</em> trước khi một trong số chúng ghi giá trị trở lại, mỗi yêu cầu sẽ tăng <em>counter</em> lên một và ghi lại mà không kiểm tra luồng (thread) còn lại. Cả hai yêu cầu (luồng) đều tin rằng chúng có giá trị <em>counter</em> đúng là 4. Tuy nhiên, giá trị <em>counter</em> đúng phải là 5.</p>
+<p>Khóa (tiếng Anh: locks) là giải pháp rõ ràng nhất để giải quyết race condition. Tuy nhiên, khóa sẽ làm chậm hệ thống đáng kể. Hai chiến lược thường được sử dụng để giải quyết vấn đề này là: script Lua (tiếng Anh: Lua script) [13] và cấu trúc dữ liệu sorted sets (tiếng Anh: sorted sets) trong Redis [8]. Đối với những độc giả quan tâm đến các chiến lược này, hãy tham khảo các tài liệu tham khảo tương ứng [8] [13].</p>
+<p><strong>Vấn đề đồng bộ hóa</strong>
+Đồng bộ hóa (tiếng Anh: synchronization) là một yếu tố quan trọng khác cần xem xét trong môi trường phân tán. Để hỗ trợ hàng triệu người dùng, một máy chủ rate limiter có thể không đủ để xử lý lưu lượng truy cập. Khi sử dụng nhiều máy chủ rate limiter, việc đồng bộ hóa là cần thiết. Ví dụ, ở phía bên trái của Hình 4-15, client 1 g ửi yêu cầu đến rate limiter 1, và client 2 gửi yêu cầu đến</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160713/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-65-0.png" alt="" class="img_AuN4">
+rate limiter 2. Vì tầng web (tiếng Anh: web tier) là stateless (không trạng thái), các client có thể gửi yêu cầu đến một rate limiter khác như minh họa ở phía bên phải của Hình 4-15. Nếu không có đồng bộ hóa, rate limiter 1 sẽ không chứa bất kỳ dữ liệu nào về client 2. Do đó, rate limiter không thể hoạt động đúng cách.</p>
+<p>Một giải pháp khả thi là sử dụng sticky sessions (phiên cố định) cho phép client gửi lưu lượng truy cập đến cùng một rate limiter. Giải pháp này không được khuyến khích vì nó không có khả năng mở rộng (tiếng Anh: scalable) cũng như không linh hoạt (tiếng Anh: flexible). Một cách tiếp cận tốt hơn là sử dụng các kho dữ liệu tập trung (tiếng Anh: centralized data stores) như Redis. Thiết kế được thể hiện trong Hình 4-16.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="tối-ưu-hóa-hiệu-suất"><strong>Tối ưu hóa hiệu suất</strong><a href="#tối-ưu-hóa-hiệu-suất" class="hash-link" aria-label="Direct link to tối-ưu-hóa-hiệu-suất" title="Direct link to tối-ưu-hóa-hiệu-suất" translate="no">​</a></h2>
+<p>Tối ưu hóa hiệu suất (tiếng Anh: performance optimization) là một chủ đề phổ biến trong các buổi phỏng vấn thiết kế hệ thống. Chúng ta sẽ đề cập đến hai lĩnh vực cần cải thiện.</p>
+<p>Thứ nhất, thiết lập đa trung tâm dữ liệu (tiếng Anh: multi-data center setup) là rất quan trọng đối với một rate limiter vì độ trễ (tiếng Anh: latency) cao đối với người dùng ở xa trung tâm dữ li ệu. Hầu hết các nhà cung cấp dịch vụ đám mây (tiếng Anh: cloud service providers) xây dựng nhiều vị trí máy chủ biên (tiếng Anh: edge server locations) trên khắp thế giới. Ví dụ, tính đến ngày 20/05/2020, Cloudflare có 194 máy chủ biên phân tán về mặt địa lý [14]. Lưu lượng truy cập được tự động định tuyến đến máy chủ biên gần nhất để giảm độ trễ.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160716/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-66-0.png" alt="" class="img_AuN4"></p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160718/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-66-1.png" alt="" class="img_AuN4">
+<img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781160719/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-67-0.png" alt="" class="img_AuN4"></p>
+<p>Thứ hai, đồng bộ hóa dữ liệu bằng mô hình nhất quán cuối cùng (tiếng Anh: eventual consistency model). Nếu bạn chưa rõ về mô hình nhất quán cuối cùng, hãy tham khảo phần “Consistency” trong “Chương 6: Thiết kế một Kho khóa-giá trị (tiếng Anh: Key-value Store).”</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="giám-sát"><strong>Giám sát</strong><a href="#giám-sát" class="hash-link" aria-label="Direct link to giám-sát" title="Direct link to giám-sát" translate="no">​</a></h2>
+<p>Sau khi rate limiter được triển khai, việc thu thập dữ liệu phân tích (tiếng Anh: analytics data) để kiểm tra xem rate limiter có hiệu quả hay không là rất quan trọng. Chủ yếu, chúng ta muốn đảm bảo rằng:</p>
+<ul>
+<li class="">Thuật toán giới hạn tốc độ (tiếng Anh: rate limiting algorithm) hiệu quả.</li>
+<li class="">Các quy tắc giới hạn tốc độ (tiếng Anh: rate limiting rules) hiệu quả.</li>
+</ul>
+<p>Ví dụ, nếu các quy tắc giới hạn tốc độ quá nghiêm ngặt, nhiều yêu cầu hợp lệ sẽ bị loại bỏ. Trong trường hợp này, chúng ta muốn nới lỏng các quy tắc một chút. Trong một ví dụ khác, chúng ta nhận thấy rate limiter của mình trở nên kém hiệu quả khi có sự gia tăng đột ngột về lưu lượng truy cập, chẳng hạn như trong các đợt flash sale. Trong kịch bản này, chúng ta có thể thay thế thuật toán để hỗ trợ lưu lượng truy cập đột biến (tiếng Anh: burst traffic). Token bucket là một lựa chọn phù hợp ở đây.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="bước-4---tổng-kết"><strong>Bước 4 - Tổng kết</strong><a href="#bước-4---tổng-kết" class="hash-link" aria-label="Direct link to bước-4---tổng-kết" title="Direct link to bước-4---tổng-kết" translate="no">​</a></h2>
+<p>Trong chương này, chúng ta đã thảo luận về các thuật toán giới hạn tốc độ khác nhau cùng với ưu/nhược điểm của chúng. Các thuật toán đã thảo luận bao gồm:</p>
+<ul>
+<li class="">Token bucket</li>
+<li class="">Leaking bucket</li>
+<li class="">Fixed window</li>
+<li class="">Sliding window log</li>
+<li class="">Sliding window counter</li>
+</ul>
+<p>Sau đó, chúng ta đã thảo luận về kiến trúc hệ thống, rate limiter trong môi trường phân tán, tối ưu hóa hiệu suất và giám sát. Tương tự như bất kỳ câu hỏi phỏng vấn thiết kế hệ thống nào, có những điểm bổ sung bạn có thể đề cập nếu thời gian cho phép:</p>
+<ul>
+<li class="">Giới hạn tốc độ cứng (Hard) so với mềm (Soft).<!-- -->
+<ul>
+<li class="">Cứng: Số lượng yêu cầu không thể vượt quá ngưỡng.</li>
+<li class="">Mềm: Yêu c ầu có thể vượt quá ngưỡng trong một khoảng thời gian ngắn.</li>
+</ul>
+</li>
+<li class="">Giới hạn tốc độ ở các cấp độ khác nhau. Trong chương này, chúng ta chỉ nói về giới hạn tốc độ ở cấp độ ứng dụng (tiếng Anh: application level) (HTTP: lớp 7). Có thể áp dụng giới hạn tốc độ ở các lớp khác. Ví dụ, bạn có thể áp dụng giới hạn tốc độ theo địa chỉ IP bằng cách sử dụng Iptables [15] (IP: lớp 3).
+Lưu ý: Mô hình Kết nối Hệ thống Mở (OSI model) có 7 lớp [16]: Lớp 1: Lớp vật lý (tiếng Anh: Physical layer), Lớp 2: Lớp liên kết dữ liệu (tiếng Anh: Data link layer), Lớp 3: Lớp mạng (tiếng Anh: Network layer), Lớp 4: Lớp vận chuyển (tiếng Anh: Transport layer), Lớp 5: Lớp phiên (tiếng Anh: Session layer), Lớp 6: Lớp trình bày (tiếng Anh: Presentation layer), Lớp 7: Lớp ứng dụng (tiếng Anh: Application layer).</li>
+<li class="">Tránh bị giới hạn tốc độ. Thiết kế client của bạn với các phương pháp hay nhất (tiếng Anh: best practices):<!-- -->
+<ul>
+<li class="">Sử dụng bộ nhớ đệm (cache) phía client (tiếng Anh: client cache) để tránh thực hiện các lệnh gọi API thường xuyên.</li>
+<li class="">Hiểu rõ giới hạn và không gửi quá nhiều yêu cầu trong một khoảng thời gian ngắn.</li>
+<li class="">Bao gồm mã để bắt các ngoại lệ (tiếng Anh: exceptions) hoặc lỗi để client của bạn có thể phục hồi một cách linh hoạt từ các ngoại lệ.</li>
+<li class="">Thêm đủ thời gian back off (tiếng Anh: back off time) vào logic thử lại (tiếng Anh: retry logic).
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!</li>
+</ul>
+</li>
+</ul>
+<h1><strong>Tài liệu tham khảo</strong></h1>
+<p>[1] Rate-limiting strategies and techniques: <a href="https://cloud.google.com/solutions/rate-limitingstrategies-techniques" target="_blank" rel="noopener noreferrer" class="">https://cloud.google.com/solutions/rate-limitingstrategies-techniques</a></p>
+<p>[2] Twitter rate limits: <a href="https://developer.twitter.com/en/docs/basics/rate-limits" target="_blank" rel="noopener noreferrer" class="">https://developer.twitter.com/en/docs/basics/rate-limits</a></p>
+<p>[3] Google docs usage limits: <a href="https://developers.google.com/docs/api/limits" target="_blank" rel="noopener noreferrer" class="">https://developers.google.com/docs/api/limits</a></p>
+<p>[4] IBM microservices: <a href="https://www.ibm.com/cloud/learn/microservices" target="_blank" rel="noopener noreferrer" class="">https://www.ibm.com/cloud/learn/microservices</a></p>
+<p>[5] Throttle API requests for better throughput:
+<a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-requestthrottling.html" target="_blank" rel="noopener noreferrer" class="">https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-requestthrottling.html</a></p>
+<p>[6] Stripe rate limiters: <a href="https://stripe.com/blog/rate-limiters" target="_blank" rel="noopener noreferrer" class="">https://stripe.com/blog/rate-limiters</a></p>
+<p>[7] Shopify REST Admin API rate limits: <a href="https://help.shopify.com/en/api/reference/restadmin-api-rate-limits" target="_blank" rel="noopener noreferrer" class="">https://help.shopify.com/en/api/reference/restadmin-api-rate-limits</a></p>
+<p>[8] Better Rate Limiting With Redis Sorted Sets:
+<a href="https://engineering.classdojo.com/blog/2015/02/06/rolling-rate-limiter/" target="_blank" rel="noopener noreferrer" class="">https://engineering.classdojo.com/blog/2015/02/06/rolling-rate-limiter/</a></p>
+<p>[9] System Design — Rate limiter and Data modelling:
+<a href="https://medium.com/@saisandeepmopuri/system-design-rate-limiter-and-data-modelling9304b0d18250" target="_blank" rel="noopener noreferrer" class="">https://medium.com/@saisandeepmopuri/system-design-rate-limiter-and-data-modelling9304b0d18250</a></p>
+<p>[10] How we built rate limiting capable of scaling to millions of domains:
+<a href="https://blog.cloudflare.com/counting-things-a-lot-of-different-things/" target="_blank" rel="noopener noreferrer" class="">https://blog.cloudflare.com/counting-things-a-lot-of-different-things/</a></p>
+<p>[11] Redis website: <a href="https://redis.io/" target="_blank" rel="noopener noreferrer" class="">https://redis.io/</a></p>
+<p>[12] Lyft rate limiting: <a href="https://github.com/lyft/ratelimit" target="_blank" rel="noopener noreferrer" class="">https://github.com/lyft/ratelimit</a></p>
+<p>[13] Scaling your API with rate limiters:
+<a href="https://gist.github.com/ptarjan/e38f45f2dfe601419ca3af937fff574d#request-rate-limiter" target="_blank" rel="noopener noreferrer" class="">https://gist.github.com/ptarjan/e38f45f2dfe601419ca3af937fff574d#request-rate-limiter</a></p>
+<p>[14] What is edge computing: <a href="https://www.cloudflare.com/learning/serverless/glossary/whatis-edge-computing/" target="_blank" rel="noopener noreferrer" class="">https://www.cloudflare.com/learning/serverless/glossary/whatis-edge-computing/</a></p>
+<p>[15] Rate Limit Requests with Iptables: <a href="https://blog.programster.org/rate-limit-requests-withiptables" target="_blank" rel="noopener noreferrer" class="">https://blog.programster.org/rate-limit-requests-withiptables</a></p>
+<p>[16] OSI model: <a href="https://en.wikipedia.org/wiki/OSI_model#Layer_architecture" target="_blank" rel="noopener noreferrer" class="">https://en.wikipedia.org/wiki/OSI_model#Layer_architecture</a></p>
+<hr>
+<p><em>Made by Anh Tu - Share to be share</em></p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_BIFD padding--none margin-left--sm"><li class="tag_CrcL"><a rel="tag" class="tag_OUtc tagRegular_ff5q" href="/blog/tags/aha-interpreter">aha-interpreter</a></li><li class="tag_CrcL"><a rel="tag" class="tag_OUtc tagRegular_ff5q" href="/blog/tags/book-notes">book-notes</a></li><li class="tag_CrcL"><a rel="tag" class="tag_OUtc tagRegular_ff5q" href="/blog/tags/auto-translated">auto-translated</a></li></ul></div></div></footer></article></div></div><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/aha-interpreter-system-design-interview-pages-5-33"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">[System design interview] Từ trang 5 đến 33</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/aha-interpreter-system-design-interview-pages-71-86"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">[System design interview] Từ trang 71 đến 86</div></a></nav></main><div class="col col--2"><div class="tableOfContents_Be9Y thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#bước-1---hiểu-rõ-vấn-đề-và-xác-định-phạm-vi-thiết-kế" class="table-of-contents__link toc-highlight"><strong>Bước 1 - Hiểu rõ vấn đề và xác định phạm vi thiết kế</strong></a></li><li><a href="#bước-2---đề-xuất-thiết-kế-cấp-cao-và-nhận-được-sự-đồng-thuận" class="table-of-contents__link toc-highlight"><strong>Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận</strong></a></li><li><a href="#các-thuật-toán-giới-hạn-tốc-độ" class="table-of-contents__link toc-highlight"><strong>Các thuật toán giới hạn tốc độ</strong></a></li><li><a href="#kiến-trúc-cấp-cao-high-level-architecture" class="table-of-contents__link toc-highlight"><strong>Kiến trúc cấp cao (High-level architecture)</strong></a></li><li><a href="#bước-3---đi-sâu-vào-thiết-kế-design-deep-dive" class="table-of-contents__link toc-highlight"><strong>Bước 3 - Đi sâu vào thiết kế (Design deep dive)</strong></a></li><li><a href="#các-quy-tắc-điều-tiết-tốc-độ-rate-limiting-rules" class="table-of-contents__link toc-highlight"><strong>Các quy tắc điều tiết tốc độ (Rate limiting rules)</strong></a></li><li><a href="#vượt-quá-giới-hạn-điều-tiết-tốc-độ-exceeding-the-rate-limit" class="table-of-contents__link toc-highlight"><strong>Vượt quá giới hạn điều tiết tốc độ (Exceeding the rate limit)</strong></a></li><li><a href="#thiết-kế-chi-tiết-detailed-design" class="table-of-contents__link toc-highlight"><strong>Thiết kế chi tiết (Detailed design)</strong></a></li><li><a href="#rate-limiter-trong-môi-trường-phân-tán" class="table-of-contents__link toc-highlight"><strong>Rate limiter trong môi trường phân tán</strong></a></li><li><a href="#tối-ưu-hóa-hiệu-suất" class="table-of-contents__link toc-highlight"><strong>Tối ưu hóa hiệu suất</strong></a></li><li><a href="#giám-sát" class="table-of-contents__link toc-highlight"><strong>Giám sát</strong></a></li><li><a href="#bước-4---tổng-kết" class="table-of-contents__link toc-highlight"><strong>Bước 4 - Tổng kết</strong></a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 My Stories. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

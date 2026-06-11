@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.1">
+<title data-rh="true">The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run | Anhhtus stories</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://vuanhtu1993.github.io/img/social_card.jpg"><meta data-rh="true" name="twitter:image" content="https://vuanhtu1993.github.io/img/social_card.jpg"><meta data-rh="true" property="og:url" content="https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run | Anhhtus stories"><meta data-rh="true" name="description" content="Bài viết được biên dịch tự động bởi Aha! Mind Socratic Engine. Nguồn bài viết: Link gốc"><meta data-rh="true" property="og:description" content="Bài viết được biên dịch tự động bởi Aha! Mind Socratic Engine. Nguồn bài viết: Link gốc"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-06-11T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/vuanhtu1993"><meta data-rh="true" property="article:tag" content="aha-mind,auto-generated,daily-digest"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run"><link data-rh="true" rel="alternate" href="https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run" hreflang="en"><link data-rh="true" rel="alternate" href="https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://W95VTU3G1X-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run","mainEntityOfPage":"https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run","url":"https://vuanhtu1993.github.io/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run","headline":"The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run","name":"The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run","description":"Bài viết được biên dịch tự động bởi Aha! Mind Socratic Engine. Nguồn bài viết: Link gốc","datePublished":"2026-06-11T00:00:00.000Z","author":{"@type":"Person","name":"Vũ Anh Tú","description":"Share to be shared","url":"https://github.com/vuanhtu1993","image":"https://avatars.githubusercontent.com/u/29482564?v=4"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://vuanhtu1993.github.io/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Anhhtus stories RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Anhhtus stories Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GQETJJQ2L9"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-GQETJJQ2L9",{anonymize_ip:!0})</script>
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="Anhhtus stories" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.ce678be9.css">
+<script src="/assets/js/runtime~main.b9bb7629.js" defer="defer"></script>
+<script src="/assets/js/main.0d4f3c36.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_DDhr" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpg" alt="My Site Logo" class="themedComponent_u5wZ themedComponent--light_Ndk0"><img src="/img/logo.jpg" alt="My Site Logo" class="themedComponent_u5wZ themedComponent--dark_w55u"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/intro">Khoá học</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_C9hK colorModeToggle_yIjQ"><button class="clean-btn toggleButton_DzTZ toggleButtonDisabled_mXyC" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ lightToggleIcon_YWrO"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ darkToggleIcon_MZ3X"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ systemToggleIcon_tP6m"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_UWWc"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts="Meta+k"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle><path d="m21 21-4.3-4.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_uwMc"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_m1XR thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_H5u9 margin-bottom--md">Các bài viết gần đây</div><div role="group"><h3 class="yearGroupHeading_JJ3l">2026</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/ci-cd-handbook-github-actions-docker-cloud-run">CI/CD Handbook: Continuous Integration, Delivery và Deployment với GitHub Actions, Docker và Google Cloud Run</a></li><li class="sidebarItem_DzlV"><a aria-current="page" class="sidebarItemLink_kkD1 sidebarItemLinkActive_8RPn" href="/blog/aha-mind-the-ci-cd-handbook-learn-continuous-integration-and-delivery-with-github-actions-docker-and-google-cloud-run">The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-34-41">[System design interview] Từ trang 34 đến 41</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-42-50">[System design interview] Từ trang 42 đến 50</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-5-33">[System design interview] Từ trang 5 đến 33</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-51-70">[System design interview] Từ trang 51 đến 70</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-71-86">[System design interview] Từ trang 71 đến 86</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-system-design-interview-pages-87-109">[System design interview] Từ trang 87 đến 109</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-foundational-large-language-models-and-text-generation-pages-21-42">[Foundational Large Language Models and Text Generation] Từ trang 21 đến 42</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-interpreter-foundational-large-language-models-and-text-generation-pages-8-20">[Foundational Large Language Models and Text Generation] Từ trang 8 đến 20</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/advanced-prompting-techniques">Advanced Prompting: 7 Kỹ Thuật Nâng Cao &amp; Kiểm Soát Đầu Ra</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/ai-agents-overview">AI Agents: Khi Trí Tuệ Nhân Tạo Biến Thành &#x27;Người Hành Động&#x27;</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/building-search-applications">Xây Dựng Ứng Dụng Tìm Kiếm Ngữ Nghĩa Với Text Embeddings</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/fine-tuning-llm">Fine-Tuning LLM: Khi Nào Nên &#x27;Dạy Lại&#x27; AI Từ Bên Trong?</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/foundation-models-explained">Foundation Models: Giải Mã &#x27;Khối Đế&#x27; Của Generative AI</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/generative-ai-application-lifecycle">LLMOps: Quản Trị Vòng Đời Ứng Dụng Generative AI</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/generative-ai-va-llm-nen-tang">Generative AI and Large Language Models: A Technical Foundation</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/integrating-with-function-calling">Tích Hợp Function Calling: Khắc Phục Điểm Yếu Của LLM</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/phan-loai-llm-va-chien-luoc-trien-khai">LLM Taxonomy and Deployment Strategies: A Decision Framework</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/prompt-engineering-fundamentals">Prompt Engineering: Kỹ Thuật Cơ Bản Và Các Nguyên Tắc Thiết Kế</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/rag-and-vector-databases">RAG &amp; Vector Databases: Cấy Ghép Dữ Liệu Thực Tế Vào LLM</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/responsible-ai-principles-and-practice">Responsible AI: From Principles to 4-Layer Mitigation Engineering</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/small-language-models">SLM (Small Language Models): Quyền Lực Trong Lòng Bàn Tay</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-foundation-models-explained">Foundation Models: Explained</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-08-building-search-applications-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/08-building-search-applications/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-01-introduction-to-genai-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/01-introduction-to-genai/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-02-exploring-and-comparing-different-llms-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/02-exploring-and-comparing-different-llms/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-03-using-generative-ai-responsibly-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/03-using-generative-ai-responsibly/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-04-prompt-engineering-fundamentals-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/04-prompt-engineering-fundamentals/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-05-advanced-prompts-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/05-advanced-prompts/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-11-integrating-with-function-calling-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/11-integrating-with-function-calling/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-14-the-generative-ai-application-lifecycle-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/14-the-generative-ai-application-lifecycle/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-15-rag-and-vector-databases-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/15-rag-and-vector-databases/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-17-ai-agents-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/17-ai-agents/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-18-fine-tuning-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/18-fine-tuning/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-for-beginners-19-slm-readme-md-at-main-microsoft-generative-ai-for-beginners">generative-ai-for-beginners/19-slm/README.md at main · microsoft/generative-ai-for-beginners</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-generative-ai-models-explained">Generative AI Models Explained</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-google-antigravity-2-0-t-ide-sang-n-n-t-ng-agent-first-to-n-di-n">Google Antigravity 2.0: From IDE to a Full-Fledged Agent-First Platform</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-what-is-a-knowledge-graph">What Is a Knowledge Graph?</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-subagents-hooks-scheduled-tasks-agent-management-voice-and-much-more">Subagents, Hooks, Scheduled Tasks, Agent Management, Voice, and Much More</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-evaluate-automl-experiment-results-azure-machine-learning">Evaluate AutoML experiment results - Azure Machine Learning</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-t-t-t-n-t-t-nh-ng-k-thu-t-prompt-engineering-h-u-ch-nh-t-cho-chatgpt">Tất tần tật những kĩ thuật Prompt Engineering hữu ích nhất cho chatGPT</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-how-transformers-work-a-detailed-exploration-of-transformer-architecture">How Transformers Work: A Detailed Exploration of Transformer Architecture</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-transformer-architecture-explained">Transformer Architecture explained</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/05/05/prompt-rag-finetune/Prompt Flow, RAG và Fine-Tuning">Chiến Lược Tối Ưu LLM: Prompt Flow, RAG và Fine-Tuning</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-promptflow-examples-tutorials-flow-fine-tuning-evaluation-promptflow-quality-improvement-md-at-main-microsoft-promptflow">promptflow/examples/tutorials/flow-fine-tuning-evaluation/promptflow-quality-improvement.md at main · microsoft/promptflow</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/04/29/data-structure-hardware-evolution">Lịch sử Cấu trúc Dữ liệu: Từ Rơ-le điện đến CPU Cache</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-a-brief-history-of-data-structures-algorithms-and-tech-interviews">A Brief History of Data Structures, Algorithms, and Tech Interviews</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-understanding-and-using-supervised-fine-tuning-sft-for-language-models">Understanding and Using Supervised Fine-Tuning (SFT) for Language Models</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-how-scientists-are-using-claude-to-accelerate-research-and-discovery">How scientists are using Claude to accelerate research and discovery</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/aha-mind-introducing-sonnet-4-6">Introducing Sonnet 4.6</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/04/21/2026/04/ai-tech-evolution">Tiến Hóa Công Nghệ AI (2017→Tương Lai)</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/04/06/docker-production-nestjs">Docker: Từ Lý Thuyết Đến Production với NestJS</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/31/typescript-comprehensive-guide">TypeScript Thực Chiến: Comprehensive Guide cho Dev Team</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/30/openclaw-mac-mini">Hướng dẫn cài đặt OpenClaw trên Mac Mini &amp; Tích hợp VnStocks API</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/17/aws-network-osi">AWS Network &amp; OSI Model: Bản Đồ &#x27;Nhập Ngũ&#x27; Cloud Cho Lập Trình Viên</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/13/ibm-itx-training">Trở Thành Người Phiên Dịch Dữ Liệu: Lộ Trình Học IBM ITX &amp; EDI Từ Con Số 0</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/12/feynman-technique">Phương pháp Feynman: Bí quyết học tập chủ động và ghi nhớ sâu</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/04/cloud-cost-analytics-engineer">FinOps cho Khoá Học: So Sánh Chi Phí Microsoft Fabric vs AWS vs Azure Databricks</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/03/03/azure-databricks-strategic-learning">Azure Databricks: Nền tảng phân tích dữ liệu &amp; Kịch bản học tập chiến lược</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/25/database-tuning-indexing-mindset">Database Tuning Mindset &amp; Nghệ Thuật Indexing: Đừng Để Database Của Bạn Thở Oxy!</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/25/mysql-query-execution-deep-dive">Giải Phẫu MySQL 8.0: Tráng Sĩ Xử Lý Câu Lệnh SQL Của Bạn Thế Nào?</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/14/big-o-notation-typescript">Giải Mã Big O Notation: Độ Phức Tạp Thuật Toán Với TypeScript</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/10/design-database">Phân tích và Thiết kế Cơ sở dữ liệu: Hệ thống Quiz Real-time</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/10/planning quizizz real-time">Kế hoạch phát triển dự án: Hệ thống Quizizz Real-time (NestJS)</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/09/index">Design Patterns for Frontend: Hướng dẫn toàn diện với ReactJS + TypeScript</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gemini-cli-micro-tasks">Tối Ưu Hóa Workflow: Biến Gemini CLI Thành Trợ Lý &#x27;Micro&#x27; Đắc Lực</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gemini-cli-sub-agents">Gemini CLI Sub-Agents: Xây Dựng Đội Ngũ Chuyên Gia AI Cho Dự Án Của Bạn</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/05/gemini-cli-features-usage/gemini-cli-overview">Gemini CLI: AI Assistant ngay trong Terminal của bạn</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gemini-cli-features-usage">Gemini CLI: Trợ lý AI Mạnh Mẽ Ngay Trên Terminal Của Bạn</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/openclaw-personal-assistant-deep-dive">OpenClaw Deep Dive: Xây dựng Trợ lý AI Cá nhân Hoàn chỉnh</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/03/ai-agent-skills">AI Agent Skills: Kiến Trúc Meta-Tool Biến LLM Thành Chuyên Gia</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/03/openclaw-personal-agent-future">OpenClaw và Tương Lai của Trợ Lý AI Cá Nhân: Từ Chatbot đến Digital Twin</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/03/ssl-tls-https">SSL/TLS và HTTPS: Hướng Dẫn Toàn Diện Về Bảo Mật Web</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2026/02/01/index">GitHub Actions: Hướng Dẫn Toàn Diện Cho Người Mới Bắt Đầu</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2025</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2025/07/22/Pivot và Unpivot trong Power BI 238180e4203980f08444f902b1abcec2">Pivot và Unpivot trong Power BI</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2025/07/21/Database Normalization - Chuẩn hoá cơ sở dư 238180e4203980b7b58ce84d92f5f8f3">Database Normalization - Chuẩn hoá cơ sở dữ liệu</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/2025/07/20/Phân biệt OLTP và OLAP 238180e4203980bf851cd94290411b00">Phân biệt OLTP và OLAP</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/cong-nghe-phan-mem">Nhập môn Công nghệ phần mềm</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2023</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/gioi-thieu-OpenAI-va-GPT3">Giới thiệu OpenAI và GPT-3</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2019</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Quy trình quản lý dự án Agile Scrum">Quy trình quản lý dự án Agile Scrum</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/How to create API service">Tạo API services bằng “fetch” trong React</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Create custom component in React">Làm sao để customize HTML Element trong React</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Ref in react">Understanding refs in React system</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Introduction Observation State solution">Introduction Observation state management solution</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/How to create React app">3 bước tạo mới dự án React bằng webpack</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Custom terminal with oh my zsh">Làm đẹp terminal for Mac sử dụng “oh my zsh”</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/How to Iterate Over JavaScript Object Entries">5 ways to iterate over javascript object</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Anaconda command">Anaconda tốc ký</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/MongoDB command">Some mongoDB command for beginner</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Webpack and style-loader">Webpack and style-loader for React developer</a></li><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Build-in function">Build-in functions xử lý mảng trong javascript</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_JJ3l">2018</h3><ul class="sidebarItemList_Oj47 clean-list"><li class="sidebarItem_DzlV"><a class="sidebarItemLink_kkD1" href="/blog/Javascript regular expression">Biểu thức chính quy trong javascript</a></li></ul></div></nav></aside><main class="col col--7"><div class="print-pdf-wrapper"><button class="print-pdf-button" title="Xuất PDF"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Xuất PDF</span></button><div class="print-content"><article class=""><header><h1 class="title_doz0">The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run</h1><div class="container_IpfC margin-vert--md"><time datetime="2026-06-11T00:00:00.000Z">June 11, 2026</time> · <!-- -->60 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--12 authorCol_yQln"><div class="avatar margin-bottom--sm"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo authorImage_vRjV" src="https://avatars.githubusercontent.com/u/29482564?v=4" alt="Vũ Anh Tú"></a><div class="avatar__intro authorDetails_bvQM"><div class="avatar__name"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer"><span class="authorName_IqHL" translate="no">Vũ Anh Tú</span></a></div><small class="authorTitle_ndsP" title="Share to be shared">Share to be shared</small><div class="authorSocials_Ll9J"></div></div></div></div></div></header><div id="__blog-post-container" class="markdown"><blockquote>
+<p>Bài viết được biên dịch tự động bởi <strong>Aha! Mind Socratic Engine</strong>. Nguồn bài viết: <a href="https://www.freecodecamp.org/news/learn-continuous-integration-delivery-and-deployment/" target="_blank" rel="noopener noreferrer" class="">Link gốc</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148679/github-page/dyq5cqghggm6dt7hp9yn.png" alt="The CI/CD Handbook: Learn Continuous Integration and Delivery with GitHub Actions, Docker, and Google Cloud Run" class="img_AuN4"></p>
+<p>Hey everyone! 🌟 If you’re in the tech space, chances are you’ve come across terms like <strong>Continuous Integration (CI)</strong>, <strong>Continuous Delivery (CD)</strong>, and <strong><span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">Continuous Deployment</strong></span></strong>. You’ve probably also heard about automation pipelines, staging environments, production environments, and concepts like testing workflows.</p>
+<p>These terms might seem complex or <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">interchangeable</strong></span> at first glance, leaving you wondering: What do they actually mean? How do they differ from one another? 🤔</p>
+<p>In this handbook, I’ll break down these concepts in a clear and approachable way, drawing on relatable analogies to make each term easier to understand. 🧠💡 Beyond just theory, we’ll dive into a hands-on tutorial where you’ll learn how to set up a CI/CD <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">workflow</strong></span> step by step.</p>
+<p>Together, we’ll:</p>
+<ul>
+<li class="">
+<p>Set up a Node.js project. ✨</p>
+</li>
+<li class="">
+<p>Implement automated tests using Jest and Supertest. 🛠️</p>
+</li>
+<li class="">
+<p>Set up a CI/CD workflow using GitHub Actions, triggered on push, and pull requests, or after a new release. ⚙️</p>
+</li>
+<li class="">
+<p>Build and publish a Docker image of your application to Docker Hub. 📦</p>
+</li>
+<li class="">
+<p>Deploy your application to a <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">staging environment</strong></span> for testing. 🚀</p>
+</li>
+<li class="">
+<p>Finally, roll it out to a <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">production environment</strong></span>, making it live! 🌐</p>
+</li>
+</ul>
+<p>By the end of this guide, not only will you understand the difference between CI/CD concepts, but you’ll also have practical experience in building your own automated pipeline. 😃</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="table-of-contents">Table of Contents<a href="#table-of-contents" class="hash-link" aria-label="Direct link to Table of Contents" title="Direct link to Table of Contents" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><a href="#heading-what-is-continuous-integration-deployment-and-delivery" class=""><strong>What is Continuous Integration, Deployment, and Delivery?</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-differences-between-continuous-integration-continuous-delivery-and-continuous-deployment" class=""><strong>Differences Between Continuous Integration, Continuous Delivery, and Continuous Deployment</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-how-to-set-up-a-nodejs-project-with-a-web-server-and-automated-tests" class=""><strong>How to Set Up a Node.js Project with a Web Server and Automated Tests</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-how-to-create-a-github-repository-to-host-your-codebase" class=""><strong>How to Create a GitHub Repository to Host Your Codebase</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-how-to-set-up-the-ci-and-cd-workflows-within-your-project" class=""><strong>How to Set Up the CI and CD Workflows Within Your Project</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-set-up-a-docker-hub-repository-for-the-projects-image-and-generate-an-access-token-for-publishing-the-image" class=""><strong>Set Up a Docker Hub Repository for the Project&#x27;s Image and Generate an Access Token for Publishing the Image</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-create-a-google-cloud-account-project-and-billing-account" class=""><strong>Create a Google Cloud Account, Project, and Billing Account</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-create-a-google-cloud-service-account-to-enable-deployment-of-the-nodejs-application-to-google-cloud-run-via-the-cd-pipeline" class=""><strong>Create a Google Cloud Service Account to Enable Deployment of the Node.js Application to Google Cloud Run via the CD Pipeline</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-create-the-staging-branch-and-merge-the-feature-branch-into-it-continuous-integration-and-continuous-delivery" class=""><strong>Create the Staging Branch and Merge the Feature Branch into It (Continuous Integration and Continuous Delivery)</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-merge-the-staging-branch-into-the-main-branch-continuous-integration-and-continuous-deployment" class=""><strong>Merge the Staging Branch into the Main Branch (Continuous Integration and Continuous Deployment)</strong></a></p>
+</li>
+<li class="">
+<p><a href="#heading-conclusion" class=""><strong>Conclusion</strong></a></p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-what-is-continuous-integration-deployment-and-delivery"><strong>What is Continuous Integration, Deployment, and Delivery?</strong> 🤔<a href="#heading-what-is-continuous-integration-deployment-and-delivery" class="hash-link" aria-label="Direct link to heading-what-is-continuous-integration-deployment-and-delivery" title="Direct link to heading-what-is-continuous-integration-deployment-and-delivery" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="continuous-integration-ci"><strong>Continuous Integration (CI)</strong><a href="#continuous-integration-ci" class="hash-link" aria-label="Direct link to continuous-integration-ci" title="Direct link to continuous-integration-ci" translate="no">​</a></h3>
+<p>Imagine you’re part of a team of six developers, all working on the same project. Without a proper system, chaos would ensue.</p>
+<p>Let’s say Mr. A is building a new login feature, Mrs. B is fixing a bug in the search bar, and Mr. C is tweaking the dashboard UI—all at the same time. If everyone is editing the same &quot;folder&quot; or codebase directly, things could go horribly wrong: <em>&quot;Hey! Who just broke the app?!&quot;</em> 😱</p>
+<p>To keep everything in order, teams use <strong>Version Control Systems (VCS)</strong> like GitHub, GitLab, or BitBucket. Think of it as a digital workspace where everyone can safely collaborate without stepping on each other’s toes. 🗂️✨</p>
+<p>Here’s how Continuous Integration fits into this process step-by-step:</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="1-the-main-branch-the-general-folder-">1. <strong>The Main Branch: The General Folder</strong> ✨<a href="#1-the-main-branch-the-general-folder-" class="hash-link" aria-label="Direct link to 1-the-main-branch-the-general-folder-" title="Direct link to 1-the-main-branch-the-general-folder-" translate="no">​</a></h4>
+<p>At the heart of every project is the <strong>main branch</strong>—the ultimate source of truth. It contains the stable codebase that powers your live app. It’s where every team member contributes their work, but with one important rule: only tested and approved code gets merged here. 🚀</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="2-feature-branches-personal-workspaces-">2. <strong>Feature Branches: Personal Workspaces</strong> 🔨<a href="#2-feature-branches-personal-workspaces-" class="hash-link" aria-label="Direct link to 2-feature-branches-personal-workspaces-" title="Direct link to 2-feature-branches-personal-workspaces-" translate="no">​</a></h4>
+<p>When someone like Mr. A wants to work on a new feature, they create a <strong>feature branch</strong>. This branch is essentially a personal copy of the main branch where they can <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">tinker</strong></span>, write code, and test without affecting others. Mrs. B and Mr. C are also working on their own branches. Everyone’s experiments stay neatly organized. 🧪💡</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="3-merging-changes-the-ci-workflow-">3. <strong>Merging Changes: The CI Workflow</strong> 🎉<a href="#3-merging-changes-the-ci-workflow-" class="hash-link" aria-label="Direct link to 3-merging-changes-the-ci-workflow-" title="Direct link to 3-merging-changes-the-ci-workflow-" translate="no">​</a></h4>
+<p>When Mr. A is satisfied with his feature, he doesn’t just shove it into the main branch—CI ensures it’s done safely:</p>
+<ul>
+<li class="">
+<p><strong>Automated Tests</strong>: Before merging, CI tools automatically run tests on Mr. A’s code to check for bugs or errors. Think of it as a <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">bouncer</strong></span> guarding the main branch, ensuring no bad code gets in. 🕵️‍♂️</p>
+</li>
+<li class="">
+<p><strong>Build Verification</strong>: The feature branch code is also &quot;built&quot; (converted into a deployable version of the app) to confirm it works as intended.</p>
+</li>
+</ul>
+<p>Once these checks are passed, Mr. A’s feature branch is merged into the main branch. This frequent merging of changes is what we call <strong>Continuous Integration</strong>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="continuous-delivery-cd">Continuous Delivery (CD)<a href="#continuous-delivery-cd" class="hash-link" aria-label="Direct link to Continuous Delivery (CD)" title="Direct link to Continuous Delivery (CD)" translate="no">​</a></h3>
+<p>Continuous Delivery (CD) often gets mixed up with Continuous Deployment, and while they share similarities, they serve distinct purposes in the development lifecycle. Let’s break it down! 🧐</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="the-need-for-a-staging-area-">The Need for a <code>Staging</code> Area 🌉<a href="#the-need-for-a-staging-area-" class="hash-link" aria-label="Direct link to the-need-for-a-staging-area-" title="Direct link to the-need-for-a-staging-area-" translate="no">​</a></h4>
+<p>In the Continuous Integration (CI) process we discussed above, we primarily dealt with <strong>feature branches</strong> and the <strong>main branch</strong>. But directly merging changes from feature branches into the main branch (which powers the live product) can be risky. Why? 🛑</p>
+<p>While automated tests and builds catch many errors, they’re not <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">foolproof</strong></span>. Some <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">edge cases</strong></span> or bugs might slip through unnoticed. This is where the <strong>staging branch</strong> and <strong>staging environment</strong> come into play! 🎭</p>
+<p>Think of the staging branch as a “trial run.” Before unleashing changes to real customers, the codebase from feature branches is merged into the staging branch and deployed to a <strong>staging environment</strong>. This environment is an exact replica of the production environment, but it’s used exclusively by the <strong>Quality Assurance (QA) team</strong> for testing.</p>
+<p>The QA team takes the role of a “test driver,” running the platform through its paces just as a real user would. They check for usability issues, edge cases, or bugs that automated tests might miss, and provide feedback to developers for fixes. 🚦 If everything passes, the codebase is cleared for deployment to production.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="continuous-delivery-in-action-">Continuous Delivery in Action 📦<a href="#continuous-delivery-in-action-" class="hash-link" aria-label="Direct link to Continuous Delivery in Action 📦" title="Direct link to Continuous Delivery in Action 📦" translate="no">​</a></h4>
+<p>The process of merging changes into the staging branch and deploying them to the <strong>staging environment</strong> is what we call <strong>Continuous Delivery</strong>. 🛠️ It ensures that the application is always in a deployable state, ready for the next step in the pipeline.</p>
+<p>Unlike Continuous Deployment (which we’ll discuss later), Continuous Delivery doesn’t automatically push changes to production (live platform). Instead, it pauses to let humans—namely the QA team or stakeholders—decide when to proceed. This adds an extra layer of quality assurance, reducing the chances of errors making it to the live product. 🕵️‍♂️</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="continuous-deployment-cd">Continuous Deployment (CD)<a href="#continuous-deployment-cd" class="hash-link" aria-label="Direct link to Continuous Deployment (CD)" title="Direct link to Continuous Deployment (CD)" translate="no">​</a></h3>
+<p>Continuous Deployment (CD) takes automation to its peak. While it shares similarities with Continuous Delivery, the key difference lies in the <strong>final step</strong>: there’s no manual approval required. The final process—merging the codebase and deploying it live for end users (the QA testers or the team lead could do this).</p>
+<p>Let’s explore what makes Continuous Deployment so powerful (and a little scary)! 😅</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="the-last-mile-of-the-cicd-pipeline-️">The Last Mile of the CI/CD Pipeline 🛣️<a href="#the-last-mile-of-the-cicd-pipeline-️" class="hash-link" aria-label="Direct link to The Last Mile of the CI/CD Pipeline 🛣️" title="Direct link to The Last Mile of the CI/CD Pipeline 🛣️" translate="no">​</a></h4>
+<p>Imagine you’ve gone through the <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">rigorous</strong></span> process of Continuous Integration: teammates have merged their feature branches, automated tests were run, and the codebase was successfully deployed to the staging environment during Continuous Delivery.</p>
+<p>Now, you’re confident that the application is free of bugs and ready to shine in the production environment—the live version of your platform used by real customers.</p>
+<p>In <strong>Continuous Deployment</strong>, this final step of deploying changes to the live environment happens <strong>automatically</strong>. The pipeline triggers whenever specific events occur, such as:</p>
+<ul>
+<li class="">
+<p>A <strong>Pull Request (PR)</strong> is merged into the <strong>main branch</strong>.</p>
+</li>
+<li class="">
+<p>A new <strong>release version</strong> is created.</p>
+</li>
+<li class="">
+<p>A <strong>commit</strong> is pushed directly to the production branch (though this is rare for most teams).</p>
+</li>
+</ul>
+<p>Once triggered, the pipeline springs into action, building, testing, and finally deploying the updated codebase to the production environment. 📡</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-differences-between-continuous-integration-continuous-delivery-and-continuous-deployment"><strong>Differences Between Continuous Integration, Continuous Delivery, and Continuous Deployment</strong> 🔍<a href="#heading-differences-between-continuous-integration-continuous-delivery-and-continuous-deployment" class="hash-link" aria-label="Direct link to heading-differences-between-continuous-integration-continuous-delivery-and-continuous-deployment" title="Direct link to heading-differences-between-continuous-integration-continuous-delivery-and-continuous-deployment" translate="no">​</a></h2>
+<p>Aspect</p>
+<p>Continuous Integration (CI)</p>
+<p>Continuous Delivery (CD)</p>
+<p>Continuous Deployment (CD)</p>
+<p>Primary Focus</p>
+<p>Merging feature branches into the main/general codebase OR to the staging codebase.</p>
+<p>Deploying the tested code to a staging environment for QA testing and approval.</p>
+<p>Automatically deploying the code to the live production environment.</p>
+<p><strong>Automation Level</strong></p>
+<p>Automates testing and building processes for feature branches.</p>
+<p>Automates deployment to staging/test environments after successful testing.</p>
+<p>Fully automates the deployment to production with no manual approval.</p>
+<p><strong>Testing Scope</strong></p>
+<p>Automated tests run on feature branches to ensure code quality before merging into the main or staging branch.</p>
+<p>Includes automated tests before deployment to staging and allows QA testers to perform manual testing in a controlled environment.</p>
+<p>May include automated tests as a final check, ensuring the production environment is stable before deployment.</p>
+<p><strong>Branch Involved</strong></p>
+<p>Feature branches merging into the main/general or staging branch.</p>
+<p>Staging branch used as an intermediate step before merging into the main branch.</p>
+<p>Main/general branch deployed directly to production.</p>
+<p><strong>Environment Target</strong></p>
+<p>Ensures integration and testing within a local environment or build pipeline.</p>
+<p>Deploys to staging/test environments where QA testers validate features.</p>
+<p>Deploys to production/live environment accessed by end users.</p>
+<p><strong>Key Goal</strong></p>
+<p>Prevent integration conflicts and ensure new changes don’t break the existing codebase.</p>
+<p>Provide a stable, near-production environment for thorough QA testing before final deployment.</p>
+<p>Ensure that new features and updates reach users as soon as possible with minimal delays.</p>
+<p><strong>Approval Process</strong></p>
+<p>No approval needed. Feature branches are tested and merged upon passing criteria.</p>
+<p>QA team or lead provides feedback/approval before changes are merged into the main branch for production.</p>
+<p>No manual approval. Deployment is entirely automated.</p>
+<p><strong>Example Trigger</strong></p>
+<p>A developer merges a feature branch into the main branch.</p>
+<p>The staging branch passes automated tests (during PR) and is ready for deployment to the testing environment.</p>
+<p>A new release is created or a pull request is merged into the main branch, triggering an automatic production deployment.</p>
+<p>Now that we’ve untangled the mysteries of Continuous Integration, Continuous Delivery, and Continuous Deployment, it’s time to roll up our sleeves and put theory into practice 😁.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-how-to-set-up-a-nodejs-project-with-a-web-server-and-automated-tests"><strong>How to Set Up a Node.js Project with a Web Server and Automated Tests</strong> ✨<a href="#heading-how-to-set-up-a-nodejs-project-with-a-web-server-and-automated-tests" class="hash-link" aria-label="Direct link to heading-how-to-set-up-a-nodejs-project-with-a-web-server-and-automated-tests" title="Direct link to heading-how-to-set-up-a-nodejs-project-with-a-web-server-and-automated-tests" translate="no">​</a></h2>
+<p>In this hands-on section, we’ll build a Node.js web server with automated tests using Jest. From there, we’ll create a CI/CD pipeline with GitHub Actions that automates testing for every <strong>pull request to the staging and main branches</strong>. Finally, we’ll publish an Image of our application to DockerHub and deploy the image to <strong>Google Cloud Run</strong>, first to a staging environment for testing and later to the production environment for live use.</p>
+<p>Ready to bring your project to life? Let’s get started! 🚀✨</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-install-nodejs-">Step 1: Install Node.js 📥<a href="#step-1-install-nodejs-" class="hash-link" aria-label="Direct link to Step 1: Install Node.js 📥" title="Direct link to Step 1: Install Node.js 📥" translate="no">​</a></h3>
+<p>To get started, you’ll need to have <strong>Node.js</strong> installed on your machine. Node.js provides the JavaScript runtime we’ll use to create our web server.</p>
+<ol>
+<li class="">
+<p>Visit <a href="https://nodejs.org/en/download/package-manager" target="_blank" rel="noopener noreferrer" class="">https://nodejs.org/en/download/package-manager</a></p>
+</li>
+<li class="">
+<p>Choose your operating system (Windows, macOS, or Linux) and download the installer.</p>
+</li>
+<li class="">
+<p>Follow the installation instructions to complete the setup.</p>
+</li>
+</ol>
+<p>To verify that Node.js was installed successfully, open your terminal and run <code>node -v</code>. This should display the installed version of Node.js</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-clone-the-starter-repository-">Step 2: Clone the Starter Repository 📂<a href="#step-2-clone-the-starter-repository-" class="hash-link" aria-label="Direct link to Step 2: Clone the Starter Repository 📂" title="Direct link to Step 2: Clone the Starter Repository 📂" translate="no">​</a></h3>
+<p>The next step is to grab the starter code from GitHub. If you don’t have Git installed, you can download it at <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" class="">https://git-scm.com/downloads</a>. Choose your OS and follow the instructions to install Git. Once you’re set, it’s time to clone the repository.</p>
+<p>Run the following command in your terminal to clone the <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">boilerplate</strong></span> code:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git clone --single-branch --branch initial https://github.com/onukwilip/ci-cd-tutorial</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This will download the project files from the <code>initial</code> branch, which contains the starter template for our Node.js web server.</p>
+<p>Navigate into the project directory:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">cd ci-cd-tutorial</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-install-dependencies-">Step 3: Install Dependencies 📦<a href="#step-3-install-dependencies-" class="hash-link" aria-label="Direct link to Step 3: Install Dependencies 📦" title="Direct link to Step 3: Install Dependencies 📦" translate="no">​</a></h3>
+<p>Once you’re in the project directory, install the required dependencies for the Node.js project. These are the packages that power the application:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">npm install --force</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This will download and set up all the libraries specified in the project. Alright, dependencies installed? You’re one step closer!</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-4-run-automated-tests-">Step 4: Run Automated Tests ✅<a href="#step-4-run-automated-tests-" class="hash-link" aria-label="Direct link to Step 4: Run Automated Tests ✅" title="Direct link to Step 4: Run Automated Tests ✅" translate="no">​</a></h3>
+<p>Before diving into the code, let’s confirm that the automated tests are functioning correctly. Run:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">npm test</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>You should see two successful test results in your terminal. This indicates that the starter project is correctly configured with working automated tests.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/ds9ormmbjgqizyvmceps.png" alt="Successful test run" class="img_AuN4"></p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-5-start-the-web-server-">Step 5: Start the Web Server 🌐<a href="#step-5-start-the-web-server-" class="hash-link" aria-label="Direct link to Step 5: Start the Web Server 🌐" title="Direct link to Step 5: Start the Web Server 🌐" translate="no">​</a></h3>
+<p>Finally, let’s start the web server and see it in action. Run the following command:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">npm start</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>Wait for the application to start running. Open your browser and visit <a href="http://localhost:5000/" target="_blank" rel="noopener noreferrer" class="">http://localhost:5000</a>. 🎉 You should see the starter web server up and running, ready for your CI/CD magic:</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148674/github-page/v1larsfs8kwhxkewme7u.png" alt="Successful project run" class="img_AuN4"></p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-how-to-create-a-github-repository-to-host-your-codebase"><strong>How to Create a GitHub Repository to Host Your Codebase 📂</strong><a href="#heading-how-to-create-a-github-repository-to-host-your-codebase" class="hash-link" aria-label="Direct link to heading-how-to-create-a-github-repository-to-host-your-codebase" title="Direct link to heading-how-to-create-a-github-repository-to-host-your-codebase" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-sign-in-to-github">Step 1: Sign In to GitHub<a href="#step-1-sign-in-to-github" class="hash-link" aria-label="Direct link to Step 1: Sign In to GitHub" title="Direct link to Step 1: Sign In to GitHub" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>Go to GitHub</strong>: Open your browser and visit GitHub - <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="">https://github.com</a>.</p>
+</li>
+<li class="">
+<p><strong>Sign In</strong>: Click on the <strong>Sign In</strong> button in the top-right corner and enter your username and password to log in, OR create an account if you don’t have one by clicking the <strong>Sign up</strong> button.</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-create-a-new-repository">Step 2: Create a New Repository<a href="#step-2-create-a-new-repository" class="hash-link" aria-label="Direct link to Step 2: Create a New Repository" title="Direct link to Step 2: Create a New Repository" translate="no">​</a></h3>
+<p>Once you&#x27;re signed in, on the main GitHub page, you’ll see a &quot;+&quot; sign in the top-right corner next to your profile picture. Click on it, and select <strong>“New repository”</strong> from the dropdown.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148672/github-page/n4go5lxzns6kboba1ssc.png" alt="New GitHub repository" class="img_AuN4"></p>
+<p>Now it’s time to set the repository details. You’ll include:</p>
+<ul>
+<li class="">
+<p><strong>Repository Name</strong>: Choose a name for your repository. For example, you can call it <code>ci-cd-tutorial</code>.</p>
+</li>
+<li class="">
+<p><strong>Description</strong> (Optional): You can add a short description, like “A tutorial project for CI/CD with Docker and GitHub Actions.”</p>
+</li>
+<li class="">
+<p><strong>Visibility</strong>: Choose whether you want your repository to be <strong>public</strong> (accessible by anyone) or <strong>private</strong> (only accessible by you and those you invite). For the sake of this tutorial, make it <strong>public</strong>.</p>
+</li>
+<li class="">
+<p><strong>Do Not Check the Add a README File Box</strong>: <strong>Important</strong>: Make sure you <strong>do not check</strong> the option to <strong>Add a README file</strong>. This will automatically create a <code>README.md</code> file in your repository, which could cause conflicts later when you push your local files. We&#x27;ll add the README file manually if needed later.</p>
+</li>
+</ul>
+<p>After filling out the details, click on <strong>“Create repository”</strong>.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/nhraomwjzjzm9kzixwym.png" alt="Create GitHub repository" class="img_AuN4"></p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-change-the-remote-destination-and-push-to-your-new-repository">Step 3: Change the Remote Destination and Push to Your New Repository<a href="#step-3-change-the-remote-destination-and-push-to-your-new-repository" class="hash-link" aria-label="Direct link to Step 3: Change the Remote Destination and Push to Your New Repository" title="Direct link to Step 3: Change the Remote Destination and Push to Your New Repository" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="update-the-remote-repository-url"><strong>Update the Remote Repository URL</strong>:<a href="#update-the-remote-repository-url" class="hash-link" aria-label="Direct link to update-the-remote-repository-url" title="Direct link to update-the-remote-repository-url" translate="no">​</a></h4>
+<p>Since you&#x27;ve already cloned the codebase from my repository, you need to update the remote destination to point to your newly created GitHub repository.</p>
+<p>Copy your repository URL (the URL of the page you were redirected to after creating the repository). It should look similar to this: <code>https://github.com/&lt;username&gt;/&lt;repo-name&gt;</code>.</p>
+<p>Open your terminal in the project directory and run the following commands:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git remote set-url origin &lt;your-repo-url&gt;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>Replace <code>&lt;your-repo-url&gt;</code> with your GitHub repository URL which you copied earlier.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="rename-the-current-branch-to-main"><strong>Rename the Current Branch to</strong> <code>main</code>:<a href="#rename-the-current-branch-to-main" class="hash-link" aria-label="Direct link to rename-the-current-branch-to-main" title="Direct link to rename-the-current-branch-to-main" translate="no">​</a></h4>
+<p>If your branch is named something other than <code>main</code>, you can rename it to <code>main</code> using:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git branch -M main</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="push-to-your-new-repository"><strong>Push to Your New Repository</strong>:<a href="#push-to-your-new-repository" class="hash-link" aria-label="Direct link to push-to-your-new-repository" title="Direct link to push-to-your-new-repository" translate="no">​</a></h4>
+<p>Finally, commit any changes you’ve made and push your local repository to the new remote GitHub repository by running:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git add .</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">git commit -m &#x27;Created boilerplate&#x27;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">git push -u origin main</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>Now your local codebase is linked to your new GitHub repository, and the files are successfully pushed there. You can verify by visiting your repository on GitHub.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-how-to-set-up-the-ci-and-cd-workflows-within-your-project">How to Set Up the CI and CD Workflows Within Your Project ⚙️<a href="#heading-how-to-set-up-the-ci-and-cd-workflows-within-your-project" class="hash-link" aria-label="Direct link to How to Set Up the CI and CD Workflows Within Your Project ⚙️" title="Direct link to How to Set Up the CI and CD Workflows Within Your Project ⚙️" translate="no">​</a></h2>
+<p>Now it’s time to create the <strong>CI and CD workflows</strong> for our project! These workflows won’t run on your local PC but will be automatically triggered and executed in the cloud once you push your changes to the remote repository. GitHub Actions will detect these workflows and run them based on the triggers you define.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-prepare-the-workflow-directory-">Step 1: Prepare the Workflow Directory 📂<a href="#step-1-prepare-the-workflow-directory-" class="hash-link" aria-label="Direct link to Step 1: Prepare the Workflow Directory 📂" title="Direct link to Step 1: Prepare the Workflow Directory 📂" translate="no">​</a></h3>
+<p>Before adding the CI/CD pipelines, it&#x27;s a good practice to first create a feature branch. This step mirrors the workflow commonly used in teams, where new features or changes are made in separate branches before they are merged into the main codebase.</p>
+<p>To create and switch to a new branch, run the following command:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git checkout -b feature/ci-cd-pipeline</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This will create a new branch called <code>feature/ci-cd-pipeline</code> and switch to it. Now, you can safely add and test the CI/CD workflows without affecting the main branch.</p>
+<p>Once you finish, you’ll be able to merge this feature branch back into <code>main</code> or <code>staging</code> as part of the pull request process.</p>
+<p>In the project’s root directory, create a folder named <code>.github</code>. Inside <code>.github</code>, create another folder called <code>workflows</code>.</p>
+<p>Any <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">YAML</strong></span> file placed in the <code>.github/workflows</code> directory is automatically recognized as a GitHub Actions workflow. These workflows will execute based on specific triggers, such as pull requests, pushes, or releases.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-create-the-continuous-integration-workflow-">Step 2: Create the Continuous Integration Workflow 🚀<a href="#step-2-create-the-continuous-integration-workflow-" class="hash-link" aria-label="Direct link to Step 2: Create the Continuous Integration Workflow 🚀" title="Direct link to Step 2: Create the Continuous Integration Workflow 🚀" translate="no">​</a></h3>
+<p>We’ll now create a CI workflow that automatically tests the application whenever a pull request is made to the <code>main</code> or <code>staging</code> branches.</p>
+<p>First, inside the <code>workflows</code> directory, create a file named <code>ci-pipeline.yml</code>.</p>
+<p>Paste the following code into the file:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">name: CI Pipeline to staging/production environment</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">on:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  pull_request:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    branches:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - staging</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - main</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">jobs:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  test:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    runs-on: ubuntu-latest</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    name: Setup, test, and build project</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    env:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      PORT: 5001</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    steps:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Checkout</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        uses: actions/checkout@v3</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Install dependencies</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: npm ci</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Test application</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: npm test</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Build application</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          echo &quot;Run command to build the application if present&quot;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          npm run build --if-present</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="explanation-of-the-ci-workflow">Explanation of the CI Workflow<a href="#explanation-of-the-ci-workflow" class="hash-link" aria-label="Direct link to Explanation of the CI Workflow" title="Direct link to Explanation of the CI Workflow" translate="no">​</a></h4>
+<p>Here’s a breakdown of each section in the workflow:</p>
+<ol>
+<li class="">
+<p><code>name: CI Pipeline to staging/production environment</code>: This is the title of your workflow. It helps you identify this pipeline in GitHub Actions.</p>
+</li>
+<li class="">
+<p><code>on</code>: The <code>on</code> parameter is what determines the events that trigger your workflow. When the workflow YAML file is pushed to the remote GitHub repository, GitHub Actions automatically registers the workflow using the configured triggers in the <code>on</code> field. These triggers act as event listeners that tell GitHub when to execute the workflow</p>
+<p><strong>For example:</strong></p>
+<p>If we set <code>pull_request</code> as the value for the <code>on</code> parameter and specify the branches we want to monitor using the <code>branches</code> key, GitHub sets up event listeners for pull requests to those branches.</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain"> on:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">   pull_request:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">     branches:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">       - main</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">       - staging</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This configuration means that GitHub will trigger the workflow whenever a pull request is made to the <code>main</code> or <code>staging</code> branches.</p>
+<p><strong>Multiple Triggers</strong>:<br>
+<!-- -->You can define multiple event listeners in the <code>on</code> parameter. For instance, in addition to pull requests, you can add a listener for push events.</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain"> on:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">   pull_request:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">     branches:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">       - main</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">       - staging</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">   push:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">     branches:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">       - main</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This configuration ensures that the workflow is triggered when:</p>
+<ul>
+<li class="">
+<p>A pull request is made to either the <code>main</code> or <code>staging</code> branch.</p>
+</li>
+<li class="">
+<p>A push is made directly to the <code>main</code> branch.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>📘 <strong>Learn more about triggers:</strong> Check out the <a href="https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows" target="_blank" rel="noopener noreferrer" class="">official GitHub documentation here</a>.</p>
+<ol start="3">
+<li class="">
+<p><code>jobs</code>: The <code>jobs</code> section outlines the specific tasks (or jobs) that the workflow will execute. Each job is an independent unit of work that runs on a separate virtual machine (VM). This isolation ensures a clean, unique environment for every job, avoiding potential conflicts between tasks.</p>
+<p><strong>Key Points About Jobs:</strong></p>
+<ol>
+<li class="">
+<p><strong>Clean VM for Each Job</strong>: When GitHub Actions runs a workflow, it assigns a dedicated VM instance to each job. This means the environment is reset for every job, ensuring there’s no overlap or interference between tasks.</p>
+</li>
+<li class="">
+<p><strong>Multiple Jobs</strong>: Workflows can have multiple jobs, each responsible for a specific task. For example:</p>
+<ul>
+<li class="">
+<p>A <strong>Test</strong> job to install dependencies and run automated tests.</p>
+</li>
+<li class="">
+<p>A <strong>Build</strong> job to compile the application.</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>Job Organization</strong>: Jobs can be organized to run:</p>
+<ul>
+<li class="">
+<p><strong>Sequentially</strong>: Ensures one job is completed before the next starts, for example the Test job must finish before the Build job. This sequential flow mimics the &quot;pipeline&quot; structure.</p>
+</li>
+<li class="">
+<p><strong>Simultaneously</strong>: Multiple jobs can run in parallel to save time, especially if the jobs are independent of one another.</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>Single Job in This Workflow</strong>: In our current workflow, there is only one job, <code>test</code>, which:</p>
+<ul>
+<li class="">
+<p>Installs dependencies.</p>
+</li>
+<li class="">
+<p>Runs automated tests.</p>
+</li>
+<li class="">
+<p>Builds the application.</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>📘 <strong>Learn more about jobs:</strong> Dive into the <a href="https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-jobs-in-a-workflow" target="_blank" rel="noopener noreferrer" class="">GitHub Actions jobs documentation here</a>.</p>
+<ol start="4">
+<li class="">
+<p><code>runs-on: ubuntu-latest</code>: Specifies the operating system the job will run on. GitHub provides pre-configured virtual environments, and we’re using the latest Ubuntu image.</p>
+</li>
+<li class="">
+<p><code>env</code>: Sets environment variables for the job. Here, we define the <strong>PORT</strong> variable used by our application.</p>
+</li>
+<li class="">
+<p><strong>Steps</strong>: Steps define the individual actions to execute within a job:</p>
+<ul>
+<li class="">
+<p><code>Checkout</code>: Uses the <code>actions/checkout</code> action to clone the repository containing the codebase in the feature branch into the virtual machine instance environment. This step ensures the pipeline has access to the project files.</p>
+</li>
+<li class="">
+<p><code>Install dependencies</code>: Runs <code>npm ci</code> to install the required Node.js packages.</p>
+</li>
+<li class="">
+<p><code>Test application</code>: Runs the automated tests using the <code>npm test</code> command. This validates the codebase for errors or failing test cases.</p>
+</li>
+<li class="">
+<p><code>Build application</code>: Builds the application if a build script is defined in the <code>package.json</code>. The <code>--if-present</code> flag ensures this step doesn’t fail if no build script is present.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Now that we’ve completed the CI pipeline, which runs on pull requests to the <code>main</code> or <code>staging</code> branches, let’s move on to setting up the <strong>Continuous Delivery (CD)</strong> and <strong>Continuous Deployment</strong> pipelines. 🚀</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-the-continuous-delivery-and-deployment-workflow">Step 3: The Continuous Delivery and Deployment Workflow<a href="#step-3-the-continuous-delivery-and-deployment-workflow" class="hash-link" aria-label="Direct link to Step 3: The Continuous Delivery and Deployment Workflow" title="Direct link to Step 3: The Continuous Delivery and Deployment Workflow" translate="no">​</a></h3>
+<p><strong>First, create the Pipeline File</strong>:<br>
+<!-- -->In the <code>.github/workflows</code> folder, create a new file called <code>cd-pipeline.yml</code>. This file will define the workflows for automating delivery and deployment.</p>
+<p><strong>Next, paste the configuration</strong>:<br>
+<!-- -->Copy and paste the following configuration into the <code>cd-pipeline.yml</code> file:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">name: CD Pipeline to Google Cloud Run (staging and production)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">on:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  push:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    branches:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - staging</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  workflow_dispatch: {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  release:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    types: published</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">env:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  PORT: 5001</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  IMAGE: ${{vars.IMAGE}}:${{github.sha}}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">jobs:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  test:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    runs-on: ubuntu-latest</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    name: Setup, test, and build project</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    steps:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Checkout</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        uses: actions/checkout@v3</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Install dependencies</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: npm ci</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Test application</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: npm test</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  build:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    needs: test</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    runs-on: ubuntu-latest</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    name: Setup project, Authorize GitHub Actions to GCP and Docker Hub, and deploy</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    steps:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Checkout</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        uses: actions/checkout@v3</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Authenticate for GCP</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        id: gcp-auth</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        uses: google-github-actions/auth@v0</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        with:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT }}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Set up Cloud SDK</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        uses: google-github-actions/setup-gcloud@v0</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Authenticate for Docker Hub</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        id: docker-auth</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        env:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          D_USER: ${{secrets.DOCKER_USER}}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          D_PASS: ${{secrets.DOCKER_PASSWORD}}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          docker login -u $D_USER -p $D_PASS</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Build and tag Image</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          docker build -t ${{env.IMAGE}} .</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Push the image to Docker hub</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          docker push ${{env.IMAGE}}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Enable the Billing API</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          gcloud services enable cloudbilling.googleapis.com --project=${{secrets.GCP_PROJECT_ID}}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Deploy to GCP Run - Production environment (If a new release was published from the master branch)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        if: github.event_name == &#x27;release&#x27; &amp;&amp; github.event.action == &#x27;published&#x27; &amp;&amp; github.event.release.target_commitish == &#x27;main&#x27;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          gcloud run deploy ${{vars.GCR_PROJECT_NAME}} \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --region ${{vars.GCR_REGION}} \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --image ${{env.IMAGE}} \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --platform &quot;managed&quot; \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --allow-unauthenticated \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --tag production \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">      - name: Deploy to GCP Run - Staging environment</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        if: github.ref != &#x27;refs/heads/main&#x27;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          echo &quot;Deploying to staging environment&quot;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          # Deploy service with to staging environment</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          gcloud run deploy ${{vars.GCR_STAGING_PROJECT_NAME}} \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --region ${{vars.GCR_REGION}} \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --image ${{env.IMAGE}} \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --platform &quot;managed&quot; \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --allow-unauthenticated \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">          --tag staging \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>The <strong>CD pipeline</strong> configuration combines Continuous Delivery and Continuous Deployment workflows into a single file for simplicity. It builds on the concepts of CI/CD we discussed earlier, automating testing, building, and deploying the application to Google Cloud Run.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="explanation-of-the-cd-pipeline">Explanation of the CD pipeline:<a href="#explanation-of-the-cd-pipeline" class="hash-link" aria-label="Direct link to Explanation of the CD pipeline:" title="Direct link to Explanation of the CD pipeline:" translate="no">​</a></h4>
+<ol>
+<li class="">
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="workflow-triggers-on">Workflow Triggers (<code>on</code>)<a href="#workflow-triggers-on" class="hash-link" aria-label="Direct link to workflow-triggers-on" title="Direct link to workflow-triggers-on" translate="no">​</a></h4>
+</li>
+</ol>
+<ul>
+<li class="">
+<p><code>push</code>: Workflow triggers on pushes to the <code>staging</code> branch.</p>
+</li>
+<li class="">
+<p><code>workflow_dispatch</code>: Enables manual execution of the workflow via the GitHub Actions interface.</p>
+</li>
+<li class="">
+<p><code>release</code>: Triggers when a new release is published.<br>
+<!-- -->Example: When a release is published from the <code>main</code> branch, the app deploys to the production environment.</p>
+</li>
+</ul>
+<ol start="2">
+<li class="">
+<p><strong>Job 1 – Testing the Codebase:</strong> The first job in the pipeline, Test, ensures the codebase is functional and error-free before proceeding with delivery or deployment</p>
+</li>
+<li class="">
+<p><strong>Job 2 – Building and Deploying the Application:</strong> Aha! Moment ✨: These jobs run sequentially. 😃 The <strong>Build</strong> job begins only after the <strong>Test</strong> job is completed successfully. It prepares the application for deployment and manages the actual deployment process.</p>
+<p>Here&#x27;s what happens:</p>
+<ul>
+<li class="">
+<p><strong>Authorization for GCP and Docker Hub</strong>: The workflow authenticates with both Google Cloud Platform (GCP) and Docker Hub. For GCP, it uses the <code>google-github-actions/auth@v0</code> action to handle <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">service account</strong></span> credentials stored as secrets. Similarly, it logs into Docker Hub with stored credentials to enable image uploads.</p>
+</li>
+<li class="">
+<p><strong>Build and Push Docker Image</strong>: The application is built into a Docker image and tagged with a unique identifier (<code>${{env.IMAGE}}</code>). This image is then pushed to Docker Hub, making it accessible for deployment.</p>
+</li>
+<li class="">
+<p><strong>Deploy to Google Cloud Run</strong>: Based on the event that triggered the workflow, the application is <strong>deployed to either the staging or production environment</strong> in Google Cloud Run. A <strong>push</strong> to the <code>staging</code> branch deploys to the staging environment (Continuous Delivery), while a <strong>release</strong> from the <code>main</code> branch deploys to production (Continuous Deployment).</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>To ensure the security and flexibility of our pipeline, we rely on external variables and secrets rather than hardcoding sensitive information directly into the workflow file.</p>
+<p>Why? Workflow configuration files are part of your repository and accessible to anyone with access to the codebase. If sensitive data, like API keys or passwords, is exposed here, it can be easily compromised. 😨</p>
+<p>Instead, we use GitHub’s <strong>Secrets</strong> to securely store and access this information. Secrets allow us to define variables that are encrypted and only accessible by our workflows. For example:</p>
+<ul>
+<li class="">
+<p><strong>DockerHub Credentials</strong>: We’ll add a Docker username and access token to the repository’s secrets. These are essential for authenticating with DockerHub to upload the built Docker images.</p>
+</li>
+<li class="">
+<p><strong>Google Cloud Service Account Key</strong>: This key will grant the pipeline the necessary permissions to deploy the application on <strong>Google Cloud Run</strong> securely.</p>
+</li>
+</ul>
+<p>We&#x27;ll set up these variables and secrets <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">incrementally</strong></span> as we proceed, ensuring each step is fully secure and functional. 🎯</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-set-up-a-docker-hub-repository-for-the-projects-image-and-generate-an-access-token-for-publishing-the-image"><strong>Set Up a Docker Hub Repository for the Project&#x27;s Image and Generate an Access Token for Publishing the Image</strong> 📦<a href="#heading-set-up-a-docker-hub-repository-for-the-projects-image-and-generate-an-access-token-for-publishing-the-image" class="hash-link" aria-label="Direct link to heading-set-up-a-docker-hub-repository-for-the-projects-image-and-generate-an-access-token-for-publishing-the-image" title="Direct link to heading-set-up-a-docker-hub-repository-for-the-projects-image-and-generate-an-access-token-for-publishing-the-image" translate="no">​</a></h2>
+<p>Before we dive into the steps, let’s quickly go over what we’re about to do. In this section, you’ll learn how to create a Docker Hub repository, which acts like an online storage space for your application’s container image.</p>
+<p>Think of a container image as a snapshot of your application, ready to be deployed anywhere. To ensure smooth and secure access, we’ll also generate a special access token, kind of like a <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">revokable</strong></span> password that our CI/CD pipeline can use to upload your app’s image to Docker Hub. Let’s get started! 🚀</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-sign-up-for-docker-hub">Step 1: Sign Up for Docker Hub<a href="#step-1-sign-up-for-docker-hub" class="hash-link" aria-label="Direct link to Step 1: Sign Up for Docker Hub" title="Direct link to Step 1: Sign Up for Docker Hub" translate="no">​</a></h3>
+<p>Here are the steps to follow to sign up for Docker Hub:</p>
+<ol>
+<li class="">
+<p><strong>Go to the Docker Hub website</strong>: Open your web browser and visit Docker Hub - <a href="https://hub.docker.com/" target="_blank" rel="noopener noreferrer" class="">https://hub.docker.com/</a>.</p>
+</li>
+<li class="">
+<p><strong>Create an account</strong>: On the Docker Hub homepage, you’ll see a button labelled <strong>&quot;Sign Up&quot;</strong> in the top-right corner. Click on it.</p>
+</li>
+<li class="">
+<p><strong>Fill in your details</strong>: You&#x27;ll be asked to provide a few details like your username, email address, and password. Choose a strong password that you can remember.</p>
+</li>
+<li class="">
+<p><strong>Agree to the terms</strong>: You’ll need to check a box to agree to Docker’s terms of service. After that, click <strong>“Sign Up”</strong> to create your account.</p>
+</li>
+<li class="">
+<p><strong>Verify your email</strong>: Docker Hub will send you an email to verify your account. Open that email and click on the verification link to complete your account creation.</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-sign-in-to-docker-hub">Step 2: Sign In to Docker Hub<a href="#step-2-sign-in-to-docker-hub" class="hash-link" aria-label="Direct link to Step 2: Sign In to Docker Hub" title="Direct link to Step 2: Sign In to Docker Hub" translate="no">​</a></h3>
+<p>After verifying your email, go back to Docker Hub, and click on <strong>&quot;Sign In&quot;</strong> at the top right. Then you can use the credentials you just created to log in.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-generate-an-access-token-for-the-cicd-pipeline">Step 3: Generate an Access Token (for the CI/CD pipeline)<a href="#step-3-generate-an-access-token-for-the-cicd-pipeline" class="hash-link" aria-label="Direct link to Step 3: Generate an Access Token (for the CI/CD pipeline)" title="Direct link to Step 3: Generate an Access Token (for the CI/CD pipeline)" translate="no">​</a></h3>
+<p>Now that you have an account, you can create an access token. This token will allow your GitHub Actions workflow to securely sign into Docker Hub and upload Docker images.</p>
+<p>Once you’re logged into Docker Hub, click on your profile picture (or avatar) in the top right corner. This will open a menu. From the menu, click “Account Settings”.</p>
+<p>Then in the left-hand menu of your account settings, scroll to the <strong>&quot;Security&quot;</strong> tab. This section is where you manage your tokens and passwords.</p>
+<p>Now you’ll need to create a new access token. In the Security tab, you’ll see a link labelled <strong>“Personal access tokens”</strong> – click on it. Click the button labelled <strong>“Generate new token”</strong>.</p>
+<p>You’ll be asked to give your token a description. You can name it something like &quot;GitHub Actions CI/CD&quot; so that you know what it&#x27;s for.</p>
+<p>After giving it a description, click on the “<strong>Access permissions dropdown</strong>“ and select <strong>“Read &amp; Write“,</strong> or <strong>“Read, Write, Delete“</strong>. Click “<strong>Generate</strong>“</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148672/github-page/u3gczppzmzn4bzd1qmba.png" alt="Create Docker access token" class="img_AuN4"></p>
+<p>Now, you need to copy the credentials. After clicking the generate button, Docker Hub will create an access token. <strong>Immediately copy this token along with your username</strong> and save it somewhere safe, like in a file (don’t worry, we’ll add it to our GitHub secrets). You won’t be able to see this token again, so make sure you save it!</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148674/github-page/h8ffkgs4rx00r1s46zuq.png" alt="Copy Docker username + access token" class="img_AuN4"></p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-4-add-the-token-to-github-as-a-secret">Step 4: Add the Token to GitHub as a Secret<a href="#step-4-add-the-token-to-github-as-a-secret" class="hash-link" aria-label="Direct link to Step 4: Add the Token to GitHub as a Secret" title="Direct link to Step 4: Add the Token to GitHub as a Secret" translate="no">​</a></h3>
+<p>To do this, open your GitHub repository where the codebase is hosted. In the GitHub repo, click on the <strong>Settings</strong> tab (located near the top of your repo page).</p>
+<p>Then on the left sidebar, scroll down and click on <strong>“Secrets and Variables”</strong>, then choose <strong>“Actions”</strong>.</p>
+<ol>
+<li class=""><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/rphhtqc74bxo6m5zoobs.png" alt="Open GitHub Actions Secrets" class="img_AuN4"></li>
+</ol>
+<p>Here are the steps to create and manage your new secret:</p>
+<ol>
+<li class="">
+<p><strong>Add a new secret</strong>: Click on the <strong>“New repository secret”</strong> button.</p>
+</li>
+<li class="">
+<p><strong>Set up the secret</strong>:</p>
+<ul>
+<li class="">
+<p>In the <strong>Name</strong> field, type <code>DOCKER_PASSWORD</code>.</p>
+</li>
+<li class="">
+<p>In the <strong>Value</strong> field, paste the access token you copied earlier.</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>Save the secret</strong>: Finally, click <strong>Add secret</strong> to save your Docker access token securely in GitHub.</p>
+</li>
+</ol>
+<p>Then you’ll repeat the process for your Docker username. Create a new secret called <code>DOCKER_USER</code> and add your Docker username that you copied earlier.</p>
+<p>And that’s it! Now your CI/CD pipeline can use this token to securely log in to Docker Hub and upload images automatically when triggered. 🎉</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-5-creating-the-dockerfile-for-the-project"><strong>Step 5: Creating the <span style="position:relative;display:inline-block"><strong style="cursor:pointer;border-bottom:2px dashed #ff9900;color:#ff9900">Dockerfile</strong></span> for the Project</strong><a href="#step-5-creating-the-dockerfile-for-the-project" class="hash-link" aria-label="Direct link to step-5-creating-the-dockerfile-for-the-project" title="Direct link to step-5-creating-the-dockerfile-for-the-project" translate="no">​</a></h3>
+<p>Before you can build and publish the Docker image to Docker Hub, you need to create a <code>Dockerfile</code> that contains the necessary instructions to build your application.</p>
+<p>Follow the steps below to create the <code>Dockerfile</code> in the root folder of your project:</p>
+<ol>
+<li class="">
+<p>Navigate to your project’s root folder.</p>
+</li>
+<li class="">
+<p>Create a new file named <code>Dockerfile</code>.</p>
+</li>
+<li class="">
+<p>Open the <strong>Dockerfile</strong> in a text editor and paste the following content into it:</p>
+</li>
+</ol>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">FROM node:18-slim</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">WORKDIR /app</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">COPY package.json .</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">RUN npm install -f</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">COPY . .</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"># EXPOSE 5001</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">EXPOSE 5001</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">CMD [&quot;npm&quot;, &quot;start&quot;]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="explanation-of-the-dockerfile">Explanation of the Dockerfile:<a href="#explanation-of-the-dockerfile" class="hash-link" aria-label="Direct link to Explanation of the Dockerfile:" title="Direct link to Explanation of the Dockerfile:" translate="no">​</a></h4>
+<ul>
+<li class="">
+<p><code>FROM node:18-slim</code>: This sets the base image for the Docker container, which is a slim version of the official Node.js image based on version 18.</p>
+</li>
+<li class="">
+<p><code>WORKDIR /app</code>: Sets the working directory for the application inside the container to <code>/app</code>.</p>
+</li>
+<li class="">
+<p><code>COPY package.json .</code>: Copies the <code>package.json</code> file into the working directory.</p>
+</li>
+<li class="">
+<p><code>RUN npm install -f</code>: Installs the project dependencies using <code>npm</code>.</p>
+</li>
+<li class="">
+<p><code>COPY . .</code>: Copies the rest of the project files into the container.</p>
+</li>
+<li class="">
+<p><code>EXPOSE 5001</code>: This tells Docker to expose port <code>5001</code>, which is the port our app will run on inside the container.</p>
+</li>
+<li class="">
+<p><code>CMD [&quot;npm&quot;, &quot;start&quot;]</code>: This sets the default command to start the application when the container is run, using <code>npm start</code>.</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-create-a-google-cloud-account-project-and-billing-account"><strong>Create a Google Cloud Account, Project, and Billing Account</strong> ☁️<a href="#heading-create-a-google-cloud-account-project-and-billing-account" class="hash-link" aria-label="Direct link to heading-create-a-google-cloud-account-project-and-billing-account" title="Direct link to heading-create-a-google-cloud-account-project-and-billing-account" translate="no">​</a></h2>
+<p>In this section, we’re laying the foundation for deploying our application to Google Cloud. First, we’ll set up a Google Cloud account (don’t worry, it’s free to get started!). Then, we’ll create a new project where all the resources for your app will live.</p>
+<p>Finally, we’ll enable billing so you can unlock the cloud services needed for deployment. Think of this as setting up your workspace in the cloud—organized, ready, and secure! Let’s dive in! ☁️</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-create-or-sign-in-to-a-google-cloud-account-">Step 1: Create or Sign in to a Google Cloud Account 🌐<a href="#step-1-create-or-sign-in-to-a-google-cloud-account-" class="hash-link" aria-label="Direct link to Step 1: Create or Sign in to a Google Cloud Account 🌐" title="Direct link to Step 1: Create or Sign in to a Google Cloud Account 🌐" translate="no">​</a></h3>
+<p>First, go to <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="">Google Cloud Console</a>. If you don’t have a Google Cloud account, you’ll need to create one.</p>
+<p>To do this, click on <strong>Get Started for Free</strong> and follow the steps to set up your account (you’ll need to provide payment information, but Google offers $300 in free credits to get started). If you already have a Google account, simply sign in using your credentials.</p>
+<p>Once you’ve signed in, you’ll be taken to your Google Cloud dashboard. This is where you can manage all your cloud projects and resources.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-create-a-new-google-cloud-project-️">Step 2: Create a New Google Cloud Project 🏗️<a href="#step-2-create-a-new-google-cloud-project-️" class="hash-link" aria-label="Direct link to Step 2: Create a New Google Cloud Project 🏗️" title="Direct link to Step 2: Create a New Google Cloud Project 🏗️" translate="no">​</a></h3>
+<p>At the top left of the Google Cloud Console, you’ll see a drop-down menu beside the Google Cloud logo. Click on this drop-down to display your current projects.</p>
+<p>Now it’s time to create a new project. In the top-left corner of the pop-up modal, click on the <strong>New Project</strong> button.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/xhmt9uirpncypnuy8zrh.webp" alt="Create Google Cloud Project" class="img_AuN4"></p>
+<p>You’ll be redirected to a page where you’ll need to provide some basic details for your new project. So now enter the following information:</p>
+<ul>
+<li class="">
+<p><strong>Project Name:</strong> Enter a name of your choice for the project (for example, <code>gcr-ci-cd-project</code>).</p>
+</li>
+<li class="">
+<p><strong>Location:</strong> Select a location for your project. You can leave it as the default &quot;No organization&quot; if you&#x27;re just getting started.</p>
+</li>
+</ul>
+<p>Once you&#x27;ve entered the project name, click the <strong>Create</strong> button. Google Cloud will now start creating your new project. It may take a few seconds.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-access-your-new-project-️">Step 3: Access Your New Project 🛠️<a href="#step-3-access-your-new-project-️" class="hash-link" aria-label="Direct link to Step 3: Access Your New Project 🛠️" title="Direct link to Step 3: Access Your New Project 🛠️" translate="no">​</a></h3>
+<p>After a few seconds, you’ll be redirected to your <strong>Google Cloud dashboard</strong>.</p>
+<p>Click on the drop-down menu beside the Google Cloud logo again, and you should now see your newly created project listed in the modal where you can select it.</p>
+<p>Then click on the project name (for example, <code>gcr-ci-cd-project</code>) to enter your project’s dashboard.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-4-link-a-billing-account-to-your-project-">Step 4: Link A Billing Account To Your Project 💳<a href="#step-4-link-a-billing-account-to-your-project-" class="hash-link" aria-label="Direct link to Step 4: Link A Billing Account To Your Project 💳" title="Direct link to Step 4: Link A Billing Account To Your Project 💳" translate="no">​</a></h3>
+<p>To access the billing page, in the Google Cloud Console, find the <strong>Navigation Menu</strong> (the three horizontal lines) at the top left of the screen. Click on it to open a list of options. Scroll down and click on <strong>Billing</strong>. This will take you to the billing section of your Google Cloud account.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/kmui9deryfrqfvumqnwk.png" alt="Navigate to Google Cloud Billing dashboard/section " class="img_AuN4"></p>
+<p>If you haven&#x27;t set up a billing account yet, you&#x27;ll be prompted to do so. Click on the <strong>&quot;Link a billing account&quot;</strong> button to start the process.</p>
+<p>Now you can create a new billing account (if you don’t have one). You’ll be redirected to a page where you can either select an existing billing account or create a new one. If you don&#x27;t already have a billing account, click on <strong>&quot;Create a billing account&quot;</strong>.</p>
+<p>Provide the necessary details, including:</p>
+<ul>
+<li class="">
+<p><strong>Account name</strong> (for example, &quot;Personal Billing Account&quot; or your business name).</p>
+</li>
+<li class="">
+<p><strong>Country</strong>: Choose the country where your business or account is based.</p>
+</li>
+<li class="">
+<p><strong>Currency</strong>: Choose the currency in which you want to be billed.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/vidyow2p8qqwu9eahg2q.png" alt="Create Google Cloud billing account" class="img_AuN4"></p>
+</li>
+</ul>
+<p>Next, enter your payment information (credit card or bank account details). Google Cloud will verify your payment method, so make sure the information is correct.</p>
+<p>Read and agree to the Google Cloud Terms of Service and Billing Account Terms. Once you’ve done this, click <strong>&quot;Start billing&quot;</strong> to finish setting up your billing account</p>
+<p>After setting up your billing account, you’ll be taken to a page that asks you to <strong>link</strong> it to your project. Select the billing account you just created or an existing billing account you want to use. Click Set Account to link the billing account to your project.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148674/github-page/mjnw5vxhls2qu8vwdxz4.png" alt="Link Google Cloud billing account to project" class="img_AuN4"></p>
+<p>After you’ve linked your billing account to your project, you should see a confirmation message indicating that billing has been successfully enabled for your project.</p>
+<p>You can always verify this by returning to the Billing section in the Google Cloud Console, where you’ll see your billing account listed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-create-a-google-cloud-service-account-to-enable-deployment-of-the-nodejs-application-to-google-cloud-run-via-the-cd-pipeline"><strong>Create a Google Cloud Service Account to Enable Deployment of the Node.js Application to Google Cloud Run via the CD Pipeline</strong> 🚀<a href="#heading-create-a-google-cloud-service-account-to-enable-deployment-of-the-nodejs-application-to-google-cloud-run-via-the-cd-pipeline" class="hash-link" aria-label="Direct link to heading-create-a-google-cloud-service-account-to-enable-deployment-of-the-nodejs-application-to-google-cloud-run-via-the-cd-pipeline" title="Direct link to heading-create-a-google-cloud-service-account-to-enable-deployment-of-the-nodejs-application-to-google-cloud-run-via-the-cd-pipeline" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="why-do-we-need-a-service-account-and-key-">Why Do We Need a Service Account and Key? 🤔<a href="#why-do-we-need-a-service-account-and-key-" class="hash-link" aria-label="Direct link to Why Do We Need a Service Account and Key? 🤔" title="Direct link to Why Do We Need a Service Account and Key? 🤔" translate="no">​</a></h3>
+<p>A <strong>service account</strong> allows our CI/CD pipeline to authenticate and interact with Google Cloud services programmatically. By assigning specific roles (permissions), we ensure the service account can only perform tasks related to deployment, such as managing Google Cloud Run.</p>
+<p>The <strong>service account key</strong> is a JSON file containing the credentials used for authentication. We securely store this key as a GitHub secret to protect sensitive information.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-open-the-service-accounts-page">Step 1: Open the Service Accounts Page<a href="#step-1-open-the-service-accounts-page" class="hash-link" aria-label="Direct link to Step 1: Open the Service Accounts Page" title="Direct link to Step 1: Open the Service Accounts Page" translate="no">​</a></h3>
+<p>Here are the steps you can follow to set up your service account and get your key:</p>
+<p>First, visit the Google Cloud Console at <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="">https://console.cloud.google.com/</a>. Ensure you’ve selected the correct project (e.g. <code>gcr-ci-cd-project</code>). To change projects, click the drop-down menu next to the Google Cloud logo at the top-left corner and select your project.</p>
+<p>Then navigate to the Navigation Menu (three horizontal lines in the top-left corner) and click on <strong>IAM &amp; Admin &gt; Service Accounts</strong>.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/il1qa6haq1k1fn3luskq.png" alt="Navigate to Google Cloud IAM - Service Account" class="img_AuN4"></p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-create-a-new-service-account">Step 2: Create a New Service Account<a href="#step-2-create-a-new-service-account" class="hash-link" aria-label="Direct link to Step 2: Create a New Service Account" title="Direct link to Step 2: Create a New Service Account" translate="no">​</a></h3>
+<p>Click on the &quot;Create Service Account&quot; button. This will open a form where you’ll define your service account details.</p>
+<p>Next, enter the Service Account details:</p>
+<ul>
+<li class="">
+<p><strong>Name</strong>: Enter a descriptive name (for example, <code>ci-cd-sa</code>).</p>
+</li>
+<li class="">
+<p><strong>ID</strong>: This will auto-fill based on the name.</p>
+</li>
+<li class="">
+<p><strong>Description</strong>: Add a description to help identify its purpose, such as “Used for deploying Node.js app to Cloud Run.”</p>
+</li>
+<li class="">
+<p>Click <strong>Create and Continue</strong> to proceed.</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-assign-necessary-roles-permissions">Step 3: Assign Necessary Roles (Permissions)<a href="#step-3-assign-necessary-roles-permissions" class="hash-link" aria-label="Direct link to Step 3: Assign Necessary Roles (Permissions)" title="Direct link to Step 3: Assign Necessary Roles (Permissions)" translate="no">​</a></h3>
+<p>On the next screen, you’ll assign roles to the service account. Add the following roles one by one:</p>
+<ul>
+<li class="">
+<p><strong>Cloud Run Admin</strong>: Allows management of Cloud Run services.</p>
+</li>
+<li class="">
+<p><strong>Service Account User</strong>: Grants the ability to use service accounts.</p>
+</li>
+<li class="">
+<p><strong>Service Usage Admin</strong>: Enables control over enabling APIs.</p>
+</li>
+<li class="">
+<p><strong>Viewer</strong>: Provides read-only access to view resources.</p>
+</li>
+</ul>
+<p>To add a role:</p>
+<ul>
+<li class="">
+<p>Click on <strong>&quot;Select a Role&quot;</strong>.</p>
+</li>
+<li class="">
+<p>Use the search bar to type the role name (for example, &quot;Cloud Run Admin&quot;) and select it.</p>
+</li>
+<li class="">
+<p>Repeat for all four roles.</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148677/github-page/entxh5qldbegcjq4nqi5.png" alt="Create Google Cloud Service Account - Add role to a service account during creation" class="img_AuN4"></p>
+<p>Your screen should look similar to this:</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148675/github-page/g4vuphwqliwq10mpzrv5.png" alt="Create a Google Cloud service account (SA) - Done assigning all roles to SA" class="img_AuN4"></p>
+<p>After assigning the roles, click <strong>Continue</strong>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-4-skip-granting-users-access-to-the-service-account">Step 4: Skip Granting Users Access to the Service Account<a href="#step-4-skip-granting-users-access-to-the-service-account" class="hash-link" aria-label="Direct link to Step 4: Skip Granting Users Access to the Service Account" title="Direct link to Step 4: Skip Granting Users Access to the Service Account" translate="no">​</a></h3>
+<p>On the next screen, you’ll see an option to grant additional users access to this service account. Click <strong>Done</strong> to complete the creation process.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-5-generate-a-service-account-key-">Step 5: Generate a Service Account Key 🔑<a href="#step-5-generate-a-service-account-key-" class="hash-link" aria-label="Direct link to Step 5: Generate a Service Account Key 🔑" title="Direct link to Step 5: Generate a Service Account Key 🔑" translate="no">​</a></h3>
+<p>You should now see your newly created service account in the list. Find the row for your service account (for example, <code>ci-cd-sa</code>) and click the three vertical dots under the “Actions” column. Select <strong>&quot;Manage Keys&quot;</strong> from the drop-down menu.</p>
+<p>To add a new key:</p>
+<ul>
+<li class="">
+<p>Click on <strong>&quot;Add Key&quot; &gt; &quot;Create New Key&quot;</strong>.</p>
+</li>
+<li class="">
+<p>In the pop-up dialog, select <strong>JSON</strong> as the key type.</p>
+</li>
+<li class="">
+<p>Click <strong>Create</strong>.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148672/github-page/f9wip5dcncvahyiainqw.png" alt="Create Google Cloud service account key" class="img_AuN4"></p>
+</li>
+</ul>
+<p>Now, download the key file. A JSON file will automatically be downloaded to your computer. This file contains the credentials needed to authenticate with Google Cloud.</p>
+<p>Make sure you keep the key secure and store it in a safe location. Don’t share it – treat it as sensitive information.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-6-add-the-service-account-key-to-github-secrets-">Step 6: Add the Service Account Key to GitHub Secrets 🔒<a href="#step-6-add-the-service-account-key-to-github-secrets-" class="hash-link" aria-label="Direct link to Step 6: Add the Service Account Key to GitHub Secrets 🔒" title="Direct link to Step 6: Add the Service Account Key to GitHub Secrets 🔒" translate="no">​</a></h3>
+<p>Start by opening the downloaded JSON file using a text editor (like Notepad or VS Code). Then select and copy the entire contents of the file.</p>
+<p>Then navigate to the repository you created for this project on GitHub. Click on the <strong>Settings</strong> tab at the top of the repository. Scroll down and find the <strong>Secrets and variables &gt; Actions</strong> section.</p>
+<p>Now you need to add a new secret. Click the <strong>&quot;New repository secret&quot;</strong> button. In the <strong>Name</strong> field, enter <code>GCP_SERVICE_ACCOUNT</code>. In the <strong>Value</strong> field, paste the JSON content you copied earlier. Click <strong>Add secret</strong> to save it.</p>
+<p>Do the same for the <code>GCP_PROJECT_ID</code> secret, but now add your Google Project ID as the value. To get your project ID, follow these steps:</p>
+<ol>
+<li class="">
+<p><strong>Navigate to the Google Cloud Console</strong>: Open Google Cloud Console at <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="">https://console.cloud.google.com/</a>.</p>
+</li>
+<li class="">
+<p><strong>Locate the Project Dropdown</strong>: At the top-left of the screen, next to the <strong>Google Cloud logo</strong>, you will see a drop-down that shows the name of your current project.</p>
+</li>
+<li class="">
+<p><strong>View the Project ID</strong>: Click the drop-down, and you&#x27;ll see a list of all your projects. Your <strong>Project ID</strong> will be displayed next to the project name. It is a unique identifier used by Google Cloud.</p>
+</li>
+<li class="">
+<p><strong>Copy the Project ID</strong>: Copy the <strong>Project ID</strong> that is displayed, and add it as the value of the <code>GCP_PROJECT_ID</code> secret.</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-7-adding-external-variables-to-the-github-repository-">Step 7: Adding External Variables to the GitHub Repository 🔧<a href="#step-7-adding-external-variables-to-the-github-repository-" class="hash-link" aria-label="Direct link to Step 7: Adding External Variables to the GitHub Repository 🔧" title="Direct link to Step 7: Adding External Variables to the GitHub Repository 🔧" translate="no">​</a></h3>
+<p>Before proceeding with deployment, we need to define some external variables that were referenced in the CD workflow. These variables ensure that the pipeline knows critical details about your Google Cloud Run services and Docker container registry.</p>
+<p>Here are the steps you’ll need to follow to do this:</p>
+<ol>
+<li class="">
+<p>First, go to your repository on GitHub.</p>
+</li>
+<li class="">
+<p>Click the <strong>Settings</strong> tab at the top of the repository. Scroll down to <strong>Secrets and variables &gt; Actions</strong>.</p>
+</li>
+<li class="">
+<p>Click on the <strong>Variables</strong> tab next to <strong>Secrets</strong>. Click <strong>&quot;New repository variable&quot;</strong> for each variable. Then you’ll need to define these variables:</p>
+<ul>
+<li class="">
+<p><code>GCR_PROJECT_NAME</code>: Set this to the name of your Cloud Run service for the production/live environment. For example, <code>gcr-ci-cd-app</code>.</p>
+</li>
+<li class="">
+<p><code>GCR_STAGING_PROJECT_NAME</code>: Set this to the name of your Cloud Run service for the staging/test environment. For example, <code>gcr-ci-cd-staging</code>.</p>
+</li>
+<li class="">
+<p><code>GCR_REGION</code>: Enter the region where you’d like to deploy the services. For this tutorial, set it to <code>us-central1</code>.</p>
+</li>
+<li class="">
+<p><code>IMAGE</code>: Specify the name of the Docker image/container registry where the published image will be uploaded. For example, <code>&lt;dockerhub-username&gt;/ci-cd-tutorial-app</code>.</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p>After entering each variable name and value, click <strong>Add variable</strong>.</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="enabling-the-service-usage-api-on-the-google-cloud-project-">Enabling the Service Usage API on the Google Cloud Project 🌐<a href="#enabling-the-service-usage-api-on-the-google-cloud-project-" class="hash-link" aria-label="Direct link to Enabling the Service Usage API on the Google Cloud Project 🌐" title="Direct link to Enabling the Service Usage API on the Google Cloud Project 🌐" translate="no">​</a></h3>
+<p>To deploy your application, the <strong>Service Usage API</strong> must be enabled in your Google Cloud project. This API allows you to manage Google Cloud services programmatically, including enabling/disabling APIs and monitoring their usage.</p>
+<p>Follow these steps to enable it:</p>
+<ol>
+<li class="">
+<p>First, visit the Google Cloud Console at <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="">https://console.cloud.google.com/</a>.</p>
+</li>
+<li class="">
+<p>Then make sure you’re in the correct project. Click the project drop-down menu near the <strong>Google Cloud logo</strong> at the top-left corner. Select <code>gcr-ci-cd-project</code> , or the name you gave your project from the list of projects.</p>
+</li>
+<li class="">
+<p>Next you’ll need to access the API library. Open the <strong>Navigation Menu</strong> (three horizontal lines in the top-left corner). Select <strong>APIs &amp; Services &gt; Library</strong> from the menu.</p>
+</li>
+<li class="">
+<p>In the API Library, use the search bar to search for <strong>&quot;Service Usage API&quot;</strong>.</p>
+</li>
+<li class="">
+<p>Click on the <strong>Service Usage API</strong> from the search results. On the API’s details page, click <strong>Enable</strong>.</p>
+</li>
+<li class="">
+<p>To verify, go to <strong>APIs &amp; Services &gt; Enabled APIs &amp; Services</strong> in the Google Cloud Console. Confirm that the <strong>Service Usage API</strong> appears in the list of enabled APIs.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148670/github-page/nle3zytepuzn8d2czzwl.png" alt="Enable the Google Cloud &quot;Service Usage API&quot; in the project" class="img_AuN4"></p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-create-the-staging-branch-and-merge-the-feature-branch-into-it-continuous-integration-and-continuous-delivery"><strong>Create the Staging Branch and Merge the Feature Branch into It (Continuous Integration and Continuous Delivery) 🌟</strong><a href="#heading-create-the-staging-branch-and-merge-the-feature-branch-into-it-continuous-integration-and-continuous-delivery" class="hash-link" aria-label="Direct link to heading-create-the-staging-branch-and-merge-the-feature-branch-into-it-continuous-integration-and-continuous-delivery" title="Direct link to heading-create-the-staging-branch-and-merge-the-feature-branch-into-it-continuous-integration-and-continuous-delivery" translate="no">​</a></h2>
+<p>When changes from the <code>feature/ci-cd-pipeline</code> branch are merged into the <code>staging</code> branch, we complete the <strong>Continuous Integration (CI)</strong> process, and the workflow <code>ci-pipeline.yml</code> will run. This ensures that the changes made in the feature branch are tested and integrated into a shared branch.</p>
+<p>Once the pull request (PR) is merged into <code>staging</code>, the <strong>Continuous Delivery (CD)</strong> pipeline automatically triggers, deploying the application to the staging environment. This simulates how updates are tested in a safe environment before being pushed to production.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="create-the-staging-branch-on-the-remote-repository">Create the <code>staging</code> Branch on the Remote Repository<a href="#create-the-staging-branch-on-the-remote-repository" class="hash-link" aria-label="Direct link to create-the-staging-branch-on-the-remote-repository" title="Direct link to create-the-staging-branch-on-the-remote-repository" translate="no">​</a></h3>
+<p>To enable the CI/CD pipeline, we’ll first create a <code>staging</code> branch on the remote GitHub repository. This branch will serve as the test environment where changes are deployed before they reach the production environment.</p>
+<p>To create the <code>staging</code> branch directly on GitHub, follow these steps:</p>
+<ol>
+<li class="">
+<p>First, navigate to your repository on GitHub. Open your web browser and go to the GitHub repository where you want to create the new <code>staging</code> branch.</p>
+</li>
+<li class="">
+<p>Then, switch to the <code>main</code> branch. On the top of the repository page, locate the <strong>Branch</strong> dropdown (usually labelled as <code>main</code> or the current branch name). Click on the dropdown and make sure you are on the <code>main</code> branch.</p>
+</li>
+<li class="">
+<p>Next, create the <code>staging</code> branch. In the same dropdown where you see the <code>main</code> branch, type <code>staging</code> into the text box. Once you start typing, GitHub will offer you the option to create a new branch called <code>staging</code>. Select the <strong>Create branch: staging</strong> option from the dropdown.</p>
+</li>
+<li class="">
+<p>Finally, verify the branch**.** After creating the <code>staging</code> branch, GitHub will automatically switch to it. You should now see <code>staging</code> in the branch dropdown, confirming the new branch was created.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/rjk7rvqukucxgr0khjzi.png" alt="Create a new Staging branch in the GitHub repository" class="img_AuN4"></p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="merge-your-feature-branch-into-the-staging-branch-via-a-pull-request-pr"><strong>Merge Your Feature Branch into the Staging Branch via a Pull Request (PR)</strong><a href="#merge-your-feature-branch-into-the-staging-branch-via-a-pull-request-pr" class="hash-link" aria-label="Direct link to merge-your-feature-branch-into-the-staging-branch-via-a-pull-request-pr" title="Direct link to merge-your-feature-branch-into-the-staging-branch-via-a-pull-request-pr" translate="no">​</a></h3>
+<p>This process combines both Continuous Integration (CI) and Continuous Delivery (CD). You will commit changes from your feature branch, push them to the remote feature branch, and then open a PR to merge those changes into the <code>staging</code> branch. Here&#x27;s how to do it:</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-commit-local-changes-on-your-feature-branch"><strong>Step 1: Commit Local Changes on Your Feature Branch</strong><a href="#step-1-commit-local-changes-on-your-feature-branch" class="hash-link" aria-label="Direct link to step-1-commit-local-changes-on-your-feature-branch" title="Direct link to step-1-commit-local-changes-on-your-feature-branch" translate="no">​</a></h4>
+<p>First, you’ll want to make sure that you are on the correct branch (the feature branch) by running:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git status</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>If you are not on the <code>feature/ci-cd-pipeline</code> branch, switch to it by running:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git checkout feature/ci-cd-pipeline</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>Now, it’s time to add your changes you made for the commit:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git add .</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This stages all changes, including new files, modified files, and deleted files.</p>
+<p>Next, commit your changes with a clear and descriptive message:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git commit -m &quot;Set up CI/CD pipelines for the project&quot;</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>Then you can verify your commit by running:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git log</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This will display your most recent commits, and you should see the commit message you just added.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-push-your-feature-branch-changes-to-the-remote-repository"><strong>Step 2: Push Your Feature Branch Changes to the Remote Repository</strong><a href="#step-2-push-your-feature-branch-changes-to-the-remote-repository" class="hash-link" aria-label="Direct link to step-2-push-your-feature-branch-changes-to-the-remote-repository" title="Direct link to step-2-push-your-feature-branch-changes-to-the-remote-repository" translate="no">​</a></h4>
+<p>After committing your changes, push them to the remote repository:</p>
+<div class="language-text codeBlockContainer_BxIZ theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_OQvP"><pre tabindex="0" class="prism-code language-text codeBlock_s65_ thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_vZSy"><div class="token-line" style="color:#393A34"><span class="token plain">git push origin feature/ci-cd-pipeline</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div></code></pre></div></div>
+<p>This pushes your local changes on the <code>feature/ci-cd-pipeline</code> branch to the remote GitHub repository.</p>
+<p>Once the push is successful, visit your GitHub repository in a web browser, and confirm that the <code>feature/ci-cd-pipeline</code> branch is updated with your new commit.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-create-a-pull-request-to-merge-the-feature-branch-into-staging"><strong>Step 3: Create a Pull Request to Merge the Feature Branch into Staging</strong><a href="#step-3-create-a-pull-request-to-merge-the-feature-branch-into-staging" class="hash-link" aria-label="Direct link to step-3-create-a-pull-request-to-merge-the-feature-branch-into-staging" title="Direct link to step-3-create-a-pull-request-to-merge-the-feature-branch-into-staging" translate="no">​</a></h4>
+<p>Go to your repository on GitHub and ensure that you are on the main page of the repository.</p>
+<p>You should see an alert at the top of the page suggesting you create a pull request for the recently pushed branch (<code>feature/ci-cd-pipeline</code>). Click the <strong>Compare &amp; Pull Request</strong> button next to the alert.</p>
+<p>Now, it’s time to choose the base and compare branches. On the PR creation page, make sure the <strong>base</strong> branch is set to <code>staging</code> (this is the branch you want to merge your changes into). The <strong>compare</strong> branch should already be set to <code>feature/ci-cd-pipeline</code> (the branch you just pushed). If they’re not selected correctly, use the dropdowns to change them.</p>
+<p>You’ll want to come up with a good PR description for this. Write a clear title and description for the pull request, explaining what changes you&#x27;re merging and why. For example:</p>
+<ul>
+<li class="">
+<p><strong>Title</strong>: &quot;Merge CI/CD setup changes from feature branch&quot;</p>
+</li>
+<li class="">
+<p><strong>Description</strong>: &quot;This pull request adds the CI/CD pipelines for GitHub Actions and Docker Hub integration to the project. It includes the configurations for both CI and CD workflows.&quot;</p>
+</li>
+</ul>
+<p>Now GitHub will show a list of all the changes that will be merged. Take a moment to review them and ensure everything looks correct.</p>
+<p>If all looks good after reviewing, click on the <strong>Create pull request</strong> button. This will create the PR and notify team members (if any) that changes are ready to be reviewed and merged.</p>
+<p>Wait a few seconds, and you should see a message indicating that all the checks have passed. Click on the link with the description &quot;<strong>CI Pipeline to staging/production environment...</strong>&quot;. This should direct you to the Continuous Integration workflow, where you can view the steps that ran</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/efpcqustjuzoem3e7ncf.png" alt="Create a new pull request (PR) from the feature to the staging branch" class="img_AuN4"></p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/lhw9k6gx66abvvsrrhix.png" alt="CI workflow run from PR (feature to staging branch)" class="img_AuN4"></p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="the-continuous-integration-ci-process">The Continuous Integration (CI) Process<a href="#the-continuous-integration-ci-process" class="hash-link" aria-label="Direct link to The Continuous Integration (CI) Process" title="Direct link to The Continuous Integration (CI) Process" translate="no">​</a></h4>
+<p>The CI process begins when a Pull Request is made to the <code>staging</code> branch. It triggers the GitHub Actions workflow defined in the <code>.github/workflows/ci-pipeline.yml</code> file. The workflow runs the necessary steps to set up the environment, install dependencies, and build the Node.js application.</p>
+<p>It then runs automated tests (using <code>npm test</code>) to ensure that the changes do not break any functionality in the codebase. If all these steps are completed successfully, the CI pipeline confirms that the feature branch is stable and ready to be merged into the <code>staging</code> branch for further testing and deployment.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="step-4-merge-the-pull-request"><strong>Step 4: Merge the Pull Request</strong><a href="#step-4-merge-the-pull-request" class="hash-link" aria-label="Direct link to step-4-merge-the-pull-request" title="Direct link to step-4-merge-the-pull-request" translate="no">​</a></h4>
+<p>If your team or collaborators are part of the project, they may review your PR. This step may involve discussing any changes or improvements. If everything looks good, a reviewer will merge the PR.</p>
+<p>Once the PR has been reviewed and approved, you can merge the PR. To do this, just click on the <strong>Merge pull request</strong> button. Choose <strong>Confirm merge</strong> when prompted.</p>
+<p>After merging, you can go to the <code>staging</code> branch to verify that the changes were successfully merged.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="navigating-to-the-actions-page-after-merging-the-pr"><strong>Navigating to the Actions Page After Merging the PR</strong><a href="#navigating-to-the-actions-page-after-merging-the-pr" class="hash-link" aria-label="Direct link to navigating-to-the-actions-page-after-merging-the-pr" title="Direct link to navigating-to-the-actions-page-after-merging-the-pr" translate="no">​</a></h3>
+<p>Once you have successfully merged your pull request from the <code>feature/ci-cd-pipeline</code> branch into the <code>staging</code> branch, the Continuous Delivery (CD) pipeline will be triggered. To view the progress of the CD pipeline, navigate to the <strong>Actions</strong> tab in your GitHub repository. Here&#x27;s how to do it:</p>
+<ol>
+<li class="">
+<p>Go to your GitHub repository.</p>
+</li>
+<li class="">
+<p>At the top of the page, you will see the <strong>Actions</strong> tab next to the <strong>Code</strong> tab. Click on it.</p>
+</li>
+<li class="">
+<p>On the Actions page, you will see a list of workflows that have been triggered. Look for the one labelled <strong>CD Pipeline to Google Cloud Run (staging and production)</strong>. It should appear as a new run after the PR merge.</p>
+</li>
+<li class="">
+<p>Click on the workflow run to view its progress and see the detailed logs for each step.</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/od00rh6zfkuvezxnkvdo.png" alt="Continuous Delivery workflow from merge to staging (feature to staging)" class="img_AuN4"></p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/eejpeyo7bkeh0wlcd4l8.png" alt="Continuous Delivery workflow Jobs from merge to staging (feature to staging)" class="img_AuN4"></p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/uhf63memkhfbyxia3k4k.png" alt="Continuous Delivery workflow steps from merge to staging (feature to staging)" class="img_AuN4"></p>
+<p>This will allow you to monitor the status of the CD pipeline and check if there are any issues during deployment.</p>
+<p>If you look at the CD steps and workflow, you&#x27;ll see that the step to deploy the application to the <strong>production</strong> environment was skipped, while the step to deploy to the <strong>staging</strong> environment was executed.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="continuous-delivery-cd-pipeline--whats-going-on"><strong>Continuous Delivery (CD) pipeline – what’s going on:</strong><a href="#continuous-delivery-cd-pipeline--whats-going-on" class="hash-link" aria-label="Direct link to continuous-delivery-cd-pipeline--whats-going-on" title="Direct link to continuous-delivery-cd-pipeline--whats-going-on" translate="no">​</a></h4>
+<p>The <strong>Continuous Delivery (CD) Pipeline</strong> automates the process of deploying the application to Google Cloud Run (testing environment). This workflow is triggered by a push to the <code>staging</code> branch, which happens after the changes from the feature branch are merged into <code>staging</code>. It can also be manually triggered via <code>workflow_dispatch</code> or upon a new release being published.</p>
+<p>The pipeline consists of multiple stages:</p>
+<ol>
+<li class="">
+<p><strong>Test Job:</strong> The pipeline begins by setting up the environment and running tests using the <code>npm test</code> command. If the tests pass, the process moves forward.</p>
+</li>
+<li class="">
+<p><strong>Build Job:</strong> The next step builds the Docker image of the Node.js application, tags it, and then pushes it to Docker Hub.</p>
+</li>
+<li class="">
+<p><strong>Deployment to GCP:</strong> After the image is pushed, the workflow authenticates to Google Cloud and deploys the application. If the event is a release (that is, a push to the <code>main</code> branch), the application is deployed to the production environment. If the event is a push to <code>staging</code>, the app is deployed to the staging environment.</p>
+</li>
+</ol>
+<p>The CD process ensures that any changes made to the <code>staging</code> branch are automatically tested, built, and deployed to the staging environment, ready for further validation. When a release is published, it will trigger deployment to production, ensuring your app is always up to date.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="accessing-the-deployed-application-in-the-staging-environment-on-google-cloud-run-">Accessing the Deployed Application in the Staging Environment on Google Cloud Run 🌐<a href="#accessing-the-deployed-application-in-the-staging-environment-on-google-cloud-run-" class="hash-link" aria-label="Direct link to Accessing the Deployed Application in the Staging Environment on Google Cloud Run 🌐" title="Direct link to Accessing the Deployed Application in the Staging Environment on Google Cloud Run 🌐" translate="no">​</a></h3>
+<p>Once the deployment to Google Cloud Run is successfully completed, you&#x27;ll want to access your application running in the <strong>staging</strong> environment. Follow these steps to find and visit your deployed application:</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="1-navigate-to-the-google-cloud-console">1. <strong>Navigate to the Google Cloud Console</strong><a href="#1-navigate-to-the-google-cloud-console" class="hash-link" aria-label="Direct link to 1-navigate-to-the-google-cloud-console" title="Direct link to 1-navigate-to-the-google-cloud-console" translate="no">​</a></h4>
+<p>Open the Google Cloud Console in your browser by visiting <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="">https://console.cloud.google.com</a>. If you&#x27;re not already signed in, make sure you log in with your Google account.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="2-go-to-the-cloud-run-dashboard">2. <strong>Go to the Cloud Run Dashboard</strong><a href="#2-go-to-the-cloud-run-dashboard" class="hash-link" aria-label="Direct link to 2-go-to-the-cloud-run-dashboard" title="Direct link to 2-go-to-the-cloud-run-dashboard" translate="no">​</a></h4>
+<p>In the Google Cloud Console, use the Search bar at the top or navigate through the left-hand menu: Go to <strong>Cloud Run</strong> (you can type this into the search bar, or find it under <strong>Products &amp; services</strong> &gt; <strong>Compute</strong> &gt; <strong>Cloud Run</strong>). Click on <strong>Cloud Run</strong> to open the Cloud Run dashboard.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="3-select-your-staging-service">3. <strong>Select Your Staging Service</strong><a href="#3-select-your-staging-service" class="hash-link" aria-label="Direct link to 3-select-your-staging-service" title="Direct link to 3-select-your-staging-service" translate="no">​</a></h4>
+<p>In the <strong>Cloud Run dashboard</strong>, you should see a list of all your services deployed across various environments. Find the service associated with the staging environment. The name should be similar to what you defined in your workflow (for example, <code>gcr-ci-cd-staging</code>).</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/netwtxzeareexqujju2d.png" alt="Google Cloud Run service for the staging environment" class="img_AuN4"></p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="4-access-the-service-url">4. <strong>Access the Service URL</strong><a href="#4-access-the-service-url" class="hash-link" aria-label="Direct link to 4-access-the-service-url" title="Direct link to 4-access-the-service-url" translate="no">​</a></h4>
+<p>Once you&#x27;ve selected your staging service, you’ll be taken to the <strong>Service details page</strong>. This page provides all the important information about your deployed service.<br>
+<!-- -->On this page, look for the <strong>URL</strong> section under the <strong>Service URL</strong> heading. The URL will look something like: <code>https://gcr-ci-cd-staging-&lt;unique-id&gt;.run.app</code>.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="5-visit-the-application">5. <strong>Visit the Application</strong><a href="#5-visit-the-application" class="hash-link" aria-label="Direct link to 5-visit-the-application" title="Direct link to 5-visit-the-application" translate="no">​</a></h4>
+<p>Click on the <strong>Service URL</strong>, and it will open your staging environment in a new tab in your browser. You can now interact with your application as if it were live, but in the <strong>staging environment</strong>.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148671/github-page/zwmz1ayd5kqltte7rc0u.png" alt="Google Cloud Run service URL for the staging environment" class="img_AuN4"></p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-merge-the-staging-branch-into-the-main-branch-continuous-integration-and-continuous-deployment"><strong>Merge the Staging Branch into the Main Branch (Continuous Integration and Continuous Deployment) 🌐</strong><a href="#heading-merge-the-staging-branch-into-the-main-branch-continuous-integration-and-continuous-deployment" class="hash-link" aria-label="Direct link to heading-merge-the-staging-branch-into-the-main-branch-continuous-integration-and-continuous-deployment" title="Direct link to heading-merge-the-staging-branch-into-the-main-branch-continuous-integration-and-continuous-deployment" translate="no">​</a></h2>
+<p>In this section, we&#x27;ll take the updates in the staging branch, merge them into the main branch, and trigger the CI/CD pipeline. This process not only ensures your changes are production-ready but also deploys them to the production/live environment. 🚀</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-1-push-local-changes-and-open-a-pull-request">Step 1: Push Local Changes and Open a Pull Request<a href="#step-1-push-local-changes-and-open-a-pull-request" class="hash-link" aria-label="Direct link to Step 1: Push Local Changes and Open a Pull Request" title="Direct link to Step 1: Push Local Changes and Open a Pull Request" translate="no">​</a></h3>
+<p><strong>Why?</strong> The first step involves merging the staging branch into the main branch. Just like in the previous Continuous Delivery process, this ensures the integration of thoroughly tested updates.</p>
+<p>Here’s how to do it:</p>
+<p>First, visit the GitHub repository where your project is hosted.</p>
+<p>Then go to the <strong>Pull Requests</strong> tab. Click <strong>New Pull Request</strong>. Choose <strong>staging</strong> as the source branch (base branch) and <strong>main</strong> as the target branch. Add a clear title and description for the Pull Request, explaining why these updates are ready for production deployment.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-2-continuous-integration-ci-pipeline-execution">Step 2: Continuous Integration (CI) Pipeline Execution<a href="#step-2-continuous-integration-ci-pipeline-execution" class="hash-link" aria-label="Direct link to Step 2: Continuous Integration (CI) Pipeline Execution" title="Direct link to Step 2: Continuous Integration (CI) Pipeline Execution" translate="no">​</a></h3>
+<p>After merging the pull request, the <strong>Continuous Integration (CI)</strong> pipeline will automatically execute to validate that the changes are still stable when integrated into the <strong>main branch</strong>.</p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="pipeline-steps">Pipeline Steps:<a href="#pipeline-steps" class="hash-link" aria-label="Direct link to Pipeline Steps:" title="Direct link to Pipeline Steps:" translate="no">​</a></h4>
+<ul>
+<li class="">
+<p><strong>Code Checkout</strong>: The workflow fetches the latest code from the <strong>main branch</strong>.</p>
+</li>
+<li class="">
+<p><strong>Dependency Installation</strong>: The pipeline installs all required dependencies.</p>
+</li>
+<li class="">
+<p><strong>Testing</strong>: Automated tests are run to validate the application&#x27;s stability.</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-3-create-a-new-release">Step 3: Create a New Release<a href="#step-3-create-a-new-release" class="hash-link" aria-label="Direct link to Step 3: Create a New Release" title="Direct link to Step 3: Create a New Release" translate="no">​</a></h3>
+<p>The Continuous Deployment (CD) workflow to deploy to the production environment is triggered by the creation of a new release from the main branch.</p>
+<p>Let’s walk through the steps to create a release.</p>
+<p>On your GitHub repository page, click on the <strong>Releases</strong> section (located under the <strong>Code</strong> tab).</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148672/github-page/qwrhjrdndgxeologznpl.png" alt="Navigate to the Release page in theGitHub repo" class="img_AuN4"></p>
+<p>Next, click <strong>Draft a new release</strong>. Set the <strong>Target</strong> branch to <strong>main</strong>. Enter a <strong>Tag version</strong> (for example, <code>v1.0.0</code>) following semantic versioning. Add a <strong>Release title</strong> and an optional description of the changes.</p>
+<p>Then, click <strong>Publish Release</strong> to finalize.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148673/github-page/de9hvupdooguyc2ypsdv.png" alt="Create a new release in the GitHub repo" class="img_AuN4"></p>
+<h4 class="anchor anchorTargetStickyNavbar_zY7U" id="why-run-the-continuous-deployment-pipeline-on-release-instead-of-on-push-">Why run the Continuous Deployment pipeline on release instead of on push? 🤔<a href="#why-run-the-continuous-deployment-pipeline-on-release-instead-of-on-push-" class="hash-link" aria-label="Direct link to Why run the Continuous Deployment pipeline on release instead of on push? 🤔" title="Direct link to Why run the Continuous Deployment pipeline on release instead of on push? 🤔" translate="no">​</a></h4>
+<p>In our setup, we decided not to trigger the Continuous Deployment (CD) pipeline every time changes are pushed to the main branch. Instead, we trigger it only when a new release is created. This gives the team more control over when updates are deployed to the production environment.</p>
+<p>Imagine a scenario where developers are working on new features—they may push changes to the main branch as part of their regular workflow, but these features might not be complete or ready for users yet. Automatically deploying every push could accidentally expose unfinished features to your users, which can be confusing or disruptive.</p>
+<p>By requiring a release to trigger the deployment, the team gets a chance to finalize and polish all changes before they go live.</p>
+<p>For example, developers can test new features in the staging environment, fix any issues, and merge those changes into the main branch without worrying about them immediately appearing in production. This workflow ensures that only well-tested and complete features make their way to your end users.</p>
+<p>Ultimately, this approach helps maintain a smooth user experience. Instead of seeing half-built features or unexpected changes, users only see updates that are ready and functional. It also gives the team the flexibility to push changes to the main branch frequently—preventing merge conflicts and making collaboration easier—while keeping control over what gets deployed live. 🚀</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-4-navigate-to-the-actions-page">Step 4: Navigate to the Actions Page<a href="#step-4-navigate-to-the-actions-page" class="hash-link" aria-label="Direct link to Step 4: Navigate to the Actions Page" title="Direct link to Step 4: Navigate to the Actions Page" translate="no">​</a></h3>
+<p>After the release is published, the CD pipeline for the production environment is triggered. To monitor this repeat the process taken for the Continuous Delivery workflow, follow these steps:</p>
+<ol>
+<li class="">
+<p><strong>Go to the GitHub Actions tab</strong>: In your GitHub repository, click on the <strong>Actions</strong> tab.</p>
+</li>
+<li class="">
+<p><strong>Locate the deployment workflow</strong>: Look for the <strong>CD Pipeline to Google Cloud Run (staging and production)</strong> workflow. You’ll notice that the workflow has been triggered on the <strong>main branch</strong> due to the push event.</p>
+</li>
+<li class="">
+<p><strong>Open the workflow details</strong>: Click on the workflow to view detailed steps, logs, and statuses for each part of the deployment process.</p>
+</li>
+</ol>
+<p>This time, the Continuous delivery workflow deploys the application to the <strong>production</strong>/<strong>live</strong> environment.</p>
+<p><img decoding="async" loading="lazy" src="https://res.cloudinary.com/dv3vzmogk/image/upload/v1781148672/github-page/jx7ekplwaankylqsq9mj.png" alt="Continuous Deployment workflow from merge to main (staging to main)" class="img_AuN4"></p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="step-5-access-the-live-application">Step 5: Access the Live Application<a href="#step-5-access-the-live-application" class="hash-link" aria-label="Direct link to Step 5: Access the Live Application" title="Direct link to Step 5: Access the Live Application" translate="no">​</a></h3>
+<p>Once the deployment is complete, go to Google Cloud Console at <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="">https://console.cloud.google.com</a>.</p>
+<p>Navigate to <strong>Cloud Run</strong> from the menu. Select the service corresponding to the <strong>production environment</strong> (for example, <code>gcr-ci-cd-app</code>).</p>
+<p>Locate the <strong>Service URL</strong> in the service details page. Open the URL in your browser to access the live application.</p>
+<p>And now, congratulations – you’re done!</p>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="heading-conclusion">Conclusion 🌟<a href="#heading-conclusion" class="hash-link" aria-label="Direct link to Conclusion 🌟" title="Direct link to Conclusion 🌟" translate="no">​</a></h2>
+<p>In this article, we explored how to build and automate a CI/CD pipeline for a Node.js application, using GitHub Actions, Docker Hub, and Google Cloud Run.</p>
+<p>We set up workflows to handle Continuous Integration by testing and integrating code changes and Continuous Delivery to deploy those changes to a staging environment. We also containerized our app using Docker and deployed it seamlessly to Google Cloud Run.</p>
+<p>Finally, we implemented Continuous Deployment, ensuring updates to the production environment happen only when a release is created from the main branch.</p>
+<p>This approach gives teams the flexibility to push and test incomplete features without impacting end users. By following these steps, you&#x27;ve built a robust pipeline that makes deploying your application smoother, faster, and more reliable.</p>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="study-further-">Study Further 📚<a href="#study-further-" class="hash-link" aria-label="Direct link to Study Further 📚" title="Direct link to Study Further 📚" translate="no">​</a></h3>
+<p>If you would like to learn more about Continuous Integration, Delivery, and Deployment you can check out the courses below:</p>
+<ul>
+<li class="">
+<p><a href="https://www.coursera.org/learn/continuous-integration-and-continuous-delivery-ci-cd" target="_blank" rel="noopener noreferrer" class=""><strong>Continuous Integration and Continuous Delivery (CI/CD) (from IBM Coursera</strong></a><strong>)</strong></p>
+</li>
+<li class="">
+<p><a href="https://www.udemy.com/course/github-actions-the-complete-guide/?couponCode=CMCPSALE24" target="_blank" rel="noopener noreferrer" class=""><strong>GitHub Actions - The Complete Guide (from Udemy</strong></a><strong>)</strong></p>
+</li>
+<li class="">
+<p><a href="https://www.freecodecamp.org/news/what-is-ci-cd/" target="_blank" rel="noopener noreferrer" class=""><strong>Learn CI/CD by buliding a project (freeCodeCamp tutorial)</strong></a></p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="about-the-author-">About the Author 👨‍💻<a href="#about-the-author-" class="hash-link" aria-label="Direct link to About the Author 👨‍💻" title="Direct link to About the Author 👨‍💻" translate="no">​</a></h3>
+<p>Hi, I’m Prince! I’m a software engineer passionate about building scalable applications and sharing knowledge with the tech community.</p>
+<p>If you enjoyed this article, you can learn more about me by exploring more of my blogs and projects on my <a href="https://www.linkedin.com/in/prince-onukwili-a82143233/" target="_blank" rel="noopener noreferrer" class="">LinkedIn profile</a>. You can find my <a href="https://www.linkedin.com/in/prince-onukwili-a82143233/details/publications/" target="_blank" rel="noopener noreferrer" class="">LinkedIn articles here</a>. And you can <a href="https://prince-onuk.vercel.app/achievements#articles" target="_blank" rel="noopener noreferrer" class="">visit my website</a> to read more of my articles as well. Let’s connect and grow together! 😊</p>
+<hr>
+<hr>
+<p>Learn to code for free. freeCodeCamp&#x27;s open source curriculum has helped more than 40,000 people get jobs as developers. <a href="https://www.freecodecamp.org/learn" target="_blank" rel="noopener noreferrer" class="">Get started</a></p>
+<hr>
+<p><em>Made by Anh Tu - Share to be share</em></p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_BIFD padding--none margin-left--sm"><li class="tag_CrcL"><a rel="tag" class="tag_OUtc tagRegular_ff5q" href="/blog/tags/aha-mind">aha-mind</a></li><li class="tag_CrcL"><a rel="tag" class="tag_OUtc tagRegular_ff5q" href="/blog/tags/auto-generated">auto-generated</a></li><li class="tag_CrcL"><a rel="tag" class="tag_OUtc tagRegular_ff5q" href="/blog/tags/daily-digest">daily-digest</a></li></ul></div></div></footer></article></div></div><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/ci-cd-handbook-github-actions-docker-cloud-run"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">CI/CD Handbook: Continuous Integration, Delivery và Deployment với GitHub Actions, Docker và Google Cloud Run</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/aha-interpreter-system-design-interview-pages-34-41"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">[System design interview] Từ trang 34 đến 41</div></a></nav></main><div class="col col--2"><div class="tableOfContents_Be9Y thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#table-of-contents" class="table-of-contents__link toc-highlight">Table of Contents</a></li><li><a href="#heading-what-is-continuous-integration-deployment-and-delivery" class="table-of-contents__link toc-highlight"><strong>What is Continuous Integration, Deployment, and Delivery?</strong> 🤔</a><ul><li><a href="#continuous-integration-ci" class="table-of-contents__link toc-highlight"><strong>Continuous Integration (CI)</strong></a></li><li><a href="#continuous-delivery-cd" class="table-of-contents__link toc-highlight">Continuous Delivery (CD)</a></li><li><a href="#continuous-deployment-cd" class="table-of-contents__link toc-highlight">Continuous Deployment (CD)</a></li></ul></li><li><a href="#heading-differences-between-continuous-integration-continuous-delivery-and-continuous-deployment" class="table-of-contents__link toc-highlight"><strong>Differences Between Continuous Integration, Continuous Delivery, and Continuous Deployment</strong> 🔍</a></li><li><a href="#heading-how-to-set-up-a-nodejs-project-with-a-web-server-and-automated-tests" class="table-of-contents__link toc-highlight"><strong>How to Set Up a Node.js Project with a Web Server and Automated Tests</strong> ✨</a><ul><li><a href="#step-1-install-nodejs-" class="table-of-contents__link toc-highlight">Step 1: Install Node.js 📥</a></li><li><a href="#step-2-clone-the-starter-repository-" class="table-of-contents__link toc-highlight">Step 2: Clone the Starter Repository 📂</a></li><li><a href="#step-3-install-dependencies-" class="table-of-contents__link toc-highlight">Step 3: Install Dependencies 📦</a></li><li><a href="#step-4-run-automated-tests-" class="table-of-contents__link toc-highlight">Step 4: Run Automated Tests ✅</a></li><li><a href="#step-5-start-the-web-server-" class="table-of-contents__link toc-highlight">Step 5: Start the Web Server 🌐</a></li></ul></li><li><a href="#heading-how-to-create-a-github-repository-to-host-your-codebase" class="table-of-contents__link toc-highlight"><strong>How to Create a GitHub Repository to Host Your Codebase 📂</strong></a><ul><li><a href="#step-1-sign-in-to-github" class="table-of-contents__link toc-highlight">Step 1: Sign In to GitHub</a></li><li><a href="#step-2-create-a-new-repository" class="table-of-contents__link toc-highlight">Step 2: Create a New Repository</a></li><li><a href="#step-3-change-the-remote-destination-and-push-to-your-new-repository" class="table-of-contents__link toc-highlight">Step 3: Change the Remote Destination and Push to Your New Repository</a></li></ul></li><li><a href="#heading-how-to-set-up-the-ci-and-cd-workflows-within-your-project" class="table-of-contents__link toc-highlight">How to Set Up the CI and CD Workflows Within Your Project ⚙️</a><ul><li><a href="#step-1-prepare-the-workflow-directory-" class="table-of-contents__link toc-highlight">Step 1: Prepare the Workflow Directory 📂</a></li><li><a href="#step-2-create-the-continuous-integration-workflow-" class="table-of-contents__link toc-highlight">Step 2: Create the Continuous Integration Workflow 🚀</a></li><li><a href="#step-3-the-continuous-delivery-and-deployment-workflow" class="table-of-contents__link toc-highlight">Step 3: The Continuous Delivery and Deployment Workflow</a></li></ul></li><li><a href="#heading-set-up-a-docker-hub-repository-for-the-projects-image-and-generate-an-access-token-for-publishing-the-image" class="table-of-contents__link toc-highlight"><strong>Set Up a Docker Hub Repository for the Project&#39;s Image and Generate an Access Token for Publishing the Image</strong> 📦</a><ul><li><a href="#step-1-sign-up-for-docker-hub" class="table-of-contents__link toc-highlight">Step 1: Sign Up for Docker Hub</a></li><li><a href="#step-2-sign-in-to-docker-hub" class="table-of-contents__link toc-highlight">Step 2: Sign In to Docker Hub</a></li><li><a href="#step-3-generate-an-access-token-for-the-cicd-pipeline" class="table-of-contents__link toc-highlight">Step 3: Generate an Access Token (for the CI/CD pipeline)</a></li><li><a href="#step-4-add-the-token-to-github-as-a-secret" class="table-of-contents__link toc-highlight">Step 4: Add the Token to GitHub as a Secret</a></li><li><a href="#step-5-creating-the-dockerfile-for-the-project" class="table-of-contents__link toc-highlight"><strong>Step 5: Creating the <term>Dockerfile</term> for the Project</strong></a></li></ul></li><li><a href="#heading-create-a-google-cloud-account-project-and-billing-account" class="table-of-contents__link toc-highlight"><strong>Create a Google Cloud Account, Project, and Billing Account</strong> ☁️</a><ul><li><a href="#step-1-create-or-sign-in-to-a-google-cloud-account-" class="table-of-contents__link toc-highlight">Step 1: Create or Sign in to a Google Cloud Account 🌐</a></li><li><a href="#step-2-create-a-new-google-cloud-project-️" class="table-of-contents__link toc-highlight">Step 2: Create a New Google Cloud Project 🏗️</a></li><li><a href="#step-3-access-your-new-project-️" class="table-of-contents__link toc-highlight">Step 3: Access Your New Project 🛠️</a></li><li><a href="#step-4-link-a-billing-account-to-your-project-" class="table-of-contents__link toc-highlight">Step 4: Link A Billing Account To Your Project 💳</a></li></ul></li><li><a href="#heading-create-a-google-cloud-service-account-to-enable-deployment-of-the-nodejs-application-to-google-cloud-run-via-the-cd-pipeline" class="table-of-contents__link toc-highlight"><strong>Create a Google Cloud Service Account to Enable Deployment of the Node.js Application to Google Cloud Run via the CD Pipeline</strong> 🚀</a><ul><li><a href="#why-do-we-need-a-service-account-and-key-" class="table-of-contents__link toc-highlight">Why Do We Need a Service Account and Key? 🤔</a></li><li><a href="#step-1-open-the-service-accounts-page" class="table-of-contents__link toc-highlight">Step 1: Open the Service Accounts Page</a></li><li><a href="#step-2-create-a-new-service-account" class="table-of-contents__link toc-highlight">Step 2: Create a New Service Account</a></li><li><a href="#step-3-assign-necessary-roles-permissions" class="table-of-contents__link toc-highlight">Step 3: Assign Necessary Roles (Permissions)</a></li><li><a href="#step-4-skip-granting-users-access-to-the-service-account" class="table-of-contents__link toc-highlight">Step 4: Skip Granting Users Access to the Service Account</a></li><li><a href="#step-5-generate-a-service-account-key-" class="table-of-contents__link toc-highlight">Step 5: Generate a Service Account Key 🔑</a></li><li><a href="#step-6-add-the-service-account-key-to-github-secrets-" class="table-of-contents__link toc-highlight">Step 6: Add the Service Account Key to GitHub Secrets 🔒</a></li><li><a href="#step-7-adding-external-variables-to-the-github-repository-" class="table-of-contents__link toc-highlight">Step 7: Adding External Variables to the GitHub Repository 🔧</a></li><li><a href="#enabling-the-service-usage-api-on-the-google-cloud-project-" class="table-of-contents__link toc-highlight">Enabling the Service Usage API on the Google Cloud Project 🌐</a></li></ul></li><li><a href="#heading-create-the-staging-branch-and-merge-the-feature-branch-into-it-continuous-integration-and-continuous-delivery" class="table-of-contents__link toc-highlight"><strong>Create the Staging Branch and Merge the Feature Branch into It (Continuous Integration and Continuous Delivery) 🌟</strong></a><ul><li><a href="#create-the-staging-branch-on-the-remote-repository" class="table-of-contents__link toc-highlight">Create the <code>staging</code> Branch on the Remote Repository</a></li><li><a href="#merge-your-feature-branch-into-the-staging-branch-via-a-pull-request-pr" class="table-of-contents__link toc-highlight"><strong>Merge Your Feature Branch into the Staging Branch via a Pull Request (PR)</strong></a></li><li><a href="#navigating-to-the-actions-page-after-merging-the-pr" class="table-of-contents__link toc-highlight"><strong>Navigating to the Actions Page After Merging the PR</strong></a></li><li><a href="#accessing-the-deployed-application-in-the-staging-environment-on-google-cloud-run-" class="table-of-contents__link toc-highlight">Accessing the Deployed Application in the Staging Environment on Google Cloud Run 🌐</a></li></ul></li><li><a href="#heading-merge-the-staging-branch-into-the-main-branch-continuous-integration-and-continuous-deployment" class="table-of-contents__link toc-highlight"><strong>Merge the Staging Branch into the Main Branch (Continuous Integration and Continuous Deployment) 🌐</strong></a><ul><li><a href="#step-1-push-local-changes-and-open-a-pull-request" class="table-of-contents__link toc-highlight">Step 1: Push Local Changes and Open a Pull Request</a></li><li><a href="#step-2-continuous-integration-ci-pipeline-execution" class="table-of-contents__link toc-highlight">Step 2: Continuous Integration (CI) Pipeline Execution</a></li><li><a href="#step-3-create-a-new-release" class="table-of-contents__link toc-highlight">Step 3: Create a New Release</a></li><li><a href="#step-4-navigate-to-the-actions-page" class="table-of-contents__link toc-highlight">Step 4: Navigate to the Actions Page</a></li><li><a href="#step-5-access-the-live-application" class="table-of-contents__link toc-highlight">Step 5: Access the Live Application</a></li></ul></li><li><a href="#heading-conclusion" class="table-of-contents__link toc-highlight">Conclusion 🌟</a><ul><li><a href="#study-further-" class="table-of-contents__link toc-highlight">Study Further 📚</a></li><li><a href="#about-the-author-" class="table-of-contents__link toc-highlight">About the Author 👨‍💻</a></li></ul></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 My Stories. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
