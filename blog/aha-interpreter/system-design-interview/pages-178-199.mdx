@@ -1,0 +1,335 @@
+---
+slug: aha-interpreter-system-design-interview-pages-178-199
+title: "[System design interview] Từ trang 178 đến 199"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+# **CHƯƠNG 12: THIẾT KẾ HỆ THỐNG CHAT**
+
+Trong chương này, chúng ta sẽ khám phá cách thiết kế một hệ thống chat. Hầu hết mọi người đều sử dụng một ứng dụng chat.
+Hình 12-1 cho thấy một số ứng dụng phổ biến nhất trên thị trường.
+
+Một ứng dụng chat thực hiện các chức năng khác nhau cho những người dùng khác nhau. Điều cực kỳ quan trọng là phải xác định rõ ràng các yêu cầu chính xác. Ví dụ, chúng ta không muốn thiết kế một hệ thống tập trung vào chat nhóm khi người phỏng vấn lại muốn chat 1-1. Điều quan trọng là phải tìm hiểu các yêu cầu về tính năng.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492787/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-177-0.png)
+
+## **Bước 1 - Hiểu vấn đề và xác định phạm vi thiết kế**
+
+Điều quan trọng là phải thống nhất về loại ứng dụng chat cần thiết kế. Trên thị trường, có các ứng dụng chat 1-1 như Facebook Messenger, WeChat và WhatsApp; các ứng dụng chat văn phòng tập trung vào chat nhóm như Slack; hoặc các ứng dụng chat game như Discord, tập trung vào tương tác nhóm lớn và độ trễ thấp cho chat thoại.
+
+Bộ câu hỏi làm rõ đầu tiên nên xác định chính xác những gì người phỏng vấn muốn khi họ yêu cầu chúng ta thiết kế một hệ thống chat. Ít nhất, hãy xác định xem chúng ta nên tập trung vào ứng dụng chat 1-1 hay chat nhóm. Một số câu hỏi chúng ta có thể hỏi như sau:
+
+**Ứng viên** : Chúng ta nên thiết kế loại ứng dụng chat nào? 1-1 hay chat nhóm?
+**Người phỏng vấn** : Nó nên hỗ trợ cả chat 1-1 và chat nhóm.
+
+**Ứng viên** : Đây là ứng dụng di động? Hay ứng dụng web? Hay cả hai?
+**Người phỏng vấn** : Cả hai.
+
+**Ứng viên** : Quy mô của ứng dụng này là gì? Một ứng dụng khởi nghiệp hay quy mô lớn?
+**Người phỏng vấn** : Nó nên hỗ trợ 50 triệu người dùng hoạt động hàng ngày (DAU).
+
+**Ứng viên** : Đối với chat nhóm, giới hạn thành viên nhóm là bao nhiêu?
+**Người phỏng vấn** : Tối đa 100 người.
+
+**Ứng viên** : Những tính năng nào quan trọng đối với ứng dụng chat? Nó có thể hỗ trợ tệp đính kèm không?
+**Người phỏng vấn** : Chat 1-1, chat nhóm, hiển thị trạng thái online. Hệ thống chỉ hỗ trợ tin nhắn văn bản.
+
+**Ứng viên** : Có giới hạn kích thước tin nhắn không?
+**Người phỏng vấn** : Có, độ dài văn bản phải dưới 100.000 ký tự.
+
+**Ứng viên** : Có yêu cầu mã hóa đầu cuối (end-to-end encryption) không?
+**Người phỏng vấn** : Hiện tại chưa yêu cầu, nhưng chúng ta sẽ thảo luận nếu có thời gian.
+
+**Ứng viên** : Chúng ta sẽ lưu trữ lịch sử chat trong bao lâu?
+**Người phỏng vấn** : Vĩnh viễn.
+
+Trong chương này, chúng ta tập trung vào việc thiết kế một ứng dụng chat tương tự Facebook Messenger, với trọng tâm vào các tính năng sau:
+
+  - Chat 1-1 với độ trễ gửi tin nhắn thấp
+  - Chat nhóm nhỏ (tối đa 100 người)
+  - Hiển thị trạng thái online
+  - Hỗ trợ đa thiết bị. Cùng một tài khoản có thể đăng nhập trên nhiều thiết bị cùng lúc.
+  - Thông báo đẩy (Push notifications)
+
+Cũng điều quan trọng là phải thống nhất về quy mô thiết kế. Chúng ta sẽ thiết kế một hệ thống hỗ trợ 50 triệu DAU.
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận**
+
+Để phát triển một thiết kế chất lượng cao, chúng ta cần có kiến thức cơ bản về cách client và server giao tiếp. Trong một hệ thống chat, client có thể là ứng dụng di động hoặc ứng dụng web. Các client không giao tiếp trực tiếp với nhau. Thay vào đó, mỗi client kết nối với một dịch vụ chat (chat service), dịch vụ này hỗ trợ tất cả các tính năng đã đề cập ở trên. Hãy cùng tập trung vào các hoạt động cơ bản. Dịch vụ chat phải hỗ trợ các chức năng sau:
+
+  - Nhận tin nhắn từ các client khác.
+  - Tìm người nhận phù hợp cho mỗi tin nhắn và chuyển tiếp tin nhắn đến người nhận.
+  - Nếu người nhận không online, giữ tin nhắn cho người nhận đó trên server cho đến khi họ online.
+
+Hình 12-2 cho thấy mối quan hệ giữa các client (người gửi và người nhận) và dịch vụ chat.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492789/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-179-0.png)
+
+Khi một client muốn bắt đầu chat, nó kết nối với dịch vụ chat bằng cách sử dụng một hoặc nhiều giao thức mạng. Đối với một dịch vụ chat, việc lựa chọn các giao thức mạng là quan trọng. Hãy cùng thảo luận điều này với người phỏng vấn.
+
+Các yêu cầu thường được khởi tạo bởi client đối với hầu hết các ứng dụng client/server. Điều này cũng đúng đối với phía người gửi của một ứng dụng chat. Trong Hình 12-2, khi người gửi gửi tin nhắn cho người nhận thông qua dịch vụ chat, nó sử dụng giao thức HTTP đã được kiểm chứng qua thời gian, đây là giao thức web phổ biến nhất. Trong kịch bản này, client mở một kết nối HTTP với dịch vụ chat và gửi tin nhắn, thông báo cho dịch vụ gửi tin nhắn đến người nhận. Cơ chế keep-alive hiệu quả cho việc này vì header keep-alive cho phép client duy trì một kết nối liên tục với dịch vụ chat. Nó cũng giảm số lượng bắt tay TCP (TCP handshakes). HTTP là một lựa chọn tốt ở phía người gửi, và nhiều ứng dụng chat phổ biến như Facebook [1] ban đầu đã sử dụng HTTP để gửi tin nhắn.
+
+Tuy nhiên, phía người nhận phức tạp hơn một chút. Vì HTTP là giao thức do client khởi tạo, việc gửi tin nhắn từ server không hề đơn giản. Trong những năm qua, nhiều kỹ thuật đã được sử dụng để mô phỏng một kết nối do server khởi tạo: polling, long polling và WebSocket. Đây là những kỹ thuật quan trọng được sử dụng rộng rãi trong các cuộc phỏng vấn thiết kế hệ thống, vì vậy hãy cùng xem xét từng kỹ thuật.
+
+## **Polling**
+
+Như thể hiện trong Hình 12-3, polling là một kỹ thuật mà client định kỳ hỏi server xem có tin nhắn nào khả dụng không. Tùy thuộc vào tần suất polling, polling có thể tốn kém. Nó có thể tiêu tốn tài nguyên server quý giá để trả lời một câu hỏi mà hầu hết thời gian câu trả lời là không có gì.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492791/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-180-0.png)
+
+## **Long polling**
+
+Vì polling có thể không hiệu quả, bước phát triển tiếp theo là long polling (Hình 12-4).
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492792/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-181-0.png)
+
+Trong long polling, client giữ kết nối mở cho đến khi có tin nhắn mới hoặc ngưỡng thời gian chờ (timeout threshold) đã đạt được. Khi client nhận được tin nhắn mới, nó ngay lập tức gửi một yêu cầu khác đến server, khởi động lại quá trình. Long polling có một vài nhược điểm:
+
+  - Người gửi và người nhận có thể không kết nối đến cùng một server chat. Các server dựa trên HTTP thường là stateless (không trạng thái). Nếu chúng ta sử dụng round robin để cân bằng tải (load balancing), server nhận tin nhắn có thể không có kết nối long polling với client nhận tin nhắn.
+  - Server không có cách nào tốt để biết liệu một client có bị ngắt kết nối hay không.
+  - Nó không hiệu quả. Nếu người dùng không chat nhiều, long polling vẫn tạo các kết nối định kỳ sau khi hết thời gian chờ.
+
+## **WebSocket**
+
+WebSocket là giải pháp phổ biến nhất để gửi các cập nhật bất đồng bộ (asynchronous updates) từ server đến client. Hình 12-5 cho thấy cách nó hoạt động.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492794/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-182-0.png)
+
+Kết nối WebSocket được khởi tạo bởi client. Nó là kết nối hai chiều (bi-directional) và liên tục (persistent). Nó bắt đầu như một kết nối HTTP và có thể được “nâng cấp” thông qua một quá trình bắt tay (handshake) được định nghĩa rõ ràng thành một kết nối WebSocket. Thông qua kết nối liên tục này, server có thể gửi các cập nhật đến client. Các kết nối WebSocket thường hoạt động ngay cả khi có tường lửa (firewall). Điều này là do chúng sử dụng cổng 80 hoặc 443, vốn cũng được sử dụng bởi các kết nối HTTP/HTTPS.
+
+Trước đó chúng ta đã nói rằng ở phía người gửi, HTTP là một giao thức tốt để sử dụng, nhưng vì WebSocket là hai chiều, không có lý do kỹ thuật mạnh mẽ nào để không sử dụng nó cho cả việc gửi tin nhắn. Hình 12-6 cho thấy cách WebSocket (ws) được sử dụng cho cả phía người gửi và người nhận.
+
+Bằng cách sử dụng WebSocket cho cả việc gửi và nhận, nó đơn giản hóa thiết kế và giúp việc triển khai ở cả client và server trở nên dễ dàng hơn. Vì các kết nối WebSocket là liên tục, việc quản lý kết nối hiệu quả là rất quan trọng ở phía server.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492795/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-182-1.png)
+---
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492795/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-182-1.png)
+
+## **Thiết kế cấp cao**
+
+Vừa rồi chúng ta đã đề cập rằng WebSocket được chọn làm giao thức giao tiếp chính giữa client và server nhờ khả năng giao tiếp hai chiều. Điều quan trọng cần lưu ý là không phải mọi thứ khác đều phải sử dụng WebSocket. Trên thực tế, hầu hết các tính năng (đăng ký, đăng nhập, hồ sơ người dùng, v.v.) của một ứng dụng chat có thể sử dụng phương pháp request/response truyền thống qua HTTP. Hãy cùng đi sâu hơn một chút và xem xét các thành phần cấp cao của hệ thống.
+
+Như được minh họa trong Hình 12-7, hệ thống chat được chia thành ba loại chính: các dịch vụ phi trạng thái (stateless services), các dịch vụ có trạng thái (stateful services) và tích hợp bên thứ ba (third-party integration).
+
+**Dịch vụ phi trạng thái (Stateless Services)**
+Các dịch vụ phi trạng thái là các dịch vụ request/response truyền thống hướng ra công chúng, được sử dụng để quản lý đăng nhập, đăng ký, hồ sơ người dùng, v.v. Đây là những tính năng phổ biến trên nhiều trang web và ứng dụng.
+
+Các dịch vụ phi trạng thái nằm sau một bộ cân bằng tải (load balancer), có nhiệm vụ định tuyến các yêu cầu đến các dịch vụ phù hợp dựa trên đường dẫn yêu cầu. Các dịch vụ này có thể là kiến trúc nguyên khối (monolithic) hoặc các Microservices riêng lẻ. Chúng ta không cần tự xây dựng nhiều dịch vụ phi trạng thái này vì có những dịch vụ trên thị trường có thể được tích hợp dễ dàng. Một dịch vụ mà chúng ta sẽ thảo luận sâu hơn trong phần đi sâu là service discovery (khám phá dịch vụ). Nhiệm vụ chính của nó là cung cấp cho client một danh sách các tên máy chủ DNS của các máy chủ chat mà client có thể kết nối.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492799/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-183-0.png)
+
+**Dịch vụ có trạng thái (Stateful Service)**
+Dịch vụ có trạng thái duy nhất là dịch vụ chat. Dịch vụ này có trạng thái vì mỗi client duy trì một kết nối mạng liên tục đến một máy chủ chat. Trong dịch vụ này, client thường không chuyển sang máy chủ chat khác miễn là máy chủ đó vẫn khả dụng. Service discovery phối hợp chặt chẽ với dịch vụ chat để tránh tình trạng quá tải máy chủ. Chúng ta sẽ đi vào chi tiết trong phần đi sâu.
+
+**Tích hợp bên thứ ba (Third-party integration)**
+Đối với một ứng dụng chat, push notification (thông báo đẩy) là tích hợp bên thứ ba quan trọng nhất. Đây là một cách để thông báo cho người dùng khi có tin nhắn mới, ngay cả khi ứng dụng không chạy. Việc tích hợp push notification đúng cách là rất quan trọng. Tham khảo Chương 10 "Thiết kế hệ thống thông báo" để biết thêm thông tin.
+
+**Khả năng mở rộng (Scalability)**
+Ở quy mô nhỏ, tất cả các dịch vụ được liệt kê ở trên có thể nằm gọn trong một máy chủ. Ngay cả ở quy mô mà chúng ta đang thiết kế, về lý thuyết, vẫn có thể chứa tất cả các kết nối người dùng trong một máy chủ đám mây hiện đại. Số lượng kết nối đồng thời mà một máy chủ có thể xử lý rất có thể sẽ là yếu tố giới hạn. Trong kịch bản của chúng ta, với 1 triệu người dùng đồng thời, giả sử mỗi kết nối người dùng cần 10KB bộ nhớ trên máy chủ (đây là một con số rất ước chừng và phụ thuộc nhiều vào lựa chọn ngôn ngữ), thì chỉ cần khoảng 10GB bộ nhớ để chứa tất cả các kết nối trên một máy.
+
+Nếu chúng ta đề xuất một thiết kế mà mọi thứ đều nằm gọn trong một máy chủ, điều này có thể là một dấu hiệu đáng báo động lớn trong suy nghĩ của người phỏng vấn. Không một kỹ sư công nghệ nào lại thiết kế một hệ thống ở quy mô như vậy trên một máy chủ duy nhất. Thiết kế một máy chủ duy nhất là một yếu tố không thể chấp nhận được do nhiều yếu tố. Điểm lỗi duy nhất (single point of failure) là yếu tố lớn nhất trong số đó.
+
+Tuy nhiên, việc bắt đầu với thiết kế một máy chủ duy nhất là hoàn toàn chấp nhận được. Chỉ cần đảm bảo người phỏng vấn biết rằng đây là điểm khởi đầu. Tổng hợp tất cả những gì chúng ta đã đề cập, Hình 12-8 cho thấy thiết kế cấp cao đã được điều chỉnh.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492801/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-185-0.png)
+
+Trong Hình 12-8, client duy trì kết nối WebSocket liên tục đến một máy chủ chat để nhắn tin theo thời gian thực.
+
+  - Các máy chủ chat (Chat servers) hỗ trợ gửi/nhận tin nhắn.
+
+  - Các máy chủ trạng thái (Presence servers) quản lý trạng thái online/offline.
+
+  - Các API servers xử lý mọi thứ bao gồm đăng nhập, đăng ký, thay đổi hồ sơ người dùng, v.v.
+
+  - Các máy chủ thông báo (Notification servers) gửi push notification.
+
+  - Cuối cùng, kho lưu trữ key-value (key-value store) được sử dụng để lưu trữ lịch sử chat. Khi một người dùng offline trở lại online, họ sẽ thấy tất cả lịch sử chat trước đó của mình.
+
+**Lưu trữ (Storage)**
+Đến thời điểm này, chúng ta đã có các máy chủ sẵn sàng, các dịch vụ đang chạy và các tích hợp bên thứ ba đã hoàn tất. Sâu bên dưới ngăn xếp công nghệ là tầng dữ liệu (data layer). Tầng dữ liệu thường đòi hỏi một số nỗ lực để triển khai đúng cách. Một quyết định quan trọng mà chúng ta phải đưa ra là chọn loại cơ sở dữ liệu phù hợp để sử dụng: cơ sở dữ liệu quan hệ (relational databases) hay cơ sở dữ liệu NoSQL? Để đưa ra quyết định sáng suốt, chúng ta sẽ xem xét các loại dữ liệu và các mẫu đọc/ghi (read/write patterns).
+
+Hai loại dữ liệu tồn tại trong một hệ thống chat điển hình. Loại đầu tiên là dữ liệu chung, chẳng hạn như hồ sơ người dùng, cài đặt, danh sách bạn bè của người dùng. Những dữ liệu này được lưu trữ trong các cơ sở dữ liệu quan hệ mạnh mẽ và đáng tin cậy. Replication (nhân rộng dữ liệu) và sharding (phân mảnh dữ liệu) là các kỹ thuật phổ biến để đáp ứng các yêu cầu về tính khả dụng (availability) và khả năng mở rộng (scalability).
+
+Loại thứ hai là đặc thù của hệ thống chat: dữ liệu lịch sử chat. Điều quan trọng là phải hiểu mẫu đọc/ghi.
+
+  - Lượng dữ liệu cho các hệ thống chat là rất lớn. Một nghiên cứu trước đây [2] tiết lộ rằng Facebook Messenger và WhatsApp xử lý 60 tỷ tin nhắn mỗi ngày.
+
+  - Chỉ những cuộc trò chuyện gần đây mới được truy cập thường xuyên. Người dùng thường không tìm kiếm các cuộc trò chuyện cũ.
+
+  - Mặc dù lịch sử chat rất gần đây được xem trong hầu hết các trường hợp, người dùng có thể sử dụng các tính năng yêu cầu truy cập dữ liệu ngẫu nhiên (random access), chẳng hạn như tìm kiếm, xem các lượt nhắc đến bạn, nhảy đến các tin nhắn cụ thể, v.v. Các trường hợp này phải được hỗ trợ bởi tầng truy cập dữ liệu (data access layer).
+
+  - Tỷ lệ đọc trên ghi (read to write ratio) là khoảng 1:1 đối với các ứng dụng chat 1-1.
+
+Việc chọn hệ thống lưu trữ chính xác hỗ trợ tất cả các trường hợp sử dụng của chúng ta là rất quan trọng. Chúng ta đề xuất kho lưu trữ key-value vì những lý do sau:
+
+  - Kho lưu trữ key-value cho phép mở rộng theo chiều ngang (horizontal scaling) dễ dàng.
+
+  - Kho lưu trữ key-value cung cấp độ trễ rất thấp khi truy cập dữ liệu.
+
+  - Các cơ sở dữ liệu quan hệ không xử lý tốt dữ liệu "long tail" [3]. Khi các chỉ mục (indexes) trở nên lớn, việc truy cập ngẫu nhiên sẽ tốn kém.
+
+  - Kho lưu trữ key-value được áp dụng bởi các ứng dụng chat đáng tin cậy đã được chứng minh khác. Ví dụ, cả Facebook Messenger và Discord đều sử dụng kho lưu trữ key-value. Facebook Messenger sử dụng HBase [4], và Discord sử dụng Cassandra [5].
+
+## **Mô hình dữ liệu (Data models)**
+
+Vừa rồi, chúng ta đã nói về việc sử dụng kho lưu trữ key-value làm tầng lưu trữ của mình. Dữ liệu quan trọng nhất là dữ liệu tin nhắn. Hãy cùng xem xét kỹ hơn.
+
+**Bảng tin nhắn cho chat 1-1 (Message table for 1 on 1 chat)**
+Hình 12-9 cho thấy bảng tin nhắn cho chat 1-1. Khóa chính (primary key) là _message_id_, giúp xác định thứ tự tin nhắn. Chúng ta không thể dựa vào _created_at_ để xác định thứ tự tin nhắn vì hai tin nhắn có thể được tạo cùng một lúc.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492803/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-187-0.png)
+
+**Bảng tin nhắn cho chat nhóm (Message table for group chat)**
+Hình 12-10 cho thấy bảng tin nhắn cho chat nhóm. Khóa chính tổng hợp (composite primary key) là _(channel_id, message_id)._ "Channel" và "group" có cùng ý nghĩa ở đây. _channel_id_ là khóa phân vùng (partition key) vì tất cả các truy vấn trong một cuộc trò chuyện nhóm đều hoạt động trong một kênh.
+
+**ID tin nhắn (Message ID)**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492804/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-187-1.png)
+Cách tạo _message_id_ là một chủ đề thú vị đáng để khám phá. _Message_id_ chịu trách nhiệm đảm bảo thứ tự của các tin nhắn. Để xác định thứ tự của các tin nhắn, _message_id_ phải thỏa mãn hai yêu cầu sau:
+
+  - ID phải là duy nhất.
+
+  - ID phải có thể sắp xếp được theo thời gian, nghĩa là các hàng mới có ID cao hơn các hàng cũ.
+
+Làm thế nào chúng ta có thể đạt được hai đảm bảo đó? Ý tưởng đầu tiên xuất hiện trong đầu là từ khóa “ _auto_increment_ ” trong MySQL. Tuy nhiên, các cơ sở dữ liệu NoSQL thường không cung cấp tính năng như vậy.
+
+Cách tiếp cận thứ hai là sử dụng một trình tạo số thứ tự 64-bit toàn cầu như Snowflake [6]. Điều này được thảo luận trong “Chương 7: Thiết kế trình tạo ID duy nhất trong hệ thống phân tán”.
+
+Cách tiếp cận cuối cùng là sử dụng trình tạo số thứ tự cục bộ (local sequence number generator). Cục bộ có nghĩa là ID chỉ là duy nhất trong một nhóm. Lý do ID cục bộ hoạt động là vì việc duy trì thứ tự tin nhắn trong một kênh 1-1 hoặc một kênh nhóm là đủ. Cách tiếp cận này dễ triển khai hơn so với việc triển khai ID toàn cầu.
+
+## **Bước 3 - Đi sâu vào thiết kế (Design deep dive)**
+
+Trong một buổi phỏng vấn thiết kế hệ thống, thông thường bạn được mong đợi sẽ đi sâu vào một số thành phần trong thiết kế cấp cao. Đối với hệ thống chat, service discovery, luồng tin nhắn (messaging flows) và các chỉ báo online/offline (online/offline indicators) là những phần đáng để khám phá sâu hơn.
+
+---
+[Context từ đoạn trước]:
+...việc triển khai ID toàn cục.
+
+## **Bước 3 - Đi sâu vào thiết kế**
+
+Trong một buổi phỏng vấn thiết kế hệ thống, chúng ta thường được kỳ vọng sẽ đi sâu vào một số thành phần trong thiết kế tổng quan. Đối với hệ thống chat, các phần như service discovery, luồng tin nhắn và chỉ báo trạng thái trực tuyến/ngoại tuyến rất đáng để tìm hiểu sâu hơn.
+
+---
+
+## **Service discovery**
+
+Vai trò chính của service discovery là đề xuất máy chủ chat tốt nhất cho một client dựa trên các tiêu chí như vị trí địa lý, dung lượng máy chủ, v.v. Apache Zookeeper [7] là một giải pháp mã nguồn mở phổ biến cho service discovery. Nó đăng ký tất cả các máy chủ chat khả dụng và chọn máy chủ chat tốt nhất cho một client dựa trên các tiêu chí được định nghĩa trước.
+
+Hình 12-11 minh họa cách service discovery (Zookeeper) hoạt động.
+
+1. Người dùng A cố gắng đăng nhập vào ứng dụng.
+2. Load balancer gửi yêu cầu đăng nhập đến các API servers.
+3. Sau khi hệ thống backend xác thực người dùng, service discovery tìm máy chủ chat tốt nhất cho Người dùng A. Trong ví dụ này, máy chủ 2 được chọn và thông tin máy chủ được trả về cho Người dùng A.
+4. Người dùng A kết nối với máy chủ chat 2 thông qua WebSocket.
+
+## **Luồng tin nhắn**
+
+Thật thú vị khi tìm hiểu luồng từ đầu đến cuối của một hệ thống chat. Trong phần này, chúng ta sẽ
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492807/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-189-0.png)
+khám phá luồng chat 1-1, đồng bộ tin nhắn trên nhiều thiết bị và luồng chat nhóm.
+
+**Luồng chat 1-1**
+Hình 12-12 giải thích những gì xảy ra khi Người dùng A gửi tin nhắn cho Người dùng B.
+
+1. Người dùng A gửi tin nhắn chat đến Máy chủ chat 1.
+2. Máy chủ chat 1 lấy ID tin nhắn từ bộ tạo ID.
+3. Máy chủ chat 1 gửi tin nhắn đến hàng đợi đồng bộ tin nhắn.
+4. Tin nhắn được lưu trữ trong một key-value store.
+5.a. Nếu Người dùng B đang trực tuyến, tin nhắn được chuyển tiếp đến Máy chủ chat 2 nơi Người dùng B đang kết nối.
+5.b. Nếu Người dùng B đang ngoại tuyến, một push notification sẽ được gửi từ các máy chủ push notification (PN).
+6. Máy chủ chat 2 chuyển tiếp tin nhắn đến Người dùng B. Có một kết nối WebSocket liên tục giữa Người dùng B và Máy chủ chat 2.
+
+**Đồng bộ tin nhắn trên nhiều thiết bị**
+Nhiều người dùng có nhiều thiết bị. Chúng ta sẽ giải thích cách đồng bộ tin nhắn trên nhiều thiết bị. Hình 12-13 minh họa một ví dụ về đồng bộ tin nhắn.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492810/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-190-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492812/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-191-0.png)
+
+Trong Hình 12-13, người dùng A có hai thiết bị: điện thoại và máy tính xách tay. Khi Người dùng A đăng nhập vào ứng dụng chat bằng điện thoại của mình, nó thiết lập một kết nối WebSocket với Máy chủ chat 1. Tương tự, có một kết nối giữa máy tính xách tay và Máy chủ chat 1.
+
+Mỗi thiết bị duy trì một biến gọi là _cur_max_message_id_, theo dõi ID tin nhắn mới nhất trên thiết bị. Các tin nhắn đáp ứng hai điều kiện sau được coi là tin nhắn mới:
+
+  - ID người nhận bằng với ID người dùng đang đăng nhập.
+
+  - ID tin nhắn trong key-value store lớn hơn _cur_max_message_id_.
+
+Với _cur_max_message_id_ riêng biệt trên mỗi thiết bị, việc đồng bộ tin nhắn trở nên dễ dàng vì mỗi thiết bị có thể lấy tin nhắn mới từ KV store.
+
+**Luồng chat nhóm nhỏ**
+So với chat 1-1, logic của chat nhóm phức tạp hơn. Hình 12-14 và 12-15 giải thích luồng này.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492814/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-192-0.png)
+
+Hình 12-14 giải thích những gì xảy ra khi Người dùng A gửi tin nhắn trong một cuộc chat nhóm. Giả sử có 3 thành viên trong nhóm (Người dùng A, Người dùng B và Người dùng C). Đầu tiên, tin nhắn từ Người dùng A được sao chép vào hàng đợi đồng bộ tin nhắn của từng thành viên trong nhóm: một cho Người dùng B và một cho Người dùng C. Chúng ta có thể coi hàng đợi đồng bộ tin nhắn như một hộp thư đến (inbox) cho người nhận. Lựa chọn thiết kế này tốt cho chat nhóm nhỏ vì:
+
+  - nó đơn giản hóa luồng đồng bộ tin nhắn vì mỗi client chỉ cần kiểm tra hộp thư đến của riêng mình để nhận tin nhắn mới.
+
+  - khi số lượng thành viên nhóm nhỏ, việc lưu trữ một bản sao trong hộp thư đến của mỗi người nhận không quá tốn kém.
+
+WeChat sử dụng một cách tiếp cận tương tự và
+
+## **Bước 4 - Tổng kết**
+
+Trong chương này, chúng ta đã trình bày một kiến trúc hệ thống chat hỗ trợ cả chat 1-đối-1 và chat nhóm nhỏ. WebSocket được sử dụng để giao tiếp thời gian thực giữa client và server. Hệ thống chat bao gồm các thành phần sau: các chat server để nhắn tin thời gian thực, các presence server để quản lý trạng thái trực tuyến, các push notification server để gửi thông báo đẩy, các key-value store để lưu trữ lịch sử chat và các API server cho các chức năng khác.
+
+Nếu bạn có thêm thời gian vào cuối buổi phỏng vấn, đây là những điểm bổ sung có thể thảo luận:
+
+  - Mở rộng ứng dụng chat để hỗ trợ các tệp đa phương tiện như ảnh và video. Các tệp đa phương tiện có kích thước lớn hơn đáng kể so với văn bản. Nén dữ liệu, lưu trữ đám mây và ảnh thu nhỏ là những chủ đề thú vị để thảo luận.
+
+  - End-to-end encryption. Whatsapp hỗ trợ End-to-end encryption cho tin nhắn. Chỉ người gửi và người nhận mới có thể đọc tin nhắn. Độc giả quan tâm nên tham khảo bài viết trong tài liệu tham khảo [9].
+
+  - Việc caching tin nhắn ở phía client có hiệu quả trong việc giảm lượng dữ liệu truyền tải giữa client và server.
+
+  - Cải thiện thời gian tải. Slack đã xây dựng một mạng lưới phân tán địa lý để cache dữ liệu người dùng, kênh, v.v. nhằm cải thiện thời gian tải [10].
+
+  - Xử lý lỗi.
+
+    - Lỗi chat server. Có thể có hàng trăm nghìn, hoặc thậm chí nhiều hơn các kết nối bền vững (persistent connections) đến một chat server. Nếu một chat server ngừng hoạt động, service discovery (Zookeeper) sẽ cung cấp một chat server mới để client thiết lập kết nối.
+
+    - Cơ chế gửi lại tin nhắn. Thử lại (retry) và xếp hàng đợi (queueing) là những kỹ thuật phổ biến để gửi lại tin nhắn.
+
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!
+
+# **Tài liệu tham khảo**
+
+[1] Erlang tại Facebook: https://www.erlangfactory.com/upload/presentations/31/EugeneLetuchy-ErlangatFacebook.pdf
+
+[2] Messenger và WhatsApp xử lý 60 tỷ tin nhắn mỗi ngày: https://www.theverge.com/2016/4/12/11415198/facebook-messenger-whatsapp-numbermessages-vs-sms-f8-2016
+
+[3] Đuôi dài (Long tail): https://en.wikipedia.org/wiki/Long_tail
+
+[4] Công nghệ nền tảng của tin nhắn: https://www.facebook.com/notes/facebookengineering/the-underlying-technology-of-messages/454991608919/
+
+[5] Cách Discord lưu trữ hàng tỷ tin nhắn: https://blog.discordapp.com/how-discordstores-billions-of-messages-7fa6ec7ee4c7
+
+[6] Giới thiệu Snowflake: https://blog.twitter.com/engineering/en_us/a/2010/announcingsnowflake.html
+
+[7] Apache ZooKeeper: https://zookeeper.apache.org/
+
+[8] Từ con số không: sự phát triển của hệ thống backend WeChat (Bài viết tiếng Trung): https://www.infoq.cn/article/the-road-of-the-growth-weixin-background
+
+[9] End-to-end encryption: https://faq.whatsapp.com/en/android/28030015/
+
+[10] Flannel: Một Edge Cache cấp ứng dụng để Slack có thể mở rộng quy mô: https://slack.engineering/flannel-an-application-level-edge-cache-to-make-slack-scaleb8a6400e2f6b
+
+---
+
+*Made by Anh Tu - Share to be share*

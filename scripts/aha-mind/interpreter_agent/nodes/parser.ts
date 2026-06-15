@@ -87,6 +87,8 @@ export const parserNode = async (
           rawContent = rawContent.split(backslashPath).join(cloudinaryUrl);
           rawContent = rawContent.split(path.join(imageDir, file)).join(cloudinaryUrl);
 
+          // Xoá file ảnh tạm sau khi upload thành công
+          fs.unlinkSync(localPath);
         } catch (uploadError) {
           console.error(`[Parser] ❌ Lỗi khi upload ${file}, giữ nguyên đường dẫn local.`);
           // Nếu lỗi, đổi sang đường dẫn tương đối (fallback)

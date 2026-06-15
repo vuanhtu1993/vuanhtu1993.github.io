@@ -1,0 +1,178 @@
+---
+slug: aha-interpreter-system-design-interview-pages-110-118
+title: "[System design interview] Từ trang 110 đến 118"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+# **CHƯƠNG 7: THIẾT KẾ HỆ THỐNG TẠO ID DUY NHẤT TRONG** **HỆ THỐNG PHÂN TÁN**
+
+Trong chương này, chúng ta sẽ thiết kế một hệ thống tạo ID duy nhất trong các hệ thống phân tán. Suy nghĩ đầu tiên của bạn có thể là sử dụng khóa chính với thuộc tính _auto_increment_ trong một cơ sở dữ liệu truyền thống. Tuy nhiên, _auto_increment_ không hoạt động trong môi trường phân tán vì một máy chủ cơ sở dữ liệu duy nhất không đủ lớn và việc tạo ID duy nhất trên nhiều cơ sở dữ liệu với độ trễ tối thiểu là một thách thức.
+
+Dưới đây là một vài ví dụ về các ID duy nhất:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491438/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-109-0.png)
+
+## **Bước 1 - Hiểu rõ vấn đề và xác định phạm vi thiết kế**
+
+Đặt câu hỏi làm rõ là bước đầu tiên để giải quyết bất kỳ câu hỏi phỏng vấn thiết kế hệ thống nào. Dưới đây là một ví dụ về tương tác giữa ứng viên và người phỏng vấn:
+
+**Ứng viên** : Các đặc điểm của ID duy nhất là gì?
+**Người phỏng vấn** : ID phải là duy nhất và có thể sắp xếp được.
+
+**Ứng viên** : Với mỗi bản ghi mới, ID có tăng thêm 1 không?
+**Người phỏng vấn** : ID tăng theo thời gian nhưng không nhất thiết chỉ tăng thêm 1. Các ID được tạo vào buổi tối sẽ lớn hơn các ID được tạo vào buổi sáng cùng ngày.
+
+**Ứng viên** : ID chỉ chứa các giá trị số phải không?
+**Người phỏng vấn** : Đúng vậy.
+
+**Ứng viên** : Yêu cầu về độ dài ID là gì?
+**Người phỏng vấn** : ID nên vừa với 64-bit.
+
+**Ứng viên** : Quy mô của hệ thống là bao nhiêu?
+**Người phỏng vấn** : Hệ thống phải có khả năng tạo ra 10.000 ID mỗi giây.
+
+Trên đây là một số câu hỏi mẫu mà bạn có thể hỏi người phỏng vấn. Điều quan trọng là phải hiểu rõ các yêu cầu và làm rõ những điểm không rõ ràng. Đối với câu hỏi phỏng vấn này, các yêu cầu được liệt kê như sau:
+
+  - ID phải là duy nhất.
+
+  - ID chỉ chứa các giá trị số.
+
+  - ID vừa với 64-bit.
+
+  - ID được sắp xếp theo ngày.
+
+  - Khả năng tạo ra hơn 10.000 ID duy nhất mỗi giây.
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận**
+
+Có nhiều tùy chọn có thể được sử dụng để tạo ID duy nhất trong các hệ thống phân tán. Các tùy chọn chúng ta đã xem xét là:
+
+  - Multi-master replication (nhân bản đa chủ)
+
+  - Universally unique identifier (UUID)
+
+  - Ticket Server
+
+  - Phương pháp Twitter snowflake
+
+Chúng ta hãy cùng xem xét từng tùy chọn, cách chúng hoạt động và ưu/nhược điểm của mỗi tùy chọn.
+
+## **Multi-master replication**
+
+Như thể hiện trong Hình 7-2, phương pháp đầu tiên là multi-master replication.
+
+Phương pháp này sử dụng tính năng _auto_increment_ của cơ sở dữ liệu. Thay vì tăng ID tiếp theo lên 1, chúng ta tăng nó lên _k_, trong đó _k_ là số lượng máy chủ cơ sở dữ liệu đang được sử dụng. Như minh họa trong Hình 7-2, ID tiếp theo được tạo ra bằng ID trước đó trong cùng một máy chủ cộng với 2. Điều này giải quyết một số vấn đề về khả năng mở rộng vì ID có thể mở rộng theo số lượng máy chủ cơ sở dữ liệu. Tuy nhiên, chiến lược này có một số nhược điểm lớn:
+
+  - Khó mở rộng với nhiều trung tâm dữ liệu (data center).
+
+  - ID không tăng theo thời gian trên nhiều máy chủ.
+
+  - Nó không mở rộng tốt khi một máy chủ được thêm hoặc xóa.
+
+## **UUID**
+
+UUID là một cách dễ dàng khác để có được các ID duy nhất. UUID là một số 128-bit được sử dụng để nhận dạng thông tin trong các hệ thống máy tính. UUID có xác suất trùng lặp (collusion) rất thấp. Trích dẫn từ Wikipedia, “sau khi tạo ra 1 tỷ UUID mỗi giây trong khoảng 100 năm, xác suất tạo ra một bản sao duy nhất mới đạt 50%” [1].
+
+Dưới đây là một ví dụ về UUID: _09c93e62-50b4-468d-bf8a-c07e1040bfb2_. Các UUID có thể được tạo độc lập mà không cần phối hợp giữa các máy chủ. Hình 7-3 trình bày thiết kế UUID.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491440/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-111-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491441/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-112-0.png)
+
+Trong thiết kế này, mỗi máy chủ web chứa một trình tạo ID, và một máy chủ web chịu trách nhiệm tạo ID một cách độc lập.
+
+Ưu điểm:
+
+  - Việc tạo UUID đơn giản. Không cần phối hợp giữa các máy chủ nên sẽ không có bất kỳ vấn đề đồng bộ hóa nào.
+
+  - Hệ thống dễ dàng mở rộng vì mỗi máy chủ web chịu trách nhiệm tạo ID mà chúng sử dụng. Trình tạo ID có thể dễ dàng mở rộng cùng với các máy chủ web.
+Nhược điểm:
+
+  - ID dài 128 bit, nhưng yêu cầu của chúng ta là 64 bit.
+
+  - ID không tăng theo thời gian.
+
+  - ID có thể không phải là số.
+
+## **Ticket Server**
+
+Ticket Server là một cách thú vị khác để tạo ID duy nhất. Flicker đã phát triển các ticket server để tạo khóa chính phân tán [2]. Điều đáng nói là cách hệ thống này hoạt động.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491442/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-112-1.png)
+Ý tưởng là sử dụng tính năng _auto_increment_ tập trung trong một máy chủ cơ sở dữ liệu duy nhất (Ticket Server). Để tìm hiểu thêm về điều này, hãy tham khảo bài viết trên blog kỹ thuật của Flicker [2].
+
+Ưu điểm:
+
+  - ID là số.
+
+  - Dễ triển khai và hoạt động tốt cho các ứng dụng quy mô nhỏ đến trung bình.
+
+Nhược điểm:
+
+  - Điểm lỗi duy nhất (Single point of failure). Một ticket server duy nhất có nghĩa là nếu ticket server đó ngừng hoạt động, tất cả các hệ thống phụ thuộc vào nó sẽ gặp sự cố. Để tránh điểm lỗi duy nhất, chúng ta có thể thiết lập nhiều ticket server. Tuy nhiên, điều này sẽ tạo ra những thách thức mới như đồng bộ hóa dữ liệu.
+
+## **Phương pháp Twitter snowflake**
+
+Các phương pháp đã đề cập ở trên cung cấp cho chúng ta một số ý tưởng về cách các hệ thống tạo ID khác nhau hoạt động. Tuy nhiên, không có phương pháp nào trong số đó đáp ứng các yêu cầu cụ thể của chúng ta; do đó, chúng ta cần một phương pháp khác. Hệ thống tạo ID duy nhất của Twitter có tên là "snowflake" [3] rất đáng học hỏi và có thể đáp ứng các yêu cầu của chúng ta.
+
+Chia để trị là người bạn của chúng ta. Thay vì tạo ID trực tiếp, chúng ta chia ID thành các phần khác nhau. Hình 7-5 cho thấy cấu trúc của một ID 64-bit.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491443/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-113-0.png)
+
+Mỗi phần được giải thích dưới đây.
+
+  - Bit dấu (Sign bit): 1 bit. Nó sẽ luôn là 0. Bit này được dành cho các mục đích sử dụng trong tương lai. Nó có thể được sử dụng để phân biệt giữa số có dấu và số không dấu.
+
+  - Timestamp: 41 bit. Số mili giây kể từ epoch (th
+
+[Context từ đoạn trước]:
+...e or adopt other techniques
+to migrate IDs.
+
+**Số thứ tự (Sequence number)**
+Trường số thứ tự (sequence number) có 12 bit, cho phép chúng ta có 2^12 = 4096 tổ hợp. Trường này có giá trị 0 trừ khi có nhiều hơn một ID được tạo ra trong cùng một mili giây trên cùng một máy chủ. Về lý thuyết, một máy có thể hỗ trợ tối đa 4096 ID mới mỗi mili giây.
+
+---
+
+## **Bước 4 - Tổng kết**
+
+Trong chương này, chúng ta đã thảo luận về các phương pháp khác nhau để thiết kế một trình tạo ID duy nhất: nhân bản đa chủ (multimaster replication), UUID, máy chủ ticket (ticket server) và trình tạo ID duy nhất kiểu Twitter Snowflake. Chúng ta đã chọn Snowflake vì nó hỗ trợ tất cả các trường hợp sử dụng của chúng ta và có khả năng mở rộng trong môi trường phân tán.
+
+Nếu có thêm thời gian vào cuối buổi phỏng vấn, đây là một vài điểm thảo luận bổ sung:
+
+  - Đồng bộ hóa đồng hồ (clock synchronization). Trong thiết kế của chúng ta, chúng ta giả định các máy chủ tạo ID có cùng một đồng hồ. Giả định này có thể không đúng khi một máy chủ đang chạy trên nhiều lõi. Thử thách tương tự cũng tồn tại trong các kịch bản đa máy. Các giải pháp cho đồng bộ hóa đồng hồ nằm ngoài phạm vi của cuốn sách này; tuy nhiên, điều quan trọng là phải hiểu rằng vấn đề này tồn tại. Giao thức thời gian mạng (Network Time Protocol) là giải pháp phổ biến nhất cho vấn đề này. Đối với độc giả quan tâm, hãy tham khảo tài liệu tham khảo [4].
+
+  - Điều chỉnh độ dài các trường (section length tuning). Ví dụ, ít bit số thứ tự (sequence number) hơn nhưng nhiều bit dấu thời gian (timestamp) hơn sẽ hiệu quả cho các ứng dụng có độ đồng thời thấp và hoạt động lâu dài.
+
+  - Tính sẵn sàng cao (high availability). Vì trình tạo ID là một hệ thống quan trọng (mission-critical system), nó phải có tính sẵn sàng cao.
+
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!
+
+# **Tài liệu tham khảo**
+
+[1] Mã định danh duy nhất toàn cầu (Universally unique identifier): https://en.wikipedia.org/wiki/Universally_unique_identifier
+
+[2] Máy chủ Ticket (Ticket Servers): Khóa chính duy nhất phân tán với chi phí thấp: https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-thecheap/
+
+[3] Giới thiệu Snowflake: https://blog.twitter.com/engineering/en_us/a/2010/announcingsnowflake.html
+
+[4] Giao thức thời gian mạng (Network Time Protocol): https://en.wikipedia.org/wiki/Network_Time_Protocol
+
+---
+
+*Made by Anh Tu - Share to be share*

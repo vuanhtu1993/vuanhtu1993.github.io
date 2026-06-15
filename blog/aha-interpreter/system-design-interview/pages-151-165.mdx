@@ -1,0 +1,326 @@
+---
+slug: aha-interpreter-system-design-interview-pages-151-165
+title: "[System design interview] Từ trang 151 đến 165"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+# **CHƯƠNG 10: THIẾT KẾ HỆ THỐNG THÔNG BÁO**
+
+Hệ thống thông báo đã trở thành một tính năng rất phổ biến cho nhiều ứng dụng trong những năm gần đây. Một thông báo sẽ cảnh báo người dùng về các thông tin quan trọng như tin tức nóng hổi, cập nhật sản phẩm, sự kiện, ưu đãi, v.v. Nó đã trở thành một phần không thể thiếu trong cuộc sống hàng ngày của chúng ta. Trong chương này, chúng ta sẽ được yêu cầu thiết kế một hệ thống thông báo.
+
+Một thông báo không chỉ đơn thuần là thông báo đẩy (push notification) trên di động. Ba định dạng thông báo phổ biến là: thông báo đẩy trên di động, tin nhắn SMS và Email. Hình 10-1 minh họa một ví dụ cho mỗi loại thông báo này.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492117/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-150-0.png)
+
+## **Bước 1 - Hiểu vấn đề và xác định phạm vi thiết kế**
+
+Xây dựng một hệ thống có khả năng mở rộng (scalable system) để gửi hàng triệu thông báo mỗi ngày không phải là một nhiệm vụ dễ dàng. Nó đòi hỏi sự hiểu biết sâu sắc về hệ sinh thái thông báo. Câu hỏi phỏng vấn được thiết kế có chủ đích là mở và mơ hồ, và trách nhiệm của chúng ta là đặt câu hỏi để làm rõ các yêu cầu.
+
+**Ứng viên** : Hệ thống hỗ trợ những loại thông báo nào?
+**Người phỏng vấn** : Thông báo đẩy (push notification), tin nhắn SMS và email.
+
+**Ứng viên:** Đây có phải là một hệ thống thời gian thực (real-time system) không?
+**Người phỏng vấn:** Hãy coi đây là một hệ thống thời gian thực mềm (soft real-time system). Chúng ta muốn người dùng nhận được thông báo càng sớm càng tốt. Tuy nhiên, nếu hệ thống đang chịu tải cao, một chút chậm trễ là chấp nhận được.
+
+**Ứng viên:** Các thiết bị được hỗ trợ là gì?
+**Người phỏng vấn:** Thiết bị iOS, thiết bị Android và máy tính xách tay/máy tính để bàn.
+
+**Ứng viên:** Điều gì kích hoạt các thông báo?
+**Người phỏng vấn:** Thông báo có thể được kích hoạt bởi các ứng dụng khách (client applications). Chúng cũng có thể được lên lịch ở phía máy chủ (server-side).
+
+**Ứng viên:** Người dùng có thể chọn không nhận thông báo (opt-out) không?
+**Người phỏng vấn:** Có, những người dùng chọn không nhận thông báo sẽ không còn nhận được thông báo nữa.
+
+**Ứng viên:** Mỗi ngày có bao nhiêu thông báo được gửi đi?
+**Người phỏng vấn:** 10 triệu thông báo đẩy trên di động, 1 triệu tin nhắn SMS và 5 triệu email.
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận**
+
+Phần này trình bày thiết kế cấp cao hỗ trợ nhiều loại thông báo khác nhau: thông báo đẩy iOS, thông báo đẩy Android, tin nhắn SMS và Email. Nó được cấu trúc như sau:
+
+  - Các loại thông báo khác nhau
+
+  - Luồng thu thập thông tin liên hệ
+
+  - Luồng gửi/nhận thông báo
+
+## **Các loại thông báo khác nhau**
+
+Chúng ta bắt đầu bằng cách xem xét cách mỗi loại thông báo hoạt động ở cấp độ cao.
+
+**Thông báo đẩy iOS**
+
+Chúng ta chủ yếu cần ba thành phần để gửi một thông báo đẩy iOS:
+
+  - Provider (Nhà cung cấp). Một nhà cung cấp xây dựng và gửi các yêu cầu thông báo đến Apple Push Notification Service (APNS). Để tạo một thông báo đẩy, nhà cung cấp cung cấp các dữ liệu sau:
+
+    - Token thiết bị (Device token): Đây là một định danh duy nhất được sử dụng để gửi thông báo đẩy.
+
+    - Payload: Đây là một đối tượng JSON (JSON dictionary) chứa dữ liệu Payload của thông báo. Dưới đây là một ví dụ:
+
+  - APNS: Đây là một dịch vụ từ xa do Apple cung cấp để truyền tải các thông báo đẩy đến các thiết bị iOS.
+
+  - Thiết bị iOS: Đây là ứng dụng khách cuối cùng (end client), nơi nhận các thông báo đẩy.
+
+**Thông báo đẩy Android**
+Android áp dụng một luồng thông báo tương tự. Thay vì sử dụng APNS, Firebase Cloud Messaging (FCM) thường được sử dụng để gửi thông báo đẩy đến các thiết bị Android.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492119/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-152-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492119/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-152-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492120/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-153-0.png)
+
+**Tin nhắn SMS**
+Đối với tin nhắn SMS, các dịch vụ SMS của bên thứ ba như Twilio [1], Nexmo [2] và nhiều dịch vụ khác thường được sử dụng. Hầu hết chúng là các dịch vụ thương mại.
+
+**Email**
+Mặc dù các công ty có thể tự thiết lập máy chủ email của riêng mình, nhiều công ty chọn sử dụng các dịch vụ email thương mại. Sendgrid [3] và Mailchimp [4] là một trong những dịch vụ email phổ biến nhất, cung cấp tỷ lệ gửi thành công tốt hơn và phân tích dữ liệu (data analytics).
+
+Hình 10-6 hiển thị thiết kế sau khi đã bao gồm tất cả các dịch vụ của bên thứ ba.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492121/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-153-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492123/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-153-2.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492125/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-154-0.png)
+
+## **Luồng thu thập thông tin liên hệ**
+
+Để gửi thông báo, chúng ta cần thu thập token thiết bị di động, số điện thoại hoặc địa chỉ email. Như được hiển thị trong Hình 10-7, khi người dùng cài đặt ứng dụng của chúng ta hoặc đăng ký lần đầu, các máy chủ API sẽ thu thập thông tin liên hệ của người dùng và lưu trữ vào cơ sở dữ liệu (database).
+
+Hình 10-8 hiển thị các bảng cơ sở dữ liệu được đơn giản hóa để lưu trữ thông tin liên hệ. Địa chỉ email và số điện thoại được lưu trữ trong bảng _user_, trong khi token thiết bị được lưu trữ trong bảng _device_. Một
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492127/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-154-1.png)
+người dùng có thể có nhiều thiết bị, cho thấy rằng một thông báo đẩy có thể được gửi đến tất cả các thiết bị của người dùng.
+
+---
+## **Dòng chảy gửi/nhận thông báo**
+
+Đầu tiên, chúng ta sẽ trình bày thiết kế ban đầu; sau đó, đề xuất một số tối ưu hóa.
+
+**Thiết kế cấp cao**
+
+Hình 10-9 minh họa thiết kế, và mỗi thành phần hệ thống được giải thích dưới đây.
+
+**Dịch vụ 1 đến N** : Một dịch vụ có thể là một micro-service, một cron job, hoặc một distributed system kích hoạt các sự kiện gửi thông báo. Ví dụ, một dịch vụ thanh toán gửi email nhắc nhở khách hàng về khoản thanh toán đến hạn hoặc một trang web mua sắm thông báo cho khách hàng rằng gói hàng của họ sẽ được giao vào ngày mai qua tin nhắn SMS.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492129/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-155-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492130/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-155-1.png)
+**Hệ thống thông báo** : Hệ thống thông báo là trọng tâm của việc gửi/nhận thông báo. Bắt đầu với một thiết kế đơn giản, chỉ một máy chủ thông báo được sử dụng. Nó cung cấp các API cho các dịch vụ từ 1 đến N, và xây dựng các payload thông báo cho các dịch vụ bên thứ ba.
+
+**Các dịch vụ bên thứ ba:** Các dịch vụ bên thứ ba chịu trách nhiệm gửi thông báo đến người dùng. Khi tích hợp với các dịch vụ bên thứ ba, chúng ta cần đặc biệt chú ý đến khả năng mở rộng (extensibility). Khả năng mở rộng tốt có nghĩa là một hệ thống linh hoạt có thể dễ dàng thêm hoặc loại bỏ một dịch vụ bên thứ ba. Một yếu tố quan trọng khác cần xem xét là một dịch vụ bên thứ ba có thể không khả dụng ở các thị trường mới hoặc trong tương lai. Ví dụ, FCM không khả dụng ở Trung Quốc. Do đó, các dịch vụ bên thứ ba thay thế như Jpush, PushY, v.v. được sử dụng ở đó.
+
+**iOS, Android, SMS, Email** : Người dùng nhận thông báo trên thiết bị của họ.
+
+Ba vấn đề được xác định trong thiết kế này:
+
+  - Điểm lỗi duy nhất (SPOF): Một máy chủ thông báo duy nhất đồng nghĩa với SPOF.
+
+  - Khó mở rộng: Hệ thống thông báo xử lý mọi thứ liên quan đến push notification trên một máy chủ duy nhất. Việc mở rộng các database, cache và các thành phần xử lý thông báo khác nhau một cách độc lập là một thách thức.
+
+  - Nút thắt hiệu suất (Performance bottleneck): Xử lý và gửi thông báo có thể tốn nhiều tài nguyên. Ví dụ, việc xây dựng các trang HTML và chờ phản hồi từ các dịch vụ bên thứ ba có thể mất thời gian. Xử lý mọi thứ trong một hệ thống duy nhất có thể dẫn đến quá tải hệ thống, đặc biệt trong giờ cao điểm.
+
+**Thiết kế cấp cao (cải tiến)**
+Sau khi liệt kê các thách thức trong thiết kế ban đầu, chúng ta cải tiến thiết kế như sau:
+
+  - Di chuyển database và cache ra khỏi máy chủ thông báo.
+
+  - Thêm nhiều máy chủ thông báo và thiết lập horizontal scaling tự động.
+
+  - Giới thiệu message queues để tách rời các thành phần hệ thống.
+
+Hình 10-10 minh họa thiết kế cấp cao đã được cải tiến.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492132/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-157-0.png)
+
+Cách tốt nhất để xem xét sơ đồ trên là từ trái sang phải:
+
+**Dịch vụ 1 đến N** : Chúng đại diện cho các dịch vụ khác nhau gửi thông báo thông qua các API được cung cấp bởi các máy chủ thông báo.
+
+**Các máy chủ thông báo** : Chúng cung cấp các chức năng sau:
+
+  - Cung cấp các API cho các dịch vụ để gửi thông báo. Các API này chỉ có thể truy cập nội bộ hoặc bởi các client đã được xác minh để ngăn chặn spam.
+
+  - Thực hiện các xác thực cơ bản để kiểm tra email, số điện thoại, v.v.
+
+  - Truy vấn database hoặc cache để lấy dữ liệu cần thiết để hiển thị thông báo.
+
+  - Đưa dữ liệu thông báo vào message queues để xử lý song song.
+
+Dưới đây là một ví dụ về API để gửi email:
+
+_POST https://api.example.com/v/sms/send_
+Request body
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492134/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-158-0.png)
+
+**Cache** : Thông tin người dùng, thông tin thiết bị, các mẫu thông báo (notification template) được cache.
+
+**DB** : Nó lưu trữ dữ liệu về người dùng, thông báo, cài đặt, v.v.
+
+**Message queues** : Chúng loại bỏ sự phụ thuộc giữa các thành phần. Message queues đóng vai trò là bộ đệm khi có khối lượng lớn thông báo cần được gửi đi. Mỗi loại thông báo được gán một message queue riêng biệt để sự cố ở một dịch vụ bên thứ ba sẽ không ảnh hưởng đến các loại thông báo khác.
+
+**Workers** : Workers là một danh sách các máy chủ kéo các sự kiện thông báo từ message queues và gửi chúng đến các dịch vụ bên thứ ba tương ứng.
+
+**Các dịch vụ bên thứ ba** : Đã được giải thích trong thiết kế ban đầu.
+
+**iOS, Android, SMS, Email** : Đã được giải thích trong thiết kế ban đầu.
+
+Tiếp theo, chúng ta hãy xem xét cách mỗi thành phần hoạt động cùng nhau để gửi một thông báo:
+1. Một dịch vụ gọi các API được cung cấp bởi các máy chủ thông báo để gửi thông báo.
+2. Các máy chủ thông báo lấy metadata như thông tin người dùng, device token và cài đặt thông báo (notification setting) từ cache hoặc database.
+3. Một sự kiện thông báo được gửi đến hàng đợi tương ứng để xử lý. Ví dụ, một sự kiện push notification của iOS được gửi đến hàng đợi PN của iOS.
+4. Các Workers kéo các sự kiện thông báo từ message queues.
+5. Các Workers gửi thông báo đến các dịch vụ bên thứ ba.
+6. Các dịch vụ bên thứ ba gửi thông báo đến thiết bị của người dùng.
+
+## **Bước 3 - Đi sâu vào thiết kế**
+
+Trong thiết kế cấp cao, chúng ta đã thảo luận về các loại thông báo khác nhau, quy trình thu thập thông tin liên hệ và quy trình gửi/nhận thông báo. Chúng ta sẽ khám phá sâu hơn những điều sau:
+
+  - Độ tin cậy (Reliability).
+
+  - Các thành phần và cân nhắc bổ sung: mẫu thông báo (notification template), cài đặt thông báo (notification settings), giới hạn tỷ lệ (rate limiting), cơ chế thử lại (retry mechanism), bảo mật trong push notification, giám sát các thông báo trong hàng đợi và theo dõi sự kiện (event tracking).
+
+  - Thiết kế cập nhật.
+
+## **Độ tin cậy**
+
+Chúng ta phải trả lời một vài câu hỏi quan trọng về độ tin cậy khi thiết kế một hệ thống thông báo trong các môi trường phân tán.
+
+**Làm thế nào để ngăn chặn mất dữ liệu?**
+Một trong những yêu cầu quan trọng nhất trong một hệ thống thông báo là nó không được làm mất dữ liệu. Thông báo thường có thể bị trì hoãn hoặc sắp xếp lại, nhưng không bao giờ bị mất. Để đáp ứng yêu cầu này, hệ thống thông báo lưu trữ dữ liệu thông báo vào database và triển khai một cơ chế thử lại (retry mechanism). Database nhật ký thông báo được bao gồm để duy trì dữ liệu, như được hiển thị trong Hình 10-11.
+
+**Người nhận có nhận được thông báo chính xác một lần không?**
+Câu trả lời ngắn gọn là không. Mặc dù thông báo được gửi chính xác một lần trong hầu hết các trường hợp, nhưng bản chất phân tán có thể dẫn đến các thông báo trùng lặp. Để giảm thiểu sự xuất hiện trùng lặp, chúng ta giới thiệu một cơ chế dedupe (chống trùng lặp) và xử lý cẩn thận từng trường hợp lỗi. Dưới đây là một logic dedupe đơn giản:
+
+Khi một sự kiện thông báo lần đầu tiên đến, chúng ta kiểm tra xem nó đã được nhìn thấy trước đó chưa bằng cách kiểm tra event ID. Nếu đã được nhìn thấy trước đó, nó sẽ bị loại bỏ. Ngược lại, chúng ta sẽ gửi thông báo đi. Đối với những độc giả quan tâm muốn tìm hiểu lý do tại sao chúng ta không thể có việc gửi chính xác một lần, hãy tham khảo tài liệu [5].
+
+---
+[Context từ đoạn trước]:
+...ic:
+
+When a notification event first arrives, we check if it is seen before by checking the event ID.
+If it is seen before, it is discarded. Otherwise, we will send out the notification. For interested
+readers to explore why we cannot have exactly once delivery, refer to the reference material
+
+[5].
+
+---
+
+## **Các thành phần và cân nhắc bổ sung**
+
+Chúng ta đã thảo luận về cách thu thập thông tin liên hệ của người dùng, gửi và nhận thông báo. Một hệ thống thông báo còn nhiều hơn thế nữa. Tại đây, chúng ta sẽ thảo luận về các thành phần bổ sung bao gồm tái sử dụng mẫu, cài đặt thông báo, theo dõi sự kiện, giám sát hệ thống, giới hạn tốc độ (rate limiting), v.v.
+
+**Mẫu thông báo**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492136/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-159-0.png)
+Một hệ thống thông báo lớn gửi đi hàng triệu thông báo mỗi ngày, và nhiều thông báo trong số này tuân theo một định dạng tương tự. Các mẫu thông báo (notification templates) được giới thiệu để tránh xây dựng mọi thông báo từ đầu. Một mẫu thông báo là một thông báo được định dạng sẵn để tạo ra thông báo độc đáo của bạn bằng cách tùy chỉnh các tham số, kiểu dáng, liên kết theo dõi, v.v. Dưới đây là một ví dụ về mẫu thông báo đẩy (push notification).
+
+NỘI DUNG:
+Bạn đã mơ về nó. Chúng tôi đã dám thực hiện. [TÊN SẢN PHẨM] đã trở lại — chỉ đến [NGÀY].
+KÊU GỌI HÀNH ĐỘNG (CTA):
+Đặt hàng ngay. Hoặc, Lưu [TÊN SẢN PHẨM] của tôi
+
+Lợi ích của việc sử dụng các mẫu thông báo bao gồm duy trì định dạng nhất quán, giảm thiểu sai sót và tiết kiệm thời gian.
+
+**Cài đặt thông báo**
+Người dùng thường nhận quá nhiều thông báo mỗi ngày và họ có thể dễ dàng cảm thấy bị quá tải. Do đó, nhiều trang web và ứng dụng cung cấp cho người dùng quyền kiểm soát chi tiết (fine-grained control) đối với cài đặt thông báo. Thông tin này được lưu trữ trong bảng cài đặt thông báo, với các trường sau:
+
+user_id bigInt
+channel varchar # thông báo đẩy, email hoặc SMS
+opt_in boolean # chọn nhận thông báo
+
+Trước khi bất kỳ thông báo nào được gửi đến người dùng, chúng ta sẽ kiểm tra xem người dùng có chọn nhận loại thông báo này hay không.
+
+**Giới hạn tốc độ (Rate limiting)**
+Để tránh làm người dùng bị quá tải với quá nhiều thông báo, chúng ta có thể giới hạn số lượng thông báo mà một người dùng có thể nhận. Điều này quan trọng vì người nhận có thể tắt hoàn toàn thông báo nếu chúng ta gửi quá thường xuyên.
+
+**Cơ chế thử lại**
+Khi một dịch vụ bên thứ ba không gửi được thông báo, thông báo đó sẽ được thêm vào hàng đợi tin nhắn (message queue) để thử lại. Nếu vấn đề vẫn tiếp diễn, một cảnh báo sẽ được gửi đến các nhà phát triển.
+
+**Bảo mật trong thông báo đẩy**
+Đối với các ứng dụng iOS hoặc Android, appKey và appSecret được sử dụng để bảo mật các API thông báo đẩy [6]. Chỉ các client đã được xác thực hoặc xác minh mới được phép gửi thông báo đẩy bằng cách sử dụng các API của chúng ta. Người dùng quan tâm nên tham khảo tài liệu tham khảo [6].
+
+**Giám sát thông báo đang chờ xử lý**
+Một chỉ số quan trọng cần giám sát là tổng số thông báo đang chờ xử lý. Nếu số lượng này lớn, các sự kiện thông báo không được xử lý đủ nhanh bởi các worker. Để tránh sự chậm trễ trong việc gửi thông báo, cần thêm nhiều worker hơn. Hình 10-12 (nguồn: [7]) minh họa ví dụ về các tin nhắn đang chờ được xử lý.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492137/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-161-0.png)
+
+Hình 10-12
+
+**Theo dõi sự kiện**
+Các chỉ số thông báo, chẳng hạn như tỷ lệ mở, tỷ lệ nhấp và mức độ tương tác, rất quan trọng trong việc hiểu hành vi khách hàng. Dịch vụ phân tích (Analytics service) triển khai tính năng theo dõi sự kiện. Việc tích hợp giữa hệ thống thông báo và dịch vụ phân tích thường là cần thiết. Hình 10-13 cho thấy một ví dụ về các sự kiện có thể được theo dõi cho mục đích phân tích.
+
+## **Thiết kế cập nhật**
+
+Tổng hợp tất cả lại, Hình 10-14 cho thấy thiết kế hệ thống thông báo đã được cập nhật.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492139/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-161-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492142/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-162-0.png)
+
+Trong thiết kế này, nhiều thành phần mới được thêm vào so với thiết kế trước đó.
+
+  - Các máy chủ thông báo được trang bị thêm hai tính năng quan trọng: xác thực (authentication) và giới hạn tốc độ (rate-limiting).
+
+  - Chúng ta cũng thêm một cơ chế thử lại để xử lý các lỗi thông báo. Nếu hệ thống không gửi được thông báo, chúng sẽ được đưa trở lại hàng đợi tin nhắn và các worker sẽ thử lại một số lần được định trước.
+
+  - Hơn nữa, các mẫu thông báo cung cấp một quy trình tạo thông báo nhất quán và hiệu quả.
+
+  - Cuối cùng, các hệ thống giám sát và theo dõi được thêm vào để kiểm tra tình trạng hệ thống và cải tiến trong tương lai.
+
+## **Bước 4 - Tổng kết**
+
+Thông báo là không thể thiếu vì chúng giúp chúng ta cập nhật những thông tin quan trọng. Đó có thể là một thông báo đẩy về bộ phim yêu thích của bạn trên Netflix, một email về các chương trình giảm giá sản phẩm mới, hoặc một tin nhắn xác nhận thanh toán mua sắm trực tuyến của bạn.
+
+Trong chương này, chúng ta đã mô tả thiết kế của một hệ thống thông báo có khả năng mở rộng, hỗ trợ nhiều định dạng thông báo: thông báo đẩy, tin nhắn SMS và email. Chúng ta đã áp dụng hàng đợi tin nhắn để tách rời các thành phần hệ thống.
+
+Bên cạnh thiết kế cấp cao, chúng ta đã đi sâu vào nhiều thành phần và tối ưu hóa hơn.
+
+  - Độ tin cậy: Chúng ta đã đề xuất một cơ chế thử lại mạnh mẽ để giảm thiểu tỷ lệ lỗi.
+
+  - Bảo mật: Cặp AppKey/appSecret được sử dụng để đảm bảo chỉ các client đã được xác minh mới có thể gửi thông báo.
+
+  - Theo dõi và giám sát: Chúng được triển khai ở bất kỳ giai đoạn nào của luồng thông báo để thu thập các số liệu thống kê quan trọng.
+
+  - Tôn trọng cài đặt người dùng: Người dùng có thể chọn không nhận thông báo. Hệ thống của chúng ta kiểm tra cài đặt người dùng trước khi gửi thông báo.
+
+  - Giới hạn tốc độ: Người dùng sẽ đánh giá cao việc giới hạn tần suất (frequency capping) số lượng thông báo mà họ nhận được.
+
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!
+
+# **Tài liệu tham khảo**
+
+[1] Twilio SMS: https://www.twilio.com/sms
+
+[2] Nexmo SMS: https://www.nexmo.com/products/sms
+
+[3] Sendgrid: https://sendgrid.com/
+
+[4] Mailchimp: https://mailchimp.com/
+
+[5] You Cannot Have Exactly-Once Delivery: https://bravenewgeek.com/you-cannot-haveexactly-once-delivery/
+
+[6] Security in Push Notifications: https://cloud.ibm.com/docs/services/mobilepush?
+topic=mobile-pushnotification-security-in-push-notifications
+
+[7] RadditMQ: https://bit.ly/2sotIa6
+
+---
+
+*Made by Anh Tu - Share to be share*

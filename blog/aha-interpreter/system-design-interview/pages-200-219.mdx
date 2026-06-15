@@ -1,0 +1,260 @@
+---
+slug: aha-interpreter-system-design-interview-pages-200-219
+title: "[System design interview] Từ trang 200 đến 219"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+# **CHƯƠNG 13: THIẾT KẾ HỆ THỐNG TỰ ĐỘNG HOÀN THÀNH TÌM KIẾM**
+
+Khi tìm kiếm trên Google hoặc mua sắm tại Amazon, ngay khi bạn gõ vào ô tìm kiếm, một hoặc nhiều kết quả khớp với cụm từ tìm kiếm sẽ được hiển thị. Tính năng này được gọi là autocomplete (tự động hoàn thành), typeahead (gợi ý khi gõ), search-as-you-type (tìm kiếm khi gõ), hoặc incremental search (tìm kiếm tăng dần). Hình 13-1 minh họa một ví dụ về tìm kiếm trên Google, hiển thị danh sách các kết quả autocomplete khi từ “dinner” được gõ vào ô tìm kiếm. Search autocomplete là một tính năng quan trọng của nhiều sản phẩm. Điều này dẫn chúng ta đến câu hỏi phỏng vấn: thiết kế một hệ thống search autocomplete, còn được gọi là “thiết kế top k” hoặc “thiết kế top k truy vấn được tìm kiếm nhiều nhất”.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492979/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-199-0.png)
+
+## **Bước 1 - Hiểu rõ vấn đề và xác định phạm vi thiết kế**
+
+Bước đầu tiên để giải quyết bất kỳ câu hỏi phỏng vấn thiết kế hệ thống nào là đặt đủ câu hỏi để làm rõ các yêu cầu. Dưới đây là ví dụ về tương tác giữa ứng viên và người phỏng vấn:
+
+**Ứng viên** : Việc khớp từ chỉ được hỗ trợ ở đầu truy vấn tìm kiếm hay cả ở giữa nữa?
+**Người phỏng vấn** : Chỉ ở đầu truy vấn tìm kiếm.
+
+**Ứng viên** : Hệ thống nên trả về bao nhiêu gợi ý autocomplete?
+**Người phỏng vấn** : 5
+
+**Ứng viên** : Làm thế nào hệ thống biết được 5 gợi ý nào cần trả về?
+**Người phỏng vấn** : Điều này được xác định bởi mức độ phổ biến, dựa trên tần suất truy vấn lịch sử.
+
+**Ứng viên** : Hệ thống có hỗ trợ kiểm tra chính tả (spell check) không?
+**Người phỏng vấn** : Không, spell check hoặc autocorrect (tự động sửa lỗi) không được hỗ trợ.
+
+**Ứng viên** : Các truy vấn tìm kiếm có phải bằng tiếng Anh không?
+**Người phỏng vấn** : Có. Nếu còn thời gian ở cuối, chúng ta có thể thảo luận về hỗ trợ đa ngôn ngữ.
+
+**Ứng viên** : Chúng ta có cho phép chữ hoa và các ký tự đặc biệt không?
+**Người phỏng vấn** : Không, chúng ta giả định tất cả các truy vấn tìm kiếm đều là chữ cái viết thường.
+
+**Ứng viên** : Có bao nhiêu người dùng sử dụng sản phẩm?
+**Người phỏng vấn** : 10 triệu DAU (Daily Active Users - người dùng hoạt động hàng ngày).
+
+**Yêu cầu**
+Dưới đây là tóm tắt các yêu cầu:
+
+  - Thời gian phản hồi nhanh: Khi người dùng gõ truy vấn tìm kiếm, các gợi ý autocomplete phải hiển thị đủ nhanh. Một bài viết về hệ thống autocomplete của Facebook [1] tiết lộ rằng hệ thống cần trả về kết quả trong vòng 100 mili giây. Nếu không, nó sẽ gây ra hiện tượng giật lag.
+
+  - Liên quan: Các gợi ý autocomplete phải liên quan đến cụm từ tìm kiếm.
+
+  - Sắp xếp: Các kết quả trả về bởi hệ thống phải được sắp xếp theo mức độ phổ biến hoặc các mô hình xếp hạng khác.
+
+  - Khả năng mở rộng (Scalable): Hệ thống có thể xử lý lượng truy cập lớn.
+
+  - Tính sẵn sàng cao (Highly available): Hệ thống phải luôn sẵn sàng và có thể truy cập được ngay cả khi một phần của hệ thống ngoại tuyến, chậm lại hoặc gặp lỗi mạng không mong muốn.
+
+## **Ước tính sơ bộ**
+
+  - Giả sử có 10 triệu người dùng hoạt động hàng ngày (DAU).
+
+  - Một người trung bình thực hiện 10 lượt tìm kiếm mỗi ngày.
+
+  - 20 byte dữ liệu cho mỗi chuỗi truy vấn:
+
+    - Giả sử chúng ta sử dụng mã hóa ký tự ASCII. 1 ký tự = 1 byte
+
+    - Giả sử một truy vấn chứa 4 từ, và mỗi từ trung bình có 5 ký tự.
+
+    - Tức là 4 x 5 = 20 byte cho mỗi truy vấn.
+
+  - Với mỗi ký tự được nhập vào ô tìm kiếm, một client sẽ gửi yêu cầu đến backend để lấy gợi ý autocomplete. Trung bình, 20 yêu cầu được gửi cho mỗi truy vấn tìm kiếm. Ví dụ, 6 yêu cầu sau được gửi đến backend khi bạn hoàn thành việc gõ “dinner”.
+search?q=d
+search?q=di
+search?q=din
+search?q=dinn
+search?q=dinne
+search?q=dinner
+
+- Khoảng 24.000 truy vấn mỗi giây (QPS) = 10.000.000 người dùng * 10 truy vấn / ngày * 20 ký tự / 24 giờ / 3600 giây.
+
+- QPS cao điểm = QPS * 2 = ~48.000
+
+- Giả sử 20% truy vấn hàng ngày là mới. 10 triệu * 10 truy vấn / ngày * 20 byte mỗi truy vấn * 20% = 0,4 GB. Điều này có nghĩa là 0,4GB dữ liệu mới được thêm vào bộ nhớ hàng ngày.
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận sự đồng thuận**
+
+Ở cấp cao, hệ thống được chia thành hai phần:
+
+  - Dịch vụ thu thập dữ liệu (Data gathering service): Dịch vụ này thu thập các truy vấn đầu vào của người dùng và tổng hợp chúng theo thời gian thực. Xử lý thời gian thực không thực tế đối với các tập dữ liệu lớn; tuy nhiên, đây là một điểm khởi đầu tốt. Chúng ta sẽ khám phá một giải pháp thực tế hơn trong phần tìm hiểu sâu.
+
+  - Dịch vụ truy vấn (Query service): Với một truy vấn tìm kiếm hoặc tiền tố, trả về 5 cụm từ được tìm kiếm thường xuyên nhất.
+
+## **Dịch vụ thu thập dữ liệu**
+
+Hãy cùng sử dụng một ví dụ đơn giản để xem dịch vụ thu thập dữ liệu hoạt động như thế nào. Giả sử chúng ta có một bảng tần suất (frequency table) lưu trữ chuỗi truy vấn và tần suất của nó như trong Hình 13-2. Ban đầu, bảng tần suất trống. Sau đó, người dùng lần lượt nhập các truy vấn “twitch”, “twitter”, “twitter” và “twillo”. Hình 13-2 cho thấy cách bảng tần suất được cập nhật.
+
+## **Dịch vụ truy vấn**
+
+Giả sử chúng ta có một bảng tần suất như trong Bảng 13-1. Nó có hai trường.
+
+  - Query: lưu trữ chuỗi truy vấn.
+
+  - Frequency: biểu thị số lần một truy vấn đã được tìm kiếm.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492981/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-202-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492983/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-203-0.png)
+
+Khi người dùng gõ “tw” vào ô tìm kiếm, 5 truy vấn được tìm kiếm hàng đầu sau đây sẽ được hiển thị (Hình 13-3), giả sử bảng tần suất dựa trên Bảng 13-1.
+
+Để lấy 5 truy vấn được tìm kiếm thường xuyên nhất, hãy thực thi truy vấn SQL sau:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492984/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-203-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492985/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-203-2.png)
+Đây là một giải pháp chấp nhận được khi tập dữ liệu nhỏ. Khi tập dữ liệu lớn, việc truy cập cơ sở dữ liệu sẽ trở thành một nút thắt cổ chai. Chúng ta sẽ khám phá các tối ưu hóa trong phần tìm hiểu sâu.
+
+## **Bước 3 - Tìm hiểu sâu về thiết kế**
+
+Trong thiết kế cấp cao, chúng ta đã thảo luận về dịch vụ thu thập dữ liệu và dịch vụ truy vấn. Thiết kế cấp cao chưa tối ưu, nhưng nó đóng vai trò là một điểm khởi đầu tốt. Trong phần này, chúng ta sẽ tìm hiểu sâu về một số thành phần và khám phá các tối ưu hóa như sau:
+
+  - Cấu trúc dữ liệu Trie
+
+  - Dịch vụ thu thập dữ liệu
+
+  - Dịch vụ truy vấn
+
+  - Mở rộng bộ nhớ lưu trữ
+
+  - Các thao tác trên Trie
+
+---
+[Context từ đoạn trước]:
+...ery service. The highlevel design is not optimal, but it serves as a good starting point. In this section, we will dive
+deep into a few components and explore optimizations as follows:
+
+  - Trie data structure
+
+  - Data gathering service
+
+  - Query service
+
+  - Scale the storage
+
+  - Trie operations
+
+---
+
+## **Cấu trúc dữ liệu Trie**
+
+Trong thiết kế cấp cao, cơ sở dữ liệu quan hệ được sử dụng để lưu trữ. Tuy nhiên, việc lấy 5 truy vấn tìm kiếm hàng đầu từ cơ sở dữ liệu quan hệ là không hiệu quả. Cấu trúc dữ liệu trie (cây tiền tố - tiếng Anh: prefix tree) được sử dụng để khắc phục vấn đề này. Vì cấu trúc dữ liệu trie rất quan trọng đối với hệ thống, chúng ta sẽ dành nhiều thời gian để thiết kế một trie tùy chỉnh. Xin lưu ý rằng một số ý tưởng được lấy từ các bài viết [2] và [3].
+
+Hiểu cấu trúc dữ liệu trie cơ bản là điều cần thiết cho câu hỏi phỏng vấn này. Tuy nhiên, đây là một câu hỏi về cấu trúc dữ liệu hơn là một câu hỏi về thiết kế hệ thống. Bên cạnh đó, có nhiều tài liệu trực tuyến giải thích khái niệm này. Trong chương này, chúng ta sẽ chỉ thảo luận tổng quan về cấu trúc dữ liệu trie và tập trung vào cách tối ưu hóa trie cơ bản để cải thiện thời gian phản hồi.
+
+Trie (phát âm là “try”) là một cấu trúc dữ liệu dạng cây có thể lưu trữ chuỗi một cách nhỏ gọn. Tên gọi này bắt nguồn từ từ re **trie** val (truy xuất), cho thấy nó được thiết kế cho các thao tác truy xuất chuỗi. Ý tưởng chính của trie bao gồm các điểm sau:
+
+  - Một trie là một cấu trúc dữ liệu dạng cây.
+
+  - Nút gốc đại diện cho một chuỗi rỗng.
+
+  - Mỗi nút lưu trữ một ký tự và có 26 nút con, một cho mỗi ký tự có thể có. Để tiết kiệm không gian, chúng ta không vẽ các liên kết trống.
+
+  - Mỗi nút cây đại diện cho một từ hoặc một chuỗi tiền tố.
+Hình 13-5 minh họa một trie với các truy vấn tìm kiếm “tree”, “try”, “true”, “toy”, “wish”, “win”. Các truy vấn tìm kiếm được làm nổi bật bằng đường viền dày hơn.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492987/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-206-0.png)
+
+Cấu trúc dữ liệu trie cơ bản lưu trữ các ký tự trong các nút. Để hỗ trợ sắp xếp theo tần suất, thông tin tần suất cần được đưa vào các nút. Giả sử chúng ta có bảng tần suất sau.
+
+Sau khi thêm thông tin tần suất vào các nút, cấu trúc dữ liệu trie được cập nhật được hiển thị trong Hình 13-6.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492988/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-206-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492989/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-207-0.png)
+
+Autocomplete hoạt động như thế nào với trie? Trước khi đi sâu vào thuật toán, chúng ta hãy định nghĩa một số thuật ngữ.
+
+  - _p_ : độ dài của một tiền tố
+
+  - _n:_ tổng số nút trong một trie
+
+  - c: số lượng nút con của một nút đã cho
+
+Các bước để lấy _k_ truy vấn được tìm kiếm nhiều nhất được liệt kê dưới đây:
+1. Tìm tiền tố. Độ phức tạp thời gian: _O(p)_ .
+2. Duyệt cây con từ nút tiền tố để lấy tất cả các
+
+...được ánh xạ tới một giá trị trong bảng băm (hash table).
+Hình 13-10 minh họa ánh xạ giữa trie và bảng băm.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493001/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-212-0.png)
+
+Trong Hình 13-10, mỗi nút trie ở bên trái được ánh xạ tới cặp _\<key, value\>_ ở bên phải. Nếu
+bạn chưa rõ cách hoạt động của kho dữ liệu key-value (key-value stores), hãy tham khảo Chương 6: Thiết kế một kho dữ liệu key-value.
+
+---
+
+## **Dịch vụ truy vấn**
+
+Trong thiết kế cấp cao, dịch vụ truy vấn (query service) gọi trực tiếp cơ sở dữ liệu để lấy 5 kết quả hàng đầu.
+Hình 13-11 minh họa thiết kế được cải tiến vì thiết kế trước đó không hiệu quả.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493003/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-213-0.png)
+
+1. Một truy vấn tìm kiếm được gửi đến bộ cân bằng tải (load balancer).
+2. Bộ cân bằng tải định tuyến yêu cầu đến các máy chủ API.
+3. Các máy chủ API lấy dữ liệu trie từ Bộ nhớ đệm Trie (Trie Cache) và xây dựng các gợi ý tự động hoàn thành (autocomplete suggestions) cho máy khách.
+4. Trong trường hợp dữ liệu không có trong Bộ nhớ đệm Trie, chúng ta sẽ nạp lại dữ liệu vào bộ nhớ đệm. Bằng cách này, tất cả các yêu cầu tiếp theo cho cùng một tiền tố sẽ được trả về từ bộ nhớ đệm. Một lỗi bộ nhớ đệm (cache miss) có thể xảy ra khi máy chủ bộ nhớ đệm hết bộ nhớ hoặc ngoại tuyến.
+
+Dịch vụ truy vấn yêu cầu tốc độ cực nhanh. Chúng ta đề xuất các tối ưu hóa sau:
+
+  - Yêu cầu AJAX. Đối với các ứng dụng web, trình duyệt thường gửi yêu cầu AJAX để lấy kết quả tự động hoàn thành. Lợi ích chính của AJAX là việc gửi/nhận yêu cầu/phản hồi không làm mới toàn bộ trang web.
+
+  - Bộ nhớ đệm trình duyệt (Browser caching). Đối với nhiều ứng dụng, các gợi ý tìm kiếm tự động hoàn thành có thể không thay đổi nhiều trong một thời gian ngắn. Do đó, các gợi ý tự động hoàn thành có thể được lưu trong bộ nhớ đệm trình duyệt để cho phép các yêu cầu tiếp theo lấy kết quả trực tiếp từ bộ nhớ đệm. Công cụ tìm kiếm Google sử dụng cùng một cơ chế bộ nhớ đệm. Hình 13-12 hiển thị tiêu đề phản hồi khi bạn gõ “system design interview” trên công cụ tìm kiếm Google. Như bạn có thể thấy, Google
+
+lưu kết quả vào bộ nhớ đệm của trình duyệt trong 1 giờ. Xin lưu ý: “private” trong cache-control có nghĩa là kết quả dành cho một người dùng duy nhất và không được lưu vào bộ nhớ đệm dùng chung. “maxage=3600” có nghĩa là bộ nhớ đệm có giá trị trong 3600 giây, tức là một giờ.
+
+  - Lấy mẫu dữ liệu (Data sampling): Đối với một hệ thống quy mô lớn, việc ghi nhật ký mọi truy vấn tìm kiếm đòi hỏi rất nhiều sức mạnh xử lý và lưu trữ. Lấy mẫu dữ liệu là rất quan trọng. Ví dụ, chỉ 1 trong số _N_ yêu cầu được hệ thống ghi nhật ký.
+
+## **Các thao tác trên Trie**
+
+Trie là một thành phần cốt lõi của hệ thống tự động hoàn thành. Chúng ta hãy xem xét cách các thao tác trên trie (tạo, cập nhật và xóa) hoạt động.
+
+**Tạo**
+Trie được tạo bởi các worker sử dụng dữ liệu tổng hợp. Nguồn dữ liệu đến từ Nhật ký/Cơ sở dữ liệu phân tích (Analytics Log/DB).
+
+**Cập nhật**
+Có hai cách để cập nhật trie.
+
+Tùy chọn 1: Cập nhật trie hàng tuần. Khi một trie mới được tạo, trie mới sẽ thay thế trie cũ.
+
+Tùy chọn 2: Cập nhật trực tiếp từng nút trie. Chúng ta cố gắng tránh thao tác này vì nó chậm. Tuy nhiên, nếu kích thước của trie nhỏ, đây là một giải pháp chấp nhận được. Khi chúng ta cập nhật một nút trie, các nút tổ tiên của nó cho đến gốc đều phải được cập nhật vì các nút tổ tiên lưu trữ các truy vấn hàng đầu của các nút con. Hình 13-13 minh họa một ví dụ về cách hoạt động của thao tác cập nhật. Ở bên trái, truy vấn tìm kiếm “beer” có giá trị gốc là 10. Ở bên phải, nó được cập nhật thành 30. Như bạn có thể thấy, nút và các nút tổ tiên của nó đều có giá trị “beer” được cập nhật thành 30.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493005/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-214-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493009/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-215-0.png)
+
+**Xóa**
+Chúng ta phải loại bỏ các gợi ý tự động hoàn thành mang tính thù địch, bạo lực, khiêu dâm hoặc nguy hiểm. Chúng ta thêm một lớp lọc (filter layer) (Hình 13-14) phía trước Bộ nhớ đệm Trie để lọc bỏ các gợi ý không mong muốn. Việc có một lớp lọc mang lại cho chúng ta sự linh hoạt trong việc loại bỏ kết quả dựa trên các quy tắc lọc khác nhau. Các gợi ý không mong muốn được xóa vật lý khỏi cơ sở dữ liệu một cách bất đồng bộ (asynchronically) để tập dữ liệu chính xác sẽ được sử dụng để xây dựng trie trong chu kỳ cập nhật tiếp theo.
+
+## **Mở rộng bộ nhớ lưu trữ**
+
+Giờ đây chúng ta đã phát triển một hệ thống để đưa các truy vấn tự động hoàn thành đến người dùng, đã đến lúc giải quyết vấn đề khả năng mở rộng (scalability issue) khi trie trở nên quá lớn không thể chứa vừa trên một máy chủ.
+
+Vì tiếng Anh là ngôn ngữ duy nhất được hỗ trợ, một cách sharding (tiếng Anh: sharding) đơn giản là dựa trên ký tự đầu tiên. Dưới đây là một số ví dụ.
+
+  - Nếu chúng ta cần hai máy chủ để lưu trữ, chúng ta có thể lưu trữ các truy vấn bắt đầu bằng ‘ _a_ ’ đến ‘ _m_ ’ trên máy chủ đầu tiên và ‘ _n_ ’ đến ‘ _z_ ’ trên máy chủ thứ hai.
+
+  - Nếu chúng ta cần ba máy chủ, chúng ta có thể chia các truy vấn thành ‘ _a_ ’ đến ‘ _i_ ’, ‘ _j_ ’ đến ‘ _r_ ’ và
+
+---
+
+*Made by Anh Tu - Share to be share*

@@ -17,8 +17,7 @@
  *   npm run aha-mind:interpreter -- --pdf paper/my-book.pdf --title "Book Title" [--author "Author Name"] [--chapters 1,3,5]
  */
 
-import * as dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 import { StateGraph, MemorySaver, START, END } from "@langchain/langgraph";
 import { StateAnnotation } from "./state";
@@ -164,8 +163,8 @@ function parseArgs(): {
 async function runPipeline() {
   const { pdfPath, title, author, pageRange } = parseArgs();
 
-  const pagesDisplay = pageRange.end === Infinity 
-    ? `Từ trang ${pageRange.start} đến hết` 
+  const pagesDisplay = pageRange.end === Infinity
+    ? `Từ trang ${pageRange.start} đến hết`
     : `Từ trang ${pageRange.start} đến ${pageRange.end}`;
 
   console.log(`
@@ -226,3 +225,5 @@ runPipeline().catch((err) => {
   console.error("❌ Pipeline thất bại:", err);
   process.exit(1);
 });
+// Example:
+// pnpm aha-mind:interpreter --pdf /Users/anhtus/Documents/Development/Documentary/vuanhtu1993.github.io/sources/books/System Design Interview by Alex Xu.pdf --title "System design interview" --pages 220-243

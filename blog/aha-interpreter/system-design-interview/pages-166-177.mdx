@@ -1,0 +1,255 @@
+---
+slug: aha-interpreter-system-design-interview-pages-166-177
+title: "[System design interview] Từ trang 166 đến 177"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+# **CHƯƠNG 11: THIẾT KẾ HỆ THỐNG BẢNG TIN**
+
+Trong chương này, chúng ta được yêu cầu thiết kế một hệ thống bảng tin (news feed). Bảng tin là gì? Theo trang trợ giúp của Facebook, “Bảng tin là danh sách các câu chuyện được cập nhật liên tục ở giữa trang chủ của bạn. Bảng tin bao gồm các cập nhật trạng thái, ảnh, video, liên kết, hoạt động ứng dụng và lượt thích từ những người, trang và nhóm mà bạn theo dõi trên Facebook” [1]. Đây là một câu hỏi phỏng vấn phổ biến. Các câu hỏi tương tự thường được hỏi là: thiết kế bảng tin Facebook, bảng tin Instagram, dòng thời gian Twitter, v.v.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492451/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-165-0.png)
+
+## **Bước 1 - Hiểu vấn đề và xác định phạm vi thiết kế**
+
+Bộ câu hỏi làm rõ đầu tiên là để hiểu những gì người phỏng vấn muốn khi cô ấy yêu cầu chúng ta thiết kế một hệ thống bảng tin. Ít nhất, chúng ta nên tìm ra những tính năng cần hỗ trợ. Dưới đây là ví dụ về tương tác giữa ứng viên và người phỏng vấn:
+
+**Ứng viên** : Đây là ứng dụng di động? Hay ứng dụng web? Hay cả hai?
+**Người phỏng vấn** : Cả hai.
+
+**Ứng viên** : Các tính năng quan trọng là gì?
+**Người phỏng vấn:** Một người dùng có thể đăng bài và xem bài đăng của bạn bè trên trang bảng tin.
+
+**Ứng viên** : Bảng tin được sắp xếp theo thứ tự thời gian đảo ngược hay theo một thứ tự cụ thể nào đó như điểm số chủ đề? Ví dụ, các bài đăng từ bạn bè thân thiết có điểm số cao hơn.
+**Người phỏng vấn** : Để đơn giản, chúng ta hãy giả định bảng tin được sắp xếp theo thứ tự thời gian đảo ngược.
+
+**Ứng viên** : Một người dùng có thể có bao nhiêu bạn bè?
+**Người phỏng vấn** : 5000
+
+**Ứng viên** : Khối lượng traffic là bao nhiêu?
+**Người phỏng vấn** : 10 triệu DAU
+
+**Ứng viên** : Bảng tin có thể chứa hình ảnh, video hay chỉ văn bản?
+**Người phỏng vấn** : Nó có thể chứa các tệp đa phương tiện, bao gồm cả hình ảnh và video.
+
+Bây giờ chúng ta đã thu thập được các yêu cầu, chúng ta sẽ tập trung vào việc thiết kế hệ thống.
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận**
+
+Thiết kế được chia thành hai luồng: đăng bài (feed publishing) và xây dựng bảng tin (news feed building).
+
+  - Đăng bài: khi người dùng đăng một bài, dữ liệu tương ứng được ghi vào cache và cơ sở dữ liệu. Bài đăng được đưa vào bảng tin của bạn bè cô ấy.
+
+  - Xây dựng bảng tin: để đơn giản, chúng ta hãy giả định bảng tin được xây dựng bằng cách tổng hợp các bài đăng của bạn bè theo thứ tự thời gian đảo ngược.
+
+## **API của bảng tin**
+
+Các API của bảng tin là những cách chính để client giao tiếp với server. Các API này dựa trên HTTP, cho phép client thực hiện các hành động, bao gồm đăng trạng thái, truy xuất bảng tin, thêm bạn bè, v.v. Chúng ta sẽ thảo luận về hai API quan trọng nhất: API đăng bài và API truy xuất bảng tin.
+
+**API đăng bài**
+Để đăng một bài, một yêu cầu HTTP POST sẽ được gửi đến server. API được hiển thị dưới đây:
+
+_POST /v1/me/feed_
+Tham số:
+
+  - content: nội dung là văn bản của bài đăng.
+
+  - auth_token: được sử dụng để xác thực các yêu cầu API.
+
+**API truy xuất bảng tin**
+API để truy xuất bảng tin được hiển thị dưới đây:
+
+_GET /v1/me/feed_
+Tham số:
+
+  - auth_token: được sử dụng để xác thực các yêu cầu API.
+
+## **Đăng bài**
+
+Hình 11-2 cho thấy thiết kế cấp cao của luồng đăng bài.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492453/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-168-0.png)
+
+  - Người dùng: một người dùng có thể xem bảng tin trên trình duyệt hoặc ứng dụng di động. Người dùng tạo một bài đăng với nội dung “Hello” thông qua API:
+_/v1/me/feed?content=Hello&auth_token=\{auth_token\}_
+
+  - Load balancer: phân phối traffic đến các máy chủ web.
+
+  - Máy chủ web: các máy chủ web chuyển hướng traffic đến các dịch vụ nội bộ khác nhau.
+
+  - Dịch vụ đăng bài (Post service): lưu trữ bài đăng vào cơ sở dữ liệu và cache.
+
+  - Dịch vụ Fanout (Fanout service): đẩy nội dung mới vào bảng tin của bạn bè. Dữ liệu bảng tin được lưu trữ trong cache để truy xuất nhanh.
+
+  - Dịch vụ thông báo (Notification service): thông báo cho bạn bè rằng có nội dung mới và gửi thông báo đẩy (push notifications).
+
+## **Xây dựng bảng tin**
+
+Trong phần này, chúng ta sẽ thảo luận về cách bảng tin được xây dựng đằng sau hậu trường. Hình 11-3 cho thấy thiết kế cấp cao:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492456/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-169-0.png)
+
+- Người dùng: một người dùng gửi yêu cầu để truy xuất bảng tin của mình. Yêu cầu trông như thế này:
+/ v1/me/feed.
+
+- Load balancer: load balancer chuyển hướng traffic đến các máy chủ web.
+
+- Máy chủ web: các máy chủ web định tuyến yêu cầu đến dịch vụ bảng tin.
+
+- Dịch vụ bảng tin (Newsfeed service): dịch vụ bảng tin lấy bảng tin từ cache.
+
+- Cache bảng tin (Newsfeed cache): lưu trữ các ID bảng tin cần thiết để hiển thị bảng tin.
+
+## **Bước 3 - Đi sâu vào thiết kế**
+
+Thiết kế cấp cao đã trình bày sơ lược hai luồng: đăng bài và xây dựng bảng tin. Tại đây, chúng ta sẽ thảo luận sâu hơn về các chủ đề đó.
+
+## **Bước 3 - Đi sâu vào thiết kế**
+
+Thiết kế cấp cao đã đề cập ngắn gọn đến hai luồng: xuất bản tin (feed publishing) và xây dựng tin tức (news feed building).
+Tại đây, chúng ta sẽ thảo luận chi tiết hơn về các chủ đề đó.
+
+## **Đi sâu vào xuất bản tin (Feed publishing deep dive)**
+
+Hình 11-4 phác thảo thiết kế chi tiết cho việc xuất bản tin. Chúng ta đã thảo luận hầu hết các thành phần trong thiết kế cấp cao, và bây giờ chúng ta sẽ tập trung vào hai thành phần: web servers và fanout service.
+
+**Web servers**
+Ngoài việc giao tiếp với client, web servers còn thực thi xác thực (authentication) và giới hạn tốc độ (rate-limiting).
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492459/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-170-0.png)
+Chỉ những người dùng đã đăng nhập với _auth_token_ hợp lệ mới được phép đăng bài. Hệ thống giới hạn số lượng bài đăng mà một người dùng có thể tạo trong một khoảng thời gian nhất định, điều này rất quan trọng để ngăn chặn spam và nội dung lạm dụng.
+
+**Fanout service**
+Fanout là quá trình phân phối một bài đăng đến tất cả bạn bè. Có hai loại mô hình fanout: fanout on write (còn gọi là mô hình đẩy - push model) và fanout on read (còn gọi là mô hình kéo - pull model). Cả hai mô hình đều có ưu và nhược điểm. Chúng ta sẽ giải thích quy trình làm việc của chúng và khám phá cách tiếp cận tốt nhất để hỗ trợ hệ thống của chúng ta.
+
+**Fanout on write.** Với cách tiếp cận này, news feed được tính toán trước trong quá trình ghi. Một bài đăng mới sẽ được gửi đến cache của bạn bè ngay sau khi nó được xuất bản.
+
+Ưu điểm:
+
+  - News feed được tạo theo thời gian thực và có thể được đẩy đến bạn bè ngay lập tức.
+
+  - Việc lấy news feed nhanh chóng vì news feed đã được tính toán trước trong quá trình ghi.
+
+Nhược điểm:
+
+  - Nếu một người dùng có nhiều bạn bè, việc lấy danh sách bạn bè và tạo news feed cho tất cả họ sẽ chậm và tốn thời gian. Đây được gọi là vấn đề hotkey (hotkey problem).
+
+  - Đối với những người dùng không hoạt động hoặc hiếm khi đăng nhập, việc tính toán trước news feed sẽ lãng phí tài nguyên tính toán.
+
+**Fanout on read**. News feed được tạo trong quá trình đọc. Đây là một mô hình theo yêu cầu (on-demand model). Các bài đăng gần đây sẽ được kéo về khi người dùng tải trang chủ của họ.
+
+Ưu điểm:
+
+  - Đối với những người dùng không hoạt động hoặc hiếm khi đăng nhập, fanout on read hoạt động tốt hơn vì nó sẽ không lãng phí tài nguyên tính toán cho họ.
+
+  - Dữ liệu không bị đẩy đến bạn bè nên không có vấn đề hotkey.
+
+Nhược điểm:
+
+  - Việc lấy news feed chậm vì news feed không được tính toán trước.
+
+Chúng ta áp dụng một cách tiếp cận lai (hybrid approach) để tận dụng lợi ích của cả hai phương pháp và tránh những nhược điểm của chúng. Vì việc lấy news feed nhanh chóng là rất quan trọng, chúng ta sử dụng mô hình đẩy (push model) cho phần lớn người dùng. Đối với những người nổi tiếng hoặc người dùng có nhiều bạn bè/người theo dõi, chúng ta cho phép người theo dõi kéo nội dung tin tức theo yêu cầu (on-demand) để tránh quá tải hệ thống. Consistent hashing là một kỹ thuật hữu ích để giảm thiểu vấn đề hotkey vì nó giúp phân phối các yêu cầu/dữ liệu đồng đều hơn.
+
+Hãy cùng xem xét kỹ hơn về fanout service như được minh họa trong Hình 11-5.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492461/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-172-0.png)
+
+Fanout service hoạt động như sau:
+1. Lấy ID bạn bè từ graph database. Graph database rất phù hợp để quản lý mối quan hệ bạn bè và đề xuất bạn bè. Độc giả quan tâm muốn tìm hiểu thêm về khái niệm này nên tham khảo tài liệu [2].
+2. Lấy thông tin bạn bè từ user cache. Hệ thống sau đó lọc bạn bè dựa trên cài đặt của người dùng. Ví dụ, nếu bạn tắt tiếng (mute) ai đó, bài đăng của họ sẽ không hiển thị trên news feed của bạn mặc dù bạn vẫn là bạn bè. Một lý do khác khiến bài đăng có thể không hiển thị là người dùng có thể chọn chia sẻ thông tin với những người bạn cụ thể hoặc ẩn nó khỏi những người khác.
+3. Gửi danh sách bạn bè và ID bài đăng mới đến message queue.
+4. Các fanout worker lấy dữ liệu từ message queue và lưu trữ dữ liệu news feed vào news feed cache. Bạn có thể coi news feed cache là một bảng ánh xạ _\<post_id, user_id\>_. Bất cứ khi nào một bài đăng mới được tạo, nó sẽ được thêm vào bảng news feed như trong Hình 11-6. Lượng bộ nhớ tiêu thụ có thể trở nên rất lớn nếu chúng ta lưu trữ toàn bộ đối tượng người dùng và bài đăng trong cache. Do đó, chỉ ID được lưu trữ. Để giữ kích thước bộ nhớ nhỏ, chúng ta đặt một giới hạn có thể cấu hình. Khả năng một người dùng cuộn qua hàng nghìn bài đăng trong news feed là rất thấp. Hầu hết người dùng chỉ quan tâm đến nội dung mới nhất, vì vậy tỷ lệ cache miss thấp.
+5. Lưu trữ _\<post_id, user_id \>_ trong news feed cache. Hình 11-6 cho thấy một ví dụ về news feed trông như thế nào trong cache.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492463/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-173-0.png)
+
+## **Đi sâu vào truy xuất tin tức (Newsfeed retrieval deep dive)**
+
+Hình 11-7 minh họa thiết kế chi tiết cho việc truy xuất news feed.
+
+Như trong Hình 11-7, nội dung đa phương tiện (hình ảnh, video, v.v.) được lưu trữ trong CDN để truy xuất nhanh chóng. Hãy cùng xem cách một client truy xuất news feed.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492465/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-173-1.png)
+1. Một người dùng gửi yêu cầu để truy xuất news feed của cô ấy. Yêu cầu trông như sau: _/v1/me/feed_
+2. Load balancer phân phối lại các yêu cầu đến web servers.
+3. Web servers gọi news feed service để lấy news feed.
+4. News feed service lấy danh sách các ID bài đăng từ news feed cache.
+5. News feed của người dùng không chỉ là một danh sách các ID feed. Nó chứa tên người dùng, ảnh đại diện, nội dung bài đăng, hình ảnh bài đăng, v.v. Do đó, news feed service lấy các đối tượng người dùng và bài đăng hoàn chỉnh từ các cache (user cache và post cache) để xây dựng news feed đã được làm đầy đủ dữ liệu (fully hydrated news feed).
+6. News feed đã được làm đầy đủ dữ liệu được trả về dưới định dạng JSON cho client để hiển thị.
+
+## **Kiến trúc Cache**
+
+Cache cực kỳ quan trọng đối với một hệ thống news feed. Chúng ta chia tầng cache thành 5 lớp như được minh họa trong Hình 11-8.
+
+  - News Feed: Lưu trữ ID của các news feed.
+
+  - Content: Lưu trữ tất cả dữ liệu bài đăng. Nội dung phổ biến được lưu trữ trong hot cache.
+
+  - Social Graph: Lưu trữ dữ liệu mối quan hệ người dùng.
+
+  - Action: Lưu trữ thông tin về việc người dùng đã thích một bài đăng, trả lời một bài đăng hay thực hiện các hành động khác trên một bài đăng.
+
+  - Counters: Lưu trữ các bộ đếm cho lượt thích, trả lời, người theo dõi (follower), đang theo dõi (following), v.v.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781492468/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-174-0.png)
+
+## **Bước 4 - Tổng kết**
+
+Trong chương này, chúng ta đã thiết kế một hệ thống news feed. Thiết kế của chúng ta bao gồm hai luồng: xuất bản tin (feed publishing) và truy xuất tin tức (news feed retrieval).
+
+Giống như bất kỳ câu hỏi phỏng vấn thiết kế hệ thống nào, không có cách nào hoàn hảo để thiết kế một hệ thống. Mỗi công ty có những ràng buộc riêng, và bạn phải thiết kế một hệ thống phù hợp với những ràng buộc đó. Việc hiểu rõ các đánh đổi (tradeoffs) trong thiết kế và lựa chọn công nghệ của bạn là rất quan trọng. Nếu còn vài phút, bạn có thể nói về các vấn đề về khả năng mở rộng (scalability issues). Để tránh thảo luận trùng lặp, chỉ những điểm chính cấp cao được liệt kê dưới đây.
+
+Mở rộng cơ sở dữ liệu (Scaling the database):
+
+  - Mở rộng theo chiều dọc (Vertical scaling) so với Mở rộng theo chiều ngang (Horizontal scaling)
+
+  - SQL so với NoSQL
+
+  - Master-slave replication
+
+  - Read replicas
+
+  - Mô hình nhất quán (Consistency models)
+
+  - Database sharding
+
+Các điểm thảo luận khác:
+
+  - Giữ tầng web (web tier) không trạng thái (stateless)
+
+  - Cache dữ liệu nhiều nhất có thể
+
+  - Hỗ trợ nhiều trung tâm dữ liệu (data centers)
+
+  - Nới lỏng sự phụ thuộc giữa các thành phần (lose couple components) bằng message queues
+
+  - Giám sát các chỉ số chính (key metrics). Ví dụ, QPS trong giờ cao điểm và độ trễ (latency) khi người dùng làm mới news feed của họ là những chỉ số thú vị để giám sát.
+
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!
+
+# **Tài liệu tham khảo**
+
+[1] How News Feed Works:
+https://www.facebook.com/help/327131014036297/
+
+[2] Friend of Friend recommendations Neo4j and SQL Sever:
+http://geekswithblogs.net/brendonpage/archive/2015/10/26/friend-of-friendrecommendations-with-neo4j.aspx
+
+---
+
+*Made by Anh Tu - Share to be share*

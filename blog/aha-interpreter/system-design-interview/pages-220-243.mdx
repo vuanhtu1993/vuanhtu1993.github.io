@@ -1,0 +1,440 @@
+---
+slug: aha-interpreter-system-design-interview-pages-220-243
+title: "[System design interview] Từ trang 220 đến 243"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+# **CHƯƠNG 14: THIẾT KẾ YOUTUBE**
+
+Trong chương này, chúng ta sẽ được yêu cầu thiết kế YouTube. Giải pháp cho câu hỏi này có thể áp dụng cho các câu hỏi phỏng vấn khác như thiết kế một nền tảng chia sẻ video tương tự Netflix và Hulu. Hình 14-1 hiển thị trang chủ YouTube.
+
+YouTube trông có vẻ đơn giản: người tạo nội dung tải video lên và người xem nhấn nút phát. Liệu nó có thực sự đơn giản như vậy không? Không hẳn. Ẩn dưới sự đơn giản đó là rất nhiều công nghệ phức tạp. Hãy cùng xem một số thống kê ấn tượng, dữ liệu nhân khẩu học và những sự thật thú vị về YouTube vào năm 2020 [1] [2].
+
+  - Tổng số người dùng hoạt động hàng tháng: 2 tỷ.
+
+  - Số video được xem mỗi ngày: 5 tỷ.
+
+  - 73% người trưởng thành ở Hoa Kỳ sử dụng YouTube.
+
+  - 50 triệu người sáng tạo nội dung trên YouTube.
+
+  - Doanh thu quảng cáo của YouTube đạt 15,1 tỷ đô la cho cả năm 2019, tăng 36% so với năm 2018.
+
+  - YouTube chịu trách nhiệm cho 37% tổng lưu lượng truy cập internet di động.
+
+  - YouTube có sẵn bằng 80 ngôn ngữ khác nhau.
+
+Từ những số liệu thống kê này, chúng ta biết rằng YouTube là một nền tảng khổng lồ, mang tính toàn cầu và tạo ra rất nhiều tiền.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493162/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-219-0.png)
+
+## **Bước 1 - Hiểu vấn đề và xác định phạm vi thiết kế**
+
+Như Hình 14-1 đã chỉ ra, ngoài việc xem video, chúng ta có thể làm nhiều điều khác trên YouTube. Ví dụ: bình luận, chia sẻ hoặc thích một video, lưu video vào danh sách phát (playlists), đăng ký kênh (subscribe to a channel), v.v. Không thể thiết kế mọi thứ trong một buổi phỏng vấn kéo dài 45 hoặc 60 phút. Do đó, việc đặt câu hỏi để thu hẹp phạm vi là rất quan trọng.
+
+**Ứng viên** : Những tính năng nào là quan trọng?
+**Người phỏng vấn** : Khả năng tải video lên và xem video.
+
+**Ứng viên** : Chúng ta cần hỗ trợ những loại client nào?
+**Người phỏng vấn** : Ứng dụng di động, trình duyệt web và smart TV.
+
+**Ứng viên** : Chúng ta có bao nhiêu người dùng hoạt động hàng ngày (DAU)?
+**Người phỏng vấn** : 5 triệu
+
+**Ứng viên** : Thời gian trung bình hàng ngày dành cho sản phẩm là bao nhiêu?
+**Người phỏng vấn** : 30 phút.
+
+**Ứng viên** : Chúng ta có cần hỗ trợ người dùng quốc tế không?
+**Người phỏng vấn** : Có, một tỷ lệ lớn người dùng là người dùng quốc tế.
+
+**Ứng viên** : Các độ phân giải video được hỗ trợ là gì?
+**Người phỏng vấn** : Hệ thống chấp nhận hầu hết các độ phân giải và định dạng video.
+
+**Ứng viên** : Có yêu cầu mã hóa không?
+**Người phỏng vấn** : Có.
+
+**Ứng viên** : Có yêu cầu về kích thước tệp video không?
+**Người phỏng vấn** : Nền tảng của chúng ta tập trung vào các video có kích thước nhỏ và trung bình. Kích thước video tối đa được phép là 1GB.
+
+**Ứng viên** : Chúng ta có thể tận dụng một số cơ sở hạ tầng đám mây hiện có do Amazon, Google hoặc Microsoft cung cấp không?
+**Người phỏng vấn** : Đó là một câu hỏi hay. Xây dựng mọi thứ từ đầu là không thực tế đối với hầu hết các công ty, nên tận dụng một số dịch vụ đám mây hiện có là điều được khuyến nghị.
+
+Trong chương này, chúng ta sẽ tập trung vào việc thiết kế một dịch vụ streaming video với các tính năng sau:
+
+  - Khả năng tải video lên nhanh chóng
+
+  - Streaming video mượt mà
+
+  - Khả năng thay đổi chất lượng video
+
+  - Chi phí cơ sở hạ tầng thấp
+
+  - Yêu cầu về tính sẵn sàng cao (high availability), khả năng mở rộng (scalability) và độ tin cậy (reliability)
+
+  - Các client được hỗ trợ: ứng dụng di động, trình duyệt web và smart TV
+
+## **Ước tính sơ bộ**
+
+Các ước tính sau đây dựa trên nhiều giả định, vì vậy điều quan trọng là phải trao đổi với người phỏng vấn để đảm bảo cả hai bên có cùng quan điểm.
+
+  - Giả sử sản phẩm có 5 triệu người dùng hoạt động hàng ngày (DAU).
+
+  - Người dùng xem 5 video mỗi ngày.
+
+  - 10% người dùng tải lên 1 video mỗi ngày.
+
+  - Giả sử kích thước video trung bình là 300 MB.
+
+  - Tổng dung lượng lưu trữ cần thiết hàng ngày: 5 triệu * 10% * 300 MB = 150TB
+
+  - Chi phí CDN.
+
+    - Khi CDN đám mây phân phát một video, chúng ta sẽ bị tính phí cho dữ liệu được truyền ra khỏi CDN.
+
+    - Chúng ta hãy sử dụng CDN CloudFront của Amazon để ước tính chi phí (Hình 14-2) [3]. Giả sử 100% lưu lượng truy cập được phân phát từ Hoa Kỳ. Chi phí trung bình mỗi GB là 0,02 đô la. Để đơn giản, chúng ta chỉ tính chi phí streaming video.
+
+    - 5 triệu * 5 video * 0,3GB * 0,02 đô la = 150.000 đô la mỗi ngày.
+
+Từ ước tính chi phí sơ bộ, chúng ta biết rằng việc phân phát video từ CDN tốn rất nhiều tiền. Mặc dù các nhà cung cấp đám mây sẵn sàng giảm đáng kể chi phí CDN cho các khách hàng lớn, nhưng chi phí này vẫn rất đáng kể. Chúng ta sẽ thảo luận về các cách giảm chi phí CDN trong phần tìm hiểu sâu.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493167/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-221-0.png)
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận**
+
+Như đã thảo luận trước đó, người phỏng vấn khuyến nghị tận dụng các dịch vụ đám mây hiện có thay vì xây dựng mọi thứ từ đầu. CDN và blob storage (lưu trữ đối tượng) là những dịch vụ đám mây mà chúng ta sẽ tận dụng. Một số độc giả có thể hỏi tại sao không tự xây dựng mọi thứ? Các lý do được liệt kê dưới đây:
+
+  - Các buổi phỏng vấn thiết kế hệ thống không phải là về việc xây dựng mọi thứ từ đầu. Trong khung thời gian giới hạn, việc chọn đúng công nghệ để thực hiện công việc một cách chính xác quan trọng hơn là giải thích chi tiết cách công nghệ đó hoạt động. Ví dụ, việc đề cập đến blob storage để lưu trữ video nguồn là đủ cho buổi phỏng vấn. Nói về thiết kế chi tiết cho blob storage có thể là quá mức cần thiết (overkill).
+
+  - Xây dựng một blob storage hoặc CDN có khả năng mở rộng là cực kỳ phức tạp và tốn kém. Ngay cả các công ty lớn như Netflix hay Facebook cũng không tự xây dựng mọi thứ. Netflix tận dụng các dịch vụ đám mây của Amazon [4], và Facebook sử dụng CDN của Akamai [5].
+Ở cấp độ cao, hệ thống bao gồm ba thành phần (Hình 14-3).
+
+**Client** : Chúng ta có thể xem YouTube trên máy tính, điện thoại di động và smartTV.
+
+**CDN** : Video được lưu trữ trong CDN. Khi chúng ta nhấn nút phát, video sẽ được streaming từ CDN.
+
+**API servers** : Mọi thứ khác ngoài streaming video đều đi qua các API servers. Điều này bao gồm đề xuất nguồn cấp dữ liệu (feed recommendation), tạo URL tải video lên, cập nhật cơ sở dữ liệu và bộ nhớ đệm (cache) siêu dữ liệu (metadata), đăng ký người dùng, v.v.
+
+Trong buổi hỏi đáp, người phỏng vấn đã thể hiện sự quan tâm đến hai luồng (flow) chính:
+
+  - Luồng tải video lên
+
+  - Luồng streaming video
+
+Chúng ta sẽ cùng tìm hiểu thiết kế cấp cao cho từng luồng này.
+---
+
+## **Luồng tải video (Video uploading flow)**
+
+Hình 14-4 minh họa thiết kế cấp cao cho quá trình tải video lên.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493169/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-222-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493173/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-223-0.png)
+
+Nó bao gồm các thành phần sau:
+
+  - Người dùng: Người dùng xem YouTube trên các thiết bị như máy tính, điện thoại di động hoặc TV thông minh.
+
+  - Load balancer: Một Load balancer (tiếng Anh: Load balancer) phân phối đều các yêu cầu giữa các API server.
+
+  - API servers: Tất cả các yêu cầu của người dùng đều đi qua các API server, ngoại trừ luồng phát video.
+
+  - Metadata DB: Metadata video được lưu trữ trong Metadata DB. Nó được sharding (chia nhỏ) và replication (nhân bản) để đáp ứng yêu cầu về hiệu suất và tính sẵn sàng cao.
+
+  - Metadata cache: Để có hiệu suất tốt hơn, metadata video và các đối tượng người dùng được lưu vào cache.
+
+  - Original storage: Một hệ thống blob storage được sử dụng để lưu trữ các video gốc. Một trích dẫn trên Wikipedia về blob storage cho thấy: “Một Binary Large Object (BLOB) là một tập hợp dữ liệu nhị phân được lưu trữ dưới dạng một thực thể duy nhất trong hệ thống quản lý cơ sở dữ liệu” [6].
+
+  - Transcoding servers: Video transcoding còn được gọi là video encoding. Đây là quá trình chuyển đổi định dạng video sang các định dạng khác (MPEG, HLS, v.v.), nhằm cung cấp các luồng video tốt nhất có thể cho các thiết bị và khả năng băng thông khác nhau.
+
+  - Transcoded storage: Đây là một blob storage dùng để lưu trữ các tệp video đã được transcoding.
+
+  - CDN: Các video được lưu vào cache trong CDN. Khi bạn nhấp vào nút phát, video sẽ được stream từ CDN.
+
+  - Completion queue: Đây là một hàng đợi thông báo (message queue) lưu trữ thông tin về các sự kiện hoàn tất transcoding video.
+
+  - Completion handler: Thành phần này bao gồm một danh sách các worker (tiến trình làm việc) lấy dữ liệu sự kiện từ completion queue và cập nhật metadata cache và database.
+
+Bây giờ chúng ta đã hiểu từng thành phần riêng lẻ, hãy cùng xem xét cách thức hoạt động của luồng tải video. Luồng này được chia thành hai quy trình chạy song song:
+a. Tải video thực tế lên.
+b. Cập nhật metadata video. Metadata chứa thông tin về URL video, kích thước, độ phân giải, định dạng, thông tin người dùng, v.v.
+
+**Luồng a: Tải video thực tế lên**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493178/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-225-0.png)
+
+Hình 14-5 minh họa cách tải video thực tế lên. Giải thích được trình bày dưới đây:
+1. Video được tải lên original storage.
+2. Transcoding servers lấy video từ original storage và bắt đầu transcoding.
+3. Sau khi transcoding hoàn tất, hai bước sau được thực hiện song song:
+3a. Các video đã được transcoding được gửi đến transcoded storage.
+3b. Các sự kiện hoàn tất transcoding được đưa vào completion queue.
+3a.1. Các video đã được transcoding được phân phối đến CDN.
+3b.1. Completion handler chứa một nhóm các worker liên tục lấy dữ liệu sự kiện từ hàng đợi.
+
+3b.1.a. và 3b.1.b. Completion handler cập nhật metadata database và cache khi quá trình transcoding video hoàn tất.
+4. Các API server thông báo cho client rằng video đã được tải lên thành công và sẵn sàng để streaming.
+
+**Luồng b: Cập nhật metadata**
+Trong khi một tệp đang được tải lên original storage, client song song gửi một yêu cầu cập nhật metadata video như thể hiện trong Hình 14-6. Yêu cầu này chứa metadata video, bao gồm tên tệp, kích thước, định dạng, v.v. Các API server cập nhật metadata cache và database.
+
+## **Luồng phát video (Video streaming flow)**
+
+Bất cứ khi nào bạn xem video trên YouTube, video thường bắt đầu streaming ngay lập tức và bạn không phải đợi cho đến khi toàn bộ video được tải xuống. Tải xuống (downloading) có nghĩa là toàn bộ video được sao chép vào thiết bị của bạn, trong khi streaming có nghĩa là thiết bị của bạn liên tục nhận các luồng video từ các nguồn video từ xa. Khi bạn xem video streaming, client của bạn tải từng chút dữ liệu một để bạn có thể xem video ngay lập tức và liên tục.
+
+Trước khi chúng ta thảo luận về luồng phát video, hãy cùng xem xét một khái niệm quan trọng: giao thức streaming (streaming protocol). Đây là một cách tiêu chuẩn hóa để kiểm soát việc truyền dữ liệu cho video streaming. Các giao thức streaming phổ biến là:
+
+ - MPEG–DASH. MPEG là viết tắt của “Moving Picture Experts Group” và DASH là viết tắt của "Dynamic Adaptive Streaming over HTTP".
+
+  - Apple HLS. HLS là viết tắt của “HTTP Live Streaming”.
+
+  - Microsoft Smooth Streaming.
+
+ - Adobe HTTP Dynamic Streaming (HDS).
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493179/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-226-0.png)
+Bạn không cần phải hiểu đầy đủ hoặc thậm chí ghi nhớ tên các giao thức streaming này vì chúng là các chi tiết cấp thấp đòi hỏi kiến thức chuyên sâu về lĩnh vực. Điều quan trọng ở đây là hiểu rằng các giao thức streaming khác nhau hỗ trợ các loại mã hóa video (video encoding) và trình phát khác nhau. Khi chúng ta thiết kế một dịch vụ video streaming, chúng ta phải chọn giao thức streaming phù hợp để hỗ trợ các trường hợp sử dụng của mình. Để tìm hiểu thêm về các giao thức streaming, đây là một bài viết tuyệt vời [7].
+
+Video được stream trực tiếp từ CDN. Máy chủ biên (edge server) gần bạn nhất sẽ phân phối video. Do đó, độ trễ (latency) rất thấp. Hình 14-7 minh họa thiết kế cấp cao cho luồng phát video.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493181/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-227-0.png)
+
+## **Bước 3 - Đi sâu vào thiết kế (Design deep dive)**
+
+Trong thiết kế cấp cao, toàn bộ hệ thống được chia thành hai phần: luồng tải video và luồng phát video. Trong phần này, chúng ta sẽ tinh chỉnh cả hai luồng với các tối ưu hóa quan trọng và giới thiệu các cơ chế xử lý lỗi.
+
+## **Transcoding video (Video transcoding)**
+
+Khi bạn quay một video, thiết bị (thường là điện thoại hoặc máy ảnh) sẽ tạo ra tệp video với một định dạng nhất định. Nếu bạn muốn video được phát mượt mà trên các thiết bị khác, video phải được mã hóa thành các bitrate và định dạng tương thích. Bitrate là tốc độ xử lý các bit theo thời gian. Bitrate cao hơn thường có nghĩa là chất lượng video cao hơn. Các luồng bitrate cao cần nhiều sức mạnh xử lý hơn và tốc độ internet nhanh.
+
+Transcoding video rất quan trọng vì những lý do sau:
+
+  - Video thô (raw video) tiêu tốn một lượng lớn không gian lưu trữ. Một video độ nét cao dài một giờ được quay ở 60 khung hình mỗi giây có thể chiếm vài trăm GB dung lượng.
+
+  - Nhiều thiết bị và trình duyệt chỉ hỗ trợ một số loại định dạng video nhất định. Do đó, việc mã hóa video sang các định dạng khác nhau vì lý do tương thích là rất quan trọng.
+
+  - Để đảm bảo người dùng xem video chất lượng cao trong khi vẫn duy trì phát lại mượt mà, nên cung cấp video độ phân giải cao hơn cho người dùng có băng thông mạng cao và video độ phân giải thấp hơn cho người dùng có băng thông thấp.
+
+  - Điều kiện mạng có thể thay đổi, đặc biệt trên các thiết bị di động. Để đảm bảo video được phát liên tục, việc tự động hoặc thủ công chuyển đổi chất lượng video dựa trên điều kiện mạng là điều cần thiết để có trải nghiệm người dùng mượt mà.
+
+Có nhiều loại định dạng mã hóa có sẵn; tuy nhiên, hầu hết chúng đều chứa hai phần:
+
+  - Container: Đây giống như một cái giỏ chứa tệp video, âm thanh và metadata. Bạn có thể nhận biết định dạng container qua phần mở rộng tệp, chẳng hạn như .avi, .mov hoặc .mp4.
+
+  - Codecs: Đây là các thuật toán nén và giải nén nhằm giảm kích thước video trong khi vẫn giữ được chất lượng video. Các codec video được sử dụng phổ biến nhất là H.264, VP9 và HEVC.
+
+---
+[Context từ đoạn trước]:
+...tệp video, âm thanh và siêu dữ liệu. Chúng ta có thể nhận biết định dạng container qua phần mở rộng tệp, chẳng hạn như .avi, .mov hoặc .mp4.
+
+  - Codec: Đây là các thuật toán nén và giải nén nhằm giảm kích thước video trong khi vẫn giữ được chất lượng video. Các codec video được sử dụng phổ biến nhất là H.264, VP9 và HEVC.
+
+---
+
+## **Mô hình đồ thị có hướng không chu trình (DAG)**
+
+Chuyển mã video là một tác vụ tốn kém về mặt tính toán và mất nhiều thời gian. Bên cạnh đó, các nhà sáng tạo nội dung khác nhau có thể có các yêu cầu xử lý video khác nhau. Ví dụ, một số nhà sáng tạo nội dung yêu cầu đóng dấu bản quyền (watermark) lên video của họ, một số tự cung cấp ảnh thumbnail, và một số tải lên video độ nét cao, trong khi những người khác thì không.
+
+Để hỗ trợ các Data Pipeline xử lý video khác nhau và duy trì khả năng song song hóa cao, việc thêm một lớp trừu tượng và cho phép các lập trình viên client định nghĩa các tác vụ cần thực thi là rất quan trọng. Ví dụ, công cụ video streaming của Facebook sử dụng mô hình lập trình DAG, định nghĩa các tác vụ theo từng giai đoạn để chúng có thể được thực thi tuần tự hoặc song song [8]. Trong thiết kế của chúng ta, chúng ta áp dụng một mô hình DAG tương tự để đạt được sự linh hoạt và khả năng song song hóa. Hình 14-8 minh họa một DAG cho việc chuyển mã video.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493183/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-229-0.png)
+
+Trong Hình 14-8, video gốc được tách thành video, âm thanh và siêu dữ liệu. Dưới đây là một số tác vụ có thể áp dụng cho một tệp video:
+
+  - Kiểm tra (Inspection): Đảm bảo video có chất lượng tốt và không bị lỗi định dạng.
+
+  - Mã hóa video (Video encodings): Video được chuyển đổi để hỗ trợ các độ phân giải, codec, bitrate khác nhau, v.v. Hình 14-9 cho thấy một ví dụ về các tệp video đã được mã hóa.
+
+  - Thumbnail: Ảnh thumbnail có thể do người dùng tải lên hoặc được hệ thống tự động tạo.
+
+  - Dấu bản quyền (Watermark): Một lớp phủ hình ảnh trên video của bạn chứa thông tin nhận dạng về video.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493184/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-230-0.png)
+
+## **Kiến trúc chuyển mã video**
+
+Kiến trúc chuyển mã video được đề xuất, tận dụng các dịch vụ đám mây, được thể hiện trong Hình 14-10.
+
+Kiến trúc này có sáu thành phần chính: bộ tiền xử lý (preprocessor), bộ lập lịch DAG (DAG scheduler), trình quản lý tài nguyên (resource manager), các worker tác vụ (task workers), bộ nhớ tạm thời (temporary storage) và video đã mã hóa (encoded video) làm đầu ra. Chúng ta hãy cùng xem xét kỹ từng thành phần.
+
+**Bộ tiền xử lý**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493186/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-230-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493187/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-231-0.png)
+
+Bộ tiền xử lý có 4 trách nhiệm:
+1. Chia tách video (Video splitting). Luồng video được chia hoặc tiếp tục chia thành các nhóm ảnh (Group of Pictures - GOP) nhỏ hơn theo căn chỉnh. GOP là một nhóm/khối các khung hình được sắp xếp theo một thứ tự cụ thể. Mỗi khối là một đơn vị có thể phát độc lập, thường dài vài giây.
+
+2. Một số thiết bị di động hoặc trình duyệt cũ có thể không hỗ trợ chia tách video. Bộ tiền xử lý chia video theo căn chỉnh GOP cho các client cũ.
+
+3. Tạo DAG (DAG generation). Bộ xử lý tạo DAG dựa trên các tệp cấu hình mà lập trình viên client viết. Hình 14-12 là một biểu diễn DAG đơn giản hóa với 2 nút (node) và 1 cạnh (edge):
+
+Biểu diễn DAG này được tạo ra từ hai tệp cấu hình dưới đây (Hình 14-13):
+
+4. Lưu trữ dữ liệu vào bộ đệm (Cache data). Bộ tiền xử lý là một bộ đệm cho các video đã được phân đoạn. Để có độ tin cậy tốt hơn, bộ tiền xử lý lưu trữ các GOP và siêu dữ liệu vào bộ nhớ tạm thời. Nếu quá trình mã hóa video thất bại, hệ thống có thể sử dụng dữ liệu đã được lưu trữ để thực hiện các thao tác thử lại.
+
+**Bộ lập lịch DAG**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493188/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-231-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493189/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-231-2.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493190/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-232-0.png)
+
+Bộ lập lịch DAG chia một đồ thị DAG thành các giai đoạn tác vụ và đưa chúng vào hàng đợi tác vụ (task queue) trong trình quản lý tài nguyên. Hình 14-15 minh họa một ví dụ về cách bộ lập lịch DAG hoạt động.
+
+Như thể hiện trong Hình 14-15, video gốc được chia thành ba giai đoạn: Giai đoạn 1: video, âm thanh và siêu dữ liệu. Tệp video tiếp tục được chia thành hai tác vụ trong giai đoạn 2: mã hóa video và thumbnail. Tệp âm thanh yêu cầu mã hóa âm thanh như một phần của các tác vụ giai đoạn 2.
+
+**Trình quản lý tài nguyên**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493193/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-232-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493194/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-233-0.png)
+
+Trình quản lý tài nguyên chịu trách nhiệm quản lý hiệu quả việc phân bổ tài nguyên. Nó chứa 3 hàng đợi (queue) và một bộ lập lịch tác vụ (task scheduler) như thể hiện trong Hình 14-17.
+
+  - Hàng đợi tác vụ (Task queue): Đây là một hàng đợi ưu tiên (priority queue) chứa các tác vụ cần được thực thi.
+
+  - Hàng đợi worker (Worker queue): Đây là một hàng đợi ưu tiên chứa thông tin sử dụng của các worker.
+
+  - Hàng đợi đang chạy (Running queue): Nó chứa thông tin về các tác vụ đang chạy hiện tại và các worker đang thực thi các tác vụ đó.
+
+  - Bộ lập lịch tác vụ (Task scheduler): Nó chọn tác vụ/worker tối ưu và chỉ thị cho worker tác vụ được chọn thực thi công việc.
+
+Trình quản lý tài nguyên hoạt động như sau:
+
+  - Bộ lập lịch tác vụ lấy tác vụ có độ ưu tiên cao nhất từ hàng đợi tác vụ.
+
+  - Bộ lập lịch tác vụ lấy worker tác vụ tối ưu để chạy tác vụ từ hàng đợi worker.
+
+  - Bộ lập lịch tác vụ chỉ thị cho worker tác vụ được chọn chạy tác vụ.
+
+  - Bộ lập lịch tác vụ liên kết thông tin tác vụ/worker và đưa nó vào hàng đợi đang chạy.
+
+  - Bộ lập lịch tác vụ loại bỏ công việc khỏi hàng đợi đang chạy sau khi công việc hoàn thành.
+
+**Các worker tác vụ**
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493196/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-233-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493197/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-234-0.png)
+
+Các worker tác vụ thực thi các tác vụ được định nghĩa trong DAG. Các worker tác vụ khác nhau có thể chạy các tác vụ khác nhau như thể hiện trong Hình 14-19.
+
+**Bộ nhớ tạm thời**
+
+Nhiều hệ thống lưu trữ được sử dụng ở đây. Việc lựa chọn hệ thống lưu trữ phụ thuộc vào các yếu tố như loại dữ liệu, kích thước dữ liệu, tần suất truy cập, vòng đời dữ liệu, v.v. Ví dụ, siêu dữ liệu thường xuyên được các worker truy cập và kích thước dữ liệu thường nhỏ. Do đó, việc lưu siêu dữ liệu vào bộ đệm trong bộ nhớ (in-memory caching) là một ý tưởng hay. Đối với dữ liệu video hoặc âm thanh, chúng ta lưu trữ chúng trong blob storage. Dữ liệu trong bộ nhớ tạm thời được giải phóng ngay sau khi quá trình xử lý video tương ứng hoàn tất.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493198/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-234-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493200/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-234-2.png)
+
+**Video đã mã hóa**
+
+Video đã mã hóa là đầu ra cuối cùng của Data Pipeline mã hóa. Dưới đây là một ví dụ về đầu ra: funny_720p.mp4.
+
+## **Tối ưu hóa hệ thống**
+
+Đến đây, chúng ta hẳn đã có cái nhìn rõ ràng về luồng tải video lên, luồng phát video và chuyển mã video (video transcoding). Tiếp theo, chúng ta sẽ tinh chỉnh hệ thống với các tối ưu hóa, bao gồm tốc độ, an toàn và tiết kiệm chi phí.
+
+**Tối ưu hóa tốc độ: song song hóa việc tải video lên**
+Tải lên toàn bộ một video dưới dạng một đơn vị duy nhất là không hiệu quả. Chúng ta có thể chia video thành các phần nhỏ hơn bằng cách căn chỉnh theo GOP (Group of Pictures) như minh họa trong Hình 14-22.
+
+Điều này cho phép tải lên tiếp tục nhanh chóng khi lần tải trước đó bị lỗi. Việc chia tệp video theo GOP có thể được triển khai ở phía client để cải thiện tốc độ tải lên như minh họa trong Hình 14-23.
+
+**Tối ưu hóa tốc độ: đặt các trung tâm tải lên gần người dùng**
+Một cách khác để cải thiện tốc độ tải lên là thiết lập nhiều trung tâm tải lên trên toàn cầu (Hình 14-24). Người dùng ở Hoa Kỳ có thể tải video lên trung tâm tải lên ở Bắc Mỹ, và người dùng ở Trung Quốc có thể tải video lên trung tâm tải lên ở Châu Á. Để đạt được điều này, chúng ta sử dụng CDN làm các trung tâm tải lên.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493201/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-235-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493202/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-235-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493203/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-235-2.png)
+
+**Tối ưu hóa tốc độ: song song hóa ở mọi nơi**
+Đạt được độ trễ thấp (low latency) đòi hỏi nhiều nỗ lực. Một tối ưu hóa khác là xây dựng một hệ thống có tính liên kết lỏng lẻo (loosely coupled) và cho phép song song hóa cao (high parallelism).
+
+Thiết kế của chúng ta cần một số sửa đổi để đạt được song song hóa cao. Hãy cùng xem xét kỹ hơn luồng chuyển video từ bộ nhớ gốc đến CDN. Luồng này được thể hiện trong Hình 14-25, cho thấy đầu ra phụ thuộc vào đầu vào của bước trước đó. Sự phụ thuộc này khiến việc song song hóa trở nên khó khăn.
+
+Để làm cho hệ thống có tính liên kết lỏng lẻo hơn, chúng ta đã giới thiệu các hàng đợi tin nhắn (message queues) như minh họa trong Hình 14-26. Hãy sử dụng một ví dụ để giải thích cách các hàng đợi tin nhắn giúp hệ thống có tính liên kết lỏng lẻo hơn.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493209/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-236-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493213/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-236-1.png)
+
+- Trước khi hàng đợi tin nhắn được giới thiệu, module mã hóa phải chờ đầu ra từ module tải xuống.
+
+- Sau khi hàng đợi tin nhắn được giới thiệu, module mã hóa không cần phải chờ đầu ra từ module tải xuống nữa. Nếu có các sự kiện trong hàng đợi tin nhắn, module mã hóa có thể thực thi các công việc đó song song.
+
+**Tối ưu hóa an toàn: URL tải lên đã ký trước**
+An toàn là một trong những khía cạnh quan trọng nhất của bất kỳ sản phẩm nào. Để đảm bảo chỉ những người dùng được ủy quyền mới tải video lên đúng vị trí, chúng ta giới thiệu các URL đã ký trước (pre-signed URLs) như minh họa trong Hình 14-27.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493216/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-237-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781493218/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-238-0.png)
+
+Luồng tải lên được cập nhật như sau:
+1
+
+## **Bước 4 - Tổng kết**
+
+Trong chương này, chúng ta đã trình bày thiết kế kiến trúc cho các dịch vụ streaming video như YouTube. Nếu còn thời gian vào cuối buổi phỏng vấn, đây là một vài điểm bổ sung mà chúng ta có thể đề cập:
+
+  - Mở rộng tầng API: Vì các máy chủ API là stateless (không lưu trạng thái), nên việc mở rộng tầng API theo chiều ngang (horizontally) rất dễ dàng.
+
+  - Mở rộng cơ sở dữ liệu: Chúng ta có thể nói về replication (nhân bản dữ liệu) và sharding (phân mảnh dữ liệu) cho cơ sở dữ liệu.
+
+  - Live streaming (truyền phát trực tiếp): Thuật ngữ này đề cập đến quá trình một video được ghi lại và phát sóng theo thời gian thực. Mặc dù hệ thống của chúng ta không được thiết kế đặc biệt cho live streaming, nhưng live streaming và non-live streaming (truyền phát không trực tiếp) có một số điểm tương đồng: cả hai đều yêu cầu tải lên (uploading), mã hóa (encoding) và truyền phát (streaming). Những điểm khác biệt đáng chú ý là:
+
+    - Live streaming có yêu cầu về độ trễ (latency) cao hơn, vì vậy có thể cần một giao thức streaming khác.
+
+    - Live streaming có yêu cầu thấp hơn về tính song song (parallelism) vì các khối dữ liệu nhỏ đã được xử lý theo thời gian thực.
+
+    - Live streaming yêu cầu các bộ xử lý lỗi (error handling) khác nhau. Bất kỳ cơ chế xử lý lỗi nào mất quá nhiều thời gian đều không thể chấp nhận được.
+
+  - Gỡ bỏ video: Các video vi phạm bản quyền (copyrights), nội dung khiêu dâm (pornography) hoặc các hành vi bất hợp pháp khác sẽ bị gỡ bỏ. Một số có thể được hệ thống phát hiện trong quá trình tải lên, trong khi những video khác có thể được phát hiện thông qua việc người dùng gắn cờ (user flagging).
+
+Chúc mừng bạn đã đi được đến đây! Bây giờ hãy tự thưởng cho mình một lời khen. Làm tốt lắm!
+
+# **Tài liệu tham khảo**
+
+[1] YouTube qua các con số: https://www.omnicoreagency.com/youtube-statistics/
+
+[2] Thống kê nhân khẩu học YouTube 2019: https://blog.hubspot.com/marketing/youtube-demographics
+
+[3] Giá Cloudfront: https://aws.amazon.com/cloudfront/pricing/
+
+[4] Netflix trên AWS: https://aws.amazon.com/solutions/case-studies/netflix/
+
+[5] Trang chủ Akamai: https://www.akamai.com/
+
+[6] Đối tượng nhị phân lớn (Binary large object): https://en.wikipedia.org/wiki/Binary_large_object
+
+[7] Những điều bạn cần biết về các giao thức streaming: https://www.dacast.com/blog/streaming-protocols/
+
+[8] SVE: Xử lý video phân tán ở quy mô Facebook: https://www.cs.princeton.edu/~wlloyd/papers/sve-sosp17.pdf
+
+[9] Kiến trúc xử lý video của Weibo (bằng tiếng Trung): https://www.upyun.com/opentalk/399.html
+
+[10] Ủy quyền truy cập bằng shared access signature: https://docs.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-accesssignature
+
+[11] Bài nói chuyện về khả năng mở rộng của YouTube từ một nhân viên kỳ cựu của YouTube: https://www.youtube.com/watch?v=w5WVu624fY8
+
+[12] Tìm hiểu các đặc điểm của chia sẻ video ngắn trên internet: Một nghiên cứu đo lường dựa trên YouTube. https://arxiv.org/pdf/0707.3670.pdf
+
+[13] Mức độ phổ biến nội dung cho Open Connect: https://netflixtechblog.com/content-popularity-for-open-connect-b86d56f613b
+
+---
+
+*Made by Anh Tu - Share to be share*

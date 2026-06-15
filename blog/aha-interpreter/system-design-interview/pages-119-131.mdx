@@ -1,0 +1,112 @@
+---
+slug: aha-interpreter-system-design-interview-pages-119-131
+title: "[System design interview] Từ trang 119 đến 131"
+date: 2026-06-15
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"System design interview"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+# **CHƯƠNG 8: THIẾT KẾ DỊCH VỤ RÚT GỌN URL**
+
+Trong chương này, chúng ta sẽ giải quyết một câu hỏi phỏng vấn thiết kế hệ thống thú vị và kinh điển: thiết kế một dịch vụ rút gọn URL như tinyurl.
+
+## **Bước 1 - Hiểu vấn đề và xác định phạm vi thiết kế**
+
+Các câu hỏi phỏng vấn thiết kế hệ thống thường cố ý được để mở. Để thiết kế một hệ thống tốt, việc đặt các câu hỏi làm rõ là rất quan trọng.
+
+**Ứng viên**: Bạn có thể cho một ví dụ về cách một dịch vụ rút gọn URL hoạt động không?
+**Người phỏng vấn**: Giả sử URL https://www.systeminterview.com/q=chatsystem&c=loggedin&v=v3&l=long là URL gốc. Dịch vụ của bạn sẽ tạo một bí danh (alias) có độ dài ngắn hơn: https://tinyurl.com/ y7keocwj. Nếu bạn nhấp vào bí danh này, nó sẽ chuyển hướng bạn đến URL gốc.
+
+**Ứng viên**: Lưu lượng truy cập là bao nhiêu?
+**Người phỏng vấn**: 100 triệu URL được tạo ra mỗi ngày.
+
+**Ứng viên**: URL rút gọn dài bao nhiêu?
+**Người phỏng vấn**: Ngắn nhất có thể.
+
+**Ứng viên**: Những ký tự nào được phép trong URL rút gọn?
+**Người phỏng vấn**: URL rút gọn có thể là sự kết hợp của các số (0-9) và ký tự (a-z, A-Z).
+
+**Ứng viên**: Các URL rút gọn có thể bị xóa hoặc cập nhật không?
+**Người phỏng vấn**: Để đơn giản, chúng ta hãy giả định rằng các URL rút gọn không thể bị xóa hoặc cập nhật.
+
+Dưới đây là các trường hợp sử dụng cơ bản:
+1.  **URL shortening**: cho một URL dài => trả về một URL ngắn hơn nhiều
+2.  Chuyển hướng URL: cho một URL ngắn hơn => chuyển hướng đến URL gốc
+3.  Các cân nhắc về tính sẵn sàng cao (High availability), khả năng mở rộng (scalability) và khả năng chịu lỗi (fault tolerance)
+
+## **Ước tính sơ bộ**
+
+*   Thao tác ghi: 100 triệu URL được tạo ra mỗi ngày.
+*   Thao tác ghi mỗi giây: 100 triệu / 24 / 3600 = 1160
+*   Thao tác đọc: Giả sử tỷ lệ thao tác đọc so với thao tác ghi là 10:1, thao tác đọc mỗi giây: 1160 * 10 = 11.600
+*   Giả sử dịch vụ rút gọn URL sẽ hoạt động trong 10 năm, điều này có nghĩa là chúng ta phải hỗ trợ 100 triệu * 365 * 10 = 365 tỷ bản ghi.
+*   Giả sử độ dài URL trung bình là 100.
+*   Yêu cầu lưu trữ trong 10 năm: 365 tỷ * 100 byte * 10 năm = 365 TB
+
+Điều quan trọng là bạn phải trình bày các giả định và tính toán này với người phỏng vấn để cả hai cùng hiểu rõ vấn đề.
+
+## **Bước 2 - Đề xuất thiết kế cấp cao và nhận được sự đồng thuận**
+
+Trong phần này, chúng ta sẽ thảo luận về các API endpoints, luồng chuyển hướng URL và luồng rút gọn URL.
+
+## **API Endpoints**
+
+Các API endpoints tạo điều kiện giao tiếp giữa client và server. Chúng ta sẽ thiết kế các API theo phong cách REST. Nếu bạn chưa quen với RESTful API, bạn có thể tham khảo các tài liệu bên ngoài, chẳng hạn như tài liệu tham khảo [1]. Một dịch vụ rút gọn URL chủ yếu cần hai API endpoints:
+1.  **URL shortening**: Để tạo một URL ngắn mới, một client gửi một yêu cầu POST, trong đó chứa một tham số: URL dài gốc. API trông như sau:
+
+    _POST api/v1/data/shorten_
+
+    *   tham số yêu cầu: `{longUrl: longURLString}`
+    *   trả về shortURL
+
+2.  Chuyển hướng URL: Để chuyển hướng một URL ngắn đến URL dài tương ứng, một client gửi một yêu cầu GET. API trông như sau:
+
+    _
+
+## **Hàm băm**
+
+Hàm băm (hash function) được dùng để băm một long URL thành một short URL, còn được gọi là _hashValue_.
+
+**Độ dài của hash value**
+_hashValue_ bao gồm các ký tự từ [0-9, a-z, A-Z], tổng cộng có 10 + 26 + 26 = 62 ký tự khả dụng. Để xác định độ dài của _hashValue_, chúng ta cần tìm số _n_ nhỏ nhất sao cho _62^n_ _≥ 365 tỷ_. Hệ thống phải hỗ trợ tới 365 tỷ URL dựa trên ước tính sơ bộ. Bảng 8-1 hiển thị độ dài của _hashValue_ và số lượng URL tối đa tương ứng mà nó có thể hỗ trợ.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491451/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-123-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491452/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-124-0.png)
+
+Khi _n = 7, 62 ^ n = ~3.5 nghìn tỷ_, 3.5 nghìn tỷ là quá đủ để chứa 365 tỷ URL, vì vậy độ dài của _hashValue_ là 7.
+
+Chúng ta sẽ tìm hiểu hai loại hàm băm cho một dịch vụ rút gọn URL. Loại thứ nhất là “băm + xử lý va chạm”, và loại thứ hai là “chuyển đổi cơ số 62”. Hãy cùng xem xét từng loại một.
+
+**Băm + xử lý va chạm**
+Để rút gọn một long URL, chúng ta nên triển khai một hàm băm để băm long URL đó thành một chuỗi 7 ký tự. Một giải pháp đơn giản là sử dụng các hàm băm nổi tiếng như CRC32, MD5 hoặc SHA-1. Bảng sau so sánh kết quả băm sau khi áp dụng các hàm băm khác nhau trên URL này: https://en.wikipedia.org/wiki/Systems_design.
+
+Như thể hiện trong Bảng 8-2, ngay cả _hashValue_ ngắn nhất (từ CRC32) cũng quá dài (hơn 7 ký tự). Làm thế nào chúng ta có thể làm cho nó ngắn hơn?
+
+Cách tiếp cận đầu tiên là lấy 7 ký tự đầu tiên của một _hashValue_; tuy nhiên, phương pháp này có thể dẫn đến va chạm băm (hash collisions). Để giải quyết va chạm băm, chúng ta có thể đệ quy nối thêm một chuỗi định nghĩa trước mới cho đến khi không còn va chạm nào được phát hiện. Quá trình này được giải thích trong Hình 8
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781491453/aha-interpreter/system-design-interview/System-Design-Interview-by-Alex-Xu.pdf-124-1.png)
+5.
+
+Phương pháp này có thể loại bỏ va chạm; tuy nhiên, việc truy vấn cơ sở dữ liệu để kiểm tra xem một shortURL có tồn tại hay không cho mỗi yêu cầu là tốn kém. Một kỹ thuật gọi là bloom filters (tiếng Anh: bloom filters) [2] có thể cải thiện hiệu suất. Bloom filter là một kỹ thuật xác suất hiệu quả về không gian để kiểm tra xem một phần tử có phải là thành viên của một tập hợp hay không. Tham khảo tài liệu [2] để biết thêm chi tiết.
+
+**Chuyển đổi cơ số 62**
+Chuyển đổi cơ số (base conversion) là một cách tiếp cận khác thường được sử dụng cho các dịch vụ rút gọn URL. Chuyển đổi cơ số giúp chuyển đổi cùng một số giữa các hệ thống biểu diễn số khác nhau của nó. Chuyển đổi cơ số 62 được sử dụng vì có 62 ký tự khả dụng cho _hashValue_. Hãy sử dụng một ví dụ để giải thích cách chuyển đổi hoạt động: chuyển đổi 1115710 sang biểu diễn cơ số 62 (1115710 đại diện cho 11157 trong hệ cơ số 10).
+
+  - Đúng như tên gọi, cơ số 
+
+---
+
+*Made by Anh Tu - Share to be share*
