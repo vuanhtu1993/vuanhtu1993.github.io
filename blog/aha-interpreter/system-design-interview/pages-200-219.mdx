@@ -1,6 +1,6 @@
 ---
 slug: aha-interpreter-system-design-interview-pages-200-219
-title: "[System design interview] Từ trang 200 đến 219"
+title: "[System design interview] CHƯƠNG 13: THIẾT KẾ HỆ THỐNG GỢI Ý TÌM KIẾM"
 date: 2026-06-15
 authors:
   - anhhtus
@@ -20,7 +20,7 @@ Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline d
 <!-- truncate -->
 
 ---
-# **CHƯƠNG 13: THIẾT KẾ HỆ THỐNG TỰ ĐỘNG HOÀN THÀNH TÌM KIẾM**
+## **CHƯƠNG 13: THIẾT KẾ HỆ THỐNG GỢI Ý TÌM KIẾM**
 
 Khi tìm kiếm trên Google hoặc mua sắm tại Amazon, ngay khi bạn gõ vào ô tìm kiếm, một hoặc nhiều kết quả khớp với cụm từ tìm kiếm sẽ được hiển thị. Tính năng này được gọi là autocomplete (tự động hoàn thành), typeahead (gợi ý khi gõ), search-as-you-type (tìm kiếm khi gõ), hoặc incremental search (tìm kiếm tăng dần). Hình 13-1 minh họa một ví dụ về tìm kiếm trên Google, hiển thị danh sách các kết quả autocomplete khi từ “dinner” được gõ vào ô tìm kiếm. Search autocomplete là một tính năng quan trọng của nhiều sản phẩm. Điều này dẫn chúng ta đến câu hỏi phỏng vấn: thiết kế một hệ thống search autocomplete, còn được gọi là “thiết kế top k” hoặc “thiết kế top k truy vấn được tìm kiếm nhiều nhất”.
 

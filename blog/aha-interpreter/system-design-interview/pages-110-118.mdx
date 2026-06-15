@@ -1,6 +1,6 @@
 ---
 slug: aha-interpreter-system-design-interview-pages-110-118
-title: "[System design interview] Từ trang 110 đến 118"
+title: "[System design interview] CHƯƠNG 7: THIẾT KẾ HỆ THỐNG TẠO ID DUY NHẤT TRONG HỆ THỐNG PHÂN TÁN"
 date: 2026-06-15
 authors:
   - anhhtus
@@ -20,7 +20,7 @@ Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline d
 <!-- truncate -->
 
 ---
-# **CHƯƠNG 7: THIẾT KẾ HỆ THỐNG TẠO ID DUY NHẤT TRONG** **HỆ THỐNG PHÂN TÁN**
+## **CHƯƠNG 7: THIẾT KẾ HỆ THỐNG TẠO ID DUY NHẤT TRONG** **HỆ THỐNG PHÂN TÁN**
 
 Trong chương này, chúng ta sẽ thiết kế một hệ thống tạo ID duy nhất trong các hệ thống phân tán. Suy nghĩ đầu tiên của bạn có thể là sử dụng khóa chính với thuộc tính _auto_increment_ trong một cơ sở dữ liệu truyền thống. Tuy nhiên, _auto_increment_ không hoạt động trong môi trường phân tán vì một máy chủ cơ sở dữ liệu duy nhất không đủ lớn và việc tạo ID duy nhất trên nhiều cơ sở dữ liệu với độ trễ tối thiểu là một thách thức.
 
