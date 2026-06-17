@@ -1,0 +1,122 @@
+---
+title: "ChatXAI integration - Docs by LangChain"
+source_url: "https://docs.langchain.com/oss/javascript/integrations/chat/xai"
+crawled_at: "2026-06-17T14:52:49.619Z"
+---
+
+[xAI](https://x.ai/) develops Grok chat models. See the [xAI model documentation](https://docs.x.ai/docs/models) for available model IDs. This guide will help you getting started with `ChatXAI` [chat models](https://docs.langchain.com/oss/javascript/langchain/models). For detailed documentation of all `ChatXAI` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-xai/ChatXAI).
+
+## Overview
+
+### Integration details
+
+| Class | Package | Serializable | [PY support](https://python.langchain.com/docs/integrations/chat/xai/) | Downloads | Version |
+| --- | --- | --- | --- | --- | --- |
+| [`ChatXAI`](https://reference.langchain.com/javascript/langchain-xai/ChatXAI) | [`@langchain/xai`](https://www.npmjs.com/package/@langchain/xai) | ✅ | ✅ | ![NPM - Downloads](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781707970/aha-mind/docs-crawler/docs.langchain.com/xai_cpg7k5.svg) | ![NPM - Version](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781707970/aha-mind/docs-crawler/docs.langchain.com/xai_sununc.svg) |
+
+### Model features
+
+See the links in the table headers below for guides on how to use specific features.
+
+| [Tool calling](https://docs.langchain.com/oss/javascript/langchain/tools) | [Structured output](https://docs.langchain.com/oss/javascript/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/javascript/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/javascript/langchain/streaming) | [Token usage](https://docs.langchain.com/oss/javascript/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/javascript/langchain/models#log-probabilities) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+
+## Setup
+
+To access `ChatXAI` models, create an xAI account, [get an API key](https://console.x.ai/), and install the `@langchain/xai` integration package.
+
+### Credentials
+
+Head to [the xAI website](https://x.ai/) to sign up and generate an API key. Set the `XAI_API_KEY` environment variable:
+
+```
+export XAI_API_KEY="your-api-key"
+```
+
+If you want to get automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+
+```
+# export LANGSMITH_TRACING="true"
+# export LANGSMITH_API_KEY="your-api-key"
+```
+
+### Installation
+
+The LangChain `ChatXAI` integration lives in the `@langchain/xai` package:
+
+## Instantiation
+
+Now we can instantiate our model object and generate chat completions:
+
+```
+import { ChatXAI } from "@langchain/xai";
+
+const llm = new ChatXAI({
+    model: "grok-3-fast",
+    temperature: 0,
+    maxTokens: undefined,
+    maxRetries: 2,
+    // other params...
+})
+```
+
+## Invocation
+
+```
+const aiMsg = await llm.invoke([
+    [
+      "system",
+      "You are a helpful assistant that translates English to French. Translate the user sentence.",
+    ],
+    ["human", "I love programming."],
+])
+console.log(aiMsg)
+```
+
+```
+AIMessage {
+  "id": "71d7e3d8-30dd-472c-8038-b6b283dcee63",
+  "content": "J'adore programmer.",
+  "additional_kwargs": {},
+  "response_metadata": {
+    "tokenUsage": {
+      "promptTokens": 30,
+      "completionTokens": 6,
+      "totalTokens": 36
+    },
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 30,
+      "completion_tokens": 6,
+      "total_tokens": 36
+    },
+    "system_fingerprint": "fp_3e3898d4ce"
+  },
+  "tool_calls": [],
+  "invalid_tool_calls": [],
+  "usage_metadata": {
+    "output_tokens": 6,
+    "input_tokens": 30,
+    "total_tokens": 36,
+    "input_token_details": {},
+    "output_token_details": {}
+  }
+}
+```
+
+```
+console.log(aiMsg.content)
+```
+
+```
+J'adore programmer.
+```
+
+---
+
+## API reference
+
+For detailed documentation of all `ChatXAI` features and configurations head to the [API reference](https://reference.langchain.com/javascript/langchain-xai/ChatXAI).
+
+---

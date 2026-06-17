@@ -108,7 +108,7 @@ program
       if (result.errors.length > 0) {
         console.log(`\n❌ Lỗi (${result.errors.length} trang):`);
         for (const err of result.errors.slice(0, 5)) {
-          console.log(`   - ${err.url}: ${truncate(err.error, 60)}`);
+          console.log(`   - ${err.url}: ${truncateError(err.error, 100)}`);
         }
         if (result.errors.length > 5) {
           console.log(`   ... và ${result.errors.length - 5} lỗi khác`);
@@ -151,8 +151,14 @@ program
 
 program.parse(process.argv);
 
-// Helper: cắt ngắn string
+// Helper: cắt ngắn string cho URL/Path (giữ phần đuôi)
 function truncate(str: string, maxLen: number): string {
   if (str.length <= maxLen) return str;
   return "..." + str.slice(str.length - maxLen + 3);
+}
+
+// Helper: cắt ngắn string cho Error (giữ phần đầu)
+function truncateError(str: string, maxLen: number): string {
+  if (str.length <= maxLen) return str;
+  return str.slice(0, maxLen - 3) + "...";
 }

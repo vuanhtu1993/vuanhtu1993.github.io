@@ -1,0 +1,627 @@
+---
+title: "Subagents - Docs by LangChain"
+source_url: "https://docs.langchain.com/oss/javascript/deepagents/subagents"
+crawled_at: "2026-06-17T14:44:59.564Z"
+---
+
+A deep agent can create subagents to delegate work. You can specify custom subagents in the `subagents` parameter. Subagents are useful for [context quarantine](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html#context-quarantine) (keeping the main agent’s context clean) and for providing specialized instructions. This page covers **synchronous** subagents, where the supervisor blocks until the subagent finishes. For long-running tasks, parallel workstreams, or cases where you need mid-flight steering and cancellation, see [Async subagents](https://docs.langchain.com/oss/javascript/deepagents/async-subagents).
+
+## Why use subagents?
+
+Subagents solve the **context bloat problem**. When agents use tools with large outputs (web search, file reads, database queries), the context window fills up quickly with intermediate results. Subagents isolate this detailed work—the main agent receives only the final result, not the dozens of tool calls that produced it. **When to use subagents:**
+
+-   ✅ Multi-step tasks that would clutter the main agent’s context
+-   ✅ Specialized domains that need custom instructions or tools
+-   ✅ Tasks requiring different model capabilities
+-   ✅ When you want to keep the main agent focused on high-level coordination
+
+**When NOT to use subagents:**
+
+-   ❌ Simple, single-step tasks
+-   ❌ When you need to maintain intermediate context
+-   ❌ When the overhead outweighs benefits
+
+## Configuration
+
+`subagents` should be a list of dictionaries or [`CompiledSubAgent`](https://reference.langchain.com/javascript/deepagents/middleware/CompiledSubAgent) objects. There are two types:
+
+### Default subagent
+
+Deep Agents automatically adds a synchronous `general-purpose` subagent unless you already provide a synchronous subagent with that name. The `general-purpose` subagent has filesystem tools by default and can be customized with additional tools/middleware.
+
+-   To replace it, pass your own subagent named `general-purpose`.
+-   To rename or re-prompt the auto-added version, set `general_purpose_subagent=GeneralPurposeSubagentProfile(...)` on the active [harness profile](https://docs.langchain.com/oss/javascript/deepagents/profiles#harness-profiles).
+-   To disable it, see [Running without subagents](#running-without-subagents) below.
+
+### Running without subagents
+
+To run an agent without the `task` tool, do two things:
+
+1.  Set `general_purpose_subagent=GeneralPurposeSubagentProfile(enabled=False)` on the active [harness profile](https://docs.langchain.com/oss/javascript/deepagents/profiles#harness-profiles).
+2.  Pass no synchronous subagents via `subagents=` on `create_deep_agent`.
+
+Deep Agents only attaches [`SubAgentMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createSubAgentMiddleware) (and the `task` tool) when at least one synchronous subagent exists. With neither the default nor a caller-provided one, the agent runs without delegation. Async subagents are unaffected—they flow through their own middleware and tools, described in [Async subagents](https://docs.langchain.com/oss/javascript/deepagents/async-subagents).
+
+## Custom subagents
+
+You can define specialized subagents with specific tool by using the `subagents` parameter. For example to serve as a code reviewer, web researcher, or test runner. For most use cases, define subagents as dictionaries with [SubAgent dictionaries](#subagent-dictionary-based). For complex workflows, use a [`CompiledSubAgent`](#compiledsubagent):
+
+### SubAgent (Dictionary-based)
+
+Define subagents as dictionaries matching the [`SubAgent`](https://reference.langchain.com/javascript/deepagents/middleware/SubAgent) spec with the following fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `name` | `str` | Required. Unique identifier for the subagent. The main agent uses this name when calling the `task()` tool. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents. |
+| `description` | `str` | Required. Description of what this subagent does. Be specific and action-oriented. The main agent uses this to decide when to delegate. |
+| `system_prompt` | `str` | Required. Instructions for the subagent. Custom subagents must define their own. Include tool usage guidance and output format requirements.  
+Does not inherit from main agent. |
+| `tools` | `list[Callable]` | Optional. Tools the subagent can use. Keep this minimal and include only what’s needed.  
+Inherits from main agent by default. When specified, overrides the inherited tools entirely. |
+| `model` | `str` | `BaseChatModel` | Optional. Overrides the main agent’s model. Omit to use the main agent’s model.  
+Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5.5'` (using the `'provider:model'` format) or a LangChain chat model object (`await initChatModel("gpt-5.5")` or `new ChatOpenAI({ model: "gpt-5.5" })`). |
+| `name` | `string` | Required. Unique identifier for the subagent. The main agent uses this name when calling the `task()` tool. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents. |
+| `description` | `string` | Required. Description of what this subagent does. Be specific and action-oriented. The main agent uses this to decide when to delegate. |
+| `systemPrompt` | `string` | Required. Instructions for the subagent. Custom subagents must define their own. Include tool usage guidance and output format requirements.  
+Does not inherit from main agent. |
+| `tools` | `StructuredTool[]` | Optional. Tools the subagent can use. Keep this minimal and include only what’s needed.  
+Inherits from main agent by default. When specified, overrides the inherited tools entirely. |
+| `model` | `LanguageModelLike | string` | Optional. Overrides the main agent’s model. Omit to use the main agent’s model.  
+Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5.5'` (using the `'provider:model'` format) or a LangChain chat model object (`await initChatModel("gpt-5.5")` or `new ChatOpenAI({ model: "gpt-5.5" })`). |
+| `middleware` | `AgentMiddleware[]` | Optional. Additional middleware for custom behavior, logging, or rate limiting.  
+Does not inherit from the main agent. Appended to the [default subagent stack](https://docs.langchain.com/oss/javascript/deepagents/customization#default-stack-synchronous-subagents). |
+| `interruptOn` | `Record<string, boolean | InterruptOnConfig>` | Optional. Configure [human-in-the-loop](https://docs.langchain.com/oss/javascript/deepagents/human-in-the-loop) for specific tools. Options: `True`, `False`. or an `InterruptOnConfig` with `allowed_decisions`. Requires checkpointer.  
+Inherits from main agent by default. Subagent value overrides the default. |
+| `skills` | `string[]` | Optional. [Skills](https://docs.langchain.com/oss/javascript/deepagents/skills) source paths. When specified, the subagent will load skills from these directories (e.g., `["/skills/research/", "/skills/web-search/"]`). This allows subagents to have different skill sets than the main agent.  
+Does not inherit from main agent. Only the general-purpose subagent inherits the main agent’s skills. When a subagent has skills, it runs its own independent [`SkillsMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createSkillsMiddleware) instance. Skill state is fully isolated—a subagent’s loaded skills are not visible to the parent, and vice versa. |
+| `responseFormat` | `ResponseFormat` | Optional. [Structured output](https://docs.langchain.com/oss/javascript/langchain/structured-output) schema for the subagent. When set, the parent receives the subagent’s result as JSON instead of free-form text. Accepts Zod schemas, JSON schema objects, `toolStrategy(...)`, or `providerStrategy(...)`. See [Structured output](#structured-output). |
+| `permissions` | `FilesystemPermission[]` | Optional. [Filesystem permission rules](https://docs.langchain.com/oss/javascript/deepagents/permissions) for the subagent. When set, **replaces** the parent agent’s permissions entirely.  
+Inherits from main agent by default. |
+
+### CompiledSubAgent
+
+For complex workflows, use a prebuilt LangGraph graph as a [`CompiledSubAgent`](https://reference.langchain.com/javascript/deepagents/middleware/CompiledSubAgent):
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `name` | `str` | Required. Unique identifier for the subagent. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents. |
+| `description` | `str` | Required. What this subagent does. |
+| `runnable` | `Runnable` | Required. A compiled LangGraph graph (must call `.compile()` first). |
+
+## Using SubAgent
+
+## Using CompiledSubAgent
+
+For more complex use cases, you can provide your custom subagents with [`CompiledSubAgent`](https://reference.langchain.com/javascript/deepagents/middleware/CompiledSubAgent). You can create a custom subagent using LangChain’s [`create_agent`](https://reference.langchain.com/javascript/langchain/index/createAgent) or by making a custom LangGraph graph using the [graph API](https://docs.langchain.com/oss/javascript/langgraph/graph-api). If you’re creating a custom LangGraph graph, make sure that the graph has a [state key called `"messages"`](https://docs.langchain.com/oss/javascript/langgraph/quickstart#2-define-state):
+
+```
+import { createDeepAgent, CompiledSubAgent } from "deepagents";
+import { createAgent } from "langchain";
+
+// Create a custom agent graph
+const customGraph = createAgent({
+  model: yourModel,
+  tools: specializedTools,
+  prompt: "You are a specialized agent for data analysis...",
+});
+
+// Use it as a custom subagent
+const customSubagent: CompiledSubAgent = {
+  name: "data-analyzer",
+  description: "Specialized agent for complex data analysis tasks",
+  runnable: customGraph,
+};
+
+const subagents = [customSubagent];
+
+const agent = createDeepAgent({
+  model: "google_genai:gemini-3.5-flash",
+  tools: [internetSearch],
+  systemPrompt: researchInstructions,
+  subagents: subagents,
+});
+```
+
+## Streaming
+
+Deep Agents support streaming updates from both the coordinator and every delegated subagent. Use [`streamEvents`](https://docs.langchain.com/oss/javascript/deepagents/event-streaming) to get typed projections—separate iterators for subagents, messages, tool calls, and values—so you can consume each independently.
+
+### Stream subagent progress
+
+The simplest pattern is to iterate `stream.subagents` to track each delegated task as it starts, runs, and completes. Each subagent handle exposes `.name`, `.messages`, `.tool_calls`, and `.output`.
+
+### LangSmith tracing
+
+As your deep agent runs, all runs executed by a subagent or the coordinator will have the agent name in their metadata under the `lc_agent_name` key—for example, `{'lc_agent_name': 'research-agent'}`. This lets you identify and filter runs by subagent in LangSmith. ![LangSmith Example trace showing the metadata](https://res.cloudinary.com/dv3vzmogk/image/upload/v1781707501/aha-mind/docs-crawler/docs.langchain.com/deepagents-langsmith_khkqai.png)
+
+## Filter by subagent in LangSmith
+
+Because each subagent’s `name` is written to the `lc_agent_name` metadata key on every run it produces, you can use LangSmith’s metadata filtering to isolate all runs from a specific subagent — useful for debugging, monitoring, or comparing subagent behavior over time.
+
+### Filter in the LangSmith UI
+
+1.  Open your tracing project in [LangSmith](https://smith.langchain.com/?utm_source=docs&utm_medium=cta&utm_campaign=langsmith-signup&utm_content=oss-deepagents-subagents).
+2.  Switch the view to **Runs** on the Tracing project page to see individual spans.
+3.  Click **Add filter** and select **Metadata**.
+4.  Set the **Key** to `lc_agent_name` and the **Value** to the subagent name (for example, `research-agent`).
+
+This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+
+### Filter programmatically with the SDK
+
+Use the `has` comparator in the LangSmith filter query language to match runs by metadata key-value pair:
+
+```
+from langsmith import Client
+
+client = Client()
+
+runs = client.list_runs(
+    project_name="<your-project>",
+    filter='has(metadata, \'{"lc_agent_name": "research-agent"}\')',
+)
+
+for run in runs:
+    print(run.name, run.start_time, run.status)
+```
+
+To fetch runs from _any_ named subagent (excluding the main agent), filter for runs that have the `lc_agent_name` key at all:
+
+```
+runs = client.list_runs(
+    project_name="<your-project>",
+    filter="has(metadata, 'lc_agent_name')",
+)
+```
+
+For the full filter query language reference, see [Trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax).
+
+## Structured output
+
+Subagents support [structured output](https://docs.langchain.com/oss/javascript/langchain/structured-output), so the parent agent receives predictable, parseable JSON instead of free-form text.
+
+Pass `responseFormat` on the subagent config. When the subagent finishes, its structured response is JSON-serialized and returned as the `ToolMessage` content to the parent agent. The schema accepts anything supported by `createAgent`: Zod schemas, JSON schema objects, `toolStrategy(...)`, or `providerStrategy(...)`.
+
+```
+import { z } from "zod";
+import { createDeepAgent } from "deepagents";
+
+const ResearchFindings = z.object({
+  summary: z.string().describe("Summary of findings"),
+  confidence: z.number().describe("Confidence score from 0 to 1"),
+  sources: z.array(z.string()).describe("List of source URLs"),
+});
+
+const researchSubagent = {
+  name: "researcher",
+  description: "Researches topics and returns structured findings",
+  systemPrompt: "Research the given topic thoroughly. Return your findings.",
+  tools: [webSearch],
+  responseFormat: ResearchFindings,
+};
+
+const agent = createDeepAgent({
+  model: "claude-sonnet-4-6",
+  subagents: [researchSubagent],
+});
+
+const result = await agent.invoke({
+  messages: [{ role: "user", content: "Research recent advances in quantum computing" }],
+});
+
+// The parent's ToolMessage contains JSON-serialized structured data:
+// '{"summary": "...", "confidence": 0.87, "sources": ["https://..."]}'
+```
+
+Without `response_format`, the parent receives the subagent’s last message text as-is. With it, the parent always gets valid JSON matching the schema, which is useful when the parent needs to process the result programmatically or pass it to downstream tools. For full details on schema types and strategies (tool calling vs. provider-native), see [Structured output](https://docs.langchain.com/oss/javascript/langchain/structured-output).
+
+## The general-purpose subagent
+
+In addition to any user-defined subagents, every deep agent has access to a `general-purpose` subagent at all times. This subagent:
+
+-   Uses its own [default system prompt with profile overlays applied](https://docs.langchain.com/oss/javascript/deepagents/customization#prompt-assembly)
+-   Has access to all the same tools
+-   Uses the same model (unless overridden)
+-   Inherits skills from the main agent (when skills are configured)
+
+### Override the general-purpose subagent
+
+Include a subagent with `name: "general-purpose"` in your `subagents` list to replace the default. Use this to configure a different model, tools, or system prompt for the general-purpose subagent:
+
+```
+import { createDeepAgent } from "deepagents";
+
+// Main agent uses Gemini; general-purpose subagent uses GPT
+const agent = await createDeepAgent({
+  model: "google_genai:gemini-3.5-flash",
+  tools: [internetSearch],
+  subagents: [
+    {
+      name: "general-purpose",
+      description: "General-purpose agent for research and multi-step tasks",
+      systemPrompt: "You are a general-purpose assistant.",
+      tools: [internetSearch],
+      model: "openai:gpt-5.5",  // Different model for delegated tasks
+    },
+  ],
+});
+```
+
+When you provide a subagent with the general-purpose name, the default general-purpose subagent is not added. Your spec fully replaces it. To remove the built-in general-purpose subagent entirely instead of replacing it, set the active harness profile’s general-purpose subagent `enabled` flag to `False`.
+
+### When to use it
+
+The general-purpose subagent is ideal for context isolation without specialized behavior. The main agent can delegate a complex multi-step task to this subagent and get a concise result back without bloat from intermediate tool calls.
+
+### Skills inheritance
+
+When configuring [skills](https://docs.langchain.com/oss/javascript/deepagents/skills) with `create_deep_agent`:
+
+-   **General-purpose subagent**: Automatically inherits skills from the main agent
+-   **Custom subagents**: Do NOT inherit skills by default—use the `skills` parameter to give them their own skills
+
+```
+import { createDeepAgent, SubAgent } from "deepagents";
+
+// Research subagent with its own skills
+const researchSubagent: SubAgent = {
+  name: "researcher",
+  description: "Research assistant with specialized skills",
+  systemPrompt: "You are a researcher.",
+  tools: [webSearch],
+  skills: ["/skills/research/", "/skills/web-search/"],  // Subagent-specific skills
+};
+
+const agent = createDeepAgent({
+  model: "google_genai:gemini-3.5-flash",
+  skills: ["/skills/main/"],  // Main agent and GP subagent get these
+  subagents: [researchSubagent],  // Gets only /skills/research/ and /skills/web-search/
+});
+```
+
+## Best practices
+
+### Write clear descriptions
+
+The main agent uses descriptions to decide which subagent to call. Be specific: ✅ **Good:** `"Analyzes financial data and generates investment insights with confidence scores"` ❌ **Bad:** `"Does finance stuff"`
+
+### Keep system prompts detailed
+
+Include specific guidance on how to use tools and format outputs:
+
+```
+const researchSubagent = {
+  name: "research-agent",
+  description: "Conducts in-depth research using web search and synthesizes findings",
+  systemPrompt: `You are a thorough researcher. Your job is to:
+
+  1. Break down the research question into searchable queries
+  2. Use internet_search to find relevant information
+  3. Synthesize findings into a comprehensive but concise summary
+  4. Cite sources when making claims
+
+  Output format:
+  - Summary (2-3 paragraphs)
+  - Key findings (bullet points)
+  - Sources (with URLs)
+
+  Keep your response under 500 words to maintain clean context.`,
+  tools: [internetSearch],
+};
+```
+
+### Minimize tool sets
+
+Only give subagents the tools they need. This improves focus and security:
+
+```
+// ✅ Good: Focused tool set
+const emailAgent = {
+  name: "email-sender",
+  tools: [sendEmail, validateEmail],  // Only email-related
+};
+
+// ❌ Bad: Too many tools
+const emailAgentBad = {
+  name: "email-sender",
+  tools: [sendEmail, webSearch, databaseQuery, fileUpload],  // Unfocused
+};
+```
+
+### Choose models by task
+
+Different models excel at different tasks:
+
+```
+const subagents = [
+  {
+    name: "contract-reviewer",
+    description: "Reviews legal documents and contracts",
+    systemPrompt: "You are an expert legal reviewer...",
+    tools: [readDocument, analyzeContract],
+    model: "google_genai:gemini-3.5-flash",  // Large context for long documents
+  },
+  {
+    name: "financial-analyst",
+    description: "Analyzes financial data and market trends",
+    systemPrompt: "You are an expert financial analyst...",
+    tools: [getStockPrice, analyzeFundamentals],
+    model: "gpt-5.5",  // Better for numerical analysis
+  },
+];
+```
+
+### Return concise results
+
+Instruct subagents to return summaries, not raw data:
+
+```
+const dataAnalyst = {
+  systemPrompt: `Analyze the data and return:
+  1. Key insights (3-5 bullet points)
+  2. Overall confidence score
+  3. Recommended next actions
+
+  Do NOT include:
+  - Raw data
+  - Intermediate calculations
+  - Detailed tool outputs
+
+  Keep response under 300 words.`,
+};
+```
+
+## Common patterns
+
+### Multiple specialized subagents
+
+Create specialized subagents for different domains:
+
+```
+import { createDeepAgent } from "deepagents";
+
+const subagents = [
+  {
+    name: "data-collector",
+    description: "Gathers raw data from various sources",
+    systemPrompt: "Collect comprehensive data on the topic",
+    tools: [webSearch, apiCall, databaseQuery],
+  },
+  {
+    name: "data-analyzer",
+    description: "Analyzes collected data for insights",
+    systemPrompt: "Analyze data and extract key insights",
+    tools: [statisticalAnalysis],
+  },
+  {
+    name: "report-writer",
+    description: "Writes polished reports from analysis",
+    systemPrompt: "Create professional reports from insights",
+    tools: [formatDocument],
+  },
+];
+
+const agent = createDeepAgent({
+  model: "google_genai:gemini-3.5-flash",
+  systemPrompt: "You coordinate data analysis and reporting. Use subagents for specialized tasks.",
+  subagents: subagents,
+});
+```
+
+**Workflow:**
+
+1.  Main agent creates high-level plan
+2.  Delegates data collection to data-collector
+3.  Passes results to data-analyzer
+4.  Sends insights to report-writer
+5.  Compiles final output
+
+Each subagent works with clean context focused only on its task.
+
+## Context management
+
+When you invoke a parent agent with [runtime context](https://docs.langchain.com/oss/javascript/langchain/runtime), that context automatically propagates to all subagents. Each subagent run receives the same runtime context you passed on the parent `invoke` / `ainvoke` call. This means tools running inside any subagent can access the same context values you provided to the parent:
+
+```
+import { createDeepAgent } from "deepagents";
+import { tool } from "langchain";
+import type { ToolRuntime } from "@langchain/core/tools";
+import { z } from "zod";
+
+const contextSchema = z.object({
+  userId: z.string(),
+  sessionId: z.string(),
+});
+
+const getUserData = tool(
+  async (input, runtime: ToolRuntime<unknown, typeof contextSchema>) => {
+    const userId = runtime.context?.userId;
+    return `Data for user ${userId}: ${input.query}`;
+  },
+  {
+    name: "get_user_data",
+    description: "Fetch data for the current user",
+    schema: z.object({ query: z.string() }),
+  }
+);
+
+const researchSubagent = {
+  name: "researcher",
+  description: "Conducts research for the current user",
+  systemPrompt: "You are a research assistant.",
+  tools: [getUserData],
+};
+
+const agent = createDeepAgent({
+  model: "google_genai:gemini-3.5-flash",
+  subagents: [researchSubagent],
+  contextSchema,
+});
+
+// Context flows to the researcher subagent and its tools automatically
+const result = await agent.invoke(
+  { messages: [new HumanMessage("Look up my recent activity")] },
+  { context: { userId: "user-123", sessionId: "abc" } },
+);
+```
+
+### Per-subagent context
+
+All subagents receive the same parent context. To pass configuration that is specific to a particular subagent, use **namespaced keys** (prefix keys with the subagent name, for example `researcher:max_depth`) in a flat `context` mapping, **or** model those settings as separate fields on your context type:
+
+```
+import { tool } from "langchain";
+import type { ToolRuntime } from "@langchain/core/tools";
+import { z } from "zod";
+
+const contextSchema = z.object({
+  userId: z.string(),
+  researcherMaxDepth: z.number().optional(),
+  factCheckerStrictMode: z.boolean().optional(),
+});
+
+const result = await agent.invoke(
+  { messages: [new HumanMessage("Research this and verify the claims")] },
+  {
+    context: {
+      userId: "user-123",                        // shared by all agents
+      "researcher:maxDepth": 3,                  // only for researcher
+      "fact-checker:strictMode": true,           // only for fact-checker
+    },
+  },
+);
+
+const verifyClaim = tool(
+  async (input, runtime: ToolRuntime<unknown, typeof contextSchema>) => {
+    const strictMode = runtime.context?.factCheckerStrictMode ?? false;
+    if (strictMode) {
+      return strictVerification(input.claim);
+    }
+    return basicVerification(input.claim);
+  },
+  {
+    name: "verify_claim",
+    description: "Verify a factual claim",
+    schema: z.object({ claim: z.string() }),
+  }
+);
+```
+
+### Identifying which subagent called a tool
+
+When the same tool is shared between the parent and multiple subagents, you can use the `lc_agent_name` metadata (the same value used in [streaming](#streaming)) to determine which agent initiated the call:
+
+```
+import { tool } from "langchain";
+import type { ToolRuntime } from "@langchain/core/tools";
+
+const sharedLookup = tool(
+  async (input, runtime: ToolRuntime) => {
+    const agentName = runtime.config?.metadata?.lc_agent_name;
+    if (agentName === "fact-checker") {
+      return strictLookup(input.query);
+    }
+    return generalLookup(input.query);
+  },
+  {
+    name: "shared_lookup",
+    description: "Look up information from various sources",
+    schema: z.object({ query: z.string() }),
+  }
+);
+```
+
+You can combine both patterns—read agent-specific settings from `runtime.context` and read `lc_agent_name` from `runtime.config` metadata when branching tool behavior.
+
+```
+const flexibleSearch = tool(
+  async (input, runtime: ToolRuntime<unknown, typeof contextSchema>) => {
+    const agentName = runtime.config?.metadata?.lc_agent_name ?? "unknown";
+    const ctx = runtime.context;
+    const maxResults =
+      agentName === "researcher" ? ctx?.researcherMaxDepth ?? 5 : 5;
+    const includeRaw = false;
+
+    return performSearch(input.query, { maxResults, includeRaw });
+  },
+  {
+    name: "flexible_search",
+    description: "Search with agent-specific settings",
+    schema: z.object({ query: z.string() }),
+  }
+);
+```
+
+## Troubleshooting
+
+### Subagent not being called
+
+**Problem**: Main agent tries to do work itself instead of delegating. **Solutions**:
+
+1.  **Make descriptions more specific:**
+    
+    ```
+    // ✅ Good
+    { name: "research-specialist", description: "Conducts in-depth research on specific topics using web search. Use when you need detailed information that requires multiple searches." }
+    
+    // ❌ Bad
+    { name: "helper", description: "helps with stuff" }
+    ```
+    
+2.  **Instruct main agent to delegate:**
+    
+    ```
+    const agent = createDeepAgent({
+      systemPrompt: `...your instructions...
+    
+      IMPORTANT: For complex tasks, delegate to your subagents using the task() tool.
+      This keeps your context clean and improves results.`,
+      subagents: [...]
+    });
+    ```
+    
+
+### Context still getting bloated
+
+**Problem**: Context fills up despite using subagents. **Solutions**:
+
+1.  **Instruct subagent to return concise results:**
+    
+    ```
+    systemPrompt: `...
+    
+    IMPORTANT: Return only the essential summary.
+    Do NOT include raw data, intermediate search results, or detailed tool outputs.
+    Your response should be under 500 words.`
+    ```
+    
+2.  **Use filesystem for large data:**
+    
+    ```
+    systemPrompt: `When you gather large amounts of data:
+    1. Save raw data to /data/raw_results.txt
+    2. Process and analyze the data
+    3. Return only the analysis summary
+    
+    This keeps context clean.`
+    ```
+    
+
+### Wrong subagent being selected
+
+**Problem**: Main agent calls inappropriate subagent for the task. **Solution**: Differentiate subagents clearly in descriptions:
+
+```
+const subagents = [
+  {
+    name: "quick-researcher",
+    description: "For simple, quick research questions that need 1-2 searches. Use when you need basic facts or definitions.",
+  },
+  {
+    name: "deep-researcher",
+    description: "For complex, in-depth research requiring multiple searches, synthesis, and analysis. Use for comprehensive reports.",
+  }
+];
+```
+
+---
