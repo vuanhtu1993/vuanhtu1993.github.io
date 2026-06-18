@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-ai-agents/implementation-plan" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.1">
+<title data-rh="true">Kế Hoạch Xây Dựng Khoá Học AI Agents | Anhhtus stories</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://vuanhtu1993.github.io/img/social_card.jpg"><meta data-rh="true" name="twitter:image" content="https://vuanhtu1993.github.io/img/social_card.jpg"><meta data-rh="true" property="og:url" content="https://vuanhtu1993.github.io/docs/ai-agents/implementation-plan"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Kế Hoạch Xây Dựng Khoá Học AI Agents | Anhhtus stories"><meta data-rh="true" name="description" content="Target LangChain.js + LangGraph.js | LLM: gemini-2.5-flash"><meta data-rh="true" property="og:description" content="Target LangChain.js + LangGraph.js | LLM: gemini-2.5-flash"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://vuanhtu1993.github.io/docs/ai-agents/implementation-plan"><link data-rh="true" rel="alternate" href="https://vuanhtu1993.github.io/docs/ai-agents/implementation-plan" hreflang="en"><link data-rh="true" rel="alternate" href="https://vuanhtu1993.github.io/docs/ai-agents/implementation-plan" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://W95VTU3G1X-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AI Agents","item":"https://vuanhtu1993.github.io/docs/category/ai-agents"},{"@type":"ListItem","position":2,"name":"Kế Hoạch Xây Dựng Khoá Học AI Agents","item":"https://vuanhtu1993.github.io/docs/ai-agents/implementation-plan"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Anhhtus stories RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Anhhtus stories Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GQETJJQ2L9"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-GQETJJQ2L9",{anonymize_ip:!0})</script>
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="Anhhtus stories" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.ce678be9.css">
+<script src="/assets/js/runtime~main.b9c66f16.js" defer="defer"></script>
+<script src="/assets/js/main.188b2457.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_DDhr" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpg" alt="My Site Logo" class="themedComponent_u5wZ themedComponent--light_Ndk0"><img src="/img/logo.jpg" alt="My Site Logo" class="themedComponent_u5wZ themedComponent--dark_w55u"></div><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Khoá học</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_C9hK colorModeToggle_yIjQ"><button class="clean-btn toggleButton_DzTZ toggleButtonDisabled_mXyC" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ lightToggleIcon_YWrO"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ darkToggleIcon_MZ3X"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_fQbJ systemToggleIcon_tP6m"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_UWWc"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts="Meta+k"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle><path d="m21 21-4.3-4.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_uwMc"><div class="docsWrapper_aRWF"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_bZrI" type="button"></button><div class="docRoot_Xo4T"><aside class="theme-doc-sidebar-container docSidebarContainer_hUe3"><div class="sidebarViewport_TLfc"><div class="sidebar_Lm7i"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_cGUU"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro"><span title="Tổng quan về chuyên trang này" class="linkLabel_uHdd">Tổng quan về chuyên trang này</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/2-khoá-học-kinh-tế-vĩ-mô"><span title="2. Khoá học kinh tế vĩ mô" class="categoryLinkLabel_UkwF">2. Khoá học kinh tế vĩ mô</span></a><button aria-label="Expand sidebar category &#x27;2. Khoá học kinh tế vĩ mô&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/bất-động-sản"><span title="Bất động sản" class="categoryLinkLabel_UkwF">Bất động sản</span></a><button aria-label="Expand sidebar category &#x27;Bất động sản&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/3-kinh-tế-vĩ-mô-việt-nam"><span title="3. Kinh tế Vĩ mô Việt Nam" class="categoryLinkLabel_UkwF">3. Kinh tế Vĩ mô Việt Nam</span></a><button aria-label="Expand sidebar category &#x27;3. Kinh tế Vĩ mô Việt Nam&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/5-aws-từ-cơ-bản-đến-nâng-cao"><span title="5. AWS Từ Cơ Bản Đến Nâng Cao" class="categoryLinkLabel_UkwF">5. AWS Từ Cơ Bản Đến Nâng Cao</span></a><button aria-label="Expand sidebar category &#x27;5. AWS Từ Cơ Bản Đến Nâng Cao&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/data-structures--algorithms-dsa"><span title="Data Structures &amp; Algorithms (DSA)" class="categoryLinkLabel_UkwF">Data Structures &amp; Algorithms (DSA)</span></a><button aria-label="Expand sidebar category &#x27;Data Structures &amp; Algorithms (DSA)&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/6-nestjs-thực-chiến"><span title="6. NestJS Thực Chiến" class="categoryLinkLabel_UkwF">6. NestJS Thực Chiến</span></a><button aria-label="Expand sidebar category &#x27;6. NestJS Thực Chiến&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/7-khoá-học-nextjs"><span title="7. Khoá học Next.js" class="categoryLinkLabel_UkwF">7. Khoá học Next.js</span></a><button aria-label="Expand sidebar category &#x27;7. Khoá học Next.js&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/8-khoá-học-nodejs"><span title="8. Khoá học Node.js" class="categoryLinkLabel_UkwF">8. Khoá học Node.js</span></a><button aria-label="Expand sidebar category &#x27;8. Khoá học Node.js&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/9-typeorm"><span title="9. TypeORM" class="categoryLinkLabel_UkwF">9. TypeORM</span></a><button aria-label="Expand sidebar category &#x27;9. TypeORM&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/ai-900-azure-ai-fundamentals"><span title="AI-900: Azure AI Fundamentals" class="categoryLinkLabel_UkwF">AI-900: Azure AI Fundamentals</span></a><button aria-label="Expand sidebar category &#x27;AI-900: Azure AI Fundamentals&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/nlp-trong-ai"><span title="NLP trong AI" class="categoryLinkLabel_UkwF">NLP trong AI</span></a><button aria-label="Expand sidebar category &#x27;NLP trong AI&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/10-prisma-orm"><span title="10. Prisma ORM" class="categoryLinkLabel_UkwF">10. Prisma ORM</span></a><button aria-label="Expand sidebar category &#x27;10. Prisma ORM&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/11-️-azure-ai---building-ai-agents"><span title="11. ☁️ Azure AI - Building AI Agents" class="categoryLinkLabel_UkwF">11. ☁️ Azure AI - Building AI Agents</span></a><button aria-label="Expand sidebar category &#x27;11. ☁️ Azure AI - Building AI Agents&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/12--chứng-chỉ-ai-901"><span title="12. 🏆 Chứng Chỉ AI-901" class="categoryLinkLabel_UkwF">12. 🏆 Chứng Chỉ AI-901</span></a><button aria-label="Expand sidebar category &#x27;12. 🏆 Chứng Chỉ AI-901&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/12--generative-ai--llm"><span title="12. 🤖 Generative AI &amp; LLM" class="categoryLinkLabel_UkwF">12. 🤖 Generative AI &amp; LLM</span></a><button aria-label="Expand sidebar category &#x27;12. 🤖 Generative AI &amp; LLM&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" href="/docs/category/13--prompt-engineering"><span title="13. 🎯 Prompt Engineering" class="categoryLinkLabel_UkwF">13. 🎯 Prompt Engineering</span></a><button aria-label="Expand sidebar category &#x27;13. 🎯 Prompt Engineering&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist menu__link--active" href="/docs/category/ai-agents"><span title="AI Agents" class="categoryLinkLabel_UkwF">AI Agents</span></a><button aria-label="Collapse sidebar category &#x27;AI Agents&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist" tabindex="0" href="/docs/category/agentic-patterns"><span title="Agentic Patterns" class="categoryLinkLabel_UkwF">Agentic Patterns</span></a><button aria-label="Expand sidebar category &#x27;Agentic Patterns&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/ai-agents/agents-101/chatbot-vs-agent"><span title="agents-101" class="categoryLinkLabel_UkwF">agents-101</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/ai-agents/implementation-plan"><span title="Kế Hoạch Xây Dựng Khoá Học AI Agents" class="linkLabel_uHdd">Kế Hoạch Xây Dựng Khoá Học AI Agents</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_wnag menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/data-analyst/da_master_curriculum"><span title="data-analyst" class="categoryLinkLabel_UkwF">data-analyst</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_fz58"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_mOPI"><div class="docItemContainer_JTtl"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_LnMq" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_VxiP"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/ai-agents"><span>AI Agents</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Kế Hoạch Xây Dựng Khoá Học AI Agents</span></li></ul></nav><div class="tocCollapsible_EZfz theme-doc-toc-mobile tocMobile_B2Fa"><button type="button" class="clean-btn tocCollapsibleButton_XTEb">On this page</button></div><div class="print-pdf-wrapper"><button class="print-pdf-button" title="Xuất PDF"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Xuất PDF</span></button><div class="print-content"><div class="theme-doc-markdown markdown"><header><h1>Kế Hoạch Xây Dựng Khoá Học AI Agents</h1></header>
+<blockquote>
+<p><strong>Target:</strong> Junior JS/TS Developer | <strong>Tool:</strong> LangChain.js + LangGraph.js | <strong>LLM:</strong> <code>gemini-2.5-flash</code></p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="thông-số-cốt-lõi">Thông Số Cốt Lõi<a href="#thông-số-cốt-lõi" class="hash-link" aria-label="Direct link to Thông Số Cốt Lõi" title="Direct link to Thông Số Cốt Lõi" translate="no">​</a></h2>
+<table><thead><tr><th>Thông số</th><th>Giá trị</th></tr></thead><tbody><tr><td><strong>Đối tượng</strong></td><td>Junior Dev có kinh nghiệm JS/TS web</td></tr><tr><td><strong>Công cụ demo</strong></td><td>LangChain.js + LangGraph.js (JS/TS native)</td></tr><tr><td><strong>LLM backend</strong></td><td><code>gemini-2.5-flash</code> — tiết kiệm, đủ mạnh</td></tr><tr><td><strong>Approach</strong></td><td>Full Course, build tuần tự</td></tr><tr><td><strong>Format</strong></td><td>Docs reference trên Docusaurus</td></tr><tr><td><strong>Tổng bài dự kiến</strong></td><td>~34 bài (Phase 0 đã có nội dung riêng)</td></tr><tr><td><strong>Timeline ước tính</strong></td><td>4–5 tháng (2 bài/tuần)</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="quy-tắc-bám-sát-tài-liệu">Quy Tắc Bám Sát Tài Liệu<a href="#quy-tắc-bám-sát-tài-liệu" class="hash-link" aria-label="Direct link to Quy Tắc Bám Sát Tài Liệu" title="Direct link to Quy Tắc Bám Sát Tài Liệu" translate="no">​</a></h2>
+<blockquote>
+<p>Mỗi bài học <strong>PHẢI</strong> được viết dựa trực tiếp vào file nguồn trong:
+<code>sources/documentations/docs.langchain.com/oss/javascript/</code></p>
+<ul>
+<li class=""><code>langchain/</code> — LangChain.js core (tools, models, memory, structured output...)</li>
+<li class=""><code>langgraph/</code> — LangGraph.js (agents, workflows, multi-agent, persistence...)</li>
+</ul>
+<p>Demo code <strong>BẮT BUỘC</strong> dùng <code>gemini-2.5-flash</code> (thay <code>ChatAnthropic</code> trong nguồn gốc).</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="kiến-trúc-khoá-học">Kiến Trúc Khoá Học<a href="#kiến-trúc-khoá-học" class="hash-link" aria-label="Direct link to Kiến Trúc Khoá Học" title="Direct link to Kiến Trúc Khoá Học" translate="no">​</a></h2>
+<!-- -->
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="phase-1-ai-agents-101">Phase 1: AI Agents 101<a href="#phase-1-ai-agents-101" class="hash-link" aria-label="Direct link to Phase 1: AI Agents 101" title="Direct link to Phase 1: AI Agents 101" translate="no">​</a></h2>
+<blockquote>
+<p><strong>Thời gian:</strong> 5 tuần | <strong>Số bài:</strong> 9</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-11--chatbot-vs-ai-agent">Bài 1.1 — Chatbot vs AI Agent<a href="#bài-11--chatbot-vs-ai-agent" class="hash-link" aria-label="Direct link to Bài 1.1 — Chatbot vs AI Agent" title="Direct link to Bài 1.1 — Chatbot vs AI Agent" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Workflow (cố định) vs Agent (động), 5 Agentic Patterns</li>
+<li class=""><strong>LLM Augmentations:</strong> Tool calling, Structured output, Memory</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/workflows-agents.md</code> — định nghĩa chính thức, sơ đồ patterns</li>
+<li class=""><code>langchain/agents.md</code> — agent architecture tổng quan</li>
+</ul>
+</li>
+<li class=""><strong>Đã tạo:</strong> <code>docs/ai-agents/01-chatbot-vs-agent.md</code></li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-12--agent-loop-trong-code">Bài 1.2 — Agent Loop Trong Code<a href="#bài-12--agent-loop-trong-code" class="hash-link" aria-label="Direct link to Bài 1.2 — Agent Loop Trong Code" title="Direct link to Bài 1.2 — Agent Loop Trong Code" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> StateGraph, Node, Edge, MessagesValue, ReducedValue</li>
+<li class=""><strong>Demo JS:</strong> Graph API + Functional API với <code>gemini-2.5-flash</code></li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/quickstart.md</code> — <strong>NGUỒN CHÍNH</strong> (Graph API + Functional API step-by-step)</li>
+<li class=""><code>langgraph/thinking-in-langgraph.md</code> — mental model Node/State/Edge</li>
+<li class=""><code>langgraph/workflows-agents.md</code> — ToolNode pattern</li>
+</ul>
+</li>
+<li class=""><strong>Đã tạo:</strong> <code>docs/ai-agents/02-agent-loop-in-code.md</code></li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-13--tools-công-cụ-của-agent">Bài 1.3 — Tools: Công Cụ Của Agent<a href="#bài-13--tools-công-cụ-của-agent" class="hash-link" aria-label="Direct link to Bài 1.3 — Tools: Công Cụ Của Agent" title="Direct link to Bài 1.3 — Tools: Công Cụ Của Agent" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Tool schema (Zod), tool binding, tool routing</li>
+<li class=""><strong>Demo JS:</strong> Custom tool, built-in tools (search, calculator)</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/tools.md</code> — <strong>NGUỒN CHÍNH</strong> (tool() API, schema, ToolNode)</li>
+<li class=""><code>langgraph/workflows-agents.md</code> — ToolNode prebuilt</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-14--messages-ngôn-ngữ-của-agent">Bài 1.4 — Messages: Ngôn Ngữ Của Agent<a href="#bài-14--messages-ngôn-ngữ-của-agent" class="hash-link" aria-label="Direct link to Bài 1.4 — Messages: Ngôn Ngữ Của Agent" title="Direct link to Bài 1.4 — Messages: Ngôn Ngữ Của Agent" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> HumanMessage, AIMessage, ToolMessage, SystemMessage, message roles</li>
+<li class=""><strong>Demo JS:</strong> Message types, trimming, filtering</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/messages.md</code> — <strong>NGUỒN CHÍNH</strong> (toàn bộ message types và usage)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-15--models-chọn-và-cấu-hình-llm">Bài 1.5 — Models: Chọn Và Cấu Hình LLM<a href="#bài-15--models-chọn-và-cấu-hình-llm" class="hash-link" aria-label="Direct link to Bài 1.5 — Models: Chọn Và Cấu Hình LLM" title="Direct link to Bài 1.5 — Models: Chọn Và Cấu Hình LLM" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Chat models, model parameters (temperature, max_tokens), provider switching</li>
+<li class=""><strong>Demo JS:</strong> <code>ChatGoogleGenerativeAI</code> với <code>gemini-2.5-flash</code>, so sánh providers</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/models.md</code> — <strong>NGUỒN CHÍNH</strong> (providers, parameters, streaming, structured output)</li>
+<li class=""><code>langchain/install.md</code> — package dependencies</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-16--structured-output-trả-lời-đúng-format">Bài 1.6 — Structured Output: Trả Lời Đúng Format<a href="#bài-16--structured-output-trả-lời-đúng-format" class="hash-link" aria-label="Direct link to Bài 1.6 — Structured Output: Trả Lời Đúng Format" title="Direct link to Bài 1.6 — Structured Output: Trả Lời Đúng Format" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> <code>withStructuredOutput()</code>, Zod schema, JSON mode, tool-based extraction</li>
+<li class=""><strong>Demo JS:</strong> TypeScript type-safe output từ LLM</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/structured-output.md</code> — <strong>NGUỒN CHÍNH</strong> (withStructuredOutput, schema binding)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-17--short-term-memory-bộ-nhớ-trong-một-session">Bài 1.7 — Short-term Memory: Bộ Nhớ Trong Một Session<a href="#bài-17--short-term-memory-bộ-nhớ-trong-một-session" class="hash-link" aria-label="Direct link to Bài 1.7 — Short-term Memory: Bộ Nhớ Trong Một Session" title="Direct link to Bài 1.7 — Short-term Memory: Bộ Nhớ Trong Một Session" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> In-context memory, message history, trimming, summarization</li>
+<li class=""><strong>Demo JS:</strong> ConversationChain với message history</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/short-term-memory.md</code> — <strong>NGUỒN CHÍNH</strong> (buffer, summary, token limit strategies)</li>
+<li class=""><code>langgraph/add-memory.md</code> — memory trong LangGraph graph</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-18--long-term-memory-bộ-nhớ-cho-nhiều-session">Bài 1.8 — Long-term Memory: Bộ Nhớ Cho Nhiều Session<a href="#bài-18--long-term-memory-bộ-nhớ-cho-nhiều-session" class="hash-link" aria-label="Direct link to Bài 1.8 — Long-term Memory: Bộ Nhớ Cho Nhiều Session" title="Direct link to Bài 1.8 — Long-term Memory: Bộ Nhớ Cho Nhiều Session" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> External storage, semantic memory, episodic memory, stores</li>
+<li class=""><strong>Demo JS:</strong> LangGraph Stores + vector memory</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/long-term-memory.md</code> — <strong>NGUỒN CHÍNH</strong> (overview long-term memory types)</li>
+<li class=""><code>langgraph/stores.md</code> — LangGraph Store API</li>
+<li class=""><code>langgraph/add-memory.md</code> — thêm memory vào agent</li>
+</ul>
+</li>
+<li class=""><strong>Đã tạo:</strong> <code>docs/ai-agents/08-long-term-memory.md</code></li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-19--project-research-assistant">Bài 1.9 — Project: Research Assistant<a href="#bài-19--project-research-assistant" class="hash-link" aria-label="Direct link to Bài 1.9 — Project: Research Assistant" title="Direct link to Bài 1.9 — Project: Research Assistant" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Project:</strong> Agent search web + summarize + trả lời câu hỏi</li>
+<li class=""><strong>Stack:</strong> LangChain.js + <code>gemini-2.5-flash</code> + Tavily search tool</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/tools.md</code> — search tool integration</li>
+<li class=""><code>langgraph/quickstart.md</code> — agent setup</li>
+<li class=""><code>langchain/streaming.md</code> — streaming response</li>
+</ul>
+</li>
+<li class=""><strong>Đã tạo:</strong> <code>docs/ai-agents/09-project-research-assistant.md</code></li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical (Capstone Phase 1)</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="phase-2-agentic-patterns">Phase 2: Agentic Patterns<a href="#phase-2-agentic-patterns" class="hash-link" aria-label="Direct link to Phase 2: Agentic Patterns" title="Direct link to Phase 2: Agentic Patterns" translate="no">​</a></h2>
+<blockquote>
+<p><strong>Thời gian:</strong> 5 tuần | <strong>Số bài:</strong> 9</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-21--streaming-real-time-agent-response">Bài 2.1 — Streaming: Real-time Agent Response<a href="#bài-21--streaming-real-time-agent-response" class="hash-link" aria-label="Direct link to Bài 2.1 — Streaming: Real-time Agent Response" title="Direct link to Bài 2.1 — Streaming: Real-time Agent Response" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Token streaming, event streaming, StreamingTextResponse</li>
+<li class=""><strong>Demo JS:</strong> Agent phát stream từng token ra giao diện</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/streaming.md</code> — <strong>NGUỒN CHÍNH</strong> (stream, streamEvents)</li>
+<li class=""><code>langgraph/streaming.md</code> — streaming trong LangGraph</li>
+<li class=""><code>langgraph/event-streaming.md</code> — event types chi tiết</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-22--retrieval-augmented-generation-rag">Bài 2.2 — Retrieval-Augmented Generation (RAG)<a href="#bài-22--retrieval-augmented-generation-rag" class="hash-link" aria-label="Direct link to Bài 2.2 — Retrieval-Augmented Generation (RAG)" title="Direct link to Bài 2.2 — Retrieval-Augmented Generation (RAG)" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Retrieval-Augmented Generation, indexing pipeline, retrieval strategies</li>
+<li class=""><strong>Demo JS:</strong> RAG pipeline đầy đủ từ document đến answer</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/rag.md</code> — <strong>NGUỒN CHÍNH</strong> (naive RAG, advanced retrieval, re-ranking)</li>
+<li class=""><code>langchain/retrieval.md</code> — retriever types</li>
+<li class=""><code>langchain/knowledge-base.md</code> — knowledge base management</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-23--agentic-rag-agent-chủ-động-tìm-kiếm">Bài 2.3 — Agentic RAG: Agent Chủ Động Tìm Kiếm<a href="#bài-23--agentic-rag-agent-chủ-động-tìm-kiếm" class="hash-link" aria-label="Direct link to Bài 2.3 — Agentic RAG: Agent Chủ Động Tìm Kiếm" title="Direct link to Bài 2.3 — Agentic RAG: Agent Chủ Động Tìm Kiếm" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Agent quyết định khi nào cần retrieve, self-corrective RAG</li>
+<li class=""><strong>Demo JS:</strong> Agent với retrieval tool, iterative search</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/agentic-rag.md</code> — <strong>NGUỒN CHÍNH</strong> (agentic RAG patterns)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-24--context-engineering-tối-ưu-prompt">Bài 2.4 — Context Engineering: Tối Ưu Prompt<a href="#bài-24--context-engineering-tối-ưu-prompt" class="hash-link" aria-label="Direct link to Bài 2.4 — Context Engineering: Tối Ưu Prompt" title="Direct link to Bài 2.4 — Context Engineering: Tối Ưu Prompt" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Context window management, prompt compression, few-shot selection</li>
+<li class=""><strong>Demo JS:</strong> Dynamic prompt assembly, context trimming</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/context-engineering.md</code> — <strong>NGUỒN CHÍNH</strong> (38KB — rất đầy đủ)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-25--fault-tolerance-khả-năng-chịu-lỗi">Bài 2.5 — Fault Tolerance: Khả Năng Chịu Lỗi<a href="#bài-25--fault-tolerance-khả-năng-chịu-lỗi" class="hash-link" aria-label="Direct link to Bài 2.5 — Fault Tolerance: Khả Năng Chịu Lỗi" title="Direct link to Bài 2.5 — Fault Tolerance: Khả Năng Chịu Lỗi" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Retry policies, error handling, graceful degradation</li>
+<li class=""><strong>Demo JS:</strong> Node với retry config, fallback branches</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/fault-tolerance.md</code> — <strong>NGUỒN CHÍNH</strong> (retry, error handling trong LangGraph)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-26--checkpointing--persistence">Bài 2.6 — Checkpointing &amp; Persistence<a href="#bài-26--checkpointing--persistence" class="hash-link" aria-label="Direct link to Bài 2.6 — Checkpointing &amp; Persistence" title="Direct link to Bài 2.6 — Checkpointing &amp; Persistence" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Save/restore state, resume interrupted workflows</li>
+<li class=""><strong>Demo JS:</strong> MemorySaver, SQLite checkpointer</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/checkpointers.md</code> — <strong>NGUỒN CHÍNH</strong> (checkpointer types, durability modes)</li>
+<li class=""><code>langgraph/persistence.md</code> — persistence overview</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-27--interrupts-human-in-the-loop">Bài 2.7 — Interrupts: Human-in-the-Loop<a href="#bài-27--interrupts-human-in-the-loop" class="hash-link" aria-label="Direct link to Bài 2.7 — Interrupts: Human-in-the-Loop" title="Direct link to Bài 2.7 — Interrupts: Human-in-the-Loop" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> <code>interrupt()</code>, approval gates, resume execution</li>
+<li class=""><strong>Demo JS:</strong> Agent dừng chờ user confirm trước khi thực thi</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/interrupts.md</code> — <strong>NGUỒN CHÍNH</strong> (interrupt(), Command, resume)</li>
+<li class=""><code>langchain/human-in-the-loop.md</code> — HITL patterns</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-28--middleware--guardrails">Bài 2.8 — Middleware &amp; Guardrails<a href="#bài-28--middleware--guardrails" class="hash-link" aria-label="Direct link to Bài 2.8 — Middleware &amp; Guardrails" title="Direct link to Bài 2.8 — Middleware &amp; Guardrails" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Input/output validation, prompt injection defense, PII detection</li>
+<li class=""><strong>Demo JS:</strong> Middleware chain bao quanh agent</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/guardrails.md</code> — <strong>NGUỒN CHÍNH</strong> (guardrail patterns, validation)</li>
+<li class=""><code>langchain/middleware.md</code> — middleware architecture</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-29--project-coding-assistant">Bài 2.9 — Project: Coding Assistant<a href="#bài-29--project-coding-assistant" class="hash-link" aria-label="Direct link to Bài 2.9 — Project: Coding Assistant" title="Direct link to Bài 2.9 — Project: Coding Assistant" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Project:</strong> Agent đọc file, phân tích code, suggest fix</li>
+<li class=""><strong>Stack:</strong> LangChain.js + <code>gemini-2.5-flash</code> + file system tools</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/tools.md</code> — file tools</li>
+<li class=""><code>langgraph/use-graph-api.md</code> — advanced graph patterns</li>
+<li class=""><code>langchain/streaming.md</code> — streaming output</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical (Capstone Phase 2)</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="phase-3-multi-agent-systems">Phase 3: Multi-Agent Systems<a href="#phase-3-multi-agent-systems" class="hash-link" aria-label="Direct link to Phase 3: Multi-Agent Systems" title="Direct link to Phase 3: Multi-Agent Systems" translate="no">​</a></h2>
+<blockquote>
+<p><strong>Thời gian:</strong> 4 tuần | <strong>Số bài:</strong> 8</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-31--multi-agent-architecture">Bài 3.1 — Multi-Agent Architecture<a href="#bài-31--multi-agent-architecture" class="hash-link" aria-label="Direct link to Bài 3.1 — Multi-Agent Architecture" title="Direct link to Bài 3.1 — Multi-Agent Architecture" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Tại sao multi-agent? Context limit, specialization, parallelism</li>
+<li class=""><strong>So sánh:</strong> Single agent vs Multi-agent trade-offs</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/multi-agent.md</code> — <strong>NGUỒN CHÍNH</strong> (architecture overview)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-32--subgraphs-agent-trong-agent">Bài 3.2 — Subgraphs: Agent Trong Agent<a href="#bài-32--subgraphs-agent-trong-agent" class="hash-link" aria-label="Direct link to Bài 3.2 — Subgraphs: Agent Trong Agent" title="Direct link to Bài 3.2 — Subgraphs: Agent Trong Agent" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Subgraph isolation, state scoping, nested workflows</li>
+<li class=""><strong>Demo JS:</strong> Agent gọi một sub-agent chuyên biệt</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/use-subgraphs.md</code> — <strong>NGUỒN CHÍNH</strong> (subgraph patterns)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-33--supervisor-pattern">Bài 3.3 — Supervisor Pattern<a href="#bài-33--supervisor-pattern" class="hash-link" aria-label="Direct link to Bài 3.3 — Supervisor Pattern" title="Direct link to Bài 3.3 — Supervisor Pattern" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Orchestrator điều phối nhiều worker agents</li>
+<li class=""><strong>Demo JS:</strong> Supervisor → Research Agent + Writer Agent</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/multi-agent.md</code> — supervisor pattern</li>
+<li class=""><code>langgraph/workflows-agents.md</code> — orchestrator-worker diagram</li>
+<li class=""><code>langgraph/use-graph-api.md</code> — Send API cho parallel workers</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-34--functional-api-agent-linh-ho ạt-hơn">Bài 3.4 — Functional API: Agent Linh Hoạt Hơn<a href="#bài-34--functional-api-agent-linh-hoạt-hơn" class="hash-link" aria-label="Direct link to Bài 3.4 — Functional API: Agent Linh Hoạt Hơn" title="Direct link to Bài 3.4 — Functional API: Agent Linh Hoạt Hơn" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> <code>task</code>, <code>entrypoint</code>, vs Graph API trade-offs</li>
+<li class=""><strong>Demo JS:</strong> Rewrite agent từ Graph API sang Functional API</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/functional-api.md</code> — <strong>NGUỒN CHÍNH</strong> (task, entrypoint)</li>
+<li class=""><code>langgraph/use-functional-api.md</code> — how-to guide</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-35--model-context-protocol-mcp">Bài 3.5 — Model Context Protocol (MCP)<a href="#bài-35--model-context-protocol-mcp" class="hash-link" aria-label="Direct link to Bài 3.5 — Model Context Protocol (MCP)" title="Direct link to Bài 3.5 — Model Context Protocol (MCP)" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> MCP standard, tool interoperability, connect external services</li>
+<li class=""><strong>Demo JS:</strong> LangChain agent kết nối MCP server</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/mcp.md</code> — <strong>NGUỒN CHÍNH</strong> (MCP integration với LangChain.js)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical (Trend 2025-2026)</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-36--time-travel-debug-và-replay">Bài 3.6 — Time Travel: Debug Và Replay<a href="#bài-36--time-travel-debug-và-replay" class="hash-link" aria-label="Direct link to Bài 3.6 — Time Travel: Debug Và Replay" title="Direct link to Bài 3.6 — Time Travel: Debug Và Replay" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Graph replay, state inspection, fork execution</li>
+<li class=""><strong>Demo JS:</strong> Replay agent từ checkpoint cụ thể để debug</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/use-time-travel.md</code> — <strong>NGUỒN CHÍNH</strong> (time travel API)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Nice-to-have</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-37--sql-agent-agent-truy-vấn-database">Bài 3.7 — SQL Agent: Agent Truy Vấn Database<a href="#bài-37--sql-agent-agent-truy-vấn-database" class="hash-link" aria-label="Direct link to Bài 3.7 — SQL Agent: Agent Truy Vấn Database" title="Direct link to Bài 3.7 — SQL Agent: Agent Truy Vấn Database" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> NL to SQL, schema introspection, safe query execution</li>
+<li class=""><strong>Demo JS:</strong> Agent trả lời câu hỏi bằng cách query SQL</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/sql-agent.md</code> — <strong>NGUỒN CHÍNH</strong> (SQL agent full example)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-38--project-content-creation-pipeline">Bài 3.8 — Project: Content Creation Pipeline<a href="#bài-38--project-content-creation-pipeline" class="hash-link" aria-label="Direct link to Bài 3.8 — Project: Content Creation Pipeline" title="Direct link to Bài 3.8 — Project: Content Creation Pipeline" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Project:</strong> Multi-agent pipeline research → outline → write → review → publish</li>
+<li class=""><strong>Stack:</strong> LangGraph.js + <code>gemini-2.5-flash</code> + 4 specialized agents</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/use-graph-api.md</code> — advanced graph (56KB)</li>
+<li class=""><code>langchain/multi-agent.md</code> — multi-agent coordination</li>
+<li class=""><code>langgraph/interrupts.md</code> — human review gate</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical (Capstone Phase 3)</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="phase-4-production--evaluation">Phase 4: Production &amp; Evaluation<a href="#phase-4-production--evaluation" class="hash-link" aria-label="Direct link to Phase 4: Production &amp; Evaluation" title="Direct link to Phase 4: Production &amp; Evaluation" translate="no">​</a></h2>
+<blockquote>
+<p><strong>Thời gian:</strong> 4 tuần | <strong>Số bài:</strong> 8</p>
+</blockquote>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-41--observability-theo-dõi-agent">Bài 4.1 — Observability: Theo Dõi Agent<a href="#bài-41--observability-theo-dõi-agent" class="hash-link" aria-label="Direct link to Bài 4.1 — Observability: Theo Dõi Agent" title="Direct link to Bài 4.1 — Observability: Theo Dõi Agent" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Tracing, logging, debugging với LangSmith</li>
+<li class=""><strong>Demo JS:</strong> Setup LangSmith trong LangChain.js project</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/observability.md</code> — <strong>NGUỒN CHÍNH</strong> (LangSmith setup)</li>
+<li class=""><code>langgraph/observability.md</code> — tracing trong LangGraph</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-42--testing-agents">Bài 4.2 — Testing Agents<a href="#bài-42--testing-agents" class="hash-link" aria-label="Direct link to Bài 4.2 — Testing Agents" title="Direct link to Bài 4.2 — Testing Agents" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Unit testing tools/nodes, mock LLM, integration tests</li>
+<li class=""><strong>Demo JS:</strong> Jest + mock responses</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/test.md</code> — <strong>NGUỒN CHÍNH</strong> (testing strategies trong LangGraph)</li>
+<li class=""><code>langchain/test/</code> (thư mục) — test utilities</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-43--streaming-in-production">Bài 4.3 — Streaming In Production<a href="#bài-43--streaming-in-production" class="hash-link" aria-label="Direct link to Bài 4.3 — Streaming In Production" title="Direct link to Bài 4.3 — Streaming In Production" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Server-Sent Events, WebSocket streaming, backpressure</li>
+<li class=""><strong>Demo JS:</strong> Express.js + LangGraph streaming endpoint</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/streaming.md</code> — streaming patterns</li>
+<li class=""><code>langgraph/streaming.md</code> — LangGraph stream modes</li>
+<li class=""><code>langchain/event-streaming.md</code> — streamEvents API</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-44--voice-agent">Bài 4.4 — Voice Agent<a href="#bài-44--voice-agent" class="hash-link" aria-label="Direct link to Bài 4.4 — Voice Agent" title="Direct link to Bài 4.4 — Voice Agent" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Speech-to-text → LLM → Text-to-speech pipeline</li>
+<li class=""><strong>Demo JS:</strong> Voice interface cho agent</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/voice-agent.md</code> — <strong>NGUỒN CHÍNH</strong> (voice agent architecture)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Nice-to-have</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-45--frontend-integration">Bài 4.5 — Frontend Integration<a href="#bài-45--frontend-integration" class="hash-link" aria-label="Direct link to Bài 4.5 — Frontend Integration" title="Direct link to Bài 4.5 — Frontend Integration" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> CopilotKit, Vercel AI SDK, useChat hook</li>
+<li class=""><strong>Demo JS:</strong> Next.js chat UI kết nối LangGraph agent</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/ui.md</code> — frontend integration overview</li>
+<li class=""><code>langgraph/ui.md</code> — LangGraph UI patterns</li>
+<li class=""><code>langgraph/frontend/</code> (thư mục) — frontend-specific guides</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-46--deployment">Bài 4.6 — Deployment<a href="#bài-46--deployment" class="hash-link" aria-label="Direct link to Bài 4.6 — Deployment" title="Direct link to Bài 4.6 — Deployment" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> LangGraph Platform, self-hosted, Docker</li>
+<li class=""><strong>Demo JS:</strong> Deploy agent lên production</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/deploy.md</code> — deployment options</li>
+<li class=""><code>langgraph/deploy.md</code> — LangGraph Platform</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-47--runtime-configuration">Bài 4.7 — Runtime Configuration<a href="#bài-47--runtime-configuration" class="hash-link" aria-label="Direct link to Bài 4.7 — Runtime Configuration" title="Direct link to Bài 4.7 — Runtime Configuration" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Concept:</strong> Dynamic config per request, RunnableConfig, thread management</li>
+<li class=""><strong>Demo JS:</strong> Multi-tenant agent với per-request config</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langchain/runtime.md</code> — <strong>NGUỒN CHÍNH</strong> (RunnableConfig, config injection)</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Important</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_zY7U" id="bài-48--final-project-personal-ai-assistant">Bài 4.8 — Final Project: Personal AI Assistant<a href="#bài-48--final-project-personal-ai-assistant" class="hash-link" aria-label="Direct link to Bài 4.8 — Final Project: Personal AI Assistant" title="Direct link to Bài 4.8 — Final Project: Personal AI Assistant" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Project:</strong> Full-stack agent app — Chat UI, memory, tools, streaming, deploy</li>
+<li class=""><strong>Stack:</strong> LangGraph.js + <code>gemini-2.5-flash</code> + Next.js + LangGraph Platform</li>
+<li class=""><strong>Nguồn tài liệu:</strong>
+<ul>
+<li class=""><code>langgraph/use-graph-api.md</code> — advanced agent</li>
+<li class=""><code>langchain/ui.md</code> + <code>langgraph/ui.md</code> — frontend</li>
+<li class=""><code>langgraph/add-memory.md</code> — persistent memory</li>
+<li class=""><code>langchain/streaming.md</code> — real-time output</li>
+<li class=""><code>langgraph/deploy.md</code> — production deployment</li>
+</ul>
+</li>
+<li class=""><strong>Độ ưu tiên:</strong> Critical (Capstone Final)</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="timeline-tổng-thể">Timeline Tổng Thể<a href="#timeline-tổng-thể" class="hash-link" aria-label="Direct link to Timeline Tổng Thể" title="Direct link to Timeline Tổng Thể" translate="no">​</a></h2>
+<table><thead><tr><th>Tháng</th><th>Phase</th><th>Số bài</th></tr></thead><tbody><tr><td>Tháng 1–2</td><td>Phase 1 — Agent 101</td><td>9 bài</td></tr><tr><td>Tháng 2–3</td><td>Phase 2 — Agentic Patterns</td><td>9 bài</td></tr><tr><td>Tháng 3–4</td><td>Phase 3 — Multi-Agent</td><td>8 bài</td></tr><tr><td>Tháng 4–5</td><td>Phase 4 — Production</td><td>8 bài</td></tr></tbody></table>
+<p><strong>Tổng:</strong> ~34 bài trong 4–5 tháng (2 bài/tuần)</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="tech-stack-chuẩn">Tech Stack Chuẩn<a href="#tech-stack-chuẩn" class="hash-link" aria-label="Direct link to Tech Stack Chuẩn" title="Direct link to Tech Stack Chuẩn" translate="no">​</a></h2>
+<table><thead><tr><th>Layer</th><th>Công nghệ</th><th>Lý do</th></tr></thead><tbody><tr><td><strong>LLM</strong></td><td><code>gemini-2.5-flash</code></td><td>Tiết kiệm, fast, multimodal</td></tr><tr><td><strong>Framework JS</strong></td><td><code>@langchain/langgraph</code> + <code>@langchain/core</code></td><td>Native TS, type-safe</td></tr><tr><td><strong>Tool</strong></td><td><code>@langchain/community</code> tools</td><td>Search, SQL, file system</td></tr><tr><td><strong>Vector DB</strong></td><td>Chroma (local)</td><td>Dễ setup, không cần cloud</td></tr><tr><td><strong>Observability</strong></td><td>LangSmith</td><td>Tích hợp native LangChain</td></tr><tr><td><strong>Frontend</strong></td><td>Next.js + Vercel AI SDK</td><td>Quen thuộc với JS/TS dev</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="map-nguồn-tài-liệu--bài-học">Map Nguồn Tài Liệu → Bài Học<a href="#map-nguồn-tài-liệu--bài-học" class="hash-link" aria-label="Direct link to Map Nguồn Tài Liệu → Bài Học" title="Direct link to Map Nguồn Tài Liệu → Bài Học" translate="no">​</a></h2>
+<table><thead><tr><th>File nguồn</th><th>Bài học sử dụng</th></tr></thead><tbody><tr><td><code>langchain/tools.md</code></td><td>1.3, 1.9, 2.9</td></tr><tr><td><code>langchain/messages.md</code></td><td>1.4</td></tr><tr><td><code>langchain/models.md</code></td><td>1.5</td></tr><tr><td><code>langchain/structured-output.md</code></td><td>1.6</td></tr><tr><td><code>langchain/short-term-memory.md</code></td><td>1.7</td></tr><tr><td><code>langchain/long-term-memory.md</code></td><td>1.8</td></tr><tr><td><code>langchain/streaming.md</code></td><td>2.1, 4.3</td></tr><tr><td><code>langchain/rag.md</code></td><td>2.2</td></tr><tr><td><code>langchain/context-engineering.md</code></td><td>2.4</td></tr><tr><td><code>langchain/guardrails.md</code></td><td>2.8</td></tr><tr><td><code>langchain/multi-agent.md</code></td><td>3.1, 3.3</td></tr><tr><td><code>langchain/mcp.md</code></td><td>3.5</td></tr><tr><td><code>langchain/sql-agent.md</code></td><td>3.7</td></tr><tr><td><code>langchain/observability.md</code></td><td>4.1</td></tr><tr><td><code>langchain/voice-agent.md</code></td><td>4.4</td></tr><tr><td><code>langchain/runtime.md</code></td><td>4.7</td></tr><tr><td><code>langgraph/quickstart.md</code></td><td>1.2, 1.9</td></tr><tr><td><code>langgraph/workflows-agents.md</code></td><td>1.1, 1.3</td></tr><tr><td><code>langgraph/thinking-in-langgraph.md</code></td><td>1.2</td></tr><tr><td><code>langgraph/agentic-rag.md</code></td><td>2.3</td></tr><tr><td><code>langgraph/fault-tolerance.md</code></td><td>2.5</td></tr><tr><td><code>langgraph/checkpointers.md</code></td><td>2.6</td></tr><tr><td><code>langgraph/interrupts.md</code></td><td>2.7, 3.8</td></tr><tr><td><code>langgraph/use-subgraphs.md</code></td><td>3.2</td></tr><tr><td><code>langgraph/functional-api.md</code></td><td>3.4</td></tr><tr><td><code>langgraph/use-time-travel.md</code></td><td>3.6</td></tr><tr><td><code>langgraph/use-graph-api.md</code></td><td>3.3, 3.8, 4.8</td></tr><tr><td><code>langgraph/add-memory.md</code></td><td>1.7, 1.8, 4.8</td></tr><tr><td><code>langgraph/stores.md</code></td><td>1.8</td></tr><tr><td><code>langgraph/test.md</code></td><td>4.2</td></tr><tr><td><code>langgraph/streaming.md</code></td><td>2.1, 4.3</td></tr><tr><td><code>langgraph/deploy.md</code></td><td>4.6, 4.8</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_zY7U" id="rủi-ro--mitigation">Rủi Ro &amp; Mitigation<a href="#rủi-ro--mitigation" class="hash-link" aria-label="Direct link to Rủi Ro &amp; Mitigation" title="Direct link to Rủi Ro &amp; Mitigation" translate="no">​</a></h2>
+<table><thead><tr><th>Rủi ro</th><th>Xác suất</th><th>Mitigation</th></tr></thead><tbody><tr><td>LangChain API thay đổi</td><td>Cao</td><td>Ghi <code>Last Updated</code>, dùng stable LCEL API</td></tr><tr><td><code>gemini-2.5-flash</code> pricing thay đổi</td><td>Thấp</td><td>Abstraction qua LangChain — đổi provider 1 dòng</td></tr><tr><td>Bài quá lý thuyết</td><td>Trung bình</td><td>Mỗi bài BẮT BUỘC có working code demo</td></tr><tr><td>Burnout (full course)</td><td>Cao</td><td>Milestone checkpoint sau mỗi phase</td></tr></tbody></table>
+<hr>
+<p><em>Made by Anh Tu - Share to be share</em></p></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_v5qZ"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/ai-agents/implementation-plan.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_pjPM" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_cfxz"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/ai-agents/agents-101/project-research-assistant"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Bài 1.9 — Project: Research Assistant (Capstone Phase 1)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/data-analyst/da_master_curriculum"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">🎓 Master Curriculum: Data Analytics</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_Be9Y thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#thông-số-cốt-lõi" class="table-of-contents__link toc-highlight">Thông Số Cốt Lõi</a></li><li><a href="#quy-tắc-bám-sát-tài-liệu" class="table-of-contents__link toc-highlight">Quy Tắc Bám Sát Tài Liệu</a></li><li><a href="#kiến-trúc-khoá-học" class="table-of-contents__link toc-highlight">Kiến Trúc Khoá Học</a></li><li><a href="#phase-1-ai-agents-101" class="table-of-contents__link toc-highlight">Phase 1: AI Agents 101</a><ul><li><a href="#bài-11--chatbot-vs-ai-agent" class="table-of-contents__link toc-highlight">Bài 1.1 — Chatbot vs AI Agent</a></li><li><a href="#bài-12--agent-loop-trong-code" class="table-of-contents__link toc-highlight">Bài 1.2 — Agent Loop Trong Code</a></li><li><a href="#bài-13--tools-công-cụ-của-agent" class="table-of-contents__link toc-highlight">Bài 1.3 — Tools: Công Cụ Của Agent</a></li><li><a href="#bài-14--messages-ngôn-ngữ-của-agent" class="table-of-contents__link toc-highlight">Bài 1.4 — Messages: Ngôn Ngữ Của Agent</a></li><li><a href="#bài-15--models-chọn-và-cấu-hình-llm" class="table-of-contents__link toc-highlight">Bài 1.5 — Models: Chọn Và Cấu Hình LLM</a></li><li><a href="#bài-16--structured-output-trả-lời-đúng-format" class="table-of-contents__link toc-highlight">Bài 1.6 — Structured Output: Trả Lời Đúng Format</a></li><li><a href="#bài-17--short-term-memory-bộ-nhớ-trong-một-session" class="table-of-contents__link toc-highlight">Bài 1.7 — Short-term Memory: Bộ Nhớ Trong Một Session</a></li><li><a href="#bài-18--long-term-memory-bộ-nhớ-cho-nhiều-session" class="table-of-contents__link toc-highlight">Bài 1.8 — Long-term Memory: Bộ Nhớ Cho Nhiều Session</a></li><li><a href="#bài-19--project-research-assistant" class="table-of-contents__link toc-highlight">Bài 1.9 — Project: Research Assistant</a></li></ul></li><li><a href="#phase-2-agentic-patterns" class="table-of-contents__link toc-highlight">Phase 2: Agentic Patterns</a><ul><li><a href="#bài-21--streaming-real-time-agent-response" class="table-of-contents__link toc-highlight">Bài 2.1 — Streaming: Real-time Agent Response</a></li><li><a href="#bài-22--retrieval-augmented-generation-rag" class="table-of-contents__link toc-highlight">Bài 2.2 — Retrieval-Augmented Generation (RAG)</a></li><li><a href="#bài-23--agentic-rag-agent-chủ-động-tìm-kiếm" class="table-of-contents__link toc-highlight">Bài 2.3 — Agentic RAG: Agent Chủ Động Tìm Kiếm</a></li><li><a href="#bài-24--context-engineering-tối-ưu-prompt" class="table-of-contents__link toc-highlight">Bài 2.4 — Context Engineering: Tối Ưu Prompt</a></li><li><a href="#bài-25--fault-tolerance-khả-năng-chịu-lỗi" class="table-of-contents__link toc-highlight">Bài 2.5 — Fault Tolerance: Khả Năng Chịu Lỗi</a></li><li><a href="#bài-26--checkpointing--persistence" class="table-of-contents__link toc-highlight">Bài 2.6 — Checkpointing &amp; Persistence</a></li><li><a href="#bài-27--interrupts-human-in-the-loop" class="table-of-contents__link toc-highlight">Bài 2.7 — Interrupts: Human-in-the-Loop</a></li><li><a href="#bài-28--middleware--guardrails" class="table-of-contents__link toc-highlight">Bài 2.8 — Middleware &amp; Guardrails</a></li><li><a href="#bài-29--project-coding-assistant" class="table-of-contents__link toc-highlight">Bài 2.9 — Project: Coding Assistant</a></li></ul></li><li><a href="#phase-3-multi-agent-systems" class="table-of-contents__link toc-highlight">Phase 3: Multi-Agent Systems</a><ul><li><a href="#bài-31--multi-agent-architecture" class="table-of-contents__link toc-highlight">Bài 3.1 — Multi-Agent Architecture</a></li><li><a href="#bài-32--subgraphs-agent-trong-agent" class="table-of-contents__link toc-highlight">Bài 3.2 — Subgraphs: Agent Trong Agent</a></li><li><a href="#bài-33--supervisor-pattern" class="table-of-contents__link toc-highlight">Bài 3.3 — Supervisor Pattern</a></li><li><a href="#bài-34--functional-api-agent-linh-hoạt-hơn" class="table-of-contents__link toc-highlight">Bài 3.4 — Functional API: Agent Linh Hoạt Hơn</a></li><li><a href="#bài-35--model-context-protocol-mcp" class="table-of-contents__link toc-highlight">Bài 3.5 — Model Context Protocol (MCP)</a></li><li><a href="#bài-36--time-travel-debug-và-replay" class="table-of-contents__link toc-highlight">Bài 3.6 — Time Travel: Debug Và Replay</a></li><li><a href="#bài-37--sql-agent-agent-truy-vấn-database" class="table-of-contents__link toc-highlight">Bài 3.7 — SQL Agent: Agent Truy Vấn Database</a></li><li><a href="#bài-38--project-content-creation-pipeline" class="table-of-contents__link toc-highlight">Bài 3.8 — Project: Content Creation Pipeline</a></li></ul></li><li><a href="#phase-4-production--evaluation" class="table-of-contents__link toc-highlight">Phase 4: Production &amp; Evaluation</a><ul><li><a href="#bài-41--observability-theo-dõi-agent" class="table-of-contents__link toc-highlight">Bài 4.1 — Observability: Theo Dõi Agent</a></li><li><a href="#bài-42--testing-agents" class="table-of-contents__link toc-highlight">Bài 4.2 — Testing Agents</a></li><li><a href="#bài-43--streaming-in-production" class="table-of-contents__link toc-highlight">Bài 4.3 — Streaming In Production</a></li><li><a href="#bài-44--voice-agent" class="table-of-contents__link toc-highlight">Bài 4.4 — Voice Agent</a></li><li><a href="#bài-45--frontend-integration" class="table-of-contents__link toc-highlight">Bài 4.5 — Frontend Integration</a></li><li><a href="#bài-46--deployment" class="table-of-contents__link toc-highlight">Bài 4.6 — Deployment</a></li><li><a href="#bài-47--runtime-configuration" class="table-of-contents__link toc-highlight">Bài 4.7 — Runtime Configuration</a></li><li><a href="#bài-48--final-project-personal-ai-assistant" class="table-of-contents__link toc-highlight">Bài 4.8 — Final Project: Personal AI Assistant</a></li></ul></li><li><a href="#timeline-tổng-thể" class="table-of-contents__link toc-highlight">Timeline Tổng Thể</a></li><li><a href="#tech-stack-chuẩn" class="table-of-contents__link toc-highlight">Tech Stack Chuẩn</a></li><li><a href="#map-nguồn-tài-liệu--bài-học" class="table-of-contents__link toc-highlight">Map Nguồn Tài Liệu → Bài Học</a></li><li><a href="#rủi-ro--mitigation" class="table-of-contents__link toc-highlight">Rủi Ro &amp; Mitigation</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/vuanhtu1993" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_SWoo"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 My Stories. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
