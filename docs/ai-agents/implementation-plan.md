@@ -71,7 +71,7 @@ graph LR
 
 ---
 
-### Bài 1.3 — Tools: Tay Chân Của Agent
+### Bài 1.3 — Tools: Công Cụ Của Agent
 
 - **Concept:** Tool schema (Zod), tool binding, tool routing
 - **Demo JS:** Custom tool, built-in tools (search, calculator)
@@ -113,7 +113,7 @@ graph LR
 
 ---
 
-### Bài 1.7 — Short-term Memory: Nhớ Trong Một Session
+### Bài 1.7 — Short-term Memory: Bộ Nhớ Trong Một Session
 
 - **Concept:** In-context memory, message history, trimming, summarization
 - **Demo JS:** ConversationChain với message history
@@ -124,7 +124,7 @@ graph LR
 
 ---
 
-### Bài 1.8 — Long-term Memory: Nhớ Qua Nhiều Session
+### Bài 1.8 — Long-term Memory: Bộ Nhớ Cho Nhiều Session
 
 - **Concept:** External storage, semantic memory, episodic memory, stores
 - **Demo JS:** LangGraph Stores + vector memory
@@ -132,6 +132,7 @@ graph LR
   - `langchain/long-term-memory.md` — **NGUỒN CHÍNH** (overview long-term memory types)
   - `langgraph/stores.md` — LangGraph Store API
   - `langgraph/add-memory.md` — thêm memory vào agent
+- **Đã tạo:** `docs/ai-agents/08-long-term-memory.md`
 - **Độ ưu tiên:** Important
 
 ---
@@ -144,6 +145,7 @@ graph LR
   - `langchain/tools.md` — search tool integration
   - `langgraph/quickstart.md` — agent setup
   - `langchain/streaming.md` — streaming response
+- **Đã tạo:** `docs/ai-agents/09-project-research-assistant.md`
 - **Độ ưu tiên:** Critical (Capstone Phase 1)
 
 ---
@@ -164,7 +166,7 @@ graph LR
 
 ---
 
-### Bài 2.2 — RAG: Hỏi Đáp Từ Tài Liệu Nội Bộ
+### Bài 2.2 — Retrieval-Augmented Generation (RAG)
 
 - **Concept:** Retrieval-Augmented Generation, indexing pipeline, retrieval strategies
 - **Demo JS:** RAG pipeline đầy đủ từ document đến answer
@@ -196,7 +198,7 @@ graph LR
 
 ---
 
-### Bài 2.5 — Fault Tolerance: Agent Không Bị Crash
+### Bài 2.5 — Fault Tolerance: Khả Năng Chịu Lỗi
 
 - **Concept:** Retry policies, error handling, graceful degradation
 - **Demo JS:** Node với retry config, fallback branches

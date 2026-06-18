@@ -2,7 +2,6 @@
 sidebar_position: 1
 description: "Phân biệt Chatbot và AI Agent theo tài liệu chính thức LangChain. Hiểu Agent Loop (Perceive → Think → Act → Observe), các Workflow Patterns, và khi nào nên dùng Agent thay vì Workflow."
 ---
-
 # 1.1. Chatbot vs AI Agent
 
 ## Agenda
@@ -22,25 +21,25 @@ description: "Phân biệt Chatbot và AI Agent theo tài liệu chính thức L
 
 **1. Technical Terms (Thuật ngữ kỹ thuật):**
 
-| Term | Vietnamese Meaning & Quick Explain |
-| :--- | :--- |
-| **Agent** | Tác nhân — Hệ thống AI tự động xác định quy trình và công cụ cần dùng để giải quyết bài toán. |
-| **Workflow** | Luồng làm việc — Chuỗi bước thực thi được định nghĩa trước, cố định về thứ tự. |
-| **Agent Loop** | Vòng lặp tác nhân — Chu trình liên tục: nhận input → suy luận → hành động → quan sát → lặp lại. |
-| **LLM** | Large Language Model — Mô hình ngôn ngữ lớn (GPT-4o, Gemini Flash, Claude). |
-| **Tool Calling** | Gọi công cụ — Cơ chế cho phép LLM yêu cầu thực thi một hàm bên ngoài (search, calculator...). |
-| **Structured Output** | Đầu ra có cấu trúc — LLM trả về JSON theo schema định trước thay vì text tự do. |
-| **ToolNode** | Node công cụ — Thành phần trong LangGraph thực thi tool calls song song và xử lý lỗi tự động. |
+| Term                        | Vietnamese Meaning & Quick Explain                                                                                   |
+| :-------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| **Agent**             | Tác nhân — Hệ thống AI tự động xác định quy trình và công cụ cần dùng để giải quyết bài toán. |
+| **Workflow**          | Luồng làm việc — Chuỗi bước thực thi được định nghĩa trước, cố định về thứ tự.                 |
+| **Agent Loop**        | Vòng lặp tác nhân — Chu trình liên tục: nhận input → suy luận → hành động → quan sát → lặp lại.  |
+| **LLM**               | Large Language Model — Mô hình ngôn ngữ lớn (GPT-4o, Gemini Flash, Claude).                                    |
+| **Tool Calling**      | Gọi công cụ — Cơ chế cho phép LLM yêu cầu thực thi một hàm bên ngoài (search, calculator...).          |
+| **Structured Output** | Đầu ra có cấu trúc — LLM trả về JSON theo schema định trước thay vì text tự do.                        |
+| **ToolNode**          | Node công cụ — Thành phần trong LangGraph thực thi tool calls song song và xử lý lỗi tự động.           |
 
 **2. Vocabulary Support (Từ vựng học thuật/B1+):**
 
-| Word | Meaning in Context |
-| :--- | :--- |
-| **Predetermined (adj)** | Được định trước, không thay đổi trong runtime. |
-| **Autonomy (n)** | Tính tự trị — khả năng tự quyết định mà không cần can thiệp từ bên ngoài. |
-| **Synthesize (v)** | Tổng hợp — kết hợp nhiều kết quả thành một output duy nhất. |
-| **Resilience (n)** | Khả năng phục hồi — hệ thống tiếp tục hoạt động dù một phần bị lỗi. |
-| **Augment (v)** | Tăng cường — gắn thêm khả năng (tools, memory) cho LLM vốn chỉ xử lý text. |
+| Word                          | Meaning in Context                                                                         |
+| :---------------------------- | :----------------------------------------------------------------------------------------- |
+| **Predetermined (adj)** | Được định trước, không thay đổi trong runtime.                                   |
+| **Autonomy (n)**        | Tính tự trị — khả năng tự quyết định mà không cần can thiệp từ bên ngoài. |
+| **Synthesize (v)**      | Tổng hợp — kết hợp nhiều kết quả thành một output duy nhất.                     |
+| **Resilience (n)**      | Khả năng phục hồi — hệ thống tiếp tục hoạt động dù một phần bị lỗi.       |
+| **Augment (v)**         | Tăng cường — gắn thêm khả năng (tools, memory) cho LLM vốn chỉ xử lý text.     |
 
 ---
 
@@ -58,16 +57,16 @@ AI Agent mở rộng LLM bằng 3 augmentation (*tăng cường*) cốt lõi: **
 
 ---
 
-## 2. Chatbot vs AI Agent: Ranh Giới Kiến Trúc
+## 2. Workflow vs AI Agent: Ranh Giới Kiến Trúc
 
 Theo tài liệu chính thức LangChain, ranh giới giữa Chatbot và Agent không phải là "thông minh hơn" mà là **kiểu kiến trúc khác nhau**:
 
-| | Chatbot / Workflow | AI Agent |
-| :--- | :--- | :--- |
-| **Luồng thực thi** | Cố định, định nghĩa trước | Động, tự quyết định |
-| **Tool usage** | Không có hoặc hardcoded | Tự chọn tool phù hợp |
-| **Xử lý bài toán mới** | Thất bại nếu chưa được lập trình | Tự điều chỉnh chiến lược |
-| **Ví dụ** | FAQ bot, form wizard | Research assistant, coding assistant |
+|                                   | Chatbot / Workflow                        | AI Agent                             |
+| :-------------------------------- | :---------------------------------------- | :----------------------------------- |
+| **Luồng thực thi**        | Cố định, định nghĩa trước         | Động, tự quyết định            |
+| **Tool usage**              | Không có hoặc hardcoded                | Tự chọn tool phù hợp             |
+| **Xử lý bài toán mới** | Thất bại nếu chưa được lập trình | Tự điều chỉnh chiến lược      |
+| **Ví dụ**                 | FAQ bot, form wizard                      | Research assistant, coding assistant |
 
 > **Nguồn:** [LangChain - Workflows and Agents](https://docs.langchain.com/oss/javascript/langgraph/workflows-agents)
 >
@@ -147,24 +146,25 @@ const searchWeb = tool(
 const llmWithTools = llm.bindTools([searchWeb]);
 ```
 
-**Structured Output** — Buộc LLM trả về JSON đúng schema, thay vì text tự do:
+**Retrieval (RAG)** — Cung cấp cho LLM khả năng truy xuất dữ liệu từ các nguồn bên ngoài (tài liệu nội bộ, database, web) thay vì chỉ dựa vào kiến thức huấn luyện sẵn:
 
 ```typescript
-// filename: agent/schemas.ts
+// filename: agent/retrieval.ts
 
-import * as z from "zod";
+import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { OpenAIEmbeddings } from "@langchain/openai";
 
-// Zod schema = type-safe contract cho output của LLM
-const ClassifyResult = z.object({
-  intent: z.enum(["question", "bug", "billing"]),
-  urgency: z.enum(["low", "medium", "high"]),
-  summary: z.string(),
-});
+// 1. Lưu trữ tài liệu vào Vector Database
+const vectorStore = await MemoryVectorStore.fromTexts(
+  ["Chính sách hoàn tiền: Khách hàng được hoàn tiền trong 30 ngày."],
+  [{ id: 1 }],
+  new OpenAIEmbeddings()
+);
 
-// LLM sẽ trả về object đúng type ClassifyResult
-const structuredLlm = llm.withStructuredOutput(ClassifyResult);
-const result = await structuredLlm.invoke("I was charged twice!");
-// result.intent === "billing", result.urgency === "high"
+// 2. Tạo retriever để truy xuất thông tin
+const retriever = vectorStore.asRetriever();
+const context = await retriever.invoke("Quy định hoàn tiền thế nào?");
+// Kết quả: context chứa text "Chính sách hoàn tiền..." để đưa vào prompt cho LLM
 ```
 
 **Memory (Short-term)** — Giữ lại lịch sử hội thoại trong context window:
@@ -227,13 +227,13 @@ Một LLM tạo response, một LLM khác đánh giá. Nếu chưa đạt, feedb
 
 :::
 
-| Tiêu chí | Dùng Workflow | Dùng Agent |
-| :--- | :--- | :--- |
-| **Bài toán có thể định nghĩa sẵn** | Có | Không |
-| **Số bước thực thi** | Cố định | Thay đổi tùy bài toán |
-| **Yêu cầu về cost** | Thấp hơn (ít LLM calls) | Cao hơn (nhiều vòng lặp) |
-| **Yêu cầu về reliability** | Cao — dễ test, dễ debug | Thấp hơn — khó predict |
-| **Ví dụ thực tế** | ETL pipeline, notification system | Research assistant, coding agent |
+| Tiêu chí                                       | Dùng Workflow                    | Dùng Agent                      |
+| :----------------------------------------------- | :-------------------------------- | :------------------------------- |
+| **Bài toán có thể định nghĩa sẵn** | Có                               | Không                           |
+| **Số bước thực thi**                   | Cố định                        | Thay đổi tùy bài toán       |
+| **Yêu cầu về cost**                     | Thấp hơn (ít LLM calls)        | Cao hơn (nhiều vòng lặp)     |
+| **Yêu cầu về reliability**              | Cao — dễ test, dễ debug        | Thấp hơn — khó predict       |
+| **Ví dụ thực tế**                      | ETL pipeline, notification system | Research assistant, coding agent |
 
 **Quyết định thực tế:**
 
@@ -244,11 +244,8 @@ Nếu có thể viết pseudocode rõ ràng cho từng bước → dùng **Workf
 ## Discussion Questions
 
 1. **LangChain phân biệt Workflow và Agent theo tiêu chí gì?** Tại sao tiêu chí đó quan trọng hơn là "LLM có hay không có"?
-
 2. **Agent Loop có thể chạy vô tận không?** Trong production, cần mechanism nào để ngăn infinite loop? (Gợi ý: xem `recursionLimit` trong LangGraph)
-
 3. **Trade-off của Orchestrator-Worker:** Nếu một worker gặp lỗi, toàn bộ workflow có bị ảnh hưởng không? Làm thế nào để xử lý partial failure?
-
 4. **Khi nào Evaluator-Optimizer trở nên phản tác dụng?** (Gợi ý: nghĩ về cost, latency và điều kiện dừng)
 
 ---

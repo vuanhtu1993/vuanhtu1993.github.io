@@ -1,0 +1,8 @@
+{
+  "label": "Agentic Patterns",
+  "position": 21,
+  "link": {
+    "type": "generated-index",
+    "description": "Phase 2 — Các pattern nâng cao cho AI Agent: Streaming, RAG, Fault Tolerance, Persistence, Human-in-the-Loop, và nhiều hơn nữa. Xây dựng hệ thống agent production-ready với LangGraph.js."
+  }
+}

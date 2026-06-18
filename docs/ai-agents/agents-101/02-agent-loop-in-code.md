@@ -106,7 +106,7 @@ import * as z from "zod";
 
 // Dùng Gemini Flash — tiết kiệm chi phí, đủ mạnh cho demo
 const model = new ChatGoogleGenerativeAI({
-  model: "gemini-1.5-flash",
+  model: "gemini-2.5-flash",
   temperature: 0,
 });
 
