@@ -7,7 +7,7 @@
 
 ---
 
-## 1. Tổng quan (What we'll build) 🎯
+## 1. Tổng quan (What we'll build)
 
 [Mô tả ngắn sản phẩm cuối cùng + screenshot/demo nếu có]
 
@@ -16,12 +16,12 @@ flowchart LR
     A[Start] --> B[Step 1]
     B --> C[Step 2]
     C --> D[Step 3]
-    D --> E[✅ Done]
+    D --> E[Done]
 ```
 
 ---
 
-## 2. Chuẩn bị (Prerequisites) 📋
+## 2. Chuẩn bị (Prerequisites)
 
 ### Cài đặt cần thiết
 
@@ -40,7 +40,7 @@ npm --version   # >= 9.0
 
 ---
 
-## 3. Các bước thực hiện 🚀
+## 3. Các bước thực hiện
 
 ### Bước 1: [Tên bước]
 
@@ -65,7 +65,7 @@ npm init -y
 ```javascript
 // filename: src/index.js
 
-// 👇 Đây là phần cốt lõi của bước này
+// Đây là phần cốt lõi của bước này
 const express = require('express');
 const app = express();
 
@@ -90,7 +90,7 @@ app.listen(PORT, () => {
 
 // ... (imports)
 
-// 👇 Route handler cho user
+// Route handler cho user
 router.get('/users', async (req, res) => {
     // ...
 });
@@ -100,10 +100,10 @@ router.get('/users', async (req, res) => {
 
 ---
 
-## 4. Full Code 📦
+## 4. Full Code
 
 <details>
-<summary>👉 Click để xem toàn bộ code</summary>
+<summary>Click để xem toàn bộ code</summary>
 
 ```javascript
 // filename: src/index.js
@@ -114,7 +114,7 @@ router.get('/users', async (req, res) => {
 
 ---
 
-## 5. Edge Cases & Xử lý lỗi ⚠️
+## 5. Edge Cases & Xử lý lỗi
 
 ### Lỗi thường gặp
 
@@ -126,7 +126,7 @@ router.get('/users', async (req, res) => {
 ### Xử lý edge case
 
 ```javascript
-// ✅ Luôn validate input
+// Luôn validate input
 if (!req.body.email) {
     return res.status(400).json({ error: 'Email is required' });
 }
@@ -134,7 +134,7 @@ if (!req.body.email) {
 
 ---
 
-## 6. Mở rộng (What's next?) 🔮
+## 6. Mở rộng (What's next?)
 
 Sau khi hoàn thành tutorial này, bạn có thể:
 
@@ -144,15 +144,10 @@ Sau khi hoàn thành tutorial này, bạn có thể:
 
 ---
 
-## 7. Tổng kết 🎯
+## 7. Discussion Questions
 
-### Những gì đã làm được
-1. ✅ [Thành quả 1]
-2. ✅ [Thành quả 2]
-3. ✅ [Thành quả 3]
-
-### Bài tập thực hành
-> 💪 **Thử thách:** [Gợi ý mở rộng dựa trên những gì đã học]
+1. **[Câu hỏi 1]:** [Khơi gợi suy nghĩ về bảo mật/hiệu năng trong code tutorial]
+2. **[Câu hỏi 2]:** [Hỏi về cách xử lý nếu hệ thống scale lên]
 
 ---
 

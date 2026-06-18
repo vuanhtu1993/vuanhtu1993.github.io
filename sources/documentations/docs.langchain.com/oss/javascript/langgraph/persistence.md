@@ -1,7 +1,7 @@
 ---
 title: "Persistence - Docs by LangChain"
 source_url: "https://docs.langchain.com/oss/javascript/langgraph/persistence"
-crawled_at: "2026-06-17T14:41:46.455Z"
+crawled_at: "2026-06-18T02:36:48.018Z"
 ---
 
 Persistence lets LangGraph applications keep useful information beyond a single graph run. It matters when an agent needs to continue a conversation, resume after an interruption, recover from a failure, or remember information across interactions. LangGraph provides two complementary persistence systems:

@@ -1,0 +1,8 @@
+{
+  "label": "AI Agents",
+  "position": 20,
+  "link": {
+    "type": "generated-index",
+    "description": "Khoá học AI Agents từ nền tảng đến production — dành cho Junior JS/TS Developer. Bám sát roadmap.sh/ai-agents với demo bằng LangChain.js và LangGraph.js."
+  }
+}

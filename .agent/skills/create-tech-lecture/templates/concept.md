@@ -6,19 +6,22 @@
 
 ---
 
-## 1. Đặt vấn đề (The "Why") 🎣
+## 1. Đặt vấn đề (The "Why")
 
-[Bắt đầu bằng một tình huống thực tế mà độc giả gặp phải]
+**Vấn đề (Problem Statement):**
+- [Pain point 1 của kiến trúc hiện tại hoặc cách làm truyền thống]
+- [Pain point 2]
 
-*Ví dụ: "Bạn đã bao giờ deploy code lên server và tự hỏi: 'Sao trên máy mình chạy được mà lên production lại lỗi?' Đây chính là lúc Docker ra đời để giải quyết..."*
+**Giải pháp (Solution):**
+[Concept] giải quyết vấn đề trên bằng cách [Mô tả ngắn gọn cơ chế lõi].
 
 ---
 
-## 2. Giải thích khái niệm (The "What") 💡
+## 2. Giải thích khái niệm (The "What")
 
 ### Tư duy ẩn dụ
 
-> **Ẩn dụ:** [So sánh concept với đời sống hàng ngày]
+> **Ẩn dụ:** [So sánh concept với đời sống hàng ngày - Chỉ dùng 1-2 câu]
 > 
 > *Ví dụ: "Docker Container giống như một hộp đồ ăn takeaway - bạn mang đi đâu cũng được, mở ra là ăn được ngay, không cần biết nhà bếp họ dùng bếp gì."*
 
@@ -26,15 +29,13 @@
 
 **[Term chính]** là [định nghĩa ngắn gọn, 1-2 câu].
 
-**Thuật ngữ liên quan:**
-| Term | Giải thích |
-|------|------------|
-| [Term A] | [Giải thích ngắn] |
-| [Term B] | [Giải thích ngắn] |
+**Giải phẫu định nghĩa (Definition Anatomy):**
+- **[Từ khóa 1]** (*Dịch nghĩa*): Giải thích bản chất.
+- **[Từ khóa 2]** (*Dịch nghĩa*): Giải thích bản chất.
 
 ---
 
-## 3. Phân tích kỹ thuật (The "How") 🔬
+## 3. Phân tích kỹ thuật (The "How")
 
 ### Kiến trúc tổng quan
 
@@ -81,14 +82,14 @@ sequenceDiagram
 
 ---
 
-## 4. Code minh họa (Show me the code) 💻
+## 4. Code minh họa (Show me the code)
 
 ```javascript
 // filename: src/example.js
 
-// 👇 Phần này minh họa [concept chính]
+// Phần này minh họa [concept chính]
 function exampleFunction() {
-    // Lý do chọn cách này: [giải thích WHY]
+    // Lý do chọn cách này: [giải thích WHY thay vì WHAT]
     const result = doSomething();
     
     return result;
@@ -97,31 +98,27 @@ function exampleFunction() {
 
 ---
 
-## 5. Lỗi thường gặp (Common Pitfalls) ⚠️
+## 5. Lỗi thường gặp (Common Pitfalls)
 
-### ❌ Anti-pattern: [Tên lỗi]
+### Anti-pattern: [Tên lỗi]
 ```javascript
-// 🚫 Sai: [Lý do]
+// Sai: [Lý do]
 badCode();
 ```
 
-### ✅ Best Practice: [Giải pháp đúng]
+### Best Practice: [Giải pháp đúng]
 ```javascript
-// ✅ Đúng: [Lý do]
+// Đúng: [Lý do]
 goodCode();
 ```
 
 ---
 
-## 6. Tổng kết & Thử thách 🎯
+## 6. Discussion Questions
 
-### 3 điểm cốt lõi
-1. **[Điểm 1]:** [Tóm tắt]
-2. **[Điểm 2]:** [Tóm tắt]
-3. **[Điểm 3]:** [Tóm tắt]
-
-### Bài tập nhỏ
-> 💪 **Thử thách:** [Gợi ý người đọc tự thực hành hoặc mở rộng]
+1. **[Câu hỏi 1]:** [Khơi gợi tư duy phản biện về trade-off]
+2. **[Câu hỏi 2]:** [Câu hỏi tình huống ứng dụng]
+3. **[Câu hỏi 3]:** [So sánh với một công nghệ khác]
 
 ---
 

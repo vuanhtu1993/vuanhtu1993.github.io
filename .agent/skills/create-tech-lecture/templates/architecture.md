@@ -6,15 +6,15 @@
 
 ---
 
-## 1. Bối cảnh & Vấn đề (Context) 🎯
+## 1. Bối cảnh & Vấn đề (Context)
 
 ### Tình huống thực tế
 
-[Mô tả tình huống mà team/công ty gặp phải dẫn đến việc cần quyết định kiến trúc này]
+[Mô tả tình huống mà team/công ty gặp phải dẫn đến việc cần quyết định kiến trúc này. Trình bày trực tiếp, không dùng câu hỏi tu từ.]
 
-*Ví dụ: "Khi hệ thống scale lên 10 triệu users, monolith trở nên bottleneck. Team đang cân nhắc chuyển sang microservices..."*
+*Ví dụ: "Khi hệ thống scale lên 10 triệu users, kiến trúc monolith trở thành bottleneck (điểm nghẽn). Team đang phân tích việc chuyển sang microservices..."*
 
-### Câu hỏi cần trả lời
+### Yêu cầu đánh giá
 
 - Khi nào nên chọn [Giải pháp A]?
 - [Giải pháp B] có những trade-off gì?
@@ -22,7 +22,7 @@
 
 ---
 
-## 2. Tổng quan các giải pháp 📊
+## 2. Tổng quan các giải pháp
 
 ### Giải pháp A: [Tên]
 
@@ -73,22 +73,22 @@ flowchart TB
 
 ---
 
-## 3. Bảng so sánh Trade-off ⚖️
+## 3. Bảng so sánh Trade-off
 
 | Tiêu chí | Giải pháp A | Giải pháp B |
 |----------|-------------|-------------|
-| **Độ phức tạp ban đầu** | ✅ Thấp | ⚠️ Cao |
-| **Khả năng scale** | ⚠️ Hạn chế | ✅ Linh hoạt |
-| **Chi phí vận hành** | ✅ Thấp | ⚠️ Cao |
-| **Tốc độ phát triển (giai đoạn đầu)** | ✅ Nhanh | ⚠️ Chậm |
-| **Tốc độ phát triển (scale)** | ⚠️ Chậm dần | ✅ Ổn định |
+| **Độ phức tạp ban đầu** | Thấp | Cao |
+| **Khả năng scale** | Hạn chế | Linh hoạt |
+| **Chi phí vận hành** | Thấp | Cao |
+| **Tốc độ phát triển (giai đoạn đầu)** | Nhanh | Chậm |
+| **Tốc độ phát triển (scale)** | Chậm dần | Ổn định |
 | **Team size phù hợp** | 1-5 người | 5+ người |
-| **Debugging** | ✅ Dễ | ⚠️ Phức tạp |
-| **Deployment** | ✅ Đơn giản | ⚠️ Cần CI/CD mature |
+| **Debugging** | Dễ | Phức tạp |
+| **Deployment** | Đơn giản | Cần CI/CD mature |
 
 ---
 
-## 4. Phân tích chi tiết 🔬
+## 4. Phân tích chi tiết
 
 ### 4.1. [Khía cạnh 1: Performance]
 
@@ -108,7 +108,6 @@ flowchart TB
 ```bash
 # Deploy đơn giản
 git push origin main
-# Done! 🎉
 ```
 
 **Giải pháp B:**
@@ -136,23 +135,23 @@ graph LR
 
 ---
 
-## 5. Decision Framework 📋
+## 5. Decision Framework
 
 ### Chọn Giải pháp A khi:
-- ✅ Team nhỏ (< 5 người)
-- ✅ MVP / Startup giai đoạn đầu
-- ✅ Không chắc chắn về product-market fit
-- ✅ Budget hạn chế
+- Team nhỏ (< 5 người)
+- MVP / Startup giai đoạn đầu
+- Không chắc chắn về product-market fit
+- Budget hạn chế
 
 ### Chọn Giải pháp B khi:
-- ✅ Team lớn (> 5 người) với nhiều squad
-- ✅ Cần scale độc lập từng component
-- ✅ Có DevOps/SRE team
-- ✅ Traffic không đồng đều giữa các feature
+- Team lớn (> 5 người) với nhiều squad
+- Cần scale độc lập từng component
+- Có DevOps/SRE team
+- Traffic không đồng đều giữa các feature
 
 ---
 
-## 6. Migration Path 🛤️
+## 6. Migration Path
 
 ### Từ A → B
 
@@ -176,9 +175,9 @@ gantt
 
 ---
 
-## 7. Tổng kết & Khuyến nghị 🎯
+## 7. Discussion Questions & Khuyến nghị
 
-### Kết luận
+### Khuyến nghị
 
 | Tình huống | Khuyến nghị |
 |------------|-------------|
@@ -188,9 +187,14 @@ gantt
 
 ### Sai lầm thường gặp
 
-- ❌ **Premature optimization:** Chọn B quá sớm khi chưa cần
-- ❌ **Ignoring team capability:** Chọn B khi team chưa có kinh nghiệm DevOps
-- ❌ **All-or-nothing:** Không biết về migration patterns (strangler fig)
+- **Premature optimization:** Chọn B quá sớm khi chưa cần
+- **Ignoring team capability:** Chọn B khi team chưa có kinh nghiệm DevOps
+- **All-or-nothing:** Không biết về migration patterns (strangler fig)
+
+### Thảo luận
+
+1. **[Câu hỏi 1]:** [Hỏi về một trade-off cụ thể]
+2. **[Câu hỏi 2]:** [Hỏi về hybrid approach]
 
 ---
 
