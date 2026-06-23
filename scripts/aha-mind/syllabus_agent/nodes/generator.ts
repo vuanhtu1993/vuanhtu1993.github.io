@@ -11,7 +11,7 @@ export async function generatorNode(state: SyllabusState): Promise<Partial<Sylla
   const scheduleContent = fs.readFileSync(scheduleDetailCsvPath, "utf8");
 
   const llm = new ChatGoogleGenerativeAI({
-    model: "gemini-2.5-flash",
+    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
     temperature: 0.1,
   });
 

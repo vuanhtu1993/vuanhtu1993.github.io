@@ -41,9 +41,9 @@ export const cefrAnalyzerNode = async (state: AhaMindState): Promise<Partial<Aha
 
   try {
     // Khởi tạo model lười (lazy) để đảm bảo biến môi trường đã được load
-    // Sử dụng gemini-flash-latest để tối ưu tốc độ và tránh quota limits
+    // Sử dụng gemini model từ biến môi trường để đồng bộ
     const model = new ChatGoogleGenerativeAI({
-      model: "gemini-flash-latest",
+      model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
       maxOutputTokens: 8192,
       temperature: 0.2,
       apiKey: process.env.GOOGLE_API_KEY?.trim(),

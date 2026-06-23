@@ -9,7 +9,7 @@ export async function classifierNode(state: DumpState): Promise<Partial<DumpStat
   const { uniqueQuestions } = state;
 
   const llm = new ChatGoogleGenerativeAI({
-    model: "gemini-2.5-flash",
+    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
     temperature: 0.1,
     maxRetries: 2,
   });

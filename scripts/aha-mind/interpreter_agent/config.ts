@@ -112,7 +112,7 @@ export const CHUNKING = {
 // ─── LLM Config ───────────────────────────────────────────────────────────────
 
 export const LLM_CONFIG = {
-  MODEL: "gemini-2.5-flash",
+  MODEL: process.env.GEMINI_MODEL || "gemini-2.5-flash",
   TEMPERATURE: 0.3,  // Thấp = ít sáng tạo, tuân thủ format tốt hơn
   MAX_OUTPUT_TOKENS: 8192,
 

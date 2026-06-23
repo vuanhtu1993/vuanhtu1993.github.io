@@ -1,0 +1,297 @@
+---
+slug: aha-interpreter-nestjs-course-manual-pages-29-42
+title: "[NestJS Course Manual] Từ trang 29 đến 42"
+date: 2026-06-23
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"NestJS Course Manual"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+---
+#### Khi bạn gửi lại yêu cầu lấy danh sách bài hát (get songs request), bạn sẽ nhận được mảng bài hát (songs array) trong phản hồi.
+
+
+["Animals by Martin Garrix"];
+
+### Chương 3: Middlewares / Bộ lọc ngoại lệ và Pipes
+
+#### Middleware trong Nest.js là gì?
+
+
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782209560/aha-interpreter/nestjs-course-manual/Nestjs_Course_Manual_Haider_Malik.pdf-28-0.png)
+#### Thực thi một hàm middleware trước khi chạy bộ xử lý route (route handler); ví dụ, chạy nó trước phương thức `findAll` trong `SongsController`. Ngược lại với các framework như Express, middleware của Nest.js cung cấp một cách tiếp cận có tổ chức và module hóa hơn, phù hợp chặt chẽ với các mô hình lập trình hướng đối tượng (object-oriented programming) và lập trình hàm (functional programming). Middleware sẽ có quyền truy cập vào các đối tượng `req`, `res` và hàm `next`, cho phép tùy chỉnh đối tượng yêu cầu (request object). Điều này tương tự như Express, nhưng Nest.js cung cấp một kiến trúc mạnh mẽ và có khả năng mở rộng hơn để xây dựng các ứng dụng phức tạp. Thực thi bất kỳ mã nào trong middleware. Trong Nest.js, middleware tương tự như middleware của Express.js nhưng được xây dựng theo lớp (class-based) và module hóa hơn, rất phù hợp với kiến trúc module mạnh mẽ của Nest. Không giống như trong Express, nơi middleware đôi khi có thể trở nên khó quản lý trong các ứng dụng lớn, Nest.js cung cấp một cách tiếp cận có cấu trúc hơn để xử lý middleware.
+
+
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782209562/aha-interpreter/nestjs-course-manual/Nestjs_Course_Manual_Haider_Malik.pdf-29-0.png)
+#### Sửa đổi đối tượng yêu cầu (`req`). Trong Express.js truyền thống, việc này thường được thực hiện trực tiếp trong hàm middleware. Tuy nhiên, trong Nest.js, chúng ta có thể tận dụng Dependency Injection (DI) và tính module hóa để thực hiện các thay đổi này một cách có tổ chức hơn. Kết thúc chu trình phản hồi (response cycle). Giống như trong Express, middleware trong Nest.js có thể kết thúc chu trình yêu cầu-phản hồi (request-response cycle). Tuy nhiên, middleware của Nest.js tận dụng `async/await` và decorators, mang đến một cách tiếp cận hiện đại hơn và cú pháp rõ ràng hơn để xử lý các hoạt động như vậy. Gọi middleware tiếp theo trong stack. Cả trong Nest.js và Express, middleware đều có thể chuyển quyền điều khiển cho hàm middleware tiếp theo trong stack bằng cách sử dụng hàm `next()`. Tuy nhiên, Nest.js mang lại tính an toàn kiểu dữ liệu (type safety) và DI, giúp xây dựng các ứng dụng mạnh mẽ và dễ bảo trì hơn. Logger Middleware. Gửi yêu cầu đến máy chủ thông qua trình duyệt. Trong ứng dụng Nest.js, thực thi logger middleware trước khi chạy bộ xử lý yêu cầu (request handler). Kiến trúc này tuân theo cách tiếp cận module hóa của Nest.js, trong đó các hàm ghi log (logging functions) giống như middleware có thể được
+
+
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782209563/aha-interpreter/nestjs-course-manual/Nestjs_Course_Manual_Haider_Malik.pdf-30-0.png)
+#### tổ chức và tái sử dụng hiệu quả hơn giữa các module khác nhau so với một framework như Express, vốn thiếu một hệ thống module tích hợp như vậy. Các hệ thống ghi log (logger systems) rất cần thiết để theo dõi hoạt động, chẩn đoán sự cố và hiểu hành vi của một ứng dụng. Không giống như các thiết lập truyền thống nơi việc ghi log có thể là một phần bổ sung sau, Nest.js cho phép tích hợp các cơ chế ghi log tinh vi nhờ vào bản chất module hóa và khả năng mở rộng của nó. Điều này trái ngược với các framework ít "opinionated" hơn như Express, nơi việc ghi log thường được triển khai thông qua middleware bên ngoài mà không có bất kỳ cấu trúc tiêu chuẩn nào. Tạo Logger Middleware. Chúng ta sẽ sử dụng `nest cli` để tạo `LoggerMiddleware`. Vui lòng tạo thư mục `common` bên trong thư mục `src` và cũng tạo một thư mục `middleware` bên trong thư mục `common`. Cấu trúc thư mục có thể là `src/common/middleware/`.
+
+```
+nest g module common/middleware/logger --no-spec --no-flat
+
+#### · --no-spec means I don’t want the testing file
+
+```
+
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782209564/aha-interpreter/nestjs-course-manual/Nestjs_Course_Manual_Haider_Malik.pdf-31-0.png)
+#### · `--no-flat` có nghĩa là không tạo thư mục mới cùng với logger middleware. Bạn phải tạo tệp `logger.middleware.ts`. Bạn sẽ có tệp `logger.middleware.ts` bên trong thư mục `middleware`.
+
+```
+ @Injectable()
+
+ export class LoggerMiddleware implements NestMiddleware {
+
+ use(req: any, res: any, next: () => void) {
+
+ console.log("Request ....", new Date().toDateString());
+
+ next();
+
+ }
+
+ }
+
+#### Create a LoggerMiddleware class that implements NestMiddleware. Ensure you write the implementation for the use method. Customize the req object as needed; for example, you could log the current date. Apply middleware in the AppModule.
+
+ export class AppModule implements NestModule {
+
+ configure(consumer: MiddlewareConsumer) {
+
+ // consumer.apply(LoggerMiddleware).forRoutes('songs'); // option no 1
+
+ // consumer
+
+ // .apply(LoggerMiddleware)
+
+```
+
+```
+ // .forRoutes({ path: 'songs', method: RequestMethod.POST }); //option no 2
+
+ consumer.apply(LoggerMiddleware).forRoutes(SongsController); //option no 3
+
+ }
+
+ }
+
+#### Choose from the three provided options to apply the middleware. In the last option, implement the LoggerMiddleware for the SongsController routes. Test the middleware Start the application using npm run start:dev . When sending a request to any songs API route, ensure it displays the current date. Send a GET request to localhost:3000/songs . Handling Exceptions If an error occurs in the code, handling it becomes crucial. NestJS offers built-in HTTP exception handling that streamlines the process of sending informative, well-structured responses to the client, a feature that sets it apart from frameworks like Express, which require additional middleware for similar functionality. Throwing an exception in the SongsService findAll method can be accomplished with ease. In NestJS, using throw new HttpException('Description', HttpStatus.STATUS_CODE) allows for both custom messages and HTTP status codes, providing a more developer-friendly and robust error-handling mechanism than some other backend frameworks like Flask, where exceptions often require more manual setup.
+
+```
+
+```
+ findAll() {
+
+ // fetch the songs from the db
+
+ // Errors come while fetching the data from DB
+
+ throw new Error('Error in Db while fetching record');
+
+ return this.songs;
+
+ }
+
+#### A fake error message has been sent to simulate an issue while fetching data from the database. Sending a request to fetch all songs from http://localhost:3000/songs will result in an error message accompanied by a 500 status code. Handling Exception with Try/Catch
+
+ // SongsContoller.ts
+
+ @Get()
+
+ findAll() {
+
+  try {
+
+  return this.songsService.findAll();
+
+ }
+
+  catch (e) {
+
+  throw new HttpException(
+
+  'server error',
+
+  HttpStatus.INTERNAL_SERVER_ERROR,{ cause: e },
+
+```
+
+```
+ );
+
+ }
+
+#### ● Exception handling is possible using the try/catch block, a standard programming construct. Within the scope of NestJS, this is more structured and type-safe compared to Express, where error handling often relies on middleware functions and lacks native TypeScript support. ● Logging messages in the catch block serves as a best practice for debugging and auditing purposes. In NestJS, logging can be more streamlined thanks to its modular architecture and built-in Logger class, unlike Express, where a third-party library like winston or morgan is generally needed for robust logging. ● Sending specific HTTP status codes along with error messages is facilitated in NestJS through its built-in HttpException class. This provides more granularity and control over error responses compared to Express, which often requires additional libraries like http-errors for similar functionality. ● Opting for a 500 Internal Server Error is a choice that indicates a server-side issue. As a best practice, principal engineers might choose to map exceptions to specific HTTP status codes based on the nature of the error, a feature that is natively supported and simplified in NestJS compared to Express. Pipes ● Transform Param using ParseInt is a feature in NestJS that allows for easy type conversion. In contrast to frameworks like Express, which lack built-in parameter transformation, NestJS’s use of pipes offers a more automated and native approach to type coercion, adhering to best practices for robust type checking, which a principal engineer would highly value. ● There are two primary use cases for pipes: transforming the value and validating the input parameters. While Express requires middleware or additional libraries like express-validator to achieve similar functionality, NestJS pipes integrate seamlessly into the framework’s ecosystem, offering a
+
+```
+
+#### một giải pháp thanh lịch, dễ bảo trì hơn cho cả việc biến đổi giá trị (value transformation) và xác thực đầu vào (input validation) – phù hợp với các thực tiễn tốt nhất về kiến trúc mà một kỹ sư chính (principal engineer) sẽ triển khai.
+
+```
+// SongsContoller.ts
+
+@Get(':id')
+
+findOne(
+
+  @Param(
+
+    'id',
+
+    new ParseIntPipe({
+       errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE
+    }),
+
+  ),
+
+  id: number,
+
+) {
+
+  return `fetch song on the based on id ${typeof id}`;
+
+}
+
+#### ● Dynamic parameters can be captured using the @Param decorator, where the argument name needs to be specified. In contrast to Express, where request parameters are extracted using req.params, NestJS provides a more declarative and type-safe way to do so, adhering to best practices by enforcing a stricter type system. ● The id parameter is of type string by default. Utilizing ParseIntPipe will automatically convert this string value to a number. Unlike in Express, which would require manual type conversion, NestJS’s use of pipes allows for automatic type transformation, making the code more robust and maintainable, a practice any principal engineer would appreciate.
+
+```
+
+#### ● Gửi yêu cầu đến `http://localhost:3000/songs/1` sẽ dẫn đến việc ghi log kiểu dữ liệu của `id` là một số. Điều này thể hiện khả năng của NestJS trong việc sử dụng pipes cho các tác vụ biến đổi (transformation tasks), một lĩnh vực mà nó có lợi thế hơn các framework như Express, vốn yêu cầu middleware riêng biệt cho các hoạt động như vậy. ● Mã trạng thái lỗi (error status code) cũng có thể được cung cấp cho `ParseIntPipe`. Nếu một giá trị chuỗi được cung cấp, một lỗi sẽ được tạo ra. Cách tiếp cận này giúp xử lý lỗi tốt hơn trong NestJS so với các phương pháp kiểm tra lỗi thủ công hơn được yêu cầu trong Express. ● Gửi yêu cầu đến `http://localhost:3000/songs/abc` sẽ tạo ra một thông báo lỗi "not acceptable" (không chấp nhận được). Trong các framework như Express, logic xác thực để xử lý các lỗi như vậy thường cần được viết rõ ràng, trong khi NestJS cho phép các cơ chế xác thực có thể cấu hình và tích hợp sẵn. Tính năng này phù hợp với các thực tiễn tốt nhất về khả năng bảo trì và mở rộng. Xác thực tham số yêu cầu với `class-validator`. · Để xác thực các tham số yêu cầu, `class-validator` thường được sử dụng trong NestJS. Việc cài đặt hai gói bắt buộc sẽ kích hoạt tính năng này, biến việc xác thực trở thành một phần không thể thiếu của quá trình xử lý yêu cầu, không giống như trong Express nơi logic xác thực có thể được mã hóa thủ công hoặc được kéo vào thông qua middleware bổ sung. · Việc sử dụng `class-validator` trong NestJS cho phép các quy tắc xác thực khai báo (declarative validation rules) trong các lớp DTO (Data Transfer Object) bằng cách sử dụng các decorators khác nhau như `@IsString()` hoặc `@IsNotEmpty()`. Cách tiếp cận này thúc đẩy khả năng tái sử dụng và bảo trì logic xác thực, phù hợp với các thực tiễn tốt nhất cho kiến trúc ứng dụng có khả năng mở rộng, trong khi ở Express, thường cần các thư viện xác thực riêng biệt như `validator` hoặc `express-validator`.
+
+```
+ "class-transformer": "^0.5.1",
+
+```
+
+```
+ "class-validator": "^0.14.0"
+
+#### Global Scope pipes · The next action involves binding the ValidationPipe from the @nestjs/common package. This feature provides an advantage over frameworks like Express, where validation often necessitates additional libraries or custom middleware. In NestJS, pipes offer multiple scopes for validation: parameter-scoped, method-scoped, controller-scoped, or global-scoped, lending greater flexibility and modularity to the application. · Opting for a global scope requires registration in the main.ts file. This is a best practice for ensuring application-wide consistency in validation, as it minimizes the chances of missing validation logic in any part of the application. Unlike Express, which would require a global middleware function for similar functionality, NestJS makes it straightforward to set global validation rules.
+
+ src/main.ts
+
+ import { ValidationPipe } from "@nestjs/common";
+
+ // ...
+
+ app.useGlobalPipes(new ValidationPipe());
+
+#### Create CreateSongDTO A DTO (Data Transfer Object) serves as a blueprint for how data will be sent over the network. While both TypeScript interfaces and simple classes can define the DTO schema, classes are recommended in this context. In contrast to Express, where DTO and validation often require additional libraries or middleware, NestJS provides a more integrated approach through its decorator-based validation techniques. As a best
+
+```
+
+#### thực tế, việc lưu trữ các DTO trong một thư mục chuyên dụng đảm bảo rằng ứng dụng tuân thủ nguyên tắc tách biệt các mối quan tâm (separation of concerns), tạo điều kiện thuận lợi cho việc bảo trì dễ dàng hơn và khả năng mở rộng trong tương lai. Để khởi tạo DTO, một lớp mới nên được tạo bên trong tệp `src/songs/dto/create-song.dto.ts`. Đây là một cách tiếp cận có cấu trúc hơn so với các framework như Express, nơi lược đồ (schema) và xác thực (validation) có thể bị trộn lẫn với các bộ xử lý route (route handlers) hoặc middleware. Việc có một tệp DTO chuyên dụng góp phần tạo ra mã nguồn module hóa và dễ bảo trì hơn.
+
+```
+ import {
+
+ IsArray,
+
+ IsDate,
+
+ IsDateString,
+
+ IsInt,
+
+ IsMilitaryTime,
+
+ IsNotEmpty,
+
+ IsString,
+
+ } from "class-validator";
+
+ export class CreateSongDto {
+
+ @IsString()
+
+ @IsNotEmpty()
+
+ readonly title;
+
+ @IsNotEmpty()
+
+```
+
+```
+ @IsArray()
+
+ @IsString({ each: true })
+
+ readonly artists;
+
+ @IsDateString()
+
+ @IsNotEmpty()
+
+ readonly releasedDate: Date;
+
+ @IsMilitaryTime()
+
+ @IsNotEmpty()
+
+ readonly duration: Date;
+
+ }
+
+#### Four fields— title, artists, releasedDate, duration —are present. Class-validator enables the addition of decorator-based validations. The isDateString() function is employed to validate the date, while isMilitaryTime() is used for time validation in the HH:MM format. Apply CreateSongDTO as Body decorator You have to update the create method inside the src/songs/songs.controller.ts
+
+ @Post()
+
+ create(@Body() createSongDTO: CreateSongDto) {
+
+ const results = this.songsService.create(createSongDTO);
+
+ return results;
+
+```
+
+```
+ }
+
+#### Test the Application To initiate the application, execute the command npm run start:dev and proceed to send the ‘create song’ request. Unlike in Express, where nodemon or a similar package would be separately installed for hot-reloading, NestJS includes this feature by default with the start:dev script, providing a more out-of-the-box development experience. As a best practice, separating the ‘create song’ logic into a dedicated service method ensures cleaner, more maintainable code.
+
+ POST http://localhost:3001/songs
+
+ Content-Type: application/json
+
+ {
+
+ "title": "Lasting Lover",
+
+ "artists": ["Siagla"],
+
+ "releasedDate" : "2022-07-29 00:00:00",
+
+ "duration" :"02:34"
+
+ }
+
+### Chapter 4 Dependency Injection
+
+#### Custom Providers ● Constructor-based dependency injection is utilized for injecting instances, often service providers like SongsService, into classes using constructor(private songsService: SongService) . This approach is in
+
+```
+
+
+---
+
+*Made by Anh Tu - Share to be share*

@@ -7,7 +7,7 @@ export async function fixerNode(state: SyllabusState): Promise<Partial<SyllabusS
   const { tsvOutput, validationError, retryCount } = state;
 
   const llm = new ChatGoogleGenerativeAI({
-    model: "gemini-2.5-flash",
+    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
     temperature: 0, // Set temperature 0 để fix lỗi chính xác
   });
 
