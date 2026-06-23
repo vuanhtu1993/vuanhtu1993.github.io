@@ -29,7 +29,7 @@ program
   .option(
     "-o, --output <dir>",
     "Thư mục lưu output markdown files",
-    "/documentations"
+    "./sources/documentations"
   )
   .option(
     "-m, --max-pages <number>",
