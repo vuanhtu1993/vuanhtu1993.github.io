@@ -281,8 +281,8 @@ docs/nestjs/
 
 ### Phase 2 — Verify Existing Files (3-4h)
 - [x] Verify & Rebuild `01-oop/` (6 files) → **Kết quả**: ✅ Đã viết lại toàn bộ 6 bài theo đúng chuẩn 4MAT và B1+ Vocabulary. Tẩy sạch emoji.
+- [x] Verify & Rebuild `03-tooling/` (2 files: Debugger & Logger) → **Kết quả**: ✅ Đã viết lại toàn bộ 2 bài theo chuẩn 4MAT, xoá sạch emoji, bổ sung Glossary và kiến trúc chuyên sâu.
 - [ ] Verify `04-aop.mdx` — cross-check với `guards.md`, `interceptors.md`, `pipes.md`, `exception-filters.md`
-- [ ] Verify `03-tooling/01-debug-vscode.mdx` và `03-tooling/02-logger.md`
 
 ### Phase 3 — Build New Content (Ưu tiên theo dependency)
 Thứ tự build theo dependency học tập:
