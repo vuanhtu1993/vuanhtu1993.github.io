@@ -1,830 +1,295 @@
 ---
-title: "OOP trong NestJS (Phần 4): Dependency Injection - Trái Tim Của NestJS"
+title: "OOP trong NestJS (Phần 4): Dependency Injection & IoC Container - Trái Tim Của Framework"
 date: "2026-02-02"
 category: "NestJS"
 authors: [anhhtus]
-tags: [nestjs, oop, typescript, dependency-injection, ioc, providers]
-description: "Hiểu sâu Dependency Injection và IoC Container trong NestJS. Từ manual instantiation đến DI, các loại providers, và cách inject interface."
+tags: [nestjs, oop, typescript, dependency-injection, ioc-container, custom-providers]
+description: "Khám phá nguyên lý Inversion of Control (IoC) và Dependency Injection (DI) trong NestJS. Hướng dẫn chi tiết cách cấu hình Custom Providers (useValue, useFactory, useClass) và xử lý Optional Injection."
 ---
 
-# 💉 OOP trong NestJS (Phần 4): Dependency Injection
+# OOP trong NestJS (Phần 4): Dependency Injection & IoC Container
 
-> 🎯 **Mục tiêu**: Hiểu bản chất DI, IoC Container, và hoàn thiện inject `IUserRepository` vào `UserService`.
+## Agenda
 
-<!--truncate-->
+**Thời gian đọc ước tính:** ~20 phút
+
+### Learning outcome:
+- **Hiểu** được nguyên lý Inversion of Control (IoC) và cách Dependency Injection (DI) giải quyết bài toán kết dính mã (Tight coupling).
+- **Giải thích** được cơ chế hoạt động của IoC Container trong NestJS dưới góc độ đồ thị phụ thuộc (Dependency Graph).
+- **Tự tay** cấu hình được các loại Custom Providers nâng cao như `useValue`, `useFactory`, `useClass`.
+- **Phân biệt** được khi nào nên dùng Constructor Injection tiêu chuẩn, khi nào dùng Property-based Injection và cách xử lý Optional Dependency.
 
 ---
 
-## 📌 Recap từ Phần 1-3
+## Glossary & Vocabulary
 
-| Phần | Đã học | UserService evolution |
-|------|--------|----------------------|
-| 1 | Class vs Function | Functional → Class-based |
-| 2 | Encapsulation, Decorators | Thêm @Injectable(), private methods |
-| 3 | Interface, Abstract Class | Tạo IUserRepository, BaseRepository |
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Inversion of Control (IoC)** | Đảo ngược quyền điều khiển. Nguyên lý thiết kế trong đó quy trình quản lý luồng điều khiển của ứng dụng được chuyển giao cho một Framework thay vì do lập trình viên tự viết code thủ tục. |
+| **Dependency Injection (DI)** | Tiêm phụ thuộc. Kỹ thuật lập trình (một dạng của IoC) trong đó một đối tượng cung cấp các phụ thuộc của một đối tượng khác thông qua hàm tạo (Constructor) hoặc thuộc tính (Property). |
+| **IoC Container** | Bộ chứa IoC. Bộ máy cốt lõi của NestJS chịu trách nhiệm khởi tạo, quản lý vòng đời và kết nối các Providers lại với nhau. |
+| **Provider** | Nhà cung cấp. Bất kỳ thực thể nào (Class, Value, Factory) được đăng ký với NestJS để có thể được "inject" vào nơi khác. |
+| **Circular Dependency** | Phụ thuộc vòng tròn. Lỗi kiến trúc khi Service A cần Service B, và Service B lại cần Service A. |
 
-**Vấn đề cuối Phần 3**: Làm sao inject `IUserRepository` vào `UserService`?
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Tight coupling (n)** | Kết dính chặt chẽ. Trạng thái mà hai đoạn code phụ thuộc lẫn nhau đến mức không thể thay đổi một cái mà không làm hỏng cái kia. |
+| **Mocking (n)** | Giả lập. Kỹ thuật tạo ra một đối tượng giả với hành vi có thể kiểm soát được để phục vụ cho việc viết Unit Test. |
+| **Opaque (adj)** | Đục, mờ đục. Dùng để chỉ các đoạn mã mà các phần phụ thuộc của nó bị giấu kín bên trong, người ngoài không nhìn thấy được. |
+
+---
+
+## 1. WHY — Bài Toán Kết Dính (Tight Coupling)
+
+Hãy tưởng tượng bạn đang viết một `UserService` cần kết nối với cơ sở dữ liệu để lưu người dùng. Cách tiếp cận truyền thống (không dùng DI) thường sẽ là tự khởi tạo (Instantiate) đối tượng bên trong Class:
 
 ```typescript
-@Injectable()
+// filename: src/users/user.service.ts
+import { PostgresDatabase } from '../database/postgres.db';
+
 export class UserService {
-  constructor(
-    private readonly userRepository: IUserRepository  // ← Làm sao inject?
-  ) {}
-}
-```
-
----
-
-## 1. TẠI SAO CẦN DEPENDENCY INJECTION?
-
-### 1.1 Vấn đề với Manual Instantiation
-
-```typescript
-// ❌ Không có DI - Hard dependencies
-class UserService {
-  private userRepository: InMemoryUserRepository;
-  private logger: ConsoleLogger;
-  private emailService: SendGridEmailService;
+  private database: PostgresDatabase;
 
   constructor() {
-    // Tự tạo dependencies
-    this.userRepository = new InMemoryUserRepository();
-    this.logger = new ConsoleLogger();
-    this.emailService = new SendGridEmailService('api-key-hardcoded');
+    // ❌ LỖI THIẾT KẾ: Tự tay khởi tạo dependency
+    this.database = new PostgresDatabase('localhost:5432');
   }
 
-  async create(dto: CreateUserDto) {
-    this.logger.log('Creating user...');
-    const user = await this.userRepository.create(dto);
-    await this.emailService.send(user.email, 'Welcome!');
-    return user;
+  saveUser(user: any) {
+    this.database.save(user);
   }
 }
-
-// Khi test:
-const service = new UserService();
-// ❌ Không thể mock userRepository
-// ❌ Không thể mock emailService (thực sự gửi email!)
-// ❌ Muốn đổi sang PostgreSQL? Phải sửa code!
 ```
 
-### 1.2 Với Dependency Injection
+Cách viết này tạo ra 3 vấn đề kỹ thuật nghiêm trọng:
 
-```typescript
-// ✅ Có DI - Dependencies được inject
-class UserService {
-  constructor(
-    private userRepository: IUserRepository,
-    private logger: ILogger,
-    private emailService: IEmailService
-  ) {}
+1. **Tight Coupling (Kết dính chặt chẽ):** `UserService` bị "trói chặt" với `PostgresDatabase`. Nếu ngày mai công ty chuyển sang dùng MongoDB, bạn bắt buộc phải sửa trực tiếp mã nguồn của `UserService`.
+2. **Opaque Dependencies (Phụ thuộc bị giấu kín):** Nhìn vào giao diện public của class, lập trình viên khác không thể biết được `UserService` cần `PostgresDatabase` để hoạt động, cho đến khi họ đọc dòng code bên trong Constructor.
+3. **Unit Test bất khả thi:** Khi viết test cho `UserService`, bạn không thể ngăn nó kết nối đến Database thật, vì dòng `new PostgresDatabase()` đã bị đóng cứng bên trong. Việc truyền một "Database giả" (Mocking) vào là không thể.
 
-  async create(dto: CreateUserDto) {
-    this.logger.log('Creating user...');
-    const user = await this.userRepository.create(dto);
-    await this.emailService.send(user.email, 'Welcome!');
-    return user;
-  }
-}
-
-// Production:
-const service = new UserService(
-  new PostgresUserRepository(db),
-  new CloudWatchLogger(),
-  new SendGridEmailService(process.env.SENDGRID_KEY)
-);
-
-// Testing:
-const service = new UserService(
-  new MockUserRepository(),
-  new MockLogger(),
-  new MockEmailService()  // Không gửi email thật!
-);
-```
-
-### 1.3 Lợi ích của DI
-
-| Lợi ích | Giải thích |
-|---------|-----------|
-| **Loose Coupling** | UserService không biết về implementation cụ thể |
-| **Testability** | Dễ dàng inject mocks |
-| **Flexibility** | Đổi implementation không sửa code |
-| **Single Responsibility** | Tạo dependencies không phải việc của UserService |
+Nguyên lý Inversion of Control (IoC) kết hợp với Dependency Injection (DI) ra đời để "cởi trói" cho các Class. Thay vì Class tự tìm và tự tạo đồ nghề (Dependencies) cho mình, Framework sẽ đảm nhận việc chuẩn bị sẵn đồ nghề và "tiêm" (Inject) chúng vào Class.
 
 ---
 
-## 2. IOC CONTAINER - NGƯỜI QUẢN LÝ
+## 2. WHAT — Giải Phẫu Cơ Chế Tiêm Phụ Thuộc
 
-### 2.1 IoC là gì?
+### 2.1. Inversion of Control (IoC) Là Gì?
 
-**Inversion of Control**: Đảo ngược quyền kiểm soát việc tạo dependencies.
+**Definition Anatomy (Giải phẫu định nghĩa):**
+- **Inversion** (*Đảo ngược*): Chuyển giao trách nhiệm từ Class sang Framework.
+- **Control** (*Quyền điều khiển*): Quyền khởi tạo và quản lý vòng đời đối tượng.
 
-```
-Không IoC:
-  UserService tự tạo dependencies
+Trong NestJS, IoC Container chính là người "nhạc trưởng". Nó biết mọi Class cần gì và sẽ cung cấp đúng thứ đó lúc ứng dụng khởi động.
 
-Có IoC:
-  Container tạo dependencies → inject vào UserService
-```
+### 2.2. Dependency Injection (DI) Là Gì?
+
+DI là cách thực hành cụ thể của IoC.
+
+**Definition Anatomy:**
+- **Dependency** (*Phụ thuộc*): Đối tượng mà Class đang cần (Ví dụ: DatabaseService, LoggerService).
+- **Injection** (*Tiêm vào*): Hành động truyền đối tượng đó từ bên ngoài vào bên trong Class, thường là thông qua các tham số của hàm tạo (Constructor).
+
+### 2.3. Trực Quan Hóa Luồng Hoạt Động Của IoC Container
+
+Sơ đồ dưới đây mô tả cách bộ máy NestJS phân tích và giải quyết các phụ thuộc ở thời điểm khởi động (Bootstrap).
 
 ```mermaid
-graph LR
-    A[IoC Container] -->|inject| B[UserService]
-    A -->|creates| C[UserRepository]
-    A -->|creates| D[Logger]
-    A -->|creates| E[EmailService]
-    C -.->|injected| B
-    D -.->|injected| B
-    E -.->|injected| B
-```
+sequenceDiagram
+    participant App as NestJS Application
+    participant Container as IoC Container
+    participant Decorator as @Injectable()
+    participant Service as UserService
+    participant DB as DatabaseService
 
-### 2.2 NestJS IoC Container hoạt động thế nào?
+    App->>Container: Khởi động hệ thống (Bootstrap)
+    Container->>Decorator: Đọc Metadata (Reflect.getMetadata)
+    Decorator-->>Container: "UserService cần DatabaseService"
+    
+    Note over Container: Kiểm tra trong kho chứa (Cache)
+    
+    alt Chưa có DatabaseService
+        Container->>DB: Gọi new DatabaseService()
+        DB-->>Container: Lưu vào bộ nhớ (Singleton)
+    end
 
-```typescript
-// 1. Khai báo providers trong Module
-@Module({
-  providers: [
-    UserService,           // Class được quản lý
-    UserRepository,        // Dependency
-    Logger,                // Dependency
-  ],
-  controllers: [UserController]
-})
-export class UserModule {}
-
-// 2. NestJS đọc metadata từ @Injectable()
-@Injectable()
-export class UserService {
-  constructor(
-    private userRepository: UserRepository,
-    private logger: Logger
-  ) {}
-}
-
-// 3. Khi cần UserService, NestJS:
-//    a. Tìm UserRepository trong providers
-//    b. Tìm Logger trong providers
-//    c. Tạo instance của cả hai
-//    d. Inject vào UserService constructor
-//    e. Trả về UserService instance
-```
-
-### 2.3 Token - Chìa Khóa Của DI
-
-```typescript
-// Token = ID để NestJS tìm provider
-
-// Token kiểu 1: Class reference (default)
-@Injectable()
-class UserRepository {}
-
-providers: [UserRepository]  // Token là UserRepository class
-
-// Token kiểu 2: String
-providers: [
-  {
-    provide: 'USER_REPOSITORY',  // String token
-    useClass: UserRepository
-  }
-]
-
-// Token kiểu 3: Symbol (unique)
-const USER_REPO = Symbol('USER_REPOSITORY');
-
-providers: [
-  {
-    provide: USER_REPO,
-    useClass: UserRepository
-  }
-]
+    Container->>Service: Gọi new UserService(DatabaseService)
+    Service-->>Container: Lưu UserService vào bộ nhớ
+    Container-->>App: Sẵn sàng nhận Request
 ```
 
 ---
 
-## 3. CÁC LOẠI PROVIDERS
+## 3. HOW — Ứng Dụng Dependency Injection Trong NestJS
 
-### 3.1 Standard Provider (useClass)
+### 3.1. Cấu Hình Chuẩn Bằng `@Injectable()`
 
-```typescript
-// Cách ngắn
-providers: [UserService]
-
-// Tương đương với
-providers: [
-  {
-    provide: UserService,    // Token
-    useClass: UserService    // Implementation
-  }
-]
-```
-
-### 3.2 Value Provider (useValue)
+Cách cơ bản nhất (Standard Provider) là đánh dấu Class bằng `@Injectable()` và truyền nó vào mảng `providers` của Module. NestJS sẽ tự động dùng tên Class làm Token định danh (Identity Token) và tạo instance.
 
 ```typescript
-// Inject giá trị cố định
-providers: [
-  {
-    provide: 'CONFIG',
-    useValue: {
-      database: 'postgres',
-      port: 5432,
-      debug: process.env.NODE_ENV !== 'production'
-    }
-  }
-]
-
-// Sử dụng
-@Injectable()
-class DatabaseService {
-  constructor(@Inject('CONFIG') private config: DatabaseConfig) {
-    console.log(this.config.database);  // 'postgres'
-  }
-}
-```
-
-### 3.3 Factory Provider (useFactory)
-
-```typescript
-// Tạo provider với logic phức tạp
-providers: [
-  {
-    provide: 'DATABASE_CONNECTION',
-    useFactory: async (config: ConfigService) => {
-      const connection = await createConnection({
-        host: config.get('DB_HOST'),
-        port: config.get('DB_PORT'),
-        username: config.get('DB_USER'),
-        password: config.get('DB_PASS'),
-        database: config.get('DB_NAME'),
-      });
-      return connection;
-    },
-    inject: [ConfigService]  // Dependencies của factory
-  }
-]
-```
-
-### 3.4 Alias Provider (useExisting)
-
-```typescript
-// Alias cho provider khác
-providers: [
-  UserRepository,
-  {
-    provide: 'AliasRepo',
-    useExisting: UserRepository  // Trỏ đến cùng instance
-  }
-]
-```
-
-### 3.5 Bảng So Sánh
-
-| Provider Type | Dùng khi | Ví dụ |
-|---------------|----------|-------|
-| `useClass` | Inject class implementation | Service, Repository |
-| `useValue` | Inject giá trị tĩnh | Config, constants |
-| `useFactory` | Cần logic khởi tạo | DB connection, async init |
-| `useExisting` | Alias cho provider có sẵn | Backward compatibility |
-
----
-
-## 4. INJECT INTERFACE - VẤN ĐỀ VÀ GIẢI PHÁP
-
-### 4.1 Vấn đề: Interface không tồn tại ở Runtime
-
-```typescript
-// ❌ Không hoạt động - Interface biến mất sau compile
-@Injectable()
-export class UserService {
-  constructor(private userRepository: IUserRepository) {}
-}
-
-// Error: Nest can't resolve dependencies of UserService
-// IUserRepository không còn ở runtime!
-```
-
-### 4.2 Giải pháp 1: String Token
-
-```typescript
-// interfaces/user-repository.interface.ts
-export const USER_REPOSITORY = 'USER_REPOSITORY';
-
-export interface IUserRepository {
-  create(user: CreateUserData): Promise<User>;
-  findByEmail(email: string): Promise<User | null>;
-  // ...
-}
-
-// user.module.ts
-@Module({
-  providers: [
-    UserService,
-    {
-      provide: USER_REPOSITORY,
-      useClass: InMemoryUserRepository
-    }
-  ]
-})
-export class UserModule {}
-
-// user.service.ts
-@Injectable()
-export class UserService {
-  constructor(
-    @Inject(USER_REPOSITORY) 
-    private readonly userRepository: IUserRepository
-  ) {}
-}
-```
-
-### 4.3 Giải pháp 2: Abstract Class as Token
-
-```typescript
-// Abstract class TỒN TẠI ở runtime → có thể dùng làm token
-export abstract class UserRepository {
-  abstract create(user: CreateUserData): Promise<User>;
-  abstract findByEmail(email: string): Promise<User | null>;
-  abstract findById(id: string): Promise<User | null>;
-  abstract update(id: string, data: Partial<User>): Promise<User>;
-  abstract delete(id: string): Promise<void>;
-}
-
-// Implementation
-@Injectable()
-export class InMemoryUserRepository extends UserRepository {
-  private users = new Map<string, User>();
-
-  async create(user: CreateUserData): Promise<User> {
-    // implementation
-  }
-  // ... other methods
-}
-
-// Module
-@Module({
-  providers: [
-    UserService,
-    {
-      provide: UserRepository,  // Abstract class as token
-      useClass: InMemoryUserRepository
-    }
-  ]
-})
-export class UserModule {}
-
-// UserService - Không cần @Inject!
-@Injectable()
-export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
-}
-```
-
-### 4.4 So sánh 2 Giải pháp
-
-| Approach | Ưu điểm | Nhược điểm |
-|----------|---------|------------|
-| String Token | Rõ ràng, flexible | Cần @Inject decorator |
-| Abstract Class | Không cần @Inject | Ít flexible hơn |
-
----
-
-## 5. HOÀN THIỆN USERSERVICE
-
-### 5.1 Folder Structure
-
-```
-src/
-├── users/
-│   ├── interfaces/
-│   │   └── user-repository.interface.ts
-│   ├── repositories/
-│   │   ├── base.repository.ts
-│   │   ├── in-memory-user.repository.ts
-│   │   └── typeorm-user.repository.ts
-│   ├── dto/
-│   │   ├── create-user.dto.ts
-│   │   └── update-user.dto.ts
-│   ├── entities/
-│   │   └── user.entity.ts
-│   ├── user.service.ts
-│   ├── user.controller.ts
-│   └── user.module.ts
-```
-
-### 5.2 Interface và Token
-
-```typescript
-// interfaces/user-repository.interface.ts
-export const USER_REPOSITORY = 'USER_REPOSITORY';
-
-export interface IUserRepository {
-  create(data: CreateUserData): Promise<User>;
-  findByEmail(email: string): Promise<User | null>;
-  findById(id: string): Promise<User | null>;
-  update(id: string, data: UpdateUserData): Promise<User>;
-  delete(id: string): Promise<void>;
-}
-
-export interface CreateUserData {
-  email: string;
-  password: string;
-  name: string;
-}
-
-export interface UpdateUserData {
-  name?: string;
-  password?: string;
-}
-
-export interface User {
-  id: string;
-  email: string;
-  password: string;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
-
-### 5.3 Base Repository
-
-```typescript
-// repositories/base.repository.ts
-export abstract class BaseRepository<T> {
-  protected abstract entityName: string;
-
-  protected generateId(): string {
-    return `${this.entityName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  protected log(operation: string, details?: any): void {
-    console.log(`[${this.entityName}Repository] ${operation}`, details || '');
-  }
-
-  protected now(): Date {
-    return new Date();
-  }
-}
-```
-
-### 5.4 In-Memory Implementation
-
-```typescript
-// repositories/in-memory-user.repository.ts
+// filename: src/users/user.service.ts
 import { Injectable } from '@nestjs/common';
-import { BaseRepository } from './base.repository';
-import { IUserRepository, User, CreateUserData, UpdateUserData } from '../interfaces/user-repository.interface';
+import { DatabaseService } from '../database/database.service';
 
-@Injectable()
-export class InMemoryUserRepository 
-  extends BaseRepository<User> 
-  implements IUserRepository {
-  
-  protected entityName = 'User';
-  private users = new Map<string, User>();
-
-  async create(data: CreateUserData): Promise<User> {
-    const now = this.now();
-    const user: User = {
-      id: this.generateId(),
-      ...data,
-      createdAt: now,
-      updatedAt: now
-    };
-    this.users.set(user.id, user);
-    this.log('CREATE', { id: user.id, email: user.email });
-    return user;
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    const user = [...this.users.values()].find(u => u.email === email);
-    this.log('FIND_BY_EMAIL', { email, found: !!user });
-    return user || null;
-  }
-
-  async findById(id: string): Promise<User | null> {
-    const user = this.users.get(id);
-    this.log('FIND_BY_ID', { id, found: !!user });
-    return user || null;
-  }
-
-  async update(id: string, data: UpdateUserData): Promise<User> {
-    const user = this.users.get(id);
-    if (!user) throw new Error('User not found');
-    
-    const updated: User = { 
-      ...user, 
-      ...data, 
-      updatedAt: this.now() 
-    };
-    this.users.set(id, updated);
-    this.log('UPDATE', { id });
-    return updated;
-  }
-
-  async delete(id: string): Promise<void> {
-    const deleted = this.users.delete(id);
-    this.log('DELETE', { id, success: deleted });
-  }
-}
-```
-
-### 5.5 UserService Hoàn Chỉnh
-
-```typescript
-// user.service.ts
-import { Injectable, Inject, ConflictException, NotFoundException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-import { USER_REPOSITORY, IUserRepository, User, CreateUserData } from './interfaces/user-repository.interface';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-
-export interface UserResponse {
-  id: string;
-  email: string;
-  name: string;
-  createdAt: Date;
-}
-
-@Injectable()
+@Injectable() // Báo cho IoC Container quản lý Class này
 export class UserService {
-  private readonly SALT_ROUNDS = 10;
-
-  constructor(
-    @Inject(USER_REPOSITORY)
-    private readonly userRepository: IUserRepository
-  ) {}
-
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    // Check duplicate email
-    const existing = await this.userRepository.findByEmail(dto.email);
-    if (existing) {
-      throw new ConflictException('Email already exists');
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(dto.password, this.SALT_ROUNDS);
-
-    // Create user
-    const user = await this.userRepository.create({
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name
-    });
-
-    return this.toPublicUser(user);
-  }
-
-  async findById(id: string): Promise<UserResponse> {
-    const user = await this.userRepository.findById(id);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-    return this.toPublicUser(user);
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    return this.userRepository.findByEmail(email);
-  }
-
-  async validatePassword(email: string, password: string): Promise<User | null> {
-    const user = await this.userRepository.findByEmail(email);
-    if (!user) return null;
-    
-    const isValid = await bcrypt.compare(password, user.password);
-    return isValid ? user : null;
-  }
-
-  async update(id: string, dto: UpdateUserDto): Promise<UserResponse> {
-    const updates: any = { ...dto };
-    
-    if (dto.password) {
-      updates.password = await bcrypt.hash(dto.password, this.SALT_ROUNDS);
-    }
-
-    const user = await this.userRepository.update(id, updates);
-    return this.toPublicUser(user);
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.userRepository.delete(id);
-  }
-
-  private toPublicUser(user: User): UserResponse {
-    return {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      createdAt: user.createdAt
-    };
-  }
+  // 1. Dependency được khai báo rõ ràng ở Constructor
+  // 2. Chuyển quyền khởi tạo cho NestJS
+  constructor(private readonly database: DatabaseService) {}
 }
 ```
 
-### 5.6 Module Configuration
-
 ```typescript
-// user.module.ts
+// filename: src/users/user.module.ts
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserController } from './user.controller';
-import { USER_REPOSITORY } from './interfaces/user-repository.interface';
-import { InMemoryUserRepository } from './repositories/in-memory-user.repository';
+import { DatabaseService } from '../database/database.service';
 
 @Module({
-  controllers: [UserController],
-  providers: [
-    UserService,
-    {
-      provide: USER_REPOSITORY,
-      useClass: InMemoryUserRepository
-    }
-  ],
-  exports: [UserService]  // Export để modules khác dùng
+  // Tương đương với: [{ provide: UserService, useClass: UserService }]
+  providers: [UserService, DatabaseService],
 })
 export class UserModule {}
 ```
 
-### 5.7 Switching to TypeORM (Bonus)
+### 3.2. Sức Mạnh Của Custom Providers
+
+Sức mạnh thực sự của DI không nằm ở Constructor Injection, mà nằm ở khả năng tùy biến Providers tại cấp độ Module.
+
+#### A. Value Provider (`useValue`)
+
+Rất hữu ích khi bạn muốn inject một hằng số cấu hình, hoặc truyền Mock Object khi viết Unit Test.
 
 ```typescript
-// repositories/typeorm-user.repository.ts
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
-import { IUserRepository, User, CreateUserData, UpdateUserData } from '../interfaces/user-repository.interface';
+// filename: src/users/user.module.spec.ts
+const mockDatabaseService = {
+  save: (user) => console.log('Mock saved user:', user),
+};
+
+@Module({
+  providers: [
+    UserService,
+    {
+      provide: DatabaseService,      // Khi một class yêu cầu DatabaseService
+      useValue: mockDatabaseService, // Đừng khởi tạo cái thật, hãy tiêm giá trị Mock này vào
+    },
+  ],
+})
+export class UserTestModule {}
+```
+
+#### B. Factory Provider (`useFactory`)
+
+Dùng khi việc khởi tạo một Provider đòi hỏi logic phức tạp, hoặc phải tải các thông tin bất đồng bộ (như kết nối đến Database, gọi API lấy Config).
+
+```typescript
+// filename: src/database/database.module.ts
+import { Module } from '@nestjs/common';
+
+@Module({
+  providers: [
+    {
+      provide: 'DATABASE_CONNECTION',
+      // Factory có thể nhận các dependencies khác thông qua mảng 'inject'
+      useFactory: async (configService: ConfigService) => {
+        // Logic khởi tạo phức tạp
+        const host = configService.get('DB_HOST');
+        const connection = await createConnection(host);
+        return connection;
+      },
+      // NestJS sẽ resolve ConfigService và truyền vào useFactory
+      inject: [ConfigService], 
+    },
+  ],
+})
+export class DatabaseModule {}
+```
+
+#### C. Class Provider (`useClass`)
+
+Giúp ghi đè (Override) implementation mà không ảnh hưởng đến các class đang sử dụng. Rất hữu ích khi kết hợp với Abstract Class (đã thảo luận ở Phần 3).
+
+```typescript
+// filename: src/logging/logger.module.ts
+const environment = process.env.NODE_ENV;
+
+@Module({
+  providers: [
+    {
+      provide: BaseLogger,
+      // Tính đa hình: Tùy môi trường mà dùng Logger khác nhau
+      useClass: environment === 'production' ? CloudWatchLogger : ConsoleLogger,
+    },
+  ],
+})
+export class LoggerModule {}
+```
+
+### 3.3. Các Kỹ Thuật Injection Nâng Cao
+
+#### A. Optional Providers (`@Optional`)
+
+Đôi khi một class phụ thuộc vào một Service có cũng được, không có cũng không sao. Nếu không tìm thấy, NestJS thường sẽ báo lỗi Crash ứng dụng. Để ngăn lỗi này, dùng `@Optional()`.
+
+```typescript
+// filename: src/analytics/analytics.service.ts
+import { Injectable, Optional, Inject } from '@nestjs/common';
 
 @Injectable()
-export class TypeOrmUserRepository implements IUserRepository {
+export class AnalyticsService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly repo: Repository<UserEntity>
+    // Nếu Module không cung cấp 'HTTP_OPTIONS', httpClient sẽ là undefined
+    @Optional() 
+    @Inject('HTTP_OPTIONS') 
+    private readonly httpClient: any
   ) {}
 
-  async create(data: CreateUserData): Promise<User> {
-    const entity = this.repo.create(data);
-    return this.repo.save(entity);
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    return this.repo.findOne({ where: { email } });
-  }
-
-  async findById(id: string): Promise<User | null> {
-    return this.repo.findOne({ where: { id } });
-  }
-
-  async update(id: string, data: UpdateUserData): Promise<User> {
-    await this.repo.update(id, data);
-    return this.findById(id);
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.repo.delete(id);
+  trackEvent(event: string) {
+    if (this.httpClient) {
+      this.httpClient.send(event);
+    } else {
+      console.log('Chạy local, bỏ qua tracking event:', event);
+    }
   }
 }
-
-// Đổi provider - UserService KHÔNG CẦN SỬA!
-@Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
-  providers: [
-    UserService,
-    {
-      provide: USER_REPOSITORY,
-      useClass: TypeOrmUserRepository  // Chỉ đổi dòng này!
-    }
-  ]
-})
-export class UserModule {}
 ```
 
----
+#### B. Property-based Injection
 
-## 6. TESTING VỚI DI
-
-```typescript
-// user.service.spec.ts
-import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from './user.service';
-import { USER_REPOSITORY, IUserRepository } from './interfaces/user-repository.interface';
-
-describe('UserService', () => {
-  let service: UserService;
-  let mockRepository: jest.Mocked<IUserRepository>;
-
-  beforeEach(async () => {
-    // Tạo mock repository
-    mockRepository = {
-      create: jest.fn(),
-      findByEmail: jest.fn(),
-      findById: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-    };
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        UserService,
-        {
-          provide: USER_REPOSITORY,
-          useValue: mockRepository  // Inject mock
-        }
-      ],
-    }).compile();
-
-    service = module.get<UserService>(UserService);
-  });
-
-  describe('create', () => {
-    it('should create user successfully', async () => {
-      // Arrange
-      const dto = { email: 'test@example.com', password: 'password123', name: 'Test User' };
-      const expectedUser = { id: '1', email: dto.email, name: dto.name, password: 'hashed', createdAt: new Date(), updatedAt: new Date() };
-      
-      mockRepository.findByEmail.mockResolvedValue(null);
-      mockRepository.create.mockResolvedValue(expectedUser);
-
-      // Act
-      const result = await service.create(dto);
-
-      // Assert
-      expect(result.email).toBe(dto.email);
-      expect(result.name).toBe(dto.name);
-      expect(mockRepository.findByEmail).toHaveBeenCalledWith(dto.email);
-      expect(mockRepository.create).toHaveBeenCalled();
-    });
-
-    it('should throw conflict if email exists', async () => {
-      const dto = { email: 'existing@example.com', password: 'password123', name: 'Test' };
-      mockRepository.findByEmail.mockResolvedValue({ id: '1' } as any);
-
-      await expect(service.create(dto)).rejects.toThrow('Email already exists');
-    });
-  });
-});
-```
-
----
-
-## 7. BÀI TẬP THỰC HÀNH
-
-### 📝 Câu hỏi Lý thuyết
-
-| # | Câu hỏi | Gợi ý đáp án |
-|---|---------|--------------|
-| 1 | DI giúp gì cho testing? | Có thể inject mock thay vì real dependencies |
-| 2 | IoC Container là gì? | Quản lý việc tạo và inject dependencies |
-| 3 | Tại sao không thể inject interface trực tiếp? | Interface không tồn tại ở runtime |
-| 4 | useFactory khác useClass thế nào? | useFactory cho phép logic khởi tạo phức tạp |
-
-### 💻 Bài tập Code
-
-**Tạo provider với useFactory:**
+Đây là một kỹ thuật dùng để thay thế Constructor Injection. Theo chuẩn, bạn **LUÔN NÊN** dùng Constructor Injection để dependencies được hiển thị rõ ràng. Tuy nhiên, nếu một Class kế thừa (extends) một Class khác và gọi `super()` với quá nhiều tham số, việc này sẽ trở nên cồng kềnh.
 
 ```typescript
-// Yêu cầu: Tạo DatabaseConnection provider
-// - Đọc config từ ConfigService
-// - Nếu NODE_ENV=test → return MockConnection
-// - Nếu NODE_ENV=production → return RealConnection
-// - Log connection status
+// filename: src/common/services/base.service.ts
+@Injectable()
+export class BaseService {
+  // Thay vì truyền qua constructor bắt lớp con phải gọi super(logger)
+  // Hãy tiêm thẳng vào thuộc tính (Property)
+  @Inject(LoggerService)
+  protected readonly logger: LoggerService;
+}
 
-providers: [
-  {
-    provide: 'DATABASE_CONNECTION',
-    useFactory: (config: ConfigService) => {
-      // TODO: Implement
-    },
-    inject: [ConfigService]
+// filename: src/users/user.service.ts
+@Injectable()
+export class UserService extends BaseService {
+  // Không cần khai báo constructor rườm rà
+  
+  doSomething() {
+    // Có thể sử dụng ngay
+    this.logger.log('Action performed');
   }
-]
+}
 ```
 
----
-
-## 🔗 Tiếp theo
-
-**[Phần 5: SOLID Principles →](./05-solid.md)**
-
-Trong phần tiếp theo, chúng ta sẽ:
-- Hiểu 5 nguyên tắc SOLID
-- Áp dụng DIP (Dependency Inversion) đã học
-- Refactor UserService theo SRP
-- Ví dụ Strategy Pattern cho NotificationService
+> ⚠️ **Official Warning**: *"If your class doesn't extend another class, it's generally better to use constructor-based injection."* Constructor injection rõ ràng hơn, không bị giấu kín (Opaque) và dễ mock hơn khi test.
 
 ---
 
-## 📚 Tóm tắt Phần 4
+## 4. Discussion Questions
 
-| Concept | Giải thích |
-|---------|------------|
-| **DI** | Inject dependencies thay vì tự tạo |
-| **IoC** | Container quản lý việc tạo và inject |
-| **Token** | ID để tìm provider (class, string, symbol) |
-| **useClass** | Inject class implementation |
-| **useValue** | Inject giá trị tĩnh |
-| **useFactory** | Logic khởi tạo phức tạp |
-| **@Inject()** | Chỉ định token khi inject |
+1. **Về Circular Dependency:** Giả sử bạn có `UserService` inject `AuthService`, và `AuthService` lại inject `UserService`. IoC Container sẽ bị treo (Crash) vì không biết khởi tạo ai trước. NestJS cung cấp hàm `forwardRef()` để giải quyết vòng lặp này. Theo bạn, dưới góc nhìn kiến trúc phần mềm, việc dùng `forwardRef()` là một "phép thuật" hay là một dấu hiệu (Code smell) cho thấy thiết kế hệ thống đang có vấn đề về sự phân tách trách nhiệm (Separation of Concerns)?
+2. **Về Singleton Scope vs Memory Limit:** Mặc định mọi Provider trong NestJS đều là Singleton (Khởi tạo 1 lần và dùng chung cho mọi Request). Nếu bạn lưu một mảng dữ liệu tạm thời vào một private property của `UserService`, điều gì sẽ xảy ra sau 1 triệu lượt Request từ người dùng (Memory Leak)? Làm thế nào để giải quyết vấn đề này nếu bắt buộc phải lưu trạng thái của từng Request riêng biệt?
 
-> 💡 **Takeaway**: DI là core của NestJS. Hiểu DI = Hiểu cách NestJS hoạt động.
+---
+
+*Made by Anh Tu - Share to be share*

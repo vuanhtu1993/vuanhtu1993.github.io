@@ -1,605 +1,269 @@
 ---
-title: "OOP trong NestJS (Phần 3): Interface vs Abstract Class - Khi Nào Dùng Gì?"
+title: "OOP trong NestJS (Phần 3): Interface vs Abstract Class - Cuộc Chiến Runtime và Compile-time"
 date: "2026-02-02"
 category: "NestJS"
 authors: [anhhtus]
-tags: [nestjs, oop, typescript, interface, abstract-class, design-patterns]
-description: "Phân biệt Interface và Abstract Class trong TypeScript/NestJS. Hiểu rõ khi nào dùng cái nào, với ví dụ Repository Pattern thực tế."
+tags: [nestjs, oop, typescript, interface, abstract-class, repository-pattern]
+description: "Phân biệt rõ ràng Interface và Abstract Class trong TypeScript. Giải thích lý do tại sao không thể dùng Interface làm DI Token trong NestJS và cách xây dựng Base Repository chuẩn mực."
 ---
 
-# 📐 OOP trong NestJS (Phần 3): Interface vs Abstract Class
+# OOP trong NestJS (Phần 3): Interface vs Abstract Class
 
-> 🎯 **Mục tiêu**: Phân biệt rõ ràng Interface và Abstract Class, áp dụng vào `UserService` với Repository Pattern.
+## Agenda
 
-<!--truncate-->
+**Thời gian đọc ước tính:** ~15 phút
 
----
-
-## 📌 Recap từ Phần 1 & 2
-
-- **Phần 1**: Chuyển từ functions sang `UserService` class
-- **Phần 2**: Thêm encapsulation và decorators
-
-**Vấn đề hiện tại**: `UserService` đang lưu data trong `Map`. Nếu muốn đổi sang Database?
-
-```typescript
-// Hiện tại - Hardcoded Map
-@Injectable()
-export class UserService {
-  private readonly users = new Map<string, User>();  // ← Muốn đổi sang PostgreSQL?
-  
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    this.users.set(email, user);  // ← Phải sửa toàn bộ code!
-  }
-}
-```
-
-**Giải pháp**: **Interface** và **Abstract Class** cho phép tách biệt "hợp đồng" khỏi "implementation".
+### Learning outcome:
+- **Hiểu** được sự khác biệt cốt lõi giữa Interface và Abstract Class trong hệ sinh thái TypeScript, đặc biệt là tính chất tồn tại ở thời gian thực thi (Runtime).
+- **Giải thích** được nguyên nhân gốc rễ gây ra lỗi không thể dùng Interface làm Dependency Injection (DI) token trong NestJS và cách khắc phục.
+- **Tự tay** thiết kế được một cấu trúc Repository Pattern cơ bản kết hợp giữa Abstract Class (để chia sẻ logic) và triển khai thực tế.
+- **Phân biệt** được khi nào nên dùng `implements` (để ký kết hợp đồng dữ liệu) và khi nào nên dùng `extends` (để tái sử dụng logic chung).
 
 ---
 
-## 1. INTERFACE - HỢP ĐỒNG COMPILE-TIME
+## Glossary & Vocabulary
 
-### 1.1 Interface là gì?
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Interface** | Giao diện / Hợp đồng. Định nghĩa hình dáng của đối tượng (các thuộc tính và phương thức bắt buộc phải có) nhưng không chứa logic thực thi. |
+| **Abstract Class** | Lớp trừu tượng. Một lớp chưa hoàn chỉnh, không thể khởi tạo trực tiếp bằng từ khóa `new`, thường chứa cả phương thức trừu tượng và phương thức đã có logic (dùng chung). |
+| **Type Erasure** | Xóa bỏ kiểu dữ liệu. Cơ chế của trình biên dịch TypeScript khi xóa bỏ hoàn toàn các thông tin về kiểu (như Interface, Type alias) lúc chuyển đổi mã sang JavaScript. |
+| **Compile-time** | Thời gian biên dịch. Quá trình chuyển đổi từ mã nguồn TypeScript sang JavaScript. |
+| **Runtime** | Thời gian chạy thực thi. Khi mã JavaScript đang được Node.js xử lý. |
 
-```typescript
-// Interface = "Hợp đồng" - nói rằng object PHẢI có những gì
-interface IUserRepository {
-  create(user: User): Promise<User>;
-  findByEmail(email: string): Promise<User | null>;
-  findById(id: string): Promise<User | null>;
-  update(id: string, data: Partial<User>): Promise<User>;
-  delete(id: string): Promise<void>;
-}
-```
-
-**Đặc điểm:**
-- ❌ Không có implementation (methods body)
-- ❌ Không tồn tại ở runtime (TypeScript only)
-- ✅ Type checking mạnh
-- ✅ Có thể implement nhiều interfaces
-
-### 1.2 Implementing Interface
-
-```typescript
-// Implementation 1: In-Memory
-class InMemoryUserRepository implements IUserRepository {
-  private users = new Map<string, User>();
-
-  async create(user: User): Promise<User> {
-    this.users.set(user.id, user);
-    return user;
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    return [...this.users.values()].find(u => u.email === email) || null;
-  }
-
-  async findById(id: string): Promise<User | null> {
-    return this.users.get(id) || null;
-  }
-
-  async update(id: string, data: Partial<User>): Promise<User> {
-    const user = this.users.get(id);
-    if (!user) throw new Error('User not found');
-    const updated = { ...user, ...data };
-    this.users.set(id, updated);
-    return updated;
-  }
-
-  async delete(id: string): Promise<void> {
-    this.users.delete(id);
-  }
-}
-
-// Implementation 2: PostgreSQL
-class PostgresUserRepository implements IUserRepository {
-  constructor(private db: Pool) {}
-
-  async create(user: User): Promise<User> {
-    const result = await this.db.query(
-      'INSERT INTO users (id, email, name) VALUES ($1, $2, $3) RETURNING *',
-      [user.id, user.email, user.name]
-    );
-    return result.rows[0];
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    const result = await this.db.query(
-      'SELECT * FROM users WHERE email = $1',
-      [email]
-    );
-    return result.rows[0] || null;
-  }
-
-  // ... other methods
-}
-```
-
-### 1.3 Interface Biến Mất Ở Runtime!
-
-```typescript
-// TypeScript code
-interface ILogger {
-  log(message: string): void;
-}
-
-class ConsoleLogger implements ILogger {
-  log(message: string) {
-    console.log(message);
-  }
-}
-
-// Compiled JavaScript - Interface không còn!
-class ConsoleLogger {
-  log(message) {
-    console.log(message);
-  }
-}
-```
-
-> ⚠️ **Quan trọng**: Vì interface không tồn tại ở runtime, NestJS DI cần cách khác để inject. Chúng ta sẽ thấy ở Phần 4.
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Contract (n)** | Hợp đồng. Sự cam kết ràng buộc một Lớp (Class) phải triển khai đầy đủ các phương thức đã được định nghĩa. |
+| **Vanish (v)** | Biến mất. Tình trạng của Interface sau khi đoạn code được biên dịch sang JavaScript. |
+| **Workaround (n)** | Cách xử lý đường vòng. Một giải pháp thay thế khi cách làm thông thường không mang lại kết quả do giới hạn của ngôn ngữ hoặc framework. |
 
 ---
 
-## 2. ABSTRACT CLASS - MẪU VỚI LOGIC CƠ BẢN
+## 1. WHY — Vấn Đề Khi Sử Dụng Cấu Trúc Trừu Tượng
 
-### 2.1 Abstract Class là gì?
+Đối với các lập trình viên chuyển từ Java hoặc C# sang TypeScript/NestJS, một trong những cú sốc lớn nhất là việc hệ thống Dependency Injection (DI) báo lỗi khi sử dụng Interface. 
 
-```typescript
-// Abstract class = "Mẫu" - có thể có implementation sẵn
-abstract class BaseRepository<T> {
-  // Abstract methods - BẮT BUỘC subclass implement
-  abstract create(entity: T): Promise<T>;
-  abstract findById(id: string): Promise<T | null>;
-  abstract update(id: string, data: Partial<T>): Promise<T>;
-  abstract delete(id: string): Promise<void>;
+Thực trạng phát triển ứng dụng gặp phải 3 vấn đề lớn xoay quanh tính trừu tượng:
 
-  // Concrete methods - Có sẵn implementation
-  protected generateId(): string {
-    return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
+1. **Lỗi DI với Interface:** Lập trình viên cố gắng áp dụng nguyên lý Dependency Inversion (thuộc SOLID) bằng cách inject một Interface vào Constructor. Kết quả là NestJS throw một lỗi đỏ lòm: `Nest can't resolve dependencies of the UserService (?). Please make sure that the argument is available...`
+2. **Code lặp lại (Boilerplate):** Các Services (Ví dụ: `UserService`, `ProductService`, `OrderService`) thường lặp đi lặp lại các thao tác CRUD cơ bản (`findAll`, `findById`, `create`, `update`, `delete`). Nếu chỉ dùng Interface để ép kiểu, mỗi Service đều phải viết lại hàng chục dòng code giống hệt nhau.
+3. **Sự nhầm lẫn vai trò:** Thiếu sự rạch ròi trong việc quyết định khi nào dùng `Type`, khi nào dùng `Interface`, và khi nào nên nâng cấp lên `Abstract Class`. 
 
-  protected logOperation(operation: string, id: string): void {
-    console.log(`[${this.constructor.name}] ${operation}: ${id}`);
-  }
-}
-```
-
-**Đặc điểm:**
-- ✅ Có thể có implementation sẵn
-- ✅ Tồn tại ở runtime
-- ✅ Có thể có constructor
-- ❌ Chỉ extend được 1 class
-
-### 2.2 Extending Abstract Class
-
-```typescript
-// UserRepository extends BaseRepository
-class UserRepository extends BaseRepository<User> {
-  private users = new Map<string, User>();
-
-  async create(user: User): Promise<User> {
-    // Dùng method từ abstract class
-    const id = this.generateId();
-    const newUser = { ...user, id };
-    this.users.set(id, newUser);
-    this.logOperation('CREATE', id);  // Từ BaseRepository
-    return newUser;
-  }
-
-  async findById(id: string): Promise<User | null> {
-    this.logOperation('FIND', id);
-    return this.users.get(id) || null;
-  }
-
-  async update(id: string, data: Partial<User>): Promise<User> {
-    const user = this.users.get(id);
-    if (!user) throw new Error('User not found');
-    const updated = { ...user, ...data };
-    this.users.set(id, updated);
-    this.logOperation('UPDATE', id);
-    return updated;
-  }
-
-  async delete(id: string): Promise<void> {
-    this.users.delete(id);
-    this.logOperation('DELETE', id);
-  }
-
-  // Thêm method riêng cho UserRepository
-  async findByEmail(email: string): Promise<User | null> {
-    return [...this.users.values()].find(u => u.email === email) || null;
-  }
-}
-```
+Bài viết này sẽ giải phẫu bản chất của TypeScript Compile-time để giải quyết triệt để các rắc rối trên.
 
 ---
 
-## 3. SO SÁNH CHI TIẾT
+## 2. WHAT — Giải Phẫu Interface Và Abstract Class
 
-### 3.1 Bảng So Sánh
+### 2.1. Bản Chất Của Interface
 
-| Đặc điểm | Interface | Abstract Class |
-|----------|-----------|----------------|
-| **Implementation** | ❌ Không có | ✅ Có thể có |
-| **Runtime existence** | ❌ Không | ✅ Có |
-| **Multiple inheritance** | ✅ Nhiều interfaces | ❌ 1 class |
-| **Constructor** | ❌ Không | ✅ Có |
-| **Properties** | Type only | Có giá trị |
-| **DI trong NestJS** | Cần token | Trực tiếp |
+Trong TypeScript, Interface đóng vai trò là một "Hợp đồng thiết kế". 
 
-### 3.2 Ví dụ Kết Hợp
+**Definition Anatomy (Giải phẫu định nghĩa):**
+- **Contract** (*Hợp đồng cam kết*): Bất kỳ Class nào ký kết (`implements`) hợp đồng này, nó bắt buộc phải cung cấp logic thực thi cho toàn bộ các phương thức đã khai báo trong Interface.
+- **Compile-time only** (*Chỉ tồn tại khi biên dịch*): Đây là đặc tính sống còn. Trình biên dịch TypeScript chỉ dùng Interface để kiểm tra lỗi cú pháp (Type checking). Khi dịch sang file `.js`, Interface hoàn toàn bốc hơi khỏi mã nguồn.
+- **No implementation** (*Không có logic thực thi*): Interface tuyệt đối không được phép chứa bất kỳ một đoạn code logic nào. Nó chỉ chứa phần "vỏ" (Signature).
 
-```typescript
-// Interface cho CONTRACT
-interface IRepository<T> {
-  create(entity: T): Promise<T>;
-  findById(id: string): Promise<T | null>;
-  update(id: string, data: Partial<T>): Promise<T>;
-  delete(id: string): Promise<void>;
-}
+### 2.2. Bản Chất Của Abstract Class
 
-// Interface riêng cho User operations
-interface IUserRepository extends IRepository<User> {
-  findByEmail(email: string): Promise<User | null>;
-  validatePassword(email: string, password: string): Promise<boolean>;
-}
+Abstract Class sinh ra để lấp đầy khoảng trống giữa Interface (không có logic) và Class thông thường (logic hoàn chỉnh).
 
-// Abstract class cho SHARED LOGIC
-abstract class BaseRepository<T> implements IRepository<T> {
-  protected abstract tableName: string;
+**Definition Anatomy:**
+- **Incomplete Class** (*Lớp chưa hoàn chỉnh*): Lớp này bị gắn cờ "trừu tượng", nghĩa là bạn không thể gọi `new AbstractClass()`. Nó sinh ra chỉ để làm cha cho các lớp khác kế thừa (`extends`).
+- **Shared logic** (*Chia sẻ logic*): Điểm ăn tiền của Abstract Class là nó cho phép bạn viết sẵn các hàm có logic thực thi hoàn chỉnh để các lớp con dùng chung, đồng thời vẫn có thể định nghĩa các hàm trừu tượng bắt lớp con tự viết.
+- **Runtime presence** (*Tồn tại ở Runtime*): Sau khi biên dịch, Abstract Class biến thành một Class tiêu chuẩn trong JavaScript. Do đó, nó vẫn sống sót trên bộ nhớ khi Node.js chạy.
 
-  constructor(protected db: DatabaseConnection) {}
+### 2.3. Trực Quan Hóa Quá Trình Biên Dịch (Type Erasure)
 
-  async create(entity: T): Promise<T> {
-    return this.db.insert(this.tableName, entity);
-  }
-
-  async findById(id: string): Promise<T | null> {
-    return this.db.findOne(this.tableName, { id });
-  }
-
-  async update(id: string, data: Partial<T>): Promise<T> {
-    return this.db.update(this.tableName, id, data);
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.db.delete(this.tableName, id);
-  }
-}
-
-// Concrete class KẾT HỢP cả hai
-class UserRepository extends BaseRepository<User> implements IUserRepository {
-  protected tableName = 'users';
-
-  async findByEmail(email: string): Promise<User | null> {
-    return this.db.findOne(this.tableName, { email });
-  }
-
-  async validatePassword(email: string, password: string): Promise<boolean> {
-    const user = await this.findByEmail(email);
-    if (!user) return false;
-    return bcrypt.compare(password, user.password);
-  }
-}
-```
-
----
-
-## 4. DECISION TREE - KHI NÀO DÙNG GÌ?
+Sơ đồ dưới đây minh họa sự khác biệt chí mạng giữa hai khái niệm này khi đi qua màng lọc của TypeScript Compiler (tsc).
 
 ```mermaid
-graph TD
-    A[Cần định nghĩa contract?] -->|Có| B{Cần shared implementation?}
-    B -->|Không| C[✅ Interface]
-    B -->|Có| D{Có nhiều parent cần kế thừa?}
-    D -->|Không| E[✅ Abstract Class]
-    D -->|Có| F[✅ Interface + Composition]
-    
-    A -->|Không| G{Cần base class với logic?}
-    G -->|Có| E
-    G -->|Không| H[Regular Class]
-```
+flowchart TD
+    subgraph TypeScript Source Code
+        I[interface ILogger]
+        A[abstract class BaseService]
+        C[class UserService implements ILogger, extends BaseService]
+    end
 
-### 4.1 Dùng Interface khi:
+    Compiler((TypeScript Compiler))
 
-```typescript
-// 1. Chỉ cần type contract, không cần logic
-interface ILogger {
-  log(message: string): void;
-  error(message: string): void;
-}
+    subgraph JavaScript Runtime Code
+        A_JS[class BaseService]
+        C_JS[class UserService extends BaseService]
+        Note[ILogger hoàn toàn BIẾN MẤT]
+    end
 
-// 2. Cần implement nhiều contracts
-interface ISerializable {
-  toJSON(): string;
-}
+    I --> Compiler
+    A --> Compiler
+    C --> Compiler
 
-interface IComparable<T> {
-  compareTo(other: T): number;
-}
-
-class User implements ISerializable, IComparable<User> {
-  toJSON(): string { return JSON.stringify(this); }
-  compareTo(other: User): number { return this.id.localeCompare(other.id); }
-}
-```
-
-### 4.2 Dùng Abstract Class khi:
-
-```typescript
-// 1. Có shared implementation
-abstract class BaseController {
-  protected formatResponse<T>(data: T): ApiResponse<T> {
-    return { success: true, data, timestamp: new Date() };
-  }
-
-  protected formatError(message: string): ApiResponse<null> {
-    return { success: false, data: null, error: message, timestamp: new Date() };
-  }
-}
-
-// 2. Cần constructor để setup
-abstract class ConfigurableService {
-  constructor(protected config: ServiceConfig) {
-    this.validateConfig();
-  }
-
-  private validateConfig(): void {
-    if (!this.config.apiKey) throw new Error('API key required');
-  }
-
-  abstract execute(): Promise<void>;
-}
+    Compiler --> A_JS
+    Compiler --> C_JS
+    Compiler -.-x Note
 ```
 
 ---
 
-## 5. REFACTOR USERSERVICE VỚI REPOSITORY
+## 3. HOW — Ứng Dụng Trong Thực Tế Với NestJS
 
-### 5.1 Định nghĩa Interface
+### 3.1. Bí Ẩn Về Lỗi DI Khi Dùng Interface
+
+Trong bài trước, chúng ta đã biết NestJS dùng `Reflect.getMetadata('design:paramtypes')` để tự động đọc thông tin tham số trong Constructor.
+
+Hãy xem điều gì xảy ra nếu bạn cố inject một Interface:
 
 ```typescript
-// interfaces/user-repository.interface.ts
+// filename: src/users/interfaces/user-repository.interface.ts
 export interface IUserRepository {
-  create(user: CreateUserData): Promise<User>;
-  findByEmail(email: string): Promise<User | null>;
-  findById(id: string): Promise<User | null>;
-  update(id: string, data: Partial<User>): Promise<User>;
-  delete(id: string): Promise<void>;
+  findUsers(): Promise<any[]>;
 }
 
-// Types
-export interface CreateUserData {
-  email: string;
-  password: string;
-  name: string;
-}
-
-export interface User {
-  id: string;
-  email: string;
-  password: string;
-  name: string;
-  createdAt: Date;
-}
-```
-
-### 5.2 Abstract Base Repository
-
-```typescript
-// repositories/base.repository.ts
-export abstract class BaseRepository<T> {
-  protected abstract entityName: string;
-
-  protected generateId(): string {
-    return `${this.entityName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  protected log(operation: string, details?: any): void {
-    console.log(`[${this.entityName}Repository] ${operation}`, details || '');
-  }
-}
-```
-
-### 5.3 In-Memory Implementation
-
-```typescript
-// repositories/in-memory-user.repository.ts
+// filename: src/users/user.service.ts
 import { Injectable } from '@nestjs/common';
-
-@Injectable()
-export class InMemoryUserRepository 
-  extends BaseRepository<User> 
-  implements IUserRepository {
-  
-  protected entityName = 'User';
-  private users = new Map<string, User>();
-
-  async create(data: CreateUserData): Promise<User> {
-    const user: User = {
-      id: this.generateId(),
-      ...data,
-      createdAt: new Date()
-    };
-    this.users.set(user.id, user);
-    this.log('CREATE', { id: user.id, email: user.email });
-    return user;
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    const user = [...this.users.values()].find(u => u.email === email);
-    this.log('FIND_BY_EMAIL', { email, found: !!user });
-    return user || null;
-  }
-
-  async findById(id: string): Promise<User | null> {
-    const user = this.users.get(id);
-    this.log('FIND_BY_ID', { id, found: !!user });
-    return user || null;
-  }
-
-  async update(id: string, data: Partial<User>): Promise<User> {
-    const user = this.users.get(id);
-    if (!user) throw new NotFoundException('User not found');
-    
-    const updated = { ...user, ...data };
-    this.users.set(id, updated);
-    this.log('UPDATE', { id });
-    return updated;
-  }
-
-  async delete(id: string): Promise<void> {
-    const deleted = this.users.delete(id);
-    this.log('DELETE', { id, success: deleted });
-  }
-}
-```
-
-### 5.4 Refactored UserService
-
-```typescript
-// user.service.ts - Sử dụng Repository
-import { Injectable, ConflictException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { IUserRepository } from './interfaces/user-repository.interface';
 
 @Injectable()
 export class UserService {
-  private readonly SALT_ROUNDS = 10;
+  // ❌ LỖI: NestJS sẽ không thể Inject đoạn code này
+  constructor(private readonly userRepository: IUserRepository) {}
+}
+```
 
+**Nguyên nhân (WHY):**
+Khi biên dịch sang JavaScript, `IUserRepository` bốc hơi (Type Erasure). Lệnh `Reflect.getMetadata` của NestJS sẽ nhận về giá trị là `Object` thay vì kiểu dữ liệu cụ thể. NestJS không biết phải tìm Provider nào có tên là `Object` để inject vào, do đó ứng dụng bị Crash ngay khi khởi động.
+
+**Cách khắc phục 1 (Workaround với String Token):**
+Sử dụng một chuỗi (String) hoặc Symbol làm Token thay cho Class.
+
+```typescript
+// Định nghĩa một hằng số chuỗi
+export const USER_REPO_TOKEN = 'USER_REPOSITORY';
+
+@Injectable()
+export class UserService {
   constructor(
-    // Inject bằng interface (cần token - xem Phần 4)
+    // Dùng @Inject để báo cho NestJS biết cần tìm Token dạng chuỗi
+    @Inject(USER_REPO_TOKEN) 
     private readonly userRepository: IUserRepository
   ) {}
+}
+```
 
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    // Check duplicate
-    const existing = await this.userRepository.findByEmail(dto.email);
-    if (existing) {
-      throw new ConflictException('Email already exists');
-    }
+Mặc dù cách này giải quyết được vấn đề, nhưng nó làm phát sinh thêm các biến hằng số (Constants) rải rác khắp nơi, làm mất đi sự thanh lịch vốn có của Constructor Injection.
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(dto.password, this.SALT_ROUNDS);
+### 3.2. Giải Pháp Toàn Diện: Dùng Abstract Class Làm DI Token
 
-    // Create user via repository
-    const user = await this.userRepository.create({
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name
-    });
+NestJS Docs chính thức khuyến nghị sử dụng Abstract Class như một giải pháp thay thế hoàn hảo cho Interface trong hệ thống DI. Vì Abstract Class sống sót qua quá trình biên dịch, NestJS có thể đọc được tên của nó ở Runtime.
 
-    return this.toPublicUser(user);
-  }
+```typescript
+// filename: src/users/repositories/user-repository.abstract.ts
 
-  async findByEmail(email: string): Promise<User | null> {
-    return this.userRepository.findByEmail(email);
-  }
+// 1. Định nghĩa Abstract Class (Đóng vai trò như một Interface)
+export abstract class AbstractUserRepository {
+  // Định nghĩa hàm trừu tượng, bắt buộc lớp con phải triển khai
+  abstract findUsers(): Promise<any[]>;
+  abstract findById(id: string): Promise<any>;
+}
+```
 
-  async validatePassword(email: string, password: string): Promise<boolean> {
-    const user = await this.userRepository.findByEmail(email);
-    if (!user) return false;
-    return bcrypt.compare(password, user.password);
-  }
+Bây giờ, trong Controller hoặc Service, bạn có thể inject trực tiếp một cách "sạch sẽ":
 
-  private toPublicUser(user: User): UserResponse {
-    const { password, ...publicUser } = user;
-    return publicUser;
+```typescript
+// filename: src/users/user.service.ts
+import { Injectable } from '@nestjs/common';
+import { AbstractUserRepository } from './repositories/user-repository.abstract';
+
+@Injectable()
+export class UserService {
+  // ✅ HOẠT ĐỘNG HOÀN HẢO: Không cần dùng @Inject('STRING_TOKEN')
+  constructor(private readonly userRepository: AbstractUserRepository) {}
+
+  async getUsers() {
+    return this.userRepository.findUsers();
   }
 }
 ```
 
-### 5.5 Lợi ích của Refactor
+Cuối cùng, trong Module, bạn chỉ cho NestJS biết lớp thực tế nào sẽ đảm nhận vị trí của Abstract Class này:
 
 ```typescript
-// Giờ đây chuyển sang PostgreSQL rất dễ:
+// filename: src/users/user.module.ts
+import { Module } from '@nestjs/common';
+import { MongoUserRepository } from './repositories/mongo-user.repository';
 
-// 1. Tạo implementation mới
-@Injectable()
-class PostgresUserRepository 
-  extends BaseRepository<User> 
-  implements IUserRepository {
-  
-  constructor(@InjectRepository(UserEntity) private repo: Repository<UserEntity>) {
-    super();
-  }
-
-  async create(data: CreateUserData): Promise<User> {
-    const entity = this.repo.create(data);
-    return this.repo.save(entity);
-  }
-  // ... other methods
-}
-
-// 2. Đổi provider trong module - UserService KHÔNG CẦN SỬA!
 @Module({
   providers: [
-    UserService,
     {
-      provide: 'IUserRepository',
-      useClass: PostgresUserRepository  // Đổi từ InMemoryUserRepository
+      provide: AbstractUserRepository, // Khi ai đó cần AbstractUserRepository
+      useClass: MongoUserRepository,   // Hãy giao cho họ MongoUserRepository (đã có logic thật)
     }
   ]
 })
+export class UserModule {}
 ```
 
----
+### 3.3. Xây Dựng Base Repository Pattern (Kế Thừa Logic)
 
-## 6. BÀI TẬP THỰC HÀNH
-
-### 📝 Câu hỏi Lý thuyết
-
-| # | Câu hỏi | Gợi ý đáp án |
-|---|---------|--------------|
-| 1 | Interface có tồn tại ở runtime không? | Không, chỉ TypeScript compile-time |
-| 2 | Có thể extend nhiều abstract class không? | Không, chỉ 1 class |
-| 3 | Khi nào dùng interface thay vì abstract class? | Khi chỉ cần contract, không cần shared logic |
-| 4 | Tại sao Repository pattern hữu ích? | Tách data layer, dễ đổi implementation |
-
-### 💻 Bài tập Code
-
-**Tạo Abstract Class và Interface cho Notification System:**
+Nếu bạn có nhiều Collections/Tables trong cơ sở dữ liệu, việc tạo Abstract Class cho từng Repository là chưa đủ tối ưu. Thay vào đó, chúng ta có thể lợi dụng đặc tính "Shared logic" của Abstract Class để viết CRUD chung (Base Repository).
 
 ```typescript
-// interface/notification.interface.ts
-interface INotificationService {
-  send(to: string, message: string): Promise<boolean>;
-  sendBulk(recipients: string[], message: string): Promise<number>;
-}
+// filename: src/common/repositories/base.repository.ts
 
-// abstract class (hint: có shared logic validate recipient)
-abstract class BaseNotificationService implements INotificationService {
-  // TODO: Implement
-}
+// Chứa logic chung cho mọi entity
+export abstract class BaseRepository<T> {
+  // Lớp con bắt buộc phải truyền model/collection vào qua constructor của lớp cha
+  constructor(protected readonly databaseModel: any) {}
 
-// Implementations:
-// - EmailNotificationService
-// - SMSNotificationService  
-// - PushNotificationService
+  // Logic chung, viết 1 lần dùng mãi mãi
+  async findAll(): Promise<T[]> {
+    return this.databaseModel.find();
+  }
+
+  async findById(id: string): Promise<T> {
+    return this.databaseModel.findOne({ id });
+  }
+
+  // Phương thức trừu tượng, tùy từng Entity sẽ có nghiệp vụ riêng
+  abstract doSomethingSpecial(): void;
+}
+```
+
+Implement cho User:
+
+```typescript
+// filename: src/users/repositories/user.repository.ts
+import { Injectable } from '@nestjs/common';
+import { BaseRepository } from '../../common/repositories/base.repository';
+
+@Injectable()
+// Extends để nhận miễn phí hàm findAll và findById
+export class UserRepository extends BaseRepository<UserEntity> {
+  constructor(private readonly userModel: UserModel) {
+    // Gọi super() để truyền model lên cho lớp Base xử lý
+    super(userModel);
+  }
+
+  // Bắt buộc phải triển khai hàm này do đã ký hợp đồng với BaseRepository
+  doSomethingSpecial(): void {
+    console.log('Sending welcome email to new user...');
+  }
+  
+  // Có thể tự do thêm các method đặc thù
+  async findByEmail(email: string) {
+    return this.databaseModel.findOne({ email });
+  }
+}
 ```
 
 ---
 
-## 🔗 Tiếp theo
+## 4. Discussion Questions
 
-**[Phần 4: Dependency Injection - IoC Container →](./04-dependency-injection.md)**
-
-Trong phần tiếp theo, chúng ta sẽ:
-- Hiểu DI và IoC Container
-- Cách inject interface trong NestJS (dùng token)
-- Custom Providers: useClass, useValue, useFactory
-- Hoàn thiện inject `IUserRepository` vào `UserService`
+1. **Về Performance & Bundle Size:** Việc lạm dụng Abstract Class (bị biên dịch ra mã JavaScript rác nếu không chứa logic dùng chung) thay vì dùng Interface (hoàn toàn biến mất khi biên dịch) có làm tăng đáng kể dung lượng file bundle (Kích thước file cuối) của ứng dụng Node.js không? Có đáng bận tâm không?
+2. **Về Tính Linh Hoạt (Multiple Inheritance):** Trong TypeScript, một Class có thể `implements` (ký hợp đồng) với nhiều Interface cùng lúc (VD: `class User implements ILogger, IAuditable`). Tuy nhiên, nó chỉ có thể `extends` (kế thừa) duy nhất MỘT Abstract Class. Nếu bạn có một `UserRepository` vừa cần thừa kế logic CRUD từ `BaseRepository`, vừa cần thừa kế logic ghi log từ `BaseLogger`, bạn sẽ giải quyết rào cản đơn kế thừa này như thế nào? (Gợi ý: Mixins Pattern hoặc Composition over Inheritance).
 
 ---
 
-## 📚 Tóm tắt Phần 3
-
-| Concept | Interface | Abstract Class |
-|---------|-----------|----------------|
-| **Mục đích** | Type contract | Base template với logic |
-| **Runtime** | Không tồn tại | Tồn tại |
-| **Inheritance** | Nhiều | Một |
-| **Khi dùng** | Chỉ cần contract | Cần shared implementation |
-
-> 💡 **Takeaway**: Interface định nghĩa "cái gì", Abstract Class định nghĩa "cái gì + cách làm cơ bản". Kết hợp cả hai cho flexibility tối đa.
+*Made by Anh Tu - Share to be share*

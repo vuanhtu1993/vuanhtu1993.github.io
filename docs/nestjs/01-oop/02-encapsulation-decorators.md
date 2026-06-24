@@ -1,320 +1,186 @@
 ---
-title: "OOP trong NestJS (Phần 2): Encapsulation & Decorators - Giải Mã Magic"
+title: "OOP trong NestJS (Phần 2): Encapsulation & Decorators - Giải Mã Phép Màu"
 date: "2026-02-02"
 category: "NestJS"
 authors: [anhhtus]
 tags: [nestjs, oop, typescript, decorators, encapsulation, metadata]
-description: "Hiểu sâu Encapsulation (đóng gói) và Decorators trong NestJS. Giải thích @Controller, @Injectable, @Module hoạt động thế nào, và cách tự tạo custom decorators."
+description: "Hiểu sâu Encapsulation (đóng gói) và Decorators trong NestJS. Giải thích cách @Controller, @Injectable hoạt động dưới hood, và cách tự tạo custom decorators."
 ---
 
-# 🎭 OOP trong NestJS (Phần 2): Encapsulation & Decorators
+# OOP trong NestJS (Phần 2): Encapsulation & Decorators
 
-> 🎯 **Mục tiêu**: Hiểu Encapsulation và "de-magic" các decorators của NestJS. Tiếp tục phát triển `UserService` từ Phần 1.
+## Agenda
 
-<!--truncate-->
+**Thời gian đọc ước tính:** ~20 phút
 
----
-
-## 📌 Recap từ Phần 1
-
-Trong [Phần 1](./01-foundation.md), chúng ta đã:
-- Chuyển từ functional sang class-based `UserService`
-- Hiểu `this` keyword và constructor injection
-- Thấy decorator `@Injectable()` nhưng chưa giải thích
-
-Bây giờ, hãy hiểu **tại sao** decorator đó quan trọng và cách NestJS sử dụng chúng.
+### Learning outcome:
+- **Hiểu** được nguyên lý Đóng gói (Encapsulation) trong OOP và vai trò sống còn của nó trong việc bảo vệ tính toàn vẹn dữ liệu.
+- **Giải thích** được cơ chế hoạt động thực sự của Decorator dưới góc độ JavaScript/TypeScript thay vì chỉ coi nó là "phép thuật của framework".
+- **Tự tay** tạo được Custom Decorator để giải quyết các bài toán Cross-cutting concerns (như Logging, Authentication).
+- **Phân biệt** được vai trò của Metadata Reflection (*Phản chiếu siêu dữ liệu*) trong cách NestJS tự động hóa hệ thống Dependency Injection.
 
 ---
 
-## 1. ENCAPSULATION - ĐÓNG GÓI DỮ LIỆU
+## Glossary & Vocabulary
 
-### 1.1 Vấn đề khi không có Encapsulation
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Encapsulation** | Đóng gói. Khái niệm giấu kín chi tiết triển khai bên trong một đối tượng và chỉ cung cấp các giao diện cần thiết ra bên ngoài. |
+| **Decorator** | Hàm bổ trợ (Thường giữ nguyên từ tiếng Anh). Một tính năng của TypeScript cho phép đính kèm hành vi hoặc siêu dữ liệu vào Class, Method, Property hoặc Parameter mà không làm thay đổi logic lõi. |
+| **Metadata Reflection** | Khả năng truy xuất siêu dữ liệu. Khả năng của chương trình có thể phân tích và sửa đổi cấu trúc (types, properties) của chính nó tại thời điểm chạy (Runtime). |
+| **Cross-cutting concerns** | Mối quan tâm chéo. Các logic nghiệp vụ chung lặp lại ở nhiều nơi (Ví dụ: Ghi log, kiểm tra quyền hạn, xử lý lỗi) độc lập với logic lõi. |
 
-```typescript
-// ❌ Không có encapsulation
-class UserService {
-  users = new Map();  // Public by default
-  passwordSalt = 10;  // Ai cũng thấy được
-}
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Annotate (v)** | Chú thích. Đánh dấu một đoạn code bằng các thẻ (như `@Injectable`) để cung cấp thông tin phụ trợ. |
+| **Mutate (v)** | Đột biến / Sửa đổi trạng thái của dữ liệu. Trái nghĩa với Immutable (Bất biến). |
+| **Syntactic sugar (n)** | Cú pháp "kẹo ngọt". Các tính năng cú pháp được thiết kế để code dễ đọc và dễ viết hơn, nhưng bản chất bên dưới vẫn sử dụng cơ chế cũ. |
 
-const service = new UserService();
+---
 
-// Ai cũng có thể làm điều này:
-service.users.clear();  // Xóa hết users!
-service.passwordSalt = 1;  // Làm yếu security!
+## 1. WHY — Tại Sao Cần Đóng Gói Và Decorator?
+
+Trong quá trình xây dựng ứng dụng Enterprise với NodeJS, lập trình viên thường đối mặt với các vấn đề về quản lý trạng thái và mã nguồn lặp lại:
+
+1. **Rủi ro đột biến dữ liệu trái phép:** Nếu một Service quản lý danh sách Users hoặc chứa các khóa bí mật (Secret keys) mà không có cơ chế bảo vệ, bất kỳ module nào khác cũng có thể can thiệp và ghi đè dữ liệu này (Mutate), gây ra các lỗi tiềm ẩn cực kỳ khó debug.
+2. **Boilerplate Code lặp lại khắp nơi:** Mọi API Endpoint đều cần kiểm tra Authentication, đo thời gian thực thi (Performance timing), hoặc ghi Log. Nếu viết trực tiếp vào trong hàm xử lý logic, mã nguồn sẽ phình to và che lấp đi business logic cốt lõi.
+3. **Cấu hình thủ công phức tạp (Imperative configuration):** Việc phải tự tay khởi tạo từng Controller, truyền từng Dependency vào các Services là một quá trình dài dòng và dễ sai sót. Các Framework hiện đại cần một cơ chế khai báo (Declarative) gọn gàng hơn.
+
+Khái niệm Encapsulation giải quyết bài toán số 1. Và Decorator kết hợp với Metadata Reflection chính là giải pháp hoàn hảo của NestJS cho bài toán số 2 và số 3.
+
+---
+
+## 2. WHAT — Giải Phẫu Encapsulation & Decorators
+
+### 2.1. Encapsulation (Đóng Gói) Là Gì?
+
+Encapsulation là quá trình giới hạn quyền truy cập trực tiếp vào một số thành phần của đối tượng. 
+
+**Definition Anatomy (Giải phẫu định nghĩa):**
+- **Information Hiding** (*Che giấu thông tin*): Bảo vệ State (trạng thái) bên trong của đối tượng khỏi sự can thiệp từ bên ngoài.
+- **Public Interface** (*Giao diện công khai*): Cung cấp các phương thức (Methods) có kiểm soát để bên ngoài có thể tương tác với State một cách an toàn.
+
+### 2.2. Decorator Là Gì?
+
+Nhiều người nghĩ Decorator là một tính năng độc quyền của NestJS, thực chất đây là một đề xuất của ECMAScript (JavaScript) và đã được TypeScript hỗ trợ từ lâu. 
+
+**Definition Anatomy:**
+- **Higher-order function** (*Hàm bậc cao*): Bản chất Decorator chỉ là một function nhận đầu vào là một function/class khác.
+- **Wrapping** (*Bao bọc*): Nó bao bọc mục tiêu (Target) bên trong nó để thực thi thêm các logic phụ trợ (như Log, Validate) trước hoặc sau khi logic chính chạy.
+- **Non-invasive** (*Không xâm lấn*): Code bên trong hàm chính không cần biết sự tồn tại của Decorator.
+
+### 2.3. Metadata Reflection Là Gì?
+
+Khi biên dịch từ TypeScript sang JavaScript, toàn bộ thông tin về kiểu dữ liệu (`String`, `Number`, `CustomClass`) sẽ bị xóa sạch (Type Erasure). Metadata Reflection giải quyết vấn đề này.
+
+**Definition Anatomy:**
+- **Meta-programming** (*Siêu lập trình*): Code viết ra code, hoặc code có khả năng đọc cấu trúc của chính nó.
+- **Reflection** (*Phản chiếu*): Tính năng cho phép ứng dụng NestJS "nhìn" vào một tham số trong Constructor và biết được chính xác kiểu dữ liệu của nó là gì ở thời điểm chạy (Runtime) thông qua thư viện `reflect-metadata`.
+
+### 2.4. Trực Quan Hóa Hoạt Động Của Method Decorator
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Decorator as @LogExecution Decorator
+    participant Method as Original Method
+
+    Client->>Decorator: 1. Gọi hàm tìm User
+    Note over Decorator: 2. Thực thi logic TRƯỚC (Start Timer)
+    Decorator->>Method: 3. Chuyển tiếp (Forward) arguments
+    Note over Method: 4. Chạy Business Logic cốt lõi
+    Method-->>Decorator: 5. Trả về kết quả (User Data)
+    Note over Decorator: 6. Thực thi logic SAU (Tính Duration)
+    Decorator-->>Client: 7. Trả kết quả cuối cùng cho Client
 ```
 
-### 1.2 Access Modifiers trong TypeScript
+---
+
+## 3. HOW — Ứng Dụng Đóng Gói Và Tự Tạo Decorator
+
+### 3.1. Thiết Lập Encapsulation Bằng Access Modifiers
+
+TypeScript cung cấp các Access Modifiers (*Chỉ định truy cập*) để thực hiện việc đóng gói.
 
 ```typescript
-class UserService {
-  private users = new Map<string, User>();  // Chỉ class này access được
-  private readonly SALT_ROUNDS = 10;        // Private + không thể thay đổi
-  
-  protected logger: Logger;  // Class này + subclasses access được
-  
-  public userCount = 0;      // Ai cũng access được (default)
-}
-```
+// filename: src/users/user.service.ts
+import { Injectable, ConflictException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
-| Modifier | Class | Subclass | Bên ngoài |
-|----------|-------|----------|-----------|
-| `private` | ✅ | ❌ | ❌ |
-| `protected` | ✅ | ✅ | ❌ |
-| `public` | ✅ | ✅ | ✅ |
-| `readonly` | ✅ (ghi 1 lần) | ✅ | ✅ |
-
-### 1.3 Áp dụng vào UserService
-
-```typescript
-// user.service.ts - Encapsulated version
 @Injectable()
 export class UserService {
-  // Private state - không ai thấy từ bên ngoài
-  private readonly users = new Map<string, User>();
+  // 1. private: Tuyệt đối không cho bên ngoài truy cập (Information Hiding)
+  // 2. readonly: Đảm bảo biến chỉ được gán giá trị 1 lần
+  private readonly users = new Map<string, any>();
   private readonly SALT_ROUNDS = 10;
 
-  // Public interface - API cho bên ngoài
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    // Sử dụng private state an toàn
-    if (this.users.has(dto.email)) {
-      throw new ConflictException('Email already exists');
+  // 3. public (mặc định): Giao diện giao tiếp an toàn (Public Interface)
+  public async createUser(email: string, password: string) {
+    if (this.users.has(email)) {
+      throw new ConflictException('Email đã tồn tại');
     }
 
-    const user = await this.hashAndSaveUser(dto);
+    // Delegate công việc cho các private helpers
+    const hashedPassword = await this.hashPassword(password);
+    
+    const user = { id: Date.now(), email, password: hashedPassword };
+    this.users.set(email, user);
+    
     return this.toPublicUser(user);
   }
 
-  // Private helper methods
-  private async hashAndSaveUser(dto: CreateUserDto): Promise<User> {
-    const hashedPassword = await bcrypt.hash(dto.password, this.SALT_ROUNDS);
-    const user: User = {
-      id: this.generateId(),
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name,
-      createdAt: new Date()
-    };
-    this.users.set(dto.email, user);
-    return user;
+  // Helper methods bị che giấu, controller không thể gọi hàm hashPassword()
+  private async hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, this.SALT_ROUNDS);
   }
 
-  private toPublicUser(user: User): UserResponse {
-    // Không expose password!
-    return { id: user.id, email: user.email, name: user.name };
-  }
-
-  private generateId(): string {
-    return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  private toPublicUser(user: any) {
+    const { password, ...publicUser } = user; // Loại bỏ password trước khi trả về
+    return publicUser;
   }
 }
 ```
 
-> 💡 **Key insight**: Encapsulation = **Hide implementation, expose interface**. Bên ngoài không cần biết users được lưu trong Map hay Database.
+### 3.2. Hiểu Bản Chất Method Decorator Bằng Cách Tự Viết
 
----
-
-## 2. DECORATORS - CHÚNG LÀ GÌ?
-
-### 2.1 Decorator = Just a Function!
+Để ghi log thời gian thực thi của hàm `createUser` mà không phải chèn code `Date.now()` vào trong hàm đó, chúng ta sẽ viết một Custom Method Decorator.
 
 ```typescript
-// Decorator đơn giản nhất
-function SimpleLog(target: any) {
-  console.log('Class được decorated:', target.name);
-}
+// filename: src/common/decorators/log-execution.decorator.ts
 
-@SimpleLog
-class UserService {}
-
-// Console output: "Class được decorated: UserService"
-```
-
-### 2.2 Các loại Decorators
-
-```typescript
-// 1. CLASS DECORATOR
-function ClassDecorator(constructor: Function) {
-  console.log('Decorating class:', constructor.name);
-}
-
-// 2. METHOD DECORATOR  
-function MethodDecorator(
-  target: any,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) {
-  console.log('Decorating method:', propertyKey);
-}
-
-// 3. PROPERTY DECORATOR
-function PropertyDecorator(target: any, propertyKey: string) {
-  console.log('Decorating property:', propertyKey);
-}
-
-// 4. PARAMETER DECORATOR
-function ParamDecorator(
-  target: any, 
-  propertyKey: string, 
-  parameterIndex: number
-) {
-  console.log('Decorating param at index:', parameterIndex);
-}
-
-@ClassDecorator
-class Example {
-  @PropertyDecorator
-  name: string;
-
-  @MethodDecorator
-  greet(@ParamDecorator message: string) {
-    return message;
-  }
-}
-```
-
-### 2.3 Decorator Factory - Decorator có Parameters
-
-```typescript
-// Decorator Factory = function trả về decorator
-function Log(prefix: string) {
-  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value;
-
-    descriptor.value = function(...args: any[]) {
-      console.log(`${prefix} Calling ${propertyKey} with:`, args);
-      const result = originalMethod.apply(this, args);
-      console.log(`${prefix} Result:`, result);
-      return result;
-    };
-  };
-}
-
-class UserService {
-  @Log('[UserService]')
-  create(name: string) {
-    return { id: 1, name };
-  }
-}
-
-const service = new UserService();
-service.create('Alice');
-// Output:
-// [UserService] Calling create with: ['Alice']
-// [UserService] Result: { id: 1, name: 'Alice' }
-```
-
----
-
-## 3. NESTJS DECORATORS GIẢI MÃ
-
-### 3.1 @Injectable() - Đăng ký với IoC Container
-
-```typescript
-// Simplified version của @Injectable
-function Injectable(): ClassDecorator {
-  return (target: Function) => {
-    // Đánh dấu class này có thể được inject
-    Reflect.defineMetadata('injectable', true, target);
-  };
-}
-```
-
-**Thực tế @Injectable() làm gì:**
-1. Ghi metadata vào class
-2. NestJS IoC Container đọc metadata này
-3. Tự động tạo instance và inject khi cần
-
-```typescript
-// Khi bạn viết
-@Injectable()
-export class UserService {
-  constructor(private logger: Logger) {}
-}
-
-// NestJS hiểu: "UserService cần Logger, tôi sẽ inject cho nó"
-```
-
-### 3.2 @Controller() - Route Handler
-
-```typescript
-// Simplified version
-function Controller(prefix: string): ClassDecorator {
-  return (target: Function) => {
-    Reflect.defineMetadata('path', prefix, target);
-    Reflect.defineMetadata('controller', true, target);
-  };
-}
-
-function Get(path: string = ''): MethodDecorator {
-  return (target, propertyKey, descriptor) => {
-    Reflect.defineMetadata('method', 'GET', descriptor.value);
-    Reflect.defineMetadata('path', path, descriptor.value);
-  };
-}
-
-@Controller('users')  // prefix = '/users'
-export class UserController {
+// Factory Pattern: Hàm trả về một Decorator function
+export function LogExecution(customPrefix: string = 'EXEC'): MethodDecorator {
   
-  @Get()              // GET /users
-  findAll() {}
-
-  @Get(':id')         // GET /users/:id
-  findOne() {}
-}
-```
-
-### 3.3 @Module() - Grouping Components
-
-```typescript
-// Simplified version
-function Module(metadata: ModuleMetadata): ClassDecorator {
-  return (target: Function) => {
-    Reflect.defineMetadata('imports', metadata.imports, target);
-    Reflect.defineMetadata('controllers', metadata.controllers, target);
-    Reflect.defineMetadata('providers', metadata.providers, target);
-    Reflect.defineMetadata('exports', metadata.exports, target);
-  };
-}
-
-@Module({
-  imports: [DatabaseModule],
-  controllers: [UserController],
-  providers: [UserService],
-  exports: [UserService]
-})
-export class UserModule {}
-```
-
----
-
-## 4. TẠO CUSTOM DECORATORS
-
-### 4.1 Method Decorator: @LogExecution
-
-```typescript
-// decorators/log-execution.decorator.ts
-export function LogExecution(): MethodDecorator {
+  // Trả về hàm Decorator thực sự
   return (
-    target: any,
-    propertyKey: string | symbol,
+    target: any, 
+    propertyKey: string | symbol, 
     descriptor: PropertyDescriptor
   ) => {
+    // 1. Lưu lại tham chiếu của hàm gốc (Original method)
     const originalMethod = descriptor.value;
-    const className = target.constructor.name;
 
+    // 2. Ghi đè (Mutate) hàm gốc bằng một hàm bọc (Wrapper)
     descriptor.value = async function (...args: any[]) {
+      const className = target.constructor.name;
+      const methodName = String(propertyKey);
+      
       const start = Date.now();
-      console.log(`[${className}] ${String(propertyKey)} started`);
+      console.log(`[${customPrefix}] Bắt đầu chạy ${className}.${methodName}...`);
       
       try {
+        // 3. Gọi hàm gốc thông qua .apply() và giữ nguyên 'this' context
         const result = await originalMethod.apply(this, args);
+        
+        // 4. Logic chạy SAU KHI hàm gốc hoàn thành
         const duration = Date.now() - start;
-        console.log(`[${className}] ${String(propertyKey)} completed in ${duration}ms`);
+        console.log(`[${customPrefix}] Hoàn thành ${methodName} trong ${duration}ms`);
+        
         return result;
       } catch (error) {
-        const duration = Date.now() - start;
-        console.error(`[${className}] ${String(propertyKey)} failed after ${duration}ms:`, error.message);
+        console.error(`[${customPrefix}] Lỗi tại ${methodName}:`, error.message);
         throw error;
       }
     };
@@ -324,289 +190,158 @@ export function LogExecution(): MethodDecorator {
 }
 ```
 
-**Áp dụng vào UserService:**
+**Sử dụng Decorator:**
 
 ```typescript
+// filename: src/users/user.service.ts
+import { LogExecution } from '../common/decorators/log-execution.decorator';
+
 @Injectable()
 export class UserService {
-  private readonly users = new Map<string, User>();
-
-  @LogExecution()  // ← Custom decorator
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    // ... implementation
-  }
-
-  @LogExecution()
-  async findByEmail(email: string): Promise<User | undefined> {
-    return this.users.get(email);
+  // Chỉ cần annotate, business logic vẫn sạch sẽ
+  @LogExecution('USER_SVC')
+  public async createUser(email: string, password: string) {
+    // ... business logic ...
   }
 }
-
-// Console output khi gọi create:
-// [UserService] create started
-// [UserService] create completed in 45ms
 ```
 
-### 4.2 Parameter Decorator: @CurrentUser
+### 3.3. Tạo Parameter Decorator: `@CurrentUser`
+
+Đây là một use-case cực kỳ phổ biến trong NestJS. Trong Controller, dữ liệu User thường được nhét vào đối tượng `request.user` bởi các Authentication Guard. Thay vì gọi `req.user` lặp đi lặp lại, ta làm một Decorator.
 
 ```typescript
-// decorators/current-user.decorator.ts
+// filename: src/common/decorators/current-user.decorator.ts
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
+// NestJS cung cấp sẵn hàm createParamDecorator
 export const CurrentUser = createParamDecorator(
   (data: string, ctx: ExecutionContext) => {
+    // switchToHttp() giúp lấy được Express Request object một cách an toàn
     const request = ctx.switchToHttp().getRequest();
-    const user = request.user;  // Set by AuthGuard
+    const user = request.user;
 
-    // Nếu có data (field name), trả về field đó
+    // Nếu có truyền vào data (ví dụ: @CurrentUser('email')), trả về property đó
+    // Nếu không, trả về toàn bộ object user
     return data ? user?.[data] : user;
-  }
+  },
 );
 ```
 
-**Sử dụng:**
+Sử dụng trong Controller:
 
 ```typescript
+// filename: src/users/user.controller.ts
+import { Controller, Get, UseGuards } from '@nestjs/common';
+
 @Controller('users')
 export class UserController {
   
   @Get('profile')
   @UseGuards(JwtAuthGuard)
-  getProfile(@CurrentUser() user: User) {
+  // Lấy toàn bộ User
+  getProfile(@CurrentUser() user: any) {
     return user;
   }
 
   @Get('my-email')
   @UseGuards(JwtAuthGuard)
+  // Chỉ lấy đúng email thông qua tham số 'data'
   getEmail(@CurrentUser('email') email: string) {
     return { email };
   }
 }
 ```
 
-### 4.3 Class Decorator: @ApiVersion
+### 3.4. Cắt Lớp Sự Thật Phía Sau `@Injectable()` và Metadata
+
+Bạn đã bao giờ thắc mắc: Làm thế nào NestJS biết `UserController` cần truyền một bản sao của `UserService` vào constructor?
 
 ```typescript
-// decorators/api-version.decorator.ts
-export function ApiVersion(version: string): ClassDecorator {
-  return (target: Function) => {
-    Reflect.defineMetadata('api-version', version, target);
-  };
-}
-
-// Helper để lấy version
-export function getApiVersion(target: Function): string {
-  return Reflect.getMetadata('api-version', target) || 'v1';
-}
-
-// Sử dụng
-@ApiVersion('v2')
+// filename: src/users/user.controller.ts
 @Controller('users')
 export class UserController {
-  // ...
+  // NestJS đọc từ đâu để biết tham số này có kiểu là UserService?
+  constructor(private readonly userService: UserService) {}
 }
-
-// Middleware có thể đọc version
-const version = getApiVersion(UserController);
-console.log(version);  // 'v2'
 ```
 
----
+Bí mật nằm ở `@Controller()` và `@Injectable()`. Chúng sử dụng thư viện `reflect-metadata` để ghi lại Type (Kiểu dữ liệu) của tham số trong quá trình biên dịch (Compilation).
 
-## 5. METADATA REFLECTION
-
-### 5.1 Reflect Metadata là gì?
+Chúng ta có thể tự mình đọc metadata này:
 
 ```typescript
-// NestJS sử dụng reflect-metadata để lưu thông tin
+// filename: src/demo/reflection.demo.ts
 import 'reflect-metadata';
 
-class UserService {
-  greet(name: string): string {
-    return `Hello, ${name}`;
-  }
+// Nếu xóa decorator này, Reflect sẽ không lưu metadata cho class!
+@Injectable() 
+export class UserController {
+  constructor(private readonly userService: UserService) {}
 }
 
-// Lấy type information
-const paramTypes = Reflect.getMetadata('design:paramtypes', UserService.prototype, 'greet');
-console.log(paramTypes);  // [String]
+// Hàm này chính là cách NestJS Container hoạt động dưới hood:
+function inspectDependencies(targetClass: any) {
+  // Đọc danh sách các tham số trong Constructor
+  const dependencies = Reflect.getMetadata('design:paramtypes', targetClass);
+  
+  console.log(`Class ${targetClass.name} phụ thuộc vào:`);
+  dependencies.forEach(dep => console.log('- ', dep.name));
+}
 
-const returnType = Reflect.getMetadata('design:returntype', UserService.prototype, 'greet');
-console.log(returnType);  // String
+inspectDependencies(UserController);
+// Kết quả trả về ở Runtime: 
+// Class UserController phụ thuộc vào:
+// - UserService
 ```
 
-### 5.2 Tại sao cần Metadata?
+Khi NestJS khởi động, nó lặp qua tất cả các Controllers, dùng `Reflect.getMetadata('design:paramtypes')` để lấy danh sách Dependencies, tự động khởi tạo (tạo instance qua `new UserService()`), và tiêm vào Constructor.
+
+### 3.5. Decorator Composition với `applyDecorators`
+
+Trong các dự án thực tế, một Endpoint (API) thường bị gắn quá nhiều Decorators (Kiểm tra quyền, Gắn docs Swagger, Xác thực Token). NestJS cung cấp hàm `applyDecorators` để gom nhóm chúng lại thành một.
 
 ```typescript
-@Injectable()
-export class UserService {
-  constructor(
-    private userRepo: UserRepository,
-    private logger: Logger
-  ) {}
+// filename: src/common/decorators/auth.decorator.ts
+import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
+
+export function Auth(...roles: string[]) {
+  // Gom 4 decorators thành 1
+  return applyDecorators(
+    SetMetadata('roles', roles),
+    UseGuards(JwtAuthGuard, RolesGuard),
+    ApiBearerAuth(),
+    ApiUnauthorizedResponse({ description: 'Không có quyền truy cập (Unauthorized)' }),
+  );
 }
-
-// NestJS đọc param types từ metadata:
-const params = Reflect.getMetadata('design:paramtypes', UserService);
-// [UserRepository, Logger]
-
-// → NestJS biết cần inject những dependencies nào
 ```
 
-> 💡 **Key insight**: Decorators + Metadata = NestJS có thể "đọc" code của bạn và tự động wire dependencies.
+Lúc này Controller sẽ cực kỳ gọn gàng:
+
+```typescript
+// filename: src/users/user.controller.ts
+@Controller('admin')
+export class AdminController {
+  
+  @Get('dashboard')
+  @Auth('admin', 'super_admin') // Áp dụng 4 decorators cùng lúc
+  getDashboard() {
+    return "Secret Dashboard";
+  }
+}
+```
+
+*Lưu ý kỹ thuật*: `@ApiHideProperty()` từ thư viện `@nestjs/swagger` không tương thích với `applyDecorators` vì nó hoạt động ở cấp độ Property thay vì Method/Class.
 
 ---
 
-## 6. USERSERVICE EVOLUTION
+## 4. Discussion Questions
 
-### Từ Phần 1 → Phần 2
-
-```typescript
-// user.service.ts - Version với Decorators và Encapsulation
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-
-// Custom decorator từ section trên
-function LogExecution(): MethodDecorator {
-  return (target, key, descriptor: PropertyDescriptor) => {
-    const original = descriptor.value;
-    descriptor.value = async function(...args: any[]) {
-      console.log(`[${target.constructor.name}] ${String(key)} called`);
-      const start = Date.now();
-      const result = await original.apply(this, args);
-      console.log(`[${target.constructor.name}] ${String(key)} took ${Date.now() - start}ms`);
-      return result;
-    };
-  };
-}
-
-@Injectable()
-export class UserService {
-  // ENCAPSULATION: Private state
-  private readonly users = new Map<string, User>();
-  private readonly SALT_ROUNDS = 10;
-
-  // PUBLIC INTERFACE với DECORATORS
-  @LogExecution()
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    await this.ensureEmailNotExists(dto.email);
-    const user = await this.hashAndSaveUser(dto);
-    return this.toPublicUser(user);
-  }
-
-  @LogExecution()
-  async findByEmail(email: string): Promise<User> {
-    const user = this.users.get(email);
-    if (!user) throw new NotFoundException('User not found');
-    return user;
-  }
-
-  @LogExecution()
-  async validatePassword(email: string, password: string): Promise<boolean> {
-    try {
-      const user = await this.findByEmail(email);
-      return bcrypt.compare(password, user.password);
-    } catch {
-      return false;
-    }
-  }
-
-  // PRIVATE HELPERS - Hidden implementation
-  private async ensureEmailNotExists(email: string): Promise<void> {
-    if (this.users.has(email)) {
-      throw new ConflictException('Email already exists');
-    }
-  }
-
-  private async hashAndSaveUser(dto: CreateUserDto): Promise<User> {
-    const hashedPassword = await bcrypt.hash(dto.password, this.SALT_ROUNDS);
-    const user: User = {
-      id: this.generateId(),
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name,
-      createdAt: new Date()
-    };
-    this.users.set(dto.email, user);
-    return user;
-  }
-
-  private toPublicUser(user: User): UserResponse {
-    const { password, ...publicUser } = user;
-    return publicUser;
-  }
-
-  private generateId(): string {
-    return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
-}
-```
+1. **Về Performance:** Cơ chế Reflection và việc đọc metadata trong lúc ứng dụng đang chạy (Runtime) có gây ảnh hưởng tiêu cực đến hiệu suất (Latency) của ứng dụng không? Tại sao quá trình Dependency Injection của NestJS chỉ bị chậm ở giai đoạn khởi động (Bootstrap)?
+2. **Về Design Pattern:** Decorator pattern được sử dụng trong TypeScript khác biệt như thế nào so với mẫu thiết kế Decorator truyền thống được định nghĩa trong bộ sách GOF (Gang of Four) vốn dùng tính kế thừa (Inheritance) hoặc giao diện (Interface)?
+3. **Về Memory Limit:** Nếu chúng ta sử dụng Decorator `@CacheResult` để lưu kết quả của một hàm xử lý dữ liệu lớn trên RAM (In-memory), rủi ro lớn nhất về mặt vận hành là gì và làm thế nào để xử lý nó (Gợi ý: LRU Cache / Redis)?
 
 ---
 
-## 7. BÀI TẬP THỰC HÀNH
-
-### 📝 Câu hỏi Lý thuyết
-
-| # | Câu hỏi | Gợi ý đáp án |
-|---|---------|--------------|
-| 1 | Decorator là gì? | Function nhận target và modify/annotate nó |
-| 2 | `private` khác `protected` thế nào? | private chỉ class, protected thêm subclass |
-| 3 | Tại sao @Injectable() cần thiết? | Để NestJS biết class có thể inject |
-| 4 | Metadata dùng để làm gì trong NestJS? | Lưu thông tin type để DI container đọc |
-
-### 💻 Bài tập Code
-
-**Tạo custom decorator `@CatchError`:**
-
-```typescript
-// Yêu cầu: Decorator bắt error và log, không crash app
-// Trước:
-@CatchError()
-async riskyMethod() {
-  throw new Error('Something went wrong');
-}
-// Kết quả: Log error, return null thay vì crash
-```
-
-**Gợi ý:**
-```typescript
-function CatchError(): MethodDecorator {
-  return (target, key, descriptor: PropertyDescriptor) => {
-    const original = descriptor.value;
-    descriptor.value = async function(...args: any[]) {
-      try {
-        return await original.apply(this, args);
-      } catch (error) {
-        // TODO: implement logging và return fallback
-      }
-    };
-  };
-}
-```
-
----
-
-## 🔗 Tiếp theo
-
-**[Phần 3: Interface & Abstract Class →](./03-interface-abstract.md)**
-
-Trong phần tiếp theo, chúng ta sẽ:
-- Hiểu Interface vs Abstract Class
-- Tạo `IUserRepository` interface
-- Tạo `BaseRepository<T>` abstract class
-- Refactor UserService để dùng Repository pattern
-
----
-
-## 📚 Tóm tắt Phần 2
-
-| Concept | Giải thích |
-|---------|------------|
-| **Encapsulation** | Ẩn implementation, chỉ expose public API |
-| **Access Modifiers** | private/protected/public/readonly |
-| **Decorator** | Function modify/annotate class/method/property |
-| **Decorator Factory** | Function trả về decorator, cho phép params |
-| **Metadata** | Thông tin về types, lưu qua reflect-metadata |
-
-> 💡 **Takeaway**: Decorators là "sugar syntax" cho metadata. NestJS đọc metadata này để tự động configure ứng dụng.
+*Made by Anh Tu - Share to be share*

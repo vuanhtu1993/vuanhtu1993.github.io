@@ -1,805 +1,220 @@
 ---
-title: "OOP trong NestJS (Phần 6): Design Patterns - Tổng Kết Series"
+title: "OOP trong NestJS (Phần 6): Design Patterns - Tinh Hoa Kiến Trúc Enterprise"
 date: "2026-02-02"
 category: "NestJS"
 authors: [anhhtus]
 tags: [nestjs, oop, typescript, design-patterns, factory, repository, singleton]
-description: "Các Design Patterns phổ biến trong NestJS: Factory, Module, Repository, Singleton, Decorator. Tổng kết series OOP với ví dụ hoàn chỉnh."
+description: "Tổng hợp 4 Design Patterns cốt lõi làm nên sức mạnh của NestJS: Factory, Repository, Singleton và Decorator. Phân tích tác động hiệu năng của Scope."
 ---
+# OOP trong NestJS (Phần 6): Design Patterns
 
-# 🏗️ OOP trong NestJS (Phần 6): Design Patterns
+## Agenda
 
-> 🎯 **Mục tiêu**: Tổng hợp các Design Patterns trong NestJS và hoàn thiện kiến thức OOP.
+**Thời gian đọc ước tính:** ~20 phút
 
-<!--truncate-->
+### Learning outcome:
 
----
-
-## 📌 Tổng Quan Series
-
-| Phần | Chủ đề | Áp dụng vào UserService |
-|------|--------|------------------------|
-| 1 | Class, Constructor | Functional → Class-based |
-| 2 | Decorators | @Injectable, @LogExecution |
-| 3 | Interface/Abstract | IUserRepository, BaseRepository |
-| 4 | DI, IoC | Inject dependencies |
-| 5 | SOLID | Tách services, Strategy pattern |
-| **6** | **Design Patterns** | **Factory, Repository, Module** |
+- **Hiểu** được khái niệm Design Patterns và tại sao kiến trúc của NestJS lại được xây dựng chặt chẽ trên các mẫu chuẩn mực này thay vì cho phép lập trình viên tự do sáng tạo cấu trúc.
+- **Giải thích** được cơ chế hoạt động của 4 Design Patterns cốt lõi làm nên sức mạnh của framework: Factory, Repository, Singleton và Decorator.
+- **Tự tay** áp dụng Factory Pattern để thiết lập kết nối cơ sở dữ liệu động (Dynamic configuration) thông qua Dynamic Module.
+- **Phân biệt** được các loại Scope (DEFAULT, REQUEST, TRANSIENT) trong Singleton Pattern và đánh giá được tác động của chúng đến hiệu suất (Performance) của ứng dụng.
 
 ---
 
-## 1. FACTORY PATTERN
+## Glossary & Vocabulary
 
-### 1.1 Factory là gì?
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
 
-> **Factory = Class/function chịu trách nhiệm tạo objects.**
-> Client không biết object được tạo như thế nào.
+| Term                         | Vietnamese Meaning & Quick Explain                                                                                                                                                                                       |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Design Pattern**     | Mẫu thiết kế phần mềm. Các giải pháp tổng quát, có thể tái sử dụng cho các vấn đề thường xuyên xảy ra trong thiết kế phần mềm.                                                                |
+| **Factory Pattern**    | Mẫu thiết kế chuyên xử lý việc khởi tạo đối tượng. Thuộc nhóm Khởi tạo (Creational), dùng để tạo ra các đối tượng mà không cần chỉ định rõ lớp (Class) cụ thể nào sẽ được tạo. |
+| **Repository Pattern** | Mẫu thiết kế quản lý truy cập dữ liệu. Thuộc nhóm Kiến trúc, đóng vai trò làm cầu nối giữa tầng logic nghiệp vụ và tầng truy cập dữ liệu (Database).                                          |
+| **Singleton Pattern**  | Mẫu thiết kế đảm bảo một thực thể duy nhất. Thuộc nhóm Khởi tạo, đảm bảo một Class chỉ có duy nhất một phiên bản (Instance) được tạo ra trong toàn bộ vòng đời ứng dụng.              |
 
-### 1.2 Simple Factory
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
 
-```typescript
-// Không dùng Factory
-const logger = process.env.ENV === 'production'
-  ? new CloudWatchLogger()
-  : new ConsoleLogger();
-
-// ❌ Logic tạo object rải rác khắp nơi
-```
-
-```typescript
-// ✅ Dùng Factory
-class LoggerFactory {
-  static create(): ILogger {
-    if (process.env.ENV === 'production') {
-      return new CloudWatchLogger();
-    }
-    return new ConsoleLogger();
-  }
-}
-
-// Client
-const logger = LoggerFactory.create();
-```
-
-### 1.3 Factory trong NestJS - useFactory
-
-```typescript
-// factories/database.factory.ts
-export const DatabaseFactory = {
-  provide: 'DATABASE_CONNECTION',
-  useFactory: async (config: ConfigService): Promise<DataSource> => {
-    const type = config.get<string>('DB_TYPE', 'postgres');
-    
-    const dataSource = new DataSource({
-      type: type as any,
-      host: config.get('DB_HOST'),
-      port: config.get('DB_PORT'),
-      username: config.get('DB_USER'),
-      password: config.get('DB_PASS'),
-      database: config.get('DB_NAME'),
-      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-      synchronize: config.get('NODE_ENV') !== 'production',
-    });
-
-    await dataSource.initialize();
-    console.log(`Database connected: ${type}`);
-    
-    return dataSource;
-  },
-  inject: [ConfigService],
-};
-
-// Module
-@Module({
-  providers: [DatabaseFactory],
-  exports: ['DATABASE_CONNECTION']
-})
-export class DatabaseModule {}
-```
-
-### 1.4 Dynamic Module Factory
-
-```typescript
-// notification.module.ts
-@Module({})
-export class NotificationModule {
-  static register(options: NotificationOptions): DynamicModule {
-    return {
-      module: NotificationModule,
-      providers: [
-        {
-          provide: 'NOTIFICATION_OPTIONS',
-          useValue: options,
-        },
-        {
-          provide: 'NOTIFICATION_CHANNELS',
-          useFactory: (opts: NotificationOptions) => {
-            const channels: INotificationChannel[] = [];
-            
-            if (opts.email) {
-              channels.push(new EmailChannel(opts.email));
-            }
-            if (opts.sms) {
-              channels.push(new SmsChannel(opts.sms));
-            }
-            if (opts.push) {
-              channels.push(new PushChannel(opts.push));
-            }
-            
-            return channels;
-          },
-          inject: ['NOTIFICATION_OPTIONS'],
-        },
-        NotificationService,
-      ],
-      exports: [NotificationService],
-    };
-  }
-}
-
-// Sử dụng
-@Module({
-  imports: [
-    NotificationModule.register({
-      email: { apiKey: process.env.SENDGRID_KEY },
-      sms: { accountSid: process.env.TWILIO_SID },
-      // push: không enable
-    }),
-  ],
-})
-export class AppModule {}
-```
+| Word                         | Meaning in Context (Nghĩa trong ngữ cảnh)                                                                                                                     |
+| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Dynamic Module (n)** | Mô-đun động. Cấu trúc trong NestJS cho phép cấu hình Module tại thời điểm chạy (Runtime) thông qua các phương thức tĩnh như `register()`. |
+| **Overhead (n)**       | Chi phí phát sinh. Sự tiêu tốn thêm tài nguyên (bộ nhớ, CPU) hoặc thời gian xử lý do một cơ chế nào đó mang lại.                            |
+| **Scope (n)**          | Phạm vi vòng đời. Xác định một đối tượng sẽ tồn tại bao lâu và được chia sẻ như thế nào trong hệ thống.                                |
 
 ---
 
-## 2. REPOSITORY PATTERN
+## 1. WHY — Tại Sao Cần Design Patterns?
 
-### 2.1 Repository là gì?
+Khi xây dựng các ứng dụng phía máy chủ (Backend), lập trình viên Node.js (đặc biệt là người dùng Express.js) thường phải đối mặt với các "bài toán lặp lại" (Common problems):
 
-> **Repository = Abstraction layer giữa domain và data layer.**
-> Business logic không quan tâm data lưu ở đâu.
+- Làm sao để quản lý hàng tá kết nối đến Database mà không bị rò rỉ bộ nhớ (Memory leak)?
+- Làm sao để tách biệt logic xử lý nghiệp vụ (Business logic) khỏi các câu lệnh truy vấn SQL thô cứng?
+- Làm sao để cấu hình các module của bên thứ ba (như Redis, Stripe) tùy theo môi trường (Dev/Stag/Prod)?
 
-### 2.2 Complete Repository Implementation
+Express.js cung cấp sự tự do tuyệt đối, dẫn đến việc mỗi dự án, mỗi công ty lại có một cách giải quyết khác nhau. Khi một thành viên mới tham gia vào dự án, họ phải tốn rất nhiều thời gian để hiểu được kiến trúc tự chế của team (Custom architecture).
 
-```typescript
-// 1. Base Interface
-export interface IRepository<T> {
-  findById(id: string): Promise<T | null>;
-  findAll(options?: FindOptions): Promise<T[]>;
-  create(data: Partial<T>): Promise<T>;
-  update(id: string, data: Partial<T>): Promise<T>;
-  delete(id: string): Promise<void>;
-  count(filter?: FilterOptions): Promise<number>;
-}
-
-// 2. User-specific Interface
-export interface IUserRepository extends IRepository<User> {
-  findByEmail(email: string): Promise<User | null>;
-  findByUsername(username: string): Promise<User | null>;
-  existsByEmail(email: string): Promise<boolean>;
-}
-
-// 3. Abstract Base Repository với common logic
-export abstract class BaseRepository<T extends { id: string }> 
-  implements IRepository<T> {
-  
-  protected abstract get entityName(): string;
-
-  abstract findById(id: string): Promise<T | null>;
-  abstract findAll(options?: FindOptions): Promise<T[]>;
-  abstract create(data: Partial<T>): Promise<T>;
-  abstract update(id: string, data: Partial<T>): Promise<T>;
-  abstract delete(id: string): Promise<void>;
-  abstract count(filter?: FilterOptions): Promise<number>;
-
-  // Shared utility methods
-  protected generateId(): string {
-    return `${this.entityName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  protected log(operation: string, details?: object): void {
-    console.log(`[${this.entityName}Repository] ${operation}`, details || '');
-  }
-}
-
-// 4. Concrete Implementation - TypeORM
-@Injectable()
-export class TypeOrmUserRepository 
-  extends BaseRepository<User> 
-  implements IUserRepository {
-  
-  protected get entityName() { return 'User'; }
-
-  constructor(
-    @InjectRepository(UserEntity)
-    private readonly repo: Repository<UserEntity>,
-  ) {
-    super();
-  }
-
-  async findById(id: string): Promise<User | null> {
-    this.log('findById', { id });
-    return this.repo.findOne({ where: { id } });
-  }
-
-  async findAll(options?: FindOptions): Promise<User[]> {
-    this.log('findAll', options);
-    return this.repo.find({
-      skip: options?.offset,
-      take: options?.limit,
-      order: options?.orderBy,
-    });
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    this.log('findByEmail', { email });
-    return this.repo.findOne({ where: { email } });
-  }
-
-  async findByUsername(username: string): Promise<User | null> {
-    this.log('findByUsername', { username });
-    return this.repo.findOne({ where: { username } });
-  }
-
-  async existsByEmail(email: string): Promise<boolean> {
-    const count = await this.repo.count({ where: { email } });
-    return count > 0;
-  }
-
-  async create(data: Partial<User>): Promise<User> {
-    this.log('create', { email: data.email });
-    const entity = this.repo.create(data);
-    return this.repo.save(entity);
-  }
-
-  async update(id: string, data: Partial<User>): Promise<User> {
-    this.log('update', { id });
-    await this.repo.update(id, data);
-    return this.findById(id);
-  }
-
-  async delete(id: string): Promise<void> {
-    this.log('delete', { id });
-    await this.repo.delete(id);
-  }
-
-  async count(filter?: FilterOptions): Promise<number> {
-    return this.repo.count({ where: filter });
-  }
-}
-```
-
-### 2.3 Unit of Work Pattern (Bonus)
-
-```typescript
-// Unit of Work quản lý transactions
-export interface IUnitOfWork {
-  userRepository: IUserRepository;
-  orderRepository: IOrderRepository;
-  
-  beginTransaction(): Promise<void>;
-  commit(): Promise<void>;
-  rollback(): Promise<void>;
-}
-
-@Injectable()
-export class TypeOrmUnitOfWork implements IUnitOfWork {
-  private queryRunner: QueryRunner;
-
-  constructor(
-    private dataSource: DataSource,
-    @Inject(USER_REPOSITORY) public userRepository: IUserRepository,
-    @Inject(ORDER_REPOSITORY) public orderRepository: IOrderRepository,
-  ) {}
-
-  async beginTransaction(): Promise<void> {
-    this.queryRunner = this.dataSource.createQueryRunner();
-    await this.queryRunner.connect();
-    await this.queryRunner.startTransaction();
-  }
-
-  async commit(): Promise<void> {
-    await this.queryRunner.commitTransaction();
-    await this.queryRunner.release();
-  }
-
-  async rollback(): Promise<void> {
-    await this.queryRunner.rollbackTransaction();
-    await this.queryRunner.release();
-  }
-}
-
-// Sử dụng
-@Injectable()
-export class OrderService {
-  constructor(private unitOfWork: IUnitOfWork) {}
-
-  async createOrderWithUser(orderDto: CreateOrderDto, userDto: CreateUserDto) {
-    await this.unitOfWork.beginTransaction();
-    
-    try {
-      const user = await this.unitOfWork.userRepository.create(userDto);
-      const order = await this.unitOfWork.orderRepository.create({
-        ...orderDto,
-        userId: user.id,
-      });
-      
-      await this.unitOfWork.commit();
-      return { user, order };
-    } catch (error) {
-      await this.unitOfWork.rollback();
-      throw error;
-    }
-  }
-}
-```
+NestJS giải quyết triệt để sự hỗn loạn này bằng cách **ép buộc** (Opinionated) ứng dụng phải tuân theo các Design Patterns chuẩn mực của ngành kỹ nghệ phần mềm. Bằng cách sử dụng một "ngôn ngữ chung" (Common vocabulary) như Factory hay Repository, mọi lập trình viên trên thế giới đều có thể đọc hiểu mã nguồn NestJS của nhau một cách dễ dàng.
 
 ---
 
-## 3. SINGLETON PATTERN
+## 2. WHAT & HOW — 4 Patterns Cốt Lõi Trong NestJS
 
-### 3.1 Singleton trong NestJS
+### 2.1. Factory Pattern
 
-> **Mặc định, NestJS providers là SINGLETON** - chỉ tạo 1 instance.
+**Definition Anatomy (Giải phẫu định nghĩa):**
 
-```typescript
-@Injectable()  // Singleton by default
-export class ConfigService {
-  private readonly config: Map<string, any>;
+- **Creational** (*Khởi tạo*): Mục đích chính của nó là tạo ra đối tượng.
+- **Hide Logic** (*Che giấu logic*): Ẩn đi quá trình khởi tạo phức tạp (ví dụ: cần đọc file config, gọi API lấy khóa bí mật) để Client không cần bận tâm.
 
-  constructor() {
-    console.log('ConfigService created');  // Chỉ log 1 lần!
-    this.config = this.loadConfig();
-  }
-
-  get<T>(key: string): T {
-    return this.config.get(key);
-  }
-}
-
-// Cả app chỉ có 1 instance ConfigService
-// UserModule và OrderModule dùng chung instance
-```
-
-### 3.2 Các Scopes trong NestJS
-
-```typescript
-import { Scope } from '@nestjs/common';
-
-// Scope.DEFAULT (Singleton)
-@Injectable({ scope: Scope.DEFAULT })
-export class SingletonService {}
-
-// Scope.REQUEST - Mới instance cho mỗi request
-@Injectable({ scope: Scope.REQUEST })
-export class RequestScopedService {
-  constructor(@Inject(REQUEST) private request: Request) {
-    // Access request-specific data
-    console.log(this.request.headers);
-  }
-}
-
-// Scope.TRANSIENT - Mới instance mỗi lần inject
-@Injectable({ scope: Scope.TRANSIENT })
-export class TransientService {
-  private readonly id = Math.random();
-  
-  getId() { return this.id; }  // Mỗi inject = id khác nhau
-}
-```
-
-### 3.3 Khi nào dùng scope nào?
-
-| Scope | Use Case | Ví dụ |
-|-------|----------|-------|
-| **DEFAULT** | Stateless services | ConfigService, UserService |
-| **REQUEST** | Cần request context | LoggerService với request ID |
-| **TRANSIENT** | Mỗi consumer cần instance riêng | ít dùng |
-
----
-
-## 4. DECORATOR PATTERN
-
-### 4.1 Decorator Pattern là gì?
-
-> **Decorator = Wrap object để thêm behavior mà không sửa original.**
-
-### 4.2 NestJS Decorators = Decorator Pattern
-
-```typescript
-// Decorator function wrap method
-function CacheResult(ttl: number): MethodDecorator {
-  return (target, propertyKey, descriptor: PropertyDescriptor) => {
-    const originalMethod = descriptor.value;
-    const cache = new Map<string, { value: any; expiry: number }>();
-
-    descriptor.value = async function (...args: any[]) {
-      const key = JSON.stringify(args);
-      const cached = cache.get(key);
-      
-      if (cached && cached.expiry > Date.now()) {
-        console.log(`[Cache HIT] ${String(propertyKey)}`);
-        return cached.value;
-      }
-
-      console.log(`[Cache MISS] ${String(propertyKey)}`);
-      const result = await originalMethod.apply(this, args);
-      cache.set(key, { value: result, expiry: Date.now() + ttl });
-      
-      return result;
-    };
-
-    return descriptor;
-  };
-}
-
-// Sử dụng
-@Injectable()
-export class UserService {
-  @CacheResult(60000)  // Cache 60 seconds
-  async findById(id: string): Promise<User> {
-    console.log('Fetching from database...');
-    return this.userRepo.findById(id);
-  }
-}
-
-// Gọi 2 lần liên tiếp:
-// [Cache MISS] findById
-// Fetching from database...
-// [Cache HIT] findById  ← Không fetch lại!
-```
-
-### 4.3 Composing Multiple Decorators
-
-```typescript
-// Combine nhiều behaviors
-@Injectable()
-export class UserService {
-  
-  @LogExecution()      // Log time
-  @CacheResult(60000)  // Cache result
-  @RetryOnFailure(3)   // Retry if fails
-  async findById(id: string): Promise<User> {
-    return this.userRepo.findById(id);
-  }
-}
-
-// Order: LogExecution → CacheResult → RetryOnFailure → originalMethod
-```
-
----
-
-## 5. MODULE PATTERN
-
-### 5.1 NestJS Module = Organized Factory
-
-```typescript
-// Module đóng gói một feature hoàn chỉnh
-@Module({
-  imports: [
-    TypeOrmModule.forFeature([UserEntity]),
-    ConfigModule,
-  ],
-  controllers: [UserController],
-  providers: [
-    UserService,
-    {
-      provide: USER_REPOSITORY,
-      useClass: TypeOrmUserRepository,
-    },
-    {
-      provide: 'PASSWORD_HASHER',
-      useClass: BcryptPasswordHasher,
-    },
-  ],
-  exports: [UserService],  // Public API của module
-})
-export class UserModule {}
-```
-
-### 5.2 Core Module Pattern
-
-```typescript
-// core.module.ts - Shared singleton services
-@Global()  // Available everywhere without import
-@Module({
-  providers: [
-    ConfigService,
-    LoggerService,
-    EventBusService,
-  ],
-  exports: [
-    ConfigService,
-    LoggerService,
-    EventBusService,
-  ],
-})
-export class CoreModule {}
-
-// app.module.ts
-@Module({
-  imports: [
-    CoreModule,  // Import 1 lần
-    UserModule,
-    OrderModule,
-    // UserModule và OrderModule tự động có access đến CoreModule services
-  ],
-})
-export class AppModule {}
-```
-
-### 5.3 Feature Module Structure
-
-```
-src/
-├── core/
-│   ├── core.module.ts
-│   ├── services/
-│   │   ├── config.service.ts
-│   │   └── logger.service.ts
-│   └── index.ts
-│
-├── users/
-│   ├── users.module.ts
-│   ├── controllers/
-│   │   └── user.controller.ts
-│   ├── services/
-│   │   └── user.service.ts
-│   ├── repositories/
-│   │   ├── user.repository.interface.ts
-│   │   └── typeorm-user.repository.ts
-│   ├── entities/
-│   │   └── user.entity.ts
-│   ├── dto/
-│   │   ├── create-user.dto.ts
-│   │   └── update-user.dto.ts
-│   └── index.ts
-│
-├── orders/
-│   ├── orders.module.ts
-│   └── ...
-│
-└── app.module.ts
-```
-
----
-
-## 6. TỔNG KẾT: USERSERVICE HOÀN CHỈNH
-
-### 6.1 Áp dụng tất cả Patterns
-
-```typescript
-// interfaces/user-repository.interface.ts
-export const USER_REPOSITORY = 'USER_REPOSITORY';
-
-export interface IUserRepository {
-  findById(id: string): Promise<User | null>;
-  findByEmail(email: string): Promise<User | null>;
-  existsByEmail(email: string): Promise<boolean>;
-  create(data: CreateUserData): Promise<User>;
-  update(id: string, data: Partial<User>): Promise<User>;
-  delete(id: string): Promise<void>;
-}
-
-// repositories/typeorm-user.repository.ts
-@Injectable()
-export class TypeOrmUserRepository 
-  extends BaseRepository<User>  // Template Method Pattern
-  implements IUserRepository {
-  
-  protected get entityName() { return 'User'; }
-
-  constructor(
-    @InjectRepository(UserEntity) private repo: Repository<UserEntity>,
-  ) {
-    super();
-  }
-
-  // ... implementations
-}
-
-// services/password-hasher.interface.ts
-export interface IPasswordHasher {
-  hash(password: string): Promise<string>;
-  compare(password: string, hash: string): Promise<boolean>;
-}
-
-// services/bcrypt-password-hasher.ts
-@Injectable()
-export class BcryptPasswordHasher implements IPasswordHasher {
-  private readonly SALT_ROUNDS = 10;
-
-  async hash(password: string): Promise<string> {
-    return bcrypt.hash(password, this.SALT_ROUNDS);
-  }
-
-  async compare(password: string, hash: string): Promise<boolean> {
-    return bcrypt.compare(password, hash);
-  }
-}
-
-// decorators/log-execution.decorator.ts
-export function LogExecution(): MethodDecorator {
-  return (target, key, descriptor: PropertyDescriptor) => {
-    const original = descriptor.value;
-    
-    descriptor.value = async function (...args: any[]) {
-      const className = target.constructor.name;
-      const start = Date.now();
-      console.log(`[${className}] ${String(key)} started`);
-      
-      try {
-        const result = await original.apply(this, args);
-        console.log(`[${className}] ${String(key)} completed in ${Date.now() - start}ms`);
-        return result;
-      } catch (error) {
-        console.error(`[${className}] ${String(key)} failed:`, error.message);
-        throw error;
-      }
-    };
-
-    return descriptor;
-  };
-}
-
-// services/user.service.ts
-@Injectable()
-export class UserService {
-  constructor(
-    @Inject(USER_REPOSITORY) 
-    private readonly userRepository: IUserRepository,  // DIP
-    
-    @Inject('PASSWORD_HASHER')
-    private readonly passwordHasher: IPasswordHasher,  // DIP
-    
-    private readonly eventEmitter: EventEmitter2,       // SRP - events
-  ) {}
-
-  @LogExecution()  // Decorator Pattern
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    // Check duplicate
-    const exists = await this.userRepository.existsByEmail(dto.email);
-    if (exists) {
-      throw new ConflictException('Email already exists');
-    }
-
-    // Hash password
-    const hashedPassword = await this.passwordHasher.hash(dto.password);
-
-    // Create user
-    const user = await this.userRepository.create({
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name,
-    });
-
-    // Emit event (SRP - không gửi notification trực tiếp)
-    this.eventEmitter.emit('user.created', new UserCreatedEvent(user));
-
-    return this.toPublicUser(user);
-  }
-
-  @LogExecution()
-  async findById(id: string): Promise<UserResponse> {
-    const user = await this.userRepository.findById(id);
-    if (!user) throw new NotFoundException('User not found');
-    return this.toPublicUser(user);
-  }
-
-  @LogExecution()
-  async validateCredentials(
-    email: string, 
-    password: string
-  ): Promise<User | null> {
-    const user = await this.userRepository.findByEmail(email);
-    if (!user) return null;
-
-    const isValid = await this.passwordHasher.compare(password, user.password);
-    return isValid ? user : null;
-  }
-
-  private toPublicUser(user: User): UserResponse {
-    const { password, ...publicUser } = user;
-    return publicUser;
-  }
-}
-
-// users.module.ts
-@Module({
-  imports: [
-    TypeOrmModule.forFeature([UserEntity]),
-  ],
-  controllers: [UserController],
-  providers: [
-    UserService,
-    // Factory Pattern cho repository
-    {
-      provide: USER_REPOSITORY,
-      useClass: TypeOrmUserRepository,
-    },
-    // Factory Pattern cho password hasher
-    {
-      provide: 'PASSWORD_HASHER',
-      useClass: BcryptPasswordHasher,
-    },
-  ],
-  exports: [UserService],
-})
-export class UserModule {}
-```
-
----
-
-## 7. PATTERN REFERENCE
-
-| Pattern | NestJS Implementation | Use Case |
-|---------|----------------------|----------|
-| **Factory** | `useFactory`, Dynamic Modules | Create complex objects |
-| **Repository** | Abstract + Interface | Data layer abstraction |
-| **Singleton** | Default provider scope | Shared services |
-| **Decorator** | Method/Class decorators | Add behaviors |
-| **Module** | @Module() | Organize features |
-| **Strategy** | Interface + implementations | Swap algorithms |
-| **Observer** | EventEmitter2 | Decouple components |
-
----
-
-## 8. SERIES SUMMARY
-
-### 8.1 Hành trình từ FP đến OOP
+**Trực quan hóa:**
 
 ```mermaid
 graph LR
-    A[Functional<br/>Express] --> B[Class<br/>Basics]
-    B --> C[Decorators<br/>Magic]
-    C --> D[Interface<br/>Abstract]
-    D --> E[DI<br/>IoC]
-    E --> F[SOLID<br/>Principles]
-    F --> G[Design<br/>Patterns]
-    G --> H[NestJS<br/>Master]
+    Client((UserService)) -->|Yêu cầu Database| Factory[Database Factory]
+    Factory -.->|1. Đọc Env Variables| Config(ConfigService)
+    Factory -.->|2. Khởi tạo Connection| Connection[Postgres Connection]
+    Connection -->|3. Trả về kết quả| Client
 ```
 
-### 8.2 Tổng Kết Kiến Thức
+**Cách NestJS áp dụng (Dynamic Module & `useFactory`):**
 
-| Phần | Core Concept | Takeaway |
-|------|--------------|----------|
-| 1 | Class & `this` | OOP = State + Behavior |
-| 2 | Decorators | Decorators = Functions + Metadata |
-| 3 | Interface/Abstract | Interface = Contract, Abstract = Template |
-| 4 | DI | DI = Decouple creation from usage |
-| 5 | SOLID | SOLID = Maintainable code |
-| 6 | Patterns | Patterns = Proven solutions |
+Trong NestJS, Factory Pattern thường xuất hiện thông qua các mô-đun động (Dynamic Modules). Hãy xem cách chúng ta cấu hình cơ sở dữ liệu tùy thuộc vào biến môi trường:
 
-### 8.3 Tiếp Theo
+```typescript
+// filename: src/database/database.module.ts
+import { Module, DynamicModule, Global } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { DataSource } from 'typeorm';
 
-- **Practice**: Áp dụng vào project thực tế
-- **Deep Dive**: Microservices với NestJS
-- **Advanced**: CQRS, Event Sourcing
-- **Testing**: Unit tests, E2E tests
+@Global()
+@Module({})
+export class DatabaseModule {
+  // Phương thức tĩnh đóng vai trò như một Factory Method
+  static register(): DynamicModule {
+    return {
+      module: DatabaseModule,
+      providers: [
+        {
+          provide: 'DATA_SOURCE',
+          // Sử dụng useFactory để ẩn giấu logic khởi tạo phức tạp
+          useFactory: async (configService: ConfigService) => {
+            const dataSource = new DataSource({
+              type: 'postgres',
+              host: configService.get<string>('DB_HOST'),
+              port: configService.get<number>('DB_PORT'),
+              // ... các cấu hình khác
+            });
+      
+            // Xử lý bất đồng bộ trước khi trả về đối tượng
+            return dataSource.initialize();
+          },
+          inject: [ConfigService], // Tiêm các phụ thuộc cần thiết cho Factory
+        },
+      ],
+      exports: ['DATA_SOURCE'],
+    };
+  }
+}
+```
+
+Việc sử dụng phương thức `register()` hoặc `forRoot()` chính là cách NestJS triển khai Factory Pattern ở cấp độ Module.
+
+### 2.2. Repository Pattern
+
+**Definition Anatomy:**
+
+- **Data Access** (*Truy cập dữ liệu*): Đóng gói toàn bộ logic tương tác với cơ sở dữ liệu.
+- **Abstraction** (*Trừu tượng hóa*): Đóng vai trò là một bộ sưu tập (Collection) các đối tượng trong bộ nhớ, giúp che giấu đi sự khác biệt của các loại DB (SQL vs NoSQL).
+
+**Cách NestJS áp dụng (TypeORM/Mongoose):**
+
+Nếu bạn nhúng trực tiếp SQL vào Controller hoặc Service, hệ thống của bạn đã vi phạm Single Responsibility Principle (SRP). Repository Pattern tách phần này ra.
+
+```typescript
+// filename: src/users/user.service.ts
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UserEntity } from './user.entity';
+
+@Injectable()
+export class UserService {
+  constructor(
+    // InjectRepository chính là việc gọi lấy một kho chứa đã được khởi tạo sẵn
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) {}
+
+  async findActiveUsers() {
+    // Service chỉ quan tâm đến logic nghiệp vụ, không cần viết câu lệnh SQL
+    return this.userRepository.find({ where: { isActive: true } });
+  }
+}
+```
+
+Bằng cách dùng Repository, ngày mai nếu bạn chuyển từ Postgres sang MySQL, hàm `findActiveUsers()` hoàn toàn không cần phải sửa một dòng code nào.
+
+### 2.3. Singleton Pattern
+
+**Definition Anatomy:**
+
+- **Single Instance** (*Thực thể duy nhất*): Đảm bảo rằng chỉ có đúng 1 đối tượng được tạo ra từ Class.
+- **Global Access** (*Truy cập toàn cục*): Cung cấp một điểm truy cập duy nhất đến đối tượng đó từ mọi nơi.
+
+**Cách NestJS áp dụng (Scopes):**
+
+Theo mặc định, **tất cả** các Provider trong NestJS (bao gồm Controllers, Services, Repositories) đều là Singleton. NestJS IoC Container sẽ khởi tạo chúng một lần duy nhất lúc ứng dụng bắt đầu (Bootstrap), lưu vào bộ nhớ đệm (Cache), và chia sẻ (Share) đối tượng đó cho mọi Request.
+
+Tuy nhiên, có những trường hợp bạn cần một vòng đời (Lifecycle) khác. NestJS cung cấp 3 loại Scope:
+
+| Scope               | Ký hiệu           | Cơ chế hoạt động                                                                                                                                                                                                            |
+| ------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DEFAULT**   | `Scope.DEFAULT`   | (Mặc định). Một đối tượng duy nhất dùng chung cho toàn bộ ứng dụng. Tối ưu nhất về hiệu năng.                                                                                                                |
+| **REQUEST**   | `Scope.REQUEST`   | Tạo một đối tượng**mới hoàn toàn** cho mỗi lượt yêu cầu (HTTP Request) đến. Bị hủy bỏ sau khi Request xử lý xong. Dùng khi cần lưu trữ thông tin nhạy cảm theo từng user (ví dụ: tenantId). |
+| **TRANSIENT** | `Scope.TRANSIENT` | Tạo một đối tượng mới mỗi khi có một class khác yêu cầu inject nó. Không chia sẻ đối tượng. Rất ít khi được sử dụng.                                                                                  |
+
+**Cách khai báo Scope:**
+
+```typescript
+// filename: src/analytics/analytics.service.ts
+import { Injectable, Scope, Inject } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
+
+// Chuyển sang REQUEST scope
+@Injectable({ scope: Scope.REQUEST })
+export class AnalyticsService {
+  constructor(@Inject(REQUEST) private request: Request) {}
+
+  logAction() {
+    // Mỗi request sẽ có một AnalyticsService riêng với Request object riêng
+    console.log(`Action called by IP: ${this.request.ip}`);
+  }
+}
+```
+
+> ⚠️ **[QUAN TRỌNG] Performance Warning từ Official Docs:**
+> *"Using request-scoped providers will have an impact on application performance... it is strongly recommended that you use the default singleton scope."*
+> → Cơ chế `REQUEST` scope buộc NestJS phải sử dụng bộ thu gom rác (Garbage Collector) liên tục vì hàng ngàn đối tượng mới được sinh ra rồi chết đi mỗi giây. Theo tài liệu chính thức, việc lạm dụng REQUEST scope có thể làm giảm ~5% hiệu năng (Latency) của ứng dụng.
+>
+> **Tuyệt đối KHÔNG DÙNG REQUEST scope cho**: WebSocket Gateways, Passport Strategies, Cron controllers — vì các cơ chế này không hoạt động theo mô hình Request/Response truyền thống và bắt buộc phải là Singleton. (Chi tiết xem tại [Injection Scopes](https://docs.nestjs.com/fundamentals/injection-scopes) và tính năng Durable Providers cho multi-tenant).
+
+### 2.4. Decorator Pattern
+
+**Definition Anatomy:**
+
+- **Structural** (*Kiểu cấu trúc*): Cung cấp cách lắp ráp các đối tượng.
+- **Extend Behavior** (*Mở rộng hành vi*): Cho phép thêm các chức năng mới (Logging, Validation, Auth) vào một đối tượng mà không thay đổi cấu trúc mã nguồn bên trong của đối tượng đó.
+
+NestJS "sống sót" dựa trên Decorator. Khi bạn viết `@Controller('users')` hay `@Injectable()`, bạn đang áp dụng Decorator Pattern để cung cấp thêm siêu dữ liệu (Metadata) cho Class, giúp IoC Container biết cách kết nối chúng lại với nhau (Đã trình bày rất chi tiết ở Phần 2).
 
 ---
 
-## 📚 Resources
+## 4. Discussion Questions
 
-- [NestJS Documentation](https://docs.nestjs.com/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Refactoring.Guru - Design Patterns](https://refactoring.guru/design-patterns)
-- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-
----
-
-> 💡 **Final Takeaway**: OOP trong NestJS không phải là "thêm class cho fancy". Đó là cách **tổ chức code** để dễ maintain, test, và scale. Nắm vững fundamentals → tự tin với bất kỳ NestJS project nào!
+1. **Về Anti-Pattern của Singleton:** Singleton giải quyết được vấn đề rò rỉ bộ nhớ (Memory leak) vì nó chỉ tạo 1 đối tượng. Tuy nhiên, nếu bạn khai báo một mảng `private cachedData = []` bên trong một Service (vốn là Singleton) và liên tục `push` dữ liệu vào đó qua mỗi Request mà không dọn dẹp, điều gì sẽ xảy ra với RAM của máy chủ? Đây có phải là một Anti-Pattern không?
+2. **Về Factory vs Constructor:** Thay vì viết hàm `useFactory` cực kỳ rườm rà trong Module, tại sao chúng ta không nhét tất cả logic đọc biến môi trường (Config) vào luôn bên trong hàm `constructor()` của Class? Trade-off (sự đánh đổi) giữa hai cách làm này liên quan gì đến nguyên tắc Single Responsibility Principle (SRP) đã học ở phần trước?
+3. **Về Khả năng Thay thế (Substitutability):** Repository Pattern giúp chúng ta dễ dàng thay đổi Database. Theo bạn, trong thực tế các dự án Enterprise, tỷ lệ một công ty đang chạy quyết định đổi từ MySQL sang MongoDB (hoặc ngược lại) là bao nhiêu phần trăm? Nếu tỷ lệ này cực thấp (gần bằng 0), tại sao người ta vẫn khuyên nên dùng Repository Pattern?
 
 ---
 
-## 🎉 Cảm ơn đã theo dõi series!
-
-Nếu bạn thấy hữu ích, hãy share cho đồng nghiệp cũng đang chuyển từ React/Node sang NestJS!
-
-**Series OOP trong NestJS:**
-1. [Foundation - Từ Function đến Class](./01-foundation.md)
-2. [Encapsulation & Decorators](./02-encapsulation-decorators.md)
-3. [Interface vs Abstract Class](./03-interface-abstract.md)
-4. [Dependency Injection](./04-dependency-injection.md)
-5. [SOLID Principles](./05-solid.md)
-6. **Design Patterns (bài này)**
+*Made by Anh Tu - Share to be share*

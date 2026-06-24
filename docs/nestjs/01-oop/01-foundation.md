@@ -4,501 +4,266 @@ date: "2026-02-02"
 category: "NestJS"
 authors: [anhhtus]
 tags: [nestjs, oop, typescript, beginner, class, functional-programming]
-description: "Hiểu sâu về Class và OOP từ góc nhìn của Functional Programming developer. So sánh Express (functional) với NestJS (OOP), giải thích this keyword, constructor patterns và cách chuyển đổi tư duy."
+description: "Hiểu bản chất OOP trong NestJS từ góc nhìn của Functional Programming developer. So sánh Express (functional) với NestJS (OOP), giải thích this keyword, constructor patterns và cách chuyển đổi tư duy."
 ---
 
-# 🚀 OOP trong NestJS (Phần 1): Từ Function đến Class
+# OOP trong NestJS (Phần 1): Từ Function đến Class
 
-> 🎯 **Series này dành cho ai?** ReactJS/NodeJS developers quen với Functional Programming, muốn hiểu bản chất OOP trong NestJS thay vì chỉ copy-paste code.
+## Agenda
 
-<!--truncate-->
+**Thời gian đọc ước tính:** ~15 phút
 
----
-
-## 📌 Giới Thiệu Series
-
-Nếu bạn từ React/Node (Functional Programming) chuyển sang NestJS, có lẽ bạn đang gặp khó khăn với:
-- **Class và `this`** - Functional không có `this`!
-- **Decorators** - `@Controller()`, `@Injectable()` là gì?
-- **Interface vs Abstract Class** - Khi nào dùng cái nào?
-- **DI, IoC, DIP** - Quá nhiều từ viết tắt!
-
-Series 6 phần này sẽ giúp bạn **hiểu bản chất** từng concept, sử dụng **cùng một ví dụ UserService** xuyên suốt để thấy cách mỗi concept xây dựng lên nhau.
+### Learning outcome:
+- **Hiểu** được bản chất của Object-Oriented Programming (*Lập trình hướng đối tượng*) trong môi trường NodeJS và nguyên nhân NestJS chọn kiến trúc này thay vì Functional Programming (*Lập trình hàm*).
+- **Giải thích** được sự khác biệt cốt lõi giữa Function và Class về mặt quản lý trạng thái (State management).
+- **Tự tay** chuyển đổi được một logic nghiệp vụ từ Express (Functional) sang cấu trúc NestJS (OOP).
+- **Phân biệt** được cách thức hoạt động của từ khóa `this` trong Class và giải quyết triệt để lỗi mất Context khi truyền callback.
 
 ---
 
-## 1. TẠI SAO NESTJS DÙNG OOP?
+## Glossary & Vocabulary
 
-### 1.1 So sánh Express (Functional) vs NestJS (OOP)
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Functional Programming (FP)** | Lập trình hàm. Phương pháp lập trình dựa trên việc đánh giá các hàm toán học và tránh sự thay đổi trạng thái (state) và dữ liệu đột biến (mutable data). |
+| **Object-Oriented Programming (OOP)** | Lập trình hướng đối tượng. Phương pháp lập trình dựa trên khái niệm về các "đối tượng" (objects), chứa cả dữ liệu (dưới dạng trường/thuộc tính) và mã (dưới dạng thủ tục/phương thức). |
+| **Dependency Injection (DI)** | Tiêm phụ thuộc. Một kỹ thuật trong đó một đối tượng nhận các đối tượng khác mà nó phụ thuộc vào, thay vì tự tạo ra chúng. |
+| **State** | Trạng thái. Tập hợp các giá trị của các biến trong một ứng dụng tại một thời điểm cụ thể. |
+| **Context** | Ngữ cảnh thực thi. Thường liên quan đến giá trị của từ khóa `this` tại thời điểm một hàm được gọi. |
 
-**Express - Functional Style:**
-```javascript
-// userService.js - Pure functions
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Encapsulated (adj)** | Được đóng gói, che giấu chi tiết bên trong. |
+| **Explicitly (adv)** | Một cách tường minh, rõ ràng, không ngầm định. |
+| **Boilerplate (n)** | Các đoạn code mang tính thủ tục, phải lặp đi lặp lại nhiều lần mà không thay đổi nhiều. |
+| **Overhead (n)** | Chi phí phát sinh (về tài nguyên phần cứng hoặc thời gian bảo trì). |
+
+---
+
+## 1. WHY — Bài Toán Kỹ Thuật Khi Scale Ứng Dụng NodeJS
+
+Đối với phần lớn lập trình viên xuất thân từ ReactJS hoặc ExpressJS, Functional Programming (*Lập trình hàm*) là cách tiếp cận mặc định. Tuy nhiên, khi hệ thống phát triển lớn hơn (Enterprise level), cấu trúc Functional trong Express bộc lộ nhiều điểm nghẽn kỹ thuật nghiêm trọng.
+
+1. **State Management phân tán:** Trong Express, trạng thái (state) thường được lưu trữ ở cấp độ Module (module-level variables) hoặc bị rò rỉ qua các Closures. Điều này làm cho việc theo dõi sự thay đổi của dữ liệu trong một vòng đời Request trở nên rất khó lường.
+2. **Hard-coded Dependencies:** Các modules trong Express thường `require()` hoặc `import` trực tiếp các dependencies của chúng (ví dụ: import thẳng instance của Database vào Controller). Việc này tạo ra sự kết dính chặt chẽ (Tight coupling), khiến cho việc viết Unit Test (mock database) trở thành một cực hình.
+3. **Thiếu chuẩn mực cấu trúc (Lack of conventions):** Express không quy định cách tổ chức thư mục hay luồng dữ liệu. Một team 5 người có thể có 5 cách viết Controller khác nhau, dẫn đến chi phí bảo trì (Overhead) cực kỳ lớn khi onboarding người mới.
+
+NestJS giải quyết các bài toán trên bằng cách áp dụng triệt để Object-Oriented Programming (*Lập trình hướng đối tượng*), kết hợp với Dependency Injection (*Tiêm phụ thuộc*). Cấu trúc này ép buộc lập trình viên phải tuân thủ một chuẩn mực duy nhất, tách biệt rõ ràng trách nhiệm của từng thành phần.
+
+---
+
+## 2. WHAT — Lập Trình Hướng Đối Tượng (OOP) Là Gì?
+
+### 2.1. Định nghĩa kỹ thuật
+
+Class (*Lớp*) là một bản thiết kế (blueprint) dùng để khởi tạo các đối tượng (objects), trong đó đóng gói (encapsulate) cả dữ liệu (State) và các hành vi (Behavior) xử lý dữ liệu đó thành một thực thể duy nhất.
+
+### 2.2. Definition Anatomy (Giải phẫu định nghĩa)
+
+- **Bản thiết kế (blueprint)**: Class không phải là dữ liệu thực tế đang chạy. Nó chỉ là khuôn mẫu. Khi bạn dùng từ khóa `new`, khuôn mẫu này mới tạo ra một thực thể sống trên bộ nhớ (được gọi là Instance).
+- **Đóng gói (encapsulate)**: Tính năng giấu kín dữ liệu. Các biến bên trong Class có thể được bảo vệ khỏi sự can thiệp từ bên ngoài, chỉ cho phép thay đổi thông qua các hàm cụ thể.
+- **Dữ liệu (State) và hành vi (Behavior)**: Trong Functional Programming, dữ liệu và hàm nằm rời rạc. Trong OOP, biến (dữ liệu) và hàm xử lý biến đó được gộp chung vào một Class.
+
+### 2.3. Trực quan hóa Kiến trúc (Visual First)
+
+Để hiểu rõ sự khác biệt giữa Functional và OOP, hãy xem sơ đồ luồng dữ liệu dưới đây:
+
+```mermaid
+graph TD
+    subgraph Functional Approach [Functional Programming - Express]
+        D1[(Database Module)] -->|Export directly| F1(Create User Function)
+        D1 -->|Export directly| F2(Find User Function)
+        GlobalState((Global Variables)) -.-> F1
+    end
+
+    subgraph OOP Approach [Object-Oriented Programming - NestJS]
+        C1[UserService Class]
+        S1((Private State)) --- C1
+        C1 --- M1(createUser Method)
+        C1 --- M2(findUser Method)
+        DB[(Database Dependency)] -->|Injected via Constructor| C1
+    end
+```
+
+Trong mô hình Functional, các hàm hoạt động độc lập và phụ thuộc trực tiếp vào các global variables hoặc các module bên ngoài. Trong mô hình OOP, mọi thứ (bao gồm State và Dependencies) đều được đóng gói gọn gàng bên trong Class, các hàm (Methods) chỉ giao tiếp nội bộ với Class của chúng.
+
+---
+
+## 3. HOW — Từ Function Đến Class Thực Chiến
+
+### 3.1. Phân tích Functional Approach (Express)
+
+Hãy xem một ví dụ thực tế về cách quản lý User trong Express:
+
+```typescript
+// filename: src/services/user.service.ts
+import { database } from '../config/db'; // Hard-coded dependency
+
+// Module-level state (Global đối với file này)
+let userCount = 0;
 const users = [];
 
-const createUser = (userData) => {
-  const user = { id: Date.now(), ...userData };
+export const createUser = (name: string, email: string) => {
+  // Thay đổi global state
+  userCount++;
+  
+  const user = { 
+    id: userCount, 
+    name, 
+    email,
+    createdAt: new Date()
+  };
+  
   users.push(user);
+  
+  // Gọi trực tiếp đến dependency
+  database.save(user);
+  
   return user;
 };
 
-const findUserByEmail = (email) => {
-  return users.find(u => u.email === email);
+export const getUserCount = () => {
+  return userCount;
 };
-
-module.exports = { createUser, findUserByEmail };
 ```
 
-```javascript
-// userController.js
-const { createUser } = require('./userService');
-const express = require('express');
-const router = express.Router();
+**Nhược điểm chết người:**
+- Nếu bạn cần viết Unit Test cho hàm `createUser`, làm sao bạn ngăn chặn nó ghi dữ liệu vào Database thật? Rất khó, vì `database` được import trực tiếp.
+- `userCount` chia sẻ chung cho mọi luồng (Request).
 
-router.post('/users', (req, res) => {
-  const user = createUser(req.body);
-  res.json(user);
-});
-```
+### 3.2. Xây dựng Class-based Approach (NestJS)
 
-**NestJS - OOP Style:**
+Bây giờ, chúng ta chuyển đổi logic trên sang cấu trúc OOP được sử dụng trong NestJS.
+
 ```typescript
-// user.service.ts
+// filename: src/users/user.service.ts
+import { Injectable } from '@nestjs/common';
+
 @Injectable()
 export class UserService {
-  private users: User[] = [];
+  // 1. Encapsulated State: Trạng thái chỉ tồn tại bên trong đối tượng này
+  private userCount = 0;
+  private users: any[] = [];
 
-  create(userData: CreateUserDto): User {
-    const user = { id: Date.now(), ...userData };
-    this.users.push(user);
-    return user;
-  }
+  // 2. Dependency Injection: Phụ thuộc được truyền vào từ bên ngoài
+  constructor(private readonly database: DatabaseService) {}
 
-  findByEmail(email: string): User | undefined {
-    return this.users.find(u => u.email === email);
-  }
-}
-```
-
-```typescript
-// user.controller.ts
-@Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
-
-  @Post()
-  create(@Body() userData: CreateUserDto) {
-    return this.userService.create(userData);
-  }
-}
-```
-
-### 1.2 Tại sao chọn OOP?
-
-| Tiêu chí | Functional (Express) | OOP (NestJS) |
-|----------|---------------------|--------------|
-| **Tổ chức code** | Functions rải rác | Nhóm theo class |
-| **State management** | Closures, external store | `this` trong instance |
-| **Dependencies** | `require()` trực tiếp | Dependency Injection |
-| **Testing** | Mock module imports | Inject mock objects |
-| **Scaling team** | Khó enforce patterns | Có structure rõ ràng |
-
-> 💡 **Key insight**: OOP không "tốt hơn" FP - chúng là tools khác nhau. NestJS chọn OOP vì nó phù hợp cho enterprise applications với team lớn cần architecture nhất quán.
-
----
-
-## 2. CLASS VS FUNCTION - CÓ GÌ KHÁC?
-
-### 2.1 Function: Stateless by Default
-
-```typescript
-// Functional approach - State ở bên ngoài
-let userCount = 0;
-
-const createUser = (name: string) => {
-  userCount++;
-  return { id: userCount, name };
-};
-
-createUser('Alice'); // { id: 1, name: 'Alice' }
-createUser('Bob');   // { id: 2, name: 'Bob' }
-```
-
-**Vấn đề**: `userCount` là global/module state → khó control, khó test.
-
-### 2.2 Class: Encapsulated State
-
-```typescript
-// OOP approach - State trong instance
-class UserService {
-  private userCount = 0;           // State của instance
-  private users: User[] = [];      // Data storage
-
-  create(name: string): User {
+  // 3. Behavior: Phương thức tương tác với state thông qua từ khóa 'this'
+  public createUser(name: string, email: string) {
     this.userCount++;
-    const user = { id: this.userCount, name };
+    
+    const user = { 
+      id: this.userCount, 
+      name, 
+      email,
+      createdAt: new Date()
+    };
+    
     this.users.push(user);
+    
+    // Gọi dependency thông qua context của class
+    this.database.save(user);
+    
     return user;
   }
 
-  getCount(): number {
+  public getUserCount() {
     return this.userCount;
   }
 }
-
-// Mỗi instance có state riêng
-const service1 = new UserService();
-const service2 = new UserService();
-
-service1.create('Alice');  // { id: 1, name: 'Alice' }
-service2.create('Bob');    // { id: 1, name: 'Bob' } ← ID riêng biệt!
-
-service1.getCount();  // 1
-service2.getCount();  // 1
 ```
 
-> 💡 **Key insight**: Class = **Blueprint** + **State Container**. Mỗi `new` tạo ra một instance với state riêng biệt.
+Trong ví dụ trên:
+- `userCount` không còn là biến toàn cục. Mỗi khi bạn khởi tạo `new UserService()`, nó sẽ có một `userCount` độc lập. (Lưu ý: Trong NestJS, Service thường là Singleton, chúng ta sẽ phân tích ở phần Design Patterns).
+- `DatabaseService` không bị hard-code. Khi viết test, chúng ta chỉ cần truyền vào một Mock Database qua Constructor.
 
-### 2.3 Bảng So Sánh
+### 3.3. Xử lý Context với từ khóa `this`
 
-| Đặc điểm | Pure Function | Class |
-|----------|--------------|-------|
-| **State** | Không có (hoặc external) | Trong instance (`this`) |
-| **Tạo instance** | Không cần | `new ClassName()` |
-| **Shared state** | Qua closures/modules | Qua `this` |
-| **Testability** | Dễ nếu pure | Cần mock dependencies |
+Đây là rào cản lớn nhất đối với các lập trình viên chuyển từ Functional sang OOP. Trong Functional, bạn không cần quan tâm đến `this`. Nhưng trong Class, `this` là trái tim của sự đóng gói.
+
+**Vấn đề mất Context:**
+
+Hãy xem đoạn code sau:
+
+```typescript
+// filename: src/demo/context.demo.ts
+class Logger {
+  private prefix = '[APP]';
+
+  printLog(message: string) {
+    console.log(`${this.prefix} ${message}`);
+  }
+}
+
+const myLogger = new Logger();
+
+// Gọi trực tiếp: Hoạt động hoàn hảo
+myLogger.printLog('System started'); // Output: [APP] System started
+
+// Truyền method như một callback: MẤT CONTEXT
+setTimeout(myLogger.printLog, 1000, 'Delayed log'); 
+// Output: TypeError: Cannot read properties of undefined (reading 'prefix')
+```
+
+**Nguyên nhân (WHY):**
+Từ khóa `this` trong JavaScript/TypeScript không được xác định tại thời điểm viết code, mà được xác định tại **thời điểm hàm được gọi** (Runtime binding).
+Quy tắc vàng: `this` chính là **đối tượng đứng ngay trước dấu chấm** khi hàm được gọi.
+- Ở `myLogger.printLog()`, đối tượng trước dấu chấm là `myLogger`. Nên `this` = `myLogger`.
+- Khi truyền `myLogger.printLog` vào `setTimeout`, `setTimeout` sẽ tự gọi hàm đó dạng `printLog('Delayed log')` (không có dấu chấm). Trong Strict Mode, `this` trở thành `undefined`.
+
+**Giải pháp (Arrow Functions):**
+
+Để ép buộc `this` luôn trỏ về Class instance hiện tại, chúng ta sử dụng Arrow Function cho phương thức. Arrow Function không có `this` riêng của nó, mà nó kế thừa `this` từ phạm vi bao quanh nó (lexical scoping).
+
+```typescript
+// filename: src/demo/context.demo.ts
+class Logger {
+  private prefix = '[APP]';
+
+  // Chuyển thành Arrow Function
+  printLog = (message: string) => {
+    console.log(`${this.prefix} ${message}`);
+  }
+}
+
+const myLogger = new Logger();
+setTimeout(myLogger.printLog, 1000, 'Delayed log'); 
+// Output: [APP] Delayed log (Thành công!)
+```
+
+### 3.4. Quản lý Dependencies bằng Constructor
+
+Trong kiến trúc của NestJS, việc khởi tạo các Class phụ thuộc lẫn nhau được thực hiện thông qua Constructor. Điều này tạo nền tảng cho Dependency Injection.
+
+```typescript
+// filename: src/users/user.controller.ts
+import { Controller, Post, Body } from '@nestjs/common';
+
+@Controller('users')
+export class UserController {
+  // Thay vì: private userService = new UserService(new DatabaseService());
+  // Chúng ta yêu cầu NestJS cung cấp instance thông qua constructor:
+  constructor(private readonly userService: UserService) {}
+
+  @Post()
+  create(@Body() body: any) {
+    return this.userService.createUser(body.name, body.email);
+  }
+}
+```
+
+Cú pháp `constructor(private readonly userService: UserService)` là một Shorthand của TypeScript. Việc khai báo `private` hoặc `readonly` ngay trong tham số của constructor sẽ tự động tạo ra một thuộc tính tương ứng cho Class và gán giá trị cho nó, giúp giảm thiểu Boilerplate code.
 
 ---
 
-## 3. `this` KEYWORD - HIỂU RÕ MỘT LẦN
+## 4. Discussion Questions
 
-### 3.1 Tại sao FP Developer ghét `this`?
-
-```typescript
-// Vấn đề thường gặp
-class UserService {
-  private prefix = 'USER';
-
-  formatId(id: number) {
-    return `${this.prefix}-${id}`;
-  }
-}
-
-const service = new UserService();
-const formatter = service.formatId;
-
-console.log(service.formatId(1));  // "USER-1" ✅
-console.log(formatter(1));         // Error! this is undefined ❌
-```
-
-### 3.2 Giải thích `this` cho FP Developer
-
-Hãy nghĩ `this` như một **implicity first argument**:
-
-```typescript
-// Tương đương về logic
-class UserService {
-  formatId(id: number) {
-    return `${this.prefix}-${id}`;
-  }
-}
-
-// Như thể function nhận thêm `self` argument
-function formatId(self: UserService, id: number) {
-  return `${self.prefix}-${id}`;
-}
-```
-
-**Rule đơn giản**: `this` = object **đứng trước dấu chấm** khi gọi method.
-
-```typescript
-service.formatId(1);     // this = service
-otherObj.formatId(1);    // this = otherObj
-formatId(1);             // this = undefined (strict mode)
-```
-
-### 3.3 Cách Fix - Arrow Functions
-
-```typescript
-class UserService {
-  private prefix = 'USER';
-
-  // Arrow function giữ `this` của class
-  formatId = (id: number) => {
-    return `${this.prefix}-${id}`;
-  }
-}
-
-const service = new UserService();
-const formatter = service.formatId;
-
-console.log(formatter(1));  // "USER-1" ✅ Works!
-```
-
-> 💡 **Tại sao arrow function works?** Arrow function không có `this` riêng, nó "bắt" `this` từ scope bao ngoài - trong case này là class instance.
+1. **Về Memory Allocation:** Khi chúng ta tạo 100 instance của một Class, thì phương thức (method) được viết bằng Arrow Function (như `printLog = () => {}`) và phương thức thông thường (`printLog() {}`) sẽ tiêu tốn bộ nhớ khác nhau như thế nào? (Gợi ý: Prototype chain).
+2. **Về Testing:** Việc sử dụng Constructor để truyền `DatabaseService` giúp cho quá trình viết Unit Test cho `UserService` trở nên dễ dàng ra sao so với việc import trực tiếp module? Hãy thử viết một đoạn code ngắn bằng Jest để minh họa.
+3. **Trade-offs:** Mặc dù OOP giải quyết được vấn đề kết dính mã và dễ mở rộng, nhưng việc sử dụng OOP trong JavaScript (một ngôn ngữ vốn linh hoạt và thiên về hàm) có mang lại chi phí phát sinh (overhead) nào không?
 
 ---
 
-## 4. CONSTRUCTOR - KHỞI TẠO DEPENDENCIES
-
-### 4.1 Trong FP: Bạn import trực tiếp
-
-```javascript
-// Functional style
-const db = require('./database');
-const logger = require('./logger');
-
-const createUser = (userData) => {
-  logger.log('Creating user...');
-  return db.insert('users', userData);
-};
-```
-
-**Vấn đề**:
-- Hard-coded dependencies
-- Khó mock khi test
-- Tight coupling
-
-### 4.2 Trong OOP: Constructor Injection
-
-```typescript
-// OOP style - Dependencies được truyền vào
-class UserService {
-  constructor(
-    private db: Database,
-    private logger: Logger
-  ) {}
-
-  create(userData: CreateUserDto): User {
-    this.logger.log('Creating user...');
-    return this.db.insert('users', userData);
-  }
-}
-
-// Khi sử dụng
-const realDb = new PostgresDatabase();
-const realLogger = new ConsoleLogger();
-const userService = new UserService(realDb, realLogger);
-
-// Khi test
-const mockDb = new MockDatabase();
-const mockLogger = new MockLogger();
-const testService = new UserService(mockDb, mockLogger);
-```
-
-### 4.3 TypeScript Shorthand
-
-```typescript
-// Verbose way
-class UserService {
-  private db: Database;
-  private logger: Logger;
-
-  constructor(db: Database, logger: Logger) {
-    this.db = db;
-    this.logger = logger;
-  }
-}
-
-// Shorthand - TypeScript tự tạo và assign
-class UserService {
-  constructor(
-    private db: Database,
-    private logger: Logger
-  ) {}
-  // Equivalent! TypeScript generates the same code
-}
-```
-
----
-
-## 5. XÂY DỰNG USERSERVICE - TỪ FP SANG OOP
-
-### 5.1 Bước 1: Express Version (Functional)
-
-```javascript
-// services/userService.js
-const bcrypt = require('bcrypt');
-
-const users = new Map();
-
-const createUser = async ({ email, password, name }) => {
-  if (users.has(email)) {
-    throw new Error('Email already exists');
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = {
-    id: Date.now().toString(),
-    email,
-    password: hashedPassword,
-    name,
-    createdAt: new Date()
-  };
-
-  users.set(email, user);
-  return { id: user.id, email: user.email, name: user.name };
-};
-
-const findByEmail = (email) => users.get(email);
-
-const validatePassword = async (email, password) => {
-  const user = users.get(email);
-  if (!user) return false;
-  return bcrypt.compare(password, user.password);
-};
-
-module.exports = { createUser, findByEmail, validatePassword };
-```
-
-### 5.2 Bước 2: Chuyển sang Class (Chưa có DI)
-
-```typescript
-// user.service.ts
-import * as bcrypt from 'bcrypt';
-
-interface User {
-  id: string;
-  email: string;
-  password: string;
-  name: string;
-  createdAt: Date;
-}
-
-interface CreateUserDto {
-  email: string;
-  password: string;
-  name: string;
-}
-
-interface UserResponse {
-  id: string;
-  email: string;
-  name: string;
-}
-
-export class UserService {
-  private users: Map<string, User> = new Map();
-
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    if (this.users.has(dto.email)) {
-      throw new Error('Email already exists');
-    }
-
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const user: User = {
-      id: Date.now().toString(),
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name,
-      createdAt: new Date()
-    };
-
-    this.users.set(dto.email, user);
-    return { id: user.id, email: user.email, name: user.name };
-  }
-
-  findByEmail(email: string): User | undefined {
-    return this.users.get(email);
-  }
-
-  async validatePassword(email: string, password: string): Promise<boolean> {
-    const user = this.users.get(email);
-    if (!user) return false;
-    return bcrypt.compare(password, user.password);
-  }
-}
-```
-
-### 5.3 Bước 3: NestJS Version (Với Decorator)
-
-```typescript
-// user.service.ts
-import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-
-@Injectable()  // ← Decorator này cho phép NestJS quản lý class
-export class UserService {
-  private users: Map<string, User> = new Map();
-
-  async create(dto: CreateUserDto): Promise<UserResponse> {
-    // ... same logic as above
-  }
-
-  findByEmail(email: string): User | undefined {
-    return this.users.get(email);
-  }
-
-  async validatePassword(email: string, password: string): Promise<boolean> {
-    // ... same logic as above
-  }
-}
-```
-
-> 📝 **Các bài tiếp theo sẽ giải thích:**
-> - Phần 2: `@Injectable()` làm gì?
-> - Phần 3: Interface và Abstract Class
-> - Phần 4: Dependency Injection đầy đủ
-
----
-
-## 6. BÀI TẬP THỰC HÀNH
-
-### 📝 Câu hỏi Lý thuyết
-
-| # | Câu hỏi | Gợi ý đáp án |
-|---|---------|--------------|
-| 1 | Class khác function ở điểm nào cơ bản nhất? | Class có state (this), function thường stateless |
-| 2 | `this` trong method trỏ đến đâu? | Object đứng trước dấu chấm khi gọi |
-| 3 | Tại sao dùng constructor injection? | Loose coupling, dễ test, dễ thay đổi implementation |
-| 4 | Arrow function khác regular function thế nào về `this`? | Arrow không có this riêng, bắt từ scope ngoài |
-
-### 💻 Bài tập Code
-
-```typescript
-// TODO: Chuyển function này sang class
-const products = [];
-
-const addProduct = (name, price) => {
-  products.push({ id: products.length + 1, name, price });
-};
-
-const findByName = (name) => {
-  return products.find(p => p.name === name);
-};
-
-const getTotalValue = () => {
-  return products.reduce((sum, p) => sum + p.price, 0);
-};
-```
-
-**Yêu cầu**:
-1. Tạo `ProductService` class
-2. Sử dụng TypeScript với types
-3. State (`products`) phải là private
-4. Thêm method `getAllProducts()`
-
----
-
-## 🔗 Tiếp theo
-
-**[Phần 2: Encapsulation & Decorators Magic →](./02-encapsulation-decorators.md)**
-
-Trong phần tiếp theo, chúng ta sẽ:
-- Hiểu encapsulation trong TypeScript
-- Giải mã các decorators của NestJS
-- Tự tạo custom decorator đầu tiên
-- Thêm logging decorator cho UserService
-
----
-
-## 📚 Tóm tắt
-
-| Concept | FP Approach | OOP Approach |
-|---------|-------------|--------------|
-| **State** | External/Closures | `this` trong class |
-| **Dependencies** | `require()`/`import` | Constructor injection |
-| **Organization** | Modules của functions | Classes với methods |
-| **Context (`this`)** | Không có | Object gọi method |
-
-> 💡 **Takeaway**: OOP trong NestJS không phải là "thay function bằng class" - mà là cách **tổ chức code** để dễ maintain, test, và scale với team lớn.
+*Made by Anh Tu - Share to be share*

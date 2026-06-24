@@ -48,12 +48,12 @@ Khoá học NestJS hiện tại trong `docs/nestjs/` có **4 phần** với tổ
 
 | # | Bài học (docs/nestjs) | File nguồn (sources/…) | Size | Trạng thái hiện tại |
 |---|----------------------|------------------------|------|---------------------|
-| 01.1 | OOP Foundation | `01-oop/01-foundation.md` *(AI-gen)* | 13KB | ⚠️ Verify (không có nguồn NestJS trực tiếp) |
-| 01.2 | Encapsulation & Decorators | `01-oop/02-encapsulation-decorators.md` *(AI-gen)* + `custom-decorators.md` | 16KB+8KB | ⚠️ Verify + bổ sung |
-| 01.3 | Interface & Abstract | `01-oop/03-interface-abstract.md` *(AI-gen)* | 16KB | ⚠️ Verify |
-| 01.4 | Dependency Injection | `01-oop/04-dependency-injection.md` *(AI-gen)* + `providers.md` + `fundamentals/custom-providers.md` | 21KB+10KB+17KB | ⚠️ Verify + bổ sung từ nguồn |
-| 01.5 | SOLID Principles | `01-oop/05-solid.md` *(AI-gen)* | 22KB | ⚠️ Verify |
-| 01.6 | Design Patterns | `01-oop/06-design-patterns.md` *(AI-gen)* | 21KB | ⚠️ Verify |
+| 01.1 | OOP Foundation | `01-oop/01-foundation.md` | ~15KB | ✅ Rebuilt & Verified (Chuẩn create-tech-lecture) |
+| 01.2 | Encapsulation & Decorators | `01-oop/02-encapsulation-decorators.md` | ~16KB | ✅ Rebuilt & Verified (Chuẩn create-tech-lecture) |
+| 01.3 | Interface & Abstract | `01-oop/03-interface-abstract.md` | ~16KB | ✅ Rebuilt & Verified (Chuẩn create-tech-lecture) |
+| 01.4 | Dependency Injection | `01-oop/04-dependency-injection.md` | ~18KB | ✅ Rebuilt & Verified (Chuẩn create-tech-lecture) |
+| 01.5 | SOLID Principles | `01-oop/05-solid.md` | ~18KB | ✅ Rebuilt & Verified (Chuẩn create-tech-lecture) |
+| 01.6 | Design Patterns | `01-oop/06-design-patterns.md` | ~18KB | ✅ Rebuilt & Verified (Chuẩn create-tech-lecture) |
 
 ---
 
@@ -280,7 +280,7 @@ docs/nestjs/
 - [x] Cập nhật tất cả `_category_.json`
 
 ### Phase 2 — Verify Existing Files (3-4h)
-- [ ] Verify `01-oop/` (6 files) — đánh dấu từng claim: ✅/⚠️/❌
+- [x] Verify & Rebuild `01-oop/` (6 files) → **Kết quả**: ✅ Đã viết lại toàn bộ 6 bài theo đúng chuẩn 4MAT và B1+ Vocabulary. Tẩy sạch emoji.
 - [ ] Verify `04-aop.mdx` — cross-check với `guards.md`, `interceptors.md`, `pipes.md`, `exception-filters.md`
 - [ ] Verify `03-tooling/01-debug-vscode.mdx` và `03-tooling/02-logger.md`
 
