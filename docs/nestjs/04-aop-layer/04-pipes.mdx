@@ -1,0 +1,227 @@
+---
+title: "[NestJS] Pipes: Bộ Lọc Dữ Liệu Tinh (Transformation & Validation)"
+date: "2026-03-07"
+authors: [anhhtus]
+tags: [nestjs, pipe, validation, transformation, class-validator, dto]
+description: "Pipes trong NestJS là gì? Hướng dẫn cách sử dụng Pipes để Transformation (biến đổi dữ liệu) và Validation (xác thực dữ liệu) với class-validator."
+---
+
+# [NestJS] Pipes: Bộ Lọc Dữ Liệu Tinh (Transformation & Validation)
+
+<!--truncate-->
+
+## Agenda
+
+**Thời gian đọc ước tính:** ~10 phút
+
+### Learning outcome:
+- **Hiểu** được hai nhiệm vụ cốt lõi của Pipes: Transformation (Biến đổi) và Validation (Xác thực).
+- **Giải thích** được luồng dữ liệu khi Pipe được kích hoạt ngay trước Route Handler.
+- **Áp dụng** các Built-in Pipes (như `ParseIntPipe`, `DefaultValuePipe`) vào dự án.
+- **Tự tay** thiết lập hệ thống xác thực dữ liệu (Validation) sử dụng `class-validator` và Data Transfer Object (DTO).
+
+---
+
+## Glossary & Vocabulary
+
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Pipe** | Ống dẫn / Bộ lọc. Một lớp trung gian đứng ngay trước Controller để biến đổi hoặc xác thực dữ liệu đầu vào. |
+| **Transformation** | Biến đổi. Quá trình thay đổi định dạng dữ liệu (Ví dụ: Chuyển chuỗi `"123"` sang số `123`). |
+| **Validation** | Xác thực. Quá trình kiểm tra tính hợp lệ của dữ liệu (Ví dụ: Kiểm tra trường email có đúng định dạng không). |
+| **Data Transfer Object (DTO)** | Đối tượng truyền dữ liệu. Một class định nghĩa chính xác cấu trúc dữ liệu mà client gửi lên server. |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Subsequently (adv)** | Xảy ra sau đó, tiếp theo sau đó. |
+| **Evaluate (v)** | Đánh giá, xem xét (thường dùng khi nói về việc kiểm tra tính hợp lệ của dữ liệu). |
+| **Out-of-the-box (adj)** | Tính năng có sẵn, dùng được ngay lập tức mà không cần cấu hình phức tạp. |
+
+---
+
+## 1. WHY — Vấn đề của dữ liệu thô
+
+Khi Client giao tiếp với Backend qua giao thức HTTP (đặc biệt là REST), chúng ta luôn phải đối mặt với hai vấn đề kinh điển:
+
+1. **Sai lệch kiểu dữ liệu:** Mọi dữ liệu truyền qua URL (như Path parameters hoặc Query strings) đều được hệ thống ngầm hiểu là chuỗi (String). Nếu URL là `/users/15`, tham số `15` sẽ mang kiểu chuỗi `"15"`. Tuy nhiên, Database của chúng ta lại yêu cầu ID phải là kiểu số nguyên (Integer).
+2. **Dữ liệu rác (Invalid Payload):** Khi User đăng ký tài khoản, họ gửi lên một gói dữ liệu JSON (Body). Làm sao chúng ta chắc chắn rằng họ đã gửi lên đầy đủ các trường `email`, `password`, và độ dài `password` lớn hơn 8 ký tự?
+
+**Cách giải quyết thủ công tồi tệ:**
+Nếu bạn cố gắng xử lý các vấn đề này bên trong Controller, bạn sẽ phải viết hàng tá các câu lệnh `if/else`, ép kiểu (`parseInt`), và trả về `HTTP 400 Bad Request`. Đoạn code nghiệp vụ chính sẽ bị lấp đầy bởi các đoạn mã kiểm tra dữ liệu, phá vỡ nguyên tắc Trách nhiệm duy nhất (SRP).
+
+**Giải pháp của NestJS:** Sử dụng **Pipes**. Pipes sẽ đứng chắn ngay trước cửa Controller để lọc và gọt giũa dữ liệu. Nếu dữ liệu "sạch", nó mới được đưa vào Controller.
+
+---
+
+## 2. WHAT — Pipe là gì?
+
+### 2.1. Định nghĩa kỹ thuật
+
+Pipe là một class được đánh dấu bằng decorator `@Injectable()` và bắt buộc phải implement interface `PipeTransform`. 
+
+![Mô hình hoạt động của Pipe](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782227972/aha-mind/docs-crawler/docs.nestjs.com/Pipe_1_egf5uj.png)
+
+**Definition Anatomy (Giải phẫu định nghĩa):**
+Mọi Pipe đều phải định nghĩa hàm `transform(value, metadata)`:
+- **`value`**: Chính là dữ liệu thô chuẩn bị được truyền vào hàm (ví dụ: chuỗi `"15"`, hoặc object Body gửi từ client).
+- **`metadata`**: Khối thông tin bổ sung, cho biết dữ liệu này là thuộc loại nào (`@Body`, `@Query`, `@Param`) và kiểu dữ liệu (metatype) mà hàm đang mong đợi là gì.
+
+### 2.2. Hai nhiệm vụ cốt lõi
+
+Pipes sinh ra để phục vụ đúng hai Use-cases:
+1. **Transformation (Biến đổi):** Nhận vào dữ liệu gốc (VD: chuỗi `"15"`), và `return` về một dữ liệu mới đã được biến đổi (VD: số `15`).
+2. **Validation (Xác thực):** Nhận vào dữ liệu gốc, đánh giá (evaluate) nó. Nếu hợp lệ, `return` chính giá trị đó để đi tiếp. Nếu không hợp lệ, lập tức ném ra lỗi `BadRequestException`. *Lưu ý: Khi lỗi bị ném ra trong Pipe, Controller sẽ hoàn toàn không được kích hoạt.*
+
+---
+
+## 3. HOW — Sử dụng Pipes trong thực tế
+
+NestJS cung cấp sẵn rất nhiều Built-in Pipes "out-of-the-box" như: `ParseIntPipe`, `ParseBoolPipe`, `ParseUUIDPipe`, `ValidationPipe`...
+
+### 3.1. Transformation với Built-in Pipes
+
+Sử dụng `ParseIntPipe` để ép kiểu dữ liệu từ URL. Nếu client gửi lên một chuỗi không phải là số (VD: `/users/abc`), NestJS sẽ tự động trả về lỗi 400 Bad Request.
+
+```typescript
+// filename: src/users/users.controller.ts
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+
+@Controller('users')
+export class UsersController {
+  
+  @Get(':id')
+  // Tham số 'id' sẽ đi qua ống lọc ParseIntPipe trước
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    // Lúc này, biến 'id' chắc chắn 100% là số nguyên (number)
+    return this.usersService.findOne(id);
+  }
+}
+```
+
+**Cung cấp giá trị mặc định:**
+Nếu tham số truy vấn (Query) có thể bị bỏ trống, bạn có thể kết hợp `DefaultValuePipe` trước khi biến đổi nó.
+
+```typescript
+@Get()
+findAll(
+  @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+) {
+  return this.usersService.findAll(page);
+}
+```
+
+### 3.2. Validation với class-validator
+
+Đây là kỹ thuật mạnh mẽ và phổ biến nhất trong NestJS để xác thực cấu trúc Body (JSON Payload). NestJS kết hợp cực kỳ hoàn hảo với hai thư viện `class-validator` và `class-transformer`.
+
+**Bước 1: Cài đặt thư viện**
+```bash
+npm i --save class-validator class-transformer
+```
+
+**Bước 2: Viết DTO (Data Transfer Object)**
+Sử dụng các decorator từ `class-validator` để khai báo các quy tắc (rules) ngay trên thuộc tính của class.
+
+```typescript
+// filename: src/cats/dto/create-cat.dto.ts
+import { IsString, IsInt, Min, MinLength } from 'class-validator';
+
+export class CreateCatDto {
+  @IsString()
+  @MinLength(2)
+  name: string;
+
+  @IsInt()
+  @Min(0)
+  age: number;
+
+  @IsString()
+  breed: string;
+}
+```
+
+**Bước 3: Đăng ký ValidationPipe toàn cục**
+Thay vì gọi Pipe ở từng hàm nhỏ lẻ, chúng ta thiết lập nó ở mức độ toàn ứng dụng (Global-scoped pipe) trong file cấu hình chính.
+
+```typescript
+// filename: src/main.ts
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  
+  // Đăng ký Global ValidationPipe
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // Tự động loại bỏ các field rác gửi lên không có trong DTO
+    transform: true, // Tự động biến đổi payload thành instance của DTO class
+  }));
+
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+**Bước 4: Sử dụng trong Controller**
+
+```typescript
+// filename: src/cats/cats.controller.ts
+@Post()
+// Khi Request chạy đến đây, ValidationPipe đã tự động kiểm tra payload.
+// Nếu sai định dạng, nó chặn luôn.
+// Nếu đúng, biến createCatDto đã được khởi tạo chuẩn xác.
+async create(@Body() createCatDto: CreateCatDto) {
+  return this.catsService.create(createCatDto);
+}
+```
+
+### 3.3. Tự viết một Custom Pipe (Hiểu rõ cơ chế)
+
+Để nắm bản chất của Transformation, hãy thử tự viết lại một phiên bản đơn giản của `ParseIntPipe`:
+
+```typescript
+// filename: src/common/pipes/parse-int.pipe.ts
+import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
+
+@Injectable()
+export class CustomParseIntPipe implements PipeTransform<string, number> {
+  // Hàm transform bắt buộc phải có
+  transform(value: string, metadata: ArgumentMetadata): number {
+    // Thử ép kiểu
+    const val = parseInt(value, 10);
+    
+    // Nếu ép kiểu thất bại (NaN), ném ra lỗi chặn Request
+    if (isNaN(val)) {
+      throw new BadRequestException('Giá trị truyền vào không phải là số!');
+    }
+    
+    // Nếu thành công, trả về giá trị mới đã được biến đổi
+    return val;
+  }
+}
+```
+
+---
+
+## 4. Discussion Questions
+
+Hãy thử suy luận và trả lời các câu hỏi sau để kiểm tra sự thấu hiểu của bạn về Pipes:
+
+1. **Vùng xử lý ngoại lệ (Exception Zone):** Tài liệu của NestJS đề cập rằng "Pipes run inside the exceptions zone", nghĩa là khi Pipe ném ra một lỗi (như `BadRequestException`), Controller sẽ không bao giờ được gọi. Điều này mang lại lợi ích bảo mật (Security) to lớn nào cho ứng dụng của bạn?
+2. **Vai trò của class-transformer:** Tại sao khi làm việc với thư viện `class-validator`, chúng ta lại bắt buộc phải cài đặt kèm theo `class-transformer`? Hãy tìm hiểu cách mà Node.js/Express.js nhận diện luồng dữ liệu mạng (Network Request) và tại sao phải có quá trình "deserialize" từ Plain Javascript Object thành DTO Instance (Class).
+3. **Thứ tự ưu tiên:** Nếu bạn khai báo một `ParseIntPipe` và một Interceptor cùng tác động vào tham số của Request. Cái nào sẽ được kích hoạt trước?
+
+---
+
+## References
+
+- Tài liệu chính thức NestJS - [Pipes](https://docs.nestjs.com/pipes)
+- Tài liệu kỹ thuật nâng cao - [Validation Techniques](https://docs.nestjs.com/techniques/validation)
+- Tài liệu thư viện [Class-validator](https://github.com/typestack/class-validator)
+
+---
+
+*Made by Anh Tu - Share to be share*

@@ -1,0 +1,200 @@
+---
+title: "[NestJS] Custom Decorators: Nghệ Thuật Đóng Gói Code (Composition)"
+date: "2026-03-09"
+authors: [anhhtus]
+tags: [nestjs, decorator, composition, clean-code]
+description: "Hướng dẫn tạo Custom Param Decorators và ứng dụng Decorator Composition (applyDecorators) để dọn dẹp Boilerplate code trong Controller."
+---
+
+# [NestJS] Custom Decorators: Nghệ Thuật Đóng Gói Code (Composition)
+
+<!--truncate-->
+
+## Agenda
+
+**Thời gian đọc ước tính:** ~8 phút
+
+### Learning outcome:
+- **Hiểu** được sức mạnh của Decorators trong việc làm sạch code (Clean Code) ở tầng Controller.
+- **Tự tay** tạo được một Parameter Decorator bằng `createParamDecorator` (Ví dụ: trích xuất thông tin User từ Request).
+- **Biết cách** truyền tham số vào Custom Decorator và kết hợp nó với Validation Pipe.
+- **Ứng dụng** được `applyDecorators` để gộp hàng tá Decorators thành một Decorator duy nhất (Decorator Composition).
+
+---
+
+## Glossary & Vocabulary
+
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Decorator** | Trình trang trí. Khái niệm cốt lõi của NestJS (kí hiệu bằng `@`), dùng để gắn Metadata hoặc sửa đổi hành vi của một Class/Method/Property. |
+| **Param Decorator** | Decorator gắn thẳng vào tham số của hàm (Ví dụ: `@Body()`, `@Query()`, `@Param()`). |
+| **Composition** | Đóng gói / Tổ hợp. Khái niệm gom kết hợp nhiều thành phần nhỏ lẻ thành một khối lớn hơn, gọn gàng hơn. |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Extract (v)** | Trích xuất. Lấy một phần dữ liệu nhỏ ra khỏi một khối dữ liệu lớn. |
+| **Boilerplate (n)** | Những đoạn code lặp đi lặp lại ở nhiều nơi, phải viết thủ công nhưng lại không đóng góp nhiều vào logic nghiệp vụ chính. |
+| **Transparent (adj)** | Trong suốt, rõ ràng. Ở đây ám chỉ việc code dễ đọc, nhìn vào là hiểu ngay ý đồ. |
+
+---
+
+## 1. WHY — Controller của bạn đang "Bị ngộp"
+
+Hãy nhìn vào một Controller điển hình trong các dự án thực tế. Để bảo vệ một hàm API và lấy thông tin người dùng đang đăng nhập, chúng ta thường viết như sau:
+
+```typescript
+@Get('profile')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles('admin')
+@ApiBearerAuth()
+@ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+async getProfile(@Req() request: Request) {
+  // Trích xuất user thủ công
+  const user = request.user;
+  return `Xin chào ${user.firstName}`;
+}
+```
+
+**Có hai vấn đề lớn ở đây:**
+1. **Lặp lại logic trích xuất:** Ở mọi hàm cần thông tin user, bạn đều phải gọi `@Req() request: Request` rồi lại khai báo `const user = request.user`. Quá nhiều Boilerplate.
+2. **Kẹt xe Decorators:** Có tới 4-5 Decorators chồng chất lên nhau chỉ để khai báo một nghiệp vụ duy nhất là: *"Phân quyền Admin có Swagger"*. Nhìn vào hàm rất rối mắt.
+
+**Giải pháp:** NestJS cho phép bạn tạo ra các **Custom Decorators** để "gói" tất cả sự rườm rà này lại.
+
+---
+
+## 2. WHAT — Custom Decorators là gì?
+
+NestJS cung cấp sẵn các hàm tiện ích (`createParamDecorator` và `applyDecorators`) để bạn tự do sáng tạo ra các Decorator mang đậm tính nghiệp vụ của riêng dự án.
+
+**Definition Anatomy (Giải phẫu định nghĩa):**
+- **`createParamDecorator`**: Một hàm Factory (nhà máy) nhận vào một hàm callback `(data, ctx) => value`.
+  - `data`: Tham số mà lập trình viên truyền vào khi gọi Decorator (VD: truyền `'email'` vào `@User('email')`).
+  - `ctx`: Chính là `ExecutionContext` kinh điển (chứa Request và Response).
+- **`applyDecorators`**: Hàm tiện ích dùng để gộp (compose) nhiều Method Decorators/Class Decorators thành một.
+
+---
+
+## 3. HOW — Dọn dẹp Controller từng bước một
+
+### Bước 1: Tạo Custom Param Decorator (`@User`)
+
+Thay vì dùng `@Req() request` và chọc vào `request.user` một cách thủ công, chúng ta viết một Decorator `@User()` để làm việc đó.
+
+```typescript
+// filename: src/common/decorators/user.decorator.ts
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+
+export const User = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    // Truy cập vào Request gốc
+    const request = ctx.switchToHttp().getRequest();
+    
+    // Trích xuất và trả về object user (đã được Guard gắn vào trước đó)
+    return request.user;
+  },
+);
+```
+
+Giờ đây, Controller trông sẽ thanh lịch hơn rất nhiều:
+```typescript
+@Get('profile')
+async getProfile(@User() user: UserEntity) {
+  return `Xin chào ${user.firstName}`;
+}
+```
+
+### Bước 2: Passing Data (Truyền tham số sâu)
+
+Giả sử bạn chỉ muốn lấy duy nhất trường `email` của User thay vì cả object khổng lồ. Hãy sử dụng tham số `data`.
+
+```typescript
+export const User = createParamDecorator(
+  (data: string, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    const user = request.user;
+
+    // Nếu người dùng có truyền 'data' (vd: 'email'), trả về thuộc tính đó
+    // Nếu không, trả về toàn bộ object user
+    return data ? user?.[data] : user;
+  },
+);
+```
+
+Cách dùng:
+```typescript
+@Get('profile')
+// Chỉ lấy đúng email
+async getProfile(@User('email') userEmail: string) {
+  return `Email của bạn là: ${userEmail}`;
+}
+```
+
+### Bước 3: Custom Decorators + Pipes = Bộ đôi hoàn hảo
+
+Giống hệt như các built-in decorator `@Body()` hay `@Query()`, các Custom Param Decorator của bạn **vẫn hỗ trợ Pipe**. 
+
+Bạn có thể truyền trực tiếp một Pipe vào Custom Decorator. Tuy nhiên, lưu ý cực kỳ quan trọng: `ValidationPipe` mặc định sẽ BỎ QUA các custom decorator. Để nó hoạt động, bạn phải bật cờ `validateCustomDecorators: true`.
+
+```typescript
+@Get()
+async findOne(
+  @User(new ValidationPipe({ validateCustomDecorators: true })) user: UserEntity,
+) {
+  console.log(user);
+}
+```
+
+### Bước 4: Decorator Composition (Gom cụm Method Decorators)
+
+Giải quyết vấn đề "Kẹt xe Decorators". Chúng ta sẽ dùng `applyDecorators` để gom tất cả Guard, Role, và Swagger documentation vào một chữ `@Auth()` duy nhất.
+
+```typescript
+// filename: src/common/decorators/auth.decorator.ts
+import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
+
+// Decorator Auth nhận vào danh sách các Roles yêu cầu
+export function Auth(...roles: string[]) {
+  // Gộp tất cả lại thành một Decorator thống nhất
+  return applyDecorators(
+    SetMetadata('roles', roles),                             // Gắn nhãn Roles
+    UseGuards(JwtAuthGuard, RolesGuard),                     // Kích hoạt Guards
+    ApiBearerAuth(),                                         // Bật cái khóa Bearer trên Swagger
+    ApiUnauthorizedResponse({ description: 'Unauthorized' }) // Dùng cho Swagger
+  );
+}
+```
+
+**Thành quả cuối cùng:**
+Toàn bộ đoạn code Controller phức tạp ở phần đầu bài giờ đây chỉ còn lại vài dòng vô cùng "Transparent" (trong suốt):
+
+```typescript
+@Get('profile')
+@Auth('admin') // Gọi 1 được 4
+async getProfile(@User('firstName') firstName: string) {
+  return `Xin chào Admin: ${firstName}`;
+}
+```
+
+---
+
+## 4. Discussion Questions
+
+Hãy thử suy luận và trả lời các câu hỏi sau để kiểm chứng mức độ hiểu bài:
+
+1. **Thứ tự sinh tồn:** Custom Param Decorator (`@User`) luôn lấy dữ liệu từ `request.user`. Vậy ai là người đã gắn cái `user` đó vào biến `request`? Nếu Guard chưa chạy mà Custom Decorator đã chạy thì điều gì sẽ xảy ra? (Liên hệ lại bài `01-aop-overview` để nhớ thứ tự thực thi).
+2. **Kế thừa Pipe:** Tại sao NestJS mặc định thiết lập cờ `validateCustomDecorators: false` cho `ValidationPipe`? Điều này phòng tránh lỗi hiệu năng hay lỗi nghiệp vụ gì?
+3. **Phân biệt:** Sự khác biệt giữa việc tạo một *Interceptor* để gắn `user` vào Request, và việc tạo một *Custom Decorator* để trích xuất `user` ra là gì?
+
+---
+
+## References
+
+- Tài liệu chính thức NestJS - [Custom decorators](https://docs.nestjs.com/custom-decorators)
+
+---
+
+*Made by Anh Tu - Share to be share*

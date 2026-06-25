@@ -61,10 +61,10 @@ Khoá học NestJS hiện tại trong `docs/nestjs/` có **4 phần** với tổ
 
 | # | Bài học (docs/nestjs) | File nguồn (sources/…) | Size | Trạng thái hiện tại |
 |---|----------------------|------------------------|------|---------------------|
-| 02.1 | Modules | `modules.md` | 13KB | ❌ Rebuild (hiện có `01-ioc.md` thiếu nhiều) |
-| 02.2 | Controllers | `controllers.md` | 27KB | ❌ Chưa có bài riêng |
-| 02.3 | Providers | `providers.md` | 10KB | ❌ Rebuild (hiện có `02-providers-deep-dive.mdx`) |
-| 02.4 | Middleware | `middleware.md` | 12KB | ❌ Chưa có bài riêng |
+| 02.1 | Modules | `modules.md` | 13KB | ✅ Đã xây dựng `01-modules.mdx` |
+| 02.2 | Controllers | `controllers.md` | 27KB | ✅ Đã xây dựng `02-controllers.mdx` |
+| 02.3 | Providers | `providers.md` | 10KB | ✅ Đã xây dựng `03-providers.mdx` |
+| 02.4 | Middleware | `middleware.md` | 12KB | ✅ Đã xây dựng `04-middleware.mdx` |
 
 ---
 
@@ -89,12 +89,12 @@ Khoá học NestJS hiện tại trong `docs/nestjs/` có **4 phần** với tổ
 
 | # | Bài học (docs/nestjs) | File nguồn (sources/…) | Size | Trạng thái hiện tại |
 |---|----------------------|------------------------|------|---------------------|
-| 04.0 | AOP Overview & Request Lifecycle | `02-core-concepts/04-aop.mdx` *(AI-gen)* | 29KB | ✅ Chất lượng cao → Verify cẩn thận |
-| 04.1 | Guards | `guards.md` + `microservices/guards.md` + `websockets/guards.md` | 14KB | ❌ Chưa có bài riêng |
-| 04.2 | Interceptors | `interceptors.md` + `microservices/interceptors.md` | 16KB | ❌ Chưa có bài riêng |
-| 04.3 | Pipes | `pipes.md` + `microservices/pipes.md` | 25KB | ❌ Chưa có bài riêng |
-| 04.4 | Exception Filters | `exception-filters.md` + `microservices/exception-filters.md` | 19KB | ❌ Rebuild (hiện có `05-exception-filter.mdx` sơ sài) |
-| 04.5 | Custom Decorators | `custom-decorators.md` | 8KB | ❌ Chưa có bài riêng |
+| 04.0 | AOP Overview & Request Lifecycle | `02-core-concepts/04-aop.mdx` *(AI-gen)* | 29KB | ✅ Đã Verify và đổi tên thành `01-aop-overview.mdx` |
+| 04.1 | Guards | `guards.md` + `microservices/guards.md` + `websockets/guards.md` | 14KB | ✅ Đã xây dựng `02-guards.mdx` |
+| 04.2 | Interceptors | `interceptors.md` + `microservices/interceptors.md` | 16KB | ✅ Đã xây dựng `03-interceptors.mdx` |
+| 04.3 | Pipes | `pipes.md` + `microservices/pipes.md` | 25KB | ✅ Đã xây dựng `04-pipes.mdx` |
+| 04.4 | Exception Filters | `exception-filters.md` + `microservices/exception-filters.md` | 19KB | ✅ Đã Rebuild thành `05-exception-filters.mdx` |
+| 04.5 | Custom Decorators | `custom-decorators.md` | 8KB | ✅ Đã xây dựng `06-custom-decorators.mdx` |
 
 ---
 
@@ -230,9 +230,9 @@ Khoá học NestJS hiện tại trong `docs/nestjs/` có **4 phần** với tổ
 |-------|--------|-----------------|------------|
 | Getting Started | 00-setup | 4 | ❌ 4 mới |
 | OOP Foundation | 01-oop | 6 | ⚠️ 6 verify |
-| Building Blocks | 02-building-blocks | 4 | ❌ 4 rebuild |
+| Building Blocks | 02-building-blocks | 4 | ✅ 4 hoàn thành |
 | Core Fundamentals | 03-core-fundamentals | 10 | ❌ 10 mới |
-| AOP Pipeline | 04-aop-layer | 6 | ✅1 verify + ❌5 mới |
+| AOP Pipeline | 04-aop-layer | 6 | ✅ 6 hoàn thành |
 | Techniques | 05-techniques | 24 | ⚠️2 verify + ❌22 mới |
 | Security | 06-security | 7 | ❌ 7 mới |
 | GraphQL | 07-graphql | 14 | ❌ 14 mới |
@@ -241,7 +241,7 @@ Khoá học NestJS hiện tại trong `docs/nestjs/` có **4 phần** với tổ
 | OpenAPI | 10-openapi | 6 | ❌ 6 mới |
 | Testing | 11-testing | 1 | ❌ 1 mới |
 | Mock Project | 12-project | 6 | ⚠️ 6 restructure |
-| **Tổng** | **13 modules** | **~100 files** | **✅1 / ⚠️16 / ❌83** |
+| **Tổng** | **13 modules** | **~100 files** | **✕11 / ⚠️16 / ❌74** |
 
 ---
 
@@ -282,14 +282,14 @@ docs/nestjs/
 ### Phase 2 — Verify Existing Files (3-4h)
 - [x] Verify & Rebuild `01-oop/` (6 files) → **Kết quả**: ✅ Đã viết lại toàn bộ 6 bài theo đúng chuẩn 4MAT và B1+ Vocabulary. Tẩy sạch emoji.
 - [x] Verify & Rebuild `03-tooling/` (2 files: Debugger & Logger) → **Kết quả**: ✅ Đã viết lại toàn bộ 2 bài theo chuẩn 4MAT, xoá sạch emoji, bổ sung Glossary và kiến trúc chuyên sâu.
-- [ ] Verify `04-aop.mdx` — cross-check với `guards.md`, `interceptors.md`, `pipes.md`, `exception-filters.md`
+- [x] Verify `04-aop.mdx` — cross-check với `guards.md`, `interceptors.md`, `pipes.md`, `exception-filters.md` → **Kết quả**: ✅ Đã đổi tên thành `01-aop-overview.mdx` và chuẩn hóa.
 
 ### Phase 3 — Build New Content (Ưu tiên theo dependency)
 Thứ tự build theo dependency học tập:
 1. **00-setup** → 4 files
-2. **02-building-blocks** → 4 files  
+2. **02-building-blocks** → 4 files ✅ (Đã hoàn thành)
 3. **03-core-fundamentals** → 10 files
-4. **04-aop-layer** (new files) → 5 files
+4. **04-aop-layer** (new files) → 5 files ✅ (Đã hoàn thành)
 5. **11-testing** → 1 file *(cần thiết để test mock project)*
 6. **05-techniques** → 24 files *(chia nhỏ, build dần)*
 7. **06-security** → 7 files

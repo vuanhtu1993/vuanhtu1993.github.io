@@ -1,0 +1,222 @@
+---
+title: "[NestJS] Exception Filters: Tấm Lưới Lọc Lỗi An Toàn"
+date: "2026-03-08"
+authors: [anhhtus]
+tags: [nestjs, exception, filter, error-handling]
+description: "Cách kiểm soát hoàn toàn hệ thống xử lý lỗi trong NestJS. Hướng dẫn viết Custom Exception và xây dựng Exception Filter để chuẩn hóa định dạng JSON trả về cho Client."
+---
+
+# [NestJS] Exception Filters: Tấm Lưới Lọc Lỗi An Toàn
+
+<!--truncate-->
+
+## Agenda
+
+**Thời gian đọc ước tính:** ~10 phút
+
+### Learning outcome:
+- **Hiểu** được cấu trúc phân cấp Exception mặc định của NestJS và cách thức hoạt động của Global Error Handler.
+- **Tự định nghĩa** được các Custom Exception để đáp ứng các mã lỗi nghiệp vụ riêng của dự án.
+- **Xây dựng** được Exception Filter để "bắt" (catch) các lỗi và chuẩn hóa cấu trúc JSON trả về cho Client.
+- **Nắm bắt** được cách sử dụng `ArgumentsHost` để viết Filter mang tính độc lập nền tảng (Platform-agnostic).
+
+---
+
+## Glossary & Vocabulary
+
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Exception** | Ngoại lệ (Lỗi). Một sự cố bất thường xảy ra trong quá trình thực thi làm gián đoạn luồng chương trình. |
+| **Exception Filter** | Lớp lọc lỗi (Tấm lưới). Thành phần AOP dùng để bắt và xử lý các Exception trước khi nó lọt ra tới Client. |
+| **ArgumentsHost** | Đối tượng tiện ích chứa các đối số được truyền vào Handler gốc (giúp lấy ra đối tượng Request, Response). |
+| **BaseExceptionFilter** | Lớp lọc lỗi mặc định do NestJS cung cấp sẵn (tự động trả về chuẩn JSON của Nest). |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Unrecognized (adj)** | Không nhận diện được. Những lỗi hệ thống không lường trước (VD: Lỗi cú pháp Javascript, Lỗi mất kết nối DB). |
+| **Hierarchy (n)** | Hệ thống phân cấp (trong lập trình hướng đối tượng, tức là cấu trúc kế thừa cha - con). |
+| **Platform-agnostic (adj)** | Độc lập nền tảng. Nghĩa là code có thể chạy an toàn trên cả Express.js và Fastify mà không cần sửa chữa. |
+
+---
+
+## 1. WHY — Tại sao phải tự cấu hình bộ lọc lỗi?
+
+NestJS mặc định đã làm rất tốt việc xử lý lỗi bằng một **Global Exception Filter** có sẵn. 
+Cơ chế bảo vệ mặc định này rất an toàn: Nếu bạn ném ra một lỗi có kiểm soát như `HttpException`, nó sẽ trả về JSON với Message rõ ràng. Nhưng nếu hệ thống văng ra một lỗi *không nhận diện được* (Unrecognized Exception), Nest sẽ lập tức giấu kín mọi thông tin chi tiết (để tránh rò rỉ mã nguồn) và chỉ trả về một thông báo cứng nhắc:
+
+```json
+{
+  "statusCode": 500,
+  "message": "Internal server error"
+}
+```
+
+**Tuy nhiên, thực tế dự án đòi hỏi nhiều hơn:**
+- **Chuẩn hóa cấu trúc:** FE/Mobile App thường yêu cầu Backend phải trả về JSON theo một format cố định của công ty (Ví dụ: `{ "success": false, "errorCode": 1001, "message": "...", "timestamp": "..." }`). NestJS mặc định không làm được format này.
+- **Ghi Log hệ thống:** Khi có lỗi `500`, chúng ta không chỉ muốn trả về cho Client mà còn muốn bí mật đẩy log đó lên Sentry, Datadog hoặc gửi tin báo động qua Slack.
+
+Đó là lý do chúng ta cần **Exception Filters** để giành lại toàn quyền kiểm soát luồng xử lý lỗi cuối cùng.
+
+---
+
+## 2. WHAT — Exception Filter là gì?
+
+### 2.1. Định nghĩa kỹ thuật
+
+Exception Filter là một class được đánh dấu bằng decorator `@Catch()` và bắt buộc phải implement interface `ExceptionFilter`.
+
+![Mô hình hoạt động của Exception Filter](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782227968/aha-mind/docs-crawler/docs.nestjs.com/Filter_1_pjieq6.png)
+
+**Definition Anatomy (Giải phẫu định nghĩa):**
+- **`@Catch(Type)`**: Khai báo mồi nhử. Chỉ những Exception thuộc loại `Type` (ví dụ `HttpException`) mới bị "lưới" này bắt lại. Nếu bạn để trống `@Catch()`, lưới sẽ bắt **mọi** loại lỗi.
+- **`ExceptionFilter`**: Giao diện yêu cầu hàm `catch(exception, host)`.
+  - `exception`: Lỗi thực tế vừa bị ném ra.
+  - `host`: Ngữ cảnh thực thi (`ArgumentsHost`), từ đây bạn có thể móc ra `Request` để xem user đang gọi đường dẫn nào, và `Response` để điều khiển trả về mã JSON gì.
+
+### 2.2. Vị trí cuối cùng trong vòng đời
+
+Khác với Guards chặn ở đầu vào, Exception Filter hoạt động như một lớp khiên bảo vệ ở vòng ngoài cùng, chuyên đứng "hứng" bất kỳ Exception nào lọt ra từ Controller, Service, Guard, hay Interceptor.
+
+---
+
+## 3. HOW — Làm chủ hệ thống Lỗi
+
+### 3.1. Các mức độ ném Exception (Throwing)
+
+NestJS cung cấp sẵn đầy đủ các mã lỗi HTTP trong bộ `HttpException` hierarchy. Đừng bao giờ dùng `res.status(404).send()` như Express cổ điển, hãy luôn dùng `throw`.
+
+**Built-in Exceptions phổ biến:**
+```typescript
+throw new BadRequestException('Sai định dạng'); // 400
+throw new UnauthorizedException('Chưa đăng nhập'); // 401
+throw new ForbiddenException('Không đủ quyền'); // 403
+throw new NotFoundException('Không tìm thấy user'); // 404
+```
+
+**Tạo Custom Exception mang tính nghiệp vụ:**
+Đôi khi bạn cần một mã lỗi dành riêng cho dự án (VD: 400 nhưng do nạp tiền sai quy định).
+
+```typescript
+// filename: src/common/exceptions/insufficient-funds.exception.ts
+import { HttpException, HttpStatus } from '@nestjs/common';
+
+export class InsufficientFundsException extends HttpException {
+  constructor() {
+    // Gọi constructor của cha: truyền vào Message và Status Code
+    super('Tài khoản của bạn không đủ số dư để thực hiện giao dịch', HttpStatus.BAD_REQUEST);
+  }
+}
+```
+
+### 3.2. Viết Custom Exception Filter chuẩn hóa JSON
+
+Giả sử cả công ty thống nhất mọi Error JSON đều phải chứa trường `timestamp` và `path` để dễ debug.
+
+**Bước 1: Tạo Filter**
+```typescript
+// filename: src/common/filters/http-exception.filter.ts
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
+import { Request, Response } from 'express';
+
+// Lưới này CHỈ bắt các lỗi được kế thừa từ HttpException
+@Catch(HttpException)
+export class HttpExceptionFilter implements ExceptionFilter {
+  catch(exception: HttpException, host: ArgumentsHost) {
+    // 1. Lấy ra Request và Response từ host
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request>();
+    
+    // 2. Trích xuất thông tin lỗi
+    const status = exception.getStatus();
+    const errorResponse = exception.getResponse(); // Lấy chi tiết lỗi (để lấy message)
+
+    // 3. Trả về format tùy chỉnh
+    response
+      .status(status)
+      .json({
+        statusCode: status,
+        timestamp: new Date().toISOString(),
+        path: request.url, // Cho biết user gọi sai ở URL nào
+        message: errorResponse['message'] || exception.message,
+      });
+  }
+}
+```
+
+**Bước 2: Đăng ký Global**
+Vào `main.ts` và gắn Filter này làm tấm khiên bảo vệ cho toàn bộ ứng dụng.
+
+```typescript
+// filename: src/main.ts
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  
+  // Đăng ký toàn cục
+  app.useGlobalFilters(new HttpExceptionFilter());
+  
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+### 3.3. Kỹ thuật "Catch Everything" (Bắt sạch)
+
+Nếu bạn muốn tạo một hệ thống cảnh báo Slack khi server gặp lỗi trầm trọng `500` (code nổ hoặc Database mất kết nối), bạn cần một Filter không đối số `@Catch()`. Đồng thời, bạn phải dùng `HttpAdapterHost` thay vì `express.Response` để đảm bảo code không bị chết nếu sau này sếp bắt chuyển sang dùng Fastify.
+
+```typescript
+// filename: src/common/filters/catch-everything.filter.ts
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpAdapterHost } from '@nestjs/core';
+
+@Catch() // Để trống mảng = bắt MỌI LOẠI LỖI
+export class CatchEverythingFilter implements ExceptionFilter {
+  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
+
+  catch(exception: unknown, host: ArgumentsHost): void {
+    const { httpAdapter } = this.httpAdapterHost;
+    const ctx = host.switchToHttp();
+
+    // Nếu lỗi là do chủ đích ném ra (HttpException) thì lấy Status, nếu không thì auto là 500
+    const httpStatus =
+      exception instanceof HttpException
+        ? exception.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
+
+    const responseBody = {
+      statusCode: httpStatus,
+      timestamp: new Date().toISOString(),
+      path: httpAdapter.getRequestUrl(ctx.getRequest()),
+    };
+
+    // (Tùy chọn) Viết code gửi log lên Slack hoặc Sentry tại đây nếu httpStatus === 500
+
+    // Gửi phản hồi thông qua HttpAdapter thay vì response.json()
+    httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
+  }
+}
+```
+*Lưu ý: Nếu dùng nhiều Filter Global, bạn phải gắn Filter cụ thể (`HttpExceptionFilter`) vào TRƯỚC Filter `CatchEverythingFilter` để phân luồng ưu tiên hợp lý.*
+
+---
+
+## 4. Discussion Questions
+
+Hãy thử suy luận và trả lời các câu hỏi sau để củng cố kiến thức:
+
+1. **Platform Agnostic:** Tại sao khi xây dựng một Filter bắt TẤT CẢ lỗi (`CatchEverythingFilter`), tài liệu NestJS lại khuyến khích dùng `HttpAdapterHost` (`httpAdapter.reply(...)`) thay vì ép kiểu và gọi trực tiếp `response.json()` của Express?
+2. **Try/Catch vs Filter:** Có gì khác biệt giữa việc bạn cố tình bọc toàn bộ Controller bằng `try/catch` (và trong block catch gọi `res.status(500).send()`) so với việc không dùng try/catch và để cho `ExceptionFilter` lo việc xử lý lỗi? Hướng đi nào sạch sẽ và bám sát kiến trúc NestJS hơn?
+3. **Execution Order:** Nếu một Lỗi xảy ra bên trong một *Interceptor* ở giai đoạn Before, thì *Exception Filter* có bắt được lỗi đó không?
+
+---
+
+## References
+
+- Tài liệu chính thức NestJS - [Exception filters](https://docs.nestjs.com/exception-filters)
+- Khái niệm về [Arguments host](https://docs.nestjs.com/fundamentals/execution-context)
+
+---
+
+*Made by Anh Tu - Share to be share*
