@@ -1,0 +1,99 @@
+---
+title: "Guides: Server Actions"
+source_url: "https://nextjs.org/docs/app/guides/server-actions"
+crawled_at: "2026-06-25T07:02:03.074Z"
+---
+
+## Server Actions and Mutations
+
+Last updated
+
+June 23, 2026
+
+A **Server Action** is a [React Server Function](https://react.dev/reference/rsc/server-functions) invoked through React's action mechanisms, such as `<form action>`, `<button formAction>`, or a client-side transition.
+
+You create one by adding the [`'use server'`](https://nextjs.org/docs/app/api-reference/directives/use-server) directive, then invoke it from a form, or from an event handler or `useEffect` wrapped in `startTransition`. For the basics of creating and invoking Server Functions, see [Mutating data](https://nextjs.org/docs/app/getting-started/mutating-data) and the [Forms guide](https://nextjs.org/docs/app/guides/forms).
+
+This page covers the parts of Server Actions that are specific to Next.js: how they commonly map to mutations, how the response carries both returned data and re-rendered UI, how the client dispatches them, the security boundary the framework enforces, and the configuration available.
+
+## Sequential dispatch on the client[](#sequential-dispatch-on-the-client)
+
+Next.js dispatches Server Actions one at a time per client. If a user triggers three actions in quick succession, the second waits for the first to finish, then the third waits for the second. This keeps the re-rendered server tree consistent with the action result that produced it.
+
+A consequence: do not rely on `Promise.all` to parallelize Server Actions from the client. If you need parallel work, do it inside a single Server Action, fetch in parallel from a [Server Component](https://nextjs.org/docs/app/getting-started/fetching-data#server-components), or use a [Route Handler](https://nextjs.org/docs/app/guides/backend-for-frontend#manipulating-data) for non-mutation requests.
+
+> **Good to know:** This is a property of the client dispatcher, not of Server Functions in general. Server-side, an action runs in its own request and can do anything an async function can do.
+
+## A single response carries data and UI[](#a-single-response-carries-data-and-ui)
+
+When a Server Action triggers an immediate revalidation, Next.js does the work inside one HTTP request: it runs the action, then re-renders the current route server-side. The response that comes back contains both pieces in the same Flight stream:
+
+-   The action's return value, consumed by `useActionState` or the awaited promise on the client.
+-   A newly rendered [RSC Payload](https://nextjs.org/docs/app/glossary#rsc-payload) for the current route, which the client commits as a seeded navigation.
+
+Your application code does not need a follow-up fetch to see the updated UI for the current page.
+
+A re-render is included in the same response when the action does any of these:
+
+-   Calls [`updateTag`](https://nextjs.org/docs/app/api-reference/functions/updateTag) or [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath) to immediately invalidate cached data.
+-   Calls [`refresh`](https://nextjs.org/docs/app/api-reference/functions/refresh) to refetch the current route's RSC Payload.
+-   Mutates cookies through [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies#understanding-cookie-behavior-in-server-functions). Setting or deleting a cookie automatically re-renders the current page so the UI reflects the new value.
+-   Calls [`redirect`](https://nextjs.org/docs/app/api-reference/functions/redirect). The response navigates the router and streams the destination's RSC Payload.
+
+The mutation, the cache invalidation, and the page re-render all complete in a single roundtrip. Because [`redirect`](https://nextjs.org/docs/app/api-reference/functions/redirect#behavior) throws a control-flow exception, any code after it does not run. Place revalidation calls before `redirect` if the destination needs the fresh data.
+
+[`revalidateTag`](https://nextjs.org/docs/app/api-reference/functions/revalidateTag) with a stale-while-revalidate profile is the exception: it marks the tag for background refresh and does **not** include a re-render in the action response. The page reflects the change on a later read. An action that does none of the above carries only its return value, and the current route is not re-rendered.
+
+## Security[](#security)
+
+A Server Action runs as a POST request against the page that invokes it. At build time, the `'use server'` directive tells the compiler to swap the function's implementation in client bundles for a reference (an action ID plus a dispatcher) that POSTs back to the server. The implementation stays on the server, but the route is reachable to anyone who can send the same POST. Treat every action as an untrusted entry point.
+
+Next.js enforces a few framework-level protections:
+
+-   **CSRF check.** The request's `Origin` is compared to the `Host` (or `X-Forwarded-Host`). Mismatches are rejected. Configure [`serverActions.allowedOrigins`](https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions#allowedorigins) for proxy or CDN domains.
+-   **Body size limit.** Action requests are capped at 1MB by default. Configure [`serverActions.bodySizeLimit`](https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions#bodysizelimit) when accepting larger payloads.
+-   **Encrypted action IDs and dead code elimination.** Action references are encrypted at build time, and unused Server Functions are stripped from client bundles so they have no public endpoint. See [Built-in Server Actions security features](https://nextjs.org/docs/app/guides/data-security#built-in-server-actions-security-features).
+-   **Closure variable encryption.** Variables captured by an inline action are encrypted before being sent to the client. For multi-instance and self-hosted deployments, set `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` to a stable key shared across instances. See [Closures and encryption](https://nextjs.org/docs/app/guides/data-security#closures-and-encryption).
+
+Framework protections are not a substitute for application-level checks. Inside every action:
+
+-   **Authenticate and authorize.** Render-time gating (only rendering a form on an authenticated page) is not a security boundary, because requests can be sent without going through the UI.
+-   **Validate inputs.** Treat `FormData`, query parameters, and headers as untrusted.
+-   **Constrain return values.** Action returns are serialized to the client. Shape them to what the UI renders, not raw database records.
+
+For end-to-end patterns including a Data Access Layer, return-value tainting, and rate limiting, see the [Data Security guide](https://nextjs.org/docs/app/guides/data-security#mutating-data).
+
+Destructive operations like deletes may warrant stronger handling, such as elevated session checks or re-authentication, and a loud failure when those checks miss.
+
+If you've enabled the experimental [`authInterrupts`](https://nextjs.org/docs/app/api-reference/config/next-config-js/authInterrupts) flag, you can throw [`unauthorized()`](https://nextjs.org/docs/app/api-reference/functions/unauthorized) and [`forbidden()`](https://nextjs.org/docs/app/api-reference/functions/forbidden) from `next/navigation` instead, so Next.js renders the corresponding `unauthorized.tsx` / `forbidden.tsx` UI segment automatically.
+
+For example, a client legitimately tells the server _which_ item to act on, but it should not supply the row's contents or ownership. Send a reference (typically an ID) plus the user's change, and re-read the rest from a trusted source using the session. Schema validation (zod or similar) only checks the _shape_ of the input. A well-formed `Item` object can still refer to a row the caller does not own.
+
+## Choosing a cache update[](#choosing-a-cache-update)
+
+After mutating data, on-demand revalidation updates the server cache, the client router, or both. Choose based on what needs to change:
+
+-   [`updateTag`](https://nextjs.org/docs/app/api-reference/functions/updateTag): immediate expiration of a tag. The next read (including the route re-render that ships with the action's response) waits for fresh data. Use when the action needs **read-your-own-writes** so the user immediately sees their change. Server Actions only.
+-   [`revalidateTag`](https://nextjs.org/docs/app/api-reference/functions/revalidateTag): stale-while-revalidate refresh of a tag with a cache-life profile. Subsequent reads get the stale value while a fresh fetch happens in the background, so the action's own re-render does **not** wait for the new data.
+-   [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath): invalidate by URL path. Use when one route is affected and tagging is overkill.
+-   [`refresh`](https://nextjs.org/docs/app/api-reference/functions/refresh): refetch the current route's RSC Payload without invalidating cached data. Use when the view depends on state outside the cache that the action just changed.
+
+When `updateTag`, `revalidatePath`, or `refresh` runs, Next.js re-renders the current route server-side and includes a newly rendered [RSC Payload](https://nextjs.org/docs/app/glossary#rsc-payload) in the action's response, so the page reflects the change in the same roundtrip. `revalidateTag` with a stale-while-revalidate profile intentionally skips that immediate re-render.
+
+Unlike [`redirect`](https://nextjs.org/docs/app/api-reference/functions/redirect), none of these throw, so an action can call them and still return a value to the caller. See [How revalidation works](https://nextjs.org/docs/app/guides/how-revalidation-works) for the underlying model.
+
+## Configuration[](#configuration)
+
+The [`serverActions`](https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions) option in `next.config.js` controls framework-level behavior:
+
+For the closure encryption key, set `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` in the deployment environment. See [Self-hosting: Server Functions encryption key](https://nextjs.org/docs/app/guides/self-hosting#server-functions-encryption-key) for deployment-specific guidance.
+
+## Deployment considerations[](#deployment-considerations)
+
+Each Server Action is identified by the [action ID](#security) that is part of its build artifacts. New deployments typically generate new IDs (Next.js rotates them at most every 14 days, even when the source is unchanged), so a client still running the previous build may invoke an action ID that no longer exists. The error surfaces as "[Failed to find Server Action](https://nextjs.org/docs/messages/failed-to-find-server-action)".
+
+To minimize disruption:
+
+-   Prefer rolling deployments over abrupt cutovers when active users are likely to be mid-mutation.
+-   Keep `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` stable across instances so action references remain decryptable everywhere.
+-   Surface the error as a retry path in the UI rather than a hard failure, so a refresh recovers the user.

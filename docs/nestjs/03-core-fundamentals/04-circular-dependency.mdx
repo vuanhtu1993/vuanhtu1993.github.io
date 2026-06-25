@@ -1,0 +1,193 @@
+---
+title: "[NestJS] Circular Dependency: Lỗi Vòng Lặp & Cách Hóa Giải"
+date: "2026-03-17"
+authors: [anhhtus]
+tags: [nestjs, circular-dependency, forwardRef, dependency-injection]
+description: "Phân tích nguyên nhân cốt lõi gây ra lỗi Circular Dependency (phụ thuộc vòng tròn) và hướng dẫn 2 giải pháp triệt để: forwardRef() và tái cấu trúc kiến trúc."
+source_file: "sources/documentations/docs.nestjs.com/fundamentals/circular-dependency.md"
+---
+
+# [NestJS] Circular Dependency: Lỗi Vòng Lặp & Cách Hóa Giải
+
+Trong quá trình làm việc với NestJS, sớm muộn gì bạn cũng sẽ gặp phải một thông báo lỗi "đỏ lòm" khi khởi động server: `A circular dependency has been detected...`. 
+
+Đây là một lỗi kinh điển của kiến trúc Dependency Injection. Dù lý tưởng nhất là thiết kế hệ thống sao cho không bao giờ xảy ra tình trạng này, nhưng trong thực tế, đôi khi logic nghiệp vụ ép buộc chúng ta phải chấp nhận nó. Bài viết này sẽ hướng dẫn bạn cách "hóa giải" vòng lặp này.
+
+<!--truncate-->
+
+## Agenda
+
+**Thời gian đọc ước tính:** ~8 phút
+
+### Learning outcome:
+- **Hiểu** được bản chất cơ chế khởi tạo của IoC Container và lý do tại sao nó bị "treo" khi gặp phụ thuộc vòng.
+- **Nhận diện** được lỗi do Code Architecture hay do thói quen dùng file `index.ts` (Barrel files).
+- **Áp dụng** được hàm `forwardRef()` để xử lý phụ thuộc vòng ở cấp độ Service và Module.
+- **Tư duy** được phương án tái cấu trúc (Refactor) để xóa bỏ hoàn toàn Circular Dependency thay vì chỉ "vá lỗi".
+
+---
+
+## Glossary & Vocabulary
+
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Circular Dependency** | Phụ thuộc vòng tròn. Xảy ra khi Class A cần Class B để khởi tạo, nhưng Class B lại cần Class A để khởi tạo. Kết quả là không bên nào khởi tạo được. |
+| **Forward Reference** | Tham chiếu chuyển tiếp. Một kỹ thuật báo cho NestJS biết: "Hãy cứ bỏ qua biến này đi, khởi tạo class đi đã, tí nữa tôi sẽ cung cấp giá trị cho biến này sau". |
+| **Barrel File** | File "thùng chứa" (`index.ts`). Được dùng để gộp các file import lại cho gọn (VD: `export * from './cats.service'`). Lạm dụng file này là nguyên nhân ẩn gây ra phụ thuộc vòng. |
+| **Indeterminate** | Không xác định. (Ví dụ: Thứ tự khởi tạo của 2 class bị dính phụ thuộc vòng là không thể đoán trước). |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Arise (v)** | Nảy sinh, phát sinh. (Ví dụ: Lỗi phụ thuộc vòng có thể *nảy sinh* giữa các module). |
+| **Omit (v)** | Bỏ qua, loại trừ. (Ví dụ: Hãy *loại trừ* barrel files khi import các Service cùng cấp). |
+| **Deadlock (n)** | Bế tắc. Trạng thái mà tiến trình 1 chờ tiến trình 2, tiến trình 2 chờ tiến trình 1, dẫn đến treo vĩnh viễn. |
+
+---
+
+## 1. WHY — Tại sao IoC Container lại bó tay?
+
+Hãy tưởng tượng bạn đang đi xin việc. Công ty bảo: *"Chúng tôi chỉ nhận người đã có kinh nghiệm"*. Bạn trả lời: *"Nhưng tôi cần công ty nhận vào làm thì mới có kinh nghiệm chứ!"*. Kết quả là một vòng lặp bế tắc (Deadlock).
+
+IoC Container (Hệ thống Dependency Injection của NestJS) hoạt động y hệt như vậy.
+Quá trình khởi tạo (Instantiation) diễn ra theo nguyên tắc: **Phải khởi tạo xong tất cả các dependencies thì mới khởi tạo được Class chính**.
+
+Nếu `CatsService` phụ thuộc vào `CommonService`, IoC Container sẽ chạy theo luồng sau:
+1. Đọc constructor của `CatsService`, thấy cần `CommonService`.
+2. Tạm dừng tạo `CatsService`, chạy đi tạo `CommonService` trước.
+3. Đọc constructor của `CommonService`, lại thấy cần `CatsService`.
+4. Đi tìm `CatsService`... nhưng nó chưa được tạo (vì đang kẹt ở bước 2).
+5. **Crash (Báo lỗi Circular Dependency).**
+
+---
+
+## 2. WHAT — Phân tích Cấu trúc Lỗi
+
+```mermaid
+graph LR
+    A["CatsService"] -->|"Phụ thuộc (Inject)"| B["CommonService"]
+    B -->|"Phụ thuộc ngược lại"| A
+    
+    style A fill:#d62728,stroke:#fff,color:#fff
+    style B fill:#d62728,stroke:#fff,color:#fff
+```
+
+**Định nghĩa giải phẫu:** Lỗi này không chỉ xảy ra giữa các Provider (Service), mà còn có thể xảy ra ở cấp độ to hơn: **Giữa các Module**. (Ví dụ: `CatsModule` import `CommonModule`, và `CommonModule` lại import `CatsModule`).
+
+---
+
+## 3. HOW — 2 Cấp độ xử lý Lỗi
+
+Khi gặp Circular Dependency, NestJS cung cấp một vũ khí mang tên `forwardRef()`. Bản chất của hàm này là trả về một hàm nặc danh (anonymous function), giúp "trì hoãn" việc lấy giá trị của Class cho đến khi IoC hoàn tất việc cấp phát bộ nhớ.
+
+### 3.1. Cấp độ Provider (Giữa 2 Service)
+
+Để giải quyết, bạn **BẮT BUỘC** phải dùng hàm `forwardRef()` ở **CẢ HAI PHÍA** của constructor.
+
+**Phía 1: `CatsService`**
+
+```typescript
+// cats.service.ts
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
+import { CommonService } from '../common/common.service';
+
+@Injectable()
+export class CatsService {
+  constructor(
+    // Báo cho Nest: "Hãy tạm thời cho phép commonService bị undefined, tí nữa resolve sau"
+    @Inject(forwardRef(() => CommonService))
+    private commonService: CommonService,
+  ) {}
+}
+```
+
+**Phía 2: `CommonService`**
+
+```typescript
+// common.service.ts
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
+import { CatsService } from '../cats/cats.service';
+
+@Injectable()
+export class CommonService {
+  constructor(
+    @Inject(forwardRef(() => CatsService))
+    private catsService: CatsService,
+  ) {}
+}
+```
+
+> [!WARNING] Cảnh báo thứ tự khởi tạo
+> Khi dùng `forwardRef`, bạn không thể đoán trước được `CatsService` hay `CommonService` sẽ được gọi hàm `constructor` trước. Vì vậy, **tuyệt đối KHÔNG gọi phương thức của service kia ngay bên trong `constructor()`**. Lúc đó service kia có thể chưa khởi tạo xong và sẽ văng lỗi `undefined`.
+
+---
+
+### 3.2. Cấp độ Module (Giữa 2 Module)
+
+Nếu lỗi báo ở cấp độ Module, bạn áp dụng hàm `forwardRef()` trực tiếp vào mảng `imports` của Decorator `@Module()`. Tương tự, phải gắn ở **CẢ HAI PHÍA**.
+
+```typescript
+// cats.module.ts
+import { Module, forwardRef } from '@nestjs/common';
+import { CommonModule } from '../common/common.common';
+
+@Module({
+  // Import bằng forwardRef
+  imports: [forwardRef(() => CommonModule)],
+})
+export class CatsModule {}
+```
+
+```typescript
+// common.module.ts
+import { Module, forwardRef } from '@nestjs/common';
+import { CatsModule } from '../cats/cats.module';
+
+@Module({
+  imports: [forwardRef(() => CatsModule)],
+})
+export class CommonModule {}
+```
+
+---
+
+### 3.3. Bí ẩn từ thói quen dùng Barrel Files (`index.ts`)
+
+Đôi khi, 2 Service của bạn **không hề** phụ thuộc chéo nhau, nhưng NestJS vẫn báo lỗi Circular Dependency. Nguyên nhân 99% đến từ việc bạn sử dụng file `index.ts` (Barrel file) để gom nhóm các export.
+
+**Ví dụ thực tế gây lỗi:**
+Bạn có `cats.service.ts` và `cats.controller.ts` nằm cùng 1 thư mục `cats`. Bạn tạo một file `cats/index.ts`:
+```typescript
+export * from './cats.service';
+export * from './cats.controller';
+```
+
+Sau đó, bên trong `cats.controller.ts`, thay vì import đường dẫn trực tiếp:
+`import { CatsService } from './cats.service';`
+
+Bạn lại lười biếng import qua thư mục (kích hoạt barrel file):
+`import { CatsService } from '../cats';`
+
+Khi đó, Controller gọi `index.ts`, `index.ts` lại gọi Controller $\rightarrow$ **Vô tình tự tạo ra Circular Dependency**.
+
+> **Best Practice:** Tuyệt đối không dùng Barrel files (`index.ts`) khi import các file nằm **cùng một module / cùng một thư mục cấp thấp**. Hãy import đường dẫn trực tiếp cụ thể (`./cats.service`).
+
+---
+
+## 4. Discussion Questions
+
+1. **Kiến trúc (Architecture):** Theo bạn, tại sao việc xuất hiện Circular Dependency lại là "Red flag" (dấu hiệu cảnh báo) cho thấy kiến trúc phần mềm đang có vấn đề (Bad Design)? Nếu bạn là Tech Lead, bạn sẽ đề xuất chia tách 2 service đó như thế nào để không cần dùng `forwardRef()`?
+2. **ModuleRef Alternative:** Trong tài liệu của NestJS có nhắc đến việc dùng class `ModuleRef` để thay thế cho `forwardRef()`. Nếu dùng `this.moduleRef.get(CatsService)` ở một hàm khác (không nằm trong constructor), tại sao nó lại giải quyết được bài toán phụ thuộc vòng?
+3. **Môi trường Serverless:** Bạn nghĩ việc dùng `forwardRef` có làm tăng thời gian Bootstrap (khởi động) ứng dụng không? Sự lằng nhằng trong việc khởi tạo này ảnh hưởng thế nào nếu ứng dụng chạy trên AWS Lambda (nơi thời gian cold-start tính bằng mili-giây)?
+
+---
+
+## 5. References
+
+- [NestJS Official Docs - Circular Dependency](https://docs.nestjs.com/fundamentals/circular-dependency)
+- [GitHub Issue #1181 - Cảnh báo lỗi Barrel Files](https://github.com/nestjs/nest/issues/1181#issuecomment-430197191)
+
+---
+
+*Made by Anh Tu - Share to be share*
