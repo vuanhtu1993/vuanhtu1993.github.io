@@ -1,0 +1,257 @@
+---
+title: Cấu trúc Dự án (Project Structure)
+sidebar_label: 2. Project Structure
+description: Toàn tập về cấu trúc thư mục, quy ước đặt tên file, Colocation, Private Folders và Route Groups trong Next.js App Router.
+source: https://nextjs.org/docs/app/getting-started/project-structure
+---
+
+## Agenda
+
+**Thời gian đọc ước tính:** ~20 phút
+
+### Learning Outcomes
+
+- **Hiểu** được triết lý định tuyến dựa trên hệ thống tệp (File-system routing) của Next.js.
+- **Phân biệt** được các tệp quy ước đặc biệt (Special Routing Files) như `page.tsx`, `layout.tsx`, `loading.tsx`, v.v.
+- **Giải thích** được cơ chế Colocation (*Đặt cùng vị trí*) giúp tổ chức code gọn gàng, an toàn.
+- **Áp dụng** được các mẫu thiết kế cấu trúc thư mục nâng cao: Route Groups, Private Folders, và Intercepting Routes.
+
+---
+
+## Glossary & Vocabulary
+
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **File-system Routing** | Định tuyến dựa trên hệ thống tệp. URL của ứng dụng được quyết định bởi tên và vị trí của thư mục trong mã nguồn. |
+| **Colocation** | Đặt cùng vị trí. Cho phép đặt các file không liên quan đến routing (ví dụ: components, utils) cùng thư mục với các file routing mà không làm lộ URL ra public. |
+| **Route Segments** | Phân đoạn đường dẫn. Mỗi thư mục đóng vai trò như một phần của URL (ví dụ: `/shop/clothing` gồm 2 phân đoạn `shop` và `clothing`). |
+| **Private Folders** | Thư mục riêng tư (bắt đầu bằng dấu `_`). Các thư mục này và toàn bộ nội dung bên trong sẽ bị loại khỏi hệ thống routing. |
+| **Route Groups** | Nhóm định tuyến (bọc trong ngoặc đơn, ví dụ `(shop)`). Giúp tổ chức thư mục mã nguồn mà không ảnh hưởng đến cấu trúc URL thực tế. |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Unopinionated (adj)** | Không áp đặt khuôn mẫu cố định. Framework cho phép developer tự do cấu trúc thư mục theo ý muốn. |
+| **Colocate (v)** | Đặt cùng vị trí. Hành động gom nhóm các thành phần liên quan (logic, UI, CSS) lại gần nhau. |
+| **Hierarchy (n)** | Hệ thống phân cấp. Cách các component lồng vào nhau theo chiều dọc từ ngoài vào trong. |
+| **Intersect (v)** | Giao nhau, chặn ngang (trong ngữ cảnh Intercepting Routes). |
+| **Parameterize (v)** | Tham số hóa. Biến một đoạn URL cố định thành một biến có thể nhận nhiều giá trị (dynamic). |
+
+---
+
+## 1. WHY — Tại sao cấu trúc của Next.js App Router lại đặc biệt?
+
+**Vấn đề phát sinh với React thuần và Pages Router cũ:**
+
+1. **Routing phức tạp ở React thuần:** Bạn phải bảo trì một file cấu hình định tuyến khổng lồ (thường là `App.js` với `react-router`), quản lý thủ công từng đường dẫn URL đến từng component. Khi dự án lớn lên, việc theo dõi URL nào gọi đến component nào trở thành cực hình.
+2. **Hạn chế của Pages Router (Next.js cũ):** Bất kỳ file nào đặt trong thư mục `pages/` đều tự động trở thành một URL công khai (public route). Điều này khiến developer không thể đặt các file component dùng chung, file utils hay file test nằm cạnh trang (page) tương ứng. Họ phải tạo các thư mục song song ở ngoài, dẫn đến việc phải import các thành phần với đường dẫn tương đối dài dòng (`../../../components/Button`).
+
+**Cách Next.js App Router giải quyết vấn đề:**
+
+Next.js giới thiệu mô hình **Routing dựa trên thư mục (Folder-based Routing)** kết hợp với cơ chế **Colocation**.
+- Thư mục quyết định đường dẫn (URL).
+- Tệp đặc biệt (`page.tsx`, `route.ts`) quyết định nội dung sẽ hiển thị.
+Nhờ vậy, định tuyến trở nên rõ ràng và bạn có thể gom nhóm mọi thứ liên quan đến một chức năng vào cùng một vị trí mà không sợ lộ URL trái phép.
+
+---
+
+## 2. WHAT — Giải phẫu hệ thống cấu trúc tệp
+
+> **Định nghĩa File-system routing trong App Router:** Là cơ chế trong đó các *thư mục lồng nhau (nested folders)* xác định cấu trúc của URL, và các *tệp quy ước (convention files)* đóng vai trò dựng hình Giao diện Người dùng (UI) hoặc xử lý Logic API cho URL đó.
+
+### 2.1. Definition Anatomy (Giải phẫu định nghĩa)
+
+- **nested folders** (*các thư mục lồng nhau*): Nếu bạn có thư mục `app/blog/tech`, URL tương ứng sẽ là `/blog/tech`.
+- **convention files** (*các tệp quy ước*): Các tệp có tên cố định mang chức năng đặc thù mà Next.js hiểu sẵn (như `layout.js`, `page.js`, `loading.js`). Tên khác sẽ bị Next.js "lờ đi" trong việc định tuyến.
+- **dựng hình Giao diện (UI) hoặc xử lý Logic API**: `page.tsx` trả về HTML/UI, còn `route.ts` trả về dữ liệu (JSON, Text) như một API đích thực.
+
+### 2.2. Phân cấp thư mục cấp cao nhất (Top-level folders)
+
+![Route segments to path segments (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_llpoqt.png)
+![Route segments to path segments (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_uxek3h.png)
+
+- `app`: Chứa toàn bộ logic ứng dụng và routing của hệ thống App Router mới.
+- `pages`: Dùng cho hệ thống định tuyến cũ (Pages Router). Bạn không nên dùng song song trừ khi đang migrate hệ thống cũ.
+- `public`: Chứa các tài sản tĩnh (static assets) như hình ảnh, font chữ. Trình duyệt có thể truy cập trực tiếp bằng đường dẫn gốc `/`.
+- `src` (tùy chọn): Thư mục nguồn (chứa `app`). Giúp tách biệt mã nguồn khỏi các tệp cấu hình nằm ở gốc thư mục dự án.
+
+### 2.3. Các tệp cấu hình cấp cao nhất (Top-level files)
+
+Các file này nằm ở thư mục gốc của project (bên cạnh `package.json`):
+
+- `next.config.js` / `next.config.ts`: File cấu hình lõi của Next.js.
+- `instrumentation.ts`: File cấu hình OpenTelemetry và các công cụ theo dõi hiệu suất.
+- `proxy.ts`: Cấu hình Proxy để chuyển tiếp request.
+- `.env`, `.env.local`, `.env.production`: File chứa biến môi trường.
+- `eslint.config.mjs`: Cấu hình ESLint để kiểm tra chất lượng code.
+
+### 2.4. Tệp Định tuyến Quy ước (Routing Files)
+
+Để hiển thị UI hoặc API cho một URL segment, bạn CẦN sử dụng một trong các tệp quy ước sau:
+
+- `layout.tsx`: Bố cục chia sẻ chung cho thư mục hiện tại và mọi thư mục con.
+- `page.tsx`: Nội dung giao diện (Page) duy nhất của thư mục đó (Công khai ra internet).
+- `loading.tsx`: Giao diện hiển thị trong lúc chờ tải dữ liệu (Loading UI).
+- `not-found.tsx`: Giao diện lỗi 404 tùy chỉnh.
+- `error.tsx`: Giao diện bắt lỗi (Error Boundary) nếu có crash trong component.
+- `global-error.tsx`: Giao diện bắt lỗi toàn cục (hiếm dùng).
+- `route.ts`: API Endpoint (Xử lý các request GET, POST, PUT...). Không thể nằm chung thư mục với `page.tsx`.
+- `template.tsx`: Giống `layout.tsx` nhưng re-render lại toàn bộ mỗi khi điều hướng.
+- `default.tsx`: Giao diện dự phòng dùng trong định tuyến song song (Parallel Routes).
+
+### 2.5. Tệp Metadata (Metadata file conventions)
+
+Next.js tự động nhận diện các tệp tĩnh dưới đây để sinh meta tag chuẩn SEO:
+
+- **App icons:** `favicon.ico`, `icon.png/jpg/svg`, `apple-icon.png` (Hoặc dùng `icon.tsx` để generate động).
+- **Open Graph:** `opengraph-image.jpg`, `twitter-image.png`.
+- **SEO:** `sitemap.xml`, `robots.txt` (Hoặc dùng file `.ts` để tự động tạo).
+
+---
+
+## 3. HOW — Tổ chức kiến trúc dự án thực tế
+
+Next.js hoàn toàn **Unopinionated** (*Không gò ép*) trong việc tổ chức thư mục bên trong `app/`. Dưới đây là các cơ chế quan trọng giúp bạn tối ưu hóa kiến trúc.
+
+### 3.1. Hệ thống phân cấp Component (Component Hierarchy)
+
+Khi bạn định nghĩa các file quy ước trong cùng một thư mục, Next.js sẽ lồng (nesting) chúng vào nhau theo một trật tự cố định:
+
+![Component Hierarchy for File Conventions (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_tnfbtv.png)
+![Component Hierarchy for File Conventions (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_llppww.png)
+
+Trật tự lồng nhau từ ngoài vào trong:
+`layout` → `template` → `error` → `loading` → `not-found` → `page`
+
+Khi có các thư mục con, cấu trúc này được đệ quy liên tục:
+
+![Nested File Conventions Component Hierarchy (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_beeivu.png)
+![Nested File Conventions Component Hierarchy (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370545/aha-mind/docs-crawler/nextjs.org/image_vp4asg.png)
+
+### 3.2. Sức mạnh của Colocation (*Đặt cùng vị trí*)
+
+Mặc dù hệ thống định tuyến dựa trên thư mục, nhưng **một thư mục sẽ không bao giờ công khai (not publicly accessible)** cho đến khi bạn thêm tệp `page.tsx` hoặc `route.ts` vào bên trong nó.
+
+![A diagram showing how a route is not publicly accessible until a page.js or route.js file is added to a route segment. (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_ya2a3o.png)
+![A diagram showing how a route is not publicly accessible until a page.js or route.js file is added to a route segment. (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_xuztdj.png)
+
+Ngay cả khi đường dẫn đã công khai nhờ có tệp `page.tsx`, máy chủ sẽ **CHỈ trả về nội dung sinh ra từ tệp `page.tsx` đó**.
+
+![A diagram showing how page.js and route.js files make routes publicly accessible. (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_ffmqre.png)
+![A diagram showing how page.js and route.js files make routes publicly accessible. (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370545/aha-mind/docs-crawler/nextjs.org/image_z2u6bj.png)
+
+**Ứng dụng thực tế:** Điều này có nghĩa là bạn có thể yên tâm để các tệp components, stylesheets, tests, logic chung *bên cạnh* tệp `page.tsx` mà không lo bị rò rỉ dưới dạng một URL công khai.
+
+![A diagram showing colocated project files are not routable even when a segment contains a page.js or route.js file. (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_c9y39v.png)
+![A diagram showing colocated project files are not routable even when a segment contains a page.js or route.js file. (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_safdzh.png)
+
+### 3.3. Thư mục ẩn (Private Folders)
+
+Để tường minh hóa hệ thống dự án, Next.js cung cấp khái niệm **Private Folders**. Bằng cách thêm dấu gạch dưới `_` làm tiền tố (`_folderName`), Next.js sẽ coi đây là chi tiết triển khai nội bộ và hoàn toàn lờ đi thư mục này (và tất cả thư mục con) trong hệ thống định tuyến.
+
+![An example folder structure using private folders (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_myf9vj.png)
+![An example folder structure using private folders (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_dvn3v1.png)
+
+> **💡 Best practice:** Dùng Private Folders (`_components`, `_lib`) để tách biệt code UI/Logic ra khỏi Routing Logic. Giúp IDE sắp xếp thư mục ngăn nắp và tránh trùng lặp tên với các route tương lai.
+
+### 3.4. Nhóm định tuyến (Route Groups)
+
+Gói tên thư mục trong ngoặc đơn — `(folderName)`. Tác dụng là gom nhóm mã nguồn, nhưng **KHÔNG tham gia vào URL path**.
+
+![An example folder structure using route groups (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_apbwrq.png)
+![An example folder structure using route groups (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370545/aha-mind/docs-crawler/nextjs.org/image_hvmfsh.png)
+
+Trong ví dụ trên, URL truy cập vào trang About sẽ là `/about` chứ không phải `/(marketing)/about`.
+
+### 3.5. Dynamic Routes, Parallel Routes, và Intercepting Routes
+
+Bên cạnh thư mục tĩnh thông thường, Next.js hỗ trợ các tính năng cực kỳ mạnh mẽ để giải quyết các UI phức tạp:
+
+| Cú pháp (Pattern) | Giải thích | Use case điển hình |
+| :--- | :--- | :--- |
+| **`[slug]`** | Dynamic Route. Tham số động bắt 1 phân đoạn. | URL bài viết `/blog/bai-viet-1`. Truy cập qua `props.params.slug` |
+| **`[...slug]`** | Catch-all Route. Bắt toàn bộ các phân đoạn phía sau. | `/shop/clothes/shirts` gộp chung vào 1 page xử lý. |
+| **`@folder`** | Parallel Route (Định tuyến song song) | Render 2 trang song song trên cùng 1 Layout (vd: Dashboard có Sidebar và Main). |
+| **`(.)folder`** | Intercepting Route (Định tuyến đánh chặn cùng cấp) | Chặn click chuyển trang, mở ảnh dưới dạng Modal đè lên trang hiện tại thay vì chuyển hẳn sang trang mới. |
+| **`(..)folder`** | Intercepting Route (Đánh chặn ở cấp cha) | Phục vụ Modal cho danh sách nằm ở cấp cha. |
+
+---
+
+## 4. WHAT IF — Các mô hình kiến trúc (Architecture Strategies)
+
+Với cơ chế linh hoạt trên, Next.js gợi ý nhiều chiến lược thiết kế thư mục khác nhau. Bạn chỉ cần chọn một chiến lược phù hợp với Team và nhất quán.
+
+### Chiến lược 1: Tách rời Code dự án khỏi thư mục `app`
+
+Mô hình này giữ thư mục `app/` rất mỏng (chỉ chứa các file routing), toàn bộ logic (`components`, `lib`) nằm ở gốc dự án hoặc trong `src/`.
+
+![An example folder structure with project files outside of app (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_zv2ayo.png)
+![An example folder structure with project files outside of app (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_mdlcxt.png)
+
+### Chiến lược 2: Lưu trữ tập trung bên trong thư mục `app`
+
+Đưa toàn bộ thư mục tiện ích vào chung với `app/`. Có thể kết hợp sử dụng Private Folders (`_components`, `_lib`) để đánh dấu rõ đây không phải route.
+
+![An example folder structure with project files inside app (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_hyjlym.png)
+![An example folder structure with project files inside app (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_s30miz.png)
+
+### Chiến lược 3: Chia nhỏ theo tính năng (Feature-based / Domain-driven)
+
+Đưa các component, utils dùng chung (Global) vào gốc thư mục `app/` hoặc thư mục riêng. Đối với các logic gắn chặt với tính năng (như Dashboard), ta khai báo các thư mục con bên cạnh `page.tsx` của tính năng đó.
+
+![An example folder structure with project files split by feature or route (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_pkq4ub.png)
+![An example folder structure with project files split by feature or route (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_topcsz.png)
+
+### Ứng dụng Route Group: Phân chia Layout phức tạp
+
+**1. Nhiều Layout khác nhau cùng chung 1 URL gốc:** Cả `/(marketing)` và `/(shop)` đều nằm ở gốc website, nhưng một bên dùng giao diện tiếp thị, một bên dùng giao diện mua sắm.
+
+![Route Groups with Multiple Layouts (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370545/aha-mind/docs-crawler/nextjs.org/image_wivovf.png)
+![Route Groups with Multiple Layouts (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_i1sanq.png)
+
+**2. Chọn lọc áp dụng Layout:** Sử dụng Group để `account` và `cart` xài chung layout Giỏ hàng, nhưng `checkout` lại đứng riêng một layout để tránh gián đoạn tiến trình mua hàng.
+
+![Route Groups with Opt-in Layouts (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_obzjod.png)
+![Route Groups with Opt-in Layouts (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370543/aha-mind/docs-crawler/nextjs.org/image_uz8wis.png)
+
+**3. Nhiều Root Layout hoàn toàn tách biệt:** Bạn có quyền bỏ file `layout.tsx` ở cấp cao nhất đi, và khai báo ở trong các Route Group. Giúp ứng dụng hoạt động như 2 ứng dụng khác nhau. **Cảnh báo:** Mỗi root layout tự định nghĩa thẻ `<html>` và `<body>` của riêng nó. Tốn thời gian reload toàn bộ page khi người dùng nhảy từ Group này sang Group khác.
+
+![Route Groups with Multiple Root Layouts (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_kphmbp.png)
+![Route Groups with Multiple Root Layouts (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_nrwcdz.png)
+
+**4. Áp dụng Loading UI tùy chỉnh:** Gom route vào group `/(overview)` để áp dụng `loading.tsx` riêng cho khu vực này mà không ảnh hưởng toàn bộ Dashboard.
+
+![Folder structure showing a loading.tsx and a page.tsx inside the route group (Light)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_rogwbr.png)
+![Folder structure showing a loading.tsx and a page.tsx inside the route group (Dark)](https://res.cloudinary.com/dv3vzmogk/image/upload/v1782370544/aha-mind/docs-crawler/nextjs.org/image_o1ge7a.png)
+
+---
+
+## 5. Trade-offs (Đánh đổi)
+
+Việc hiểu giới hạn của kiến trúc là điều làm nên một Senior Developer:
+
+- **Quá nhiều File trùng tên:** Khi làm việc trong các dự án lớn, việc có hàng tá tệp đều mang tên `page.tsx` và `layout.tsx` khiến việc tìm kiếm bằng `Ctrl+P` (Quick Open) cực kỳ ức chế. Bạn buộc phải tập thói quen tìm bằng tên thư mục (ví dụ gõ `dashboard/page`).
+- **Nesting Hell (Địa ngục lồng ghép):** Việc cấu trúc thư mục lồng nhau quá sâu (quá nhiều sub-folder) làm cho đường dẫn tương đối (relative paths) trở nên không thể đọc nổi. Bạn **bắt buộc** phải sử dụng Module Path Aliases (vd `@/components/`) để tránh điều này.
+- **Tách biệt Logic và UI:** Với mô hình Colocation, ranh giới giữa file routing và file component có thể mờ nhạt nếu bạn không có tiêu chuẩn (convention) rõ ràng trong nhóm làm việc (ví dụ: dùng Private Folders).
+
+---
+
+## 6. Discussion Questions
+
+1. Theo bạn, trong dự án quy mô Enterprise với hàng chục Developers, chiến lược thiết kế tổ chức thư mục nào (trong 3 chiến lược đã học) mang lại hiệu quả quản lý cao nhất? Vì sao?
+2. Sự khác biệt giữa việc sử dụng Parallel Routes (`@folder`) và lồng ghép Component truyền thống trong React là gì? Tại sao Next.js cần đẻ ra cơ chế Parallel Routes?
+3. Nếu bạn muốn ứng dụng chuyển giao diện 100% khi người dùng truy cập trang Quản trị `/admin` và trang Người dùng `/` (từ thư viện UI đến logic), bạn sẽ dùng kiến trúc nào?
+
+---
+
+## References
+
+- [Next.js Official Docs — Project Structure](https://nextjs.org/docs/app/getting-started/project-structure) *(Crawled: 2026-06-25)*
+- [File Conventions Reference](https://nextjs.org/docs/app/api-reference/file-conventions)
+
+---
+
+*Made by Anh Tu - Share to be share*

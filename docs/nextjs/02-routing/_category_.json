@@ -1,0 +1,8 @@
+{
+    "label": "2. Routing",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "Hệ thống Routing của Next.js App Router - File-system based routing"
+    }
+}

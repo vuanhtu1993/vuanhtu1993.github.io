@@ -1,8 +1,8 @@
 {
-    "label": "7. Khoá học Next.js",
+    "label": "7. Khoá học Next.js (App Router)",
     "position": 7,
     "link": {
         "type": "generated-index",
-        "description": "7. Loạt bài hướng dẫn Nextjs"
+        "description": "Khoá học Next.js App Router từ tài liệu chính thức nextjs.org - dành cho người đã biết ReactJS"
     }
 }
