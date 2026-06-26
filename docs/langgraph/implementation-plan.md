@@ -53,7 +53,7 @@ graph LR
 - **Nguồn tài liệu:**
   - `langgraph/workflows-agents.md` — định nghĩa chính thức, sơ đồ patterns
   - `langchain/agents.md` — agent architecture tổng quan
-- **Đã tạo:** `docs/ai-agents/01-chatbot-vs-agent.md`
+- **Đã tạo:** `docs/langgraph/agents-101/01-chatbot-vs-agent.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -66,7 +66,9 @@ graph LR
   - `langgraph/quickstart.md` — **NGUỒN CHÍNH** (Graph API + Functional API step-by-step)
   - `langgraph/thinking-in-langgraph.md` — mental model Node/State/Edge
   - `langgraph/workflows-agents.md` — ToolNode pattern
-- **Đã tạo:** `docs/ai-agents/02-agent-loop-in-code.md`
+- **Đã tạo:** 
+  - `docs/langgraph/agents-101/02-agent-loop-in-code.md`
+  - `docs/langgraph/agents-101/02b-thinking-in-langgraph.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -78,6 +80,7 @@ graph LR
 - **Nguồn tài liệu:**
   - `langchain/tools.md` — **NGUỒN CHÍNH** (tool() API, schema, ToolNode)
   - `langgraph/workflows-agents.md` — ToolNode prebuilt
+- **Đã tạo:** `docs/langgraph/agents-101/03-tools.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -88,6 +91,7 @@ graph LR
 - **Demo JS:** Message types, trimming, filtering
 - **Nguồn tài liệu:**
   - `langchain/messages.md` — **NGUỒN CHÍNH** (toàn bộ message types và usage)
+- **Đã tạo:** `docs/langgraph/agents-101/04-messages.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -99,6 +103,7 @@ graph LR
 - **Nguồn tài liệu:**
   - `langchain/models.md` — **NGUỒN CHÍNH** (providers, parameters, streaming, structured output)
   - `langchain/install.md` — package dependencies
+- **Đã tạo:** `docs/langgraph/agents-101/05-models.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -109,6 +114,7 @@ graph LR
 - **Demo JS:** TypeScript type-safe output từ LLM
 - **Nguồn tài liệu:**
   - `langchain/structured-output.md` — **NGUỒN CHÍNH** (withStructuredOutput, schema binding)
+- **Đã tạo:** `docs/langgraph/agents-101/06-structured-output.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -120,6 +126,7 @@ graph LR
 - **Nguồn tài liệu:**
   - `langchain/short-term-memory.md` — **NGUỒN CHÍNH** (buffer, summary, token limit strategies)
   - `langgraph/add-memory.md` — memory trong LangGraph graph
+- **Đã tạo:** `docs/langgraph/agents-101/07-short-term-memory.md`
 - **Độ ưu tiên:** Important
 
 ---
@@ -132,7 +139,7 @@ graph LR
   - `langchain/long-term-memory.md` — **NGUỒN CHÍNH** (overview long-term memory types)
   - `langgraph/stores.md` — LangGraph Store API
   - `langgraph/add-memory.md` — thêm memory vào agent
-- **Đã tạo:** `docs/ai-agents/08-long-term-memory.md`
+- **Đã tạo:** `docs/langgraph/agents-101/08-long-term-memory.md`
 - **Độ ưu tiên:** Important
 
 ---
@@ -145,7 +152,7 @@ graph LR
   - `langchain/tools.md` — search tool integration
   - `langgraph/quickstart.md` — agent setup
   - `langchain/streaming.md` — streaming response
-- **Đã tạo:** `docs/ai-agents/09-project-research-assistant.md`
+- **Đã tạo:** `docs/langgraph/agents-101/09-project-research-assistant.md`
 - **Độ ưu tiên:** Critical (Capstone Phase 1)
 
 ---
@@ -162,6 +169,7 @@ graph LR
   - `langchain/streaming.md` — **NGUỒN CHÍNH** (stream, streamEvents)
   - `langgraph/streaming.md` — streaming trong LangGraph
   - `langgraph/event-streaming.md` — event types chi tiết
+- **Đã tạo:** `docs/langgraph/agentic-patterns/01-streaming.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -174,6 +182,7 @@ graph LR
   - `langchain/rag.md` — **NGUỒN CHÍNH** (naive RAG, advanced retrieval, re-ranking)
   - `langchain/retrieval.md` — retriever types
   - `langchain/knowledge-base.md` — knowledge base management
+- **Đã tạo:** `docs/langgraph/agentic-patterns/02-rag.md`
 - **Độ ưu tiên:** Critical
 
 ---
@@ -184,6 +193,7 @@ graph LR
 - **Demo JS:** Agent với retrieval tool, iterative search
 - **Nguồn tài liệu:**
   - `langgraph/agentic-rag.md` — **NGUỒN CHÍNH** (agentic RAG patterns)
+- **Đã tạo:** `docs/langgraph/agentic-patterns/03-agentic-rag.md`
 - **Độ ưu tiên:** Important
 
 ---
@@ -194,6 +204,7 @@ graph LR
 - **Demo JS:** Dynamic prompt assembly, context trimming
 - **Nguồn tài liệu:**
   - `langchain/context-engineering.md` — **NGUỒN CHÍNH** (38KB — rất đầy đủ)
+- **Đã tạo:** `docs/langgraph/agentic-patterns/04-context-engineering.md`
 - **Độ ưu tiên:** Important
 
 ---

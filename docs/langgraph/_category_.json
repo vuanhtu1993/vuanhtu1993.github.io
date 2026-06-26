@@ -1,8 +1,8 @@
 {
-  "label": "14. Khoá học LangChain",
+  "label": "14. Khoá học LangGraph",
   "position": 14,
   "link": {
     "type": "generated-index",
-    "description": "Khoá học LangChain từ nền tảng đến production — dành cho Junior JS/TS Developer. Bám sát roadmap.sh/ai-agents với demo bằng LangChain.js và LangGraph.js."
+    "description": "Khoá học LangGraph từ nền tảng đến production — dành cho Junior JS/TS Developer. Bám sát roadmap.sh/ai-agents với demo bằng LangChain.js và LangGraph.js."
   }
 }
