@@ -103,8 +103,8 @@ Mỗi bài viết **BẮT BUỘC** phải có:
 
 | Phase | Modules | Số bài | Status |
 |-------|---------|--------|--------|
-| **Phase 1** | `01-foundations` + `02-routing` | 8 bài | ⏳ Sẵn sàng |
-| **Phase 2** | `03-rendering` + `04-data-layer` | 7 bài | ⏸️ Chờ Phase 1 |
+| **Phase 1** | `01-foundations` + `02-routing` | 8 bài | ✅ Hoàn thành |
+| **Phase 2** | `03-rendering` + `04-data-layer` | 7 bài | ⏳ Sẵn sàng |
 | **Phase 3** | `05-styling` + `06-seo-and-metadata` | 4 bài | ⏸️ Chờ Phase 2 |
 | **Phase 4** | `07-authentication` + `08-deployment` | 5 bài | ⏸️ Chờ Phase 3 |
 | **Phase 5** | `09-testing` | 1 bài | ⏸️ Chờ Phase 4 |
