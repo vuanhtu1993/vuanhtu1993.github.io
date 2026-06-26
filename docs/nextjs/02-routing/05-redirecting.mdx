@@ -1,0 +1,231 @@
+---
+title: "05. Redirecting"
+description: "Cẩm nang 5 phương pháp chuyển hướng (Redirect) trong Next.js App Router: Từ Server Components, Client Components cho đến Proxy và Config."
+source_url: "https://nextjs.org/docs/app/guides/redirecting"
+---
+
+# 05. Redirecting
+
+Trong vòng đời của một ứng dụng Web, không phải lúc nào người dùng truy cập một URL cũng nhận được đúng nội dung tại URL đó. Sẽ có những lúc bạn cần đẩy họ sang trang đăng nhập vì chưa có quyền truy cập, hoặc đưa họ đến trang chủ sau khi thanh toán thành công, hay đơn giản là bạn vừa đổi tên miền cũ sang tên miền mới. Khái niệm này gọi là Chuyển hướng (Redirecting). 
+
+Trong hệ sinh thái Next.js App Router, việc redirect không đơn giản chỉ là một hàm `push` duy nhất. Next.js cung cấp cho bạn một "kho vũ khí" gồm 5 phương thức redirect khác nhau, được thiết kế tối ưu cho từng giai đoạn của vòng đời request. Bài viết này sẽ giúp bạn làm chủ toàn bộ chúng.
+
+## Agenda
+
+**Thời gian đọc ước tính:** ~15 phút
+
+### Learning outcome:
+- **Hiểu** được vòng đời của một request và thời điểm kích hoạt của từng loại Redirect.
+- **Giải thích** được sự khác biệt giữa các HTTP Status Code (307, 308, 303) trong quá trình chuyển hướng.
+- **Tự tay** cấu hình được các hàm `redirect`, `permanentRedirect` và xử lý cấu hình tĩnh trong `next.config.js`.
+- **Phân biệt** được khi nào nên dùng Middleware (Proxy), khi nào dùng Server Component để điều hướng.
+
+## Glossary & Vocabulary
+
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Redirect** | *Chuyển hướng*. Quá trình máy chủ hoặc trình duyệt tự động đưa người dùng từ một URL này sang một URL khác. |
+| **Mutation** | *Đột biến (Thay đổi dữ liệu)*. Hành động thay đổi trạng thái của ứng dụng, ví dụ: tạo mới, cập nhật, hoặc xóa dữ liệu trên Server (như POST/PUT/DELETE request). |
+| **Canonical URL** | *Đường dẫn chuẩn*. URL chính thức và duy nhất đại diện cho một trang nội dung, giúp các công cụ tìm kiếm (Google) không bị rối khi có nhiều URL trỏ về cùng một nội dung. |
+| **Bloom filter** | *Bộ lọc Bloom*. Một cấu trúc dữ liệu xác suất, dùng để kiểm tra cực nhanh xem một phần tử CÓ THỂ tồn tại trong tập hợp hay KHÔNG tồn tại. (Dùng tối ưu truy vấn dữ liệu lớn). |
+
+**2. Vocabulary Support (Từ vựng học thuật/B1+):**
+| Word | Meaning in Context (Nghĩa trong ngữ cảnh) |
+| :--- | :--- |
+| **Programmatically (adv)** | Một cách có lập trình, sử dụng code để thực thi thay vì thao tác tĩnh. |
+| **Scale (n/v)** | Quy mô lớn, mở rộng quy mô. (VD: Managing redirects at scale - Quản lý chuyển hướng ở quy mô lớn). |
+
+---
+
+## 1. WHY — Vấn đề kỹ thuật
+
+Thực trạng kỹ thuật khi xử lý Redirect trong các hệ thống truyền thống:
+1. **Redirect quá trễ (Late Redirect):** Trong React SPA thuần, việc kiểm tra người dùng đã đăng nhập hay chưa thường diễn ra ở Client (thông qua `useEffect`). Kết quả là người dùng thấy giao diện trang chủ chớp lên một giây trước khi bị văng ra trang Login.
+2. **Khó bảo trì URL cũ:** Khi dự án tái cấu trúc hàng ngàn bài viết SEO từ URL `/post/id` sang `/blog/slug`, việc quản lý hàng ngàn lệnh chuyển hướng trong code logic làm phình to kích thước ứng dụng và làm chậm tốc độ phản hồi.
+3. **Mất điểm SEO (Search Engine Optimization):** Nếu dùng sai mã trạng thái (Ví dụ dùng 302 thay vì 301 cho các nội dung chuyển nhà vĩnh viễn), Google Bot sẽ không cập nhật URL mới, khiến bài viết rớt hạng thê thảm.
+
+**Giải pháp của Next.js:** Đưa ra 5 cấp độ chuyển hướng, trải dài từ lúc Request mới vừa chạm vào Server (Config, Proxy) cho tới khi Render (Server Component) và cuối cùng là lúc người dùng tương tác (Client Hook).
+
+---
+
+## 2. WHAT — Nó là cái gì?
+
+Thay vì chỉ có một khái niệm duy nhất, Next.js phân loại Redirect thành 5 công cụ riêng biệt.
+
+**Bảng tổng hợp 5 phương thức (Definition Anatomy):**
+
+| Tên công cụ / API | Mục đích chính | Nơi sử dụng | Mã trạng thái (Status Code) trả về |
+| :--- | :--- | :--- | :--- |
+| `redirect` | Chuyển hướng người dùng sau một hành động (như gửi form). | Server Components, Route Handlers, Server Actions | 307 (Tạm thời) hoặc 303 (Sau Server Action) |
+| `permanentRedirect` | Chuyển hướng vĩnh viễn (để giữ điểm SEO). | Tương tự trên | 308 (Vĩnh viễn) |
+| `useRouter` | Chuyển hướng khi người dùng bấm nút (Interactive). | Client Components (trong Event Handlers) | N/A (Chỉ chạy trên trình duyệt) |
+| `next.config.js` | Đổi cấu trúc URL cố định biết trước. | File cấu hình gốc | 307 hoặc 308 |
+| `NextResponse.redirect` | Chuyển hướng dựa trên điều kiện (Cookie, Auth). | Proxy (Middleware) | Tùy chọn (Bất kỳ) |
+
+*(Lưu ý về Status Code: Next.js sử dụng mã 307/308 thay cho 302/301 truyền thống nhằm giữ nguyên HTTP Method (POST/GET) khi chuyển hướng, tránh mất dữ liệu form).*
+
+---
+
+## 3. HOW — Làm nó như thế nào?
+
+Chúng ta sẽ đi từ giai đoạn Render (trong code Component) ngược ra giai đoạn Server Configuration.
+
+### 3.1 Dùng `redirect` và `permanentRedirect` (Server Side)
+
+Đây là 2 hàm được sử dụng phổ biến nhất bên trong Server Components hoặc sau khi xử lý xong một Server Action.
+
+**Nguyên tắc cốt lõi:** Khi gọi hàm này, Next.js sẽ **ném ra một Error đặc biệt (Throw an error)** để ngắt ngay lập tức quá trình render hiện tại và chuyển sang trang mới. Vì vậy, **TUYỆT ĐỐI KHÔNG** đặt nó bên trong khối `try/catch` chung, nếu không khối `catch` của bạn sẽ "nuốt" mất lệnh redirect.
+
+```tsx
+// filename: app/actions.ts (Server Action)
+'use server';
+
+import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
+
+export async function createPost(formData: FormData) {
+  const title = formData.get('title');
+  
+  try {
+    await db.insert({ title });
+  } catch (error) {
+    return { message: 'Tạo bài thất bại' };
+  }
+  
+  // Thành công! Chuyển hướng về trang chủ. Lệnh này NẰM NGOÀI try/catch.
+  redirect('/'); // Trả về mã 303
+}
+
+export async function updateUsername(oldName: string, newName: string) {
+  await db.updateName(oldName, newName);
+  
+  // URL Profile thay đổi vĩnh viễn, báo cho Google Bot biết để cập nhật SEO
+  permanentRedirect(`/profile/${newName}`); // Trả về mã 308
+}
+```
+
+### 3.2 Dùng `useRouter` (Client Side)
+
+Nếu bạn chỉ muốn chuyển trang khi người dùng làm một hành động ở phía Client (ví dụ: nhấn nút "Bỏ qua", hoặc sau khi một animation chạy xong), bạn sử dụng hook `useRouter`.
+
+```tsx
+// filename: app/components/SkipButton.tsx
+'use client'; // Bắt buộc
+
+import { useRouter } from 'next/navigation';
+
+export default function SkipButton() {
+  const router = useRouter();
+
+  return (
+    <button onClick={() => router.push('/dashboard')}>
+      Bỏ qua phần giới thiệu
+    </button>
+  );
+}
+```
+*Lời khuyên:* Nếu không có logic gì đặc biệt, hãy ưu tiên dùng thẻ `<Link href="/dashboard">` thay vì `useRouter().push()`.
+
+### 3.3 Cấu hình tĩnh trong `next.config.js`
+
+Giả sử dự án của bạn đập đi làm lại. URL bài viết cũ là `/post/123`, URL mới là `/blog/123`. Bạn không muốn viết code logic trong component cho việc này vì nó làm chậm Server. Hãy dùng `redirects` trong `next.config.js`.
+
+```javascript
+// filename: next.config.js
+
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/post/:slug', // Đường dẫn cũ
+        destination: '/blog/:slug', // Đường dẫn mới
+        permanent: true, // Trả về 308 vĩnh viễn
+      },
+      {
+        source: '/khuyen-mai-2025',
+        destination: '/khuyen-mai-2026',
+        permanent: false, // Trả về 307 tạm thời
+      },
+    ];
+  },
+};
+```
+*Lưu ý: Cách này chạy RẤT NHANH vì nó được xử lý ngay tại tầng routing của Server trước khi code React kịp khởi động.*
+
+### 3.4 Chuyển hướng bằng Proxy (Middleware)
+
+Cách 3.3 chỉ dùng cho các đường dẫn cố định. Vậy nếu bạn muốn: "Nếu user chưa có cookie token thì đẩy ra trang `/login`"? Lúc này phải dùng Proxy (Middleware).
+
+Middleware chạy TRƯỚC KHI request chạm tới Server Components của bạn. Nó là màng lọc lý tưởng nhất cho việc bảo mật.
+
+```typescript
+// filename: middleware.ts (Nằm ở gốc dự án)
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const token = request.cookies.get('auth_token');
+
+  // Nếu truy cập vào /dashboard mà chưa có token
+  if (request.nextUrl.pathname.startsWith('/dashboard') && !token) {
+    // Chuyển hướng người dùng về trang login
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+}
+```
+
+---
+
+## 4. WHAT IF — Khám phá & Trade-offs
+
+### Đánh đổi (Trade-offs)
+- **Vấn đề Giới hạn (Limits):** Cấu hình `redirects` trong `next.config.js` rất tiện nhưng nó có giới hạn phụ thuộc vào nền tảng hosting. Ví dụ trên Vercel, bạn chỉ được phép cấu hình tối đa **1,024** redirects tĩnh. Nếu bạn có 50,000 bài viết cần đổi URL, bạn không thể nhét hết vào `next.config.js`.
+- **Giải pháp ở quy mô lớn (Managing redirects at scale):** Khi có hàng chục ngàn Redirects, bạn phải lưu danh sách đó vào Database (Redis, Edge Config). Khi Request đi qua Middleware, bạn đọc Database để quyết định có redirect hay không. Tuy nhiên, việc đọc Database ở MỌI request sẽ làm chậm ứng dụng thê thảm.
+- **Tối ưu bằng Bloom Filter:** Next.js gợi ý sử dụng thuật toán Bloom Filter. Middleware sẽ hỏi Bloom Filter: "URL này có NẰM TRONG danh sách đổi tên không?". Bloom Filter trả lời cực nhanh (bằng thuật toán xác suất không cần chọc vào DB). Nếu trả lời CÓ, Middleware mới tốn công gọi DB để lấy URL mới và Redirect.
+
+### Discussion Questions
+1. Tại sao hàm `redirect()` của Next.js lại hoạt động bằng cách "Throw Error" (ném ra ngoại lệ) thay vì chỉ đơn giản `return` một object? Điều này có lợi ích gì đối với quá trình Render của React?
+2. Giả sử hệ thống của bạn xử lý chuyển hướng tại cả 3 nơi: `next.config.js`, Middleware và `Server Component`. Hãy sắp xếp thứ tự chạy của chúng từ lúc Client gửi request lên Server. Nơi nào sẽ chặn (block) request sớm nhất?
+3. Việc sử dụng mã trạng thái 307 (Temporary Redirect) thay cho 302 (Found) của HTTP chuẩn mang lại lợi ích gì đặc biệt liên quan đến HTTP Method (GET/POST)?
+
+---
+
+## 5. Mindmap Tổng kết (MECE)
+
+```mermaid
+mindmap
+  root((Redirecting
+  Architecture))
+    1. Vòng đời Request (Thứ tự thực thi)
+      1. next.config.js (Sớm nhất)
+      2. Proxy / Middleware
+      3. Server Components (Render)
+      4. Client Components (Interactive)
+    2. Các phương thức Server
+      redirect
+        Dùng cho Logic / Mutation
+        Mã 307 hoặc 303
+        Cơ chế: Throw Error
+      permanentRedirect
+        Thay đổi vĩnh viễn (SEO)
+        Mã 308
+    3. Phương thức Client
+      useRouter hook
+        router.push()
+        Dùng trong Event Handlers
+    4. Cấu hình & Infrastructure
+      next.config.js
+        Tĩnh, cố định
+        Giới hạn số lượng (~1024)
+      NextResponse.redirect
+        Nằm trong Middleware
+        Dựa trên điều kiện (Auth, Headers)
+    5. Advanced (Quy mô lớn)
+      DB + Cache
+      Thuật toán Bloom Filter tối ưu
+```
+
+---
+
+*Made by Anh Tu - Share to be share*
