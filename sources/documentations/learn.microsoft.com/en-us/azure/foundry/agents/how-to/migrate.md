@@ -1,0 +1,658 @@
+---
+title: "Migrate to the new Foundry Agent Service - Microsoft Foundry"
+source_url: "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate?tabs=python"
+crawled_at: "2026-06-27T11:31:28.309Z"
+---
+
+Tip
+
+A [migration tool](https://aka.ms/agent/migrate/tool) is available to help automate migration from the Assistants API to Agents.
+
+Foundry Agent Service provides an upgraded developer experience for building intelligent agents that are easy to build, version, operate, and observe. The new agents API introduces a modernized SDK, new enterprise-grade capabilities, and preserves the identity, governance, and observability features you rely on today.
+
+-   An Azure subscription. [Create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn_66334cff-e864-c98f-104f-3b03a36ca75b).
+-   A [Microsoft Foundry project](https://learn.microsoft.com/en-us/azure/foundry/how-to/create-projects).
+-   The Foundry Agent Service SDK for your language, and corresponding identity package for authentication. Install the packages for your language and sign in with `az login` or use `DefaultAzureCredential`:
+
+-   [Python](#tabpanel_1_python)
+-   [C#](#tabpanel_1_csharp)
+-   [JavaScript](#tabpanel_1_javascript)
+-   [Java](#tabpanel_1_java)
+
+```
+pip install "azure-ai-projects>=2.0.0"
+```
+
+-   Existing agents or assistants code that you want to migrate.
+
+The following code initializes the clients used throughout this guide:
+
+-   [Python](#tabpanel_2_python)
+-   [C#](#tabpanel_2_csharp)
+-   [JavaScript](#tabpanel_2_javascript)
+-   [Java](#tabpanel_2_java)
+
+```
+from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
+
+# Format: "https://resource_name.services.ai.azure.com/api/projects/project_name"
+PROJECT_ENDPOINT = "your_project_endpoint"
+
+project = AIProjectClient(
+    endpoint=PROJECT_ENDPOINT,
+    credential=DefaultAzureCredential(),
+)
+openai = project.get_openai_client()
+```
+
+Use `project` for agent creation and versioning. Use `openai` (or the equivalent in your language) for conversations and responses.
+
+The new agents provide the following benefits:
+
+**Developer productivity**
+
+-   ⭐ **More models.** Generate responses by using any Foundry model either in your agent or directly as a response generation call.
+-   **More features.** Web Search, File Search, Code Interpreter, MCP tool calling, image generation, and reasoning summaries.
+-   **Modern API primitive.** Built on the Responses API instead of the older Assistants API.
+-   **Background mode**. Support for long-running tools (like image-generation), and durable streams (supports disconnect/reconnect scenarios)
+-   **Future-proof.** New features and model support are only added to the new agents.
+-   **New agent types.** Create prompt-based, workflow-based agents, workflow-based agents (preview), and Hosted agents (preview).
+
+**Enterprise readiness**
+
+-   ⭐ **Single-tenant storage.** Use single-tenant storage, with the option to bring your own Azure Cosmos DB to store state and keep your data secure.
+-   **Enhanced security.** Control who can run or modify agent definitions.
+-   **Separation of duties.** Define agents once and execute them with various inputs.
+-   **Deployable agents.** Agents can be exposed as individual endpoints.
+
+**API modernization**
+
+-   **Improved state management.** Uses conversations instead of threads and messages.
+-   **Stateful context.** Automatically retains context across calls.
+-   **Superset of Responses API.** Builds on the Responses API and adds more capabilities.
+-   **Single or multi-agent workflows.** Easily chain agents for complex workflows.
+
+The following table summarizes the main API changes between the previous and current agent experience.
+
+| Before | After | Details |
+| --- | --- | --- |
+| Threads | Conversations | Supports streams of items, not just messages. |
+| Runs | Responses | Responses send input items or use a conversation object and receive output items. Tool call loops are explicitly managed. |
+| Assistants / agents | Agents (new) | Support for enterprise-ready prompt, workflow, and Hosted agents with stateful context by default for any Foundry model. |
+
+The following table compares agent tools available in classic agents and the new Foundry Agent Service. Use it to identify which tools carry over directly, which have changed, and which are exclusive to the new experience.
+
+| Tool | Foundry (classic) | Foundry (new) |
+| --- | --- | --- |
+| Agent to Agent (A2A) | No | Yes (Public Preview) |
+| Azure AI Search | Yes (GA) | Yes (GA) |
+| Azure Functions | Yes (GA) | No |
+| Browser Automation | Yes (Public Preview) | Yes (Public Preview) |
+| Code Interpreter | Yes (GA) | Yes (GA) |
+| Computer Use | Yes (Public Preview) | Yes (Public Preview) |
+| Connected Agents | Yes (Public Preview) | No (Recommendation: Workflow and A2A tool) |
+| Deep Research | Yes (Public Preview) | No (Recommendation: Deep Research model with Web Search tool) |
+| Fabric Data Agent | Yes (Public Preview) | Yes (Public Preview) |
+| File Search | Yes (GA) | Yes (GA) |
+| Function | Yes (GA) | Yes (GA) |
+| Grounding with Bing Search | Yes (GA) | Yes (GA) |
+| Grounding with Bing Custom Search | Yes (Public Preview) | Yes (Public Preview) |
+| Image Generation | No | Yes (Public Preview) |
+| MCP | Yes (Public Preview) | Yes (GA) |
+| OpenAPI | Yes (GA) | Yes (GA) |
+| SharePoint Grounding | Yes (Public Preview) | Yes (Public Preview) |
+| Web Search | No | Yes (GA) |
+
+Important
+
+In the new API, the conversations and responses APIs use the **OpenAI client** (or its language equivalent). In Python, call `project.get_openai_client()`. In C#, use `projectClient.ProjectOpenAIClient.GetProjectResponsesClientForAgent()`. In JavaScript, call `projectClient.getOpenAIClient()`. In Java, use `AgentsClientBuilder` to build a `ResponsesClient`. Agent creation and versioning remain on the **project client**. The examples in each section show which client to use.
+
+Threads stored messages on the server side. A conversation can store items, including messages, tool calls, tool outputs, and other data.
+
+The following examples compare thread creation (previous) with conversation creation (current). The current approach uses the OpenAI client obtained from `project.get_openai_client()`.
+
+**Previous - threads**
+
+-   [Python](#tabpanel_3_python)
+-   [C#](#tabpanel_3_csharp)
+-   [JavaScript](#tabpanel_3_javascript)
+-   [Java](#tabpanel_3_java)
+
+```
+thread = client.agents.threads.create( 
+     messages=[{"role": "user", "content": "Tell me a one line funny story about unicorns"}], 
+     metadata={"agent": "my-awesome-agent"}, 
+) 
+```
+
+**Current - conversations**
+
+-   [Python](#tabpanel_4_python)
+-   [C#](#tabpanel_4_csharp)
+-   [JavaScript](#tabpanel_4_javascript)
+-   [Java](#tabpanel_4_java)
+
+```
+conversation = openai.conversations.create(
+    items=[
+        {
+            "type": "message",
+            "role": "user",
+            "content": "Tell me a one line funny "
+                       "story about unicorns",
+        }
+    ],
+    metadata={"agent": "my-awesome-agent"},
+)
+```
+
+The JSON responses show the structural differences between thread objects and conversation objects.
+
+**Previous - threads**
+
+```
+{ 
+  "id": "thread_1234abcd",  
+  "object": "thread",  
+  "created_at": 1762217858,  
+  "metadata": {"agent": "my-awesome-agent"},  
+  "tool_resources": {} 
+} 
+```
+
+**Current - conversations**
+
+```
+{ 
+  "id":"conv_1234abcd", 
+  "created_at":1762217961, 
+  "metadata":{"agent":"my-awesome-agent"}, 
+  "object":"conversation" 
+} 
+```
+
+After you create a conversation, use `conversations.items.create()` to add subsequent messages. This pattern replaces adding messages to threads with `client.agents.messages.create()`.
+
+**Previous - add a message to a thread**
+
+-   [Python](#tabpanel_5_python)
+-   [C#](#tabpanel_5_csharp)
+-   [JavaScript](#tabpanel_5_javascript)
+-   [Java](#tabpanel_5_java)
+
+```
+message = client.agents.messages.create(
+    thread_id=thread.id,
+    role="user",
+    content="Follow-up question about the same topic",
+)
+```
+
+**Current - add items to a conversation**
+
+-   [Python](#tabpanel_6_python)
+-   [C#](#tabpanel_6_csharp)
+-   [JavaScript](#tabpanel_6_javascript)
+-   [Java](#tabpanel_6_java)
+
+```
+openai.conversations.items.create(
+    conversation_id=conversation.id,
+    items=[
+        {
+            "type": "message",
+            "role": "user",
+            "content": "Follow-up question "
+                       "about the same topic",
+        }
+    ],
+)
+```
+
+Runs were asynchronous processes that executed against threads. Responses are simpler: provide a set of input items to execute and get a list of output items back. Responses can be used alone, or with conversation objects for storing context. The responses API uses the OpenAI client.
+
+The following examples compare how you invoke agent logic. The previous approach used asynchronous runs with polling. The current approach calls `responses.create()` on the OpenAI client.
+
+**Previous - runs**
+
+-   [Python](#tabpanel_7_python)
+-   [C#](#tabpanel_7_csharp)
+-   [JavaScript](#tabpanel_7_javascript)
+-   [Java](#tabpanel_7_java)
+
+```
+thread_id = "thread_abcd1234" 
+assistant_id = "asst_efgh5678" 
+run = project_client.agents.runs.create( 
+  thread_id=thread_id,  
+  agent_id=assistant_id, 
+  additional_instructions="Please address the user as Jane Doe. The user has a premium account" 
+) 
+while run.status in ("queued", "in_progress"): 
+  time.sleep(1) 
+  run = project_client.agents.runs.get(thread_id=thread_id, run_id=run.id) 
+```
+
+**Current - responses**
+
+-   [Python](#tabpanel_8_python)
+-   [C#](#tabpanel_8_csharp)
+-   [JavaScript](#tabpanel_8_javascript)
+-   [Java](#tabpanel_8_java)
+
+```
+conversation_id = "conv_11112222AAAABBBB"
+
+response = openai.responses.create(
+    input="Hi, Agent! Draw a graph for a line "
+          "with a slope of 4 and "
+          "y-intercept of 9.",
+    conversation=conversation_id,
+    extra_body={
+        "agent_reference": {
+            "name": "my-agent",
+            "type": "agent_reference",
+        }
+    },
+)
+```
+
+**Previous - runs**
+
+```
+{
+  "id": "run_xyz",
+  "object": "thread.run",
+  "created_at": 1762218810,
+  "assistant_id": "asst_efgh5678",
+  "thread_id": "thread_abcd1234",
+  "status": "completed",
+  "started_at": 1762218810,
+  "expires_at": null,
+  "cancelled_at": null,
+  "failed_at": null,
+  "completed_at": 1762218812,
+  "required_action": null,
+  "last_error": null,
+  "model": "gpt-4.1",
+  "instructions": "You politely help with math questions. Use the Code Interpreter tool when asked to visualize numbers. Please address the user as Jane Doe. The user has a premium account",
+  "tools": [
+    {
+      "type": "code_interpreter"
+    }
+  ],
+  "tool_resources": {},
+  "metadata": {},
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "max_completion_tokens": null,
+  "max_prompt_tokens": null,
+  "truncation_strategy": {
+    "type": "auto",
+    "last_messages": null
+  },
+  "incomplete_details": null,
+  "usage": {
+    "prompt_tokens": 1216,
+    "completion_tokens": 76,
+    "total_tokens": 1292,
+    "prompt_token_details": {
+      "cached_tokens": 0
+    }
+  },
+  "response_format": "auto",
+  "tool_choice": "auto",
+  "parallel_tool_calls": true
+}
+```
+
+**Current - responses**
+
+```
+{
+  "id": "resp_3483e9c8dda4f165006909550333588190afc76a645a0e877a",
+  "created_at": 1762219267.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {
+    "x-ms-telemetry-agent-kind": "",
+    "x-ms-telemetry-user-agent": "OpenAI/Python 2.4.0",
+    "x-ms-telemetry-response-start-time": "2025-11-04T01:21:06.5346780+00:00"
+  },
+  "model": "gpt-4.1",
+  "object": "response",
+  "output": [
+    {
+      "id": "msg_3483e9c8dda4f1650069095503abf881909917865574cddf2c",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Of course! Here's a simple plot for the line with a rate of change of 4 and a y-intercept of 9.\\n\\nThe equation of the line is:\\n\\n\\\\[ y = 4x + 9 \\\\]\\n\\nLet's draw a graph for it:\\n\\n---\\n\\n```plaintext\\n  |\\n20|                     *\\n  |                  *\\n  |               *\\n  |            *\\n10|         *\\n  |      *\\n  |   *\\n  |*\\n  +---------------------------\\n   -2 -1  0  1  2  3\\n```\\n\\n**Key points:**\\n- The y-intercept is **9**, so at \\\\(x = 0\\\\), \\\\(y = 9\\\\) (point: (0,9))\\n- For each step right (increase in x), y goes up 4 units (rate of change \\\\(m = 4\\\\))\\n  - For \\\\(x = 1\\\\): \\\\(y = 4(1) + 9 = 13\\\\) (point: (1,13))\\n  - For \\\\(x = -1\\\\): \\\\(y = 4(-1) + 9 = 5\\\\) (point: (-1,5))\\n\\nIf you'd like a precise graph or want to visualize it interactively, let me know!",
+
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 1.0,
+  "background": false,
+  "conversation": {
+    "id": "conv_3483e9c8dda4f16500GwcAgtdWlSmbMPzYLjWvDjiSe6LSFcC6"
+  },
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "reasoning": {
+    "effort": null,
+    "generate_summary": null,
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 45,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 264,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 309
+  },
+  "user": null,
+  "content_filters": null,
+  "store": true
+}
+```
+
+If you use the `client.agents.create_agent()` method from earlier SDK versions, migrate to `client.agents.create_version()`. The new method introduces structured agent definitions with explicit `kind`, `model`, and `instructions` fields.
+
+**Previous**
+
+-   [Python](#tabpanel_9_python)
+-   [C#](#tabpanel_9_csharp)
+-   [JavaScript](#tabpanel_9_javascript)
+-   [Java](#tabpanel_9_java)
+
+```
+agent = client.agents.create_agent( 
+    model="gpt-4.1", 
+    name="my-agent",  # Name of the agent 
+    instructions="You politely help with math questions. Use the Code Interpreter tool when asked to visualize numbers.",  # Instructions for the agent 
+    tools=code_interpreter.definitions,  # Attach the tool 
+) 
+```
+
+**Current**
+
+-   [Python](#tabpanel_10_python)
+-   [C#](#tabpanel_10_csharp)
+-   [JavaScript](#tabpanel_10_javascript)
+-   [Java](#tabpanel_10_java)
+
+```
+from azure.ai.projects.models import (
+    CodeInterpreterTool,
+    PromptAgentDefinition,
+)
+
+agent = project.agents.create_version(
+    agent_name="my-agent",
+    definition=PromptAgentDefinition(
+        model="gpt-4.1",
+        instructions=(
+            "You politely help with math "
+            "questions. Use the Code "
+            "Interpreter tool when asked to "
+            "visualize numbers."
+        ),
+        tools=[CodeInterpreterTool()],
+    ),
+)
+```
+
+The following JSON examples compare the response objects returned by the previous and current agent creation methods.
+
+**Previous**
+
+```
+{ 
+  'id': 'asst_AVKrdr2KJthDnZiJ51nca1jy', 
+  'object': 'assistant', 
+  'created_at': 1762218496, 
+  'name': 'my-agent', 
+  'description': None, 
+  'model': 'gpt-4.1', 
+  'instructions': 'You politely help with math questions. Use the Code Interpreter tool when asked to visualize numbers.', 
+  'tools': [ 
+    { 
+      'type': 'code_interpreter' 
+    } 
+  ], 
+  'top_p': 1.0, 
+  'temperature': 1.0, 
+  'tool_resources': { 
+    'code_interpreter': { 
+      'file_ids': [      
+      ] 
+    } 
+  }, 
+  'metadata': { 
+  }, 
+  'response_format': 'auto' 
+} 
+```
+
+**Current**
+
+```
+{
+  "metadata": {},
+  "object": "agent.version",
+  "id": "code-agent:1",
+  "name": "code-agent",
+  "version": "1",
+  "description": "Agent with code interpreter",
+  "created_at": 1772045947,
+  "definition": {
+    "kind": "prompt",
+    "model": "gpt-4.1",
+    "instructions": "You politely help with math questions. Use the Code Interpreter tool when asked to visualize numbers.",
+    "tools": [
+      {
+        "type": "code_interpreter"
+      }
+    ]
+  }
+}
+```
+
+If your code uses the OpenAI Assistants API (`client.beta.assistants.create()`), migrate to the Foundry Agent Service by using `client.agents.create_version()`. The following examples show the structural differences.
+
+**Previous - assistants**
+
+-   [Python](#tabpanel_11_python)
+-   [C#](#tabpanel_11_csharp)
+-   [JavaScript](#tabpanel_11_javascript)
+-   [Java](#tabpanel_11_java)
+
+```
+assistant = client.beta.assistants.create( 
+    model="gpt-4.1", 
+    name="my-assistant", 
+    instructions="You politely help with math questions. Use the Code Interpreter tool when asked to visualize numbers.",  # Instructions for the agent 
+    tools=[{"type": "code_interpreter"}], 
+) 
+```
+
+**Current - new agents**
+
+-   [Python](#tabpanel_12_python)
+-   [C#](#tabpanel_12_csharp)
+-   [JavaScript](#tabpanel_12_javascript)
+-   [Java](#tabpanel_12_java)
+
+```
+from azure.ai.projects.models import (
+    CodeInterpreterTool,
+    PromptAgentDefinition,
+)
+
+agent = project.agents.create_version(
+    agent_name="my-agent",
+    definition=PromptAgentDefinition(
+        model="gpt-4.1",
+        instructions=(
+            "You politely help with math "
+            "questions. Use the Code "
+            "Interpreter tool when asked to "
+            "visualize numbers."
+        ),
+        tools=[CodeInterpreterTool()],
+    ),
+)
+```
+
+A [migration tool](https://aka.ms/agent/migrate/tool) is available on GitHub to help automate the migration of your agents and assistants. The tool migrates code constructs such as agent definitions, thread creation, message creation, and run creation. It doesn't migrate state data like past runs, threads, or messages. After migration, you can run the new code, and any new state data is created in the updated format.
+
+The following example shows a complete before-and-after comparison. Notice that the current code uses both `project` for agent creation and `openai` for conversations and responses.
+
+**Previous**
+
+-   [Python](#tabpanel_13_python)
+-   [C#](#tabpanel_13_csharp)
+-   [JavaScript](#tabpanel_13_javascript)
+-   [Java](#tabpanel_13_java)
+
+```
+agent = project_client.agents.create_agent( 
+    model="gpt-4.1", 
+    name="my-agent", 
+    instructions="You politely help with math questions. Use the Code Interpreter tool when asked to visualize numbers.",  # Instructions for the agent 
+    tools=[{"type": "code_interpreter"}] 
+) 
+thread = project_client.agents.threads.create() 
+message = project_client.agents.messages.create( 
+    thread_id=thread.id, 
+    role="user",  # Role of the message sender 
+    content="Hi, Agent! Draw a graph for a line with a rate of change of 4 and y-intercept of 9.",  # Message content 
+) 
+run = project_client.agents.runs.create_and_process( 
+    thread_id=thread.id, 
+    agent_id=agent.id, 
+    additional_instructions="Please address the user as Jane Doe. The user has a premium account", 
+) 
+messages = project_client.agents.messages.list(thread_id=thread.id) 
+for message in messages: 
+    print(f"Role: {message.role}, Content: {message.content}") 
+```
+
+**Current**
+
+-   [Python](#tabpanel_14_python)
+-   [C#](#tabpanel_14_csharp)
+-   [JavaScript](#tabpanel_14_javascript)
+-   [Java](#tabpanel_14_java)
+
+```
+from azure.ai.projects.models import (
+    CodeInterpreterTool,
+    PromptAgentDefinition,
+)
+
+# Create the agent
+agent = project.agents.create_version(
+    agent_name="my-agent",
+    definition=PromptAgentDefinition(
+        model="gpt-4.1",
+        instructions=(
+            "You politely help with math "
+            "questions. Use the Code "
+            "Interpreter tool when asked "
+            "to visualize numbers."
+        ),
+        tools=[CodeInterpreterTool()],
+    ),
+)
+
+# Create a conversation with initial message
+conversation = openai.conversations.create(
+    items=[
+        {
+            "type": "message",
+            "role": "user",
+            "content": (
+                "Hi, Agent! Draw a graph "
+                "for a line with a rate "
+                "of change of 4 and "
+                "y-intercept of 9."
+            ),
+        }
+    ],
+)
+
+# Send a response with the agent
+response = openai.responses.create(
+    conversation=conversation.id,
+    extra_body={
+        "agent_reference": {
+            "name": agent.name,
+            "type": "agent_reference",
+        }
+    },
+    input=(
+        "Please address the user as "
+        "Jane Doe. The user has a "
+        "premium account"
+    ),
+)
+
+# Print the response output
+for item in response.output:
+    if item.type == "message":
+        for block in item.content:
+            print(block.text)
+```
+
+After you migrate your code, confirm that everything works correctly:
+
+1.  **Run the updated code** and verify that it executes without errors.
+2.  **Check agent creation** by confirming that `create_version()` returns an object with an `id` and `version` field.
+3.  **Test a conversation** by creating a conversation, sending a response, and verifying that output items are returned.
+4.  **Confirm context retention** by sending multiple responses to the same conversation and checking that the agent remembers earlier messages.
+
+| Symptom | Cause | Resolution |
+| --- | --- | --- |
+| **Python**: `AttributeError: 'AIProjectClient' has no attribute 'conversations'` | You called `conversations.create()` on the project client instead of the OpenAI client. | Use `project.get_openai_client()` to obtain the OpenAI client, then call `openai.conversations.create()`. |
+| **C#**: `Azure.AI.Extensions.OpenAI` namespace not found | The `Azure.AI.Extensions.OpenAI` NuGet package is missing. | Install `Azure.AI.Projects` (which brings in `Azure.AI.Extensions.OpenAI` and `Azure.AI.Projects.Agents` as dependencies). |
+| **JavaScript**: `getOpenAIClient is not a function` | You're using an older version of `@azure/ai-projects`. | Update to `@azure/ai-projects@2.0.0` or later: `npm install @azure/ai-projects@2.0.0`. |
+| **Java**: `AgentsClientBuilder` can't resolve | The `azure-ai-agents` Maven dependency is missing or outdated. | Add `com.azure:azure-ai-agents:2.0.0` to your `pom.xml` dependencies. |
+| `create_agent()` is removed | Earlier SDK versions used `create_agent()`, which was removed in v2.0.0. | Replace with `create_version()` (Python/JS) or `CreateAgentVersionAsync()` (C#) or `createAgentVersion()` (Java) and pass a `PromptAgentDefinition` object. |
+| Old thread data isn't available | The migration tool doesn't migrate state data (past runs, threads, or messages). | Start new conversations after migration. Historical data remains accessible through the previous API until it's deprecated. |
+| `responses.create()` raises a model error | The model name might be incorrect or unavailable in your region. | Verify the model name in your Foundry project and check [model region availability](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/limits-quotas-regions). |
+
+-   [Agent runtime components](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/runtime-components)
+-   [Quickstart: Create a Hosted agent](https://learn.microsoft.com/en-us/azure/foundry/agents/quickstarts/quickstart-hosted-agent)
+-   [Deploy a Hosted agent](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/deploy-hosted-agent)

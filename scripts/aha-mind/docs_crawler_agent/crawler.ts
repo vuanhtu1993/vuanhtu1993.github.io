@@ -169,8 +169,11 @@ export async function crawl(
         // Lấy HTML sau khi JS đã render
         const html = await page.content();
 
+        // Sử dụng URL cuối cùng sau khi redirect để resolve relative links chính xác
+        const finalUrl = page.url();
+
         // Convert HTML → Markdown (có xử lý upload ảnh Cloudinary)
-        const { title, markdown, wordCount } = await convertHtmlToMarkdown(html, url);
+        const { title, markdown, wordCount } = await convertHtmlToMarkdown(html, finalUrl);
 
         // Skip trang không có nội dung thực sự (< 50 words)
         if (wordCount < 50) {
@@ -178,7 +181,7 @@ export async function crawl(
           onProgress?.({
             current: crawledCount,
             total: Math.min(visited.size + queue.length, maxPages),
-            currentUrl: url,
+            currentUrl: finalUrl,
             skipped: true,
           });
           continue;
@@ -186,18 +189,18 @@ export async function crawl(
 
         // Lưu file markdown
         const crawledAt = new Date().toISOString();
-        const savedPath = savePage({ outputDir, url, title, markdown, crawledAt });
-        crawledUrls.push(url);
+        const savedPath = savePage({ outputDir, url: finalUrl, title, markdown, crawledAt });
+        crawledUrls.push(finalUrl);
 
         onProgress?.({
           current: crawledCount,
           total: Math.min(visited.size + queue.length, maxPages),
-          currentUrl: url,
+          currentUrl: finalUrl,
           savedPath,
         });
 
         // Extract tất cả links từ trang hiện tại
-        const links = await extractLinks(page, url);
+        const links = await extractLinks(page, finalUrl);
 
         // Filter và add vào queue
         for (const link of links) {

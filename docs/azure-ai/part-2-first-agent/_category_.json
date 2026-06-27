@@ -1,8 +1,0 @@
-{
-  "label": "Phần 2: Hello Agent",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Build AI Agent đầu tiên từ zero — hiểu anatomy, tạo agent, và trao quyền cho agent với custom tools."
-  }
-}

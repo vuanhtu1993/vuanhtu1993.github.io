@@ -1,8 +1,0 @@
-{
-  "label": "Phần 1: Foundation",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "Nền tảng Azure AI — hiểu bức tranh toàn cảnh, cài đặt môi trường, và setup kết nối Python ↔ Azure AI Foundry."
-  }
-}

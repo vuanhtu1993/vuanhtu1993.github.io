@@ -46,7 +46,7 @@ export async function uploadImage(imageUrl: string, domain: string): Promise<str
 
     return result.secure_url;
   } catch (error) {
-    console.error(`❌ Lỗi upload ảnh [${imageUrl}]:`, error instanceof Error ? error.message : String(error));
+    console.error(`❌ Lỗi upload ảnh [${imageUrl}]:`, error instanceof Error ? error.message : JSON.stringify(error));
     // Nếu lỗi, fallback về link cũ để không làm gãy content
     return imageUrl;
   }

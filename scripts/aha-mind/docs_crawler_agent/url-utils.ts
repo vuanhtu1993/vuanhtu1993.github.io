@@ -22,13 +22,24 @@ export interface CrawlScope {
  */
 export function parseCrawlScope(startUrl: string): CrawlScope {
   const parsed = new URL(startUrl);
-  const pathParts = parsed.pathname.split("/").filter(Boolean); // bỏ empty string
+  let pathname = parsed.pathname;
 
-  // Lấy segment đầu tiên của path làm basePath
-  // ví dụ: /docs/guide → basePath = "/docs"
-  // ví dụ: /docs → basePath = "/docs"
-  // ví dụ: / → basePath = "/"
-  const basePath = pathParts.length > 0 ? `/${pathParts[0]}` : "/";
+  // Nếu url không kết thúc bằng "/", ta coi segment cuối cùng là tên trang hiện tại và cắt bỏ
+  // Ví dụ: "/en-us/azure/foundry/agents/overview" -> "/en-us/azure/foundry/agents"
+  // Nếu kết thúc bằng "/", giữ nguyên vì người dùng đang chỉ định chính xác thư mục gốc
+  if (!pathname.endsWith("/")) {
+    const lastSlashIndex = pathname.lastIndexOf("/");
+    if (lastSlashIndex !== -1) {
+      pathname = pathname.substring(0, lastSlashIndex);
+    }
+  }
+
+  // Loại bỏ trailing slash ở cuối (trừ root "/") để normalize
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    pathname = pathname.slice(0, -1);
+  }
+
+  const basePath = pathname || "/";
 
   return {
     domain: parsed.hostname,
