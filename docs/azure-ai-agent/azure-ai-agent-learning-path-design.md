@@ -164,7 +164,7 @@ docs/
 
 ### 🔧 Category 02: Tools (Module 2 & 3)
 
-#### `custom-tools-why.md` — Tại sao cần Custom Tools?
+#### ✅ `custom-tools-why.md` — Tại sao cần Custom Tools?
 **Nguồn:** `concepts/tool-catalog.md` (Custom tools section), `concepts/tool-best-practice.md`
 **Key concepts:**
 - Gap giữa built-in tools và nhu cầu thực tế doanh nghiệp
@@ -172,7 +172,7 @@ docs/
 - **Analogy:** Built-in tools như bộ đồ nghề tiêu chuẩn; custom tools như đặt hàng tool riêng
 - **Mermaid:** Decision flowchart: Should I use custom tools?
 
-#### `custom-tools-options.md` — Các lựa chọn Custom Tools
+#### ✅ `custom-tools-options.md` — Các lựa chọn Custom Tools
 **Nguồn:** `concepts/tool-catalog.md`, `how-to/tools/function-calling.md`, `how-to/tools/openapi.md`
 **Key concepts:**
 - Function Calling — define & execute locally
@@ -182,14 +182,14 @@ docs/
 - **Bảng so sánh** 4 options theo: hosting, auth, use case, complexity
 - **Mermaid:** Comparison diagram
 
-#### `custom-tools-integrate.md` — Cách tích hợp Custom Tools
+#### ✅ `custom-tools-integrate.md` — Cách tích hợp Custom Tools
 **Nguồn:** `how-to/tools/function-calling.md`, `how-to/tools/openapi.md`, `how-to/tools/azure-functions.md`
 **Key concepts:**
 - Function calling flow: Define schema → Agent calls → App executes → Return result
 - OpenAPI flow: Provide spec → Agent discovers endpoints → Calls automatically
 - **Mermaid:** sequenceDiagram cho từng approach
 
-#### `mcp-discovery.md` — Understand MCP Tool Discovery
+#### ✅ `mcp-discovery.md` — Understand MCP Tool Discovery
 **Nguồn:** `concepts/tool-catalog.md` (MCP sections), Tool catalog UI walkthrough
 **Key concepts:**
 - MCP Protocol là gì? (Model Context Protocol)
@@ -197,7 +197,7 @@ docs/
 - Tool catalog: browse, filter, configure
 - **Mermaid:** MCP topology diagram
 
-#### `mcp-server-client.md` — MCP Server và Client
+#### ✅ `mcp-server-client.md` — MCP Server và Client
 **Nguồn:** `how-to/mcp-authentication.md`
 **Key concepts:**
 - MCP Server = expose tools via protocol
@@ -205,7 +205,7 @@ docs/
 - **Mermaid:** Auth flow diagrams cho từng method
 - **Trade-off:** 3 auth methods
 
-#### `mcp-azure-agents.md` — Dùng MCP với Azure AI Agents
+#### ✅ `mcp-azure-agents.md` — Dùng MCP với Azure AI Agents
 **Nguồn:** `how-to/tools/model-context-protocol.md`, `overview.md` (MCP section)
 **Key concepts:**
 - Thêm MCP tool vào agent definition
@@ -217,7 +217,7 @@ docs/
 
 ### 📚 Category 03: Knowledge & RAG (Module 4)
 
-#### `rag-for-agents.md` — RAG cho AI Agents
+#### ✅ `rag-for-agents.md` — RAG cho AI Agents
 **Nguồn:** `concepts/what-is-foundry-iq.md`, `concepts/vector-stores.md`
 **Key concepts:**
 - RAG (Retrieval-Augmented Generation) là gì?
@@ -227,7 +227,7 @@ docs/
 - **Analogy:** Agent như thám tử — RAG cho phép nó tra cứu "hồ sơ vụ án" trước khi trả lời
 - **Mermaid:** RAG pipeline diagram
 
-#### `foundry-iq-overview.md` — Foundry IQ là gì?
+#### ✅ `foundry-iq-overview.md` — Foundry IQ là gì?
 **Nguồn:** `concepts/what-is-foundry-iq.md`
 **Key concepts:**
 - Foundry IQ = Knowledge base management platform
@@ -235,7 +235,7 @@ docs/
 - Work IQ vs Fabric IQ vs Foundry IQ (bộ 3 IQ)
 - **Mermaid:** IQ products overview
 
-#### `data-sources-config.md` — Cấu hình Data Sources
+#### ✅ `data-sources-config.md` — Cấu hình Data Sources
 **Nguồn:** `how-to/foundry-iq-connect.md`
 **Key concepts:**
 - Supported data sources: Azure Blob, SharePoint, Azure AI Search, v.v.
@@ -243,7 +243,7 @@ docs/
 - Data ingestion & chunking strategies
 - **Mermaid:** Data source → Index → Knowledge base flow
 
-#### `retrieval-config.md` — Cấu hình Retrieval với Foundry IQ
+#### ✅ `retrieval-config.md` — Cấu hình Retrieval với Foundry IQ
 **Nguồn:** `how-to/foundry-iq-connect.md`, `concepts/vector-stores.md`
 **Key concepts:**
 - Retrieval config: top-k, score threshold, reranking

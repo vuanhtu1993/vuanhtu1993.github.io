@@ -1,0 +1,8 @@
+{
+  "label": "03. Knowledge & RAG",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Hướng dẫn cấu hình Knowledge Base và Retrieval-Augmented Generation (RAG) trong Azure Foundry."
+  }
+}
