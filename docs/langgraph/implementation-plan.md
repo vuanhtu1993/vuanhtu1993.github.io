@@ -1,7 +1,5 @@
 # Kế Hoạch Xây Dựng Khoá Học AI Agents
 
-> **Target:** Junior JS/TS Developer | **Tool:** LangChain.js + LangGraph.js | **LLM:** `gemini-2.5-flash`
-
 ---
 
 ## Thông Số Cốt Lõi
@@ -66,7 +64,7 @@ graph LR
   - `langgraph/quickstart.md` — **NGUỒN CHÍNH** (Graph API + Functional API step-by-step)
   - `langgraph/thinking-in-langgraph.md` — mental model Node/State/Edge
   - `langgraph/workflows-agents.md` — ToolNode pattern
-- **Đã tạo:** 
+- **Đã tạo:**
   - `docs/langgraph/agents-101/02-agent-loop-in-code.md`
   - `docs/langgraph/agents-101/02b-thinking-in-langgraph.md`
 - **Độ ưu tiên:** Critical
@@ -200,12 +198,12 @@ graph LR
 
 ### Bài 2.4 — Context Engineering: Tối Ưu Prompt
 
-- **Concept:** Context window management, prompt compression, few-shot selection
-- **Demo JS:** Dynamic prompt assembly, context trimming
-- **Nguồn tài liệu:**
-  - `langchain/context-engineering.md` — **NGUỒN CHÍNH** (38KB — rất đầy đủ)
-- **Đã tạo:** `docs/langgraph/agentic-patterns/04-context-engineering.md`
-- **Độ ưu tiên:** Important
+- [ ] **Concept:** Context window management, prompt compression, few-shot selection
+- [ ] **Demo JS:** Dynamic prompt assembly, context trimming
+- [ ] **Nguồn tài liệu:**
+  - [ ] `langchain/context-engineering.md` — **NGUỒN CHÍNH** (38KB — rất đầy đủ)
+- [ ] **Đã tạo:** `docs/langgraph/agentic-patterns/04-context-engineering.md`
+- [ ] **Độ ưu tiên:** Important
 
 ---
 
@@ -517,7 +515,7 @@ graph LR
 
 | Rủi ro                                 | Xác suất  | Mitigation                                          |
 | --------------------------------------- | ----------- | --------------------------------------------------- |
-| LangChain API thay đổi                | Cao         | Ghi `Last Updated`, dùng stable LCEL API         |
+| LangChain API thay đổi                | Cao         | Ghi`Last Updated`, dùng stable LCEL API          |
 | `gemini-2.5-flash` pricing thay đổi | Thấp       | Abstraction qua LangChain — đổi provider 1 dòng |
 | Bài quá lý thuyết                   | Trung bình | Mỗi bài BẮT BUỘC có working code demo          |
 | Burnout (full course)                   | Cao         | Milestone checkpoint sau mỗi phase                 |
