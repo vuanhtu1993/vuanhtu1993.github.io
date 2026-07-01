@@ -1,0 +1,2881 @@
+{
+  "id": "nestjs-framework",
+  "label": "NestJS Framework",
+  "level": 0,
+  "description": "A progressive Node.js framework for building efficient, reliable, and scalable server-side applications using modern JavaScript and TypeScript.",
+  "docLink": "/docs/",
+  "sourceRef": "index.md",
+  "tags": [
+    "nodejs",
+    "framework",
+    "typescript"
+  ],
+  "relations": [],
+  "children": [
+    {
+      "id": "nestjs-first-steps",
+      "label": "First Steps",
+      "level": 2,
+      "description": "Core fundamentals, prerequisites, and setup instructions for starting a new NestJS project using the Nest CLI.",
+      "docLink": "/docs/first-steps",
+      "sourceRef": "first-steps.md",
+      "tags": [
+        "fundamentals",
+        "setup",
+        "cli"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-controllers",
+      "label": "Controllers",
+      "level": 2,
+      "description": "Components responsible for handling incoming HTTP requests and returning responses to the client.",
+      "docLink": "/docs/controllers",
+      "sourceRef": "controllers.md",
+      "tags": [
+        "routing",
+        "http",
+        "request-response"
+      ],
+      "relations": [
+        {
+          "targetId": "nestjs-providers",
+          "type": "depends-on"
+        },
+        {
+          "targetId": "nestjs-modules",
+          "type": "part-of"
+        }
+      ]
+    },
+    {
+      "id": "nestjs-providers",
+      "label": "Providers",
+      "level": 2,
+      "description": "Core building blocks in NestJS, such as services, repositories, and factories, designed to be injected as dependencies.",
+      "docLink": "/docs/providers",
+      "sourceRef": "providers.md",
+      "tags": [
+        "dependency-injection",
+        "services",
+        "ioc"
+      ],
+      "relations": [
+        {
+          "targetId": "nestjs-modules",
+          "type": "part-of"
+        }
+      ]
+    },
+    {
+      "id": "nestjs-modules",
+      "label": "Modules",
+      "level": 2,
+      "description": "Classes annotated with @Module() used to organize and manage the application structure and dependency graph.",
+      "docLink": "/docs/modules",
+      "sourceRef": "modules.md",
+      "tags": [
+        "architecture",
+        "dependency-graph",
+        "encapsulation"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-middleware",
+      "label": "Middleware",
+      "level": 2,
+      "description": "Functions called before the route handler that have access to request and response objects to execute code or modify payloads.",
+      "docLink": "/docs/middleware",
+      "sourceRef": "middleware.md",
+      "tags": [
+        "http",
+        "express",
+        "fastify"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-exception-filters",
+      "label": "Exception Filters",
+      "level": 2,
+      "description": "An exceptions layer responsible for processing all unhandled exceptions and sending user-friendly responses.",
+      "docLink": "/docs/exception-filters",
+      "sourceRef": "exception-filters.md",
+      "tags": [
+        "error-handling",
+        "http-exception",
+        "filters"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-pipes",
+      "label": "Pipes",
+      "level": 2,
+      "description": "Injectable classes used for data transformation and validation before route handlers are executed.",
+      "docLink": "/docs/pipes",
+      "sourceRef": "pipes.md",
+      "tags": [
+        "validation",
+        "transformation",
+        "data-integrity"
+      ],
+      "relations": [
+        {
+          "targetId": "nestjs-exception-filters",
+          "type": "related-to"
+        }
+      ]
+    },
+    {
+      "id": "nestjs-guards",
+      "label": "Guards",
+      "level": 2,
+      "description": "Injectable classes that implement authorization and determine whether a request can proceed to the route handler.",
+      "docLink": "/docs/guards",
+      "sourceRef": "guards.md",
+      "tags": [
+        "authorization",
+        "security",
+        "authentication"
+      ],
+      "relations": [
+        {
+          "targetId": "nestjs-middleware",
+          "type": "related-to"
+        }
+      ]
+    },
+    {
+      "id": "nestjs-interceptors",
+      "label": "Interceptors",
+      "level": 2,
+      "description": "Classes inspired by Aspect-Oriented Programming that bind extra logic before or after method execution and transform results.",
+      "docLink": "/docs/interceptors",
+      "sourceRef": "interceptors.md",
+      "tags": [
+        "aop",
+        "rxjs",
+        "request-lifecycle"
+      ],
+      "relations": [
+        {
+          "targetId": "nestjs-guards",
+          "type": "related-to"
+        }
+      ]
+    },
+    {
+      "id": "nestjs-custom-decorators",
+      "label": "Custom Decorators",
+      "level": 2,
+      "description": "Custom-defined decorators to simplify parameter extraction, improve code readability, and compose multiple decorators.",
+      "docLink": "/docs/custom-decorators",
+      "sourceRef": "custom-decorators.md",
+      "tags": [
+        "decorators",
+        "metadata",
+        "clean-code"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-deployment",
+      "label": "Deployment",
+      "level": 2,
+      "description": "Best practices and steps for compiling TypeScript and deploying NestJS applications to production environments.",
+      "docLink": "/docs/deployment",
+      "sourceRef": "deployment.md",
+      "tags": [
+        "production",
+        "build",
+        "cloud"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-standalone-applications",
+      "label": "Standalone Applications",
+      "level": 2,
+      "description": "A way to bootstrap NestJS without network listeners, wrapping the IoC container for CRON jobs or CLI tools.",
+      "docLink": "/docs/standalone-applications",
+      "sourceRef": "standalone-applications.md",
+      "tags": [
+        "ioc-container",
+        "cron",
+        "cli"
+      ],
+      "relations": []
+    },
+    {
+      "id": "nestjs-cli",
+      "label": "Nest CLI",
+      "level": 1,
+      "description": "The command-line interface tool used to initialize, develop, and maintain NestJS applications.",
+      "docLink": "/docs/cli/overview",
+      "tags": [
+        "cli",
+        "tooling",
+        "core"
+      ],
+      "children": [
+        {
+          "id": "cli-overview",
+          "label": "CLI Overview & Installation",
+          "level": 2,
+          "description": "Covers the installation of the Nest CLI globally or via npx, and the basic workflow for creating and running projects.",
+          "docLink": "/docs/cli/overview",
+          "tags": [
+            "installation",
+            "workflow"
+          ]
+        },
+        {
+          "id": "cli-workspaces",
+          "label": "Workspaces & Modes",
+          "level": 2,
+          "description": "NestJS supports two modes of code organization: standard mode for single projects, and monorepo mode for multi-project workspaces.",
+          "docLink": "/docs/cli/monorepo",
+          "tags": [
+            "workspace",
+            "architecture"
+          ],
+          "children": [
+            {
+              "id": "cli-standard-mode",
+              "label": "Standard Mode",
+              "level": 3,
+              "description": "The default mode for individual project-focused applications with their own dependencies and settings.",
+              "docLink": "/docs/cli/monorepo#standard-mode",
+              "tags": [
+                "standard",
+                "project"
+              ],
+              "relations": [
+                {
+                  "targetId": "cli-monorepo-mode",
+                  "type": "alternative-to"
+                }
+              ]
+            },
+            {
+              "id": "cli-monorepo-mode",
+              "label": "Monorepo Mode",
+              "level": 3,
+              "description": "A lightweight monorepo structure that coordinates multiple applications and libraries within a single workspace.",
+              "docLink": "/docs/cli/monorepo#monorepo-mode",
+              "tags": [
+                "monorepo",
+                "workspace"
+              ],
+              "relations": [
+                {
+                  "targetId": "cli-standard-mode",
+                  "type": "alternative-to"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cli-libraries",
+          "label": "Nest Libraries",
+          "level": 2,
+          "description": "Lightweight, reusable packages within a monorepo workspace that must be imported into an application to execute.",
+          "docLink": "/docs/cli/libraries",
+          "tags": [
+            "libraries",
+            "monorepo",
+            "reusability"
+          ],
+          "relations": [
+            {
+              "targetId": "cli-monorepo-mode",
+              "type": "depends-on"
+            }
+          ]
+        },
+        {
+          "id": "cli-scripts",
+          "label": "CLI & Scripts",
+          "level": 2,
+          "description": "Explains how the Nest CLI interacts with compilers (tsc, swc) and package.json scripts to manage the build and execution pipeline.",
+          "docLink": "/docs/cli/scripts",
+          "tags": [
+            "scripts",
+            "compiler",
+            "build"
+          ],
+          "children": [
+            {
+              "id": "cli-build-process",
+              "label": "Build Process",
+              "level": 3,
+              "description": "The build process wraps tsc, swc, or webpack to compile TypeScript to JavaScript while handling tsconfig-paths.",
+              "docLink": "/docs/cli/scripts#build",
+              "tags": [
+                "build",
+                "compiler",
+                "webpack"
+              ]
+            },
+            {
+              "id": "cli-execution-process",
+              "label": "Execution Process",
+              "level": 3,
+              "description": "The execution process ensures the project is built and then invokes the node command, supporting watch mode for development.",
+              "docLink": "/docs/cli/scripts#execution",
+              "tags": [
+                "start",
+                "execution",
+                "node"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cli-commands",
+          "label": "CLI Command Reference",
+          "level": 2,
+          "description": "Detailed reference of commands available in the Nest CLI for project creation, generation, and management.",
+          "docLink": "/docs/cli/usages",
+          "tags": [
+            "commands",
+            "reference"
+          ],
+          "children": [
+            {
+              "id": "cli-cmd-new",
+              "label": "nest new",
+              "level": 3,
+              "description": "Creates and initializes a new standard mode NestJS project with default configurations and folders.",
+              "docLink": "/docs/cli/usages#nest-new",
+              "tags": [
+                "commands",
+                "scaffolding"
+              ]
+            },
+            {
+              "id": "cli-cmd-generate",
+              "label": "nest generate",
+              "level": 3,
+              "description": "Generates and/or modifies files based on a schematic, such as controllers, services, modules, or libraries.",
+              "docLink": "/docs/cli/usages#nest-generate",
+              "tags": [
+                "commands",
+                "schematics"
+              ],
+              "relations": [
+                {
+                  "targetId": "cli-libraries",
+                  "type": "related-to"
+                }
+              ]
+            },
+            {
+              "id": "cli-cmd-build",
+              "label": "nest build",
+              "level": 3,
+              "description": "Compiles a NestJS application into a production-ready bundle using the configured compiler.",
+              "docLink": "/docs/cli/usages#nest-build",
+              "tags": [
+                "commands",
+                "build"
+              ],
+              "relations": [
+                {
+                  "targetId": "cli-build-process",
+                  "type": "related-to"
+                }
+              ]
+            },
+            {
+              "id": "cli-cmd-start",
+              "label": "nest start",
+              "level": 3,
+              "description": "Compiles and runs a NestJS application, with options for watch mode and debugging.",
+              "docLink": "/docs/cli/usages#nest-start",
+              "tags": [
+                "commands",
+                "execution"
+              ],
+              "relations": [
+                {
+                  "targetId": "cli-execution-process",
+                  "type": "related-to"
+                }
+              ]
+            },
+            {
+              "id": "cli-cmd-add",
+              "label": "nest add",
+              "level": 3,
+              "description": "Imports a library that has been packaged as a Nest library, running its installation schematic.",
+              "docLink": "/docs/cli/usages#nest-add",
+              "tags": [
+                "commands",
+                "library"
+              ]
+            },
+            {
+              "id": "cli-cmd-info",
+              "label": "nest info",
+              "level": 3,
+              "description": "Displays information about installed Nest framework packages, CLI version, and system environment.",
+              "docLink": "/docs/cli/usages#nest-info",
+              "tags": [
+                "commands",
+                "diagnostics"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fundamentals",
+      "label": "Fundamentals",
+      "level": 1,
+      "description": "Core fundamental concepts of NestJS, including advanced dependency injection, lifecycle events, testing, and execution contexts.",
+      "docLink": "/fundamentals/custom-providers",
+      "sourceRef": "fundamentals/custom-providers.md",
+      "tags": [
+        "nestjs",
+        "fundamentals",
+        "backend"
+      ],
+      "relations": [],
+      "children": [
+        {
+          "id": "custom-providers",
+          "label": "Custom Providers",
+          "level": 2,
+          "description": "Advanced dependency injection techniques in NestJS using custom tokens, values, classes, and factories.",
+          "docLink": "/fundamentals/custom-providers",
+          "sourceRef": "fundamentals/custom-providers.md",
+          "tags": [
+            "di",
+            "ioc",
+            "providers"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ],
+          "children": [
+            {
+              "id": "di-fundamentals",
+              "label": "Dependency Injection Fundamentals",
+              "level": 3,
+              "description": "The Inversion of Control (IoC) technique used by NestJS to delegate instantiation of dependencies to the runtime container.",
+              "docLink": "/fundamentals/custom-providers#di-fundamentals",
+              "sourceRef": "fundamentals/custom-providers.md",
+              "tags": [
+                "di",
+                "ioc",
+                "design-pattern"
+              ],
+              "relations": [
+                {
+                  "targetId": "custom-providers",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "async-providers",
+          "label": "Asynchronous Providers",
+          "level": 2,
+          "description": "Providers that delay application startup until asynchronous tasks, such as database connections, are completed.",
+          "docLink": "/fundamentals/async-providers",
+          "sourceRef": "fundamentals/async-providers.md",
+          "tags": [
+            "async",
+            "providers",
+            "startup"
+          ],
+          "relations": [
+            {
+              "targetId": "custom-providers",
+              "type": "depends-on"
+            }
+          ]
+        },
+        {
+          "id": "circular-dependency",
+          "label": "Circular Dependency",
+          "level": 2,
+          "description": "A situation where two classes depend on each other, requiring special resolution techniques in NestJS.",
+          "docLink": "/fundamentals/circular-dependency",
+          "sourceRef": "fundamentals/circular-dependency.md",
+          "tags": [
+            "circular-dependency",
+            "di",
+            "refactoring"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ],
+          "children": [
+            {
+              "id": "forward-reference",
+              "label": "Forward Reference",
+              "level": 3,
+              "description": "A utility function forwardRef() that allows NestJS to reference classes which are not yet defined.",
+              "docLink": "/fundamentals/circular-dependency#forward-reference",
+              "sourceRef": "fundamentals/circular-dependency.md",
+              "tags": [
+                "forward-ref",
+                "di",
+                "utility"
+              ],
+              "relations": [
+                {
+                  "targetId": "circular-dependency",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dynamic-modules",
+          "label": "Dynamic Modules",
+          "level": 2,
+          "description": "Modules that can be configured dynamically at runtime, enabling customizable provider registration.",
+          "docLink": "/fundamentals/dynamic-modules",
+          "sourceRef": "fundamentals/dynamic-modules.md",
+          "tags": [
+            "modules",
+            "dynamic-configuration",
+            "nest-core"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ]
+        },
+        {
+          "id": "injection-scopes",
+          "label": "Injection Scopes",
+          "level": 2,
+          "description": "Mechanisms to control the lifetime and sharing behavior of providers across requests and consumers.",
+          "docLink": "/fundamentals/injection-scopes",
+          "sourceRef": "fundamentals/injection-scopes.md",
+          "tags": [
+            "scopes",
+            "singleton",
+            "request-scope"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ],
+          "children": [
+            {
+              "id": "scope-default",
+              "label": "Default Scope (Singleton)",
+              "level": 3,
+              "description": "The default scope where a single instance of a provider is shared across the entire application lifecycle.",
+              "docLink": "/fundamentals/injection-scopes#provider-scope",
+              "sourceRef": "fundamentals/injection-scopes.md",
+              "tags": [
+                "singleton",
+                "default-scope"
+              ],
+              "relations": [
+                {
+                  "targetId": "injection-scopes",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "scope-request",
+              "label": "Request Scope",
+              "level": 3,
+              "description": "A scope where a new instance of the provider is created exclusively for each incoming request and garbage-collected afterward.",
+              "docLink": "/fundamentals/injection-scopes#provider-scope",
+              "sourceRef": "fundamentals/injection-scopes.md",
+              "tags": [
+                "request-scope",
+                "multi-tenancy"
+              ],
+              "relations": [
+                {
+                  "targetId": "injection-scopes",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "scope-transient",
+              "label": "Transient Scope",
+              "level": 3,
+              "description": "A scope where each consumer injecting the provider receives a new, dedicated instance.",
+              "docLink": "/fundamentals/injection-scopes#provider-scope",
+              "sourceRef": "fundamentals/injection-scopes.md",
+              "tags": [
+                "transient-scope",
+                "di"
+              ],
+              "relations": [
+                {
+                  "targetId": "injection-scopes",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lazy-loading-modules",
+          "label": "Lazy Loading Modules",
+          "level": 2,
+          "description": "A technique to load modules on-demand to decrease bootstrap time, especially useful in serverless environments.",
+          "docLink": "/fundamentals/lazy-loading-modules",
+          "sourceRef": "fundamentals/lazy-loading-modules.md",
+          "tags": [
+            "lazy-loading",
+            "performance",
+            "serverless"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ]
+        },
+        {
+          "id": "execution-context",
+          "label": "Execution Context",
+          "level": 2,
+          "description": "Utility classes providing information about the current execution context across HTTP, RPC, and WebSockets.",
+          "docLink": "/fundamentals/execution-context",
+          "sourceRef": "fundamentals/execution-context.md",
+          "tags": [
+            "context",
+            "guards",
+            "interceptors"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ],
+          "children": [
+            {
+              "id": "arguments-host",
+              "label": "Arguments Host",
+              "level": 3,
+              "description": "An abstraction over a handler's arguments used to retrieve arguments based on the active application context.",
+              "docLink": "/fundamentals/execution-context#argumentshost-class",
+              "sourceRef": "fundamentals/execution-context.md",
+              "tags": [
+                "arguments-host",
+                "http",
+                "rpc"
+              ],
+              "relations": [
+                {
+                  "targetId": "execution-context",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lifecycle-events",
+          "label": "Lifecycle Events",
+          "level": 2,
+          "description": "Hooks provided by NestJS to run code during key application phases: initializing, running, and terminating.",
+          "docLink": "/fundamentals/lifecycle-events",
+          "sourceRef": "fundamentals/lifecycle-events.md",
+          "tags": [
+            "lifecycle-hooks",
+            "startup",
+            "shutdown"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ]
+        },
+        {
+          "id": "module-reference",
+          "label": "Module Reference",
+          "level": 2,
+          "description": "The ModuleRef class used to navigate internal providers and dynamically instantiate static or scoped providers.",
+          "docLink": "/fundamentals/module-ref",
+          "sourceRef": "fundamentals/module-ref.md",
+          "tags": [
+            "module-ref",
+            "di",
+            "dynamic-instantiation"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ]
+        },
+        {
+          "id": "discovery-service",
+          "label": "Discovery Service",
+          "level": 2,
+          "description": "A utility from @nestjs/core to dynamically inspect and retrieve registered providers and controllers at runtime.",
+          "docLink": "/fundamentals/discovery-service",
+          "sourceRef": "fundamentals/discovery-service.md",
+          "tags": [
+            "discovery",
+            "metadata",
+            "introspection"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ]
+        },
+        {
+          "id": "platform-agnosticism",
+          "label": "Platform Agnosticism",
+          "level": 2,
+          "description": "NestJS's design philosophy allowing logical parts to be reused across HTTP, Microservices, WebSockets, and GraphQL.",
+          "docLink": "/fundamentals/platform-agnosticism",
+          "sourceRef": "fundamentals/platform-agnosticism.md",
+          "tags": [
+            "architecture",
+            "agnostic",
+            "reusability"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ]
+        },
+        {
+          "id": "testing",
+          "label": "Testing",
+          "level": 2,
+          "description": "Built-in testing utilities and integration with Jest and Supertest for unit and end-to-end testing.",
+          "docLink": "/fundamentals/testing",
+          "sourceRef": "fundamentals/testing.md",
+          "tags": [
+            "testing",
+            "jest",
+            "unit-test"
+          ],
+          "relations": [
+            {
+              "targetId": "fundamentals",
+              "type": "part-of"
+            }
+          ],
+          "children": [
+            {
+              "id": "unit-testing",
+              "label": "Unit Testing",
+              "level": 3,
+              "description": "Testing individual components in isolation by mocking dependencies using NestJS's testing module.",
+              "docLink": "/fundamentals/testing#unit-testing",
+              "sourceRef": "fundamentals/testing.md",
+              "tags": [
+                "unit-test",
+                "mocking",
+                "jest"
+              ],
+              "relations": [
+                {
+                  "targetId": "testing",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphql",
+      "label": "GraphQL",
+      "level": 1,
+      "description": "Module cung cấp khả năng tích hợp GraphQL mạnh mẽ vào NestJS, hỗ trợ cả hai phương pháp Code First và Schema First sử dụng Apollo hoặc Mercurius.",
+      "docLink": "/docs/graphql/quick-start",
+      "sourceRef": "graphql/quick-start.md",
+      "tags": [
+        "graphql",
+        "core",
+        "module"
+      ],
+      "children": [
+        {
+          "id": "graphql-quick-start",
+          "label": "GraphQL Quick Start",
+          "level": 2,
+          "description": "Hướng dẫn cài đặt và cấu hình ban đầu cho GraphQL Module với các driver Apollo hoặc Mercurius.",
+          "docLink": "/docs/graphql/quick-start",
+          "sourceRef": "graphql/quick-start.md",
+          "tags": [
+            "setup",
+            "apollo",
+            "mercurius"
+          ],
+          "children": [
+            {
+              "id": "graphql-code-first",
+              "label": "Code First Approach",
+              "level": 3,
+              "description": "Phương pháp sử dụng TypeScript decorators và classes để tự động sinh ra GraphQL SDL schema.",
+              "docLink": "/docs/graphql/quick-start#overview",
+              "sourceRef": "graphql/quick-start.md",
+              "tags": [
+                "code-first",
+                "decorators",
+                "typescript"
+              ]
+            },
+            {
+              "id": "graphql-schema-first",
+              "label": "Schema First Approach",
+              "level": 3,
+              "description": "Phương pháp sử dụng GraphQL SDL (Schema Definition Language) làm nguồn chân lý (source of truth) để định nghĩa schema.",
+              "docLink": "/docs/graphql/quick-start#overview",
+              "sourceRef": "graphql/quick-start.md",
+              "tags": [
+                "schema-first",
+                "sdl"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "graphql-resolvers",
+          "label": "Resolvers",
+          "level": 2,
+          "description": "Các thành phần chịu trách nhiệm chuyển đổi các thao tác GraphQL (Query, Mutation, Subscription) thành dữ liệu thực tế.",
+          "docLink": "/docs/graphql/resolvers",
+          "sourceRef": "graphql/resolvers.md",
+          "tags": [
+            "resolvers",
+            "query",
+            "data-fetching"
+          ],
+          "children": [
+            {
+              "id": "graphql-object-types",
+              "label": "Object Types",
+              "level": 3,
+              "description": "Định nghĩa các kiểu đối tượng trong GraphQL schema bằng cách sử dụng decorator @ObjectType() và @Field().",
+              "docLink": "/docs/graphql/resolvers#object-types",
+              "sourceRef": "graphql/resolvers.md",
+              "tags": [
+                "object-type",
+                "decorators"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "graphql-mutations",
+          "label": "Mutations",
+          "level": 2,
+          "description": "Các thao tác được sử dụng để thay đổi dữ liệu phía server, sử dụng decorator @Mutation() và @InputType().",
+          "docLink": "/docs/graphql/mutations",
+          "sourceRef": "graphql/mutations.md",
+          "tags": [
+            "mutations",
+            "write-operations",
+            "input-type"
+          ]
+        },
+        {
+          "id": "graphql-subscriptions",
+          "label": "Subscriptions",
+          "level": 2,
+          "description": "Tính năng đẩy dữ liệu thời gian thực từ server tới client thông qua kết nối persistent channel.",
+          "docLink": "/docs/graphql/subscriptions",
+          "sourceRef": "graphql/subscriptions.md",
+          "tags": [
+            "subscriptions",
+            "real-time",
+            "pubsub"
+          ],
+          "children": [
+            {
+              "id": "graphql-ws-protocol",
+              "label": "GraphQL WS Protocol",
+              "level": 3,
+              "description": "Cấu hình giao thức WebSocket cho Subscriptions sử dụng thư viện graphql-ws hoặc subscriptions-transport-ws.",
+              "docLink": "/docs/graphql/subscriptions#enable-subscriptions-with-apollo-driver",
+              "sourceRef": "graphql/subscriptions.md",
+              "tags": [
+                "websocket",
+                "graphql-ws"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "graphql-scalars",
+          "label": "Scalars",
+          "level": 2,
+          "description": "Các kiểu dữ liệu nguyên tử ở lá của GraphQL query, hỗ trợ các kiểu mặc định và định nghĩa custom scalar.",
+          "docLink": "/docs/graphql/scalars",
+          "sourceRef": "graphql/scalars.md",
+          "tags": [
+            "scalars",
+            "custom-scalars",
+            "types"
+          ]
+        },
+        {
+          "id": "graphql-directives",
+          "label": "Directives",
+          "level": 2,
+          "description": "Các chỉ thị đính kèm vào trường hoặc fragment để thay đổi hành vi thực thi của query hoặc schema.",
+          "docLink": "/docs/graphql/directives",
+          "sourceRef": "graphql/directives.md",
+          "tags": [
+            "directives",
+            "custom-directives",
+            "schema-transformation"
+          ]
+        },
+        {
+          "id": "graphql-interfaces",
+          "label": "Interfaces",
+          "level": 2,
+          "description": "Các kiểu trừu tượng định nghĩa một tập hợp các trường mà một Object Type bắt buộc phải có khi implement.",
+          "docLink": "/docs/graphql/interfaces",
+          "sourceRef": "graphql/interfaces.md",
+          "tags": [
+            "interfaces",
+            "abstract-types",
+            "resolvers"
+          ]
+        },
+        {
+          "id": "graphql-unions-and-enums",
+          "label": "Unions & Enums",
+          "level": 2,
+          "description": "Định nghĩa kiểu Union để trả về các kiểu dữ liệu khác nhau từ một trường duy nhất mà không cần chung trường.",
+          "docLink": "/docs/graphql/unions-and-enums",
+          "sourceRef": "graphql/unions-and-enums.md",
+          "tags": [
+            "unions",
+            "enums",
+            "types"
+          ]
+        },
+        {
+          "id": "graphql-mapped-types",
+          "label": "Mapped Types",
+          "level": 2,
+          "description": "Các hàm tiện ích như PartialType, PickType, OmitType giúp tái sử dụng và biến đổi các DTOs/InputTypes.",
+          "docLink": "/docs/graphql/mapped-types",
+          "sourceRef": "graphql/mapped-types.md",
+          "tags": [
+            "mapped-types",
+            "dto",
+            "utility"
+          ]
+        },
+        {
+          "id": "graphql-field-middleware",
+          "label": "Field Middleware",
+          "level": 2,
+          "description": "Cho phép chạy mã tùy ý trước hoặc sau khi một trường cụ thể được resolve.",
+          "docLink": "/docs/graphql/field-middleware",
+          "sourceRef": "graphql/field-middleware.md",
+          "tags": [
+            "middleware",
+            "field-level",
+            "logging"
+          ]
+        },
+        {
+          "id": "graphql-plugins",
+          "label": "Plugins",
+          "level": 2,
+          "description": "Mở rộng chức năng cốt lõi của Apollo Server hoặc Mercurius bằng cách lắng nghe các sự kiện trong vòng đời request.",
+          "docLink": "/docs/graphql/plugins",
+          "sourceRef": "graphql/plugins.md",
+          "tags": [
+            "plugins",
+            "apollo-plugins",
+            "mercurius-plugins"
+          ]
+        },
+        {
+          "id": "graphql-cli-plugin",
+          "label": "CLI Plugin",
+          "level": 2,
+          "description": "Plugin nâng cao quá trình biên dịch TypeScript để tự động thêm decorators và giảm thiểu boilerplate code.",
+          "docLink": "/docs/graphql/cli-plugin",
+          "sourceRef": "graphql/cli-plugin.md",
+          "tags": [
+            "cli-plugin",
+            "typescript",
+            "boilerplate"
+          ]
+        },
+        {
+          "id": "graphql-complexity",
+          "label": "Complexity",
+          "level": 2,
+          "description": "Định nghĩa độ phức tạp của các trường và giới hạn các truy vấn vượt quá mức độ phức tạp tối đa cho phép.",
+          "docLink": "/docs/graphql/complexity",
+          "sourceRef": "graphql/complexity.md",
+          "tags": [
+            "complexity",
+            "security",
+            "query-cost"
+          ]
+        },
+        {
+          "id": "graphql-extensions",
+          "label": "Extensions",
+          "level": 2,
+          "description": "Tính năng cấp thấp cho phép đính kèm metadata tùy ý vào cấu hình của các trường hoặc class.",
+          "docLink": "/docs/graphql/extensions",
+          "sourceRef": "graphql/extensions.md",
+          "tags": [
+            "extensions",
+            "metadata",
+            "advanced"
+          ]
+        },
+        {
+          "id": "graphql-generating-sdl",
+          "label": "Generating SDL",
+          "level": 2,
+          "description": "Sử dụng GraphQLSchemaBuilderModule để tạo thủ công file GraphQL SDL schema mà không cần chạy toàn bộ ứng dụng.",
+          "docLink": "/docs/graphql/generating-sdl",
+          "sourceRef": "graphql/generating-sdl.md",
+          "tags": [
+            "sdl-generation",
+            "schema-builder"
+          ]
+        },
+        {
+          "id": "graphql-sharing-models",
+          "label": "Sharing Models",
+          "level": 2,
+          "description": "Sử dụng model shim để chia sẻ các TypeScript models với ứng dụng frontend mà không bị ảnh hưởng bởi các decorators phía backend.",
+          "docLink": "/docs/graphql/sharing-models",
+          "sourceRef": "graphql/sharing-models.md",
+          "tags": [
+            "model-sharing",
+            "shim",
+            "frontend"
+          ]
+        },
+        {
+          "id": "graphql-federation",
+          "label": "Federation",
+          "level": 2,
+          "description": "Chia nhỏ monolithic GraphQL server thành các microservices độc lập và hợp nhất chúng qua một Gateway.",
+          "docLink": "/docs/graphql/federation",
+          "sourceRef": "graphql/federation.md",
+          "tags": [
+            "federation",
+            "microservices",
+            "gateway"
+          ]
+        },
+        {
+          "id": "graphql-other-features",
+          "label": "Other Features & Enhancers",
+          "level": 2,
+          "description": "Sử dụng các tính năng tiêu chuẩn của NestJS như Guards, Interceptors, Filters, và Pipes trong môi trường GraphQL.",
+          "docLink": "/docs/graphql/other-features",
+          "sourceRef": "graphql/other-features.md",
+          "tags": [
+            "guards",
+            "interceptors",
+            "pipes"
+          ],
+          "children": [
+            {
+              "id": "graphql-execution-context",
+              "label": "GqlExecutionContext",
+              "level": 3,
+              "description": "Chuyển đổi ExecutionContext tiêu chuẩn thành GqlExecutionContext để truy cập các tham số đặc thù của GraphQL.",
+              "docLink": "/docs/graphql/other-features#execution-context",
+              "sourceRef": "graphql/other-features.md",
+              "tags": [
+                "execution-context",
+                "guards",
+                "interceptors"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microservices",
+      "label": "Microservices",
+      "level": 1,
+      "description": "NestJS native support for microservice architectural style of development, utilizing non-HTTP transport layers for communication.",
+      "docLink": "/docs/microservices/basics",
+      "sourceRef": "microservices/basics.md",
+      "tags": [
+        "architecture",
+        "microservices",
+        "nestjs"
+      ],
+      "children": [
+        {
+          "id": "microservices-basics",
+          "label": "Microservices Basics",
+          "level": 2,
+          "description": "Core concepts of NestJS microservices, including the installation of the microservices package and bootstrapping using NestFactory.",
+          "docLink": "/docs/microservices/basics",
+          "sourceRef": "microservices/basics.md",
+          "tags": [
+            "basics",
+            "bootstrap",
+            "setup"
+          ],
+          "children": [
+            {
+              "id": "microservices-request-response",
+              "label": "Request-Response Style",
+              "level": 3,
+              "description": "A messaging style suitable for exchanging messages between different external services where a response is expected.",
+              "docLink": "/docs/microservices/basics",
+              "sourceRef": "microservices/basics.md",
+              "tags": [
+                "messaging",
+                "patterns"
+              ]
+            },
+            {
+              "id": "microservices-event-based",
+              "label": "Event-Based Style",
+              "level": 3,
+              "description": "A messaging style used for publishing events without waiting for a response, ideal for fire-and-forget scenarios.",
+              "docLink": "/docs/microservices/basics",
+              "sourceRef": "microservices/basics.md",
+              "tags": [
+                "events",
+                "pub-sub"
+              ]
+            },
+            {
+              "id": "microservices-client-proxy",
+              "label": "ClientProxy",
+              "level": 3,
+              "description": "An abstraction used to exchange messages or publish events to a remote Nest microservice.",
+              "docLink": "/docs/microservices/basics",
+              "sourceRef": "microservices/basics.md",
+              "tags": [
+                "client",
+                "proxy",
+                "di"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "microservices-transporters",
+          "label": "Built-in Transporters",
+          "level": 2,
+          "description": "Out-of-the-box transport layer implementations responsible for transmitting messages between microservice instances.",
+          "docLink": "/docs/microservices/basics",
+          "sourceRef": "microservices/basics.md",
+          "tags": [
+            "transporters",
+            "network",
+            "protocols"
+          ],
+          "children": [
+            {
+              "id": "transporter-tcp",
+              "label": "TCP Transporter",
+              "level": 3,
+              "description": "The default transport layer for NestJS microservices, utilizing raw TCP connections.",
+              "docLink": "/docs/microservices/basics",
+              "sourceRef": "microservices/basics.md",
+              "tags": [
+                "tcp",
+                "default"
+              ]
+            },
+            {
+              "id": "transporter-redis",
+              "label": "Redis Transporter",
+              "level": 3,
+              "description": "A transporter leveraging Redis Pub/Sub messaging paradigm for fire-and-forget message exchange.",
+              "docLink": "/docs/microservices/redis",
+              "sourceRef": "microservices/redis.md",
+              "tags": [
+                "redis",
+                "pub-sub",
+                "ioredis"
+              ]
+            },
+            {
+              "id": "transporter-grpc",
+              "label": "gRPC Transporter",
+              "level": 3,
+              "description": "A high-performance RPC framework using Protocol Buffers (.proto files) to dynamically bind clients and servers.",
+              "docLink": "/docs/microservices/grpc",
+              "sourceRef": "microservices/grpc.md",
+              "tags": [
+                "grpc",
+                "protobuf",
+                "rpc"
+              ]
+            },
+            {
+              "id": "transporter-rabbitmq",
+              "label": "RabbitMQ Transporter",
+              "level": 3,
+              "description": "An open-source message broker transporter supporting multiple messaging protocols and advanced queue configurations.",
+              "docLink": "/docs/microservices/rabbitmq",
+              "sourceRef": "microservices/rabbitmq.md",
+              "tags": [
+                "rabbitmq",
+                "amqp",
+                "broker"
+              ]
+            },
+            {
+              "id": "transporter-kafka",
+              "label": "Kafka Transporter",
+              "level": 3,
+              "description": "A distributed streaming platform transporter designed for high-throughput, low-latency real-time data feeds.",
+              "docLink": "/docs/microservices/kafka",
+              "sourceRef": "microservices/kafka.md",
+              "tags": [
+                "kafka",
+                "streaming",
+                "kafkajs"
+              ]
+            },
+            {
+              "id": "transporter-mqtt",
+              "label": "MQTT Transporter",
+              "level": 3,
+              "description": "A lightweight publish/subscribe messaging protocol optimized for low-bandwidth, high-latency networks and IoT.",
+              "docLink": "/docs/microservices/mqtt",
+              "sourceRef": "microservices/mqtt.md",
+              "tags": [
+                "mqtt",
+                "iot",
+                "pub-sub"
+              ]
+            },
+            {
+              "id": "transporter-nats",
+              "label": "NATS Transporter",
+              "level": 3,
+              "description": "A simple, secure, and high-performance messaging system for cloud-native applications and microservices.",
+              "docLink": "/docs/microservices/nats",
+              "sourceRef": "microservices/nats.md",
+              "tags": [
+                "nats",
+                "cloud-native",
+                "pub-sub"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "microservices-custom-transport",
+          "label": "Custom Transporters",
+          "level": 2,
+          "description": "API and strategies allowing developers to build custom transport layers or extend existing ones.",
+          "docLink": "/docs/microservices/custom-transport",
+          "sourceRef": "microservices/custom-transport.md",
+          "tags": [
+            "custom",
+            "strategy",
+            "extend"
+          ],
+          "children": [
+            {
+              "id": "custom-transport-strategy",
+              "label": "CustomTransportStrategy",
+              "level": 3,
+              "description": "An interface implemented by custom transporter classes to manage server lifecycle methods like listen and close.",
+              "docLink": "/docs/microservices/custom-transport",
+              "sourceRef": "microservices/custom-transport.md",
+              "tags": [
+                "interface",
+                "lifecycle",
+                "server"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "microservices-exception-filters",
+          "label": "Exception Filters",
+          "level": 2,
+          "description": "Exception handling layer for microservices, utilizing RpcException instead of HttpException.",
+          "docLink": "/docs/microservices/exception-filters",
+          "sourceRef": "microservices/exception-filters.md",
+          "tags": [
+            "exceptions",
+            "filters",
+            "rpc"
+          ],
+          "children": [
+            {
+              "id": "rpc-exception",
+              "label": "RpcException",
+              "level": 3,
+              "description": "The dedicated exception class thrown within NestJS microservices to propagate errors.",
+              "docLink": "/docs/microservices/exception-filters",
+              "sourceRef": "microservices/exception-filters.md",
+              "tags": [
+                "exception",
+                "rpc",
+                "error"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "microservices-pipes",
+          "label": "Pipes",
+          "level": 2,
+          "description": "Data validation and transformation components adapted for microservices, throwing RpcException on failure.",
+          "docLink": "/docs/microservices/pipes",
+          "sourceRef": "microservices/pipes.md",
+          "tags": [
+            "pipes",
+            "validation",
+            "transformation"
+          ]
+        },
+        {
+          "id": "microservices-guards",
+          "label": "Guards",
+          "level": 2,
+          "description": "Authorization and permission components for microservices, throwing RpcException on access denial.",
+          "docLink": "/docs/microservices/guards",
+          "sourceRef": "microservices/guards.md",
+          "tags": [
+            "guards",
+            "security",
+            "authorization"
+          ]
+        },
+        {
+          "id": "microservices-interceptors",
+          "label": "Interceptors",
+          "level": 2,
+          "description": "Aspect-oriented programming components used to bind extra logic before or after microservice message execution.",
+          "docLink": "/docs/microservices/interceptors",
+          "sourceRef": "microservices/interceptors.md",
+          "tags": [
+            "interceptors",
+            "aop",
+            "middleware"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openapi",
+      "label": "OpenAPI (Swagger)",
+      "level": 1,
+      "description": "Integration with the OpenAPI specification to generate interactive API documentation for NestJS applications.",
+      "docLink": "/docs/openapi/introduction",
+      "tags": [
+        "openapi",
+        "swagger",
+        "documentation"
+      ],
+      "children": [
+        {
+          "id": "openapi-introduction",
+          "label": "Introduction & Bootstrap",
+          "level": 2,
+          "description": "The entry point for setting up OpenAPI in a NestJS application using the @nestjs/swagger package.",
+          "docLink": "/docs/openapi/introduction",
+          "tags": [
+            "bootstrap",
+            "setup"
+          ],
+          "children": [
+            {
+              "id": "openapi-swagger-module",
+              "label": "SwaggerModule",
+              "level": 3,
+              "description": "The core class used to generate and serve the OpenAPI document in NestJS.",
+              "docLink": "/docs/openapi/introduction",
+              "tags": [
+                "module",
+                "bootstrap"
+              ],
+              "relations": [
+                {
+                  "targetId": "openapi-document-builder",
+                  "type": "depends-on"
+                }
+              ]
+            },
+            {
+              "id": "openapi-document-builder",
+              "label": "DocumentBuilder",
+              "level": 3,
+              "description": "A helper class used to structure the base OpenAPI document configuration (title, description, version, etc.).",
+              "docLink": "/docs/openapi/introduction",
+              "tags": [
+                "builder",
+                "configuration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "openapi-types-parameters",
+          "label": "Types and Parameters",
+          "level": 2,
+          "description": "How NestJS maps DTOs, route parameters, and query parameters to OpenAPI schemas.",
+          "docLink": "/docs/openapi/types-and-parameters",
+          "tags": [
+            "dto",
+            "schema",
+            "parameters"
+          ],
+          "children": [
+            {
+              "id": "openapi-api-property",
+              "label": "@ApiProperty",
+              "level": 3,
+              "description": "Decorator used to annotate class properties so they are visible to the SwaggerModule.",
+              "docLink": "/docs/openapi/types-and-parameters",
+              "tags": [
+                "decorator",
+                "property"
+              ]
+            },
+            {
+              "id": "openapi-api-body",
+              "label": "@ApiBody",
+              "level": 3,
+              "description": "Decorator used to explicitly define the HTTP request body schema for a route handler.",
+              "docLink": "/docs/openapi/types-and-parameters",
+              "tags": [
+                "decorator",
+                "request-body"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "openapi-operations",
+          "label": "Operations & Responses",
+          "level": 2,
+          "description": "Defining API endpoints, HTTP methods, tags, custom headers, and responses.",
+          "docLink": "/docs/openapi/operations",
+          "tags": [
+            "operations",
+            "responses",
+            "tags"
+          ],
+          "children": [
+            {
+              "id": "openapi-api-tags",
+              "label": "@ApiTags & Hierarchy",
+              "level": 3,
+              "description": "Grouping controllers into logical sections, with support for hierarchical tags in OpenAPI 3.2.",
+              "docLink": "/docs/openapi/operations",
+              "tags": [
+                "tags",
+                "organization"
+              ]
+            },
+            {
+              "id": "openapi-api-responses",
+              "label": "@ApiResponse & Shorthands",
+              "level": 3,
+              "description": "Defining HTTP response codes and schemas using @ApiResponse or shorthand decorators like @ApiOkResponse.",
+              "docLink": "/docs/openapi/operations",
+              "tags": [
+                "responses",
+                "decorators"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "openapi-security",
+          "label": "Security & Authentication",
+          "level": 2,
+          "description": "Configuring security schemes and protecting endpoints with authentication decorators.",
+          "docLink": "/docs/openapi/security",
+          "tags": [
+            "security",
+            "auth"
+          ],
+          "children": [
+            {
+              "id": "openapi-security-decorators",
+              "label": "Security Decorators",
+              "level": 3,
+              "description": "Decorators like @ApiBearerAuth, @ApiBasicAuth, @ApiOAuth2, and @ApiCookieAuth to secure specific operations.",
+              "docLink": "/docs/openapi/security",
+              "tags": [
+                "decorators",
+                "authentication"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "openapi-mapped-types",
+          "label": "Mapped Types",
+          "level": 2,
+          "description": "Utility functions to transform base DTO types into partial, picked, or omitted variations for OpenAPI.",
+          "docLink": "/docs/openapi/mapped-types",
+          "tags": [
+            "mapped-types",
+            "dto",
+            "utility"
+          ],
+          "relations": [
+            {
+              "targetId": "openapi-types-parameters",
+              "type": "related-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "openapi-partial-type",
+              "label": "PartialType",
+              "level": 3,
+              "description": "Generates a new type with all properties of the input class set to optional.",
+              "docLink": "/docs/openapi/mapped-types",
+              "tags": [
+                "partial",
+                "utility"
+              ]
+            },
+            {
+              "id": "openapi-pick-omit-types",
+              "label": "PickType & OmitType",
+              "level": 3,
+              "description": "Constructs new types by either picking specific properties or omitting a set of keys from an input class.",
+              "docLink": "/docs/openapi/mapped-types",
+              "tags": [
+                "pick",
+                "omit",
+                "utility"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "openapi-cli-plugin",
+          "label": "CLI Plugin",
+          "level": 2,
+          "description": "An opt-in TypeScript compilation plugin that automatically annotates DTOs and reduces boilerplate code.",
+          "docLink": "/docs/openapi/cli-plugin",
+          "tags": [
+            "cli",
+            "plugin",
+            "automation"
+          ],
+          "relations": [
+            {
+              "targetId": "openapi-api-property",
+              "type": "alternative-to"
+            }
+          ]
+        },
+        {
+          "id": "openapi-other-features",
+          "label": "Other Features",
+          "level": 2,
+          "description": "Advanced configurations including global prefixes, global parameters, global responses, and multiple specifications.",
+          "docLink": "/docs/openapi/other-features",
+          "tags": [
+            "advanced",
+            "configuration"
+          ],
+          "children": [
+            {
+              "id": "openapi-multiple-specs",
+              "label": "Multiple Specifications",
+              "level": 3,
+              "description": "Serving different Swagger documentation and UIs on different endpoints using modular inclusion.",
+              "docLink": "/docs/openapi/other-features",
+              "tags": [
+                "multi-spec",
+                "modules"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "openapi-decorators-reference",
+          "label": "Decorators Reference",
+          "level": 2,
+          "description": "A comprehensive list of all available OpenAPI decorators with their applicable levels (Method, Controller, Model).",
+          "docLink": "/docs/openapi/decorators",
+          "tags": [
+            "decorators",
+            "reference"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recipes",
+      "label": "Recipes",
+      "level": 1,
+      "description": "A collection of recipes and guides for integrating various tools, libraries, and advanced features into NestJS applications.",
+      "docLink": "/recipes",
+      "sourceRef": "recipes/",
+      "tags": [
+        "recipes",
+        "nestjs",
+        "overview"
+      ],
+      "children": [
+        {
+          "id": "recipes-crud-generator",
+          "label": "CRUD Generator",
+          "level": 2,
+          "description": "A Nest CLI schematic that automatically generates boilerplate code for REST APIs, GraphQL, Microservices, or WebSockets.",
+          "docLink": "/recipes/crud-generator",
+          "sourceRef": "recipes/crud-generator.md",
+          "tags": [
+            "cli",
+            "crud",
+            "code-generation"
+          ],
+          "children": [
+            {
+              "id": "crud-generator-cli-command",
+              "label": "Nest CLI Resource Command",
+              "level": 3,
+              "description": "Using 'nest g resource' to generate modules, controllers, services, entities, DTOs, and testing files in one step.",
+              "docLink": "/recipes/crud-generator#generating-a-new-resource",
+              "sourceRef": "recipes/crud-generator.md",
+              "tags": [
+                "cli",
+                "schematics"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recipes-hot-reload",
+          "label": "Hot Reload",
+          "level": 2,
+          "description": "Using Webpack Hot-Module Replacement (HMR) to avoid recompiling the entire project on every change, speeding up development.",
+          "docLink": "/recipes/hot-reload",
+          "sourceRef": "recipes/hot-reload.md",
+          "tags": [
+            "webpack",
+            "hmr",
+            "performance"
+          ],
+          "children": [
+            {
+              "id": "hot-reload-webpack-hmr",
+              "label": "Webpack HMR Configuration",
+              "level": 3,
+              "description": "Configuring Webpack HMR with Nest CLI using webpack-hmr.config.js and RunScriptWebpackPlugin.",
+              "docLink": "/recipes/hot-reload#with-cli",
+              "sourceRef": "recipes/hot-reload.md",
+              "tags": [
+                "webpack",
+                "configuration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recipes-mikroorm",
+          "label": "MikroORM Integration",
+          "level": 2,
+          "description": "Integrating MikroORM, a TypeScript ORM based on Data Mapper, Unit of Work, and Identity Map patterns, into NestJS.",
+          "docLink": "/recipes/mikroorm",
+          "sourceRef": "recipes/mikroorm.md",
+          "tags": [
+            "mikroorm",
+            "orm",
+            "database"
+          ],
+          "relations": [
+            {
+              "targetId": "recipes-sql-typeorm",
+              "type": "alternative-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "mikroorm-configuration",
+              "label": "MikroORM Configuration",
+              "level": 3,
+              "description": "Setting up MikroOrmModule.forRoot() with explicit configurations or external config files.",
+              "docLink": "/recipes/mikroorm#installation",
+              "sourceRef": "recipes/mikroorm.md",
+              "tags": [
+                "mikroorm",
+                "configuration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recipes-passport",
+          "label": "Passport Authentication",
+          "level": 2,
+          "description": "Implementing authentication in NestJS using the popular Passport library and @nestjs/passport wrapper.",
+          "docLink": "/recipes/passport",
+          "sourceRef": "recipes/passport.md",
+          "tags": [
+            "passport",
+            "auth",
+            "security"
+          ],
+          "children": [
+            {
+              "id": "passport-local-strategy",
+              "label": "Passport Local Strategy",
+              "level": 3,
+              "description": "Implementing username and password authentication using the passport-local strategy.",
+              "docLink": "/recipes/passport#authentication-requirements",
+              "sourceRef": "recipes/passport.md",
+              "tags": [
+                "passport",
+                "local-auth"
+              ]
+            },
+            {
+              "id": "passport-jwt-strategy",
+              "label": "Passport JWT Strategy",
+              "level": 3,
+              "description": "Securing endpoints and verifying identity using JSON Web Tokens (JWT) as bearer tokens.",
+              "docLink": "/recipes/passport#authentication-requirements",
+              "sourceRef": "recipes/passport.md",
+              "tags": [
+                "passport",
+                "jwt",
+                "token"
+              ],
+              "relations": [
+                {
+                  "targetId": "passport-local-strategy",
+                  "type": "depends-on"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recipes-repl",
+          "label": "Read-Eval-Print-Loop (REPL)",
+          "level": 2,
+          "description": "An interactive terminal environment to inspect the NestJS dependency graph and invoke providers or controllers directly.",
+          "docLink": "/recipes/repl",
+          "sourceRef": "recipes/repl.md",
+          "tags": [
+            "repl",
+            "terminal",
+            "debugging"
+          ],
+          "children": [
+            {
+              "id": "repl-native-functions",
+              "label": "REPL Native Functions",
+              "level": 3,
+              "description": "Using built-in REPL commands like get(), methods(), and debug() to interact with the application context.",
+              "docLink": "/recipes/repl#native-functions",
+              "sourceRef": "recipes/repl.md",
+              "tags": [
+                "repl",
+                "cli-tools"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recipes-sql-typeorm",
+          "label": "SQL (TypeORM Custom Provider)",
+          "level": 2,
+          "description": "Building a custom DatabaseModule and TypeORM connection from scratch using NestJS custom async providers.",
+          "docLink": "/recipes/sql-typeorm",
+          "sourceRef": "recipes/sql-typeorm.md",
+          "tags": [
+            "typeorm",
+            "custom-provider",
+            "database"
+          ],
+          "children": [
+            {
+              "id": "typeorm-async-provider",
+              "label": "TypeORM Async Provider",
+              "level": 3,
+              "description": "Creating a custom DATA_SOURCE provider that initializes the TypeORM DataSource asynchronously.",
+              "docLink": "/recipes/sql-typeorm#getting-started",
+              "sourceRef": "recipes/sql-typeorm.md",
+              "tags": [
+                "typeorm",
+                "async-provider"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recipes-swc",
+          "label": "SWC (Speedy Web Compiler)",
+          "level": 2,
+          "description": "Using the Rust-based SWC compiler with Nest CLI to significantly speed up compilation and development build times.",
+          "docLink": "/recipes/swc",
+          "sourceRef": "recipes/swc.md",
+          "tags": [
+            "swc",
+            "compiler",
+            "performance"
+          ],
+          "relations": [
+            {
+              "targetId": "recipes-hot-reload",
+              "type": "related-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "swc-type-checking",
+              "label": "SWC Type Checking",
+              "level": 3,
+              "description": "Enabling asynchronous type checking alongside SWC using the --type-check flag or compilerOptions configuration.",
+              "docLink": "/recipes/swc#type-checking",
+              "sourceRef": "recipes/swc.md",
+              "tags": [
+                "swc",
+                "typescript",
+                "type-check"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "level": 1,
+      "description": "Overview of security mechanisms in NestJS, including authentication, authorization, CORS, CSRF, encryption, helmet, and rate limiting.",
+      "docLink": "/docs/security/authentication",
+      "sourceRef": "security/authentication.md",
+      "tags": [
+        "security",
+        "nest-core",
+        "overview"
+      ],
+      "children": [
+        {
+          "id": "security-authentication",
+          "label": "Authentication",
+          "level": 2,
+          "description": "The process of identifying users, typically using credentials like username/password and issuing JWTs.",
+          "docLink": "/docs/security/authentication",
+          "sourceRef": "security/authentication.md",
+          "tags": [
+            "auth",
+            "jwt",
+            "credentials"
+          ],
+          "children": [
+            {
+              "id": "auth-module",
+              "label": "AuthModule",
+              "level": 3,
+              "description": "A dedicated NestJS module encapsulating authentication logic, services, and controllers.",
+              "docLink": "/docs/security/authentication#creating-an-authentication-module",
+              "sourceRef": "security/authentication.md",
+              "tags": [
+                "module",
+                "auth-service"
+              ]
+            },
+            {
+              "id": "jwt-strategy",
+              "label": "JWT Bearer Token",
+              "level": 3,
+              "description": "A token-based authentication mechanism where the server issues a JWT to authenticated clients.",
+              "docLink": "/docs/security/authentication",
+              "sourceRef": "security/authentication.md",
+              "tags": [
+                "jwt",
+                "bearer-token",
+                "security"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security-authorization",
+          "label": "Authorization",
+          "level": 2,
+          "description": "Determining what resources or actions an authenticated user is allowed to access.",
+          "docLink": "/docs/security/authorization",
+          "sourceRef": "security/authorization.md",
+          "tags": [
+            "authorization",
+            "rbac",
+            "access-control"
+          ],
+          "relations": [
+            {
+              "targetId": "security-authentication",
+              "type": "depends-on"
+            }
+          ],
+          "children": [
+            {
+              "id": "rbac",
+              "label": "Role-Based Access Control (RBAC)",
+              "level": 3,
+              "description": "An access-control mechanism defined around roles and privileges assigned to users.",
+              "docLink": "/docs/security/authorization#basic-rbac-implementation",
+              "sourceRef": "security/authorization.md",
+              "tags": [
+                "rbac",
+                "roles",
+                "guards"
+              ],
+              "children": [
+                {
+                  "id": "roles-decorator",
+                  "label": "@Roles() Decorator",
+                  "level": 4,
+                  "description": "A custom decorator used to attach required roles metadata to specific route handlers.",
+                  "docLink": "/docs/security/authorization#basic-rbac-implementation",
+                  "sourceRef": "security/authorization.md",
+                  "tags": [
+                    "decorator",
+                    "metadata"
+                  ]
+                },
+                {
+                  "id": "roles-guard",
+                  "label": "RolesGuard",
+                  "level": 4,
+                  "description": "A guard that compares the roles assigned to the current user with the roles required by the route.",
+                  "docLink": "/docs/security/authorization#basic-rbac-implementation",
+                  "sourceRef": "security/authorization.md",
+                  "tags": [
+                    "guard",
+                    "reflector",
+                    "authorization"
+                  ],
+                  "relations": [
+                    {
+                      "targetId": "roles-decorator",
+                      "type": "depends-on"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security-cors",
+          "label": "CORS",
+          "level": 2,
+          "description": "Cross-origin resource sharing (CORS) mechanism to allow or restrict resources requested from another domain.",
+          "docLink": "/docs/security/cors",
+          "sourceRef": "security/cors.md",
+          "tags": [
+            "cors",
+            "express",
+            "fastify"
+          ],
+          "children": [
+            {
+              "id": "enable-cors",
+              "label": "enableCors()",
+              "level": 3,
+              "description": "Method called on the Nest application instance to enable and configure CORS options.",
+              "docLink": "/docs/security/cors#getting-started",
+              "sourceRef": "security/cors.md",
+              "tags": [
+                "cors",
+                "configuration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security-csrf",
+          "label": "CSRF Protection",
+          "level": 2,
+          "description": "Preventing Cross-Site Request Forgery attacks by validating double-submitted tokens.",
+          "docLink": "/docs/security/csrf",
+          "sourceRef": "security/csrf.md",
+          "tags": [
+            "csrf",
+            "xsrf",
+            "protection"
+          ],
+          "children": [
+            {
+              "id": "csrf-express",
+              "label": "csrf-csrf (Express)",
+              "level": 3,
+              "description": "Middleware package used to provide double CSRF protection for Express-based NestJS applications.",
+              "docLink": "/docs/security/csrf#use-with-express-default",
+              "sourceRef": "security/csrf.md",
+              "tags": [
+                "csrf",
+                "express",
+                "middleware"
+              ]
+            },
+            {
+              "id": "csrf-fastify",
+              "label": "@fastify/csrf-protection",
+              "level": 3,
+              "description": "Plugin used to provide CSRF protection for Fastify-based NestJS applications.",
+              "docLink": "/docs/security/csrf#use-with-fastify",
+              "sourceRef": "security/csrf.md",
+              "tags": [
+                "csrf",
+                "fastify",
+                "plugin"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security-encryption-hashing",
+          "label": "Encryption and Hashing",
+          "level": 2,
+          "description": "Securing sensitive data using two-way encryption or one-way cryptographic hashing.",
+          "docLink": "/docs/security/encryption-and-hashing",
+          "sourceRef": "security/encryption-and-hashing.md",
+          "tags": [
+            "crypto",
+            "encryption",
+            "hashing"
+          ],
+          "children": [
+            {
+              "id": "node-crypto",
+              "label": "Node.js Crypto Module",
+              "level": 3,
+              "description": "Built-in Node.js module used for symmetric encryption and decryption (e.g., AES-256-CTR).",
+              "docLink": "/docs/security/encryption-and-hashing#encryption",
+              "sourceRef": "security/encryption-and-hashing.md",
+              "tags": [
+                "crypto",
+                "aes",
+                "node"
+              ]
+            },
+            {
+              "id": "password-hashing",
+              "label": "Password Hashing (bcrypt/argon2)",
+              "level": 3,
+              "description": "One-way hashing libraries recommended for securely storing passwords.",
+              "docLink": "/docs/security/encryption-and-hashing#hashing",
+              "sourceRef": "security/encryption-and-hashing.md",
+              "tags": [
+                "bcrypt",
+                "argon2",
+                "hashing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security-helmet",
+          "label": "Helmet",
+          "level": 2,
+          "description": "Securing Express or Fastify applications by setting appropriate HTTP headers.",
+          "docLink": "/docs/security/helmet",
+          "sourceRef": "security/helmet.md",
+          "tags": [
+            "helmet",
+            "headers",
+            "csp"
+          ],
+          "children": [
+            {
+              "id": "helmet-express",
+              "label": "Helmet for Express",
+              "level": 3,
+              "description": "Global middleware configuration using the standard 'helmet' package for Express.",
+              "docLink": "/docs/security/helmet#use-with-express-default",
+              "sourceRef": "security/helmet.md",
+              "tags": [
+                "helmet",
+                "express",
+                "middleware"
+              ]
+            },
+            {
+              "id": "helmet-fastify",
+              "label": "@fastify/helmet",
+              "level": 3,
+              "description": "Fastify plugin configuration using '@fastify/helmet' for Fastify-based applications.",
+              "docLink": "/docs/security/helmet#use-with-fastify",
+              "sourceRef": "security/helmet.md",
+              "tags": [
+                "helmet",
+                "fastify",
+                "plugin"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security-rate-limiting",
+          "label": "Rate Limiting",
+          "level": 2,
+          "description": "Protecting applications from brute-force attacks by limiting request frequency.",
+          "docLink": "/docs/security/rate-limiting",
+          "sourceRef": "security/rate-limiting.md",
+          "tags": [
+            "rate-limiting",
+            "throttler",
+            "brute-force"
+          ],
+          "children": [
+            {
+              "id": "throttler-module",
+              "label": "ThrottlerModule",
+              "level": 3,
+              "description": "Module used to configure rate limiting limits, TTLs, and multiple throttler definitions.",
+              "docLink": "/docs/security/rate-limiting",
+              "sourceRef": "security/rate-limiting.md",
+              "tags": [
+                "throttler",
+                "module",
+                "configuration"
+              ]
+            },
+            {
+              "id": "throttler-guard",
+              "label": "ThrottlerGuard",
+              "level": 3,
+              "description": "Guard used to enforce rate limits globally or per controller/route.",
+              "docLink": "/docs/security/rate-limiting",
+              "sourceRef": "security/rate-limiting.md",
+              "tags": [
+                "guard",
+                "throttler",
+                "security"
+              ],
+              "relations": [
+                {
+                  "targetId": "throttler-module",
+                  "type": "depends-on"
+                }
+              ]
+            },
+            {
+              "id": "skip-throttle-decorator",
+              "label": "@SkipThrottle() Decorator",
+              "level": 4,
+              "description": "Decorator used to bypass or negate rate limiting for specific routes or controllers.",
+              "docLink": "/docs/security/rate-limiting#customization",
+              "sourceRef": "security/rate-limiting.md",
+              "tags": [
+                "decorator",
+                "skip-throttle",
+                "customization"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "techniques",
+      "label": "Techniques",
+      "level": 1,
+      "description": "A collection of advanced techniques and integrations for building production-ready NestJS applications, including database connectivity, security, performance, and utility modules.",
+      "docLink": "/techniques/configuration",
+      "tags": [
+        "techniques",
+        "nestjs",
+        "overview"
+      ],
+      "children": [
+        {
+          "id": "techniques-configuration",
+          "label": "Configuration",
+          "level": 2,
+          "description": "Managing application configuration settings across different environments using environment variables and .env files.",
+          "docLink": "/techniques/configuration",
+          "tags": [
+            "config",
+            "dotenv",
+            "env"
+          ],
+          "children": [
+            {
+              "id": "config-module",
+              "label": "ConfigModule & ConfigService",
+              "level": 3,
+              "description": "The out-of-the-box @nestjs/config package that wraps dotenv and provides a strongly-typed ConfigService for accessing environment variables.",
+              "docLink": "/techniques/configuration",
+              "tags": [
+                "config",
+                "service",
+                "module"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-configuration",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-database",
+          "label": "Database Integration",
+          "level": 2,
+          "description": "Integrating NestJS with SQL and NoSQL databases using popular ORMs and database drivers.",
+          "docLink": "/techniques/database",
+          "tags": [
+            "database",
+            "sql",
+            "orm"
+          ],
+          "children": [
+            {
+              "id": "typeorm-integration",
+              "label": "TypeORM Integration",
+              "level": 3,
+              "description": "Integrating TypeORM, the most mature TypeScript ORM, with NestJS using the @nestjs/typeorm package.",
+              "docLink": "/techniques/database",
+              "tags": [
+                "typeorm",
+                "mysql",
+                "postgres"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-database",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "sequelize-integration",
+              "label": "Sequelize Integration",
+              "level": 3,
+              "description": "Integrating Sequelize with NestJS using the @nestjs/sequelize package for promise-based Node.js ORM capabilities.",
+              "docLink": "/techniques/database",
+              "tags": [
+                "sequelize",
+                "orm",
+                "sql"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-database",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-mongodb",
+          "label": "MongoDB Integration",
+          "level": 2,
+          "description": "Connecting NestJS to MongoDB databases using Mongoose or TypeORM connectors.",
+          "docLink": "/techniques/mongodb",
+          "tags": [
+            "mongodb",
+            "nosql",
+            "mongoose"
+          ],
+          "children": [
+            {
+              "id": "mongoose-integration",
+              "label": "Mongoose Integration",
+              "level": 3,
+              "description": "Using the dedicated @nestjs/mongoose package to define schemas, inject models, and interact with MongoDB.",
+              "docLink": "/techniques/mongodb",
+              "tags": [
+                "mongoose",
+                "mongodb",
+                "schema"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-mongodb",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-validation",
+          "label": "Validation",
+          "level": 2,
+          "description": "Enforcing validation rules on incoming client payloads using declarative decorators and pipes.",
+          "docLink": "/techniques/validation",
+          "tags": [
+            "validation",
+            "pipe",
+            "dto"
+          ],
+          "children": [
+            {
+              "id": "validation-pipe",
+              "label": "ValidationPipe",
+              "level": 3,
+              "description": "A built-in NestJS pipe that leverages class-validator and class-transformer to automatically validate incoming requests.",
+              "docLink": "/techniques/validation",
+              "tags": [
+                "validation",
+                "pipe",
+                "class-validator"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-validation",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-caching",
+          "label": "Caching",
+          "level": 2,
+          "description": "Enhancing application performance by temporarily storing frequently accessed data in memory or external stores.",
+          "docLink": "/techniques/caching",
+          "tags": [
+            "caching",
+            "performance",
+            "redis"
+          ],
+          "children": [
+            {
+              "id": "cache-manager",
+              "label": "Cache Manager Integration",
+              "level": 3,
+              "description": "Using @nestjs/cache-manager and Keyv under the hood to support in-memory and advanced storage solutions like Redis.",
+              "docLink": "/techniques/caching",
+              "tags": [
+                "cache-manager",
+                "redis",
+                "keyv"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-caching",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-serialization",
+          "label": "Serialization",
+          "level": 2,
+          "description": "Transforming and sanitizing network response objects before they are returned to the client.",
+          "docLink": "/techniques/serialization",
+          "tags": [
+            "serialization",
+            "interceptor",
+            "class-transformer"
+          ]
+        },
+        {
+          "id": "techniques-versioning",
+          "label": "Versioning",
+          "level": 2,
+          "description": "Supporting multiple versions of controllers or individual routes within the same application.",
+          "docLink": "/techniques/versioning",
+          "tags": [
+            "versioning",
+            "api",
+            "http"
+          ]
+        },
+        {
+          "id": "techniques-task-scheduling",
+          "label": "Task Scheduling",
+          "level": 2,
+          "description": "Scheduling code execution at fixed dates/times, recurring intervals, or after specified delays.",
+          "docLink": "/techniques/task-scheduling",
+          "tags": [
+            "cron",
+            "scheduling",
+            "task"
+          ],
+          "children": [
+            {
+              "id": "cron-jobs",
+              "label": "Declarative Cron Jobs",
+              "level": 3,
+              "description": "Using the @Cron() decorator from @nestjs/schedule to define automated, recurring background tasks.",
+              "docLink": "/techniques/task-scheduling",
+              "tags": [
+                "cron",
+                "decorator",
+                "schedule"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-task-scheduling",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-queues",
+          "label": "Queues",
+          "level": 2,
+          "description": "Handling resource-intensive tasks asynchronously and distributing workloads using Redis-backed queues.",
+          "docLink": "/techniques/queues",
+          "tags": [
+            "queues",
+            "bullmq",
+            "redis"
+          ],
+          "children": [
+            {
+              "id": "bullmq-integration",
+              "label": "BullMQ & Bull Integration",
+              "level": 3,
+              "description": "Integrating BullMQ or Bull queues into NestJS using @nestjs/bullmq or @nestjs/bull packages.",
+              "docLink": "/techniques/queues",
+              "tags": [
+                "bullmq",
+                "bull",
+                "redis"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-queues",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-logger",
+          "label": "Logger",
+          "level": 2,
+          "description": "Using NestJS's built-in text-based logger or implementing custom logging solutions like Pino.",
+          "docLink": "/techniques/logger",
+          "tags": [
+            "logger",
+            "logging",
+            "pino"
+          ]
+        },
+        {
+          "id": "techniques-cookies",
+          "label": "Cookies",
+          "level": 2,
+          "description": "Reading and writing HTTP cookies in NestJS using Express cookie-parser or Fastify cookie plugins.",
+          "docLink": "/techniques/cookies",
+          "tags": [
+            "cookies",
+            "express",
+            "fastify"
+          ]
+        },
+        {
+          "id": "techniques-events",
+          "label": "Events",
+          "level": 2,
+          "description": "Implementing a simple observer pattern to decouple application components using event emitters and listeners.",
+          "docLink": "/techniques/events",
+          "tags": [
+            "events",
+            "event-emitter",
+            "observer"
+          ]
+        },
+        {
+          "id": "techniques-file-upload",
+          "label": "File Upload",
+          "level": 2,
+          "description": "Handling multipart/form-data file uploads in NestJS using Multer middleware.",
+          "docLink": "/techniques/file-upload",
+          "tags": [
+            "upload",
+            "multer",
+            "file"
+          ],
+          "children": [
+            {
+              "id": "multer-integration",
+              "label": "Multer Integration",
+              "level": 3,
+              "description": "Using FileInterceptor and @UploadedFile decorators to process single or multiple file uploads.",
+              "docLink": "/techniques/file-upload",
+              "tags": [
+                "multer",
+                "interceptor",
+                "upload"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-file-upload",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-compression",
+          "label": "Compression",
+          "level": 2,
+          "description": "Decreasing response body sizes to increase web application speed using gzip or Brotli compression.",
+          "docLink": "/techniques/compression",
+          "tags": [
+            "compression",
+            "gzip",
+            "brotli"
+          ]
+        },
+        {
+          "id": "techniques-http-module",
+          "label": "HTTP Module",
+          "level": 2,
+          "description": "Performing HTTP requests using an Axios-based client wrapped in NestJS Observables.",
+          "docLink": "/techniques/http-module",
+          "tags": [
+            "http",
+            "axios",
+            "observable"
+          ],
+          "children": [
+            {
+              "id": "axios-http-service",
+              "label": "HttpService (Axios)",
+              "level": 3,
+              "description": "Injecting and configuring HttpService from @nestjs/axios to perform asynchronous HTTP requests.",
+              "docLink": "/techniques/http-module",
+              "tags": [
+                "axios",
+                "http-service",
+                "request"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-http-module",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-session",
+          "label": "Session",
+          "level": 2,
+          "description": "Storing user state across multiple HTTP requests using express-session or Fastify session plugins.",
+          "docLink": "/techniques/session",
+          "tags": [
+            "session",
+            "express-session",
+            "auth"
+          ]
+        },
+        {
+          "id": "techniques-streaming-files",
+          "label": "Streaming Files",
+          "level": 2,
+          "description": "Streaming files back to the client from REST APIs using the StreamableFile class.",
+          "docLink": "/techniques/streaming-files",
+          "tags": [
+            "streaming",
+            "file",
+            "streamable-file"
+          ]
+        },
+        {
+          "id": "techniques-mvc",
+          "label": "Model-View-Controller (MVC)",
+          "level": 2,
+          "description": "Building traditional MVC web applications in NestJS using template engines like Handlebars (hbs).",
+          "docLink": "/techniques/mvc",
+          "tags": [
+            "mvc",
+            "hbs",
+            "views"
+          ]
+        },
+        {
+          "id": "techniques-performance",
+          "label": "Performance (Fastify)",
+          "level": 2,
+          "description": "Improving application throughput and speed by migrating from Express to Fastify.",
+          "docLink": "/techniques/performance",
+          "tags": [
+            "performance",
+            "fastify",
+            "adapter"
+          ],
+          "children": [
+            {
+              "id": "fastify-adapter",
+              "label": "FastifyAdapter",
+              "level": 3,
+              "description": "The framework adapter that proxies NestJS middleware and handlers to Fastify's high-performance engine.",
+              "docLink": "/techniques/performance",
+              "tags": [
+                "fastify",
+                "adapter",
+                "performance"
+              ],
+              "relations": [
+                {
+                  "targetId": "techniques-performance",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "techniques-server-sent-events",
+          "label": "Server-Sent Events (SSE)",
+          "level": 2,
+          "description": "Enabling real-time, unidirectional server push notifications over HTTP using the @Sse() decorator.",
+          "docLink": "/techniques/server-sent-events",
+          "tags": [
+            "sse",
+            "real-time",
+            "rxjs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nestjs-websockets",
+      "label": "WebSockets",
+      "level": 1,
+      "description": "The WebSockets module in NestJS provides a platform-agnostic way to build real-time, bi-directional applications using socket.io, ws, or custom adapters.",
+      "docLink": "/docs/websockets/gateways",
+      "tags": [
+        "websockets",
+        "real-time",
+        "network"
+      ],
+      "children": [
+        {
+          "id": "ws-gateways",
+          "label": "Gateways",
+          "level": 2,
+          "description": "Gateways are classes annotated with @WebSocketGateway() that act as controllers for WebSocket connections and messages.",
+          "docLink": "/docs/websockets/gateways",
+          "tags": [
+            "gateways",
+            "decorators",
+            "providers"
+          ],
+          "children": [
+            {
+              "id": "websocket-gateway-decorator",
+              "label": "@WebSocketGateway()",
+              "level": 3,
+              "description": "Decorator used to declare a class as a WebSocket gateway, allowing configuration of ports, namespaces, and transport options.",
+              "docLink": "/docs/websockets/gateways",
+              "tags": [
+                "decorators",
+                "configuration"
+              ]
+            },
+            {
+              "id": "subscribe-message-decorator",
+              "label": "@SubscribeMessage()",
+              "level": 3,
+              "description": "Decorator used to subscribe to incoming messages and route them to specific handler methods within a gateway.",
+              "docLink": "/docs/websockets/gateways",
+              "tags": [
+                "decorators",
+                "routing"
+              ]
+            },
+            {
+              "id": "ws-namespaces",
+              "label": "WebSocket Namespaces",
+              "level": 3,
+              "description": "A communication channel that allows splitting the logic of your application over a single shared connection.",
+              "docLink": "/docs/websockets/gateways",
+              "tags": [
+                "namespaces",
+                "socket.io"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ws-adapters",
+          "label": "WebSocket Adapters",
+          "level": 2,
+          "description": "Adapters allow NestJS to be platform-agnostic, enabling integration with socket.io, ws, or custom WebSocket libraries.",
+          "docLink": "/docs/websockets/adapter",
+          "tags": [
+            "adapters",
+            "socket.io",
+            "ws"
+          ],
+          "children": [
+            {
+              "id": "websocket-adapter-interface",
+              "label": "WebSocketAdapter Interface",
+              "level": 3,
+              "description": "The interface that must be implemented to create a custom WebSocket adapter, defining methods like create, bindClientConnect, and close.",
+              "docLink": "/docs/websockets/adapter",
+              "tags": [
+                "interfaces",
+                "customization"
+              ]
+            },
+            {
+              "id": "io-adapter",
+              "label": "IoAdapter",
+              "level": 3,
+              "description": "The default adapter wrapping the socket.io library, providing out-of-the-box support for socket.io features.",
+              "docLink": "/docs/websockets/adapter",
+              "tags": [
+                "socket.io",
+                "adapters"
+              ],
+              "children": [
+                {
+                  "id": "redis-io-adapter",
+                  "label": "RedisIoAdapter",
+                  "level": 4,
+                  "description": "An extension of IoAdapter that integrates Redis to broadcast events across multiple load-balanced instances.",
+                  "docLink": "/docs/websockets/adapter",
+                  "tags": [
+                    "redis",
+                    "scaling",
+                    "load-balancing"
+                  ],
+                  "relations": [
+                    {
+                      "targetId": "io-adapter",
+                      "type": "depends-on"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ws-exception-filters",
+          "label": "WebSocket Exception Filters",
+          "level": 2,
+          "description": "Exception filters for WebSockets handle errors thrown during message processing, emitting structured error messages to clients.",
+          "docLink": "/docs/websockets/exception-filters",
+          "tags": [
+            "exception-filters",
+            "errors"
+          ],
+          "children": [
+            {
+              "id": "ws-exception",
+              "label": "WsException",
+              "level": 3,
+              "description": "The core exception class used in NestJS WebSockets instead of HttpException to trigger WebSocket-specific error handling.",
+              "docLink": "/docs/websockets/exception-filters",
+              "tags": [
+                "exceptions",
+                "errors"
+              ]
+            },
+            {
+              "id": "base-ws-exception-filter",
+              "label": "BaseWsExceptionFilter",
+              "level": 3,
+              "description": "The base class that can be extended to customize the behavior of WebSocket exception handling while retaining core functionality.",
+              "docLink": "/docs/websockets/exception-filters",
+              "tags": [
+                "inheritance",
+                "customization"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ws-guards",
+          "label": "WebSocket Guards",
+          "level": 2,
+          "description": "Guards used to determine whether a WebSocket message handler should be executed, throwing WsException on failure.",
+          "docLink": "/docs/websockets/guards",
+          "tags": [
+            "guards",
+            "security",
+            "authorization"
+          ]
+        },
+        {
+          "id": "ws-interceptors",
+          "label": "WebSocket Interceptors",
+          "level": 2,
+          "description": "Interceptors that bind to WebSocket message handlers to transform data streams or add custom logic before/after execution.",
+          "docLink": "/docs/websockets/interceptors",
+          "tags": [
+            "interceptors",
+            "aop"
+          ]
+        },
+        {
+          "id": "ws-pipes",
+          "label": "WebSocket Pipes",
+          "level": 2,
+          "description": "Pipes used to validate and transform the data parameter of incoming WebSocket messages.",
+          "docLink": "/docs/websockets/pipes",
+          "tags": [
+            "pipes",
+            "validation",
+            "transformation"
+          ]
+        }
+      ]
+    }
+  ]
+}
