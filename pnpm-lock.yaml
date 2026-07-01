@@ -65,6 +65,9 @@ importers:
       csv-stringify:
         specifier: ^6.7.0
         version: 6.7.0
+      d3:
+        specifier: ^7.9.0
+        version: 7.9.0
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2

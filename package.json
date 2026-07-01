@@ -17,7 +17,8 @@
     "aha-mind:dump": "tsx scripts/aha-mind/dump_agent/pipeline.ts",
     "aha-mind:mcp": "tsx scripts/aha-mind/mcp-server.ts",
     "aha-mind:interpreter": "tsx scripts/aha-mind/interpreter_agent/pipeline.ts",
-    "aha-mind:docs-crawler": "tsx scripts/aha-mind/docs_crawler_agent/pipeline.ts"
+    "aha-mind:docs-crawler": "tsx scripts/aha-mind/docs_crawler_agent/pipeline.ts",
+    "aha-mind:ontology": "tsx scripts/aha-mind/ontology_agent/pipeline.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
@@ -39,6 +40,7 @@
     "clsx": "^2.1.1",
     "commander": "^15.0.0",
     "csv-stringify": "^6.7.0",
+    "d3": "^7.9.0",
     "dotenv": "^17.4.2",
     "jsdom": "^29.0.2",
     "pdf-parse": "^1.1.1",

@@ -1,0 +1,131 @@
+{
+  "id": "azure-ai-agent",
+  "label": "Azure AI Agent",
+  "level": 0,
+  "description": "AI Agent development ecosystem on Microsoft Azure Foundry",
+  "tags": ["azure", "ai", "agent"],
+  "children": [
+    {
+      "id": "foundations",
+      "label": "🏗️ Foundations",
+      "level": 1,
+      "description": "Core concepts of AI Agents and Microsoft Foundry",
+      "docLink": "/docs/azure-ai-agent/01-foundations",
+      "children": [
+        {
+          "id": "what-is-ai-agent",
+          "label": "What is an AI Agent?",
+          "level": 2,
+          "description": "Agent = Model + Instructions + Tools",
+          "docLink": "/docs/azure-ai-agent/01-foundations/what-is-ai-agent",
+          "sourceRef": "sources/documentations/learn.microsoft.com/en-us/azure/foundry/agents/overview.md",
+          "children": [
+            {
+              "id": "agent-vs-chatbot",
+              "label": "Agent vs Chatbot",
+              "level": 3,
+              "description": "Agents have tool-use and autonomy, chatbots only have text in/out"
+            },
+            {
+              "id": "prompt-vs-hosted-agent",
+              "label": "Prompt Agent vs Hosted Agent",
+              "level": 3,
+              "description": "Portal-first (no-code) vs Code-first approach",
+              "children": [
+                {
+                  "id": "prompt-agent-detail",
+                  "label": "Prompt Agent (Portal)",
+                  "level": 4,
+                  "description": "Use Foundry Portal, configure via UI, quick deploy"
+                },
+                {
+                  "id": "hosted-agent-detail",
+                  "label": "Hosted Agent (Code)",
+                  "level": 4,
+                  "description": "Use SDK (Python/C#), full control, CI/CD pipelines"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "microsoft-foundry",
+          "label": "Microsoft Foundry Agent Service",
+          "level": 2,
+          "description": "Microsoft's agent management platform, provides Responses API",
+          "docLink": "/docs/azure-ai-agent/01-foundations/microsoft-foundry",
+          "sourceRef": "sources/documentations/learn.microsoft.com/en-us/azure/foundry/agents/overview.md"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "label": "🔧 Tools",
+      "level": 1,
+      "description": "Extend Agent capabilities with built-in and custom tools",
+      "docLink": "/docs/azure-ai-agent/02-tools",
+      "children": [
+        {
+          "id": "custom-tools-options",
+          "label": "Custom Tools Options",
+          "level": 2,
+          "description": "4 options: Function Calling, OpenAPI, MCP, A2A",
+          "docLink": "/docs/azure-ai-agent/02-tools/custom-tools-options"
+        },
+        {
+          "id": "mcp-protocol",
+          "label": "MCP Protocol",
+          "level": 2,
+          "description": "Model Context Protocol for remote tools",
+          "docLink": "/docs/azure-ai-agent/02-tools/mcp-discovery",
+          "children": [
+            {
+              "id": "mcp-auth",
+              "label": "Authentication",
+              "level": 3,
+              "description": "Authenticate MCP Server: Key, Entra, OAuth",
+              "docLink": "/docs/azure-ai-agent/02-tools/mcp-server-client"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "label": "📚 Knowledge & RAG",
+      "level": 1,
+      "description": "Provide knowledge to agents via RAG and Foundry IQ",
+      "docLink": "/docs/azure-ai-agent/03-knowledge",
+      "children": [
+        {
+          "id": "rag-overview",
+          "label": "RAG for Agents",
+          "level": 2,
+          "description": "Solve hallucinations by retrieving information before generating",
+          "docLink": "/docs/azure-ai-agent/03-knowledge/rag-for-agents"
+        },
+        {
+          "id": "foundry-iq",
+          "label": "Foundry IQ",
+          "level": 2,
+          "description": "Knowledge base management in Foundry",
+          "docLink": "/docs/azure-ai-agent/03-knowledge/foundry-iq-overview"
+        }
+      ]
+    },
+    {
+      "id": "integration",
+      "label": "🔗 Integration",
+      "level": 1,
+      "description": "Connect agents to M365 and other systems",
+      "docLink": "/docs/azure-ai-agent/04-integration"
+    },
+    {
+      "id": "orchestration",
+      "label": "🔀 Workflow & Orchestration",
+      "level": 1,
+      "description": "Coordinate multiple agents using workflows and agent frameworks",
+      "docLink": "/docs/azure-ai-agent/05-orchestration"
+    }
+  ]
+}
