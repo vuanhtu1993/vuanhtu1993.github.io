@@ -13,11 +13,11 @@
  *    Nếu thiếu → log warning, không throw error (graceful degradation).
  */
 
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import * as fs from "fs";
 import { InterpreterState } from "../state";
 import { GLOSSARY_PATH, LLM_CONFIG } from "../config";
+import { geminiService } from "../../utils/gemini-service";
 
 // ─── Prompt Engineering ───────────────────────────────────────────────────────
 
@@ -116,12 +116,7 @@ export const translatorNode = async (
 
   // Load glossary và khởi tạo model (lazy — sau khi dotenv đã load)
   const glossaryTerms = loadGlossary();
-  const model = new ChatGoogleGenerativeAI({
-    model: LLM_CONFIG.MODEL,
-    temperature: LLM_CONFIG.TEMPERATURE,
-    maxOutputTokens: LLM_CONFIG.MAX_OUTPUT_TOKENS,
-    apiKey: process.env.GOOGLE_API_KEY?.trim(),
-  });
+  const model = geminiService.baseLlm;
 
   const systemPrompt = SYSTEM_PROMPT_TEMPLATE.replace("{glossaryTerms}", glossaryTerms);
   const promptTemplate = ChatPromptTemplate.fromMessages([
@@ -142,11 +137,12 @@ export const translatorNode = async (
     while (attempt < 3) {
       try {
         const chain = promptTemplate.pipe(model);
-        const response = await chain.invoke({
+        const estimatedTokens = Math.ceil(chunk.length / 4);
+        const response = await geminiService.invokeChain(chain, {
           chunkNum: String(i + 1),
           totalChunks: String(state.chunks.length),
           content: chunk,
-        });
+        }, estimatedTokens);
 
         translated = typeof response.content === "string"
           ? response.content

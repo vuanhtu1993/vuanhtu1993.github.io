@@ -1,21 +1,15 @@
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { DumpState, Question } from "../state";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
+import { geminiService } from "../../utils/gemini-service";
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// Removed sleep function since geminiRateLimiter handles delays
 
 export async function questionParserNode(state: DumpState): Promise<Partial<DumpState>> {
   console.log("--- 2. QUESTION PARSER ---");
   const { rawTexts, pdfDirectory } = state;
-
-  const llm = new ChatGoogleGenerativeAI({
-    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-    temperature: 0.1,
-    maxRetries: 2,
-  });
 
   const parsedQuestions: Question[] = [];
   let isRateLimited = false;
@@ -75,8 +69,8 @@ ${chunk}
 Hãy trả về JSON array:`);
 
       try {
-        await sleep(3000); // Delay 3 giây để tránh Rate limit 429
-        const response = await llm.invoke([systemMsg, humanMsg]);
+        const response = await geminiService.invoke([systemMsg, humanMsg]);
+        
         let output = response.content as string;
         
         output = output.replace(/\`\`\`json\n?/g, "").replace(/\`\`\`\n?/g, "").trim();

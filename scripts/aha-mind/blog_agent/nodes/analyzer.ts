@@ -1,7 +1,7 @@
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { z } from "zod";
 import { AhaMindState, ExtractedTerm } from "../state";
+import { geminiService } from "../../utils/gemini-service";
 
 /**
  * Zod Schema defines the structured output format for the LLM.
@@ -40,27 +40,21 @@ export const cefrAnalyzerNode = async (state: AhaMindState): Promise<Partial<Aha
   console.log(`[Analyzer] Analyzing text for: ${state.articleToProcess.title}`);
 
   try {
-    // Khởi tạo model lười (lazy) để đảm bảo biến môi trường đã được load
-    // Sử dụng gemini model từ biến môi trường để đồng bộ
-    const model = new ChatGoogleGenerativeAI({
-      model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-      maxOutputTokens: 8192,
-      temperature: 0.2,
-      apiKey: process.env.GOOGLE_API_KEY?.trim(),
-    });
-
-    // Ép model trả về schema đã định nghĩa
-    const structuredModel = model.withStructuredOutput(terminologySchema);
+    // Sử dụng GeminiService chung thay vì khởi tạo model riêng lẻ
+    const structuredModel = geminiService.baseLlm.withStructuredOutput(terminologySchema);
     const chain = promptTemplate.pipe(structuredModel);
 
     // Tăng giới hạn content để tận dụng context window lớn của Gemini 1.5 Flash (1M tokens)
     // 50,000 chars ~ 12k-15k tokens, thoải mái cho hầu hết bài blog kỹ thuật.
     const truncatedContent = state.articleToProcess.content.substring(0, 50000);
 
-    const response = await chain.invoke({
-      title: state.articleToProcess.title,
+    // Ước tính số token = số ký tự / 4
+    const estimatedTokens = Math.ceil((state.articleToProcess.title.length + truncatedContent.length) / 4);
+
+    const response = await geminiService.invokeChain(chain, {
+      title: state.articleToProcess!.title,
       content: truncatedContent,
-    });
+    }, estimatedTokens);
 
     // Ép kiểu response.terms thành ExtractedTerm[] để đảm bảo type safety
     const extractedTerms = response.terms as ExtractedTerm[];

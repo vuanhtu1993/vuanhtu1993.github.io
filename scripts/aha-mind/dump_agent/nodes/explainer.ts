@@ -1,18 +1,10 @@
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { DumpState, Question } from "../state";
-
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+import { geminiService } from "../../utils/gemini-service";
 
 export async function explainerNode(state: DumpState): Promise<Partial<DumpState>> {
   console.log("--- 5. EXPLAINER ---");
   const { classifiedQuestions } = state;
-
-  const llm = new ChatGoogleGenerativeAI({
-    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-    temperature: 0.1,
-    maxRetries: 2,
-  });
 
   const explainedQuestions: Question[] = [...classifiedQuestions];
   let isRateLimited = false;
@@ -57,8 +49,7 @@ ${JSON.stringify(batchDataForLLM, null, 2)}
     `);
 
     try {
-      await sleep(3000); // Thêm sleep tránh 429
-      const response = await llm.invoke([systemMsg, humanMsg]);
+      const response = await geminiService.invoke([systemMsg, humanMsg]);
       let output = response.content as string;
       output = output.replace(/\`\`\`json\n?/g, "").replace(/\`\`\`\n?/g, "").trim();
       

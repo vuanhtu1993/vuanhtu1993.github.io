@@ -5,7 +5,8 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const AVAILABLE_DOMAINS = [
   { id: 'azure-ai-agent', label: 'Azure AI Agent', icon: '🤖' },
-  { id: 'nestjs-framework', label: 'NestJS Framework', icon: '🐈' }
+  { id: 'nestjs-framework', label: 'NestJS Framework', icon: '🐈' },
+  { id: 'langchain', label: 'LangChain & LangGraph', icon: '🦜' }
 ];
 
 export default function OntologyPage() {

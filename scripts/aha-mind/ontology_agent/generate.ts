@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { z } from 'zod';
-import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { geminiService } from '../utils/gemini-service';
 
 // 1. Zod Schema
 const FlatOntologyNodeSchema = z.object({
@@ -94,15 +94,6 @@ export async function generateOntology({ sourceDir, domain, depth, outputFile }:
   const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
   console.log(`🧠 Model sử dụng: ${modelName}`);
 
-  const llm = new ChatGoogleGenerativeAI({
-    model: modelName,
-    apiKey: process.env.GOOGLE_API_KEY,
-    temperature: 0.1,
-    maxOutputTokens: 8192,
-  });
-
-  const structuredLlm = llm.withStructuredOutput(OntologyOutputSchema, { name: "Ontology" });
-
   // Thu thập các thư mục con cấp 1 (Categories)
   const items = fs.readdirSync(sourceDir, { withFileTypes: true });
   const folders = items.filter(item => item.isDirectory() && !item.name.startsWith('.'));
@@ -132,7 +123,7 @@ ${rootContext}
   `;
 
   try {
-    const rootRes = await structuredLlm.invoke(rootPrompt);
+    const rootRes = await geminiService.invokeStructured(OntologyOutputSchema, rootPrompt);
     allNodes.push(...rootRes.nodes);
     console.log(`✔ Xong Root (tạo ${rootRes.nodes.length} nodes)`);
   } catch (e) {
@@ -167,7 +158,7 @@ ${folderContext}
     `;
 
     try {
-      const folderRes = await structuredLlm.invoke(folderPrompt);
+      const folderRes = await geminiService.invokeStructured(OntologyOutputSchema, folderPrompt);
       allNodes.push(...folderRes.nodes);
       console.log(`  ✔ Xong [${folder.name}] (tạo ${folderRes.nodes.length} nodes)`);
     } catch (e) {

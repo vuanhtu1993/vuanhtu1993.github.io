@@ -1,0 +1,4245 @@
+{
+  "id": "langchain",
+  "label": "LangChain",
+  "level": 0,
+  "description": "An open-source framework and ecosystem for building applications with large language models (LLMs), agents, and stateful workflows.",
+  "docLink": "/docs/oss/javascript/langchain",
+  "sourceRef": "langchain.md",
+  "tags": [
+    "llm",
+    "framework",
+    "agents"
+  ],
+  "relations": [],
+  "children": [
+    {
+      "id": "langchain-framework",
+      "label": "LangChain Framework",
+      "level": 1,
+      "description": "Khung phát triển ứng dụng AI Agent linh hoạt, cho phép kết hợp mô hình ngôn ngữ lớn với các công cụ và dữ liệu bên ngoài.",
+      "docLink": "/docs/langchain/overview",
+      "sourceRef": "langchain/overview.md",
+      "tags": [
+        "framework",
+        "ai-agents",
+        "orchestration"
+      ],
+      "children": [
+        {
+          "id": "langchain-agents",
+          "label": "Agents & Harness",
+          "level": 2,
+          "description": "Thành phần cốt lõi kết hợp mô hình ngôn ngữ (Model) và môi trường bao quanh (Harness) để thực hiện các tác vụ lặp.",
+          "docLink": "/docs/langchain/agents",
+          "sourceRef": "langchain/agents.md",
+          "tags": [
+            "agents",
+            "core-components",
+            "harness"
+          ],
+          "children": [
+            {
+              "id": "langchain-agent-loop",
+              "label": "Core Agent Loop",
+              "level": 3,
+              "description": "Vòng lặp cốt lõi của Agent bao gồm gọi mô hình (Model call) và thực thi công cụ (Tool execution) cho đến khi hoàn thành tác vụ.",
+              "docLink": "/docs/langchain/context-engineering",
+              "sourceRef": "langchain/context-engineering.md",
+              "tags": [
+                "agent-loop",
+                "execution"
+              ]
+            },
+            {
+              "id": "langchain-agent-runtime",
+              "label": "Agent Runtime",
+              "level": 3,
+              "description": "Môi trường thực thi của Agent chạy trên nền tảng LangGraph, cung cấp Context, Store, Stream writer và thông tin thực thi.",
+              "docLink": "/docs/langchain/runtime",
+              "sourceRef": "langchain/runtime.md",
+              "tags": [
+                "runtime",
+                "langgraph",
+                "context"
+              ]
+            },
+            {
+              "id": "langchain-voice-agents",
+              "label": "Voice Agents",
+              "level": 3,
+              "description": "Các Agent có khả năng giao tiếp bằng giọng nói tự nhiên, kết hợp nhận dạng giọng nói, xử lý ngôn ngữ và tổng hợp giọng nói.",
+              "docLink": "/docs/langchain/voice-agent",
+              "sourceRef": "langchain/voice-agent.md",
+              "tags": [
+                "voice",
+                "multimodal",
+                "audio"
+              ],
+              "children": [
+                {
+                  "id": "langchain-sandwich-architecture",
+                  "label": "Sandwich Architecture",
+                  "level": 4,
+                  "description": "Kiến trúc kết hợp ba thành phần độc lập: Speech-to-Text (STT), Text Agent, và Text-to-Speech (TTS) để tối ưu hóa khả năng kiểm soát.",
+                  "docLink": "/docs/langchain/voice-agent",
+                  "sourceRef": "langchain/voice-agent.md",
+                  "tags": [
+                    "architecture",
+                    "stt",
+                    "tts"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-models",
+          "label": "Models",
+          "level": 2,
+          "description": "Động cơ suy nghĩ của Agent, chịu trách nhiệm đưa ra quyết định, gọi công cụ và định hình phản hồi.",
+          "docLink": "/docs/langchain/models",
+          "sourceRef": "langchain/models.md",
+          "tags": [
+            "llm",
+            "reasoning",
+            "chat-models"
+          ],
+          "children": [
+            {
+              "id": "langchain-structured-output",
+              "label": "Structured Output",
+              "level": 3,
+              "description": "Cơ chế ép buộc mô hình trả về dữ liệu theo một cấu trúc định sẵn (schema) thay vì văn bản tự do.",
+              "docLink": "/docs/langchain/structured-output",
+              "sourceRef": "langchain/structured-output.md",
+              "tags": [
+                "schema",
+                "validation",
+                "zod"
+              ],
+              "children": [
+                {
+                  "id": "langchain-provider-strategy",
+                  "label": "Provider Strategy",
+                  "level": 4,
+                  "description": "Chiến lược xuất dữ liệu cấu trúc tận dụng trực tiếp API gốc của nhà cung cấp mô hình (như OpenAI, Anthropic).",
+                  "docLink": "/docs/langchain/structured-output",
+                  "sourceRef": "langchain/structured-output.md",
+                  "tags": [
+                    "native-api",
+                    "validation"
+                  ]
+                },
+                {
+                  "id": "langchain-tool-calling-strategy",
+                  "label": "Tool Calling Strategy",
+                  "level": 4,
+                  "description": "Chiến lược xuất dữ liệu cấu trúc bằng cách giả lập một cuộc gọi công cụ bổ sung cho các mô hình không hỗ trợ native.",
+                  "docLink": "/docs/langchain/structured-output",
+                  "sourceRef": "langchain/structured-output.md",
+                  "tags": [
+                    "tool-calling",
+                    "fallback"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-tools",
+          "label": "Tools",
+          "level": 2,
+          "description": "Các khả năng mở rộng cho phép Agent tương tác với thế giới thực, truy vấn cơ sở dữ liệu hoặc gọi API.",
+          "docLink": "/docs/langchain/tools",
+          "sourceRef": "langchain/tools.md",
+          "tags": [
+            "tools",
+            "actions",
+            "apis"
+          ],
+          "children": [
+            {
+              "id": "langchain-headless-tools",
+              "label": "Headless Tools",
+              "level": 3,
+              "description": "Mô hình công cụ chia tách định nghĩa schema trên server và thực thi thực tế ở phía client (trình duyệt).",
+              "docLink": "/docs/langchain/frontend/headless-tools",
+              "sourceRef": "langchain/frontend/headless-tools.md",
+              "tags": [
+                "frontend",
+                "client-side",
+                "browser-api"
+              ]
+            },
+            {
+              "id": "langchain-mcp",
+              "label": "Model Context Protocol (MCP)",
+              "level": 3,
+              "description": "Giao thức mở chuẩn hóa cách ứng dụng cung cấp công cụ và ngữ cảnh cho LLM thông qua các MCP server.",
+              "docLink": "/docs/langchain/mcp",
+              "sourceRef": "langchain/mcp.md",
+              "tags": [
+                "mcp",
+                "protocol",
+                "integration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-messages",
+          "label": "Messages",
+          "level": 2,
+          "description": "Đơn vị ngữ cảnh cơ bản trong LangChain đại diện cho đầu vào và đầu ra của mô hình (System, Human, AI, Tool).",
+          "docLink": "/docs/langchain/messages",
+          "sourceRef": "langchain/messages.md",
+          "tags": [
+            "messages",
+            "chat-format",
+            "context"
+          ]
+        },
+        {
+          "id": "langchain-memory",
+          "label": "Memory Systems",
+          "level": 2,
+          "description": "Hệ thống lưu trữ thông tin tương tác trước đó của Agent để duy trì ngữ cảnh và cá nhân hóa trải nghiệm.",
+          "docLink": "/docs/langchain/short-term-memory",
+          "sourceRef": "langchain/short-term-memory.md",
+          "tags": [
+            "memory",
+            "persistence",
+            "state"
+          ],
+          "children": [
+            {
+              "id": "langchain-short-term-memory",
+              "label": "Short-term Memory",
+              "level": 3,
+              "description": "Bộ nhớ ngắn hạn lưu trữ lịch sử hội thoại trong phạm vi một luồng (thread) duy nhất sử dụng checkpointer.",
+              "docLink": "/docs/langchain/short-term-memory",
+              "sourceRef": "langchain/short-term-memory.md",
+              "tags": [
+                "short-term",
+                "thread",
+                "checkpointer"
+              ]
+            },
+            {
+              "id": "langchain-long-term-memory",
+              "label": "Long-term Memory",
+              "level": 3,
+              "description": "Bộ nhớ dài hạn lưu trữ thông tin dưới dạng JSON qua nhiều phiên hội thoại khác nhau sử dụng LangGraph Store.",
+              "docLink": "/docs/langchain/long-term-memory",
+              "sourceRef": "langchain/long-term-memory.md",
+              "tags": [
+                "long-term",
+                "store",
+                "cross-thread"
+              ]
+            },
+            {
+              "id": "langchain-context-engineering",
+              "label": "Context Engineering",
+              "level": 3,
+              "description": "Kỹ thuật cung cấp đúng thông tin và công cụ dưới định dạng phù hợp để tối ưu hóa độ tin cậy của Agent.",
+              "docLink": "/docs/langchain/context-engineering",
+              "sourceRef": "langchain/context-engineering.md",
+              "tags": [
+                "context-engineering",
+                "reliability",
+                "prompting"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-middleware",
+          "label": "Middleware System",
+          "level": 2,
+          "description": "Hệ thống can thiệp vào vòng lặp của Agent để kiểm soát, ghi log, thay đổi prompt hoặc áp dụng các chính sách bảo mật.",
+          "docLink": "/docs/langchain/middleware/overview",
+          "sourceRef": "langchain/middleware/overview.md",
+          "tags": [
+            "middleware",
+            "hooks",
+            "control-flow"
+          ],
+          "children": [
+            {
+              "id": "langchain-built-in-middleware",
+              "label": "Prebuilt Middleware",
+              "level": 3,
+              "description": "Các middleware có sẵn như tóm tắt hội thoại, giới hạn cuộc gọi, tự động thử lại hoặc tìm kiếm công cụ.",
+              "docLink": "/docs/langchain/middleware/built-in",
+              "sourceRef": "langchain/middleware/built-in.md",
+              "tags": [
+                "prebuilt",
+                "summarization",
+                "retry"
+              ]
+            },
+            {
+              "id": "langchain-custom-middleware",
+              "label": "Custom Middleware",
+              "level": 3,
+              "description": "Khả năng tự xây dựng middleware bằng cách can thiệp vào các hook dạng Node-style hoặc Wrap-style.",
+              "docLink": "/docs/langchain/middleware/custom",
+              "sourceRef": "langchain/middleware/custom.md",
+              "tags": [
+                "custom",
+                "hooks",
+                "state-updates"
+              ]
+            },
+            {
+              "id": "langchain-guardrails",
+              "label": "Guardrails",
+              "level": 3,
+              "description": "Cơ chế kiểm soát an toàn, phát hiện thông tin nhạy cảm (PII), ngăn chặn prompt injection và đảm bảo tuân thủ.",
+              "docLink": "/docs/langchain/guardrails",
+              "sourceRef": "langchain/guardrails.md",
+              "tags": [
+                "guardrails",
+                "security",
+                "pii"
+              ]
+            },
+            {
+              "id": "langchain-hitl",
+              "label": "Human-in-the-Loop (HITL)",
+              "level": 3,
+              "description": "Cho phép tạm dừng Agent để con người phê duyệt, chỉnh sửa hoặc từ chối các hành động nhạy cảm của công cụ.",
+              "docLink": "/docs/langchain/human-in-the-loop",
+              "sourceRef": "langchain/human-in-the-loop.md",
+              "tags": [
+                "hitl",
+                "interrupts",
+                "approval"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-retrieval",
+          "label": "Retrieval & RAG",
+          "level": 2,
+          "description": "Cơ chế tìm kiếm và truy xuất thông tin từ các nguồn dữ liệu bên ngoài để bổ sung ngữ cảnh cho mô hình.",
+          "docLink": "/docs/langchain/retrieval",
+          "sourceRef": "langchain/retrieval.md",
+          "tags": [
+            "retrieval",
+            "rag",
+            "knowledge-base"
+          ],
+          "children": [
+            {
+              "id": "langchain-knowledge-base",
+              "label": "Knowledge Base",
+              "level": 3,
+              "description": "Kho tri thức xây dựng từ tài liệu, sử dụng kỹ thuật chia nhỏ văn bản (text splitters), nhúng (embeddings) và lưu trữ vector.",
+              "docLink": "/docs/langchain/knowledge-base",
+              "sourceRef": "langchain/knowledge-base.md",
+              "tags": [
+                "vector-store",
+                "embeddings",
+                "documents"
+              ]
+            },
+            {
+              "id": "langchain-rag-architectures",
+              "label": "RAG Architectures",
+              "level": 3,
+              "description": "Các mô hình kiến trúc RAG khác nhau để tích hợp tìm kiếm vào quá trình tạo văn bản.",
+              "docLink": "/docs/langchain/retrieval",
+              "sourceRef": "langchain/retrieval.md",
+              "tags": [
+                "rag",
+                "architecture",
+                "design-patterns"
+              ],
+              "children": [
+                {
+                  "id": "langchain-2-step-rag",
+                  "label": "2-Step RAG",
+                  "level": 4,
+                  "description": "Kiến trúc RAG đơn giản trong đó việc truy xuất tài liệu luôn xảy ra trước khi mô hình tạo câu trả lời.",
+                  "docLink": "/docs/langchain/retrieval",
+                  "sourceRef": "langchain/retrieval.md",
+                  "tags": [
+                    "2-step",
+                    "predictable",
+                    "low-latency"
+                  ]
+                },
+                {
+                  "id": "langchain-agentic-rag",
+                  "label": "Agentic RAG",
+                  "level": 4,
+                  "description": "Kiến trúc RAG linh hoạt trong đó Agent tự quyết định khi nào và làm thế nào để truy xuất thông tin.",
+                  "docLink": "/docs/langchain/retrieval",
+                  "sourceRef": "langchain/retrieval.md",
+                  "tags": [
+                    "agentic-rag",
+                    "reasoning",
+                    "dynamic"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-multi-agent",
+          "label": "Multi-Agent Systems",
+          "level": 2,
+          "description": "Hệ thống điều phối nhiều Agent chuyên biệt để giải quyết các quy trình công việc phức tạp.",
+          "docLink": "/docs/langchain/multi-agent",
+          "sourceRef": "langchain/multi-agent.md",
+          "tags": [
+            "multi-agent",
+            "coordination",
+            "scalability"
+          ],
+          "children": [
+            {
+              "id": "langchain-multi-agent-subagents",
+              "label": "Subagents Pattern",
+              "level": 3,
+              "description": "Mô hình phân cấp trong đó một Agent giám sát (Supervisor) điều phối các Agent phụ đóng vai trò như công cụ.",
+              "docLink": "/docs/langchain/multi-agent/subagents",
+              "sourceRef": "langchain/multi-agent/subagents.md",
+              "tags": [
+                "subagents",
+                "supervisor",
+                "hierarchical"
+              ]
+            },
+            {
+              "id": "langchain-multi-agent-handoffs",
+              "label": "Handoffs Pattern",
+              "level": 3,
+              "description": "Mô hình máy trạng thái (State Machine) chuyển giao quyền kiểm soát và cấu hình Agent linh hoạt dựa trên tiến trình.",
+              "docLink": "/docs/langchain/multi-agent/handoffs-customer-support",
+              "sourceRef": "langchain/multi-agent/handoffs-customer-support.md",
+              "tags": [
+                "handoffs",
+                "state-machine",
+                "dynamic-config"
+              ]
+            },
+            {
+              "id": "langchain-multi-agent-skills",
+              "label": "Skills Pattern",
+              "level": 3,
+              "description": "Kiến trúc nạp các chỉ dẫn chuyên biệt (skills) theo yêu cầu (progressive disclosure) thay vì nạp toàn bộ từ đầu.",
+              "docLink": "/docs/langchain/multi-agent/skills",
+              "sourceRef": "langchain/multi-agent/skills.md",
+              "tags": [
+                "skills",
+                "progressive-disclosure",
+                "prompts"
+              ]
+            },
+            {
+              "id": "langchain-multi-agent-router",
+              "label": "Router Pattern",
+              "level": 3,
+              "description": "Mô hình phân loại đầu vào và định tuyến yêu cầu đến các Agent chuyên biệt song song trước khi tổng hợp kết quả.",
+              "docLink": "/docs/langchain/multi-agent/router-knowledge-base",
+              "sourceRef": "langchain/multi-agent/router-knowledge-base.md",
+              "tags": [
+                "router",
+                "parallel-execution",
+                "classification"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-streaming",
+          "label": "Streaming & Events",
+          "level": 2,
+          "description": "Hệ thống truyền phát dữ liệu thời gian thực giúp cải thiện trải nghiệm người dùng bằng cách hiển thị kết quả ngay khi có.",
+          "docLink": "/docs/langchain/streaming",
+          "sourceRef": "langchain/streaming.md",
+          "tags": [
+            "streaming",
+            "real-time",
+            "ux"
+          ],
+          "children": [
+            {
+              "id": "langchain-event-streaming",
+              "label": "Event Streaming (v3)",
+              "level": 3,
+              "description": "Cơ chế stream_events truyền phát các sự kiện chi tiết về tin nhắn, cuộc gọi công cụ và trạng thái Agent.",
+              "docLink": "/docs/langchain/event-streaming",
+              "sourceRef": "langchain/event-streaming.md",
+              "tags": [
+                "event-streaming",
+                "stream-events",
+                "projections"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-frontend",
+          "label": "Frontend Integration",
+          "level": 2,
+          "description": "Các mẫu thiết kế và SDK để xây dựng giao diện người dùng tương tác phong phú cho Agent.",
+          "docLink": "/docs/langchain/frontend/overview",
+          "sourceRef": "langchain/frontend/overview.md",
+          "tags": [
+            "frontend",
+            "ui",
+            "sdk"
+          ],
+          "children": [
+            {
+              "id": "langchain-frontend-sdk",
+              "label": "Frontend SDKs",
+              "level": 3,
+              "description": "Các thư viện React, Vue, Svelte, Angular cung cấp hook useStream để đồng bộ trạng thái Agent với UI.",
+              "docLink": "/docs/langchain/frontend/overview",
+              "sourceRef": "langchain/frontend/overview.md",
+              "tags": [
+                "react",
+                "vue",
+                "use-stream"
+              ]
+            },
+            {
+              "id": "langchain-agent-chat-ui",
+              "label": "Agent Chat UI",
+              "level": 3,
+              "description": "Ứng dụng Next.js mã nguồn mở cung cấp giao diện chat trực quan, hỗ trợ debug dòng thời gian và phân nhánh trạng thái.",
+              "docLink": "/docs/langchain/ui",
+              "sourceRef": "langchain/ui.md",
+              "tags": [
+                "nextjs",
+                "chat-ui",
+                "open-source"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-observability",
+          "label": "Observability & Tooling",
+          "level": 2,
+          "description": "Khả năng giám sát, ghi vết (tracing) và phân tích hành vi của Agent trong quá trình phát triển và vận hành.",
+          "docLink": "/docs/langchain/observability",
+          "sourceRef": "langchain/observability.md",
+          "tags": [
+            "observability",
+            "monitoring",
+            "tracing"
+          ],
+          "children": [
+            {
+              "id": "langchain-langsmith-tracing",
+              "label": "LangSmith Tracing",
+              "level": 3,
+              "description": "Hệ thống tự động ghi lại mọi bước thực thi, cuộc gọi mô hình và kết quả công cụ lên LangSmith.",
+              "docLink": "/docs/langchain/observability",
+              "sourceRef": "langchain/observability.md",
+              "tags": [
+                "langsmith",
+                "traces",
+                "debugging"
+              ]
+            },
+            {
+              "id": "langchain-langsmith-studio",
+              "label": "LangSmith Studio",
+              "level": 3,
+              "description": "Giao diện trực quan cục bộ giúp kiểm thử, gỡ lỗi và tinh chỉnh Agent trực tiếp từ máy cá nhân.",
+              "docLink": "/docs/langchain/studio",
+              "sourceRef": "langchain/studio.md",
+              "tags": [
+                "studio",
+                "local-dev",
+                "visualization"
+              ]
+            },
+            {
+              "id": "langchain-deployment",
+              "label": "LangSmith Deployment",
+              "level": 3,
+              "description": "Nền tảng lưu trữ được quản lý bởi LangSmith, tối ưu riêng cho các Agent chạy lâu dài và có trạng thái.",
+              "docLink": "/docs/langchain/deploy",
+              "sourceRef": "langchain/deploy.md",
+              "tags": [
+                "deployment",
+                "hosting",
+                "cloud"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-testing",
+          "label": "Testing & Evaluation",
+          "level": 2,
+          "description": "Quy trình kiểm thử Agent bao gồm kiểm thử đơn vị (unit), kiểm thử tích hợp (integration) và đánh giá hành vi.",
+          "docLink": "/docs/langchain/test",
+          "sourceRef": "langchain/test.md",
+          "tags": [
+            "testing",
+            "evals",
+            "quality-assurance"
+          ],
+          "children": [
+            {
+              "id": "langchain-agent-evals",
+              "label": "Agent Evaluations",
+              "level": 3,
+              "description": "Đánh giá chất lượng Agent bằng cách so sánh quỹ đạo thực thi (trajectory match) hoặc sử dụng LLM làm giám khảo.",
+              "docLink": "/docs/langchain/test/evals",
+              "sourceRef": "langchain/test/evals.md",
+              "tags": [
+                "evals",
+                "llm-judge",
+                "trajectory-match"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "level": 1,
+      "description": "A low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents.",
+      "docLink": "/docs/langgraph/overview",
+      "tags": [
+        "orchestration",
+        "agents",
+        "runtime"
+      ],
+      "children": [
+        {
+          "id": "langgraph-core-concepts",
+          "label": "Core Concepts",
+          "level": 2,
+          "description": "The fundamental building blocks of LangGraph, modeling agent workflows as stateful graphs.",
+          "docLink": "/docs/langgraph/graph-api",
+          "tags": [
+            "concepts",
+            "architecture"
+          ],
+          "children": [
+            {
+              "id": "langgraph-state",
+              "label": "State & StateSchema",
+              "level": 3,
+              "description": "A shared data structure representing the current snapshot of the application, defined using StateSchema and standard schemas.",
+              "docLink": "/docs/langgraph/use-graph-api#define-and-update-state",
+              "tags": [
+                "state",
+                "schema",
+                "zod"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-core-concepts",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-nodes",
+              "label": "Nodes",
+              "level": 3,
+              "description": "Functions that encode the logic of agents, receiving the current state and returning an updated state.",
+              "docLink": "/docs/langgraph/graph-api#nodes",
+              "tags": [
+                "nodes",
+                "functions"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-core-concepts",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-edges",
+              "label": "Edges",
+              "level": 3,
+              "description": "Transitions that determine which node to execute next, including conditional routing based on state.",
+              "docLink": "/docs/langgraph/graph-api#edges",
+              "tags": [
+                "edges",
+                "routing"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-core-concepts",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-graph-api",
+          "label": "Graph API",
+          "level": 2,
+          "description": "A declarative API to build agent workflows by explicitly defining nodes, edges, and shared state.",
+          "docLink": "/docs/langgraph/choosing-apis#when-to-use-the-graph-api",
+          "tags": [
+            "graph-api",
+            "declarative"
+          ],
+          "relations": [
+            {
+              "targetId": "langgraph-functional-api",
+              "type": "alternative-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "langgraph-stategraph",
+              "label": "StateGraph",
+              "level": 3,
+              "description": "The main class used to construct, configure, and compile stateful graphs in the Graph API.",
+              "docLink": "/docs/langgraph/graph-api#stategraph",
+              "tags": [
+                "stategraph",
+                "builder"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-graph-api",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-functional-api",
+          "label": "Functional API",
+          "level": 2,
+          "description": "A procedural API that integrates LangGraph features into standard control flows with minimal code changes.",
+          "docLink": "/docs/langgraph/functional-api",
+          "tags": [
+            "functional-api",
+            "procedural"
+          ],
+          "relations": [
+            {
+              "targetId": "langgraph-graph-api",
+              "type": "alternative-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "langgraph-entrypoint",
+              "label": "Entrypoint",
+              "level": 3,
+              "description": "An abstraction in the Functional API that encapsulates workflow logic and manages execution flow.",
+              "docLink": "/docs/langgraph/functional-api#functional-api-vs-graph-api",
+              "tags": [
+                "entrypoint",
+                "workflow"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-functional-api",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-task",
+              "label": "Task",
+              "level": 3,
+              "description": "A discrete unit of work executed asynchronously within an entrypoint in the Functional API.",
+              "docLink": "/docs/langgraph/functional-api#functional-api-vs-graph-api",
+              "tags": [
+                "task",
+                "async"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-functional-api",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-persistence",
+          "label": "Persistence",
+          "level": 2,
+          "description": "Mechanisms that allow LangGraph applications to persist state across runs, enabling memory and recovery.",
+          "docLink": "/docs/langgraph/persistence",
+          "tags": [
+            "persistence",
+            "memory"
+          ],
+          "children": [
+            {
+              "id": "langgraph-checkpointers",
+              "label": "Checkpointers",
+              "level": 3,
+              "description": "Saves snapshots of graph state at each super-step, enabling short-term, thread-scoped memory.",
+              "docLink": "/docs/langgraph/checkpointers",
+              "tags": [
+                "checkpointers",
+                "short-term-memory"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-persistence",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-stores",
+              "label": "Stores",
+              "level": 3,
+              "description": "Persists application-defined key-value data outside the graph state for long-term, cross-thread memory.",
+              "docLink": "/docs/langgraph/stores",
+              "tags": [
+                "stores",
+                "long-term-memory"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-persistence",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-streaming",
+          "label": "Streaming",
+          "level": 2,
+          "description": "Real-time streaming of graph execution events, state updates, and LLM tokens.",
+          "docLink": "/docs/langgraph/streaming",
+          "tags": [
+            "streaming",
+            "real-time"
+          ],
+          "children": [
+            {
+              "id": "langgraph-event-streaming",
+              "label": "Event Streaming",
+              "level": 3,
+              "description": "A high-level streaming model that normalizes raw Pregel events into typed projections like messages and values.",
+              "docLink": "/docs/langgraph/event-streaming",
+              "tags": [
+                "event-streaming",
+                "projections"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-streaming",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-human-in-the-loop",
+          "label": "Human-in-the-Loop",
+          "level": 2,
+          "description": "Patterns that pause graph execution to wait for human approval, review, or input.",
+          "docLink": "/docs/langgraph/interrupts",
+          "tags": [
+            "human-in-the-loop",
+            "collaboration"
+          ],
+          "children": [
+            {
+              "id": "langgraph-interrupts",
+              "label": "Interrupts",
+              "level": 3,
+              "description": "Dynamic pause points in graph nodes that save state and wait for external input via Command.",
+              "docLink": "/docs/langgraph/interrupts#pause-using-interrupt",
+              "tags": [
+                "interrupts",
+                "command"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-human-in-the-loop",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-fault-tolerance",
+          "label": "Fault Tolerance",
+          "level": 2,
+          "description": "Mechanisms to handle node failures, including retries, timeouts, and error recovery functions.",
+          "docLink": "/docs/langgraph/fault-tolerance",
+          "tags": [
+            "fault-tolerance",
+            "error-handling"
+          ],
+          "children": [
+            {
+              "id": "langgraph-retries",
+              "label": "Retries",
+              "level": 3,
+              "description": "Automatic re-running of failed node attempts based on exception types and backoff policies.",
+              "docLink": "/docs/langgraph/fault-tolerance#retries",
+              "tags": [
+                "retries",
+                "backoff"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-fault-tolerance",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-subgraphs",
+          "label": "Subgraphs",
+          "level": 2,
+          "description": "Using a compiled graph as a node inside another graph to build modular, multi-agent systems.",
+          "docLink": "/docs/langgraph/use-subgraphs",
+          "tags": [
+            "subgraphs",
+            "multi-agent"
+          ]
+        },
+        {
+          "id": "langgraph-time-travel",
+          "label": "Time Travel",
+          "level": 2,
+          "description": "Debugging and execution control features allowing users to replay or fork from past checkpoints.",
+          "docLink": "/docs/langgraph/use-time-travel",
+          "tags": [
+            "time-travel",
+            "debugging"
+          ]
+        },
+        {
+          "id": "langgraph-pregel",
+          "label": "Pregel Runtime",
+          "level": 2,
+          "description": "The underlying execution engine of LangGraph, managing actors and channels using a bulk synchronous parallel model.",
+          "docLink": "/docs/langgraph/pregel",
+          "tags": [
+            "pregel",
+            "runtime",
+            "engine"
+          ]
+        },
+        {
+          "id": "langgraph-development",
+          "label": "Development & Tooling",
+          "level": 2,
+          "description": "Tools and frameworks for building, testing, and debugging LangGraph applications locally.",
+          "docLink": "/docs/langgraph/local-server",
+          "tags": [
+            "tooling",
+            "cli",
+            "testing"
+          ],
+          "children": [
+            {
+              "id": "langgraph-cli",
+              "label": "LangGraph CLI",
+              "level": 3,
+              "description": "Command-line interface to initialize projects, generate configurations, and run local development servers.",
+              "docLink": "/docs/langgraph/local-server#1-install-the-langgraph-cli",
+              "tags": [
+                "cli",
+                "local-server"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-development",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-studio",
+              "label": "LangSmith Studio",
+              "level": 3,
+              "description": "A visual interface for interacting with, visualizing, and debugging local LangGraph agents.",
+              "docLink": "/docs/langgraph/studio",
+              "tags": [
+                "studio",
+                "visualization"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-development",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-testing",
+              "label": "Testing",
+              "level": 3,
+              "description": "Patterns for writing unit tests for graphs, individual nodes, and edges using Vitest.",
+              "docLink": "/docs/langgraph/test",
+              "tags": [
+                "testing",
+                "vitest"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-development",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-deployment",
+          "label": "Deployment",
+          "level": 2,
+          "description": "Deploying stateful, long-running agents to production environments like LangSmith Cloud.",
+          "docLink": "/docs/langgraph/deploy",
+          "tags": [
+            "deployment",
+            "cloud",
+            "langsmith"
+          ]
+        },
+        {
+          "id": "langgraph-frontend",
+          "label": "Frontend Integration",
+          "level": 2,
+          "description": "Building user interfaces that visualize multi-step graph execution and stream content in real time.",
+          "docLink": "/docs/langgraph/frontend/overview",
+          "tags": [
+            "frontend",
+            "ui",
+            "react"
+          ],
+          "children": [
+            {
+              "id": "langgraph-use-stream",
+              "label": "useStream Hook",
+              "level": 3,
+              "description": "A frontend SDK hook providing reactive access to node outputs, streaming tokens, and discovered subgraphs.",
+              "docLink": "/docs/langgraph/frontend/graph-execution#setting-up-usestream",
+              "tags": [
+                "react",
+                "hook",
+                "streaming"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-frontend",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-custom-channels",
+              "label": "Custom Stream Channels",
+              "level": 3,
+              "description": "Server-side stream transformers that publish custom structured data on named channels for the frontend to consume.",
+              "docLink": "/docs/langgraph/frontend/custom-stream-channels",
+              "tags": [
+                "custom-channels",
+                "transformers"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-frontend",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "langsmith-studio",
+      "label": "LangSmith Studio",
+      "level": 2,
+      "description": "A specialized agent IDE that enables visualization, interaction, and debugging of agentic systems implementing the Agent Server API.",
+      "docLink": "/docs/oss/javascript/studio",
+      "sourceRef": "studio.md",
+      "tags": [
+        "ide",
+        "debugging",
+        "visualization"
+      ],
+      "relations": [
+        {
+          "targetId": "langgraph",
+          "type": "related-to"
+        }
+      ]
+    },
+    {
+      "id": "security-policy",
+      "label": "Security Policy",
+      "level": 2,
+      "description": "Guidelines and best practices for securing LangChain applications, including limiting permissions, anticipating misuse, and defense in depth.",
+      "docLink": "/docs/oss/javascript/security-policy",
+      "sourceRef": "security-policy.md",
+      "tags": [
+        "security",
+        "best-practices",
+        "permissions"
+      ],
+      "relations": []
+    },
+    {
+      "id": "versioning-and-releases",
+      "label": "Versioning and Release Policy",
+      "level": 2,
+      "description": "The semantic versioning rules, API stability definitions (stable, beta, alpha), deprecation policies, and LTS support for the LangChain ecosystem.",
+      "docLink": "/docs/oss/javascript/versioning",
+      "sourceRef": "versioning.md",
+      "tags": [
+        "versioning",
+        "api-stability",
+        "policy"
+      ],
+      "relations": []
+    },
+    {
+      "id": "common-errors",
+      "label": "Common Errors",
+      "level": 2,
+      "description": "A guide to resolving common errors and understanding error codes in LangChain and LangGraph.",
+      "docLink": "/docs/oss/javascript/common-errors",
+      "sourceRef": "common-errors.md",
+      "tags": [
+        "troubleshooting",
+        "errors",
+        "debugging"
+      ],
+      "relations": [
+        {
+          "targetId": "langchain-framework",
+          "type": "related-to"
+        },
+        {
+          "targetId": "langgraph",
+          "type": "related-to"
+        }
+      ]
+    },
+    {
+      "id": "contributing",
+      "label": "Contributing to LangChain",
+      "level": 1,
+      "description": "Guidelines, workflows, and standards for contributing to LangChain's codebase, documentation, and integrations.",
+      "docLink": "/docs/contributing/overview",
+      "sourceRef": "contributing/overview.md",
+      "tags": [
+        "community",
+        "open-source",
+        "guidelines"
+      ],
+      "children": [
+        {
+          "id": "contributing-overview",
+          "label": "Contribution Overview",
+          "level": 2,
+          "description": "General introduction to contributing to LangChain, including community standards and general policies.",
+          "docLink": "/docs/contributing/overview",
+          "sourceRef": "contributing/overview.md",
+          "tags": [
+            "overview",
+            "community"
+          ],
+          "children": [
+            {
+              "id": "pr-requirements",
+              "label": "Pull Request Requirements",
+              "level": 3,
+              "description": "Strict requirements for submitting PRs, including linking to approved issues and avoiding low-effort or automated spam.",
+              "docLink": "/docs/contributing/overview",
+              "sourceRef": "contributing/overview.md",
+              "tags": [
+                "github",
+                "pull-request",
+                "policy"
+              ]
+            },
+            {
+              "id": "llm-usage-policy",
+              "label": "LLM Usage Policy",
+              "level": 3,
+              "description": "Guidelines on using AI assistants to draft contributions, requiring manual verification of all code and facts.",
+              "docLink": "/docs/contributing/overview",
+              "sourceRef": "contributing/overview.md",
+              "tags": [
+                "ai-policy",
+                "llm",
+                "quality"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contributing-code",
+          "label": "Contributing to Code",
+          "level": 2,
+          "description": "Technical guide for setting up the development environment, understanding repository structure, and submitting code changes.",
+          "docLink": "/docs/contributing/code",
+          "sourceRef": "contributing/code.md",
+          "tags": [
+            "development",
+            "coding",
+            "git"
+          ],
+          "children": [
+            {
+              "id": "code-contribution-guidelines",
+              "label": "Code Contribution Guidelines",
+              "level": 3,
+              "description": "Core principles for code contributions, focusing on backwards compatibility and high standards for new features.",
+              "docLink": "/docs/contributing/code",
+              "sourceRef": "contributing/code.md",
+              "tags": [
+                "standards",
+                "compatibility",
+                "features"
+              ],
+              "children": [
+                {
+                  "id": "backwards-compatibility",
+                  "label": "Backwards Compatibility",
+                  "level": 4,
+                  "description": "Rules and practices to ensure code changes do not break existing user implementations.",
+                  "docLink": "/docs/contributing/code",
+                  "sourceRef": "contributing/code.md",
+                  "tags": [
+                    "compatibility",
+                    "api-design"
+                  ]
+                },
+                {
+                  "id": "new-features-policy",
+                  "label": "New Features Policy",
+                  "level": 4,
+                  "description": "Criteria for accepting new core abstractions, requiring demonstrated need and prior discussion.",
+                  "docLink": "/docs/contributing/code",
+                  "sourceRef": "contributing/code.md",
+                  "tags": [
+                    "features",
+                    "abstractions"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "development-environment",
+              "label": "Development Environment Setup",
+              "level": 3,
+              "description": "How to set up local environments and navigate the monorepo structure of LangChain packages.",
+              "docLink": "/docs/contributing/code",
+              "sourceRef": "contributing/code.md",
+              "tags": [
+                "setup",
+                "monorepo",
+                "environment"
+              ]
+            },
+            {
+              "id": "development-workflow",
+              "label": "Development Workflow",
+              "level": 3,
+              "description": "The workflow for testing, linting, and running pre-commit hooks before submitting code.",
+              "docLink": "/docs/contributing/code",
+              "sourceRef": "contributing/code.md",
+              "tags": [
+                "testing",
+                "linting",
+                "workflow"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contributing-documentation",
+          "label": "Contributing to Documentation",
+          "level": 2,
+          "description": "Instructions for improving LangChain's documentation, including local preview setup and writing standards.",
+          "docLink": "/docs/contributing/documentation",
+          "sourceRef": "contributing/documentation.md",
+          "tags": [
+            "documentation",
+            "writing",
+            "mintlify"
+          ],
+          "children": [
+            {
+              "id": "docs-local-development",
+              "label": "Local Docs Development",
+              "level": 3,
+              "description": "Setting up a local preview server with hot reloading to edit and view documentation changes.",
+              "docLink": "/docs/contributing/documentation",
+              "sourceRef": "contributing/documentation.md",
+              "tags": [
+                "local-dev",
+                "mintlify",
+                "preview"
+              ]
+            },
+            {
+              "id": "docs-quality-checks",
+              "label": "Docs Quality Checks",
+              "level": 3,
+              "description": "Commands for checking broken links, formatting, and linting markdown files before submission.",
+              "docLink": "/docs/contributing/documentation",
+              "sourceRef": "contributing/documentation.md",
+              "tags": [
+                "linting",
+                "formatting",
+                "quality"
+              ]
+            },
+            {
+              "id": "documentation-types",
+              "label": "Documentation Types",
+              "level": 3,
+              "description": "The four categories of documentation: How-to guides, Conceptual guides, Reference, and Tutorials.",
+              "docLink": "/docs/contributing/documentation",
+              "sourceRef": "contributing/documentation.md",
+              "tags": [
+                "content-strategy",
+                "docs-structure"
+              ],
+              "children": [
+                {
+                  "id": "docs-how-to-guides",
+                  "label": "How-to Guides",
+                  "level": 4,
+                  "description": "Task-oriented instructions designed to help users accomplish specific goals.",
+                  "docLink": "/docs/contributing/documentation",
+                  "sourceRef": "contributing/documentation.md",
+                  "tags": [
+                    "how-to",
+                    "guides"
+                  ]
+                },
+                {
+                  "id": "docs-conceptual-guides",
+                  "label": "Conceptual Guides",
+                  "level": 4,
+                  "description": "High-level explanations of core concepts and design decisions.",
+                  "docLink": "/docs/contributing/documentation",
+                  "sourceRef": "contributing/documentation.md",
+                  "tags": [
+                    "concepts",
+                    "theory"
+                  ]
+                },
+                {
+                  "id": "docs-reference",
+                  "label": "Reference Documentation",
+                  "level": 4,
+                  "description": "Detailed, low-level API and functionality descriptions.",
+                  "docLink": "/docs/contributing/documentation",
+                  "sourceRef": "contributing/documentation.md",
+                  "tags": [
+                    "api-reference",
+                    "technical"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contributing-integrations",
+          "label": "Contributing Integrations",
+          "level": 2,
+          "description": "Guidelines for building and contributing third-party integration packages to the LangChain ecosystem.",
+          "docLink": "/docs/contributing/integrations-langchain",
+          "sourceRef": "contributing/integrations-langchain.md",
+          "tags": [
+            "integrations",
+            "ecosystem",
+            "packages"
+          ],
+          "children": [
+            {
+              "id": "integration-components",
+              "label": "Components to Integrate",
+              "level": 3,
+              "description": "Overview of encouraged integration types (Chat Models, Tools, Retrievers) versus discouraged ones.",
+              "docLink": "/docs/contributing/integrations-langchain",
+              "sourceRef": "contributing/integrations-langchain.md",
+              "tags": [
+                "components",
+                "architecture"
+              ]
+            },
+            {
+              "id": "implementing-integrations",
+              "label": "Implementing Integrations",
+              "level": 3,
+              "description": "Technical details on subclassing base classes from langchain-core to build integration packages.",
+              "docLink": "/docs/contributing/implement-langchain",
+              "sourceRef": "contributing/implement-langchain.md",
+              "tags": [
+                "implementation",
+                "langchain-core",
+                "subclassing"
+              ],
+              "children": [
+                {
+                  "id": "integration-chat-models",
+                  "label": "Chat Models Integration",
+                  "level": 4,
+                  "description": "Implementing custom chat models by subclassing the BaseChatModel class.",
+                  "docLink": "/docs/contributing/implement-langchain",
+                  "sourceRef": "contributing/implement-langchain.md",
+                  "tags": [
+                    "chat-models",
+                    "llm"
+                  ]
+                },
+                {
+                  "id": "integration-tools",
+                  "label": "Tools Integration",
+                  "level": 4,
+                  "description": "Creating custom tools by inheriting from the BaseTool class to enable agent capabilities.",
+                  "docLink": "/docs/contributing/implement-langchain",
+                  "sourceRef": "contributing/implement-langchain.md",
+                  "tags": [
+                    "tools",
+                    "agents"
+                  ]
+                },
+                {
+                  "id": "integration-middleware",
+                  "label": "Middleware Integration",
+                  "level": 4,
+                  "description": "Customizing agent behavior by subclassing AgentMiddleware to hook into model and tool calls.",
+                  "docLink": "/docs/contributing/implement-langchain",
+                  "sourceRef": "contributing/implement-langchain.md",
+                  "tags": [
+                    "middleware",
+                    "hooks"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "integration-sandbox-criteria",
+              "label": "Sandbox Integration Criteria",
+              "level": 3,
+              "description": "Specific maintenance and download requirements for featuring third-party sandbox integrations.",
+              "docLink": "/docs/contributing/integrations-langchain",
+              "sourceRef": "contributing/integrations-langchain.md",
+              "tags": [
+                "sandboxes",
+                "criteria",
+                "security"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "langchain-concepts",
+      "label": "LangChain Concepts",
+      "level": 1,
+      "description": "Core concepts and architectural pillars of the LangChain ecosystem, including context engineering, memory management, product stacks, and model providers.",
+      "docLink": "/docs/concepts",
+      "sourceRef": "concepts",
+      "tags": [
+        "concepts",
+        "architecture",
+        "langchain"
+      ],
+      "children": [
+        {
+          "id": "context-engineering",
+          "label": "Context Engineering",
+          "level": 2,
+          "description": "The practice of building dynamic systems that provide the right information and tools, in the right format, so that an AI application can accomplish a task.",
+          "docLink": "/docs/concepts/context",
+          "sourceRef": "concepts/context.md",
+          "tags": [
+            "context",
+            "engineering"
+          ],
+          "children": [
+            {
+              "id": "static-context",
+              "label": "Static Context",
+              "level": 3,
+              "description": "Immutable data that does not change during execution, such as user metadata, database connections, and tools.",
+              "docLink": "/docs/concepts/context",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "static"
+              ]
+            },
+            {
+              "id": "dynamic-context",
+              "label": "Dynamic Context",
+              "level": 3,
+              "description": "Mutable data that evolves as the application runs, such as conversation history, intermediate results, and tool call observations.",
+              "docLink": "/docs/concepts/context",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "dynamic"
+              ]
+            },
+            {
+              "id": "runtime-context",
+              "label": "Runtime Context",
+              "level": 3,
+              "description": "Data scoped to a single run or invocation of an application.",
+              "docLink": "/docs/concepts/context",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "runtime"
+              ]
+            },
+            {
+              "id": "cross-conversation-context",
+              "label": "Cross-Conversation Context",
+              "level": 3,
+              "description": "Data that persists across multiple conversations or sessions.",
+              "docLink": "/docs/concepts/context",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "persistence"
+              ]
+            },
+            {
+              "id": "langgraph-config",
+              "label": "Config",
+              "level": 3,
+              "description": "Static, immutable data passed at the start of a run, typically specified using the reserved 'configurable' key.",
+              "docLink": "/docs/concepts/context#config",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "config"
+              ]
+            },
+            {
+              "id": "dynamic-runtime-context",
+              "label": "Dynamic Runtime Context (State)",
+              "level": 3,
+              "description": "Mutable data that evolves during a single run, managed through the LangGraph state object acting as short-term memory.",
+              "docLink": "/docs/concepts/context#dynamic-runtime-context",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "state",
+                "langgraph"
+              ],
+              "relations": [
+                {
+                  "targetId": "short-term-memory",
+                  "type": "related-to"
+                }
+              ]
+            },
+            {
+              "id": "dynamic-cross-conversation-context",
+              "label": "Dynamic Cross-Conversation Context (Store)",
+              "level": 3,
+              "description": "Persistent data shared across conversations, managed via LangGraph stores.",
+              "docLink": "/docs/concepts/context#dynamic-cross-conversation-context",
+              "sourceRef": "concepts/context.md",
+              "tags": [
+                "context",
+                "store",
+                "langgraph"
+              ],
+              "relations": [
+                {
+                  "targetId": "long-term-memory",
+                  "type": "related-to"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "agent-memory",
+          "label": "Memory",
+          "level": 2,
+          "description": "A system that remembers information about previous interactions, allowing AI agents to learn from feedback and adapt to user preferences.",
+          "docLink": "/docs/concepts/memory",
+          "sourceRef": "concepts/memory.md",
+          "tags": [
+            "memory",
+            "agent"
+          ],
+          "children": [
+            {
+              "id": "short-term-memory",
+              "label": "Short-Term Memory",
+              "level": 3,
+              "description": "Thread-scoped memory that tracks the ongoing conversation by maintaining message history within a single session.",
+              "docLink": "/docs/concepts/memory#short-term-memory",
+              "sourceRef": "concepts/memory.md",
+              "tags": [
+                "memory",
+                "short-term",
+                "thread"
+              ]
+            },
+            {
+              "id": "long-term-memory",
+              "label": "Long-Term Memory",
+              "level": 3,
+              "description": "User-specific or application-level data stored across sessions and shared across conversational threads, recalled at any time.",
+              "docLink": "/docs/concepts/memory#long-term-memory",
+              "sourceRef": "concepts/memory.md",
+              "tags": [
+                "memory",
+                "long-term",
+                "store"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "agent-development-stack",
+          "label": "Agent Development Stack",
+          "level": 2,
+          "description": "The categorization of tools used to build agents, divided into frameworks, runtimes, and harnesses.",
+          "docLink": "/docs/concepts/products",
+          "sourceRef": "concepts/products.md",
+          "tags": [
+            "architecture",
+            "products"
+          ],
+          "children": [
+            {
+              "id": "agent-frameworks",
+              "label": "Agent Frameworks",
+              "level": 3,
+              "description": "Libraries providing high-level abstractions, integrations, and standard loops to quickly build agents (e.g., LangChain, Vercel AI SDK).",
+              "docLink": "/docs/concepts/products#agent-frameworks-like-langchain",
+              "sourceRef": "concepts/products.md",
+              "tags": [
+                "framework",
+                "abstractions"
+              ]
+            },
+            {
+              "id": "agent-runtimes",
+              "label": "Agent Runtimes",
+              "level": 3,
+              "description": "Infrastructure providing low-level control, durable execution, streaming, human-in-the-loop, and persistence (e.g., LangGraph).",
+              "docLink": "/docs/concepts/products#agent-runtimes-like-langgraph",
+              "sourceRef": "concepts/products.md",
+              "tags": [
+                "runtime",
+                "orchestration"
+              ]
+            },
+            {
+              "id": "agent-harnesses",
+              "label": "Agent Harnesses",
+              "level": 3,
+              "description": "Predefined tools, prompts, and subagents designed for building highly autonomous agents facing complex, non-deterministic tasks.",
+              "docLink": "/docs/concepts/products#agent-harnesses-like-the-deep-agents-sdk",
+              "sourceRef": "concepts/products.md",
+              "tags": [
+                "harness",
+                "autonomous"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "providers-and-models",
+          "label": "Providers and Models",
+          "level": 2,
+          "description": "LangChain's unified interface for interacting with various AI model providers and managing model configurations.",
+          "docLink": "/docs/concepts/providers-and-models",
+          "sourceRef": "concepts/providers-and-models.md",
+          "tags": [
+            "models",
+            "providers"
+          ],
+          "children": [
+            {
+              "id": "unified-model-api",
+              "label": "Unified Model API",
+              "level": 3,
+              "description": "A single, consistent interface across all chat models allowing seamless provider swapping and side-by-side comparison.",
+              "docLink": "/docs/concepts/providers-and-models#one-api-for-any-model",
+              "sourceRef": "concepts/providers-and-models.md",
+              "tags": [
+                "api",
+                "integration"
+              ]
+            },
+            {
+              "id": "model-providers",
+              "label": "Model Providers",
+              "level": 3,
+              "description": "Platforms hosting AI models (e.g., OpenAI, Anthropic) integrated into LangChain via dedicated packages.",
+              "docLink": "/docs/concepts/providers-and-models#what-is-a-provider",
+              "sourceRef": "concepts/providers-and-models.md",
+              "tags": [
+                "providers",
+                "integration"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contributing",
+      "label": "Contributing to LangChain",
+      "level": 1,
+      "description": "Guidelines, workflows, and standards for contributing to LangChain's codebase, documentation, and integrations.",
+      "docLink": "/docs/contributing/overview",
+      "sourceRef": "contributing/overview.md",
+      "tags": [
+        "community",
+        "open-source",
+        "guidelines"
+      ],
+      "children": [
+        {
+          "id": "contributing-overview",
+          "label": "Contribution Overview",
+          "level": 2,
+          "description": "General introduction to contributing to LangChain, including community standards and general policies.",
+          "docLink": "/docs/contributing/overview",
+          "sourceRef": "contributing/overview.md",
+          "tags": [
+            "overview",
+            "community"
+          ],
+          "children": [
+            {
+              "id": "pr-requirements",
+              "label": "Pull Request Requirements",
+              "level": 3,
+              "description": "Strict requirements for submitting PRs, including linking to approved issues and avoiding low-effort or automated spam.",
+              "docLink": "/docs/contributing/overview",
+              "sourceRef": "contributing/overview.md",
+              "tags": [
+                "github",
+                "pull-request",
+                "policy"
+              ]
+            },
+            {
+              "id": "llm-usage-policy",
+              "label": "LLM Usage Policy",
+              "level": 3,
+              "description": "Guidelines on using AI assistants to draft contributions, requiring manual verification of all code and facts.",
+              "docLink": "/docs/contributing/overview",
+              "sourceRef": "contributing/overview.md",
+              "tags": [
+                "ai-policy",
+                "llm",
+                "quality"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contributing-code",
+          "label": "Contributing to Code",
+          "level": 2,
+          "description": "Technical guide for setting up the development environment, understanding repository structure, and submitting code changes.",
+          "docLink": "/docs/contributing/code",
+          "sourceRef": "contributing/code.md",
+          "tags": [
+            "development",
+            "coding",
+            "git"
+          ],
+          "children": [
+            {
+              "id": "code-contribution-guidelines",
+              "label": "Code Contribution Guidelines",
+              "level": 3,
+              "description": "Core principles for code contributions, focusing on backwards compatibility and high standards for new features.",
+              "docLink": "/docs/contributing/code",
+              "sourceRef": "contributing/code.md",
+              "tags": [
+                "standards",
+                "compatibility",
+                "features"
+              ],
+              "children": [
+                {
+                  "id": "backwards-compatibility",
+                  "label": "Backwards Compatibility",
+                  "level": 4,
+                  "description": "Rules and practices to ensure code changes do not break existing user implementations.",
+                  "docLink": "/docs/contributing/code",
+                  "sourceRef": "contributing/code.md",
+                  "tags": [
+                    "compatibility",
+                    "api-design"
+                  ]
+                },
+                {
+                  "id": "new-features-policy",
+                  "label": "New Features Policy",
+                  "level": 4,
+                  "description": "Criteria for accepting new core abstractions, requiring demonstrated need and prior discussion.",
+                  "docLink": "/docs/contributing/code",
+                  "sourceRef": "contributing/code.md",
+                  "tags": [
+                    "features",
+                    "abstractions"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "development-environment",
+              "label": "Development Environment Setup",
+              "level": 3,
+              "description": "How to set up local environments and navigate the monorepo structure of LangChain packages.",
+              "docLink": "/docs/contributing/code",
+              "sourceRef": "contributing/code.md",
+              "tags": [
+                "setup",
+                "monorepo",
+                "environment"
+              ]
+            },
+            {
+              "id": "development-workflow",
+              "label": "Development Workflow",
+              "level": 3,
+              "description": "The workflow for testing, linting, and running pre-commit hooks before submitting code.",
+              "docLink": "/docs/contributing/code",
+              "sourceRef": "contributing/code.md",
+              "tags": [
+                "testing",
+                "linting",
+                "workflow"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contributing-documentation",
+          "label": "Contributing to Documentation",
+          "level": 2,
+          "description": "Instructions for improving LangChain's documentation, including local preview setup and writing standards.",
+          "docLink": "/docs/contributing/documentation",
+          "sourceRef": "contributing/documentation.md",
+          "tags": [
+            "documentation",
+            "writing",
+            "mintlify"
+          ],
+          "children": [
+            {
+              "id": "docs-local-development",
+              "label": "Local Docs Development",
+              "level": 3,
+              "description": "Setting up a local preview server with hot reloading to edit and view documentation changes.",
+              "docLink": "/docs/contributing/documentation",
+              "sourceRef": "contributing/documentation.md",
+              "tags": [
+                "local-dev",
+                "mintlify",
+                "preview"
+              ]
+            },
+            {
+              "id": "docs-quality-checks",
+              "label": "Docs Quality Checks",
+              "level": 3,
+              "description": "Commands for checking broken links, formatting, and linting markdown files before submission.",
+              "docLink": "/docs/contributing/documentation",
+              "sourceRef": "contributing/documentation.md",
+              "tags": [
+                "linting",
+                "formatting",
+                "quality"
+              ]
+            },
+            {
+              "id": "documentation-types",
+              "label": "Documentation Types",
+              "level": 3,
+              "description": "The four categories of documentation: How-to guides, Conceptual guides, Reference, and Tutorials.",
+              "docLink": "/docs/contributing/documentation",
+              "sourceRef": "contributing/documentation.md",
+              "tags": [
+                "content-strategy",
+                "docs-structure"
+              ],
+              "children": [
+                {
+                  "id": "docs-how-to-guides",
+                  "label": "How-to Guides",
+                  "level": 4,
+                  "description": "Task-oriented instructions designed to help users accomplish specific goals.",
+                  "docLink": "/docs/contributing/documentation",
+                  "sourceRef": "contributing/documentation.md",
+                  "tags": [
+                    "how-to",
+                    "guides"
+                  ]
+                },
+                {
+                  "id": "docs-conceptual-guides",
+                  "label": "Conceptual Guides",
+                  "level": 4,
+                  "description": "High-level explanations of core concepts and design decisions.",
+                  "docLink": "/docs/contributing/documentation",
+                  "sourceRef": "contributing/documentation.md",
+                  "tags": [
+                    "concepts",
+                    "theory"
+                  ]
+                },
+                {
+                  "id": "docs-reference",
+                  "label": "Reference Documentation",
+                  "level": 4,
+                  "description": "Detailed, low-level API and functionality descriptions.",
+                  "docLink": "/docs/contributing/documentation",
+                  "sourceRef": "contributing/documentation.md",
+                  "tags": [
+                    "api-reference",
+                    "technical"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contributing-integrations",
+          "label": "Contributing Integrations",
+          "level": 2,
+          "description": "Guidelines for building and contributing third-party integration packages to the LangChain ecosystem.",
+          "docLink": "/docs/contributing/integrations-langchain",
+          "sourceRef": "contributing/integrations-langchain.md",
+          "tags": [
+            "integrations",
+            "ecosystem",
+            "packages"
+          ],
+          "children": [
+            {
+              "id": "integration-components",
+              "label": "Components to Integrate",
+              "level": 3,
+              "description": "Overview of encouraged integration types (Chat Models, Tools, Retrievers) versus discouraged ones.",
+              "docLink": "/docs/contributing/integrations-langchain",
+              "sourceRef": "contributing/integrations-langchain.md",
+              "tags": [
+                "components",
+                "architecture"
+              ]
+            },
+            {
+              "id": "implementing-integrations",
+              "label": "Implementing Integrations",
+              "level": 3,
+              "description": "Technical details on subclassing base classes from langchain-core to build integration packages.",
+              "docLink": "/docs/contributing/implement-langchain",
+              "sourceRef": "contributing/implement-langchain.md",
+              "tags": [
+                "implementation",
+                "langchain-core",
+                "subclassing"
+              ],
+              "children": [
+                {
+                  "id": "integration-chat-models",
+                  "label": "Chat Models Integration",
+                  "level": 4,
+                  "description": "Implementing custom chat models by subclassing the BaseChatModel class.",
+                  "docLink": "/docs/contributing/implement-langchain",
+                  "sourceRef": "contributing/implement-langchain.md",
+                  "tags": [
+                    "chat-models",
+                    "llm"
+                  ]
+                },
+                {
+                  "id": "integration-tools",
+                  "label": "Tools Integration",
+                  "level": 4,
+                  "description": "Creating custom tools by inheriting from the BaseTool class to enable agent capabilities.",
+                  "docLink": "/docs/contributing/implement-langchain",
+                  "sourceRef": "contributing/implement-langchain.md",
+                  "tags": [
+                    "tools",
+                    "agents"
+                  ]
+                },
+                {
+                  "id": "integration-middleware",
+                  "label": "Middleware Integration",
+                  "level": 4,
+                  "description": "Customizing agent behavior by subclassing AgentMiddleware to hook into model and tool calls.",
+                  "docLink": "/docs/contributing/implement-langchain",
+                  "sourceRef": "contributing/implement-langchain.md",
+                  "tags": [
+                    "middleware",
+                    "hooks"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "integration-sandbox-criteria",
+              "label": "Sandbox Integration Criteria",
+              "level": 3,
+              "description": "Specific maintenance and download requirements for featuring third-party sandbox integrations.",
+              "docLink": "/docs/contributing/integrations-langchain",
+              "sourceRef": "contributing/integrations-langchain.md",
+              "tags": [
+                "sandboxes",
+                "criteria",
+                "security"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deepagents",
+      "label": "Deep Agents",
+      "level": 1,
+      "description": "A framework and runtime for building production-ready, long-running AI agents with built-in capabilities like planning, memory, sandboxes, and subagents.",
+      "docLink": "/docs/deepagents/overview",
+      "tags": [
+        "agents",
+        "orchestration",
+        "runtime"
+      ],
+      "children": [
+        {
+          "id": "deepagents-harness",
+          "label": "Agent Harness",
+          "level": 2,
+          "description": "The core execution loop providing built-in capabilities for task planning, context management, and tool execution.",
+          "docLink": "/docs/deepagents/harness",
+          "tags": [
+            "core",
+            "harness",
+            "planning"
+          ],
+          "relations": [
+            {
+              "targetId": "deepagents-customization",
+              "type": "related-to"
+            }
+          ]
+        },
+        {
+          "id": "deepagents-customization",
+          "label": "Agent Customization",
+          "level": 2,
+          "description": "Configuring deep agents with custom models, tools, memory files, skills, and middleware stacks.",
+          "docLink": "/docs/deepagents/customization",
+          "tags": [
+            "configuration",
+            "middleware",
+            "tools"
+          ]
+        },
+        {
+          "id": "deepagents-memory",
+          "label": "Long-Term Memory",
+          "level": 2,
+          "description": "Filesystem-backed memory allowing agents to persist, read, and update knowledge across threads and sessions.",
+          "docLink": "/docs/deepagents/memory",
+          "tags": [
+            "memory",
+            "persistence",
+            "state"
+          ],
+          "children": [
+            {
+              "id": "deepagents-skills",
+              "label": "Skills",
+              "level": 3,
+              "description": "Reusable directories of domain expertise loaded progressively in layers (metadata, instructions, resources) to avoid context bloat.",
+              "docLink": "/docs/deepagents/skills",
+              "tags": [
+                "skills",
+                "context-management"
+              ],
+              "relations": [
+                {
+                  "targetId": "deepagents-memory",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "deepagents-agents-md",
+              "label": "AGENTS.md",
+              "level": 3,
+              "description": "Markdown files used to provide persistent context and instructions loaded automatically at session start.",
+              "docLink": "/docs/deepagents/code/memory-and-skills",
+              "tags": [
+                "configuration",
+                "markdown"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "deepagents-backends",
+          "label": "Filesystem Backends",
+          "level": 2,
+          "description": "Pluggable storage backends (State, Filesystem, Store, Context Hub) that expose a filesystem surface to the agent.",
+          "docLink": "/docs/deepagents/backends",
+          "tags": [
+            "storage",
+            "backends",
+            "filesystem"
+          ],
+          "children": [
+            {
+              "id": "deepagents-sandboxes",
+              "label": "Sandboxes",
+              "level": 3,
+              "description": "Isolated execution environments that provide filesystem tools and a secure shell execution tool.",
+              "docLink": "/docs/deepagents/sandboxes",
+              "tags": [
+                "security",
+                "sandbox",
+                "execution"
+              ],
+              "relations": [
+                {
+                  "targetId": "deepagents-backends",
+                  "type": "depends-on"
+                }
+              ]
+            },
+            {
+              "id": "deepagents-permissions",
+              "label": "Filesystem Permissions",
+              "level": 3,
+              "description": "Declarative rules to control which files and directories an agent can read or write to.",
+              "docLink": "/docs/deepagents/permissions",
+              "tags": [
+                "security",
+                "permissions"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "deepagents-subagents",
+          "label": "Subagents",
+          "level": 2,
+          "description": "Specialized worker agents spawned by a coordinator to isolate heavy tasks and prevent context bloat.",
+          "docLink": "/docs/deepagents/subagents",
+          "tags": [
+            "subagents",
+            "orchestration",
+            "concurrency"
+          ],
+          "children": [
+            {
+              "id": "deepagents-async-subagents",
+              "label": "Async Subagents",
+              "level": 3,
+              "description": "Non-blocking subagents that run background tasks concurrently, allowing interactive steering and cancellation.",
+              "docLink": "/docs/deepagents/async-subagents",
+              "tags": [
+                "async",
+                "concurrency",
+                "background-tasks"
+              ],
+              "relations": [
+                {
+                  "targetId": "deepagents-subagents",
+                  "type": "alternative-to"
+                }
+              ]
+            },
+            {
+              "id": "deepagents-programmatic-subagents",
+              "label": "Programmatic Subagents",
+              "level": 3,
+              "description": "Dispatching and orchestrating subagents directly from interpreter code using loops, branches, and parallel batches.",
+              "docLink": "/docs/deepagents/programmatic-subagents",
+              "tags": [
+                "interpreters",
+                "orchestration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "deepagents-protocols",
+          "label": "Agent Protocols",
+          "level": 2,
+          "description": "Standardized communication protocols enabling agents to interact with other agents, IDEs, and external tools.",
+          "docLink": "/docs/deepagents/mcp",
+          "tags": [
+            "protocols",
+            "standards"
+          ],
+          "children": [
+            {
+              "id": "deepagents-a2a",
+              "label": "Agent2Agent (A2A)",
+              "level": 3,
+              "description": "Google's protocol for enabling standardized communication and RPC methods between conversational AI agents.",
+              "docLink": "/docs/deepagents/a2a",
+              "tags": [
+                "protocols",
+                "a2a",
+                "communication"
+              ]
+            },
+            {
+              "id": "deepagents-acp",
+              "label": "Agent Client Protocol (ACP)",
+              "level": 3,
+              "description": "A protocol standardizing communication between coding agents and code editors or IDEs.",
+              "docLink": "/docs/deepagents/acp",
+              "tags": [
+                "protocols",
+                "acp",
+                "ide"
+              ]
+            },
+            {
+              "id": "deepagents-mcp",
+              "label": "Model Context Protocol (MCP)",
+              "level": 3,
+              "description": "An open protocol that standardizes how applications provide tools and context to LLMs.",
+              "docLink": "/docs/deepagents/mcp",
+              "tags": [
+                "protocols",
+                "mcp",
+                "tools"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "deepagents-streaming",
+          "label": "Event Streaming",
+          "level": 2,
+          "description": "Streaming infrastructure supporting real-time updates, token streaming, and independent subagent progress tracking.",
+          "docLink": "/docs/deepagents/streaming",
+          "tags": [
+            "streaming",
+            "events",
+            "real-time"
+          ]
+        },
+        {
+          "id": "deepagents-human-in-the-loop",
+          "label": "Human-in-the-Loop",
+          "level": 2,
+          "description": "Configuring interrupts and approval gates for sensitive tool operations like file writing or command execution.",
+          "docLink": "/docs/deepagents/human-in-the-loop",
+          "tags": [
+            "human-in-the-loop",
+            "security",
+            "interrupts"
+          ]
+        },
+        {
+          "id": "deepagents-interpreters",
+          "label": "Code Interpreters",
+          "level": 2,
+          "description": "In-memory runtimes giving agents a programmable workspace to compose tools, preserve state, and run loops.",
+          "docLink": "/docs/deepagents/interpreters",
+          "tags": [
+            "interpreters",
+            "runtime",
+            "code-execution"
+          ],
+          "children": [
+            {
+              "id": "deepagents-ptc",
+              "label": "Programmatic Tool Calling (PTC)",
+              "level": 3,
+              "description": "Executing multiple selected tool calls programmatically from within interpreter code.",
+              "docLink": "/docs/deepagents/interpreters",
+              "tags": [
+                "interpreters",
+                "tools"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "deepagents-code",
+          "label": "Deep Agents Code (dcode)",
+          "level": 2,
+          "description": "An open-source command-line coding agent built on the Deep Agents SDK with persistent memory and sandbox support.",
+          "docLink": "/docs/deepagents/code",
+          "tags": [
+            "cli",
+            "coding-agent",
+            "dcode"
+          ],
+          "children": [
+            {
+              "id": "deepagents-code-config",
+              "label": "dcode Configuration",
+              "level": 3,
+              "description": "Managing model defaults, provider credentials, and environment variables in the ~/.deepagents/ directory.",
+              "docLink": "/docs/deepagents/code/configuration",
+              "tags": [
+                "cli",
+                "configuration"
+              ]
+            },
+            {
+              "id": "deepagents-code-sandboxes",
+              "label": "dcode Remote Sandboxes",
+              "level": 3,
+              "description": "Running dcode tool operations inside isolated remote sandboxes instead of the local machine.",
+              "docLink": "/docs/deepagents/code/remote-sandboxes",
+              "tags": [
+                "cli",
+                "sandbox",
+                "remote"
+              ],
+              "relations": [
+                {
+                  "targetId": "deepagents-sandboxes",
+                  "type": "depends-on"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "deepagents-frontend",
+          "label": "Frontend Integration",
+          "level": 2,
+          "description": "Building user interfaces that visualize agent workflows, subagent streaming, and sandbox filesystems in real time.",
+          "docLink": "/docs/deepagents/frontend/overview",
+          "tags": [
+            "frontend",
+            "react",
+            "ui"
+          ]
+        },
+        {
+          "id": "deepagents-production",
+          "label": "Production Deployment",
+          "level": 2,
+          "description": "Deploying deep agents to production using LangSmith Deployments, managing multi-tenancy, and setting up guardrails.",
+          "docLink": "/docs/deepagents/going-to-production",
+          "tags": [
+            "production",
+            "deployment",
+            "langsmith"
+          ],
+          "children": [
+            {
+              "id": "deepagents-harness-profiles",
+              "label": "Harness Profiles",
+              "level": 3,
+              "description": "Declarative bundles of system prompts, tool overrides, and subagent tweaks applied per model or provider.",
+              "docLink": "/docs/deepagents/profiles",
+              "tags": [
+                "configuration",
+                "profiles"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "integrations",
+      "label": "Integrations",
+      "level": 1,
+      "description": "LangChain.js integrations with third-party services, models, vector stores, and tools.",
+      "docLink": "/docs/integrations",
+      "sourceRef": "integrations/providers/overview.md",
+      "tags": [
+        "integrations",
+        "ecosystem",
+        "overview"
+      ],
+      "children": [
+        {
+          "id": "integrations-chat-models",
+          "label": "Chat Model Integrations",
+          "level": 2,
+          "description": "Integrations with various chat model providers that use message sequences as inputs and outputs.",
+          "docLink": "/docs/integrations/chat",
+          "sourceRef": "integrations/chat.md",
+          "tags": [
+            "chat",
+            "models",
+            "llm"
+          ],
+          "children": [
+            {
+              "id": "chat-openai",
+              "label": "ChatOpenAI",
+              "level": 3,
+              "description": "Integration with OpenAI's powerful chat models like GPT-4o and GPT-3.5.",
+              "docLink": "/docs/integrations/chat/openai",
+              "sourceRef": "integrations/chat/openai.md",
+              "tags": [
+                "openai",
+                "chat",
+                "gpt"
+              ]
+            },
+            {
+              "id": "chat-anthropic",
+              "label": "ChatAnthropic",
+              "level": 3,
+              "description": "Integration with Anthropic's Claude models, supporting advanced prompting and system messages.",
+              "docLink": "/docs/integrations/chat/anthropic",
+              "sourceRef": "integrations/chat/anthropic.md",
+              "tags": [
+                "anthropic",
+                "claude",
+                "chat"
+              ]
+            },
+            {
+              "id": "chat-azure",
+              "label": "AzureChatOpenAI",
+              "level": 3,
+              "description": "Integration with Microsoft Azure's hosted OpenAI models.",
+              "docLink": "/docs/integrations/chat/azure",
+              "sourceRef": "integrations/chat/azure.md",
+              "tags": [
+                "azure",
+                "openai",
+                "enterprise"
+              ]
+            },
+            {
+              "id": "chat-google",
+              "label": "ChatGoogle",
+              "level": 3,
+              "description": "Integration with Google's Gemini models via Google AI Studio and Vertex AI.",
+              "docLink": "/docs/integrations/providers/google",
+              "sourceRef": "integrations/providers/google.md",
+              "tags": [
+                "google",
+                "gemini",
+                "vertex-ai"
+              ]
+            },
+            {
+              "id": "chat-bedrock",
+              "label": "ChatBedrockConverse",
+              "level": 3,
+              "description": "Unified conversational interface for Amazon Bedrock foundation models.",
+              "docLink": "/docs/integrations/chat/bedrock_converse",
+              "sourceRef": "integrations/chat/bedrock_converse.md",
+              "tags": [
+                "aws",
+                "bedrock",
+                "amazon"
+              ]
+            },
+            {
+              "id": "chat-groq",
+              "label": "ChatGroq",
+              "level": 3,
+              "description": "Fast AI inference powered by Groq's LPU technology.",
+              "docLink": "/docs/integrations/chat/groq",
+              "sourceRef": "integrations/chat/groq.md",
+              "tags": [
+                "groq",
+                "lpu",
+                "fast-inference"
+              ]
+            },
+            {
+              "id": "chat-mistral",
+              "label": "ChatMistralAI",
+              "level": 3,
+              "description": "Integration with Mistral AI's powerful open-source models.",
+              "docLink": "/docs/integrations/chat/mistral",
+              "sourceRef": "integrations/chat/mistral.md",
+              "tags": [
+                "mistral",
+                "open-source",
+                "chat"
+              ]
+            },
+            {
+              "id": "chat-ollama",
+              "label": "ChatOllama",
+              "level": 3,
+              "description": "Run open-source LLMs locally with GPU optimization and simple setup.",
+              "docLink": "/docs/integrations/chat/ollama",
+              "sourceRef": "integrations/chat/ollama.md",
+              "tags": [
+                "ollama",
+                "local-llm",
+                "offline"
+              ]
+            },
+            {
+              "id": "chat-openrouter",
+              "label": "ChatOpenRouter",
+              "level": 3,
+              "description": "Unified API proxy to access models from OpenAI, Anthropic, Google, Meta, and more.",
+              "docLink": "/docs/integrations/chat/openrouter",
+              "sourceRef": "integrations/chat/openrouter.md",
+              "tags": [
+                "openrouter",
+                "proxy",
+                "multi-model"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "integrations-llms",
+          "label": "LLM Integrations",
+          "level": 2,
+          "description": "Integrations with text completion models that take a string input and return a string output.",
+          "docLink": "/docs/integrations/llms",
+          "sourceRef": "integrations/llms.md",
+          "tags": [
+            "llm",
+            "text-completion"
+          ]
+        },
+        {
+          "id": "integrations-embeddings",
+          "label": "Embedding Model Integrations",
+          "level": 2,
+          "description": "Integrations with embedding models that transform raw text into fixed-length semantic vectors.",
+          "docLink": "/docs/integrations/embeddings",
+          "sourceRef": "integrations/embeddings.md",
+          "tags": [
+            "embeddings",
+            "vectors",
+            "semantic-search"
+          ]
+        },
+        {
+          "id": "integrations-vectorstores",
+          "label": "Vector Store Integrations",
+          "level": 2,
+          "description": "Integrations with vector databases to store embedded data and perform similarity searches.",
+          "docLink": "/docs/integrations/vectorstores",
+          "sourceRef": "integrations/vectorstores.md",
+          "tags": [
+            "vectorstores",
+            "databases",
+            "retrieval"
+          ],
+          "children": [
+            {
+              "id": "vectorstore-pgvector",
+              "label": "PGVectorStore",
+              "level": 3,
+              "description": "PostgreSQL vector search extension integration supporting hybrid search and connection pooling.",
+              "docLink": "/docs/integrations/vectorstores/pgvector",
+              "sourceRef": "integrations/vectorstores/pgvector.md",
+              "tags": [
+                "postgres",
+                "pgvector",
+                "sql"
+              ]
+            },
+            {
+              "id": "vectorstore-pinecone",
+              "label": "PineconeStore",
+              "level": 3,
+              "description": "Managed, high-performance cloud vector database integration.",
+              "docLink": "/docs/integrations/vectorstores/pinecone",
+              "sourceRef": "integrations/vectorstores/pinecone.md",
+              "tags": [
+                "pinecone",
+                "cloud-db",
+                "vector-search"
+              ]
+            },
+            {
+              "id": "vectorstore-mongodb",
+              "label": "MongoDB Atlas Vector Search",
+              "level": 3,
+              "description": "Vector search integrated directly within MongoDB Atlas collections.",
+              "docLink": "/docs/integrations/vectorstores/mongodb_atlas",
+              "sourceRef": "integrations/vectorstores/mongodb_atlas.md",
+              "tags": [
+                "mongodb",
+                "atlas",
+                "nosql"
+              ]
+            },
+            {
+              "id": "vectorstore-qdrant",
+              "label": "QdrantVectorStore",
+              "level": 3,
+              "description": "Production-ready vector similarity search engine with payload support.",
+              "docLink": "/docs/integrations/vectorstores/qdrant",
+              "sourceRef": "integrations/vectorstores/qdrant.md",
+              "tags": [
+                "qdrant",
+                "vector-search",
+                "payload"
+              ]
+            },
+            {
+              "id": "vectorstore-redis",
+              "label": "RedisVectorStore",
+              "level": 3,
+              "description": "In-memory data store vector search using the RediSearch module.",
+              "docLink": "/docs/integrations/vectorstores/redis",
+              "sourceRef": "integrations/vectorstores/redis.md",
+              "tags": [
+                "redis",
+                "in-memory",
+                "redisearch"
+              ]
+            },
+            {
+              "id": "vectorstore-weaviate",
+              "label": "WeaviateStore",
+              "level": 3,
+              "description": "Open-source vector database combining vector search with structured filtering.",
+              "docLink": "/docs/integrations/vectorstores/weaviate",
+              "sourceRef": "integrations/vectorstores/weaviate.md",
+              "tags": [
+                "weaviate",
+                "hybrid-search",
+                "graphql"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "integrations-document-loaders",
+          "label": "Document Loader Integrations",
+          "level": 2,
+          "description": "Standardized interfaces for reading data from local filesystems or remote web sources into LangChain Documents.",
+          "docLink": "/docs/integrations/document_loaders",
+          "sourceRef": "integrations/document_loaders.md",
+          "tags": [
+            "document-loaders",
+            "data-ingestion",
+            "io"
+          ]
+        },
+        {
+          "id": "integrations-retrievers",
+          "label": "Retriever Integrations",
+          "level": 2,
+          "description": "Interfaces that return documents based on unstructured queries, generalizing beyond vector stores.",
+          "docLink": "/docs/integrations/retrievers",
+          "sourceRef": "integrations/retrievers.md",
+          "tags": [
+            "retrievers",
+            "search",
+            "rag"
+          ]
+        },
+        {
+          "id": "integrations-sandboxes",
+          "label": "Sandbox Integrations",
+          "level": 2,
+          "description": "Isolated execution environments for running agent-generated code safely.",
+          "docLink": "/docs/integrations/sandboxes",
+          "sourceRef": "integrations/sandboxes.md",
+          "tags": [
+            "sandboxes",
+            "security",
+            "code-execution"
+          ],
+          "children": [
+            {
+              "id": "sandbox-modal",
+              "label": "Modal Sandbox",
+              "level": 3,
+              "description": "Serverless container infrastructure with GPU support for ML/AI workloads.",
+              "docLink": "/docs/integrations/providers/modal",
+              "sourceRef": "integrations/providers/modal.md",
+              "tags": [
+                "modal",
+                "serverless",
+                "gpu"
+              ]
+            },
+            {
+              "id": "sandbox-daytona",
+              "label": "Daytona Sandbox",
+              "level": 3,
+              "description": "Fast-starting secure sandbox environments with multi-language support.",
+              "docLink": "/docs/integrations/providers/daytona",
+              "sourceRef": "integrations/providers/daytona.md",
+              "tags": [
+                "daytona",
+                "sandbox",
+                "typescript"
+              ]
+            },
+            {
+              "id": "sandbox-deno",
+              "label": "Deno Sandbox",
+              "level": 3,
+              "description": "Linux microVMs for isolated code execution, optimized for Deno and JS workloads.",
+              "docLink": "/docs/integrations/providers/deno",
+              "sourceRef": "integrations/providers/deno.md",
+              "tags": [
+                "deno",
+                "microvm",
+                "javascript"
+              ]
+            },
+            {
+              "id": "sandbox-node-vfs",
+              "label": "Node VFS Sandbox",
+              "level": 3,
+              "description": "Local in-memory virtual file system sandbox requiring no external dependencies.",
+              "docLink": "/docs/integrations/providers/node-vfs",
+              "sourceRef": "integrations/providers/node-vfs.md",
+              "tags": [
+                "node-vfs",
+                "local-sandbox",
+                "testing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "integrations-backends",
+          "label": "Backend Integrations",
+          "level": 2,
+          "description": "Filesystem backends connecting Deep Agents to storage systems like databases and virtual filesystems.",
+          "docLink": "/docs/integrations/backends",
+          "sourceRef": "integrations/backends.md",
+          "tags": [
+            "backends",
+            "storage",
+            "vfs"
+          ]
+        },
+        {
+          "id": "integrations-middleware",
+          "label": "Middleware Integrations",
+          "level": 2,
+          "description": "Middleware enabling context engineering, harness customization, and runtime safety controls.",
+          "docLink": "/docs/integrations/middleware",
+          "sourceRef": "integrations/middleware.md",
+          "tags": [
+            "middleware",
+            "safety",
+            "context-engineering"
+          ]
+        },
+        {
+          "id": "integrations-stores",
+          "label": "Store Integrations",
+          "level": 2,
+          "description": "Key-value store interfaces primarily used for caching embeddings and messages.",
+          "docLink": "/docs/integrations/stores",
+          "sourceRef": "integrations/stores.md",
+          "tags": [
+            "stores",
+            "key-value",
+            "caching"
+          ]
+        },
+        {
+          "id": "integrations-splitters",
+          "label": "Text Splitter Integrations",
+          "level": 2,
+          "description": "Utilities to break large documents into smaller, semantically coherent chunks.",
+          "docLink": "/docs/integrations/splitters",
+          "sourceRef": "integrations/splitters.md",
+          "tags": [
+            "text-splitters",
+            "chunking",
+            "pre-processing"
+          ]
+        },
+        {
+          "id": "integrations-llm-caching",
+          "label": "Cache Integrations",
+          "level": 2,
+          "description": "Integrations allowing caching of individual LLM calls for cost savings and speed.",
+          "docLink": "/docs/integrations/llm_caching",
+          "sourceRef": "integrations/llm_caching.md",
+          "tags": [
+            "caching",
+            "optimization",
+            "llm"
+          ]
+        },
+        {
+          "id": "integrations-providers",
+          "label": "Integration Providers",
+          "level": 2,
+          "description": "Third-party services and platforms providing standalone packages for LangChain integrations.",
+          "docLink": "/docs/integrations/providers",
+          "sourceRef": "integrations/providers.md",
+          "tags": [
+            "providers",
+            "packages",
+            "ecosystem"
+          ],
+          "children": [
+            {
+              "id": "provider-perplexity",
+              "label": "Perplexity",
+              "level": 3,
+              "description": "AI-powered internet search engine integration providing chat models and retrievers.",
+              "docLink": "/docs/integrations/providers/perplexity",
+              "sourceRef": "integrations/providers/perplexity.md",
+              "tags": [
+                "perplexity",
+                "search",
+                "retriever"
+              ]
+            },
+            {
+              "id": "provider-tavily",
+              "label": "Tavily",
+              "level": 3,
+              "description": "Search engine specifically designed for AI agents to deliver factual, real-time online information.",
+              "docLink": "/docs/integrations/providers/tavily",
+              "sourceRef": "integrations/providers/tavily.md",
+              "tags": [
+                "tavily",
+                "agent-search",
+                "web-crawl"
+              ]
+            },
+            {
+              "id": "provider-youdotcom",
+              "label": "You.com",
+              "level": 3,
+              "description": "AI productivity platform providing real-time web search and content extraction APIs.",
+              "docLink": "/docs/integrations/providers/youdotcom",
+              "sourceRef": "integrations/providers/youdotcom.md",
+              "tags": [
+                "youdotcom",
+                "search",
+                "tools"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "langchain-framework",
+      "label": "LangChain Framework",
+      "level": 1,
+      "description": "Khung phát triển ứng dụng AI Agent linh hoạt, cho phép kết hợp mô hình ngôn ngữ lớn với các công cụ và dữ liệu bên ngoài.",
+      "docLink": "/docs/langchain/overview",
+      "sourceRef": "langchain/overview.md",
+      "tags": [
+        "framework",
+        "ai-agents",
+        "orchestration"
+      ],
+      "children": [
+        {
+          "id": "langchain-agents",
+          "label": "Agents & Harness",
+          "level": 2,
+          "description": "Thành phần cốt lõi kết hợp mô hình ngôn ngữ (Model) và môi trường bao quanh (Harness) để thực hiện các tác vụ lặp.",
+          "docLink": "/docs/langchain/agents",
+          "sourceRef": "langchain/agents.md",
+          "tags": [
+            "agents",
+            "core-components",
+            "harness"
+          ],
+          "children": [
+            {
+              "id": "langchain-agent-loop",
+              "label": "Core Agent Loop",
+              "level": 3,
+              "description": "Vòng lặp cốt lõi của Agent bao gồm gọi mô hình (Model call) và thực thi công cụ (Tool execution) cho đến khi hoàn thành tác vụ.",
+              "docLink": "/docs/langchain/context-engineering",
+              "sourceRef": "langchain/context-engineering.md",
+              "tags": [
+                "agent-loop",
+                "execution"
+              ]
+            },
+            {
+              "id": "langchain-agent-runtime",
+              "label": "Agent Runtime",
+              "level": 3,
+              "description": "Môi trường thực thi của Agent chạy trên nền tảng LangGraph, cung cấp Context, Store, Stream writer và thông tin thực thi.",
+              "docLink": "/docs/langchain/runtime",
+              "sourceRef": "langchain/runtime.md",
+              "tags": [
+                "runtime",
+                "langgraph",
+                "context"
+              ]
+            },
+            {
+              "id": "langchain-voice-agents",
+              "label": "Voice Agents",
+              "level": 3,
+              "description": "Các Agent có khả năng giao tiếp bằng giọng nói tự nhiên, kết hợp nhận dạng giọng nói, xử lý ngôn ngữ và tổng hợp giọng nói.",
+              "docLink": "/docs/langchain/voice-agent",
+              "sourceRef": "langchain/voice-agent.md",
+              "tags": [
+                "voice",
+                "multimodal",
+                "audio"
+              ],
+              "children": [
+                {
+                  "id": "langchain-sandwich-architecture",
+                  "label": "Sandwich Architecture",
+                  "level": 4,
+                  "description": "Kiến trúc kết hợp ba thành phần độc lập: Speech-to-Text (STT), Text Agent, và Text-to-Speech (TTS) để tối ưu hóa khả năng kiểm soát.",
+                  "docLink": "/docs/langchain/voice-agent",
+                  "sourceRef": "langchain/voice-agent.md",
+                  "tags": [
+                    "architecture",
+                    "stt",
+                    "tts"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-models",
+          "label": "Models",
+          "level": 2,
+          "description": "Động cơ suy nghĩ của Agent, chịu trách nhiệm đưa ra quyết định, gọi công cụ và định hình phản hồi.",
+          "docLink": "/docs/langchain/models",
+          "sourceRef": "langchain/models.md",
+          "tags": [
+            "llm",
+            "reasoning",
+            "chat-models"
+          ],
+          "children": [
+            {
+              "id": "langchain-structured-output",
+              "label": "Structured Output",
+              "level": 3,
+              "description": "Cơ chế ép buộc mô hình trả về dữ liệu theo một cấu trúc định sẵn (schema) thay vì văn bản tự do.",
+              "docLink": "/docs/langchain/structured-output",
+              "sourceRef": "langchain/structured-output.md",
+              "tags": [
+                "schema",
+                "validation",
+                "zod"
+              ],
+              "children": [
+                {
+                  "id": "langchain-provider-strategy",
+                  "label": "Provider Strategy",
+                  "level": 4,
+                  "description": "Chiến lược xuất dữ liệu cấu trúc tận dụng trực tiếp API gốc của nhà cung cấp mô hình (như OpenAI, Anthropic).",
+                  "docLink": "/docs/langchain/structured-output",
+                  "sourceRef": "langchain/structured-output.md",
+                  "tags": [
+                    "native-api",
+                    "validation"
+                  ]
+                },
+                {
+                  "id": "langchain-tool-calling-strategy",
+                  "label": "Tool Calling Strategy",
+                  "level": 4,
+                  "description": "Chiến lược xuất dữ liệu cấu trúc bằng cách giả lập một cuộc gọi công cụ bổ sung cho các mô hình không hỗ trợ native.",
+                  "docLink": "/docs/langchain/structured-output",
+                  "sourceRef": "langchain/structured-output.md",
+                  "tags": [
+                    "tool-calling",
+                    "fallback"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-tools",
+          "label": "Tools",
+          "level": 2,
+          "description": "Các khả năng mở rộng cho phép Agent tương tác với thế giới thực, truy vấn cơ sở dữ liệu hoặc gọi API.",
+          "docLink": "/docs/langchain/tools",
+          "sourceRef": "langchain/tools.md",
+          "tags": [
+            "tools",
+            "actions",
+            "apis"
+          ],
+          "children": [
+            {
+              "id": "langchain-headless-tools",
+              "label": "Headless Tools",
+              "level": 3,
+              "description": "Mô hình công cụ chia tách định nghĩa schema trên server và thực thi thực tế ở phía client (trình duyệt).",
+              "docLink": "/docs/langchain/frontend/headless-tools",
+              "sourceRef": "langchain/frontend/headless-tools.md",
+              "tags": [
+                "frontend",
+                "client-side",
+                "browser-api"
+              ]
+            },
+            {
+              "id": "langchain-mcp",
+              "label": "Model Context Protocol (MCP)",
+              "level": 3,
+              "description": "Giao thức mở chuẩn hóa cách ứng dụng cung cấp công cụ và ngữ cảnh cho LLM thông qua các MCP server.",
+              "docLink": "/docs/langchain/mcp",
+              "sourceRef": "langchain/mcp.md",
+              "tags": [
+                "mcp",
+                "protocol",
+                "integration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-messages",
+          "label": "Messages",
+          "level": 2,
+          "description": "Đơn vị ngữ cảnh cơ bản trong LangChain đại diện cho đầu vào và đầu ra của mô hình (System, Human, AI, Tool).",
+          "docLink": "/docs/langchain/messages",
+          "sourceRef": "langchain/messages.md",
+          "tags": [
+            "messages",
+            "chat-format",
+            "context"
+          ]
+        },
+        {
+          "id": "langchain-memory",
+          "label": "Memory Systems",
+          "level": 2,
+          "description": "Hệ thống lưu trữ thông tin tương tác trước đó của Agent để duy trì ngữ cảnh và cá nhân hóa trải nghiệm.",
+          "docLink": "/docs/langchain/short-term-memory",
+          "sourceRef": "langchain/short-term-memory.md",
+          "tags": [
+            "memory",
+            "persistence",
+            "state"
+          ],
+          "children": [
+            {
+              "id": "langchain-short-term-memory",
+              "label": "Short-term Memory",
+              "level": 3,
+              "description": "Bộ nhớ ngắn hạn lưu trữ lịch sử hội thoại trong phạm vi một luồng (thread) duy nhất sử dụng checkpointer.",
+              "docLink": "/docs/langchain/short-term-memory",
+              "sourceRef": "langchain/short-term-memory.md",
+              "tags": [
+                "short-term",
+                "thread",
+                "checkpointer"
+              ]
+            },
+            {
+              "id": "langchain-long-term-memory",
+              "label": "Long-term Memory",
+              "level": 3,
+              "description": "Bộ nhớ dài hạn lưu trữ thông tin dưới dạng JSON qua nhiều phiên hội thoại khác nhau sử dụng LangGraph Store.",
+              "docLink": "/docs/langchain/long-term-memory",
+              "sourceRef": "langchain/long-term-memory.md",
+              "tags": [
+                "long-term",
+                "store",
+                "cross-thread"
+              ]
+            },
+            {
+              "id": "langchain-context-engineering",
+              "label": "Context Engineering",
+              "level": 3,
+              "description": "Kỹ thuật cung cấp đúng thông tin và công cụ dưới định dạng phù hợp để tối ưu hóa độ tin cậy của Agent.",
+              "docLink": "/docs/langchain/context-engineering",
+              "sourceRef": "langchain/context-engineering.md",
+              "tags": [
+                "context-engineering",
+                "reliability",
+                "prompting"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-middleware",
+          "label": "Middleware System",
+          "level": 2,
+          "description": "Hệ thống can thiệp vào vòng lặp của Agent để kiểm soát, ghi log, thay đổi prompt hoặc áp dụng các chính sách bảo mật.",
+          "docLink": "/docs/langchain/middleware/overview",
+          "sourceRef": "langchain/middleware/overview.md",
+          "tags": [
+            "middleware",
+            "hooks",
+            "control-flow"
+          ],
+          "children": [
+            {
+              "id": "langchain-built-in-middleware",
+              "label": "Prebuilt Middleware",
+              "level": 3,
+              "description": "Các middleware có sẵn như tóm tắt hội thoại, giới hạn cuộc gọi, tự động thử lại hoặc tìm kiếm công cụ.",
+              "docLink": "/docs/langchain/middleware/built-in",
+              "sourceRef": "langchain/middleware/built-in.md",
+              "tags": [
+                "prebuilt",
+                "summarization",
+                "retry"
+              ]
+            },
+            {
+              "id": "langchain-custom-middleware",
+              "label": "Custom Middleware",
+              "level": 3,
+              "description": "Khả năng tự xây dựng middleware bằng cách can thiệp vào các hook dạng Node-style hoặc Wrap-style.",
+              "docLink": "/docs/langchain/middleware/custom",
+              "sourceRef": "langchain/middleware/custom.md",
+              "tags": [
+                "custom",
+                "hooks",
+                "state-updates"
+              ]
+            },
+            {
+              "id": "langchain-guardrails",
+              "label": "Guardrails",
+              "level": 3,
+              "description": "Cơ chế kiểm soát an toàn, phát hiện thông tin nhạy cảm (PII), ngăn chặn prompt injection và đảm bảo tuân thủ.",
+              "docLink": "/docs/langchain/guardrails",
+              "sourceRef": "langchain/guardrails.md",
+              "tags": [
+                "guardrails",
+                "security",
+                "pii"
+              ]
+            },
+            {
+              "id": "langchain-hitl",
+              "label": "Human-in-the-Loop (HITL)",
+              "level": 3,
+              "description": "Cho phép tạm dừng Agent để con người phê duyệt, chỉnh sửa hoặc từ chối các hành động nhạy cảm của công cụ.",
+              "docLink": "/docs/langchain/human-in-the-loop",
+              "sourceRef": "langchain/human-in-the-loop.md",
+              "tags": [
+                "hitl",
+                "interrupts",
+                "approval"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-retrieval",
+          "label": "Retrieval & RAG",
+          "level": 2,
+          "description": "Cơ chế tìm kiếm và truy xuất thông tin từ các nguồn dữ liệu bên ngoài để bổ sung ngữ cảnh cho mô hình.",
+          "docLink": "/docs/langchain/retrieval",
+          "sourceRef": "langchain/retrieval.md",
+          "tags": [
+            "retrieval",
+            "rag",
+            "knowledge-base"
+          ],
+          "children": [
+            {
+              "id": "langchain-knowledge-base",
+              "label": "Knowledge Base",
+              "level": 3,
+              "description": "Kho tri thức xây dựng từ tài liệu, sử dụng kỹ thuật chia nhỏ văn bản (text splitters), nhúng (embeddings) và lưu trữ vector.",
+              "docLink": "/docs/langchain/knowledge-base",
+              "sourceRef": "langchain/knowledge-base.md",
+              "tags": [
+                "vector-store",
+                "embeddings",
+                "documents"
+              ]
+            },
+            {
+              "id": "langchain-rag-architectures",
+              "label": "RAG Architectures",
+              "level": 3,
+              "description": "Các mô hình kiến trúc RAG khác nhau để tích hợp tìm kiếm vào quá trình tạo văn bản.",
+              "docLink": "/docs/langchain/retrieval",
+              "sourceRef": "langchain/retrieval.md",
+              "tags": [
+                "rag",
+                "architecture",
+                "design-patterns"
+              ],
+              "children": [
+                {
+                  "id": "langchain-2-step-rag",
+                  "label": "2-Step RAG",
+                  "level": 4,
+                  "description": "Kiến trúc RAG đơn giản trong đó việc truy xuất tài liệu luôn xảy ra trước khi mô hình tạo câu trả lời.",
+                  "docLink": "/docs/langchain/retrieval",
+                  "sourceRef": "langchain/retrieval.md",
+                  "tags": [
+                    "2-step",
+                    "predictable",
+                    "low-latency"
+                  ]
+                },
+                {
+                  "id": "langchain-agentic-rag",
+                  "label": "Agentic RAG",
+                  "level": 4,
+                  "description": "Kiến trúc RAG linh hoạt trong đó Agent tự quyết định khi nào và làm thế nào để truy xuất thông tin.",
+                  "docLink": "/docs/langchain/retrieval",
+                  "sourceRef": "langchain/retrieval.md",
+                  "tags": [
+                    "agentic-rag",
+                    "reasoning",
+                    "dynamic"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-multi-agent",
+          "label": "Multi-Agent Systems",
+          "level": 2,
+          "description": "Hệ thống điều phối nhiều Agent chuyên biệt để giải quyết các quy trình công việc phức tạp.",
+          "docLink": "/docs/langchain/multi-agent",
+          "sourceRef": "langchain/multi-agent.md",
+          "tags": [
+            "multi-agent",
+            "coordination",
+            "scalability"
+          ],
+          "children": [
+            {
+              "id": "langchain-multi-agent-subagents",
+              "label": "Subagents Pattern",
+              "level": 3,
+              "description": "Mô hình phân cấp trong đó một Agent giám sát (Supervisor) điều phối các Agent phụ đóng vai trò như công cụ.",
+              "docLink": "/docs/langchain/multi-agent/subagents",
+              "sourceRef": "langchain/multi-agent/subagents.md",
+              "tags": [
+                "subagents",
+                "supervisor",
+                "hierarchical"
+              ]
+            },
+            {
+              "id": "langchain-multi-agent-handoffs",
+              "label": "Handoffs Pattern",
+              "level": 3,
+              "description": "Mô hình máy trạng thái (State Machine) chuyển giao quyền kiểm soát và cấu hình Agent linh hoạt dựa trên tiến trình.",
+              "docLink": "/docs/langchain/multi-agent/handoffs-customer-support",
+              "sourceRef": "langchain/multi-agent/handoffs-customer-support.md",
+              "tags": [
+                "handoffs",
+                "state-machine",
+                "dynamic-config"
+              ]
+            },
+            {
+              "id": "langchain-multi-agent-skills",
+              "label": "Skills Pattern",
+              "level": 3,
+              "description": "Kiến trúc nạp các chỉ dẫn chuyên biệt (skills) theo yêu cầu (progressive disclosure) thay vì nạp toàn bộ từ đầu.",
+              "docLink": "/docs/langchain/multi-agent/skills",
+              "sourceRef": "langchain/multi-agent/skills.md",
+              "tags": [
+                "skills",
+                "progressive-disclosure",
+                "prompts"
+              ]
+            },
+            {
+              "id": "langchain-multi-agent-router",
+              "label": "Router Pattern",
+              "level": 3,
+              "description": "Mô hình phân loại đầu vào và định tuyến yêu cầu đến các Agent chuyên biệt song song trước khi tổng hợp kết quả.",
+              "docLink": "/docs/langchain/multi-agent/router-knowledge-base",
+              "sourceRef": "langchain/multi-agent/router-knowledge-base.md",
+              "tags": [
+                "router",
+                "parallel-execution",
+                "classification"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-streaming",
+          "label": "Streaming & Events",
+          "level": 2,
+          "description": "Hệ thống truyền phát dữ liệu thời gian thực giúp cải thiện trải nghiệm người dùng bằng cách hiển thị kết quả ngay khi có.",
+          "docLink": "/docs/langchain/streaming",
+          "sourceRef": "langchain/streaming.md",
+          "tags": [
+            "streaming",
+            "real-time",
+            "ux"
+          ],
+          "children": [
+            {
+              "id": "langchain-event-streaming",
+              "label": "Event Streaming (v3)",
+              "level": 3,
+              "description": "Cơ chế stream_events truyền phát các sự kiện chi tiết về tin nhắn, cuộc gọi công cụ và trạng thái Agent.",
+              "docLink": "/docs/langchain/event-streaming",
+              "sourceRef": "langchain/event-streaming.md",
+              "tags": [
+                "event-streaming",
+                "stream-events",
+                "projections"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-frontend",
+          "label": "Frontend Integration",
+          "level": 2,
+          "description": "Các mẫu thiết kế và SDK để xây dựng giao diện người dùng tương tác phong phú cho Agent.",
+          "docLink": "/docs/langchain/frontend/overview",
+          "sourceRef": "langchain/frontend/overview.md",
+          "tags": [
+            "frontend",
+            "ui",
+            "sdk"
+          ],
+          "children": [
+            {
+              "id": "langchain-frontend-sdk",
+              "label": "Frontend SDKs",
+              "level": 3,
+              "description": "Các thư viện React, Vue, Svelte, Angular cung cấp hook useStream để đồng bộ trạng thái Agent với UI.",
+              "docLink": "/docs/langchain/frontend/overview",
+              "sourceRef": "langchain/frontend/overview.md",
+              "tags": [
+                "react",
+                "vue",
+                "use-stream"
+              ]
+            },
+            {
+              "id": "langchain-agent-chat-ui",
+              "label": "Agent Chat UI",
+              "level": 3,
+              "description": "Ứng dụng Next.js mã nguồn mở cung cấp giao diện chat trực quan, hỗ trợ debug dòng thời gian và phân nhánh trạng thái.",
+              "docLink": "/docs/langchain/ui",
+              "sourceRef": "langchain/ui.md",
+              "tags": [
+                "nextjs",
+                "chat-ui",
+                "open-source"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-observability",
+          "label": "Observability & Tooling",
+          "level": 2,
+          "description": "Khả năng giám sát, ghi vết (tracing) và phân tích hành vi của Agent trong quá trình phát triển và vận hành.",
+          "docLink": "/docs/langchain/observability",
+          "sourceRef": "langchain/observability.md",
+          "tags": [
+            "observability",
+            "monitoring",
+            "tracing"
+          ],
+          "children": [
+            {
+              "id": "langchain-langsmith-tracing",
+              "label": "LangSmith Tracing",
+              "level": 3,
+              "description": "Hệ thống tự động ghi lại mọi bước thực thi, cuộc gọi mô hình và kết quả công cụ lên LangSmith.",
+              "docLink": "/docs/langchain/observability",
+              "sourceRef": "langchain/observability.md",
+              "tags": [
+                "langsmith",
+                "traces",
+                "debugging"
+              ]
+            },
+            {
+              "id": "langchain-langsmith-studio",
+              "label": "LangSmith Studio",
+              "level": 3,
+              "description": "Giao diện trực quan cục bộ giúp kiểm thử, gỡ lỗi và tinh chỉnh Agent trực tiếp từ máy cá nhân.",
+              "docLink": "/docs/langchain/studio",
+              "sourceRef": "langchain/studio.md",
+              "tags": [
+                "studio",
+                "local-dev",
+                "visualization"
+              ]
+            },
+            {
+              "id": "langchain-deployment",
+              "label": "LangSmith Deployment",
+              "level": 3,
+              "description": "Nền tảng lưu trữ được quản lý bởi LangSmith, tối ưu riêng cho các Agent chạy lâu dài và có trạng thái.",
+              "docLink": "/docs/langchain/deploy",
+              "sourceRef": "langchain/deploy.md",
+              "tags": [
+                "deployment",
+                "hosting",
+                "cloud"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langchain-testing",
+          "label": "Testing & Evaluation",
+          "level": 2,
+          "description": "Quy trình kiểm thử Agent bao gồm kiểm thử đơn vị (unit), kiểm thử tích hợp (integration) và đánh giá hành vi.",
+          "docLink": "/docs/langchain/test",
+          "sourceRef": "langchain/test.md",
+          "tags": [
+            "testing",
+            "evals",
+            "quality-assurance"
+          ],
+          "children": [
+            {
+              "id": "langchain-agent-evals",
+              "label": "Agent Evaluations",
+              "level": 3,
+              "description": "Đánh giá chất lượng Agent bằng cách so sánh quỹ đạo thực thi (trajectory match) hoặc sử dụng LLM làm giám khảo.",
+              "docLink": "/docs/langchain/test/evals",
+              "sourceRef": "langchain/test/evals.md",
+              "tags": [
+                "evals",
+                "llm-judge",
+                "trajectory-match"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "level": 1,
+      "description": "A low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents.",
+      "docLink": "/docs/langgraph/overview",
+      "tags": [
+        "orchestration",
+        "agents",
+        "runtime"
+      ],
+      "children": [
+        {
+          "id": "langgraph-core-concepts",
+          "label": "Core Concepts",
+          "level": 2,
+          "description": "The fundamental building blocks of LangGraph, modeling agent workflows as stateful graphs.",
+          "docLink": "/docs/langgraph/graph-api",
+          "tags": [
+            "concepts",
+            "architecture"
+          ],
+          "children": [
+            {
+              "id": "langgraph-state",
+              "label": "State & StateSchema",
+              "level": 3,
+              "description": "A shared data structure representing the current snapshot of the application, defined using StateSchema and standard schemas.",
+              "docLink": "/docs/langgraph/use-graph-api#define-and-update-state",
+              "tags": [
+                "state",
+                "schema",
+                "zod"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-core-concepts",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-nodes",
+              "label": "Nodes",
+              "level": 3,
+              "description": "Functions that encode the logic of agents, receiving the current state and returning an updated state.",
+              "docLink": "/docs/langgraph/graph-api#nodes",
+              "tags": [
+                "nodes",
+                "functions"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-core-concepts",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-edges",
+              "label": "Edges",
+              "level": 3,
+              "description": "Transitions that determine which node to execute next, including conditional routing based on state.",
+              "docLink": "/docs/langgraph/graph-api#edges",
+              "tags": [
+                "edges",
+                "routing"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-core-concepts",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-graph-api",
+          "label": "Graph API",
+          "level": 2,
+          "description": "A declarative API to build agent workflows by explicitly defining nodes, edges, and shared state.",
+          "docLink": "/docs/langgraph/choosing-apis#when-to-use-the-graph-api",
+          "tags": [
+            "graph-api",
+            "declarative"
+          ],
+          "relations": [
+            {
+              "targetId": "langgraph-functional-api",
+              "type": "alternative-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "langgraph-stategraph",
+              "label": "StateGraph",
+              "level": 3,
+              "description": "The main class used to construct, configure, and compile stateful graphs in the Graph API.",
+              "docLink": "/docs/langgraph/graph-api#stategraph",
+              "tags": [
+                "stategraph",
+                "builder"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-graph-api",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-functional-api",
+          "label": "Functional API",
+          "level": 2,
+          "description": "A procedural API that integrates LangGraph features into standard control flows with minimal code changes.",
+          "docLink": "/docs/langgraph/functional-api",
+          "tags": [
+            "functional-api",
+            "procedural"
+          ],
+          "relations": [
+            {
+              "targetId": "langgraph-graph-api",
+              "type": "alternative-to"
+            }
+          ],
+          "children": [
+            {
+              "id": "langgraph-entrypoint",
+              "label": "Entrypoint",
+              "level": 3,
+              "description": "An abstraction in the Functional API that encapsulates workflow logic and manages execution flow.",
+              "docLink": "/docs/langgraph/functional-api#functional-api-vs-graph-api",
+              "tags": [
+                "entrypoint",
+                "workflow"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-functional-api",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-task",
+              "label": "Task",
+              "level": 3,
+              "description": "A discrete unit of work executed asynchronously within an entrypoint in the Functional API.",
+              "docLink": "/docs/langgraph/functional-api#functional-api-vs-graph-api",
+              "tags": [
+                "task",
+                "async"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-functional-api",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-persistence",
+          "label": "Persistence",
+          "level": 2,
+          "description": "Mechanisms that allow LangGraph applications to persist state across runs, enabling memory and recovery.",
+          "docLink": "/docs/langgraph/persistence",
+          "tags": [
+            "persistence",
+            "memory"
+          ],
+          "children": [
+            {
+              "id": "langgraph-checkpointers",
+              "label": "Checkpointers",
+              "level": 3,
+              "description": "Saves snapshots of graph state at each super-step, enabling short-term, thread-scoped memory.",
+              "docLink": "/docs/langgraph/checkpointers",
+              "tags": [
+                "checkpointers",
+                "short-term-memory"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-persistence",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-stores",
+              "label": "Stores",
+              "level": 3,
+              "description": "Persists application-defined key-value data outside the graph state for long-term, cross-thread memory.",
+              "docLink": "/docs/langgraph/stores",
+              "tags": [
+                "stores",
+                "long-term-memory"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-persistence",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-streaming",
+          "label": "Streaming",
+          "level": 2,
+          "description": "Real-time streaming of graph execution events, state updates, and LLM tokens.",
+          "docLink": "/docs/langgraph/streaming",
+          "tags": [
+            "streaming",
+            "real-time"
+          ],
+          "children": [
+            {
+              "id": "langgraph-event-streaming",
+              "label": "Event Streaming",
+              "level": 3,
+              "description": "A high-level streaming model that normalizes raw Pregel events into typed projections like messages and values.",
+              "docLink": "/docs/langgraph/event-streaming",
+              "tags": [
+                "event-streaming",
+                "projections"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-streaming",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-human-in-the-loop",
+          "label": "Human-in-the-Loop",
+          "level": 2,
+          "description": "Patterns that pause graph execution to wait for human approval, review, or input.",
+          "docLink": "/docs/langgraph/interrupts",
+          "tags": [
+            "human-in-the-loop",
+            "collaboration"
+          ],
+          "children": [
+            {
+              "id": "langgraph-interrupts",
+              "label": "Interrupts",
+              "level": 3,
+              "description": "Dynamic pause points in graph nodes that save state and wait for external input via Command.",
+              "docLink": "/docs/langgraph/interrupts#pause-using-interrupt",
+              "tags": [
+                "interrupts",
+                "command"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-human-in-the-loop",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-fault-tolerance",
+          "label": "Fault Tolerance",
+          "level": 2,
+          "description": "Mechanisms to handle node failures, including retries, timeouts, and error recovery functions.",
+          "docLink": "/docs/langgraph/fault-tolerance",
+          "tags": [
+            "fault-tolerance",
+            "error-handling"
+          ],
+          "children": [
+            {
+              "id": "langgraph-retries",
+              "label": "Retries",
+              "level": 3,
+              "description": "Automatic re-running of failed node attempts based on exception types and backoff policies.",
+              "docLink": "/docs/langgraph/fault-tolerance#retries",
+              "tags": [
+                "retries",
+                "backoff"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-fault-tolerance",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-subgraphs",
+          "label": "Subgraphs",
+          "level": 2,
+          "description": "Using a compiled graph as a node inside another graph to build modular, multi-agent systems.",
+          "docLink": "/docs/langgraph/use-subgraphs",
+          "tags": [
+            "subgraphs",
+            "multi-agent"
+          ]
+        },
+        {
+          "id": "langgraph-time-travel",
+          "label": "Time Travel",
+          "level": 2,
+          "description": "Debugging and execution control features allowing users to replay or fork from past checkpoints.",
+          "docLink": "/docs/langgraph/use-time-travel",
+          "tags": [
+            "time-travel",
+            "debugging"
+          ]
+        },
+        {
+          "id": "langgraph-pregel",
+          "label": "Pregel Runtime",
+          "level": 2,
+          "description": "The underlying execution engine of LangGraph, managing actors and channels using a bulk synchronous parallel model.",
+          "docLink": "/docs/langgraph/pregel",
+          "tags": [
+            "pregel",
+            "runtime",
+            "engine"
+          ]
+        },
+        {
+          "id": "langgraph-development",
+          "label": "Development & Tooling",
+          "level": 2,
+          "description": "Tools and frameworks for building, testing, and debugging LangGraph applications locally.",
+          "docLink": "/docs/langgraph/local-server",
+          "tags": [
+            "tooling",
+            "cli",
+            "testing"
+          ],
+          "children": [
+            {
+              "id": "langgraph-cli",
+              "label": "LangGraph CLI",
+              "level": 3,
+              "description": "Command-line interface to initialize projects, generate configurations, and run local development servers.",
+              "docLink": "/docs/langgraph/local-server#1-install-the-langgraph-cli",
+              "tags": [
+                "cli",
+                "local-server"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-development",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-studio",
+              "label": "LangSmith Studio",
+              "level": 3,
+              "description": "A visual interface for interacting with, visualizing, and debugging local LangGraph agents.",
+              "docLink": "/docs/langgraph/studio",
+              "tags": [
+                "studio",
+                "visualization"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-development",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-testing",
+              "label": "Testing",
+              "level": 3,
+              "description": "Patterns for writing unit tests for graphs, individual nodes, and edges using Vitest.",
+              "docLink": "/docs/langgraph/test",
+              "tags": [
+                "testing",
+                "vitest"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-development",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-deployment",
+          "label": "Deployment",
+          "level": 2,
+          "description": "Deploying stateful, long-running agents to production environments like LangSmith Cloud.",
+          "docLink": "/docs/langgraph/deploy",
+          "tags": [
+            "deployment",
+            "cloud",
+            "langsmith"
+          ]
+        },
+        {
+          "id": "langgraph-frontend",
+          "label": "Frontend Integration",
+          "level": 2,
+          "description": "Building user interfaces that visualize multi-step graph execution and stream content in real time.",
+          "docLink": "/docs/langgraph/frontend/overview",
+          "tags": [
+            "frontend",
+            "ui",
+            "react"
+          ],
+          "children": [
+            {
+              "id": "langgraph-use-stream",
+              "label": "useStream Hook",
+              "level": 3,
+              "description": "A frontend SDK hook providing reactive access to node outputs, streaming tokens, and discovered subgraphs.",
+              "docLink": "/docs/langgraph/frontend/graph-execution#setting-up-usestream",
+              "tags": [
+                "react",
+                "hook",
+                "streaming"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-frontend",
+                  "type": "part-of"
+                }
+              ]
+            },
+            {
+              "id": "langgraph-custom-channels",
+              "label": "Custom Stream Channels",
+              "level": 3,
+              "description": "Server-side stream transformers that publish custom structured data on named channels for the frontend to consume.",
+              "docLink": "/docs/langgraph/frontend/custom-stream-channels",
+              "tags": [
+                "custom-channels",
+                "transformers"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-frontend",
+                  "type": "part-of"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "migrate",
+      "label": "Migration Guides",
+      "level": 1,
+      "description": "Guides and instructions for migrating to newer versions of LangChain and LangGraph.",
+      "docLink": "/docs/migrate",
+      "tags": [
+        "migration",
+        "upgrade",
+        "breaking-changes"
+      ],
+      "children": [
+        {
+          "id": "migrate-langchain-v1",
+          "label": "LangChain v1 Migration",
+          "level": 2,
+          "description": "Migration guide for upgrading to LangChain v1, featuring the new createAgent and middleware system.",
+          "docLink": "/docs/migrate/langchain-v1",
+          "tags": [
+            "langchain",
+            "v1",
+            "agents"
+          ],
+          "children": [
+            {
+              "id": "langchain-v1-create-agent",
+              "label": "createAgent & Middleware",
+              "level": 3,
+              "description": "The new agent creation function replacing createReactAgent, introducing a flexible middleware system.",
+              "docLink": "/docs/migrate/langchain-v1#createagent",
+              "tags": [
+                "agents",
+                "middleware",
+                "react-agent"
+              ],
+              "relations": [
+                {
+                  "targetId": "migrate-langgraph-v1",
+                  "type": "related-to"
+                }
+              ]
+            },
+            {
+              "id": "langchain-v1-prompts",
+              "label": "Prompt Changes",
+              "level": 3,
+              "description": "Renaming of prompt parameters to systemPrompt and introduction of dynamicSystemPromptMiddleware.",
+              "docLink": "/docs/migrate/langchain-v1#prompts",
+              "tags": [
+                "prompts",
+                "middleware"
+              ]
+            },
+            {
+              "id": "langchain-v1-hooks-middleware",
+              "label": "Hooks to Middleware",
+              "level": 3,
+              "description": "Pre-model and post-model hooks are replaced by beforeModel and afterModel middleware methods.",
+              "docLink": "/docs/migrate/langchain-v1#pre-model-hook",
+              "tags": [
+                "hooks",
+                "middleware",
+                "lifecycle"
+              ]
+            },
+            {
+              "id": "langchain-v1-breaking-changes",
+              "label": "LangChain v1 Breaking Changes",
+              "level": 3,
+              "description": "Other breaking changes including custom state, tool error handling, and namespace reorganization.",
+              "docLink": "/docs/migrate/langchain-v1",
+              "tags": [
+                "breaking-changes",
+                "classic",
+                "tools"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "migrate-langgraph-v1",
+          "label": "LangGraph v1 Migration",
+          "level": 2,
+          "description": "Migration guide for upgrading to LangGraph v1, including typed interrupts and Node 20+ requirements.",
+          "docLink": "/docs/migrate/langgraph-v1",
+          "tags": [
+            "langgraph",
+            "v1",
+            "runtime"
+          ],
+          "children": [
+            {
+              "id": "langgraph-v1-typed-interrupts",
+              "label": "Typed Interrupts",
+              "level": 3,
+              "description": "Support for strictly typed values passed to and received from interrupts defined at graph construction.",
+              "docLink": "/docs/migrate/langgraph-v1#typed-interrupts",
+              "tags": [
+                "interrupts",
+                "types",
+                "state"
+              ]
+            },
+            {
+              "id": "langgraph-v1-streaming-changes",
+              "label": "Streaming & Event Changes",
+              "level": 3,
+              "description": "Removal of toLangGraphEventStream in favor of graph.stream with encoding options.",
+              "docLink": "/docs/migrate/langgraph-v1#event-stream-encoding",
+              "tags": [
+                "streaming",
+                "events",
+                "sdk"
+              ]
+            },
+            {
+              "id": "langgraph-v1-breaking-changes",
+              "label": "LangGraph v1 Breaking Changes",
+              "level": 3,
+              "description": "Dropping Node 18 support (requiring Node 20+) and transition to bundler-based build outputs.",
+              "docLink": "/docs/migrate/langgraph-v1#breaking-changes",
+              "tags": [
+                "breaking-changes",
+                "node",
+                "bundler"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "releases",
+      "label": "Releases & Changelog",
+      "level": 1,
+      "description": "Updates, changelogs, and major release announcements for LangChain and LangGraph.",
+      "docLink": "/docs/releases/changelog",
+      "tags": [
+        "releases",
+        "changelog",
+        "updates"
+      ],
+      "children": [
+        {
+          "id": "langchain-v1",
+          "label": "LangChain v1",
+          "level": 2,
+          "description": "A focused, production-ready foundation for building agents with streamlined APIs and middleware support.",
+          "docLink": "/docs/releases/langchain-v1",
+          "tags": [
+            "langchain",
+            "v1",
+            "agents"
+          ],
+          "children": [
+            {
+              "id": "create-agent",
+              "label": "createAgent API",
+              "level": 3,
+              "description": "The standard way to build agents in LangChain v1, offering a simpler interface and high customization via middleware.",
+              "docLink": "/docs/releases/langchain-v1#createagent",
+              "tags": [
+                "agents",
+                "api",
+                "middleware"
+              ],
+              "relations": [
+                {
+                  "targetId": "langgraph-v1",
+                  "type": "depends-on"
+                }
+              ],
+              "children": [
+                {
+                  "id": "agent-middleware",
+                  "label": "Agent Middleware",
+                  "level": 4,
+                  "description": "A composable abstraction in createAgent used to control dynamic prompts, summarization, and guardrails.",
+                  "docLink": "/docs/releases/langchain-v1#middleware",
+                  "tags": [
+                    "middleware",
+                    "context-engineering"
+                  ],
+                  "children": [
+                    {
+                      "id": "prebuilt-middleware",
+                      "label": "Prebuilt Middleware",
+                      "level": 4,
+                      "description": "Built-in middleware solutions including summarization, human-in-the-loop, and PII redaction.",
+                      "docLink": "/docs/releases/langchain-v1#prebuilt-middleware",
+                      "tags": [
+                        "middleware",
+                        "security",
+                        "human-in-the-loop"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-v1",
+          "label": "LangGraph v1",
+          "level": 2,
+          "description": "Stability-focused release for the agent runtime, refining type safety, developer ergonomics, and interrupts.",
+          "docLink": "/docs/releases/langgraph-v1",
+          "tags": [
+            "langgraph",
+            "v1",
+            "runtime"
+          ],
+          "children": [
+            {
+              "id": "deprecation-create-react-agent",
+              "label": "Deprecation of createReactAgent",
+              "level": 3,
+              "description": "The deprecation of LangGraph's prebuilt createReactAgent in favor of LangChain's more customizable createAgent.",
+              "docLink": "/docs/releases/langgraph-v1#deprecation-of-createreactagent",
+              "tags": [
+                "deprecation",
+                "migration"
+              ],
+              "relations": [
+                {
+                  "targetId": "create-agent",
+                  "type": "alternative-to"
+                }
+              ]
+            },
+            {
+              "id": "typed-interrupts",
+              "label": "Typed Interrupts",
+              "level": 3,
+              "description": "A feature allowing StateGraph to accept a map of interrupt types in the constructor for stricter type safety.",
+              "docLink": "/docs/releases/langgraph-v1#typed-interrupts",
+              "tags": [
+                "interrupts",
+                "type-safety",
+                "stategraph"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "langgraph-v1-1-0",
+          "label": "LangGraph v1.1.0",
+          "level": 2,
+          "description": "Minor release introducing StateSchema, Standard JSON Schema support, and new state primitives.",
+          "docLink": "/docs/releases/changelog",
+          "tags": [
+            "langgraph",
+            "changelog",
+            "schema"
+          ],
+          "children": [
+            {
+              "id": "state-schema",
+              "label": "StateSchema",
+              "level": 3,
+              "description": "A library-agnostic way to define graph state that works with any Standard Schema-compliant validation library.",
+              "docLink": "/docs/releases/changelog#langchainlanggraph",
+              "tags": [
+                "schema",
+                "validation",
+                "state"
+              ],
+              "relations": [
+                {
+                  "targetId": "standard-json-schema",
+                  "type": "related-to"
+                }
+              ]
+            },
+            {
+              "id": "standard-json-schema",
+              "label": "Standard JSON Schema Support",
+              "level": 3,
+              "description": "Support for open specifications implemented by Zod 4, Valibot, ArkType, and other schema libraries.",
+              "docLink": "/docs/releases/changelog#standard-json-schema-support",
+              "tags": [
+                "json-schema",
+                "zod",
+                "validation"
+              ]
+            },
+            {
+              "id": "state-value-primitives",
+              "label": "State Value Primitives",
+              "level": 3,
+              "description": "New primitives including ReducedValue, UntrackedValue, and MessagesValue for advanced state management.",
+              "docLink": "/docs/releases/changelog#new-state-value-primitives",
+              "tags": [
+                "state",
+                "primitives",
+                "reducers"
+              ]
+            },
+            {
+              "id": "langgraph-type-helpers",
+              "label": "LangGraph Type Helpers",
+              "level": 3,
+              "description": "Exported type utilities like GraphNode and ConditionalEdgeRouter for typing functions outside the graph builder.",
+              "docLink": "/docs/releases/changelog#type-helper-exports",
+              "tags": [
+                "typescript",
+                "types",
+                "helpers"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

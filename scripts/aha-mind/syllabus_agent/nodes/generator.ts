@@ -1,7 +1,7 @@
 import fs from "fs";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { SyllabusState } from "../state";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { geminiService } from "../../utils/gemini-service";
 
 export async function generatorNode(state: SyllabusState): Promise<Partial<SyllabusState>> {
   console.log("--- 2. GENERATOR NODE ---");
@@ -10,12 +10,7 @@ export async function generatorNode(state: SyllabusState): Promise<Partial<Sylla
   const syllabusContent = fs.readFileSync(syllabusMetaCsvPath, "utf8");
   const scheduleContent = fs.readFileSync(scheduleDetailCsvPath, "utf8");
 
-  const llm = new ChatGoogleGenerativeAI({
-    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-    temperature: 0.1,
-  });
-
-  const systemMsg = new SystemMessage(`
+  const systemMsgText = `
 Bạn là một chuyên gia thiết kế chương trình học (Instructional Designer).
 Nhiệm vụ của bạn là đọc 2 file CSV chứa thông tin Syllabus và Schedule của một khóa học, sau đó tổng hợp chúng thành một Sơ đồ tư duy dạng văn bản Tab-indented (TSV).
 Quy tắc BẮT BUỘC:
@@ -25,9 +20,10 @@ Quy tắc BẮT BUỘC:
 4. KHÔNG sử dụng Markdown formating (như #, -, *). KHÔNG sử dụng Mermaid.
 5. CHỈ dùng chữ thuần và Tab (\\t).
 6. CHỈ trả về cấu trúc phân cấp, KHÔNG giải thích hay thêm bất kỳ text nào khác.
-`);
+`;
+  const systemMsg = new SystemMessage(systemMsgText);
 
-  const humanMsg = new HumanMessage(`
+  const humanMsgText = `
 [Thông tin chung của khóa học]
 ${syllabusContent}
 
@@ -35,10 +31,12 @@ ${syllabusContent}
 ${scheduleContent}
 
 Hãy tạo Tab-indented Mindmap. Bắt đầu ngay với nội dung:
-`);
+`;
+  const humanMsg = new HumanMessage(humanMsgText);
 
   console.log("Đang tổng hợp thông tin và tạo cấu trúc TSV...");
-  const response = await llm.invoke([systemMsg, humanMsg]);
+  
+  const response = await geminiService.invoke([systemMsg, humanMsg]);
 
   let tsvOutput = response.content as string;
   // Xóa các mã markdown thừa nếu LLM tự ý thêm vào
