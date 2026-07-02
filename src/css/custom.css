@@ -300,3 +300,22 @@ ul {
     page-break-after: avoid;
   }
 }
+
+/* --- BLOG LAYOUT OPTIMIZATION --- */
+/* Mở rộng max-width của trang blog để tăng không gian đọc */
+.blog-layout-container {
+  max-width: 1320px !important;
+}
+
+/* Giảm padding của sidebar "Các bài viết gần đây" */
+.blog-sidebar-custom {
+  padding-left: 0 !important;
+  padding-right: 15px !important;
+}
+
+@media (max-width: 996px) {
+  .blog-sidebar-custom {
+    padding-left: var(--ifm-spacing-horizontal) !important;
+    padding-right: var(--ifm-spacing-horizontal) !important;
+  }
+}
