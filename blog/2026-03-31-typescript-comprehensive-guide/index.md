@@ -1,111 +1,128 @@
 ---
-title: "TypeScript Thực Chiến: Comprehensive Guide cho Dev Team"
+title: "TypeScript Handbook thực chiến cho lập trình viên JavaScript"
 date: "2026-03-31"
 authors: [anhhtus]
-tags: [typescript, javascript, programming, guide, cheat-sheet]
-description: "Hướng dẫn toàn diện TypeScript từ Types, Generics, Decorators đến Utility Types — viết theo góc nhìn Senior Engineer, tập trung vào ví dụ thực chiến."
+tags: [typescript, javascript, programming, guide, cheat-sheet, handbook]
+description: "Sổ tay tham chiếu TypeScript toàn diện cho lập trình viên React, Node.js, Next.js và NestJS — được kiểm chứng từ nguồn chính thống typescriptlang.org, tập trung vào ví dụ thực chiến."
 ---
 
-> **Đây là tài liệu Reference Guide / Cheat Sheet cho đội ngũ lập trình viên.** Bài viết được cấu trúc như một cuốn sổ tay tra cứu nhanh, mỗi phần đều có: Khái niệm cốt lõi → Vấn đề giải quyết → Code thực chiến → Best practices.
+> **Đây là tài liệu Reference Guide / Cheat Sheet.** Bài viết được cấu trúc để tra cứu nhanh: mỗi mục gồm Định nghĩa → Vấn đề giải quyết → Code thực chiến → Trade-offs. Mọi nội dung kỹ thuật đã được đối chiếu với tài liệu gốc tại [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/).
 
 <!-- truncate -->
 
-## 📋 Agenda
+## Agenda
 
-**Thời gian đọc ước tính:** ~35 phút
+**Thời gian đọc ước tính:** ~40 phút
 
-### Sau bài này, bạn sẽ:
-- ✅ **Nắm vững** toàn bộ hệ thống type của TypeScript (Primitive, Object, Top/Bottom Types)
-- ✅ **Tự tin** viết Generic Functions, Decorators và dùng Utility Types như `Pick`, `Omit`, `Record`
-- ✅ **Áp dụng** Type Guards để viết code an toàn và không bị runtime error
-- ✅ **Phân biệt** được khi nào dùng `interface` vs `type alias`, `any` vs `unknown`
+### Learning Outcomes
 
-### Prerequisites:
-- 🔹 Biết JavaScript cơ bản (ES6+)
-- 🔹 Đã dùng TypeScript ít nhất một lần trong dự án
+Sau khi đọc xong bài này, bạn có thể:
 
----
+- **Giải thích** được sự khác biệt cốt lõi giữa `any`, `unknown`, và `never` — và biết khi nào nên dùng loại nào
+- **Áp dụng** đúng các kỹ thuật Type Narrowing (`typeof`, `instanceof`, `in`, type predicates) để viết code an toàn
+- **Phân biệt** được khi nào dùng `interface` và khi nào dùng `type alias` dựa trên hành vi thực tế của compiler
+- **Tự viết** Generic Functions với Constraints để tái sử dụng logic mà không mất type safety
+- **Chọn đúng** Utility Type (`Partial`, `Omit`, `Pick`, `Record`, `ReturnType`...) cho từng bài toán API cụ thể
 
-## Mục lục
+### Prerequisites
 
-1. [TypeScript Types](#1-typescript-types)
-   - [Primitive Types](#11-primitive-types)
-   - [Object Types](#12-object-types)
-   - [Top Types: `any` vs `unknown`](#13-top-types-any-vs-unknown)
-   - [Bottom Type: `never`](#14-bottom-type-never)
-   - [Type Assertion](#15-type-assertion)
-2. [Combining Types](#2-combining-types)
-   - [Union Types](#21-union-types-)
-   - [Intersection Types](#22-intersection-types-)
-3. [Type Guards / Narrowing](#3-type-guards--narrowing)
-4. [Interface](#4-interface)
-5. [Function Generics](#5-function-generics)
-6. [Decorators](#6-decorators)
-7. [Utility Types](#7-utility-types)
+- Biết JavaScript ES6+ (arrow functions, destructuring, async/await)
+- Đã dùng TypeScript ít nhất một lần trong dự án
 
 ---
 
-## ❓ Tại sao cần TypeScript?
+## Glossary & Vocabulary
 
-**Vấn đề với JavaScript thuần:**
-- Lỗi kiểu dữ liệu chỉ xuất hiện ở **runtime** — khi user đang dùng app thật
-- Refactoring lớn cực kỳ rủi ro: đổi tên một property → toàn bộ code có thể vỡ mà không biết
-- IDE không thể gợi ý chính xác vì không biết shape của object
+**1. Technical Terms (Thuật ngữ kỹ thuật):**
 
-**TypeScript giải quyết bằng:**
-- **Static Type Checking:** Bắt lỗi ngay khi gõ code, không phải lúc chạy
-- **Self-documenting Code:** Type chính là tài liệu, không cần comment thừa
-- **Refactoring an toàn:** Đổi tên một field → compiler chỉ ra toàn bộ điểm bị ảnh hưởng ngay lập tức
+| Term | Vietnamese Meaning & Quick Explain |
+| :--- | :--- |
+| **Static Type Checking** | Kiểm tra kiểu dữ liệu lúc biên dịch (trước khi chạy). Đối lập với Dynamic Typing của JavaScript thuần. |
+| **Type Inference** | Trình biên dịch tự suy luận ra kiểu dữ liệu dựa trên giá trị được gán, không cần khai báo tường minh. |
+| **Narrowing** | Quá trình thu hẹp type từ loại rộng (union type) xuống loại cụ thể hơn trong một block code. |
+| **Type Predicate** | Return type dạng `param is Type` trong user-defined type guards, báo cho compiler biết kết quả narrowing. |
+| **Declaration Merging** | Khả năng của `interface` cho phép khai báo cùng tên nhiều lần, compiler tự động gộp lại. |
+| **Generic Constraint** | Giới hạn tập hợp kiểu mà type parameter `T` có thể nhận, dùng cú pháp `T extends SomeType`. |
+| **Utility Type** | Các type transformation built-in của TypeScript (`Partial<T>`, `Pick<T, K>`...) để biến đổi type có sẵn. |
+| **Discriminated Union** | Union type có một property chung (discriminant) với literal type, giúp compiler narrow chính xác. |
+| **Exhaustive Check** | Kỹ thuật dùng `never` để đảm bảo mọi nhánh của switch/if đều được xử lý. |
+| **Decorator** | Syntax `@expression` để gắn thêm hành vi vào class, method, property, parameter — bản chất là Higher-Order Function. |
+| **Structural Typing** | TypeScript kiểm tra type dựa trên hình dạng (shape/structure) của object, không phải tên type. |
+
+**2. Vocabulary Support (Từ vựng học thuật):**
+
+| Word | Meaning in Context |
+| :--- | :--- |
+| **Assignable (adj)** | Có thể được gán vào — ví dụ: `string` is assignable to `string \| number`. |
+| **Coercion (n)** | Ép kiểu tự động (implicit type conversion) như JavaScript ép `0` thành `false`. |
+| **Ambient (adj)** | Môi trường khai báo type-only, không có implementation — thường dùng trong `.d.ts`. |
+| **Constraint (n)** | Ràng buộc — điều kiện mà type parameter phải thỏa mãn. |
+| **Infer (v)** | Suy luận — compiler tự động xác định type từ context mà không cần khai báo tường minh. |
 
 ---
 
-## 1. TypeScript Types
+## 1. Vấn đề kỹ thuật mà TypeScript giải quyết
 
-### 1.1 Primitive Types
+Các dự án JavaScript ở quy mô lớn gặp phải các vấn đề có tính hệ thống:
 
-**Khái niệm:** TypeScript map 1-1 với các kiểu nguyên thủy của JavaScript, thêm `null` và `undefined` như các type riêng biệt.
+1. **Lỗi kiểu dữ liệu xuất hiện ở runtime:** Gọi `.toUpperCase()` trên một giá trị `null` → crash ở môi trường production, không bị bắt lúc development.
+2. **Refactoring rủi ro cao:** Đổi tên một property → toàn bộ nơi sử dụng có thể vỡ mà không có cách phát hiện tự động.
+3. **IDE không đủ thông tin:** Autocompletion không chính xác vì không biết shape của object nhận từ API.
+4. **Onboarding khó:** Code không self-documenting — người mới phải đọc implementation mới biết function nhận/trả về gì.
+
+**TypeScript giải quyết bằng Static Type Checking** (*kiểm tra kiểu tĩnh*): compiler phân tích code trước khi chạy và báo lỗi ngay tại thời điểm viết code.
+
+> **Quan trọng từ docs chính thống:** TypeScript là một *structural type system* — compiler quan tâm đến **shape (hình dạng)** của type, không phải tên của nó. Nếu hai type có cùng structure, chúng tương thích nhau. ([source](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces))
+
+---
+
+## 2. TypeScript Types
+
+### 2.1 Primitive Types (Kiểu nguyên thủy)
+
+TypeScript map 1-1 với các primitive của JavaScript. Theo tài liệu chính thống, luôn dùng chữ thường (`string`, `number`, `boolean`) — không dùng `String`, `Number`, `Boolean` (chữ hoa) vì đây là built-in types đặc biệt ít khi cần dùng.
 
 ```typescript
 // filename: types/primitives.ts
 
 const productName: string = "iPhone 16 Pro";
-const price: number = 29_990_000; // _ làm dấu phân cách số cho dễ đọc
+const price: number = 29_990_000; // Dấu _ làm separator cho dễ đọc — valid JavaScript/TypeScript
 const inStock: boolean = true;
 
-// null và undefined là hai type khác nhau
-let discountCode: string | null = null;   // có thể có hoặc không có giảm giá
-let expiryDate: Date | undefined;         // chưa được set
-
-// ⚠️ Bật strictNullChecks trong tsconfig.json để compiler bắt lỗi null/undefined
+// null và undefined: hành vi phụ thuộc vào strictNullChecks trong tsconfig
+let discountCode: string | null = null;
+let expiryDate: Date | undefined;
 ```
 
-> **Best practice:** Bật `"strictNullChecks": true` trong `tsconfig.json`. Không bật = mất đi 50% sức mạnh của TypeScript.
+**Trade-off khi bật `strictNullChecks`:**
+
+- Bật: Compiler bắt mọi trường hợp có thể null/undefined → code an toàn hơn nhưng phải xử lý thêm
+- Tắt: `null` và `undefined` có thể gán vào bất kỳ type nào → dễ bị runtime error
+
+> **Từ docs:** "We always recommend people turn [`strictNullChecks`](https://www.typescriptlang.org/tsconfig#strictNullChecks) on if it's practical to do so." — TypeScript Handbook, Everyday Types
 
 ---
 
-### 1.2 Object Types
-
-**Cách định nghĩa chuẩn** — dùng `type alias` hoặc `interface` (chi tiết ở phần 4).
+### 2.2 Object Types (Kiểu đối tượng)
 
 ```typescript
 // filename: types/product.ts
 
-// Cách 1: Inline (chỉ dùng cho type 1-lần, nhỏ gọn)
+// Cách 1: Inline object type — dùng cho parameter nhỏ, không tái sử dụng
 function displayProduct(product: { id: string; name: string; price: number }) {
   console.log(`${product.name}: ${product.price.toLocaleString("vi-VN")} VND`);
 }
 
-// Cách 2: Type alias (tái sử dụng được — RECOMMENDED cho production code)
+// Cách 2: Type alias — RECOMMENDED cho production code vì tái sử dụng được
 type Product = {
   id: string;
   name: string;
   price: number;
   category: string;
-  imageUrl?: string; // ? = optional property — không bắt buộc phải có
-  readonly sku: string; // readonly = chỉ đọc, không được gán lại sau khi tạo
+  imageUrl?: string;   // ? = optional property — không bắt buộc phải có
+  readonly sku: string; // readonly = không được gán lại sau khi khởi tạo
 };
 
-// ✅ Đúng: readonly property chỉ được set khi khởi tạo
 const laptop: Product = {
   id: "p-001",
   name: "MacBook Pro M4",
@@ -114,60 +131,85 @@ const laptop: Product = {
   sku: "MBP-M4-512"
 };
 
-// ❌ Lỗi compile: Cannot assign to 'sku' because it is a read-only property.
+// Compiler bắt lỗi: Cannot assign to 'sku' because it is a read-only property.
 // laptop.sku = "MBP-M4-1TB";
+```
+
+**Lưu ý về Type Inference:** Trong hầu hết trường hợp, TypeScript tự suy luận type từ giá trị được gán. Bạn **không cần** khai báo tường minh nếu giá trị đủ rõ ràng:
+
+```typescript
+// TypeScript tự infer: myName: string
+let myName = "Alice";
+
+// Tương đương với
+let myName: string = "Alice"; // Thừa — không cần thiết
 ```
 
 ---
 
-### 1.3 Top Types: `any` vs `unknown`
+### 2.3 Top Types: `any` vs `unknown`
 
-**Đây là một trong những phân biệt QUAN TRỌNG NHẤT trong TypeScript.**
+Đây là phân biệt quan trọng nhất mà phần lớn lập trình viên mới dùng TypeScript hiểu sai.
+
+**Definition Anatomy — `unknown` type:**
+
+Định nghĩa từ docs: *"The unknown type represents any value. This is similar to the any type, but is safer because it's not legal to do anything with an unknown value."*
+
+Giải phẫu:
+- **any value** (*bất kỳ giá trị nào*): `unknown` nhận tất cả — giống `any`
+- **safer** (*an toàn hơn*): không thể dùng trực tiếp — phải kiểm tra type trước
+- **not legal to do anything** (*không được phép làm gì*): compiler từ chối mọi thao tác trừ khi đã narrow down
 
 | | `any` | `unknown` |
 |---|---|---|
 | **Nhận giá trị gì?** | Bất kỳ | Bất kỳ |
-| **Dùng giá trị trực tiếp?** | ✅ Được | ❌ KHÔNG — phải kiểm tra type trước |
-| **Type safety** | ❌ Tắt hoàn toàn | ✅ Được bảo vệ |
-| **Khi nào dùng?** | Cực kỳ hiếm | Khi nhận data từ bên ngoài (API, user input) |
+| **Dùng trực tiếp không cần check?** | Được | KHÔNG — phải narrow trước |
+| **Type safety** | Tắt hoàn toàn | Được bảo vệ |
+| **Khi nào dùng?** | Cực kỳ hiếm (legacy migration) | Data từ bên ngoài (API, user input) |
 
 ```typescript
 // filename: services/api.service.ts
 
-// ❌ Antipattern: dùng any — compiler "mù" hoàn toàn, không bắt được lỗi
+// Antipattern: any — compiler "mù" hoàn toàn
 async function fetchUserDataDangerous(userId: string): Promise<any> {
   const response = await fetch(`/api/users/${userId}`);
-  const data = await response.json();
-  return data;
+  return response.json();
 }
+// data.fullname.toUpperCase() → không có lỗi compile nhưng crash lúc runtime
 
-// Sau đó gọi một property không tồn tại → KHÔNG bị lỗi compile nhưng crash lúc runtime
-// const name = data.fullname.toUpperCase(); // 💣 runtime error
-
-// ✅ Đúng: dùng unknown — buộc dev phải kiểm tra trước khi dùng
+// Đúng: unknown — buộc phải kiểm tra trước khi dùng
 async function fetchUserData(userId: string): Promise<unknown> {
   const response = await fetch(`/api/users/${userId}`);
   return response.json();
 }
 
-// Muốn dùng phải narrow down type trước (xem phần Type Guards)
+// Muốn dùng phải narrow down (xem phần 4 — Type Narrowing)
 const rawData = await fetchUserData("usr-123");
 
 if (typeof rawData === "object" && rawData !== null && "name" in rawData) {
-  // ✅ Bây giờ TypeScript mới cho phép dùng
+  // Bây giờ TypeScript mới cho phép dùng
   console.log((rawData as { name: string }).name);
 }
 ```
 
-> **Rule of thumb:** Thấy mình muốn gõ `any` → hỏi bản thân "tại sao data này lại không có type?". Câu trả lời gần như luôn là `unknown`, `generic`, hoặc một `interface` cụ thể.
+**Từ docs:** Compiler flag [`noImplicitAny`](https://www.typescriptlang.org/tsconfig#noImplicitAny) sẽ báo lỗi khi TypeScript không thể infer type và phải fallback về `any`. Nên bật flag này trong mọi dự án production.
 
 ---
 
-### 1.4 Bottom Type: `never`
+### 2.4 Bottom Type: `never`
 
-**Khái niệm:** `never` là kiểu "không bao giờ xảy ra". Một function trả về `never` có nghĩa là nó không bao giờ hoàn thành bình thường (throw error hoặc loop vô tận).
+**Definition Anatomy:**
 
-**Ứng dụng thực chiến quan trọng nhất: Exhaustive Check trong `switch-case`.**
+Định nghĩa từ docs: *"When narrowing, you can reduce the options of a union to a point where you have removed all possibilities and have nothing left. In those cases, TypeScript will use a `never` type to represent a state which shouldn't exist."*
+
+- **removed all possibilities** (*đã loại bỏ tất cả khả năng*): không còn nhánh nào có thể xảy ra
+- **state which shouldn't exist** (*trạng thái không nên tồn tại*): code đến đây là bất khả thi về mặt logic
+
+**Tính chất quan trọng từ docs:**
+- `never` là assignable to (*có thể gán vào*) mọi type
+- Nhưng **không có type nào** assignable to `never` (ngoại trừ `never` chính nó)
+
+**Ứng dụng thực chiến: Exhaustive Check trong switch-case**
 
 ```typescript
 // filename: services/order.service.ts
@@ -185,61 +227,74 @@ function getStatusMessage(status: OrderStatus): string {
     case "delivered":
       return "Đã giao thành công";
     default:
-      // Trick: gán vào _exhaustiveCheck kiểu never
-      // Nếu bạn thêm "cancelled" vào OrderStatus mà quên xử lý ở switch,
-      // dòng này sẽ báo lỗi compile ngay lập tức!
+      // Gán vào never: nếu TypeScript chưa xử lý hết case, dòng này báo lỗi compile
+      // Khi team thêm "cancelled" vào OrderStatus mà quên xử lý switch, compiler chỉ ra ngay
       const _exhaustiveCheck: never = status;
       throw new Error(`Unhandled order status: ${_exhaustiveCheck}`);
   }
 }
+```
 
-// Kết quả: Khi team thêm status mới vào OrderStatus,
-// compiler sẽ chỉ ra NGAY tất cả switch-case chưa xử lý → không bao giờ bỏ sót case.
+Sơ đồ minh họa cơ chế Exhaustive Check:
+
+```mermaid
+flowchart TD
+    A["OrderStatus Union<br/>pending | processing | shipped | delivered"] --> B{switch case}
+    B --> |"case 'pending'"| C["return string"]
+    B --> |"case 'processing'"| D["return string"]
+    B --> |"case 'shipped'"| E["return string"]
+    B --> |"case 'delivered'"| F["return string"]
+    B --> |"default (chưa match)"| G["_exhaustiveCheck: never"]
+    G --> H{"Team thêm 'cancelled'<br/>mà không xử lý?"}
+    H --> |"Có"| I["Compiler ERROR ngay lập tức"]
+    H --> |"Không"| J["never — không bao giờ đến đây"]
 ```
 
 ---
 
-### 1.5 Type Assertion
+### 2.5 Type Assertion (Khẳng định kiểu)
 
-**Khái niệm:** Nói với compiler "tôi biết type của giá trị này hơn bạn". Dùng khi bạn có thông tin mà compiler không có.
+**Khi nào dùng:** Khi bạn có thông tin về type mà compiler không có — ví dụ khi làm việc với DOM API trả về generic `HTMLElement`.
 
 ```typescript
 // filename: utils/dom.utils.ts
 
-// Cú pháp 1: as Type (RECOMMENDED — hoạt động trong cả .tsx)
+// Cú pháp as Type — RECOMMENDED, hoạt động trong cả file .tsx
 const emailInput = document.getElementById("email-input") as HTMLInputElement;
-emailInput.value = "user@example.com"; // ✅ compiler biết đây là input, có property .value
+emailInput.value = "user@example.com"; // Compiler biết đây là input, có property .value
 
-// Cú pháp 2: <Type> (tránh dùng trong file .tsx vì xung đột với JSX syntax)
+// Cú pháp <Type> — KHÔNG dùng trong .tsx vì xung đột với JSX syntax
 const usernameInput = <HTMLInputElement>document.getElementById("username-input");
+```
 
-// ⚠️ Double assertion — chỉ dùng khi thực sự cần, đây là "escape hatch"
+**Lưu ý quan trọng từ docs:** Type assertions bị xóa khi biên dịch — không có runtime checking. Nếu assertion sai, KHÔNG có exception hay null được throw. TypeScript chỉ cho phép assertion khi type "chồng lấn" nhau (ví dụ `string` không thể assert sang `number`).
+
+```typescript
+// Compiler từ chối: string và number không overlap đủ
+// const x = "hello" as number; // Error
+
+// Khi cần double assertion — dùng unknown làm trung gian
 const weirdCase = someValue as unknown as SpecificType;
 ```
 
-**`as const` — Công cụ mạnh mẽ trong thực tế:**
+**`as const` — Kỹ thuật tạo Literal Types từ Array/Object:**
 
 ```typescript
-// filename: config/routes.ts
+// filename: config/payment.ts
 
-// Không có as const: TypeScript infer type là string[] → mất thông tin cụ thể
-const PAYMENT_METHODS_MUTABLE = ["credit_card", "bank_transfer", "momo"];
-// Type: string[]
+// KHÔNG có as const: TypeScript infer type là string[] — mất literal type
+const METHODS_MUTABLE = ["credit_card", "bank_transfer", "momo"];
+// type: string[]
 
-// Với as const: freeze array thành readonly tuple với literal types
+// Với as const: freeze thành readonly tuple với literal types
 const PAYMENT_METHODS = ["credit_card", "bank_transfer", "momo"] as const;
-// Type: readonly ["credit_card", "bank_transfer", "momo"]
+// type: readonly ["credit_card", "bank_transfer", "momo"]
 
-// Ứng dụng: Tạo union type từ array tự động → không cần khai báo 2 lần
+// Tạo union type từ array tự động — single source of truth
 type PaymentMethod = typeof PAYMENT_METHODS[number];
-// Type: "credit_card" | "bank_transfer" | "momo"
+// type: "credit_card" | "bank_transfer" | "momo"
 
-function processPayment(method: PaymentMethod) {
-  // Compiler sẽ báo lỗi nếu truyền "paypal" vào đây → an toàn tuyệt đối
-  console.log(`Processing payment via ${method}`);
-}
-
-// Ứng dụng với object — giữ nguyên literal value thay vì widen thành string/number
+// Với object — giữ nguyên literal value thay vì widen thành number
 const HTTP_STATUS = {
   OK: 200,
   NOT_FOUND: 404,
@@ -247,43 +302,48 @@ const HTTP_STATUS = {
 } as const;
 
 type HttpStatusCode = typeof HTTP_STATUS[keyof typeof HTTP_STATUS];
-// Type: 200 | 404 | 500
+// type: 200 | 404 | 500
 ```
+
+> **Từ docs:** *"The `as const` suffix acts like `const` but for the type system, ensuring that all properties are assigned the literal type instead of a more general version like `string` or `number`."* — Everyday Types
 
 ---
 
-## 2. Combining Types
+## 3. Combining Types (Kết hợp kiểu)
 
-### 2.1 Union Types (`|`)
+### 3.1 Union Types (`|`)
 
-**Khái niệm:** "Giá trị này thuộc HOẶC type A, HOẶC type B."
+**Definition:** *"A union type is a type formed from two or more other types, representing values that may be any one of those types."* — TypeScript Handbook
 
 ```typescript
 // filename: types/notification.ts
 
 type NotificationChannel = "email" | "sms" | "push";
 
+// Union types thực chiến: Discriminated Union pattern
 type ApiResponse<T> =
   | { success: true; data: T }
   | { success: false; error: string; errorCode: number };
 
-// Ứng dụng thực tế: handle cả 2 nhánh success/failure
+// TypeScript narrow tự động dựa vào property "success"
 function handleUserResponse(response: ApiResponse<User>) {
   if (response.success) {
-    // ✅ TypeScript biết chắc response.data tồn tại ở đây
+    // Compiler biết chắc response.data tồn tại ở đây (Discriminated Union)
     displayUserProfile(response.data);
   } else {
-    // ✅ TypeScript biết chắc response.error tồn tại ở đây
+    // Compiler biết chắc response.error và response.errorCode tồn tại
     showErrorToast(`${response.error} (Code: ${response.errorCode})`);
   }
 }
 ```
 
+**Lưu ý từ docs:** Khi làm việc với union type, TypeScript chỉ cho phép thao tác nếu thao tác đó hợp lệ với **mọi** member của union. Ví dụ `string | number` không cho phép gọi `.toUpperCase()` trực tiếp vì `number` không có method này.
+
 ---
 
-### 2.2 Intersection Types (`&`)
+### 3.2 Intersection Types (`&`)
 
-**Khái niệm:** "Giá trị này phải thỏa mãn ĐỒNG THỜI type A VÀ type B." Dùng để gộp nhiều type lại thành một type phức tạp hơn.
+**Definition:** Gộp nhiều type lại thành một type phức tạp hơn. Giá trị phải thỏa mãn **đồng thời** tất cả các type được gộp.
 
 ```typescript
 // filename: types/user.ts
@@ -303,43 +363,51 @@ type UserProfile = {
 type AdminCapabilities = {
   permissions: string[];
   canDeleteContent: boolean;
-  managedDepartments: string[];
 };
 
-// Gộp UserProfile + BaseEntity: User cơ bản trong database
+// Intersection: User phải có đầy đủ properties từ cả 2 type
 type User = UserProfile & BaseEntity;
 
-// Gộp thêm AdminCapabilities: User có quyền quản trị
+// Thêm tầng nữa
 type AdminUser = User & AdminCapabilities;
 
-// ✅ adminUser phải có ĐẦY ĐỦ properties từ cả 3 type
+// adminUser PHẢI có tất cả fields từ cả 3 type
 const adminUser: AdminUser = {
   id: "usr-admin-001",
   createdAt: new Date(),
   updatedAt: new Date(),
   fullName: "Nguyễn Quản Trị",
   email: "admin@company.com",
-  permissions: ["user:read", "user:write", "content:delete"],
+  permissions: ["user:read", "user:write"],
   canDeleteContent: true,
-  managedDepartments: ["Engineering", "Product"],
 };
 ```
 
 ---
 
-## 3. Type Guards / Narrowing
+## 4. Type Guards & Narrowing (Thu hẹp kiểu)
 
-**Khái niệm:** Kỹ thuật giúp TypeScript "thu hẹp" từ một type rộng xuống một type cụ thể hơn bên trong một block code.
+**Definition Anatomy:**
+
+Định nghĩa từ docs: *"TypeScript follows possible paths of execution that our programs can take to analyze the most specific possible type of a value at a given position."*
+
+- **paths of execution** (*đường thực thi*): các nhánh if/else, switch, loop mà code có thể đi qua
+- **most specific possible type** (*kiểu cụ thể nhất có thể*): sau khi đã loại bỏ các type không phù hợp
+- **at a given position** (*tại một vị trí cụ thể*): trong một block code cụ thể
 
 ```mermaid
 flowchart TD
-    A["Nhận value kiểu union<br/>(string | number | object)"] --> B{Type Guard Check}
-    B -->|typeof === 'string'| C["✅ Block này: kiểu string<br/>dùng .toUpperCase()"]
-    B -->|typeof === 'number'| D["✅ Block này: kiểu number<br/>dùng .toFixed()"]
-    B -->|instanceof Date| E["✅ Block này: kiểu Date<br/>dùng .toLocaleDateString()"]
+    A["Nhận value kiểu union<br/>(string | number | Date)"] --> B{Type Guard Check}
+    B --> |"typeof === string"| C["Block này: string<br/>Dùng .toUpperCase()"]
+    B --> |"typeof === number"| D["Block này: number<br/>Dùng .toFixed()"]
+    B --> |"instanceof Date"| E["Block này: Date<br/>Dùng .toLocaleDateString()"]
 ```
 
-### `typeof` và `instanceof`
+### 4.1 `typeof` Guards
+
+Theo docs, `typeof` trả về một trong các chuỗi: `"string"`, `"number"`, `"bigint"`, `"boolean"`, `"symbol"`, `"undefined"`, `"object"`, `"function"`.
+
+**Gotcha quan trọng từ docs:** `typeof null === "object"` — đây là một quirk lịch sử của JavaScript. Khi check object, phải xử lý thêm null case:
 
 ```typescript
 // filename: utils/formatter.ts
@@ -347,26 +415,36 @@ flowchart TD
 type RawValue = string | number | Date;
 
 function formatDisplayValue(value: RawValue): string {
-  // typeof hoạt động với primitive types
   if (typeof value === "string") {
-    return value.trim().toUpperCase(); // ✅ compiler biết value là string
+    return value.trim().toUpperCase(); // Compiler biết value là string
   }
 
   if (typeof value === "number") {
-    return value.toLocaleString("vi-VN"); // ✅ compiler biết value là number
+    return value.toLocaleString("vi-VN"); // Compiler biết value là number
   }
 
-  // instanceof hoạt động với class instances
-  if (value instanceof Date) {
-    return value.toLocaleDateString("vi-VN"); // ✅ compiler biết value là Date
-  }
-
-  // Sau 3 check trên, TypeScript biết các case đã được xử lý hết
-  return String(value);
+  // Sau 2 check trên, TypeScript dùng Control Flow Analysis biết đây chỉ có thể là Date
+  return value.toLocaleDateString("vi-VN");
 }
 ```
 
-### Toán tử `in`
+### 4.2 `instanceof` Guards
+
+`instanceof` hoạt động dựa trên prototype chain — phù hợp với class instances.
+
+```typescript
+function logValue(x: Date | string) {
+  if (x instanceof Date) {
+    console.log(x.toUTCString()); // x: Date
+  } else {
+    console.log(x.toUpperCase()); // x: string
+  }
+}
+```
+
+### 4.3 `in` Operator Narrowing
+
+Theo docs: *"JavaScript has an operator for determining if an object or its prototype chain has a property with a name."* TypeScript dùng `in` để narrow union types.
 
 ```typescript
 // filename: types/payment.ts
@@ -386,30 +464,63 @@ type BankTransferPayment = {
 type Payment = CreditCardPayment | BankTransferPayment;
 
 function processPaymentDetails(payment: Payment) {
-  // Dùng 'in' để check property tồn tại
   if ("cardNumber" in payment) {
-    // ✅ TypeScript narrow xuống CreditCardPayment
+    // TypeScript narrow xuống CreditCardPayment
     console.log(`Charging card ending in ${payment.cardNumber.slice(-4)}`);
   } else {
-    // ✅ TypeScript narrow xuống BankTransferPayment
+    // TypeScript narrow xuống BankTransferPayment
     console.log(`Transferring to account ${payment.bankAccount}`);
   }
 }
 ```
 
-### User-defined Type Guards (Predicate `is`)
+**Lưu ý từ docs:** Optional properties sẽ xuất hiện ở **cả hai phía** của `in` check. Ví dụ: nếu `Human` có `swim?: () => void`, thì `"swim" in human` vẫn có thể true hoặc false.
 
-**Dùng khi:** `typeof` và `instanceof` không đủ — bạn cần kiểm tra structure của object.
+### 4.4 Discriminated Unions (Union có discriminant)
+
+Đây là pattern mạnh mẽ nhất được docs đề xuất cho union types phức tạp. Mỗi type trong union có một property chung với **literal type** riêng biệt.
+
+```typescript
+// filename: types/shape.ts
+
+// Thiết kế ĐÚNG: mỗi type có discriminant property riêng
+interface Circle {
+  kind: "circle";
+  radius: number;
+}
+
+interface Square {
+  kind: "square";
+  sideLength: number;
+}
+
+type Shape = Circle | Square;
+
+// Khi check kind, TypeScript narrow chính xác
+function getArea(shape: Shape): number {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2; // shape: Circle
+    case "square":
+      return shape.sideLength ** 2;       // shape: Square
+    default:
+      // Exhaustive check với never
+      const _exhaustiveCheck: never = shape;
+      return _exhaustiveCheck;
+  }
+}
+```
+
+### 4.5 User-defined Type Guards (Type Predicate `is`)
+
+Dùng khi `typeof` và `instanceof` không đủ — cần kiểm tra structure của object.
 
 ```typescript
 // filename: types/api-response.ts
 
 type SuccessResponse = {
   status: "success";
-  data: {
-    userId: string;
-    accessToken: string;
-  };
+  data: { userId: string; accessToken: string };
 };
 
 type ErrorResponse = {
@@ -420,8 +531,8 @@ type ErrorResponse = {
 
 type AuthResponse = SuccessResponse | ErrorResponse;
 
-// Hàm type guard: return type "response is SuccessResponse" là predicate
-// Khi hàm này return true → TypeScript hiểu: bên trong if block, response là SuccessResponse
+// Return type "response is SuccessResponse" là type predicate
+// Khi hàm này return true → bên trong if block, compiler hiểu response là SuccessResponse
 function isSuccessResponse(response: AuthResponse): response is SuccessResponse {
   return response.status === "success";
 }
@@ -430,21 +541,27 @@ async function handleLogin(credentials: { email: string; password: string }) {
   const response: AuthResponse = await loginApi(credentials);
 
   if (isSuccessResponse(response)) {
-    // ✅ TypeScript biết chắc đây là SuccessResponse
+    // TypeScript biết chắc đây là SuccessResponse
     localStorage.setItem("token", response.data.accessToken);
-    redirectToDashboard(response.data.userId);
   } else {
-    // ✅ TypeScript biết chắc đây là ErrorResponse
+    // TypeScript biết chắc đây là ErrorResponse
     showAlert(`Login failed: ${response.message} (${response.code})`);
   }
 }
 ```
 
+**Bonus từ docs:** Type guards cũng có thể dùng để filter array:
+
+```typescript
+const zoo: (Fish | Bird)[] = [getSmallPet(), getSmallPet()];
+const underwater: Fish[] = zoo.filter(isFish); // Compiler biết kết quả là Fish[]
+```
+
 ---
 
-## 4. Interface
+## 5. Interface
 
-### Khai báo và `extends`
+### 5.1 Khai báo và `extends`
 
 ```typescript
 // filename: types/catalog.ts
@@ -455,26 +572,20 @@ interface BaseProduct {
   price: number;
 }
 
-// extends để kế thừa và mở rộng
+// extends: kế thừa và mở rộng — không làm mất type gốc
 interface PhysicalProduct extends BaseProduct {
-  weight: number;     // kg
+  weight: number;
   dimensions: { width: number; height: number; depth: number };
   shippingClass: "standard" | "express" | "bulky";
 }
 
-interface DigitalProduct extends BaseProduct {
-  downloadUrl: string;
-  licenseKey?: string;
-  maxDownloads: number;
-}
-
-// Extends nhiều interface cùng lúc
+// Extends nhiều interface cùng lúc (không thể làm với type alias)
 interface BundleProduct extends PhysicalProduct, DigitalProduct {
-  bundledItems: string[]; // danh sách id các sản phẩm trong bundle
+  bundledItems: string[];
 }
 ```
 
-### `implements` với Class
+### 5.2 `implements` với Class
 
 ```typescript
 // filename: services/payment.service.ts
@@ -484,10 +595,9 @@ interface PaymentGateway {
   refund(transactionId: string, amount: number): Promise<boolean>;
 }
 
-// Class PHẢI implement đầy đủ tất cả methods của interface
+// Class PHẢI implement đầy đủ tất cả methods — compiler báo lỗi nếu thiếu
 class StripeGateway implements PaymentGateway {
   async charge(amount: number, currency: string) {
-    // Stripe-specific implementation
     const result = await stripe.charges.create({ amount, currency });
     return { transactionId: result.id };
   }
@@ -498,85 +608,89 @@ class StripeGateway implements PaymentGateway {
   }
 }
 
-class VNPayGateway implements PaymentGateway {
-  async charge(amount: number, currency: string) {
-    // VNPay-specific implementation
-    const result = await vnpayClient.createPayment(amount);
-    return { transactionId: result.orderId };
-  }
-
-  async refund(transactionId: string, amount: number) {
-    await vnpayClient.refund(transactionId, amount);
-    return true;
-  }
-}
-
-// ✅ Cả 2 class đều đáp ứng contract PaymentGateway → có thể dùng hoán đổi nhau
+// Cả hai gateway đáp ứng cùng contract → dùng hoán đổi nhau được
 function processOrder(gateway: PaymentGateway, amount: number) {
   return gateway.charge(amount, "VND");
 }
 ```
 
-### Interface vs Type Alias — Khi nào dùng cái nào?
+### 5.3 Interface vs Type Alias — Phân biệt thực tế
 
-| | `interface` | `type alias` |
+Theo tài liệu chính thống TypeScript, đây là bảng so sánh chính xác:
+
+| Hành vi | `interface` | `type alias` |
 |---|---|---|
-| **Declaration merging** | ✅ Có thể merge | ❌ Không thể |
-| **`extends`** | ✅ Native syntax | ✅ Dùng `&` |
-| **Union / Intersection** | ❌ Không trực tiếp | ✅ Tự nhiên |
-| **Primitive / Tuple** | ❌ Không | ✅ Có |
-| **Class `implements`** | ✅ Rất phù hợp | ✅ Cũng được |
+| **Declaration Merging** | Có — khai báo cùng tên, compiler gộp lại | KHÔNG — lỗi "Duplicate identifier" |
+| **Extends** | `interface B extends A` | `type B = A & {...}` |
+| **Union / Intersection** | KHÔNG trực tiếp | Tự nhiên với `\|` và `&` |
+| **Primitive / Tuple / Union** | KHÔNG | Có |
+| **Hiển thị trong error** | Luôn hiển thị tên gốc | Có thể bị expand thành anonymous type |
+| **Performance** | Compiler dùng caching tốt hơn | Intersection types phải được expand |
 
-**Quyết định trong dự án thực tế:**
+**Khi nào dùng gì (theo docs):**
 
 ```typescript
-// ✅ Dùng interface: định nghĩa "hợp đồng" cho class hoặc object domain
+// Dùng interface: định nghĩa "hợp đồng" cho class hoặc object domain
 interface UserRepository {
   findById(id: string): Promise<User | null>;
   save(user: User): Promise<void>;
-  delete(id: string): Promise<void>;
 }
 
-// ✅ Dùng type alias: union types, computed types, utility types
+// Dùng type alias: union types, computed types, primitive aliases
 type UserId = string;
 type UserOrAdmin = User | AdminUser;
 type CreateUserPayload = Omit<User, "id" | "createdAt" | "updatedAt">;
 
-// ✅ Dùng interface: có thể bị extend lại bởi library consumer (declaration merging)
-// Ví dụ: Express Request có thể extend để thêm property 'currentUser'
+// Declaration merging — chỉ interface mới làm được
+// Ứng dụng thực tế: Extend Express Request để thêm currentUser
 declare global {
   namespace Express {
     interface Request {
-      currentUser?: User; // extend Request của Express để có currentUser
+      currentUser?: User;
     }
   }
 }
 ```
 
-> **Rule of thumb:** Dùng `interface` cho object shapes và class contracts. Dùng `type` cho union types, computed types, và mọi thứ còn lại.
+> **Rule của docs:** *"For the most part, you can choose based on personal preference. If you would like a heuristic, use `interface` until you need to use features from `type`."*
 
 ---
 
-## 5. Function Generics
+## 6. Generics (Kiểu tham số)
 
-### Khái niệm
+### 6.1 Khái niệm và cơ chế hoạt động
 
-**Generic** là "type parameter" — cho phép viết một function/class/interface hoạt động với NHIỀU kiểu dữ liệu khác nhau mà không mất type safety.
+**Definition Anatomy:**
 
-**Ẩn dụ:** Generic như một cái khuôn bánh (hình dạng giống nhau) nhưng phần nhân (`T`) thay đổi tùy theo cần bánh gì.
+Định nghĩa từ docs: *"Generics — being able to create a component that can work over a variety of types rather than a single one."*
 
-### Generic Functions
+- **component** (*thành phần*): có thể là function, class, interface
+- **work over a variety of types** (*hoạt động với nhiều kiểu dữ liệu*): không hardcode kiểu cụ thể
+- **rather than a single one** (*thay vì chỉ một kiểu*): đây là điểm khác biệt với `any`
+
+**Khác biệt then chốt giữa `any` và Generic:**
+
+```typescript
+// any: mất hoàn toàn thông tin type
+function identity_bad(arg: any): any {
+  return arg;
+}
+const result1 = identity_bad("hello"); // type: any — không biết gì
+
+// Generic: giữ nguyên thông tin type
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+const result2 = identity("hello"); // type: string — compiler infer được
+const result3 = identity(42);      // type: number — compiler infer được
+```
+
+### 6.2 Generic Functions thực chiến
 
 ```typescript
 // filename: utils/api.utils.ts
 
-// Hàm WITHOUT generic: phải return 'any' → mất type safety
-async function fetchDataUnsafe(url: string): Promise<any> {
-  const response = await fetch(url);
-  return response.json();
-}
-
-// Hàm WITH generic: caller tự quyết định kiểu trả về → vừa linh hoạt vừa type-safe
+// Caller tự quyết định kiểu trả về → vừa linh hoạt vừa type-safe
 async function fetchData<TResponse>(url: string): Promise<TResponse> {
   const response = await fetch(url);
 
@@ -587,44 +701,55 @@ async function fetchData<TResponse>(url: string): Promise<TResponse> {
   return response.json() as TResponse;
 }
 
-// ✅ Cách dùng — TypeScript biết chính xác kiểu trả về
+// TypeScript biết chính xác kiểu trả về khi gọi
 type Product = { id: string; name: string; price: number };
-type UserProfile = { id: string; email: string; fullName: string };
 
 const product = await fetchData<Product>("/api/products/p-001");
-// product.name ✅ — compiler biết product có property name
+// product.name — OK, compiler biết product là Product
 
-const user = await fetchData<UserProfile>("/api/users/u-001");
-// user.email ✅ — compiler biết user có property email
+const products = await fetchData<Product[]>("/api/products");
+// products.map(p => p.price) — OK
 ```
 
-### Generic Constraints (`extends`)
+### 6.3 Generic Constraints (`extends`)
 
-**Dùng khi:** Cần giới hạn Generic T, chỉ cho phép những type có đặc điểm cụ thể.
+**Từ docs:** Dùng khi cần giới hạn Generic T, chỉ chấp nhận type có đặc điểm cụ thể. Dùng interface để mô tả constraint:
 
 ```typescript
 // filename: utils/entity.utils.ts
 
 // Constraint: T phải có ít nhất property 'id: string'
+// Kỹ thuật này từ docs: declare interface mô tả constraint, rồi dùng extends
 function findById<T extends { id: string }>(items: T[], targetId: string): T | undefined {
-  // ✅ Compiler biết items[i].id tồn tại vì T extend { id: string }
   return items.find(item => item.id === targetId);
 }
 
-// Hoạt động với bất kỳ array nào có items có id
-const products: Product[] = await fetchData<Product[]>("/api/products");
-const foundProduct = findById(products, "p-001"); // Type: Product | undefined
+// Hoạt động với bất kỳ array nào có object có id
+const foundProduct = findById(products, "p-001"); // type: Product | undefined
+const foundUser = findById(users, "usr-001");     // type: User | undefined
 
-const users: User[] = await fetchData<User[]>("/api/users");
-const foundUser = findById(users, "usr-001"); // Type: User | undefined
+// Compiler từ chối: number không có property 'id'
+// findById([1, 2, 3], "1"); // Error
 ```
 
-### Multiple Generics
+**Sử dụng Type Parameters trong Generic Constraints:**
+
+```typescript
+// Từ docs: constrain bằng một type parameter khác
+function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
+  return obj[key];
+}
+
+let x = { a: 1, b: 2, c: 3 };
+getProperty(x, "a"); // OK
+// getProperty(x, "z"); // Error: "z" không là key của x
+```
+
+### 6.4 Multiple Generics
 
 ```typescript
 // filename: utils/cache.utils.ts
 
-// 2 type parameters: K là kiểu key, V là kiểu value
 class TypeSafeCache<K, V> {
   private store = new Map<K, V>();
 
@@ -637,13 +762,12 @@ class TypeSafeCache<K, V> {
   }
 }
 
-// Ví dụ thực tế: Cache sản phẩm theo SKU
 const productCache = new TypeSafeCache<string, Product>();
 productCache.set("MBP-M4-512", { id: "p-001", name: "MacBook Pro M4", price: 49_990_000 });
 
-const cached = productCache.get("MBP-M4-512"); // Type: Product | undefined
+const cached = productCache.get("MBP-M4-512"); // type: Product | undefined
 
-// Ví dụ thực tế: Generic cho HTTP request với cả request body và response body
+// Generic cho cả request body và response body
 async function post<TBody, TResponse>(url: string, body: TBody): Promise<TResponse> {
   const response = await fetch(url, {
     method: "POST",
@@ -652,29 +776,21 @@ async function post<TBody, TResponse>(url: string, body: TBody): Promise<TRespon
   });
   return response.json() as TResponse;
 }
-
-type CreateOrderPayload = { productId: string; quantity: number; userId: string };
-type OrderConfirmation = { orderId: string; estimatedDelivery: string };
-
-// ✅ Compiler biết chính xác type của cả input và output
-const confirmation = await post<CreateOrderPayload, OrderConfirmation>(
-  "/api/orders",
-  { productId: "p-001", quantity: 2, userId: "usr-123" }
-);
-console.log(confirmation.orderId); // ✅ type-safe
 ```
 
 ---
 
-## 6. Decorators
+## 7. Decorators
 
-### Khái niệm
+### 7.1 Hai phiên bản Decorator — Phân biệt quan trọng
 
-**Decorator** là một syntax đặc biệt (dùng `@`) để "gắn" thêm hành vi vào class, method, property, hoặc parameter mà không cần sửa trực tiếp code gốc. Bản chất là một **Higher-Order Function**.
+Theo tài liệu chính thống, có **hai implementation** khác nhau:
 
-**Kích hoạt trong `tsconfig.json`:**
+1. **Stage 2 Decorators (Legacy):** Kích hoạt bằng `"experimentalDecorators": true`. Đây là implementation cũ, không theo TC39 proposal.
+2. **Stage 3 Decorators (TS 5.0+):** Không cần flag — đây là standard mới theo TC39 proposal, được release từ TypeScript 5.0.
 
 ```json
+// tsconfig.json cho Stage 2 (legacy — NestJS, TypeORM vẫn dùng)
 {
   "compilerOptions": {
     "experimentalDecorators": true,
@@ -683,18 +799,31 @@ console.log(confirmation.orderId); // ✅ type-safe
 }
 ```
 
-> **Lưu ý:** TypeScript 5.0+ đã có Stage 3 Decorators (cú pháp mới theo TC39 proposal). `experimentalDecorators` vẫn được hỗ trợ nhưng là implementation cũ. Bài này dùng `experimentalDecorators` vì các framework phổ biến (NestJS, TypeORM) vẫn dùng.
+> **Lưu ý từ docs:** *"NOTE: This document refers to an experimental stage 2 decorators implementation."* Nếu dùng NestJS hoặc TypeORM, vẫn cần `experimentalDecorators: true` vì các framework này chưa migrate sang Stage 3.
 
-### Class Decorator
+### 7.2 Decorator Evaluation Order (Thứ tự thực thi)
+
+Theo docs, thứ tự evaluation là xác định và không thay đổi:
+
+1. Parameter Decorators, Method/Accessor/Property Decorators cho **instance members**
+2. Parameter Decorators, Method/Accessor/Property Decorators cho **static members**
+3. Parameter Decorators cho **constructor**
+4. Class Decorator cho **class**
+
+Khi nhiều decorator áp dụng trên cùng một declaration: **evaluation top-to-bottom, nhưng call bottom-to-top** (giống function composition trong toán học).
+
+### 7.3 Class Decorator
+
+Class Decorator nhận constructor của class làm tham số. Từ docs, nếu trả về một constructor mới, phải đảm bảo giữ nguyên prototype gốc:
 
 ```typescript
 // filename: decorators/logger.decorator.ts
 
-// Class Decorator nhận vào constructor của class làm tham số
+// Decorator Factory: trả về decorator function thực sự
 function Logger(prefix: string) {
-  return function <T extends { new (...args: unknown[]): object }>(constructor: T) {
+  return function <T extends { new (...args: any[]): {} }>(constructor: T) {
     return class extends constructor {
-      constructor(...args: unknown[]) {
+      constructor(...args: any[]) {
         super(...args);
         console.log(`[${prefix}] Instance created: ${constructor.name}`);
       }
@@ -702,7 +831,6 @@ function Logger(prefix: string) {
   };
 }
 
-// filename: services/order.service.ts
 @Logger("ORDER-SERVICE")
 class OrderService {
   constructor(private readonly orderId: string) {}
@@ -712,19 +840,20 @@ class OrderService {
   }
 }
 
-// Khi new OrderService("ORD-001") được gọi, log tự động xuất hiện:
+// Khi new OrderService("ORD-001"), tự động log:
 // [ORDER-SERVICE] Instance created: OrderService
-const service = new OrderService("ORD-001");
 ```
 
-### Method Decorator
+### 7.4 Method Decorator
 
-**Ứng dụng thực chiến nhất: `@CatchError` — tự động bắt và xử lý lỗi cho bất kỳ method nào.**
+Method Decorator nhận 3 tham số:
+1. Constructor (static member) hoặc prototype (instance member)
+2. Tên method
+3. PropertyDescriptor — mô tả method trong object
 
 ```typescript
 // filename: decorators/catch-error.decorator.ts
 
-// Method Decorator nhận 3 tham số: target, propertyKey, descriptor
 function CatchError(errorMessage: string) {
   return function (
     _target: object,
@@ -733,15 +862,15 @@ function CatchError(errorMessage: string) {
   ) {
     const originalMethod = descriptor.value;
 
-    // Wrap method gốc bằng try-catch
+    // Wrap method gốc bằng try-catch — không thay đổi signature của method
     descriptor.value = async function (...args: unknown[]) {
       try {
         return await originalMethod.apply(this, args);
       } catch (error) {
-        // Ghi log lỗi chi tiết (có thể gửi lên Sentry, DataDog...)
         console.error(`[CatchError] ${errorMessage}:`, error);
-        // Ném lại lỗi đã được wrap với message rõ ràng hơn
-        throw new Error(`${errorMessage}: ${error instanceof Error ? error.message : "Unknown error"}`);
+        throw new Error(
+          `${errorMessage}: ${error instanceof Error ? error.message : "Unknown error"}`
+        );
       }
     };
 
@@ -749,51 +878,44 @@ function CatchError(errorMessage: string) {
   };
 }
 
-// filename: services/inventory.service.ts
+// Sử dụng — code trong method sạch, không lặp lại try-catch
 class InventoryService {
   @CatchError("Failed to update stock")
   async updateStock(productId: string, quantity: number): Promise<void> {
-    // Nếu method này throw bất kỳ lỗi gì → @CatchError tự động bắt và log
     await db.query(
       "UPDATE products SET stock = stock + $1 WHERE id = $2",
       [quantity, productId]
     );
   }
-
-  @CatchError("Failed to check availability")
-  async checkAvailability(productId: string): Promise<boolean> {
-    const result = await db.query(
-      "SELECT stock FROM products WHERE id = $1",
-      [productId]
-    );
-    return result.rows[0]?.stock > 0;
-  }
 }
-
-// ✅ Cả 2 method đều được bảo vệ bởi error handling tự động
-// → Code trong method sạch hơn, không cần lặp lại try-catch
 ```
+
+**Trade-off của Decorators:**
+- Tăng tính tái sử dụng, giảm boilerplate
+- Nhưng ẩn logic — người đọc code phải tìm implementation của decorator
+- Khó debug hơn vì call stack thêm một layer
+- Dependency vào framework (NestJS decorators không dùng được trong Express thuần)
 
 ---
 
-## 7. Utility Types
+## 8. Utility Types (Kiểu biến đổi)
 
-**Utility Types** là bộ công cụ built-in của TypeScript giúp biến đổi type hiện có thành type mới mà không cần viết lại từ đầu.
+**Definition:** *"TypeScript provides several utility types to facilitate common type transformations. These utilities are available globally."* — TypeScript Handbook
 
-### Sơ đồ tổng quan
+Sơ đồ tổng quan quan hệ giữa các Utility Types:
 
 ```mermaid
 flowchart LR
-    Base["Product Type\n{id, name, price,\ncategory, description}"]
+    Base["Product Type<br/>{id, name, price, category, description?}"]
 
-    Base -->|"Partial&lt;T&gt;"| P["UpdatePayload\n{id?, name?, price?,\ncategory?, description?}"]
-    Base -->|"Required&lt;T&gt;"| R["Required Product\n{id!, name!, price!,\ncategory!, description!}"]
-    Base -->|"Pick&lt;T, K&gt;"| PK["ProductCard\n{id, name, price}"]
-    Base -->|"Omit&lt;T, K&gt;"| OM["CreatePayload\n{name, price,\ncategory, description}"]
-    Base -->|"Readonly&lt;T&gt;"| RO["Immutable Product\n(không sửa được)"]
+    Base --> |"Partial&lt;T&gt;"| P["UpdatePayload<br/>{id?, name?, price?, category?, description?}"]
+    Base --> |"Required&lt;T&gt;"| R["StrictProduct<br/>{id!, name!, price!, category!, description!}"]
+    Base --> |"Pick&lt;T, K&gt;"| PK["ProductCard<br/>{id, name, price}"]
+    Base --> |"Omit&lt;T, K&gt;"| OM["CreatePayload<br/>{name, price, category, description?}"]
+    Base --> |"Readonly&lt;T&gt;"| RO["Immutable Product<br/>(không sửa được sau khi tạo)"]
 ```
 
-### `Partial<T>` và `Required<T>`
+### 8.1 `Partial<T>` và `Required<T>`
 
 ```typescript
 // filename: services/product.service.ts
@@ -803,16 +925,16 @@ type Product = {
   name: string;
   price: number;
   category: string;
-  description?: string; // optional
+  description?: string;
 };
 
 // Partial<T>: Biến TẤT CẢ properties thành optional
-// Ứng dụng: Payload cho PATCH request (chỉ update một phần)
+// Released: TypeScript 2.1
+// Ứng dụng: Payload cho PATCH request
 type UpdateProductPayload = Partial<Product>;
-// Tương đương: { id?: string; name?: string; price?: number; ... }
+// { id?: string; name?: string; price?: number; category?: string; description?: string }
 
 async function updateProduct(id: string, payload: UpdateProductPayload) {
-  // payload chỉ cần chứa fields muốn update
   await db.products.update({ where: { id }, data: payload });
 }
 
@@ -820,63 +942,12 @@ async function updateProduct(id: string, payload: UpdateProductPayload) {
 await updateProduct("p-001", { price: 44_990_000 });
 
 // Required<T>: Biến TẤT CẢ properties thành bắt buộc (ngược với Partial)
+// Released: TypeScript 2.8
 type StrictProduct = Required<Product>;
-// description không còn optional — phải cung cấp đầy đủ
+// description không còn optional
 ```
 
-### `Pick<T, K>` và `Omit<T, K>`
-
-```typescript
-// filename: types/product-views.ts
-
-// Pick<T, K>: Chỉ lấy một số properties cụ thể
-// Ứng dụng: Tạo DTO/view model chỉ chứa những gì cần thiết
-type ProductCard = Pick<Product, "id" | "name" | "price">;
-// { id: string; name: string; price: number }
-
-// Omit<T, K>: Loại bỏ một số properties
-// Ứng dụng: Tạo payload cho POST request (không có id, timestamps)
-type CreateProductPayload = Omit<Product, "id">;
-// { name: string; price: number; category: string; description?: string }
-
-// Ứng dụng nâng cao: Omit nhiều fields do server tự generate
-type BaseEntity = {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-type CreateUserPayload = Omit<User, keyof BaseEntity>;
-// Loại bỏ toàn bộ fields của BaseEntity → chỉ còn fields do user cung cấp
-```
-
-### `Record<K, V>`
-
-```typescript
-// filename: config/permissions.ts
-
-type UserRole = "admin" | "editor" | "viewer";
-type Permission = "read" | "write" | "delete";
-
-// Record<K, V>: Tạo object type với key K và value V
-// Ứng dụng: Permission matrix, lookup table, dictionary
-const rolePermissions: Record<UserRole, Permission[]> = {
-  admin: ["read", "write", "delete"],
-  editor: ["read", "write"],
-  viewer: ["read"],
-};
-
-// ✅ Compiler đảm bảo tất cả role đều được định nghĩa (không bỏ sót)
-function hasPermission(role: UserRole, action: Permission): boolean {
-  return rolePermissions[role].includes(action);
-}
-
-// Ứng dụng khác: Cache/Map với runtime-defined keys
-const productCache: Record<string, Product> = {};
-productCache["p-001"] = { id: "p-001", name: "MacBook Pro", price: 49_990_000, category: "Laptop" };
-```
-
-### `Readonly<T>`
+### 8.2 `Readonly<T>`
 
 ```typescript
 // filename: config/app.config.ts
@@ -887,22 +958,64 @@ type AppConfig = {
   featureFlags: Record<string, boolean>;
 };
 
-// Readonly<T>: Tất cả properties không thể reassign sau khi tạo
 const CONFIG: Readonly<AppConfig> = {
   apiBaseUrl: "https://api.example.com/v2",
   maxRetries: 3,
   featureFlags: { darkMode: true, betaCheckout: false },
 };
 
-// ❌ Lỗi compile: Cannot assign to 'apiBaseUrl' because it is a read-only property.
+// Compiler từ chối: Cannot assign to 'apiBaseUrl' because it is a read-only property.
 // CONFIG.apiBaseUrl = "https://api.staging.example.com";
 
-// ⚠️ Lưu ý: Readonly là SHALLOW — object lồng nhau vẫn có thể mutate
-CONFIG.featureFlags["betaCheckout"] = true; // ✅ Không bị lỗi!
-// Để deep readonly, cần dùng thư viện như 'type-fest' hoặc tự viết recursive type
+// Quan trọng: Readonly là SHALLOW (một lớp)
+// Object lồng nhau vẫn có thể mutate!
+CONFIG.featureFlags["betaCheckout"] = true; // Không bị lỗi!
+// Để deep readonly, cần dùng thư viện như 'type-fest' hoặc recursive utility type
 ```
 
-### `Exclude<T, U>` và `Extract<T, U>`
+### 8.3 `Record<Keys, Type>`
+
+```typescript
+// filename: config/permissions.ts
+
+type UserRole = "admin" | "editor" | "viewer";
+type Permission = "read" | "write" | "delete";
+
+// Record<K, V>: Tạo object type với key K và value V
+// Compiler đảm bảo tất cả keys trong Union đều được định nghĩa (không bỏ sót)
+const rolePermissions: Record<UserRole, Permission[]> = {
+  admin: ["read", "write", "delete"],
+  editor: ["read", "write"],
+  viewer: ["read"],
+};
+
+function hasPermission(role: UserRole, action: Permission): boolean {
+  return rolePermissions[role].includes(action);
+}
+```
+
+### 8.4 `Pick<T, K>` và `Omit<T, K>`
+
+```typescript
+// filename: types/product-views.ts
+
+// Pick<T, K>: Chỉ lấy một số properties cụ thể
+// Released: TypeScript 2.1
+type ProductCard = Pick<Product, "id" | "name" | "price">;
+// { id: string; name: string; price: number }
+
+// Omit<T, K>: Loại bỏ một số properties
+// Released: TypeScript 3.5 (chú ý: muộn hơn Pick)
+type CreateProductPayload = Omit<Product, "id">;
+// { name: string; price: number; category: string; description?: string }
+
+// Kết hợp với keyof để loại bỏ động
+type BaseEntity = { id: string; createdAt: Date; updatedAt: Date };
+type CreateUserPayload = Omit<User, keyof BaseEntity>;
+// Loại bỏ tất cả fields của BaseEntity
+```
+
+### 8.5 `Exclude<T, U>` và `Extract<T, U>`
 
 ```typescript
 // filename: types/events.ts
@@ -916,6 +1029,7 @@ type SystemEvent =
   | "payment.failed";
 
 // Exclude<T, U>: Loại bỏ khỏi T những type thuộc U
+// Released: TypeScript 2.8
 type NonUserEvent = Exclude<SystemEvent, "user.created" | "user.deleted">;
 // "order.placed" | "order.cancelled" | "payment.success" | "payment.failed"
 
@@ -923,25 +1037,21 @@ type NonUserEvent = Exclude<SystemEvent, "user.created" | "user.deleted">;
 type PaymentEvent = Extract<SystemEvent, `payment.${string}`>;
 // "payment.success" | "payment.failed"
 
-// Ứng dụng: Định nghĩa các handler chỉ nhận event type phù hợp
 function registerPaymentHandler(
   event: PaymentEvent,
   handler: (data: unknown) => void
 ) {
   eventBus.on(event, handler);
 }
-
-registerPaymentHandler("payment.success", (data) => console.log("Payment done!"));
-// ❌ Lỗi compile nếu truyền "user.created" vào đây
+// Compiler báo lỗi nếu truyền "user.created" vào đây
 ```
 
-### `ReturnType<T>`
+### 8.6 `ReturnType<T>` và `Awaited<T>`
 
 ```typescript
 // filename: services/auth.service.ts
 
 async function getCurrentUser(sessionToken: string) {
-  // ... logic lấy user từ session
   return {
     id: "usr-001",
     email: "user@example.com",
@@ -950,12 +1060,14 @@ async function getCurrentUser(sessionToken: string) {
   };
 }
 
-// ReturnType<T>: Lấy type của giá trị mà function trả về
-// → Synchronizes type tự động khi function thay đổi, không cần cập nhật thủ công
+// ReturnType<T>: Lấy type của return value
+// Released: TypeScript 2.8
+// Awaited<T>: Unwrap Promise — Released: TypeScript 4.5
 type CurrentUser = Awaited<ReturnType<typeof getCurrentUser>>;
 // { id: string; email: string; role: "admin"; lastLoginAt: Date }
 
-// Ứng dụng: Component nhận đúng type không cần định nghĩa lại
+// Ưu điểm: Khi getCurrentUser thay đổi, CurrentUser tự động cập nhật
+// Không cần maintain 2 type definitions song song
 function renderUserHeader(user: CurrentUser) {
   return `Welcome, ${user.email}! Role: ${user.role}`;
 }
@@ -963,47 +1075,74 @@ function renderUserHeader(user: CurrentUser) {
 
 ---
 
-## 🧠 MECE Mindmap Tổng Kết
+## 9. Quick Reference Cheat Sheet
+
+### 9.1 Utility Types
+
+| Utility Type | Công dụng | Use case thực tế |
+|---|---|---|
+| `Partial<T>` | Mọi field → optional | PATCH request payload |
+| `Required<T>` | Mọi field → bắt buộc | Validation đầu vào |
+| `Readonly<T>` | Không cho phép mutate | Config, constants |
+| `Pick<T, K>` | Chỉ lấy K fields | View model / DTO |
+| `Omit<T, K>` | Loại bỏ K fields | POST payload (bỏ id, timestamps) |
+| `Record<K, V>` | Dictionary/Map type-safe | Permission matrix, lookup table |
+| `Exclude<T, U>` | Loại bỏ khỏi Union | Filter event types |
+| `Extract<T, U>` | Giữ lại trong Union | Narrow event types |
+| `NonNullable<T>` | Loại bỏ null và undefined | Sau khi đã check null |
+| `ReturnType<T>` | Type của return value | Sync type với function |
+| `Awaited<T>` | Unwrap Promise type | Kết hợp với ReturnType cho async |
+| `Parameters<T>` | Tuple type của parameters | Reuse function signature |
+
+### 9.2 Narrowing Techniques
+
+| Kỹ thuật | Dùng khi | Ví dụ |
+|---|---|---|
+| `typeof` | Primitive types | `typeof x === "string"` |
+| `instanceof` | Class instances | `x instanceof Date` |
+| `in` | Property existence check | `"cardNumber" in payment` |
+| Discriminated Union | Objects có discriminant | `shape.kind === "circle"` |
+| Type Predicate | Custom logic phức tạp | `function isFish(pet): pet is Fish` |
+| Equality (`===`) | Literal types | `x === "success"` |
+
+### 9.3 Interface vs Type Alias — Decision Tree
 
 ```mermaid
-mindmap
-  root((TypeScript))
-    WHY["❓ WHY"]
-      prob["Runtime errors → Compile-time"]
-      refactor["Refactoring an toàn"]
-      docs["Type = Tài liệu sống"]
-    WHAT["📖 WHAT"]
-      types["Types: Primitive/Object/any/unknown/never"]
-      combine["Union & Intersection"]
-      guards["Type Guards & Narrowing"]
-      iface["Interface vs Type Alias"]
-    HOW["🔨 HOW"]
-      generics["Generics: Tái sử dụng type-safe"]
-      decorators["Decorators: @Logger/@CatchError"]
-      utilities["Utility Types: Pick/Omit/Record..."]
-      assertion["as const: Literal types từ array/object"]
-    WHATIF["🚀 WHAT IF"]
-      any_vs_unknown["Dùng unknown thay any"]
-      never_exhaustive["never cho exhaustive check"]
-      interface_merge["Interface cho declaration merging"]
-      type_alias["Type alias cho unions/computed"]
+flowchart TD
+    A[Cần khai báo type mới] --> B{Cần declaration merging?}
+    B --> |Có| C["Dùng interface<br/>(extend library types)"]
+    B --> |Không| D{Là union type, primitive alias,<br/>hoặc computed type?}
+    D --> |Có| E["Dùng type alias<br/>(type X = A | B)"]
+    D --> |Không| F{Là class contract<br/>hoặc object shape?}
+    F --> |Có| G["Dùng interface<br/>(better error messages)"]
+    F --> |Không| H["Dùng tùy preference<br/>(cả hai đều OK)"]
 ```
 
 ---
 
-## 🚀 Quick Reference Cheat Sheet
+## 10. Câu hỏi thảo luận
 
-| Utility Type | Công dụng | Use case |
-|---|---|---|
-| `Partial<T>` | Mọi field → optional | PATCH request payload |
-| `Required<T>` | Mọi field → bắt buộc | Validation đầu vào |
-| `Pick<T, K>` | Chỉ lấy K fields | View model / DTO |
-| `Omit<T, K>` | Loại bỏ K fields | POST payload (bỏ id) |
-| `Record<K, V>` | Dictionary/Map type-safe | Permission matrix |
-| `Readonly<T>` | Không cho phép mutate | Config, constants |
-| `Exclude<T, U>` | Loại bỏ khỏi Union | Filter event types |
-| `Extract<T, U>` | Giữ lại trong Union | Narrow event types |
-| `ReturnType<T>` | Type của return value | Sync type với function |
+1. **Trade-off của `Readonly<T>`:** Tại sao `Readonly<T>` chỉ là shallow immutability? Trong trường hợp nào bạn cần deep readonly, và cách implement recursive `DeepReadonly<T>` là gì?
+
+2. **Generic vs Overloading:** Khi nào bạn nên dùng Generic thay vì Function Overloading? Điểm breakeven là gì?
+
+3. **Structural Typing vs Nominal Typing:** TypeScript dùng structural typing — điều này có thể gây ra vấn đề gì trong một số trường hợp? Ví dụ: `type UserId = string` và `type ProductId = string` có tương thích với nhau không? Cách giải quyết?
+
+4. **Stage 2 vs Stage 3 Decorators:** Bạn đang dùng NestJS — khi nào nên cân nhắc migration sang Stage 3 Decorators? Các breaking changes là gì?
+
+5. **`unknown` trong API layer:** Một số codebase dùng `zod` hoặc `io-ts` thay vì manually narrow `unknown`. Trade-off giữa runtime validation và compile-time narrowing là gì?
+
+---
+
+## References
+
+- [TypeScript Handbook — Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+- [TypeScript Handbook — Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+- [TypeScript Handbook — Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+- [TypeScript Handbook — Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+- [TypeScript Handbook — Decorators (Stage 2)](https://www.typescriptlang.org/docs/handbook/decorators.html)
+- [TypeScript 5.0 — Stage 3 Decorators](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators)
+- [TypeScript Handbook — Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 ---
 
