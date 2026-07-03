@@ -64,6 +64,30 @@ function escapeFrontmatterString(str: string): string {
   return str.replace(/"/g, '\\"');
 }
 
+/**
+ * Sanitize nội dung trước khi ghi vào MDX.
+ *
+ * Vấn đề: MDX dùng JSX syntax. Các HTML void elements như <br>, <hr>, <img>
+ * PHẢI được viết dạng self-closing (<br/>, <hr/>, <img/>) — ngược lại Docusaurus
+ * sẽ throw "Expected a closing tag" error khi build.
+ *
+ * Nguồn gốc: pymupdf4llm extract table cells có <br> từ PDF layout,
+ * masker.ts bỏ qua (không có attribute), LLM giữ nguyên → lỗi MDX.
+ */
+function sanitizeMdxContent(content: string): string {
+  // Danh sách HTML void elements phổ biến cần self-close trong JSX
+  const voidElements = ["br", "hr", "img", "input", "meta", "link", "area", "base", "col", "embed", "param", "source", "track", "wbr"];
+  const voidPattern = new RegExp(
+    `<(${voidElements.join("|")})(\\s[^>]*)?>(?!</)`,
+    "gi"
+  );
+  // <br> → <br/>  |  <hr class="x"> → <hr class="x"/>
+  return content.replace(voidPattern, (match, tag, attrs) => {
+    const cleanAttrs = attrs ?? "";
+    return `<${tag}${cleanAttrs}/>`;
+  });
+}
+
 // ─── Main Node ────────────────────────────────────────────────────────────────
 
 export const mdxExporterNode = async (
@@ -80,6 +104,9 @@ export const mdxExporterNode = async (
   const today = new Date().toISOString().split("T")[0];
 
   console.log(`\n[Exporter] 📝 Tạo MDX cho: "${chapter.title}"`);
+
+  // ── Sanitize nội dung — fix HTML void elements thành JSX-compatible ──
+  const sanitizedContent = sanitizeMdxContent(state.translatedContent);
 
   // ── Build MDX components ──
   const frontmatter = buildFrontmatter({
@@ -100,7 +127,7 @@ ${attribution}
 
 <!-- truncate -->
 
-${state.translatedContent}
+${sanitizedContent}
 
 ---
 

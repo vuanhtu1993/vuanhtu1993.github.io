@@ -11,25 +11,40 @@
  *
  * 3. Validation sau dịch: Kiểm tra LLM có giữ nguyên <ASSET_...> tags không.
  *    Nếu thiếu → log warning, không throw error (graceful degradation).
+ *
+ * 4. [Fix #0] Technical terms → HARD RULE giữ nguyên tiếng Anh, không dịch.
+ *
+ * 5. [Fix #1] Book metadata (title, author, domain) inject vào system prompt.
+ *    → LLM biết context sách, dùng đúng domain-specific terminology.
+ *
+ * 6. [Fix #2] Context overlap dùng BẢN DỊCH tiếng Việt (không phải bản gốc).
+ *    → LLM anchor vào lựa chọn thuật ngữ đã xác lập, không re-derive từ tiếng Anh.
  */
 
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import * as fs from "fs";
 import { InterpreterState } from "../state";
-import { GLOSSARY_PATH, LLM_CONFIG } from "../config";
+import { GLOSSARY_PATH, LLM_CONFIG, CHUNKING } from "../config";
 import { geminiService } from "../../utils/gemini-service";
 
 // ─── Prompt Engineering ───────────────────────────────────────────────────────
 
 /**
  * System prompt được thiết kế theo nguyên tắc:
- * 1. Persona rõ ràng → LLM biết mình đang đóng vai gì
+ * 1. Persona rõ ràng với domain cụ thể của sách → LLM biết mình đang đóng vai gì
  * 2. Rules dạng list → dễ kiểm soát, dễ debug
  * 3. Glossary inject trực tiếp → tránh LLM "đoán"
+ * 4. [Fix #0] HARD RULE về technical terms — không cho phép dịch jargon
+ * 5. [Fix #1] Placeholders cho book metadata: {bookTitle}, {bookAuthor}, {bookDomain}
  */
-const SYSTEM_PROMPT_TEMPLATE = `Bạn là một chuyên gia kỹ thuật AI/Data Engineering với 10+ năm kinh nghiệm, đồng thời là một người dịch kỹ thuật chuyên nghiệp.
+const SYSTEM_PROMPT_TEMPLATE = `Bạn là một chuyên gia kỹ thuật với 10+ năm kinh nghiệm trong lĩnh vực {bookDomain}, đồng thời là một người dịch kỹ thuật chuyên nghiệp.
 
-NHIỆM VỤ: Dịch đoạn văn kỹ thuật tiếng Anh sang tiếng Việt tự nhiên, phù hợp với kỹ sư Việt Nam trình độ trung cấp.
+THÔNG TIN SÁCH ĐANG ĐƯỢC DỊCH:
+- Tên sách: {bookTitle}
+- Tác giả: {bookAuthor}
+- Domain: {bookDomain}
+
+NHIỆM VỤ: Dịch đoạn văn kỹ thuật tiếng Anh sang tiếng Việt tự nhiên, phù hợp với kỹ sư Việt Nam trình độ trung cấp. Đảm bảo bản dịch trung thành với văn phong và thuật ngữ đặc thù của tác giả.
 
 ===QUYẾT ĐỊNH TUYỆT ĐỐI (HARD RULES — KHÔNG ĐƯỢC VI PHẠM)===
 
@@ -48,13 +63,18 @@ Các thuật ngữ sau KHÔNG được dịch:
 - List (-, 1., 2.): giữ nguyên format list
 - Blockquote (>): giữ nguyên dấu >
 
+**RULE 4: GIỮ NGUYÊN TECHNICAL TERMS — KHÔNG DỊCH JARGON KỸ THUẬT**
+- Tất cả thuật ngữ kỹ thuật, jargon, proper nouns trong lĩnh vực công nghệ → GIỮ NGUYÊN tiếng Anh.
+- Ví dụ PHẢI GIỮ NGUYÊN: pipeline, cache, load balancer, database, server, client, queue, thread, process, instance, cluster, node, endpoint, payload, middleware, framework, runtime, deployment, container, replica, shard, index, schema, query, transaction, latency, throughput, bandwidth, bottleneck, scalability, availability, consistency, partition, fault tolerance, idempotent, stateless, stateful...
+- Ví dụ ĐƯỢC DỊCH: câu hoàn chỉnh giải thích khái niệm, từ thông thường (ví dụ: "the system", "this approach", "in this chapter"...).
+- TUYỆT ĐỐI KHÔNG dịch technical term rồi ghi chú "(tiếng Anh: ...)" — điều này ngớ ngẩn và không cần thiết.
+
 ===HƯỚNG DẪN DỊCH THUẬT (SOFT RULES)===
 
 **Văn phong:**
 - Ưu tiên nghĩa, không dịch word-by-word
 - Dùng "chúng ta" thay vì "chúng tôi" khi xưng hô với người đọc
 - Câu tiếng Anh dài → chia thành 2 câu tiếng Việt nếu cần
-- Thuật ngữ kỹ thuật lần đầu xuất hiện → ghi "(tiếng Anh: term)" sau lần đầu
 
 **Không thêm:**
 - Không thêm lời giới thiệu như "Đây là bản dịch..."
@@ -75,6 +95,42 @@ function loadGlossary(): string {
     console.warn("[Translator] ⚠️ Không đọc được glossary.json:", e);
     return "  - (Không có glossary)";
   }
+}
+
+/**
+ * [Fix #1] Tự động suy ra domain của sách từ title bằng keyword matching.
+ * Tại sao: Tránh thêm CLI flag --domain, giảm friction cho user.
+ * Trade-off: Có thể suy sai với sách nằm ở giao điểm nhiều domain.
+ */
+function inferDomain(title: string): string {
+  const t = title.toLowerCase();
+
+  if (/machine learning|deep learning|neural|natural language|llm|transformer|generative|artificial intelligence/.test(t))
+    return "AI & Machine Learning";
+
+  if (/system design|distributed system|architecture|scalab|microservice|high availab/.test(t))
+    return "System Design & Software Architecture";
+
+  if (/data engineer|data pipeline|etl|elt|warehouse|lakehouse|apache spark|kafka|airflow/.test(t))
+    return "Data Engineering";
+
+  if (/devops|kubernetes|docker|ci\/cd|infrastructure|cloud|terraform|ansible/.test(t))
+    return "DevOps & Cloud Infrastructure";
+
+  if (/javascript|typescript|react|vue|angular|node|frontend|backend|web development/.test(t))
+    return "Web Development";
+
+  if (/database|sql|postgres|mysql|mongodb|redis|nosql/.test(t))
+    return "Database Systems";
+
+  if (/security|cryptograph|authentication|authorization|penetration/.test(t))
+    return "Cybersecurity";
+
+  if (/algorithm|data structure|competitive|leetcode/.test(t))
+    return "Algorithms & Data Structures";
+
+  // Fallback mặc định
+  return "Software Engineering & Technology";
 }
 
 /**
@@ -99,6 +155,34 @@ function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * [Fix #2] Tạo human prompt với context tiếng Việt từ chunk đã dịch trước.
+ *
+ * Tại sao inject BẢN DỊCH thay vì bản gốc:
+ * - Bản gốc (tiếng Anh) → LLM phải re-derive lại cách dịch → có thể chọn khác nhau
+ * - Bản dịch (tiếng Việt) → LLM anchor vào lựa chọn đã xác lập → nhất quán
+ *
+ * @param resolvedSystemPrompt - System prompt đã được replace tất cả placeholders (bookTitle, bookAuthor, bookDomain, glossaryTerms)
+ * @param prevTranslated - 300 chars cuối của bản dịch chunk trước (hoặc null nếu chunk đầu tiên)
+ *
+ * BUG FIX: Phải nhận resolvedSystemPrompt làm tham số thay vì dùng SYSTEM_PROMPT_TEMPLATE trực tiếp.
+ * Lý do: SYSTEM_PROMPT_TEMPLATE còn chứa {bookDomain}, {bookTitle}... → LangChain hiểu là
+ * input variables → throw "Missing value for input variable 'bookDomain'" error.
+ */
+function buildHumanPrompt(resolvedSystemPrompt: string, prevTranslated: string | null): ChatPromptTemplate {
+  const contextBlock = prevTranslated
+    ? `[BẢN DỊCH đoạn trước — CHỈ ĐỂ THAM KHẢO, KHÔNG CẦN DỊCH LẠI — dùng để duy trì nhất quán thuật ngữ]:\n...${prevTranslated}\n\n---\n\n`
+    : "";
+
+  return ChatPromptTemplate.fromMessages([
+    ["system", resolvedSystemPrompt],
+    [
+      "human",
+      `${contextBlock}Đây là nội dung cần dịch (chunk {chunkNum}/{totalChunks}):\n\n---\n{content}\n---\n\nHãy dịch toàn bộ nội dung trong phần "---" cuối cùng sang tiếng Việt, tuân thủ tuyệt đối các HARD RULES đã nêu.`,
+    ],
+  ]);
+}
+
 // ─── Main Node ────────────────────────────────────────────────────────────────
 
 export const translatorNode = async (
@@ -118,13 +202,20 @@ export const translatorNode = async (
   const glossaryTerms = loadGlossary();
   const model = geminiService.baseLlm;
 
-  const systemPrompt = SYSTEM_PROMPT_TEMPLATE.replace("{glossaryTerms}", glossaryTerms);
-  const promptTemplate = ChatPromptTemplate.fromMessages([
-    ["system", systemPrompt],
-    ["human", "Đây là nội dung cần dịch (chunk {chunkNum}/{totalChunks}):\n\n---\n{content}\n---\n\nHãy dịch toàn bộ nội dung trên sang tiếng Việt, tuân thủ tuyệt đối các HARD RULES đã nêu."]
-  ]);
+  // [Fix #1] Suy ra domain và build system prompt với book metadata
+  const bookDomain = inferDomain(state.bookMetadata.title);
+  console.log(`[Translator] 📚 Book: "${state.bookMetadata.title}" | Domain: ${bookDomain}`);
+
+  const systemPrompt = SYSTEM_PROMPT_TEMPLATE
+    .replace("{glossaryTerms}", glossaryTerms)
+    .replace(/\{bookTitle\}/g, state.bookMetadata.title)
+    .replace(/\{bookAuthor\}/g, state.bookMetadata.originalAuthor)
+    .replace(/\{bookDomain\}/g, bookDomain);
 
   const translatedChunks: string[] = [];
+
+  // [Fix #2] Track 300 chars cuối của bản dịch chunk trước để làm context
+  let lastTranslatedContext: string | null = null;
 
   // Sequential processing — giữ nhất quán thuật ngữ
   for (let i = 0; i < state.chunks.length; i++) {
@@ -136,7 +227,11 @@ export const translatorNode = async (
 
     while (attempt < 3) {
       try {
+        // [Fix #2] Tạo prompt động với translated context từ chunk trước
+        // Truyền systemPrompt (đã resolve tất cả placeholders) vào buildHumanPrompt
+        const promptTemplate = buildHumanPrompt(systemPrompt, lastTranslatedContext);
         const chain = promptTemplate.pipe(model);
+
         const estimatedTokens = Math.ceil(chunk.length / 4);
         const response = await geminiService.invokeChain(chain, {
           chunkNum: String(i + 1),
@@ -168,6 +263,10 @@ export const translatorNode = async (
     }
 
     translatedChunks.push(translated);
+
+    // [Fix #2] Cập nhật context: lấy 300 chars cuối của BẢN DỊCH tiếng Việt
+    const overlapStart = Math.max(0, translated.length - CHUNKING.CONTEXT_OVERLAP_CHARS);
+    lastTranslatedContext = translated.slice(overlapStart).trim();
 
     // Rate limit delay giữa các calls
     if (i < state.chunks.length - 1) {

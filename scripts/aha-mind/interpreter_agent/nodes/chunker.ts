@@ -96,22 +96,11 @@ export function createChunks(text: string): string[] {
     rawChunks.push(currentChunk.trim());
   }
 
-  // ── Bước 3: Thêm Context Overlap vào đầu các chunks (trừ chunk đầu tiên) ──
-  const chunksWithContext: string[] = [];
-  for (let i = 0; i < rawChunks.length; i++) {
-    let chunk = rawChunks[i];
-    if (i > 0) {
-      const prevChunk = rawChunks[i - 1];
-      const overlapStart = Math.max(0, prevChunk.length - CHUNKING.CONTEXT_OVERLAP_CHARS);
-      const overlapText = prevChunk.slice(overlapStart).trim();
-      if (overlapText) {
-        chunk = `[Context từ đoạn trước]:\n...${overlapText}\n\n---\n\n${chunk}`;
-      }
-    }
-    chunksWithContext.push(chunk);
-  }
-
-  return chunksWithContext;
+  // [Fix #2] Context overlap KHÔNG inject ở đây nữa.
+  // translator.ts sẽ inject 300 chars cuối của BẢN DỊCH tiếng Việt vào human prompt
+  // của chunk tiếp theo, thay vì inject bản gốc tiếng Anh vào chunk data.
+  // Lý do: LLM anchor vào lựa chọn tiếng Việt đã xác lập → nhất quán thuật ngữ.
+  return rawChunks;
 }
 
 /**
