@@ -105,6 +105,7 @@ function parseArgs(): {
   title: string;
   author: string;
   pageRange: { start: number; end: number };
+  noisePatterns: string[];
 } {
   const args = process.argv.slice(2);
 
@@ -125,10 +126,30 @@ function parseArgs(): {
     return parts.length > 0 ? parts.join(" ") : undefined;
   };
 
+  /**
+   * Lấy tất cả giá trị của một flag xuất hiện nhiều lần.
+   * Ví dụ: --noise "pattern 1" --noise "pattern 2"
+   */
+  const getArray = (flag: string): string[] => {
+    const results: string[] = [];
+    for (let i = 0; i < args.length; i++) {
+      if (args[i] === flag && i + 1 < args.length && !args[i + 1].startsWith("--")) {
+        const parts: string[] = [];
+        for (let j = i + 1; j < args.length; j++) {
+          if (args[j].startsWith("--")) break;
+          parts.push(args[j]);
+        }
+        results.push(parts.join(" "));
+      }
+    }
+    return results;
+  };
+
   const pdfArg = getMultiWord("--pdf");
   const titleArg = getMultiWord("--title");
   const authorArg = getMultiWord("--author") ?? "Unknown Author";
   const pagesArg = getMultiWord("--pages");
+  const noiseArg = getArray("--noise");
 
   let startPage = 1;
   let endPage = Infinity;
@@ -155,13 +176,19 @@ function parseArgs(): {
 
   const pdfPath = path.resolve(process.cwd(), pdfArg);
 
-  return { pdfPath, title: titleArg, author: authorArg, pageRange: { start: startPage, end: endPage } };
+  return { 
+    pdfPath, 
+    title: titleArg, 
+    author: authorArg, 
+    pageRange: { start: startPage, end: endPage },
+    noisePatterns: noiseArg
+  };
 }
 
 // ─── Main Runner ──────────────────────────────────────────────────────────────
 
 async function runPipeline() {
-  const { pdfPath, title, author, pageRange } = parseArgs();
+  const { pdfPath, title, author, pageRange, noisePatterns } = parseArgs();
 
   const pagesDisplay = pageRange.end === Infinity
     ? `Từ trang ${pageRange.start} đến hết`
@@ -194,6 +221,7 @@ ${"=".repeat(60)}
         slug: bookSlug,
         originalAuthor: author,
         translatedDate: today,
+        noisePatterns,
       },
       pageRange,
     },

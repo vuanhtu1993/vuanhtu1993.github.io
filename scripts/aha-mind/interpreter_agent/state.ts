@@ -34,6 +34,8 @@ export interface BookMetadata {
   originalAuthor: string;
   /** Ngày dịch — tự động set là ngày chạy pipeline */
   translatedDate: string;
+  /** Danh sách regex (dạng chuỗi) để lọc nhiễu header/footer đặc thù của từng sách */
+  noisePatterns?: string[];
 }
 
 /**
@@ -95,8 +97,8 @@ export const StateAnnotation = Annotation.Root({
     default: () => "",
   }),
   bookMetadata: Annotation<BookMetadata>({
-    reducer: (x, y) => y ?? x ?? { title: "", slug: "", originalAuthor: "", translatedDate: "" },
-    default: () => ({ title: "", slug: "", originalAuthor: "", translatedDate: "" }),
+    reducer: (x, y) => y ?? x ?? { title: "", slug: "", originalAuthor: "", translatedDate: "", noisePatterns: [] },
+    default: () => ({ title: "", slug: "", originalAuthor: "", translatedDate: "", noisePatterns: [] }),
   }),
   pageRange: Annotation<{ start: number; end: number }>({
     reducer: (x, y) => y ?? x ?? { start: 1, end: Infinity },

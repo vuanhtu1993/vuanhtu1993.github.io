@@ -103,6 +103,21 @@ export const parserNode = async (
   rawContent = rawContent.split(imageDirForward + "/").join("./images/");
   rawContent = rawContent.split(imageDirForward).join("./images");
 
+  // ── Bước 3: Lọc nhiễu (Noise Filtering) ──
+  // Lọc các header/footer hoặc pattern đặc thù của sách được định nghĩa trong bookMetadata
+  if (state.bookMetadata.noisePatterns && state.bookMetadata.noisePatterns.length > 0) {
+    for (const patternStr of state.bookMetadata.noisePatterns) {
+      try {
+        const regex = new RegExp(patternStr, 'gmi');
+        rawContent = rawContent.replace(regex, '');
+      } catch (e) {
+        console.warn(`[Parser] ⚠️ Bỏ qua regex không hợp lệ: ${patternStr}`);
+      }
+    }
+  }
+  // Dọn dẹp khoảng trắng thừa (giảm token thừa)
+  rawContent = rawContent.replace(/\n{3,}/g, '\n\n');
+
   // Dọn dẹp file tạm
   fs.unlinkSync(outFile);
 
