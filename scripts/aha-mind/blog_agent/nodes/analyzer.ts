@@ -40,21 +40,18 @@ export const cefrAnalyzerNode = async (state: AhaMindState): Promise<Partial<Aha
   console.log(`[Analyzer] Analyzing text for: ${state.articleToProcess.title}`);
 
   try {
-    // Sử dụng GeminiService chung thay vì khởi tạo model riêng lẻ
-    const structuredModel = geminiService.baseLlm.withStructuredOutput(terminologySchema);
-    const chain = promptTemplate.pipe(structuredModel);
-
     // Tăng giới hạn content để tận dụng context window lớn của Gemini 1.5 Flash (1M tokens)
     // 50,000 chars ~ 12k-15k tokens, thoải mái cho hầu hết bài blog kỹ thuật.
     const truncatedContent = state.articleToProcess.content.substring(0, 50000);
 
-    // Ước tính số token = số ký tự / 4
-    const estimatedTokens = Math.ceil((state.articleToProcess.title.length + truncatedContent.length) / 4);
-
-    const response = await geminiService.invokeChain(chain, {
+    // Format prompt messages
+    const messages = await promptTemplate.formatMessages({
       title: state.articleToProcess!.title,
       content: truncatedContent,
-    }, estimatedTokens);
+    });
+
+    // Gọi LLM thông qua geminiService.invokeStructured (hỗ trợ tự động xoay key khi hết RPD)
+    const response = await geminiService.invokeStructured(terminologySchema, messages);
 
     // Ép kiểu response.terms thành ExtractedTerm[] để đảm bảo type safety
     const extractedTerms = response.terms as ExtractedTerm[];

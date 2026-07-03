@@ -1,0 +1,417 @@
+---
+slug: aha-interpreter-ai-agent-the-illustrated-guidebook-pages-4-23
+title: "[AI agent, the illustrated guidebook] Từ trang 4 đến 23"
+date: 2026-07-03
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"AI agent, the illustrated guidebook"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+****
+
+3
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066597/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-3-0.png)
+****
+
+## **AI Agents**
+
+4
+
+****
+##### **What is an AI Agent?**
+
+Hãy tưởng tượng bạn muốn tạo một báo cáo về các xu hướng mới nhất trong nghiên cứu AI. Nếu sử dụng một LLM tiêu chuẩn, bạn có thể:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066600/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-5-0.png)
+
+1. Yêu cầu tóm tắt các bài nghiên cứu AI gần đây.
+
+2. Xem xét phản hồi và nhận ra bạn cần các nguồn tài liệu.
+
+3. Lấy danh sách các bài báo cùng với trích dẫn.
+
+4. Phát hiện ra một số nguồn đã lỗi thời, vì vậy bạn tinh chỉnh lại query.
+
+5. Cuối cùng, sau nhiều iteration, bạn mới nhận được một output hữu ích.
+
+Quá trình lặp đi lặp lại này tốn nhiều thời gian và công sức, đòi hỏi bạn phải đóng vai trò là người đưa ra quyết định ở mọi bước.
+
+Bây giờ, hãy xem các AI Agent xử lý việc này khác biệt như thế nào:
+
+Một Research Agent sẽ tự động tìm kiếm và truy xuất các bài nghiên cứu AI liên quan từ arXiv, Semantic Scholar, hoặc Google Scholar.
+
+5
+
+****
+
+- Một Filtering Agent quét các bài báo đã truy xuất, xác định những bài liên quan nhất dựa trên số lượng trích dẫn, ngày xuất bản và từ khóa.
+
+- Một Summarization Agent trích xuất các key insights và cô đọng chúng thành một báo cáo dễ đọc.
+
+- Một Formatting Agent định cấu trúc báo cáo cuối cùng, đảm bảo nó tuân theo một layout rõ ràng và chuyên nghiệp.
+
+6
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066602/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-6-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066603/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-6-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066604/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-6-2.png)
+****
+
+Ở đây, các AI Agent không chỉ thực thi quy trình nghiên cứu từ đầu đến cuối (end-to-end) mà còn tự tinh chỉnh (self-refine) các output của chúng, đảm bảo báo cáo cuối cùng toàn diện, cập nhật và có cấu trúc tốt - tất cả đều không cần đến sự can thiệp của con người ở mỗi bước.
+
+Để định nghĩa một cách chính thức, AI Agent là các hệ thống tự trị (autonomous systems) có khả năng suy luận (reason), tư duy, lập kế hoạch (plan), xác định các nguồn tài liệu liên quan và trích xuất thông tin từ chúng khi cần thiết, thực hiện hành động, và thậm chí tự sửa lỗi nếu có sự cố xảy ra.
+
+7
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066605/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-7-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066607/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-7-1.png)
+****
+
+##### **Agent vs LLM vs RAG**
+
+Hãy cùng phân tích điều này bằng một phép so sánh đơn giản:
+
+  - LLM là bộ não.
+
+  - RAG là việc cung cấp thông tin mới cho bộ não đó.
+
+  - Một Agent là người đưa ra quyết định, lập kế hoạch và hành động bằng cách sử dụng bộ não và các công cụ (tools).
+
+**LLM (Large Language Model)**
+
+Một LLM như GPT-4 được huấn luyện trên một lượng dữ liệu văn bản khổng lồ.
+
+Nó có thể suy luận, tạo nội dung, tóm tắt nhưng chỉ sử dụng những gì nó đã biết (tức là dữ liệu huấn luyện của nó).
+
+8
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066609/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-8-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066611/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-8-1.png)
+****
+
+Nó thông minh nhưng tĩnh. Nó không thể tự truy cập web, gọi API, hay tự tìm nạp các thông tin mới.
+
+**RAG (Retrieval-Augmented Generation)**
+
+RAG tăng cường sức mạnh cho LLM bằng cách truy xuất các tài liệu bên ngoài (từ một vector DB, công cụ tìm kiếm, v.v.) và đưa chúng vào LLM dưới dạng context trước khi tạo ra phản hồi.
+
+RAG giúp LLM nhận biết được thông tin cập nhật và liên quan mà không cần phải huấn luyện lại.
+
+**Agent**
+
+Một Agent bổ sung thêm tính tự trị (autonomy) vào sự kết hợp này.
+
+Nó không chỉ trả lời một câu hỏi — nó quyết định các bước cần thực hiện:
+
+Nó có nên gọi một công cụ (tool) không? Tìm kiếm trên web? Tóm tắt? Lưu trữ thông tin?
+
+Một Agent sử dụng một LLM, gọi các công cụ, đưa ra quyết định và điều phối các workflow giống như một trợ lý thực thụ.
+
+9
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066612/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-9-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066615/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-9-1.png)
+****
+##### **Building blocks of AI Agents**
+
+Các AI Agent được thiết kế để suy luận, lập kế hoạch và hành động một cách tự trị. Tuy nhiên, để đạt hiệu quả, chúng phải được xây dựng dựa trên một số nguyên tắc cốt lõi nhất định. Có sáu thành phần cấu tạo (building blocks) thiết yếu giúp các AI Agent trở nên đáng tin cậy, thông minh và hữu ích hơn trong các ứng dụng thực tế:
+
+1. Role-playing
+
+2. Focus
+
+3. Tools
+
+4. Cooperation
+
+5. Guardrails
+
+6. Memory
+
+Hãy cùng khám phá từng khái niệm này và hiểu tại sao chúng lại là nền tảng để xây dựng các AI Agent tuyệt vời.
+
+**1) Role-playing**
+
+Một trong những cách đơn giản nhất để nâng cao hiệu suất của một agent là cung cấp cho nó một vai trò (role) rõ ràng và cụ thể.
+
+Một trợ lý AI chung chung có thể đưa ra những câu trả lời mơ hồ. Nhưng nếu định nghĩa nó là một "Senior contract lawyer" (Luật sư hợp đồng cấp cao), nó sẽ phản hồi với độ chính xác pháp lý và context phù hợp.
+
+Tại sao?
+
+Bởi vì việc phân vai (role assignment) sẽ định hình quá trình suy luận và truy xuất của agent.
+
+10
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066557/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-10-0.png)
+****
+
+Vai trò càng cụ thể, output càng sắc bén và phù hợp.
+
+**2) Focus/Tasks**
+
+Sự tập trung (Focus) là chìa khóa để giảm thiểu tình trạng Hallucination và cải thiện độ chính xác.
+
+Giao cho một agent quá nhiều nhiệm vụ hoặc quá nhiều dữ liệu không hề giúp ích gì - trái lại còn gây hại.
+
+Sự quá tải dẫn đến nhầm lẫn, không nhất quán và kết quả kém.
+
+Ví dụ, một marketing agent chỉ nên tập trung vào thông điệp, giọng điệu (tone) và đối tượng khán giả — chứ không phải định giá hay phân tích thị trường.
+
+Thay vì cố gắng bắt một agent làm mọi thứ, một cách tiếp cận tốt hơn là sử dụng nhiều agent, mỗi agent có một trọng tâm cụ thể và hẹp.
+
+Các agent chuyên biệt luôn mang lại hiệu suất tốt hơn.
+
+**3) Tools**
+
+Các agent sẽ trở nên thông minh hơn khi chúng có thể sử dụng đúng công cụ (tools).
+
+Nhưng nhiều công cụ hơn không đồng nghĩa với kết quả tốt hơn (more tools ≠ better results).
+
+11
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066558/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-11-0.png)
+****
+
+Ví dụ, một AI research agent có thể hưởng lợi từ:
+
+  - Một công cụ tìm kiếm web để truy xuất các ấn phẩm gần đây.
+
+  - Một mô hình tóm tắt để cô đọng các bài nghiên cứu dài.
+
+  - Một trình quản lý trích dẫn để định dạng tài liệu tham khảo một cách chính xác.
+
+Nhưng nếu bạn thêm các công cụ không cần thiết — như module chuyển đổi giọng nói thành văn bản (speech-to-text) hoặc môi trường thực thi mã nguồn (code execution environment) — nó có thể làm agent bối rối và giảm hiệu suất.
+
+**#3.1) Custom tools**
+
+Mặc dù các agent vận hành bằng LLM rất giỏi trong việc suy luận và tạo phản hồi, chúng lại thiếu khả năng truy cập trực tiếp vào thông tin thời gian thực (real-time), các hệ thống bên ngoài và các tính toán chuyên biệt.
+
+Các công cụ (tools) cho phép Agent:
+
+  - Tìm kiếm trên web để lấy dữ liệu thời gian thực.
+
+  - Truy xuất thông tin có cấu trúc từ các API và database.
+
+  - Thực thi mã nguồn để thực hiện các phép tính hoặc biến đổi dữ liệu (data transformation).
+
+  - Phân tích hình ảnh, file PDF và tài liệu thay vì chỉ giới hạn ở các input dạng văn bản.
+
+12
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066559/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-12-0.png)
+****
+
+CrewAI hỗ trợ một số công cụ mà bạn có thể tích hợp với các Agent, như được mô tả dưới đây:
+
+Tuy nhiên, đôi khi bạn sẽ cần phải tự xây dựng các custom tools.
+
+Trong ví dụ này, chúng ta sẽ xây dựng một công cụ chuyển đổi tiền tệ theo thời gian thực bên trong CrewAI. Thay vì bắt LLM tự đoán tỷ giá hối đoái, chúng ta tích hợp một custom tool để lấy tỷ giá trực tiếp từ một API bên ngoài và đưa ra một số phân tích.
+
+Dưới đây, hãy cùng xem cách bạn có thể xây dựng một công cụ như vậy cho các nhu cầu tùy chỉnh của mình trong framework CrewAI.
+
+Trước tiên, hãy đảm bảo rằng package chứa các công cụ đã được cài đặt:
+
+13
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066564/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-13-0.png)
+****
+
+Bạn cũng sẽ cần một API key từ đây: https://www.exchangerate-api.com/ (hoàn toàn miễn phí). Hãy khai báo nó trong file .env như hình dưới đây:
+
+Sau khi hoàn tất, chúng ta bắt đầu với một số câu lệnh import tiêu chuẩn:
+
+Tiếp theo, chúng ta định nghĩa các trường input mà công cụ yêu cầu bằng cách sử dụng Pydantic.
+
+14
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066566/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-14-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066567/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-14-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066568/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-14-2.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066570/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-14-3.png)
+****
+
+Bây giờ, chúng ta định nghĩa `CurrencyConverterTool` bằng cách kế thừa từ `BaseTool`:
+
+Mỗi class công cụ đều nên có phương thức `_run` mà chúng ta sẽ thực thi bất cứ khi nào Agent muốn sử dụng nó.
+
+Đối với use case của chúng ta, chúng ta triển khai nó như sau:
+
+Trong đoạn code trên, chúng ta lấy tỷ giá hối đoái trực tiếp bằng một API request. Chúng ta cũng xử lý các lỗi nếu request thất bại hoặc mã tiền tệ không hợp lệ.
+
+Bây giờ, chúng ta định nghĩa một agent sử dụng công cụ này để phân tích tiền tệ theo thời gian thực và gắn `CurrencyConverterTool` của chúng ta vào, cho phép agent gọi trực tiếp khi cần thiết:
+
+15
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066572/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-15-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066573/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-15-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066574/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-15-2.png)
+****
+
+Chúng ta gán một task cho agent `currency_analyst`.
+
+Cuối cùng, chúng ta tạo một Crew, gán agent vào task đó và thực thi.
+
+In phản hồi ra màn hình, chúng ta nhận được output sau:
+
+Hoạt động đúng như mong đợi!
+
+16
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066575/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-16-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066576/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-16-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066578/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-16-2.png)
+****
+
+**#3.2) Custom tools qua MCP**
+
+Bây giờ, hãy tiến thêm một bước nữa.
+
+Thay vì nhúng trực tiếp công cụ vào mỗi Crew, chúng ta sẽ expose nó dưới dạng một MCP tool có thể tái sử dụng — giúp nhiều agent và flow khác nhau có thể truy cập được thông qua một server đơn giản.
+
+Trước tiên, hãy cài đặt các package cần thiết:
+
+Chúng ta sẽ tiếp tục sử dụng ExchangeRate-API trong file .env:
+
+Bây giờ chúng ta sẽ viết một script `server.py` gọn nhẹ để expose công cụ chuyển đổi tiền tệ. Chúng ta bắt đầu với các câu lệnh import tiêu chuẩn:
+
+Bây giờ, chúng ta load các biến môi trường (environment variables) và khởi tạo server:
+
+17
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066580/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-17-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066581/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-17-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066583/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-17-2.png)
+****
+
+Tiếp theo, chúng ta định nghĩa logic của công cụ với `@mcp.tool()`:
+
+Hàm (function) này nhận vào ba input — amount (số tiền), source currency (tiền tệ nguồn), và target currency (tiền tệ đích) — và trả về kết quả đã chuyển đổi bằng cách sử dụng API tỷ giá hối đoái thời gian thực.
+
+Để công cụ có thể truy cập được, chúng ta cần chạy MCP server. Hãy thêm đoạn này vào cuối script của bạn:
+
+18
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066584/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-18-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066586/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-18-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066587/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-18-2.png)
+****
+
+Đoạn này khởi động server và expose tool `convert_currency` của bạn tại:
+
+http://localhost:8081/sse.
+
+Giờ đây, bất kỳ CrewAI agent nào cũng có thể kết nối tới nó bằng cách sử dụng `MCPServerAdapter`. Bây giờ, hãy cùng consume tool này từ bên trong một CrewAI agent.
+
+Đầu tiên, chúng ta import các class CrewAI cần thiết. Chúng ta sẽ sử dụng `Agent`, `Task`, và `Crew` từ CrewAI, cùng với `MCPServerAdapter` để kết nối tới tool server của chúng ta.
+
+Tiếp theo, chúng ta kết nối tới MCP tool server. Hãy định nghĩa các server parameter để kết nối tới tool đang chạy của bạn (từ `server.py`).
+
+Bây giờ, chúng ta sử dụng MCP tool đã được phát hiện (discovered) trong một agent:
+
+Agent này được gán tool `convert_currency` từ remote server. Giờ đây, nó có thể call tool này giống hệt như một tool được định nghĩa locally.
+
+19
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066588/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-19-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066589/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-19-1.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066590/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-20-0.png)
+
+Chúng ta cung cấp cho agent một mô tả task:
+
+Cuối cùng, chúng ta tạo Crew, truyền các input vào và run nó:
+
+In kết quả ra, chúng ta nhận được output sau:
+
+****
+
+20
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066591/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-20-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066592/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-20-2.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066593/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-20-3.png)
+****
+
+**4) Cooperation**
+
+Các hệ thống Multi-Agent hoạt động tốt nhất khi các agent cộng tác và trao đổi feedback với nhau.
+
+Thay vì một agent duy nhất làm mọi thứ, một đội ngũ gồm các agent chuyên biệt có thể chia nhỏ các task và cải thiện output của nhau.
+
+Hãy xem xét một hệ thống phân tích tài chính vận hành bằng AI:
+
+  - Một agent thu thập data,
+
+  - một agent khác đánh giá rủi ro,
+
+  - agent thứ ba xây dựng chiến lược,
+
+  - và agent thứ tư viết báo cáo.
+
+Sự cộng tác này mang lại kết quả thông minh và chính xác hơn.
+
+Best practice ở đây là cho phép các agent cộng tác bằng cách thiết kế các workflow, nơi các agent có thể trao đổi thông tin chuyên sâu (insights) và cùng nhau tinh chỉnh câu trả lời của mình.
+
+21
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066594/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-21-0.png)
+****
+
+**5) Guardrails**
+
+Các agent rất mạnh mẽ, nhưng nếu không có các ràng buộc (constraints), chúng có thể đi chệch hướng. Chúng có thể gặp hiện tượng Hallucination, rơi vào vòng lặp vô hạn (loop endlessly), hoặc đưa ra các quyết định call sai lầm.
+
+Guardrails đảm bảo các agent luôn đi đúng hướng và duy trì các tiêu chuẩn chất lượng.
+
+Các ví dụ về guardrails hữu ích bao gồm:
+
+  - Giới hạn việc sử dụng tool: Ngăn chặn agent lạm dụng các API hoặc tạo ra các query không liên quan.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783066596/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-22-0.png)
+
+- Thiết lập các validation checkpoint: Đảm bảo các output đáp ứng các tiêu chí được định nghĩa trước khi chuyển sang bước tiếp theo.
+
+- Thiết lập các fallback mechanism: Nếu một agent thất bại trong việc hoàn thành task, một agent khác hoặc người kiểm duyệt (human reviewer) có thể can thiệp.
+
+Ví dụ, một trợ lý pháp lý vận hành bằng AI cần tránh các luật đã lỗi thời hoặc các tuyên bố sai sự thật - guardrails sẽ đảm bảo điều đó.
+
+**6) Memory**
+
+Cuối cùng, chúng ta có memory (bộ nhớ), một trong những thành phần quan trọng nhất của các AI Agent.
+
+22
+
+---
+
+*Made by Anh Tu - Share to be share*

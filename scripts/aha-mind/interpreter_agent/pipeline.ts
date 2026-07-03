@@ -204,10 +204,7 @@ ${"=".repeat(60)}
 ${"=".repeat(60)}
 `);
 
-  if (!process.env.GOOGLE_API_KEY) {
-    console.error("❌ GOOGLE_API_KEY chưa được cấu hình trong .env");
-    process.exit(1);
-  }
+
 
   const today = new Date().toISOString().split("T")[0];
   const bookSlug = createSlug(title);

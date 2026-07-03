@@ -44,9 +44,7 @@ const app = workflow.compile({ checkpointer: new MemorySaver() });
 async function runPipeline() {
   console.log("🚀 Bắt đầu Dump Extractor Agent Pipeline...");
 
-  if (!process.env.GOOGLE_API_KEY) {
-    console.warn("⚠️ Cảnh báo: GOOGLE_API_KEY chưa được cấu hình. Các Node AI sẽ bị lỗi.");
-  }
+
 
   const pdfDirArg = process.argv[2];
 

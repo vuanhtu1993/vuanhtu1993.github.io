@@ -1,0 +1,198 @@
+---
+slug: aha-interpreter-ai-agent-the-illustrated-guidebook-pages-24-34
+title: "[AI agent, the illustrated guidebook] Từ trang 24 đến 34"
+date: 2026-07-03
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"AI agent, the illustrated guidebook"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+Nếu không có memory, một agent sẽ phải bắt đầu lại từ đầu trong mỗi lần chạy, làm mất đi toàn bộ context từ các tương tác trước đó. Nhờ có memory, các agent có thể cải thiện theo thời gian, ghi nhớ các hành động trong quá khứ và tạo ra các phản hồi mạch lạc hơn.
+
+Các loại memory khác nhau trong AI Agent bao gồm:
+
+  - Short-term memory – Chỉ tồn tại trong quá trình execution (ví dụ: nhớ lại lịch sử hội thoại gần đây).
+
+  - Long-term memory – Vẫn tồn tại sau khi kết thúc execution (ví dụ: ghi nhớ sở thích của người dùng qua nhiều lần tương tác).
+
+  - Entity memory – Lưu trữ thông tin về các đối tượng chính được thảo luận (ví dụ: theo dõi thông tin chi tiết về khách hàng trong một CRM agent).
+
+Ví dụ, trong một hệ thống gia sư hỗ trợ bởi AI, memory cho phép agent nhớ lại các bài học trước đó, tùy chỉnh feedback và tránh bị lặp lại.
+
+23
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067915/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-23-0.png)
+****
+##### **5 Agentic AI Design Patterns**
+
+Các hành vi agentic cho phép các LLM tinh chỉnh output của chúng bằng cách tích hợp self-evaluation, planning và collaboration!
+
+Hình ảnh minh họa dưới đây mô tả 5 design pattern phổ biến nhất được sử dụng để xây dựng các AI Agent.
+
+24
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067917/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-24-0.png)
+****
+
+**#1) Reflection pattern**
+
+AI tự xem xét lại kết quả công việc của chính nó để phát hiện lỗi sai và iterate cho đến khi tạo ra response cuối cùng.
+
+**#2) Tool use pattern**
+
+25
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067919/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-25-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067921/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-25-1.png)
+****
+
+Các tool cho phép LLM thu thập thêm thông tin bằng cách:
+
+  - Query một vector database
+
+  - Execute các Python script
+
+  - Invoke các API, v.v.
+
+Điều này rất hữu ích vì LLM không phụ thuộc hoàn toàn vào internal knowledge của nó.
+
+**#3) ReAct (Reason and Act) pattern**
+
+ReAct kết hợp cả hai pattern kể trên:
+
+  - Agent reflect trên các output được tạo ra.
+
+  - Nó tương tác với thế giới bên ngoài bằng cách sử dụng các tool.
+
+Một ReAct agent hoạt động trong một vòng lặp Thought → Action → Observation, lặp lại cho đến khi tìm ra giải pháp hoặc câu trả lời cuối cùng. Điều này tương tự như cách con người giải quyết vấn đề:
+
+26
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067923/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-26-0.png)
+****
+
+_Note: Các framework như CrewAI chủ yếu sử dụng pattern này theo mặc định._
+
+Để hiểu rõ hơn, hãy xem xét output của một hệ thống Multi-Agent dưới đây:
+
+Như đã hiển thị ở trên, Agent đang trải qua một chuỗi các hoạt động suy nghĩ (thought) trước khi đưa ra response.
+
+Đây chính là ReAct pattern đang hoạt động!
+
+27
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067924/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-27-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067927/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-27-1.png)
+****
+
+Cụ thể hơn, under the hood, nhiều framework như vậy sử dụng ReAct (Reasoning and Acting) pattern để cho phép LLM suy nghĩ thấu đáo các vấn đề và sử dụng các tool để tác động lên thế giới bên ngoài.
+
+Ví dụ, một agent trong CrewAI thường luân phiên giữa việc reasoning về một task và acting (sử dụng một tool) để thu thập thông tin hoặc execute các bước, tuân theo paradigm của ReAct.
+
+Điều này giúp tăng cường khả năng xử lý các task và quyết định phức tạp của một LLM agent bằng cách kết hợp chain-of-thought với việc sử dụng tool bên ngoài, giống như trong bản implementation ReAct from scratch này.
+
+**#4) Planning pattern**
+
+Thay vì giải quyết một task trong một lượt duy nhất, AI tạo ra một roadmap bằng cách:
+
+  - Chia nhỏ các task
+
+  - Phác thảo các objective
+
+Tư duy chiến lược này giúp giải quyết các task hiệu quả hơn.
+
+_Note: Trong CrewAI, hãy chỉ định `planning=True` để sử dụng Planning._
+
+28
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067928/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-28-0.png)
+****
+
+**#5) Multi-Agent pattern**
+
+  - Có nhiều agent khác nhau, mỗi agent đảm nhận một vai trò (role) và task cụ thể.
+
+  - Mỗi agent cũng có thể truy cập vào các tool.
+
+Tất cả các agent cùng hợp tác để mang lại kết quả cuối cùng, đồng thời có thể delegate các task cho các agent khác nếu cần thiết.
+
+29
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067930/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-29-0.png)
+****
+##### **5 Levels of Agentic AI Systems**
+
+Các hệ thống Agentic AI không chỉ generate text; chúng có thể đưa ra quyết định, call các function, và thậm chí chạy các autonomous workflow.
+
+Hình ảnh minh họa giải thích 5 cấp độ của AI agency—từ các responder đơn giản cho đến các agent hoàn toàn tự trị (fully autonomous).
+
+30
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067934/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-30-0.png)
+****
+
+**#1) Basic responder**
+
+Con người điều hướng toàn bộ flow.
+
+LLM chỉ là một generic responder nhận vào một input và tạo ra một output. Nó có rất ít quyền kiểm soát đối với program flow.
+
+**#2) Router pattern**
+
+Con người định nghĩa các path/function tồn tại trong flow.
+
+LLM đưa ra các quyết định cơ bản về việc nó sẽ đi theo function hoặc path nào.
+
+31
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067935/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-31-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067937/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-31-1.png)
+****
+
+**#3) Tool calling**
+
+Con người định nghĩa một tập hợp các tool mà LLM có thể truy cập để hoàn thành một task.
+
+LLM quyết định khi nào nên sử dụng chúng và cả các argument cho việc execution.
+
+**#4) Multi-agent pattern**
+
+Một manager agent điều phối nhiều sub-agent và quyết định các bước tiếp theo một cách lặp đi lặp lại (iteratively).
+
+Con người thiết lập hierarchy giữa các agent, role của chúng, tool, v.v.
+
+32
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067938/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-32-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067940/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-32-1.png)
+****
+
+LLM kiểm soát execution flow, quyết định xem cần làm gì tiếp theo.
+
+**#5) Autonomous pattern**
+
+Pattern tiên tiến nhất, trong đó LLM tự động generate và execute code mới một cách độc lập, hoạt động hiệu quả như một AI developer độc lập.
+
+33
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783067941/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-33-0.png)
+
+---
+
+*Made by Anh Tu - Share to be share*

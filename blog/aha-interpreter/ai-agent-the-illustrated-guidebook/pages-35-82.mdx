@@ -1,0 +1,866 @@
+---
+slug: aha-interpreter-ai-agent-the-illustrated-guidebook-pages-35-82
+title: "[AI agent, the illustrated guidebook] Từ trang 35 đến 82"
+date: 2026-07-03
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài dịch này
+Đây là bản dịch tiếng Việt của **"AI agent, the illustrated guidebook"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+****
+
+## **Các dự án AI Agent**
+
+34
+
+****
+
+**#1) Agentic RAG**
+
+Xây dựng một pipeline RAG với các khả năng agentic có thể lấy context một cách động từ nhiều nguồn khác nhau, như một vector DB và internet.
+
+Tech stack:
+
+  - CrewAI để orchestration Agent.
+
+  - Firecrawl để tìm kiếm web.
+
+  - LitServe của LightningAI để deployment.
+
+Workflow:
+
+  - Retriever Agent tiếp nhận query của người dùng.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068122/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-35-0.png)
+
+- Nó gọi (invoke) một tool phù hợp (tìm kiếm web bằng Firecrawl hoặc tool vector DB) để lấy context và tạo ra thông tin chi tiết (insights).
+
+- Writer Agent sẽ tạo ra câu trả lời.
+
+35
+
+****
+
+Hãy cùng bắt tay vào triển khai!
+
+#1) Thiết lập LLM
+
+CrewAI tích hợp mượt mà với tất cả các LLM và nhà cung cấp phổ biến. Dưới đây là cách chúng ta thiết lập mô hình Qwen 3 chạy local qua Ollama:
+
+#2) Định nghĩa Research Agent và Task
+
+Agent này tiếp nhận query của người dùng và truy xuất context liên quan bằng cách sử dụng một tool vectorDB và một tool tìm kiếm web do Firecrawl hỗ trợ.
+
+Một lần nữa, hãy đưa phần này vào phương thức setup() của LitServe:
+
+36
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068126/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-36-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068131/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-36-1.png)
+****
+
+#3) Định nghĩa Writer Agent và Task
+
+Tiếp theo, Writer Agent tiếp nhận các thông tin chi tiết (insights) từ Researcher Agent để tạo ra câu trả lời.
+
+Và chúng ta lại tiếp tục thêm phần này vào phương thức setup của LitServe:
+
+#4) Thiết lập Crew
+
+Sau khi đã định nghĩa các Agent và task của chúng, chúng ta sẽ điều phối (orchestrate) chúng thành một crew bằng cách sử dụng CrewAI và đưa vào phương thức setup.
+
+Hãy xem đoạn code sau:
+
+37
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068134/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-37-0.png)
+****
+
+#5) Decode request
+
+Như vậy, chúng ta đã điều phối (orchestrate) xong workflow Agentic RAG, workflow này sẽ được thực thi khi có request gửi đến. Tiếp theo, từ request body nhận được, chúng ta sẽ trích xuất query của người dùng. Hãy xem đoạn code được highlight dưới đây:
+
+38
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068139/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-38-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068141/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-38-1.png)
+****
+
+#6) Predict
+
+Chúng ta sử dụng query đã được decode của người dùng và truyền nó vào Crew đã định nghĩa trước đó để mô hình tạo ra câu trả lời. Hãy xem đoạn code được highlight dưới đây:
+
+#7) Encode response
+
+Tại đây, chúng ta có thể hậu xử lý (post-process) câu trả lời và gửi trả lại cho client.
+
+Lưu ý: LitServe sẽ tự động gọi (invoke) các phương thức này theo thứ tự: decode_request → predict → encode_request. Hãy xem đoạn code được highlight dưới đây:
+
+39
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068143/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-39-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068144/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-39-1.png)
+****
+
+#8) Như vậy là chúng ta đã hoàn thành xong phần code phía server.
+
+Tiếp theo, chúng ta có đoạn code client cơ bản để gọi (invoke) API vừa tạo bằng thư viện requests của Python. Hãy xem đoạn này:
+
+Xong! Chúng ta đã deploy thành công ứng dụng Qwen 3 Agentic RAG hoàn toàn riêng tư (private) bằng cách sử dụng LitServe.
+
+Mã nguồn có sẵn tại đây:
+
+https://www./p/deploy-a-qw
+
+en-3-agentic-rag/
+
+40
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068147/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-40-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068148/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-40-1.png)
+****
+
+**#2) Voice RAG Agent**
+
+Tương tác bằng giọng nói theo thời gian thực (real-time) đang ngày càng trở nên phổ biến trong các ứng dụng AI.
+
+Hãy cùng tìm hiểu cách xây dựng một Voice RAG Agent theo thời gian thực, từng bước một.
+
+Tech stack:
+
+  - CartesiaAI cho công nghệ text-to-speech SOTA
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068152/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-41-0.png)
+
+- AssemblyAI cho speech-to-text
+
+- LlamaIndex để vận hành RAG
+
+- Livekit để orchestration
+
+Workflow:
+
+41
+
+****
+
+- Lắng nghe âm thanh theo thời gian thực (real-time)
+
+- Transcribe âm thanh qua AssemblyAI
+
+- Sử dụng tài liệu của bạn (thông qua LlamaIndex) để soạn câu trả lời
+
+- Phát lại câu trả lời đó bằng giọng nói thông qua Cartesia
+
+Hãy cùng triển khai ứng dụng này!
+
+#1) Thiết lập môi trường và logging
+
+Điều này đảm bảo chúng ta có thể tải các cấu hình từ file .env và theo dõi mọi thứ theo thời gian thực.
+
+Hãy xem đoạn dưới đây:
+
+#2) Thiết lập RAG
+
+Đây là nơi các tài liệu của bạn được index để tìm kiếm và truy xuất, dưới sự hỗ trợ của LlamaIndex. Các câu trả lời của agent sẽ được đối chiếu (grounded) dựa trên cơ sở tri thức (knowledge base) này.
+
+42
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068153/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-42-0.png)
+****
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068155/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-43-0.png)
+
+#3) Thiết lập Voice Activity Detection
+
+Chúng ta cũng cần tính năng Voice Activity Detection (VAD) để mang lại trải nghiệm real-time mượt mà — vì vậy chúng ta sẽ "prewarm" (khởi động trước) mô hình Silero VAD. Việc này giúp chúng ta phát hiện khi nào có người thực sự đang nói. Hãy xem đoạn dưới đây:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068157/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-43-1.png)
+
+#4) VoicePipelineAgent và Entry Point
+
+Đây là nơi chúng ta kết hợp mọi thứ lại với nhau. Agent sẽ:
+
+43
+
+****
+
+1. Lắng nghe âm thanh theo thời gian thực (real-time).
+
+2. Transcribe âm thanh bằng AssemblyAI.
+
+3. Soạn câu trả lời bằng tài liệu của bạn thông qua LlamaIndex.
+
+4. Phát lại câu trả lời đó bằng giọng nói sử dụng Cartesia.
+
+Hãy xem đoạn dưới đây:
+
+#5) Chạy ứng dụng
+
+44
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068159/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-44-0.png)
+****
+
+Cuối cùng, chúng ta liên kết mọi thứ lại. Chúng ta chạy agent của mình, chỉ định hàm prewarm và entrypoint chính.
+
+Vậy là xong — Real-Time Voice RAG Agent của bạn đã sẵn sàng hoạt động!
+
+Mã nguồn có sẵn tại đây:
+
+https://www./p/building-a-r
+
+eal-time-voice-rag-agent/
+
+45
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068160/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-45-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068161/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-45-1.png)
+****
+
+**#3) Multi-agent Flight finder**
+
+Xây dựng một pipeline tìm kiếm chuyến bay với các khả năng agentic có thể parse các query bằng ngôn ngữ tự nhiên và lấy kết quả trực tiếp (live) từ Kayak.
+
+Tech stack:
+
+  - CrewAIInc để orchestration multi-agent
+
+  - Tool headless browser của BrowserbaseHQ
+
+  - Ollama để chạy local DeepSeek-R1
+
+Workflow:
+
+  - Parse query (SF đến New York vào ngày 21 tháng 9) để tạo URL tìm kiếm trên Kayak
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068164/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-46-0.png)
+
+- Truy cập URL và trích xuất (extract) 5 chuyến bay hàng đầu
+
+- Với mỗi chuyến bay, đi vào chi tiết để tìm các hãng hàng không khả dụng
+
+- Tóm tắt thông tin chuyến bay
+
+Hãy cùng triển khai ứng dụng này!
+
+46
+
+****
+
+#1) Định nghĩa LLM
+
+CrewAI tích hợp rất tốt với tất cả các LLM và nhà cung cấp phổ biến hiện nay. Dưới đây là cách bạn thiết lập mô hình DeepSeek chạy local bằng Ollama:
+
+#2) Flight Search Agent
+
+Agent này mô phỏng một người thật đang tìm kiếm chuyến bay bằng cách duyệt web, được hỗ trợ bởi tool headless-browser của Browserbase và có thể tra cứu các chuyến bay trên các trang web như Kayak.
+
+#3) Summarisation Agent
+
+47
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068166/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-47-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068169/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-47-1.png)
+****
+
+Sau khi lấy được thông tin chi tiết về chuyến bay, chúng ta cần một bản tóm tắt ngắn gọn về tất cả các lựa chọn có sẵn.
+
+Đây là lúc Summarization Agent của chúng ta tham gia để tổng hợp các kết quả giúp người dùng dễ đọc hơn.
+
+Bây giờ cả hai agent đã sẵn sàng, đã đến lúc tìm hiểu các tool hỗ trợ chúng.
+
+1. Kayak tool
+
+2. Browserbase tool
+
+Hãy cùng viết code cho từng tool một.
+
+48
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068174/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-48-0.png)
+****
+
+#4) Kayak tool
+
+Một Kayak tool tùy chỉnh (custom) để chuyển đổi (translate) đầu vào của người dùng thành một URL tìm kiếm Kayak hợp lệ.
+
+(FYI: Kayak là một trang web đặt vé máy bay và khách sạn phổ biến)
+
+49
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068175/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-49-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068178/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-49-1.png)
+****
+
+#5) Browserbase Tool
+
+Flight search agent sử dụng Browserbase tool để mô phỏng hành vi duyệt web của con người và thu thập dữ liệu chuyến bay.
+
+Chính xác hơn, nó sẽ tự động điều hướng trang web Kayak và tương tác với trang web đó. Hãy xem đoạn dưới đây:
+
+#6) Thiết lập Crew
+
+Sau khi các agent và tool được định nghĩa, chúng ta sẽ điều phối (orchestrate) chúng bằng CrewAI.
+
+Định nghĩa các task của chúng, sắp xếp thứ tự các hành động và xem chúng cộng tác với nhau theo thời gian thực. Hãy xem đoạn dưới đây:
+
+50
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068182/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-50-0.png)
+****
+
+_Lưu ý: ở đây ‘planning = True’ đang sử dụng planning pattern mà chúng ta đã thảo luận trong phần 5 Agentic AI Design Patterns ở trên._
+
+#7) Kickoff và kết quả
+
+Cuối cùng, chúng ta đưa yêu cầu của người dùng (thành phố đi, thành phố đến, ngày đi) vào Crew và chạy nó:
+
+51
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068184/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-51-0.png)
+****
+
+Streamlit UI
+
+Để hệ thống này dễ tiếp cận hơn, chúng ta đã bọc (wrap) toàn bộ hệ thống trong một giao diện Streamlit.
+
+Đó là một giao diện người dùng (UI) dạng chat đơn giản, nơi bạn nhập thông tin chi tiết về chuyến bay của mình và xem kết quả theo thời gian thực.
+
+Hãy xem đoạn dưới đây:
+
+52
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068186/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-52-0.png)
+****
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068187/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-53-0.png)
+
+Mã nguồn có sẵn tại đây:
+
+https://blog./p/hands-on-a
+
+multi-agent-fight-fnder/
+
+53
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068188/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-53-1.png)
+****
+
+**#4) Financial Analyst**
+
+Xây dựng một AI Agent giúp thu thập, phân tích và tạo ra các thông tin chi tiết (insights) về xu hướng thị trường chứng khoán, ngay từ Cursor hoặc Claude Desktop.
+
+Tech stack:
+
+  - CrewAI để orchestration multi-agent
+
+  - Ollama để chạy local DeepSeek-R1 LLM
+
+  - Cursor đóng vai trò là MCP host
+
+Workflow:
+
+  - Người dùng gửi một query.
+
+  - MCP agent sẽ kích hoạt (kick off) crew phân tích tài chính.
+
+  - Crew tiến hành nghiên cứu và tạo ra một script có thể thực thi.
+
+  - Agent chạy script đó để tạo ra biểu đồ phân tích (plot).
+
+54
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068193/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-54-0.png)
+****
+
+Hãy cùng triển khai ứng dụng này!
+
+#1) Thiết lập LLM
+
+Chúng ta sẽ sử dụng Deepseek-R1 làm LLM, được chạy local bằng Ollama.
+
+Bây giờ hãy thiết lập Crew
+
+#2) Query Parser Agent
+
+Agent này tiếp nhận một query bằng ngôn ngữ tự nhiên và trích xuất đầu ra có cấu trúc (structured output) bằng cách sử dụng Pydantic. Điều này đảm bảo đầu vào sạch và có cấu trúc để xử lý tiếp theo!
+
+55
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068195/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-55-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068199/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-55-1.png)
+****
+
+#3) Code Writer Agent
+
+Agent này viết code Python để trực quan hóa (visualize) dữ liệu chứng khoán bằng các thư viện Pandas, Matplotlib và Yahoo Finance.
+
+#4) Code Executor Agent
+
+Agent này review và thực thi code Python đã được tạo để trực quan hóa dữ liệu chứng khoán.
+
+Nó sử dụng tool code interpreter của CrewAI để thực thi code trong một sandbox environment an toàn.
+
+56
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068201/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-56-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068202/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-56-1.png)
+****
+
+#5) Setup Crew và Kickoff
+
+Chúng ta setup và kickoff financial analysis crew của mình để nhận được kết quả hiển thị bên dưới!
+
+#6) Tạo MCP Server
+
+Giờ đây, chúng ta encapsulate financial analyst của mình bên trong một MCP tool và thêm hai tool nữa để tối ưu hóa trải nghiệm người dùng.
+
+  - save_code -> Lưu generated code vào local directory
+
+  - run_code_and_show_plot -> Thực thi code và tạo plot
+
+57
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068204/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-57-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068206/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-57-1.png)
+****
+
+#7) Tích hợp MCP server với Cursor
+
+Đi tới: File → Preferences → Cursor Settings → MCP → Add new global MCP server. Trong file JSON, thêm nội dung được hiển thị bên dưới.
+
+Hoàn thành! Financial analyst MCP server của chúng ta đã live và được kết nối với Cursor.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068207/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-58-0.png)
+
+Code có sẵn tại đây:
+
+https://www./p/hands-on-bu
+
+ilding-an-mcp-powered-fnancial-analyst/
+
+58
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068209/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-58-1.png)
+****
+
+**#5) Brand Monitoring System**
+
+Xây dựng một Multi-Agent brand monitoring app giúp scrape các web mentions và tạo ra các insight về một công ty.
+
+Tech stack:
+
+  - Bright Data để scrape data at scale
+
+  - CrewAI cho orchestration
+
+  - Ollama để serve DeepSeek locally
+
+Workflow:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068211/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-59-0.png)
+
+- Sử dụng Bright Data để scrape các brand mentions trên X, Instagram, YouTube, website, v.v.
+
+- Invoke các platform-specific Crews để phân tích data và tạo ra các insight.
+
+  - Merge tất cả insight để tạo báo cáo cuối cùng.
+
+Hãy cùng bắt tay vào implement nhé!
+
+59
+
+****
+
+#1) Scraping tool
+
+Để monitor một thương hiệu, chúng ta phải scrape data trên nhiều nguồn khác nhau—X, YouTube, Instagram, website, v.v.
+
+Do đó, trước tiên chúng ta sẽ thu thập các kết quả tìm kiếm gần đây từ SERP API của Bright Data.
+
+Xem đoạn code này:
+
+#2) Platform-specific scraping function
+
+60
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068213/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-60-0.png)
+****
+
+Output ở trên sẽ chứa các link dẫn đến các trang web, bài đăng trên X, video YouTube, bài đăng Instagram, v.v.
+
+Để scrape các nguồn đó, chúng ta sử dụng các platform-specific scrapers của Bright Data.
+
+Check đoạn code này:
+
+#3) Setup DeepSeek R1 locally
+
+Chúng ta sẽ serve R1 locally thông qua Ollama.
+
+Để làm điều này:
+
+  - Đầu tiên, chúng ta download nó về local.
+
+  - Tiếp theo, chúng ta define nó với LLM class của CrewAI.
+
+Dưới đây là đoạn code:
+
+61
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068215/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-61-0.png)
+****
+
+#4) Setup Crew
+
+Chúng ta sẽ có nhiều Crew, mỗi Crew dành cho một platform (X, Instagram, YouTube, v.v.)
+
+Mỗi Crew sẽ có hai Agent:
+
+  - Analysis Agent → Phân tích nội dung đã được scrape.
+
+  - Writer Agent → Tạo ra các insight từ kết quả phân tích.
+
+Dưới đây, hãy cùng implement X Crew nhé!
+
+62
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068217/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-62-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068221/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-62-1.png)
+****
+
+#5) X Analyst Agent
+
+Agent này phân tích các bài đăng được scrape bởi Bright Data và trích xuất các key insight. Nó cũng được giao một task để thực hiện việc này.
+
+Dưới đây là cách thực hiện:
+
+#6) X Writer Agent
+
+Agent này nhận output của X analyst agent và generate ra các insight.
+
+Dưới đây là đoạn code:
+
+63
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068223/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-63-0.png)
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068226/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-64-0.png)
+
+#7) Tạo một Flow
+
+Cuối cùng, chúng ta sử dụng CrewAI Flows để orchestrate workflow:
+
+  - Chúng ta bắt đầu Flow bằng cách sử dụng Scraping tool.
+
+  - Tiếp theo, chúng ta invoke các platform-specific scrapers.
+
+  - Cuối cùng, chúng ta invoke các platform-specific Crews.
+
+Hãy check phần này:
+
+****
+
+64
+
+****
+
+#8) Streamlit UI và Kick off Flow
+
+Cuối cùng, chúng ta wrap app trong một giao diện Streamlit trực quan để tương tác và chạy Flow.
+
+Hãy check kết quả cuối cùng:
+
+65
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068228/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-65-0.png)
+****
+
+Hoàn thành!
+
+Giờ đây bạn đã sẵn sàng để monitor bất kỳ thương hiệu nào, track tất cả các lượt đề cập (mentions) và tạo ra các insight về một công ty.
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068230/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-66-0.png)
+
+Code có sẵn tại đây:
+
+https://www./p/hands-on-bu
+
+ild-a-multi-agent-brand-monitoring-system/
+
+66
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068231/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-66-1.png)
+****
+
+**#6) Multi-agent Hotel Finder**
+
+Xây dựng một Agentic workflow giúp parse một travel query, fetch dữ liệu chuyến bay và khách sạn theo thời gian thực (live data) từ Kayak, và tóm tắt các lựa chọn tốt nhất.
+
+Tech stack:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068233/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-67-0.png)
+
+- CrewAI cho multi-agent orchestration
+
+- Headless browser tool của Browserbase
+
+- Ollama để serve DeepSeek-R1 locally
+
+Workflow:
+
+  - Parse query (địa điểm, ngày tháng, v.v.) để tạo một Kayak search URL
+
+  - Truy cập URL và extract top 5 chuyến bay
+
+  - Với mỗi khách sạn, tìm kiếm thông tin giá cả và các thông tin chi tiết khác
+
+  - Tóm tắt thông tin khách sạn
+
+67
+
+****
+
+Hãy cùng implement hệ thống này nhé!
+
+#1) Define LLM
+
+CrewAI tích hợp rất tốt với tất cả các LLM và nhà cung cấp phổ biến hiện nay!
+
+Dưới đây là cách bạn setup một DeepSeek local bằng Ollama:
+
+#2) Hotel Search Agent
+
+Agent này mô phỏng một người thật đang tìm kiếm khách sạn bằng cách duyệt web. Nó được hỗ trợ bởi headless-browser tool của Browserbase và có thể tra cứu khách sạn trên các trang web như Kayak.
+
+68
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068234/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-68-0.png)
+****
+
+#3) Summarisation Agent
+
+Sau khi lấy được thông tin chi tiết về khách sạn, chúng ta cần một bản tóm tắt súc tích về tất cả các lựa chọn có sẵn.
+
+Đây là lúc Summarization Agent của chúng ta can thiệp để xử lý và hệ thống hóa các kết quả giúp người dùng dễ đọc hơn.
+
+Hãy check phần này:
+
+69
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068236/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-69-0.png)
+****
+
+Bây giờ khi cả hai agent đã sẵn sàng, đã đến lúc tìm hiểu về các tool hỗ trợ chúng.
+
+1. Kayak tool
+
+2. Browserbase tool
+
+Hãy cùng viết code cho từng tool một nhé.
+
+70
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068239/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-70-0.png)
+****
+
+#4) Kayak tool
+
+Một custom Kayak tool để chuyển đổi user input thành một Kayak search URL hợp lệ.
+
+(FYI: Kayak là một trang web phổ biến để đặt phòng khách sạn và vé máy bay)
+
+71
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068240/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-71-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068243/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-71-1.png)
+****
+
+#5) Browserbase Tool
+
+Hotel search agent sử dụng Browserbase tool để mô phỏng hành vi duyệt web của con người và thu thập dữ liệu khách sạn.
+
+Nói một cách chính xác, nó sẽ tự động điều hướng trang web Kayak và tương tác với trang web đó.
+
+Hãy check phần này:
+
+72
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068247/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-72-0.png)
+****
+
+#6) Setup Crew
+
+Sau khi các agent và tool đã được định nghĩa, chúng ta sẽ orchestrate chúng bằng cách sử dụng CrewAI.
+
+Định nghĩa các task của chúng, sắp xếp trình tự các hành động và xem chúng cộng tác với nhau theo thời gian thực! Hãy check phần này:
+
+#7) Kickoff và kết quả
+
+Cuối cùng, chúng ta truyền request của người dùng (địa điểm, ngày tháng, v.v.) vào Crew và chạy nó! Hãy check phần này:
+
+73
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068248/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-73-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068250/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-73-1.png)
+****
+
+Streamlit UI
+
+Để hệ thống này dễ tiếp cận hơn, chúng ta đã wrap toàn bộ hệ thống trong một giao diện @Streamlit.
+
+Đó là một UI dạng chat đơn giản, nơi bạn nhập địa điểm cùng các thông tin chi tiết khác và xem kết quả theo thời gian thực!
+
+Hãy check phần này:
+
+Code có sẵn tại đây:
+
+https://github.com/patchy631/ai-engineering
+hub/tree/main/hotel-booking-crew
+
+74
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068252/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-74-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068253/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-74-1.png)
+****
+
+**#7) Multi-agent Deep Researcher**
+
+ChatGPT có tính năng deep research. Nó giúp bạn có được các insight chi tiết về bất kỳ chủ đề nào. Hãy tìm hiểu cách bạn có thể xây dựng một giải pháp thay thế hoạt động 100% local cho tính năng này.
+
+Tech stack:
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068256/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-75-0.png)
+
+- Nền tảng Linkup cho deep web research
+
+- CrewAI cho multi-agent orchestration
+
+- Ollama để serve DeepSeek locally
+
+  - Cursor đóng vai trò là MCP host
+
+Workflow:
+
+  - Người dùng gửi một query
+
+  - Web search agent thực hiện deep web search thông qua Linkup
+
+  - Research analyst xác minh và deduplicate các kết quả
+
+  - Technical writer soạn thảo một phản hồi mạch lạc kèm theo các trích dẫn (citations)
+
+75
+
+****
+
+Hãy cùng implement hệ thống này nhé!
+
+#1) Setup LLM
+
+Chúng ta sẽ sử dụng DeepSeek-R1 được serve locally bằng Ollama.
+
+#2) Define Web Search Tool
+
+Chúng ta sẽ sử dụng khả năng tìm kiếm mạnh mẽ của nền tảng Linkup, vốn có thể cạnh tranh với Perplexity và OpenAI, để hỗ trợ cho web search agent của mình. Điều này được thực hiện bằng cách định nghĩa một custom tool mà agent của chúng ta có thể sử dụng.
+
+76
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068258/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-76-0.png)
+****
+
+#3) Define Web Search Agent
+
+Web search agent thu thập thông tin cập nhật nhất từ internet dựa trên query của người dùng. Linkup tool mà chúng ta đã định nghĩa trước đó sẽ được sử dụng bởi agent này.
+
+#4) Define Research Analyst Agent
+
+77
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068259/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-77-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068261/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-77-1.png)
+****
+
+Agent này chuyển đổi các raw web search results thành các insight có cấu trúc, đi kèm với các source URL. Nó cũng có thể delegate các task ngược lại cho web search agent để xác minh và fact-checking.
+
+#5) Define Technical Writer Agent
+
+Nó nhận các kết quả đã được phân tích và xác minh từ analyst agent, sau đó soạn thảo một phản hồi mạch lạc kèm theo các trích dẫn (citations) cho người dùng cuối (end user).
+
+#6) Setup Crew
+
+78
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068262/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-78-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068264/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-78-1.png)
+****
+
+Cuối cùng, sau khi đã định nghĩa tất cả các agent và tool, chúng ta tiến hành setup và kickoff deep researcher crew của mình.
+
+#7) Tạo MCP Server
+
+Giờ đây, chúng ta sẽ encapsulate deep research team của mình bên trong một MCP tool. Chỉ với vài dòng code, MCP server của chúng ta sẽ sẵn sàng hoạt động.
+
+Hãy cùng xem cách kết nối nó với Cursor.
+
+79
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068265/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-79-0.png)
+****
+
+#8) Tích hợp MCP server với Cursor
+
+Đi tới: File → Preferences → Cursor Settings → MCP → Add new global MCP server
+
+Trong file JSON, thêm nội dung được hiển thị bên dưới
+
+80
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068267/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-80-0.png)
+****
+
+Xong! Deep research MCP server của bạn đã hoạt động và được kết nối với Cursor.
+
+Code có sẵn tại đây:
+
+https://www./p/hands
+on-mcp-powered-deep-researcher/
+
+81
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068269/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-81-0.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068271/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-81-1.png)
+
+![](https://res.cloudinary.com/dv3vzmogk/image/upload/v1783068272/aha-interpreter/ai-agent-the-illustrated-guidebook/1754994250936.pdf-81-2.png)
+
+---
+
+*Made by Anh Tu - Share to be share*

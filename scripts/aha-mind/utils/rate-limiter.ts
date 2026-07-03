@@ -115,11 +115,6 @@ export class GeminiRateLimiter {
     try {
       return await operation();
     } catch (error: any) {
-      // Bắt lỗi 429 / Quota Exceeded từ API và in warning trực diện
-      const errMsg = error?.message?.toLowerCase() || '';
-      if (errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('exhausted') || errMsg.includes('503')) {
-         console.warn(`\n[GeminiRateLimiter] ⚠️ CẢNH BÁO QUOTA API: Có vẻ bạn đã hết quota số request mỗi ngày (RPD). Vui lòng đổi API KEY trong file .env và chạy lại.\nLỗi chi tiết: ${error.message}\n`);
-      }
       throw error;
     }
   }

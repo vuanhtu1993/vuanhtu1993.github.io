@@ -230,14 +230,14 @@ export const translatorNode = async (
         // [Fix #2] Tạo prompt động với translated context từ chunk trước
         // Truyền systemPrompt (đã resolve tất cả placeholders) vào buildHumanPrompt
         const promptTemplate = buildHumanPrompt(systemPrompt, lastTranslatedContext);
-        const chain = promptTemplate.pipe(model);
-
-        const estimatedTokens = Math.ceil(chunk.length / 4);
-        const response = await geminiService.invokeChain(chain, {
+        const messages = await promptTemplate.formatMessages({
           chunkNum: String(i + 1),
           totalChunks: String(state.chunks.length),
           content: chunk,
-        }, estimatedTokens);
+        });
+
+        // geminiService.invoke sẽ tự động handle key rotation nếu gặp 429
+        const response = await geminiService.invoke(messages);
 
         translated = typeof response.content === "string"
           ? response.content

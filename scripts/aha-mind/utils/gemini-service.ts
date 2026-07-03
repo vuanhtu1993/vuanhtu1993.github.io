@@ -3,18 +3,50 @@ import { geminiRateLimiter } from "./rate-limiter";
 
 export class GeminiService {
   private static instance: GeminiService;
-  private llm: ChatGoogleGenerativeAI;
+  private llm!: ChatGoogleGenerativeAI;
   
+  private apiKeys: string[] = [];
+  private currentKeyIndex: number = 0;
+
   // Expose llm for cases where custom temp/maxTokens is needed, though prefer using methods below.
-  public readonly baseLlm: ChatGoogleGenerativeAI;
+  public get baseLlm(): ChatGoogleGenerativeAI {
+    return this.llm;
+  }
 
   private constructor() {
-    this.baseLlm = new ChatGoogleGenerativeAI({
+    this.initKeys();
+    this.initLlm();
+  }
+
+  private initKeys() {
+    const keys: string[] = [];
+    
+    // Quét toàn bộ biến môi trường, lấy những biến bắt đầu bằng GOOGLE_API_KEY
+    for (const [key, value] of Object.entries(process.env)) {
+      if (key.startsWith("GOOGLE_API_KEY") && value) {
+        // Cắt bằng dấu phẩy đề phòng user khai báo 1 biến có nhiều key, và dọn dẹp khoảng trắng
+        const extractedKeys = value.split(",").map(k => k.trim()).filter(k => k.length > 0);
+        keys.push(...extractedKeys);
+      }
+    }
+
+    // Xóa các key trùng lặp
+    this.apiKeys = Array.from(new Set(keys));
+
+    if (this.apiKeys.length === 0) {
+      console.error("[GeminiService] ❌ Không tìm thấy API Key nào trong .env (các biến bắt đầu bằng GOOGLE_API_KEY)");
+      process.exit(1);
+    }
+  }
+
+  private initLlm() {
+    const currentKey = this.apiKeys[this.currentKeyIndex] || "";
+    this.llm = new ChatGoogleGenerativeAI({
+      apiKey: currentKey,
       model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
       temperature: 0.1, // Default temperature, can be customized locally if needed
       maxRetries: 2,
     });
-    this.llm = this.baseLlm;
   }
 
   public static getInstance(): GeminiService {
@@ -25,28 +57,66 @@ export class GeminiService {
   }
 
   /**
+   * Đổi sang API Key tiếp theo nếu có lỗi Quota.
+   * Trả về true nếu đổi thành công, false nếu đã hết tất cả các keys.
+   */
+  private rotateKey(): boolean {
+    this.currentKeyIndex++;
+    if (this.currentKeyIndex >= this.apiKeys.length) {
+      console.error(`[GeminiService] ❌ Đã dùng hết toàn bộ ${this.apiKeys.length} API Keys. Hệ thống sẽ dừng!`);
+      return false; // Hết key
+    }
+    console.log(`\n[GeminiService] 🔄 Tự động chuyển sang API Key thứ ${this.currentKeyIndex + 1}/${this.apiKeys.length}...`);
+    this.initLlm();
+    return true;
+  }
+
+  /**
+   * Helper function bọc execution block trong vòng lặp retry API Key.
+   */
+  private async executeWithRotation<T>(
+    estimatedTokens: number, 
+    operation: (model: ChatGoogleGenerativeAI) => Promise<T>,
+    customLlm?: ChatGoogleGenerativeAI
+  ): Promise<T> {
+    while (true) {
+      try {
+        return await geminiRateLimiter.execute(estimatedTokens, async () => {
+          const modelToUse = customLlm || this.llm;
+          return await operation(modelToUse);
+        });
+      } catch (error: any) {
+        // Chỉ bắt lỗi quota nếu sử dụng default LLM (không truyền customLlm với key khác vào)
+        if (!customLlm) {
+          const errMsg = error?.message?.toLowerCase() || '';
+          if (errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('exhausted') || errMsg.includes('503')) {
+             console.warn(`[GeminiService] ⚠️ Lỗi Quota/429/503 ở API Key thứ ${this.currentKeyIndex + 1}. Đang thử Rotate Key...`);
+             const hasNextKey = this.rotateKey();
+             if (hasNextKey) {
+               continue; // Thử lại vòng lặp với Key mới
+             }
+          }
+        }
+        throw error; // Quăng lỗi ra nếu không phải lỗi quota hoặc hết key
+      }
+    }
+  }
+
+  /**
    * Gọi LLM thông thường (trả về nội dung dạng text).
    * Tự động ước tính số lượng tokens để truyền cho Rate Limiter.
-   * 
-   * @param messages Mảng các messages (SystemMessage, HumanMessage,...)
-   * @param customLlm Có thể truyền LLM tùy chỉnh (vd: set temperature = 0) nếu không dùng mặc định
    */
   public async invoke(messages: any[], customLlm?: ChatGoogleGenerativeAI): Promise<any> {
     const textContent = messages.map(m => m.content?.toString() || "").join("\\n");
     const estimatedTokens = Math.ceil(textContent.length / 4);
 
-    return await geminiRateLimiter.execute(estimatedTokens, async () => {
-      const modelToUse = customLlm || this.llm;
-      return await modelToUse.invoke(messages);
-    });
+    return await this.executeWithRotation(estimatedTokens, async (model) => {
+      return await model.invoke(messages);
+    }, customLlm);
   }
 
   /**
    * Gọi LLM trả về Structured Output (JSON).
-   * 
-   * @param schema Schema Zod để ép kiểu output
-   * @param prompt Chuỗi prompt hoặc mảng messages
-   * @param customLlm Tùy chọn truyền LLM nếu cần override params
    */
   public async invokeStructured(schema: any, prompt: string | any[], customLlm?: ChatGoogleGenerativeAI): Promise<any> {
     const promptText = typeof prompt === "string" 
@@ -55,19 +125,10 @@ export class GeminiService {
       
     const estimatedTokens = Math.ceil(promptText.length / 4);
 
-    return await geminiRateLimiter.execute(estimatedTokens, async () => {
-      const modelToUse = customLlm || this.llm;
-      const structuredLlm = modelToUse.withStructuredOutput(schema);
+    return await this.executeWithRotation(estimatedTokens, async (model) => {
+      const structuredLlm = model.withStructuredOutput(schema);
       return await structuredLlm.invoke(prompt);
-    });
-  }
-  /**
-   * Gọi LLM thông qua Langchain Chain.
-   */
-  public async invokeChain(chain: any, input: any, estimatedTokens: number): Promise<any> {
-    return await geminiRateLimiter.execute(estimatedTokens, async () => {
-      return await chain.invoke(input);
-    });
+    }, customLlm);
   }
 }
 
