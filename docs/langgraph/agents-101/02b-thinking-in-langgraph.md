@@ -47,10 +47,113 @@ Các nodes cần có:
 - `readEmail` — Trích xuất và parse nội dung email.
 - `classifyIntent` — Dùng LLM phân loại mức độ khẩn cấp và chủ đề, sau đó route đến action phù hợp.
 - `searchDocumentation` — Query knowledge base để tìm thông tin liên quan.
+- `lookupCustomerHistory` — Lấy thông tin lịch sử của khách hàng (dành cho vấn đề billing/account).
 - `bugTracking` — Tạo hoặc cập nhật issue trong hệ thống tracking.
 - `draftResponse` — Sinh ra phản hồi phù hợp.
 - `humanReview` — Chuyển lên human agent để phê duyệt hoặc xử lý trực tiếp.
 - `sendReply` — Gửi email phản hồi.
+
+<div className="row">
+<div className="col col--6">
+
+**Flowchart (Agent Architecture):**
+
+```mermaid
+flowchart TD
+    START([START]) --> readEmail["readEmail"]
+    
+    readEmail --> classifyIntent{"classifyIntent"}
+    
+    classifyIntent -- "Question / Complex" --> searchDocumentation["searchDocumentation"]
+    classifyIntent -- "Bug" --> bugTracking["bugTracking"]
+    classifyIntent -- "Billing" --> lookupCustomerHistory["lookupCustomerHistory"]
+    classifyIntent -- "Feature / Other" --> draftResponse["draftResponse"]
+    
+    searchDocumentation --> draftResponse
+    bugTracking --> draftResponse
+    lookupCustomerHistory --> draftResponse
+    
+    draftResponse --> humanReview{"humanReview (interrupt)"}
+    
+    humanReview -- "Approved" --> sendReply["sendReply"]
+    humanReview -- "Needs Edit" --> draftResponse
+    
+    sendReply --> END([END])
+    
+    %% Styling
+    classDef actionNode fill:#2b6cb0,color:#fff,stroke:#2a4365,stroke-width:2px;
+    classDef decisionNode fill:#d69e2e,color:#fff,stroke:#975a16,stroke-width:2px;
+    classDef startEnd fill:#38a169,color:#fff,stroke:#22543d,stroke-width:2px;
+    
+    class START,END startEnd;
+    class classifyIntent,humanReview decisionNode;
+    class readEmail,searchDocumentation,bugTracking,lookupCustomerHistory,draftResponse,sendReply actionNode;
+```
+
+</div>
+<div className="col col--6">
+
+**Execution Graph (State Transfer):**
+
+```mermaid
+flowchart TD
+    %% Định nghĩa Data State (Cuốn sổ tay)
+    State_Init[/"State: {rawEmail}"/]
+    State_Parsed[/"State: {..., emailContent, senderEmail}"/]
+    State_Classified[/"State: {..., intent, urgency}"/]
+    State_Data[/"State: {..., searchResults / issueId / customerData}"/]
+    State_Drafted[/"State: {..., responseText}"/]
+    State_Approved[/"State: {..., humanApproved}"/]
+
+    START([START]) --> State_Init
+    State_Init -.-> readEmail["1. readEmail (Node)"]
+    
+    readEmail -.-> State_Parsed
+    State_Parsed -.-> classifyIntent["2. classifyIntent (Node)"]
+    
+    classifyIntent -.-> State_Classified
+    
+    %% Quyết định định tuyến bằng Command từ bên trong Node
+    State_Classified == "Command: goto(search)" ===> searchDocumentation["3a. searchDocumentation"]
+    State_Classified == "Command: goto(bug)" ===> bugTracking["3b. bugTracking"]
+    State_Classified == "Command: goto(history)" ===> lookupCustomerHistory["3c. lookupCustomerHistory"]
+    
+    searchDocumentation -.-> State_Data
+    bugTracking -.-> State_Data
+    lookupCustomerHistory -.-> State_Data
+    
+    State_Data -.-> draftResponse["4. draftResponse (Node)"]
+    
+    draftResponse -.-> State_Drafted
+    State_Drafted -.-> humanReview{"5. humanReview (Node + Interrupt)"}
+    
+    %% Human Router trả về Command sau khi Resume
+    humanReview == "Command: goto(send)" ===> State_Approved
+    humanReview == "Command: goto(draft)" ===> State_Data
+    
+    State_Approved -.-> sendReply["6. sendReply (Node)"]
+    
+    sendReply --> END([END])
+    
+    %% Styling
+    classDef stateNode fill:#fefcbf,color:#744210,stroke:#d69e2e,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef node fill:#2b6cb0,color:#fff,stroke:#2a4365,stroke-width:2px;
+    classDef interruptNode fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:2px;
+    classDef startEnd fill:#38a169,color:#fff,stroke:#22543d,stroke-width:2px;
+    
+    class START,END startEnd;
+    class State_Init,State_Parsed,State_Classified,State_Data,State_Drafted,State_Approved stateNode;
+    class readEmail,classifyIntent,searchDocumentation,bugTracking,lookupCustomerHistory,draftResponse,sendReply node;
+    class humanReview interruptNode;
+```
+
+</div>
+</div>
+
+> **💡 Note - Giải phẫu Execution Graph:** 
+> - **State Mutation:** `State` (khối màu vàng) không bao giờ bị xóa đi mà chỉ được "nhồi thêm" dữ liệu. Các đường nét đứt đại diện cho việc truyền State vào Node.
+> - **Dynamic Routing:** Các mũi tên nét đôi (`===`) đại diện cho việc Node tự động định tuyến rẽ nhánh (Decision) bằng cách trả về `Command`, thay vì dùng Conditional Edge cứng nhắc từ bên ngoài.
+> - **Interrupt:** `humanReview` là một trạm dừng chân. State được lưu an toàn xuống Checkpointer và luồng sẽ tạm ngưng tại đây cho đến khi có can thiệp của con người.
 
 ---
 
