@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { z } from 'zod';
-import { geminiService } from '../utils/gemini-service';
+import { geminiService } from '../utils/gemini';
 
 // 1. Zod Schema
 const FlatOntologyNodeSchema = z.object({

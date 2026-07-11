@@ -1,7 +1,7 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { z } from "zod";
 import { AhaMindState, ExtractedTerm } from "../state";
-import { geminiService } from "../../utils/gemini-service";
+import { geminiService } from "../../utils/gemini";
 
 /**
  * Zod Schema defines the structured output format for the LLM.

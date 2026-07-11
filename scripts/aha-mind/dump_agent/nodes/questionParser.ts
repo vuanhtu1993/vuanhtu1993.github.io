@@ -3,7 +3,7 @@ import { DumpState, Question } from "../state";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
-import { geminiService } from "../../utils/gemini-service";
+import { geminiService } from "../../utils/gemini";
 
 // Removed sleep function since geminiRateLimiter handles delays
 

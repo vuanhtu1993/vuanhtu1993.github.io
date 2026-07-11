@@ -25,7 +25,7 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 import * as fs from "fs";
 import { InterpreterState } from "../state";
 import { GLOSSARY_PATH, LLM_CONFIG, CHUNKING } from "../config";
-import { geminiService } from "../../utils/gemini-service";
+import { geminiService } from "../../utils/gemini";
 
 // ─── Prompt Engineering ───────────────────────────────────────────────────────
 

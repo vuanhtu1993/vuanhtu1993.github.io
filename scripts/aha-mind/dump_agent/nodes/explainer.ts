@@ -1,6 +1,6 @@
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { DumpState, Question } from "../state";
-import { geminiService } from "../../utils/gemini-service";
+import { geminiService } from "../../utils/gemini";
 
 export async function explainerNode(state: DumpState): Promise<Partial<DumpState>> {
   console.log("--- 5. EXPLAINER ---");

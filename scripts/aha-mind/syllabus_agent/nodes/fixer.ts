@@ -1,6 +1,6 @@
 import { SyllabusState } from "../state";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
-import { geminiService } from "../../utils/gemini-service";
+import { geminiService } from "../../utils/gemini";
 
 export async function fixerNode(state: SyllabusState): Promise<Partial<SyllabusState>> {
   console.log("--- 4. FIXER NODE ---");
