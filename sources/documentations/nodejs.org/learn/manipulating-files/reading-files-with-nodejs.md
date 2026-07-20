@@ -1,0 +1,105 @@
+---
+title: "Reading files with Node.js | Node.js Learn"
+source_url: "https://nodejs.org/learn/manipulating-files/reading-files-with-nodejs"
+crawled_at: "2026-07-20T08:09:02.783Z"
+---
+
+On this page
+
+  
+
+The simplest way to read a file in Node.js is to use the `fs.readFile()` method, passing it the file path, encoding and a callback function that will be called with the file data (and the error):
+
+```
+const fs = require('node:fs');
+
+fs.readFile('/Users/joe/test.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(data);
+});
+```
+
+Alternatively, you can use the synchronous version `fs.readFileSync()`:
+
+```
+const fs = require('node:fs');
+
+try {
+  const data = fs.readFileSync('/Users/joe/test.txt', 'utf8');
+  console.log(data);
+} catch (err) {
+  console.error(err);
+}
+```
+
+You can also use the promise-based `fsPromises.readFile()` method offered by the `fs/promises` module:
+
+```
+const fs = require('node:fs/promises');
+
+async function example() {
+  try {
+    const data = await fs.readFile('/Users/joe/test.txt', { encoding: 'utf8' });
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+example();
+```
+
+All three of `fs.readFile()`, `fs.readFileSync()` and `fsPromises.readFile()` read the full content of the file in memory before returning the data.
+
+This means that big files are going to have a major impact on your memory consumption and speed of execution of the program.
+
+In this case, a better option is to read the file content using streams as it is more memory efficient.
+
+```
+import fs from 'fs';
+import { pipeline } from 'node:stream/promises';
+import path from 'path';
+
+const fileUrl = 'https://www.gutenberg.org/files/2701/2701-0.txt';
+const outputFilePath = path.join(process.cwd(), 'moby.md');
+
+async function downloadFile(url, outputPath) {
+  const response = await fetch(url);
+
+  if (!response.ok || !response.body) {
+    // consuming the response body is mandatory: https://undici.nodejs.org/#/?id=garbage-collection
+    await response.body?.cancel();
+    throw new Error(`Failed to fetch ${url}. Status: ${response.status}`);
+  }
+
+  const fileStream = fs.createWriteStream(outputPath);
+  console.log(`Downloading file from ${url} to ${outputPath}`);
+
+  await pipeline(response.body, fileStream);
+  console.log('File downloaded successfully');
+}
+
+async function readFile(filePath) {
+  const readStream = fs.createReadStream(filePath, { encoding: 'utf8' });
+
+  try {
+    for await (const chunk of readStream) {
+      console.log('--- File chunk start ---');
+      console.log(chunk);
+      console.log('--- File chunk end ---');
+    }
+    console.log('Finished reading the file.');
+  } catch (error) {
+    console.error(`Error reading file: ${error.message}`);
+  }
+}
+
+try {
+  await downloadFile(fileUrl, outputFilePath);
+  await readFile(outputFilePath);
+} catch (error) {
+  console.error(`Error: ${error.message}`);
+}
+```

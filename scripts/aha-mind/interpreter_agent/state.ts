@@ -43,6 +43,8 @@ export interface BookMetadata {
  */
 export interface InterpreterState {
   // ── Input ──
+  /** Có dịch sang tiếng Việt hay không */
+  shouldTranslate: boolean;
   /** Đường dẫn tuyệt đối tới file PDF */
   pdfPath: string;
   /** Metadata sách (title, slug, author) */
@@ -92,6 +94,10 @@ export interface InterpreterState {
 // ─── LangGraph State Annotation ───────────────────────────────────────────────
 
 export const StateAnnotation = Annotation.Root({
+  shouldTranslate: Annotation<boolean>({
+    reducer: (x, y) => y ?? x ?? false,
+    default: () => false,
+  }),
   pdfPath: Annotation<string>({
     reducer: (x, y) => y ?? x ?? "",
     default: () => "",

@@ -14,6 +14,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { InterpreterState } from "../state";
 import { OUTPUT_DIR, MDX_CONFIG } from "../config";
+import { cleanMarkdown } from "./md_cleaner";
 
 // ─── MDX Generation ───────────────────────────────────────────────────────────
 
@@ -46,14 +47,15 @@ ${tagsYaml}
 }
 
 /**
- * Tạo attribution block — nguồn gốc bản dịch.
+ * Tạo attribution block — nguồn gốc bài viết.
  */
-function buildAttribution(bookTitle: string, originalAuthor: string): string {
-  return `:::info 📚 Về bài dịch này
-Đây là bản dịch tiếng Việt của **"${bookTitle}"** (Tác giả: ${originalAuthor}).
-Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+function buildAttribution(bookTitle: string, originalAuthor: string, isTranslated: boolean): string {
+  const sourceText = isTranslated
+    ? `Đây là bản dịch tiếng Việt của **"${bookTitle}"** (Tác giả: ${originalAuthor}).\nBài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.\n\n⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*`
+    : `Đây là nội dung được trích xuất từ **"${bookTitle}"** (Tác giả: ${originalAuthor}).\nBài được extract tự động bởi **Aha! Mind Interpreter**.`;
 
-⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+  return `:::info 📚 Về bài viết này
+${sourceText}
 :::`;
 }
 
@@ -107,6 +109,8 @@ export const mdxExporterNode = async (
 
   // ── Sanitize nội dung — fix HTML void elements thành JSX-compatible ──
   const sanitizedContent = sanitizeMdxContent(state.translatedContent);
+  // ── Làm sạch markdown ──
+  const finalContent = cleanMarkdown(sanitizedContent);
 
   // ── Build MDX components ──
   const frontmatter = buildFrontmatter({
@@ -118,7 +122,7 @@ export const mdxExporterNode = async (
     date: today,
   });
 
-  const attribution = buildAttribution(bookMetadata.title, bookMetadata.originalAuthor);
+  const attribution = buildAttribution(bookMetadata.title, bookMetadata.originalAuthor, state.shouldTranslate);
 
   // ── Assemble full MDX ──
   const mdxContent = `${frontmatter}
@@ -127,7 +131,7 @@ ${attribution}
 
 <!-- truncate -->
 
-${sanitizedContent}
+${finalContent}
 
 ---
 

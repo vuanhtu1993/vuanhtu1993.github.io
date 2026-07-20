@@ -12,6 +12,7 @@ import * as path from "path";
 import { execSync } from "child_process";
 import { Chapter, InterpreterState } from "../state";
 import { uploadImageToCloudinary } from "../utils/cloudinary";
+import { cleanMarkdown } from "./md_cleaner";
 
 // ─── Utility Functions ────────────────────────────────────────────────────────
 
@@ -115,8 +116,8 @@ export const parserNode = async (
       }
     }
   }
-  // Dọn dẹp khoảng trắng thừa (giảm token thừa)
-  rawContent = rawContent.replace(/\n{3,}/g, '\n\n');
+  // Dọn dẹp khoảng trắng thừa (giảm token thừa) và chuẩn hóa markdown
+  rawContent = cleanMarkdown(rawContent);
 
   // Dọn dẹp file tạm
   fs.unlinkSync(outFile);

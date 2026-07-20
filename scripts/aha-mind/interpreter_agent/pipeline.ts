@@ -27,6 +27,7 @@ import { chunkerNode } from "./nodes/chunker";
 import { translatorNode } from "./nodes/translator";
 import { unmaskerNode } from "./nodes/unmasker";
 import { mdxExporterNode } from "./nodes/mdx_exporter";
+import { InterpreterState } from "./state";
 import * as path from "path";
 
 // ─── Chapter Loop Logic ───────────────────────────────────────────────────────
@@ -72,6 +73,25 @@ const hasChapters = (state: any): string => {
   return END;
 };
 
+/**
+ * Node passthrough: Dùng khi KHÔNG dịch (shouldTranslate = false).
+ * Copy maskedContent sang translatedContent để unmasker có thể khôi phục assets.
+ */
+const passthroughNode = async (state: InterpreterState): Promise<Partial<InterpreterState>> => {
+  console.log(`\n[Pipeline] ⏭️ Skip translate: Sử dụng nội dung gốc`);
+  return { translatedContent: state.maskedContent };
+};
+
+/**
+ * Conditional edge sau khi chunk: Chọn nhánh translate hay passthrough.
+ */
+const shouldTranslateFlow = (state: InterpreterState): string => {
+  if (state.shouldTranslate) {
+    return "translate";
+  }
+  return "passthrough";
+};
+
 // ─── Build LangGraph Workflow ─────────────────────────────────────────────────
 
 const workflow = new StateGraph(StateAnnotation)
@@ -80,6 +100,7 @@ const workflow = new StateGraph(StateAnnotation)
   .addNode("mask", maskerNode)
   .addNode("chunk", chunkerNode)
   .addNode("translate", translatorNode)
+  .addNode("passthrough", passthroughNode)
   .addNode("unmask", unmaskerNode)
   .addNode("export", mdxExporterNode)
   .addNode("advance", advanceChapterNode)
@@ -90,8 +111,9 @@ const workflow = new StateGraph(StateAnnotation)
 
   // Per-chapter loop
   .addEdge("mask", "chunk")
-  .addEdge("chunk", "translate")
+  .addConditionalEdges("chunk", shouldTranslateFlow, { translate: "translate", passthrough: "passthrough" })
   .addEdge("translate", "unmask")
+  .addEdge("passthrough", "unmask")
   .addEdge("unmask", "export")
   .addEdge("export", "advance")
   .addConditionalEdges("advance", shouldContinue, { mask: "mask", [END]: END });
@@ -106,6 +128,7 @@ function parseArgs(): {
   author: string;
   pageRange: { start: number; end: number };
   noisePatterns: string[];
+  shouldTranslate: boolean;
 } {
   const args = process.argv.slice(2);
 
@@ -150,6 +173,7 @@ function parseArgs(): {
   const authorArg = getMultiWord("--author") ?? "Unknown Author";
   const pagesArg = getMultiWord("--pages");
   const noiseArg = getArray("--noise");
+  const shouldTranslate = args.includes("--translate");
 
   let startPage = 1;
   let endPage = Infinity;
@@ -181,14 +205,15 @@ function parseArgs(): {
     title: titleArg, 
     author: authorArg, 
     pageRange: { start: startPage, end: endPage },
-    noisePatterns: noiseArg
+    noisePatterns: noiseArg,
+    shouldTranslate
   };
 }
 
 // ─── Main Runner ──────────────────────────────────────────────────────────────
 
 async function runPipeline() {
-  const { pdfPath, title, author, pageRange, noisePatterns } = parseArgs();
+  const { pdfPath, title, author, pageRange, noisePatterns, shouldTranslate } = parseArgs();
 
   const pagesDisplay = pageRange.end === Infinity
     ? `Từ trang ${pageRange.start} đến hết`
@@ -201,6 +226,7 @@ ${"=".repeat(60)}
   📚 Tiêu đề: ${title}
   ✍️  Tác giả: ${author}
   📄 Pages: ${pagesDisplay}
+  🌐 Dịch sang Tiếng Việt: ${shouldTranslate ? "Có" : "Không"}
 ${"=".repeat(60)}
 `);
 
@@ -212,6 +238,7 @@ ${"=".repeat(60)}
   // Invoke pipeline
   const finalState = await app.invoke(
     {
+      shouldTranslate,
       pdfPath,
       bookMetadata: {
         title,
