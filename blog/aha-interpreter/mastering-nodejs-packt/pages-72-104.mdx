@@ -786,39 +786,40 @@ stream. We then open the requested remote network socket. All that is left to do
 creating the tunnel, which we do by piping remote data to the client, and client data
 to the remote connection:
 
+```javascript
 var http = require('http');
 var net = require('net');
 var url = require('url');
 var proxy = new http.Server();
-proxy.on('connect', function(request, clientSocket, head) \{
+proxy.on('connect', function(request, clientSocket, head) {
 var reqData = url.parse('http://' + request.url);
 var remoteSocket = net.connect(reqData.port, reqData.hostname,
-function() \{
+function() {
 clientSocket.write('HTTP/1.1 200 \r\n\r\n');
 remoteSocket.write(head);
 remoteSocket.pipe(clientSocket);
 clientSocket.pipe(remoteSocket);
-\});
-\}).listen(8080);
+});
+}).listen(8080);
 
-var request = http.request(\{
+var request = http.request({
 port: 8080,
 hostname: 'localhost',
 method: 'CONNECT',
 path: 'www.google.com:80'
-\});
+});
 request.end();
-request.on('connect', function(res, socket, head) \{
+request.on('connect', function(res, socket, head) {
 socket.setEncoding("utf8");
-socket.write('GET / HTTP/1.1\r\nHost: www.google.com:80\r\
-nConnection: close\r\n\r\n');
-socket.on('readable', function() \{
+socket.write('GET / HTTP/1.1\r\nHost: www.google.com:80\r\nConnection: close\r\n\r\n');
+socket.on('readable', function() {
 console.log(socket.read());
-\});
-socket.on('end', function() \{
+});
+socket.on('end', function() {
 proxy.close();
-\});
-\});
+});
+});
+```
 
 ~~**[ 71 ]**~~
 
