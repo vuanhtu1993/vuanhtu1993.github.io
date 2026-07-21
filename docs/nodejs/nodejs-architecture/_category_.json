@@ -1,0 +1,10 @@
+{
+    "label": "Node.js Core Internals",
+    "position": 2,
+    "collapsible": true,
+    "collapsed": false,
+    "link": {
+        "type": "generated-index",
+        "description": "Nền tảng kỹ thuật chuyên sâu về Node.js: Architecture, Event-driven Programming, Streaming Data, và Child Process."
+    }
+}
