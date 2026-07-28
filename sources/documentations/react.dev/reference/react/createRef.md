@@ -1,0 +1,81 @@
+---
+title: "createRef – React"
+source_url: "https://react.dev/reference/react/createRef"
+crawled_at: "2026-07-28T04:08:45.921Z"
+---
+
+`createRef` creates a [ref](https://react.dev/learn/referencing-values-with-refs) object which can contain arbitrary value.
+
+```
+class MyInput extends Component {
+inputRef = createRef();
+// ...
+}
+```
+
+-   [Reference](#reference)
+    -   [`createRef()`](#createref)
+-   [Usage](#usage)
+    -   [Declaring a ref in a class component](#declaring-a-ref-in-a-class-component)
+-   [Alternatives](#alternatives)
+    -   [Migrating from a class with `createRef` to a function with `useRef`](#migrating-from-a-class-with-createref-to-a-function-with-useref)
+
+---
+
+## Reference[](#reference "Link for Reference ")
+
+### `createRef()`[](#createref "Link for this heading")
+
+Call `createRef` to declare a [ref](https://react.dev/learn/referencing-values-with-refs) inside a [class component.](https://react.dev/reference/react/Component)
+
+```
+import { createRef, Component } from 'react';
+class MyComponent extends Component {
+intervalRef = createRef();
+inputRef = createRef();
+// ...
+```
+
+[See more examples below.](#usage)
+
+#### Parameters[](#parameters "Link for Parameters ")
+
+`createRef` takes no parameters.
+
+#### Returns[](#returns "Link for Returns ")
+
+`createRef` returns an object with a single property:
+
+-   `current`: Initially, it’s set to the `null`. You can later set it to something else. If you pass the ref object to React as a `ref` attribute to a JSX node, React will set its `current` property.
+
+#### Caveats[](#caveats "Link for Caveats ")
+
+-   `createRef` always returns a _different_ object. It’s equivalent to writing `{ current: null }` yourself.
+-   In a function component, you probably want [`useRef`](https://react.dev/reference/react/useRef) instead which always returns the same object.
+-   `const ref = useRef()` is equivalent to `const [ref, _] = useState(() => createRef(null))`.
+
+---
+
+## Usage[](#usage "Link for Usage ")
+
+### Declaring a ref in a class component[](#declaring-a-ref-in-a-class-component "Link for Declaring a ref in a class component ")
+
+To declare a ref inside a [class component,](https://react.dev/reference/react/Component) call `createRef` and assign its result to a class field:
+
+```
+import { Component, createRef } from 'react';
+class Form extends Component {
+inputRef = createRef();
+// ...
+}
+```
+
+If you now pass `ref={this.inputRef}` to an `<input>` in your JSX, React will populate `this.inputRef.current` with the input DOM node. For example, here is how you make a button that focuses the input:
+
+---
+
+## Alternatives[](#alternatives "Link for Alternatives ")
+
+### Migrating from a class with `createRef` to a function with `useRef`[](#migrating-from-a-class-with-createref-to-a-function-with-useref "Link for this heading")
+
+We recommend using function components instead of [class components](https://react.dev/reference/react/Component) in new code. If you have some existing class components using `createRef`, here is how you can convert them. This is the original code:
