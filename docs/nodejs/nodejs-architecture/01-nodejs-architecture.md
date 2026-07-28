@@ -102,9 +102,7 @@ Toàn bộ luồng điều khiển của chương trình được quyết địn
 Node.js không phải là một ngôn ngữ mới — nó là một **execution environment** (*môi trường thực thi*) cho JavaScript bên ngoài trình duyệt. Nó bổ sung các API hệ thống (filesystem, network, process) mà browser JS không có.
 
 ### 2.3. Architectural Layers — Kiến Trúc Phân Tầng
-
-![](https://miro.medium.com/v2/resize:fit:1400/0*CpVhRdAI4FzP7p5l.png)
-
+![Architecture layer NodeJS](https://res.cloudinary.com/dv3vzmogk/image/upload/v1784736788/u1O2O_hyhcls.png)
 **Mô tả từng thành phần:**
 
 - **Node.js Application** *(Layer 1)*: JavaScript code của bạn — entry point là file `.js` bạn viết.
@@ -117,6 +115,7 @@ Node.js không phải là một ngôn ngữ mới — nó là một **execution 
 - **c-ares / llhttp / OpenSSL / zlib** *(Layer 4)*: Các thư viện C++ chuyên biệt được Bindings gọi trực tiếp mà không cần qua libuv (trừ một số tác vụ đặc biệt libuv sẽ handle thread pool cho chúng).
 
 ### 2.5. Luồng Thực Thi I/O — Execution Flow
+![Architectural layers trong Node.js](https://res.cloudinary.com/dv3vzmogk/image/upload/v1784737023/node-js-architecture-1_phbogj.webp)
 
 Khi một I/O operation được gọi, luồng đi qua toàn bộ các tầng:
 
