@@ -205,9 +205,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 Streaming làm thay đổi hoàn toàn cách chúng ta đo lường Web Vitals:
 
-1. **TTFB (Time to First Byte):** Giảm đột phá. Thay vì chờ DB query xong mới gửi byte đầu tiên, Server gửi Header/Layout tĩnh (Static Shell) ngay lập tức. TTFB trở nên cực thấp.
+1. **TTFB (Time to First Byte):** Thay vì chờ DB query xong mới gửi byte đầu tiên, Server gửi Header/Layout tĩnh (Static Shell) ngay lập tức. TTFB trở nên cực thấp.
 2. **FCP (First Contentful Paint):** Tương tự, trình duyệt vẽ ngay được Static Shell.
-3. **LCP (Largest Contentful Paint):** CẦN CẨN THẬN! Nếu ảnh/banner lớn nhất (Hero Image) nằm bên trong một `<Suspense>` bị chậm, LCP sẽ rất tệ. **Rule of thumb:** Luôn để thành phần LCP nằm NGOÀI các Suspense boundary.
+3. **LCP (Largest Contentful Paint):** Nếu ảnh/banner lớn nhất (Hero Image) nằm bên trong một `<Suspense>` bị chậm, LCP sẽ rất tệ. **Rule of thumb:** Luôn để thành phần LCP nằm NGOÀI các Suspense boundary.
 4. **CLS (Cumulative Layout Shift):** Khi dữ liệu load xong và thay thế thẻ `loading`, layout có thể bị giật (shift). Hãy đảm bảo CSS của Skeleton có kích thước (height/width) hệt như nội dung thật.
 
 ### The HTTP Contract (Ràng buộc Giao thức)

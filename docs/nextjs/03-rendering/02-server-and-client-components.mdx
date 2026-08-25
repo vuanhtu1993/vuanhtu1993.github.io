@@ -52,10 +52,6 @@ Chia Component thành 2 loại:
 - **Server Components:** Chạy trên máy chủ, lấy dữ liệu nhanh, bảo mật. Đầu ra là HTML tĩnh.
 - **Client Components:** Chạy trên trình duyệt (thực ra là chạy cả ở Server lần đầu, sau đó chạy lại ở trình duyệt), đảm nhận tương tác người dùng.
 
-> [!WARNING] Cảnh báo nhầm lẫn phổ biến
-> 1. **Server Component KHÔNG CÓ NGHĨA LÀ Server-side Rendering (SSR).** Server Component có thể được render lúc Build (Static Rendering) hoặc lúc Request (Dynamic Rendering).
-> 2. **Client Component KHÔNG CÓ NGHĨA LÀ chỉ chạy trên Client.** Ở lần tải trang đầu tiên (Initial Load), Client Component vẫn được render thành HTML tĩnh trên Server để SEO tốt. Nó chỉ thực sự "thuần Client" ở các lần chuyển trang (Navigation) tiếp theo.
-
 ---
 
 ## 2. WHAT — Cơ chế hoạt động của Server & Client Components

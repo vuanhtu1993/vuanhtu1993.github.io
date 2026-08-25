@@ -109,17 +109,17 @@ graph TD
     classDef hl fill:#ffffff,stroke:#333,stroke-width:2px,color:#000;
     classDef ef fill:#ffc2c2,stroke:#d66565,stroke-width:2px,color:#000;
     
-    Req([Incoming Request]) --> MW[1. Middleware]:::mw
-    MW --> GD[2. Guard]:::gd
-    GD --> InBefore[3. Interceptor Before]:::in
-    InBefore --> PP[4. Pipe]:::pp
-    PP --> Handler((5. Controller Handler)):::hl
+    Req(["Incoming Request"]) --> MW["1. Middleware"]:::mw
+    MW --> GD["2. Guard"]:::gd
+    GD --> InBefore["3. Interceptor Before"]:::in
+    InBefore --> PP["4. Pipe"]:::pp
+    PP --> Handler(("5. Controller Handler")):::hl
     
-    Handler -- Trả kết quả --> InAfter[6. Interceptor After]:::in
-    InAfter --> Res([Server Response])
+    Handler -- "Trả kết quả" --> InAfter["6. Interceptor After"]:::in
+    InAfter --> Res(["Server Response"])
     
-    Handler -. Ném Exception .-> EF[7. Exception Filter]:::ef
-    EF -.-> ErrRes([Error Response])
+    Handler -. "Ném Exception" .-> EF["7. Exception Filter"]:::ef
+    EF -.-> ErrRes(["Error Response"])
 ```
 
 **Phân tích sơ đồ:**
@@ -129,6 +129,32 @@ graph TD
 4. **Pipe (4) & Handler (5)**: Pipe làm nhiệm vụ chuẩn hóa (Transform) và kiểm tra (Validate) dữ liệu, sau đó mới thả vào Controller Handler.
 5. **Interceptor Sau (6)**: Sau khi Controller tính toán xong, Interceptor lại "chặn" một lần nữa để bọc hoặc biến đổi Response.
 6. **Exception Filter (7)**: Đứng như một chốt chặn an toàn cuối cùng. Nếu bất kỳ bước nào bên trên gặp lỗi (Throw Exception), filter sẽ hứng lại và định dạng lỗi chuẩn chỉ.
+
+```mermaid
+graph TD
+    classDef mw fill:#f9c2ff,stroke:#d070db,stroke-width:2px,color:#000;
+    classDef gd fill:#c2f0ff,stroke:#5ebdcf,stroke-width:2px,color:#000;
+    classDef in fill:#ffe8a1,stroke:#d1ae41,stroke-width:2px,color:#000;
+    classDef pp fill:#c5f0c5,stroke:#62b562,stroke-width:2px,color:#000;
+    classDef hl fill:#ffffff,stroke:#333,stroke-width:2px,color:#000;
+    classDef ef fill:#ffc2c2,stroke:#d66565,stroke-width:2px,color:#000;
+
+    Req(["Incoming HTTP Request"]) --> MW["1. Middleware<br/>Express / Fastify Layer"]:::mw
+    MW --> Guard["2. Guard<br/>Authentication & Authorization"]:::gd
+    Guard --> InterceptorBefore["3. Interceptor - Before<br/>Pre-controller Logic / Caching / Tracing"]:::in
+    InterceptorBefore --> Pipe["4. Pipe<br/>Validation & Transformation"]:::pp
+    Pipe --> Controller["5. Controller Handler<br/>Business Logic Processing"]:::hl
+    Controller --> InterceptorAfter["6. Interceptor - After<br/>Response Mapping / Post-processing"]:::in
+    
+    subgraph ExceptionZone["Error Handling Zone"]
+        Controller -.->|"Throw Error"| Filter["7. Exception Filter<br/>Error Formatting & Logging"]:::ef
+        Guard -.->|"Reject"| Filter
+        Pipe -.->|"Validation Failed"| Filter
+    end
+
+    InterceptorAfter --> Res(["HTTP Response"])
+    Filter --> Res
+```
 
 ---
 
