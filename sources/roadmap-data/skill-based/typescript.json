@@ -1,0 +1,1417 @@
+{
+  "slug": "typescript",
+  "title": "Typescript",
+  "category": "skill-based",
+  "topicCount": 93,
+  "topics": [
+    {
+      "name": "abstract-classes",
+      "nodeId": "tZFWeWHdOUJcCEtHfXH9p",
+      "title": "Abstract Classes",
+      "description": "An abstract class is a class that cannot be instantiated directly. Its primary purpose is to define a blueprint for other classes. It can contain abstract methods (methods without implementation) and concrete methods (methods with implementation). Subclasses must provide concrete implementations for all abstract methods inherited from the abstract class, unless the subclass is also declared abstract. This ensures that subclasses adhere to a specific interface or contract.",
+      "content": "# Abstract Classes\n\nAn abstract class is a class that cannot be instantiated directly. Its primary purpose is to define a blueprint for other classes. It can contain abstract methods (methods without implementation) and concrete methods (methods with implementation). Subclasses must provide concrete implementations for all abstract methods inherited from the abstract class, unless the subclass is also declared abstract. This ensures that subclasses adhere to a specific interface or contract.\n\nVisit the following resources to learn more:\n\n- [@official@Abstract Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-and-members)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Abstract Classes",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-and-members"
+        }
+      ]
+    },
+    {
+      "name": "access-modifiers",
+      "nodeId": "RJ7on8WoxrKcXrR3qY5Rs",
+      "title": "Access Modifiers",
+      "description": "Access modifiers in object-oriented programming control the visibility of class members (properties and methods). They determine which parts of your code, or even external code, can access and modify those members. Common access modifiers include `public`, `private`, and `protected`, each offering different levels of accessibility and encapsulation.",
+      "content": "# Access Modifiers\n\nAccess modifiers in object-oriented programming control the visibility of class members (properties and methods). They determine which parts of your code, or even external code, can access and modify those members. Common access modifiers include `public`, `private`, and `protected`, each offering different levels of accessibility and encapsulation.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript Access Modifiers](https://www.typescripttutorial.net/typescript-tutorial/typescript-access-modifiers/)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript Access Modifiers",
+          "url": "https://www.typescripttutorial.net/typescript-tutorial/typescript-access-modifiers/"
+        }
+      ]
+    },
+    {
+      "name": "advanced-types",
+      "nodeId": "2F7vOL__v9dLBohA263aj",
+      "title": "Advanced Types",
+      "description": "Advanced types are sophisticated features in TypeScript that allow developers to create flexible and reusable code by composing existing types in complex ways. These tools include features like union types, intersection types, mapped types, and conditional types, which enable the creation of highly expressive type definitions. By leveraging these patterns, you can define precise constraints for your data structures and ensure type safety even in scenarios where the structure of an object is dynamic or dependent on other values.",
+      "content": "# Advanced Types\n\nAdvanced types are sophisticated features in TypeScript that allow developers to create flexible and reusable code by composing existing types in complex ways. These tools include features like union types, intersection types, mapped types, and conditional types, which enable the creation of highly expressive type definitions. By leveraging these patterns, you can define precise constraints for your data structures and ensure type safety even in scenarios where the structure of an object is dynamic or dependent on other values.\n\nVisit the following resources to learn more:\n\n- [@official@Advanced Topics](https://www.typescriptlang.org/docs/handbook/type-compatibility.html#advanced-topics)\n- [@video@Tutorial of Typescript - Advanced Types](https://www.youtube.com/playlist?list=PLw5h0DiJ-9PBIgIyd2ZA1CVnJf0BLFJg2)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Advanced Topics",
+          "url": "https://www.typescriptlang.org/docs/handbook/type-compatibility.html#advanced-topics"
+        },
+        {
+          "type": "video",
+          "title": "Tutorial of Typescript - Advanced Types",
+          "url": "https://www.youtube.com/playlist?list=PLw5h0DiJ-9PBIgIyd2ZA1CVnJf0BLFJg2"
+        }
+      ]
+    },
+    {
+      "name": "ambient-modules",
+      "nodeId": "k_5y77k8ZZ9_O2WpWXWTY",
+      "title": "Ambient Modules",
+      "description": "Ambient modules in TypeScript are used to describe the shape of existing JavaScript code when you don't have the TypeScript declaration files (`.d.ts`) readily available. They essentially allow you to tell the TypeScript compiler about the existence and structure of a JavaScript module, so you can import and use it in your TypeScript code without getting type errors, even if the module itself wasn't written in TypeScript.",
+      "content": "# Ambient Modules\n\nAmbient modules in TypeScript are used to describe the shape of existing JavaScript code when you don't have the TypeScript declaration files (`.d.ts`) readily available. They essentially allow you to tell the TypeScript compiler about the existence and structure of a JavaScript module, so you can import and use it in your TypeScript code without getting type errors, even if the module itself wasn't written in TypeScript.\n\nVisit the following resources to learn more:\n\n- [@official@Ambient Modules](https://www.typescriptlang.org/docs/handbook/modules/reference.html#ambient-modules)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Ambient Modules",
+          "url": "https://www.typescriptlang.org/docs/handbook/modules/reference.html#ambient-modules"
+        }
+      ]
+    },
+    {
+      "name": "any",
+      "nodeId": "yXiLegSlL7SveU8rBGj8U",
+      "title": "any",
+      "description": "`any` is a type in TypeScript that acts as a top type by opting out of type checking for a variable. When a value is assigned the `any` type, you can perform any operation on it, such as accessing arbitrary properties or calling it as a function, without the compiler raising errors. This type is primarily used as an escape hatch when you need to bypass the type system for dynamic content or when migrating existing JavaScript codebases to TypeScript.",
+      "content": "# any\n\n`any` is a type in TypeScript that acts as a top type by opting out of type checking for a variable. When a value is assigned the `any` type, you can perform any operation on it, such as accessing arbitrary properties or calling it as a function, without the compiler raising errors. This type is primarily used as an escape hatch when you need to bypass the type system for dynamic content or when migrating existing JavaScript codebases to TypeScript.\n\nVisit the following resources to learn more:\n\n- [@official@any type in TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "any type in TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any"
+        }
+      ]
+    },
+    {
+      "name": "array",
+      "nodeId": "YbDuIo1BbZKEAZwmXlCdZ",
+      "title": "Array",
+      "description": "An array is a data structure that stores an ordered collection of elements, where each element is accessed using its numerical index. Arrays are fundamental for managing lists of items, and in TypeScript, you define the types of elements that an array can hold, enforcing consistency and preventing errors. An array's length is mutable allowing you to dynamically add or remove elements.",
+      "content": "# Array\n\nAn array is a data structure that stores an ordered collection of elements, where each element is accessed using its numerical index. Arrays are fundamental for managing lists of items, and in TypeScript, you define the types of elements that an array can hold, enforcing consistency and preventing errors. An array's length is mutable allowing you to dynamically add or remove elements.\n\nVisit the following resources to learn more:\n\n- [@official@Arrays](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Arrays",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays"
+        }
+      ]
+    },
+    {
+      "name": "as-any",
+      "nodeId": "afTNr36VqeXoJpHxm2IoS",
+      "title": "as any",
+      "description": "The `as any` syntax in TypeScript is a type assertion that instructs the compiler to treat a value as the `any` type, effectively disabling all type checking for that specific expression. When this assertion is used, you bypass the type system, allowing you to access any properties or methods on the object regardless of its original definition. This feature is often used as a temporary escape hatch when dealing with legacy code, external libraries with incomplete type definitions, or complex dynamic data structures where precise typing is difficult to determine.",
+      "content": "# as any\n\nThe `as any` syntax in TypeScript is a type assertion that instructs the compiler to treat a value as the `any` type, effectively disabling all type checking for that specific expression. When this assertion is used, you bypass the type system, allowing you to access any properties or methods on the object regardless of its original definition. This feature is often used as a temporary escape hatch when dealing with legacy code, external libraries with incomplete type definitions, or complex dynamic data structures where precise typing is difficult to determine.\n\nVisit the following resources to learn more:\n\n- [@official@any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "any",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any"
+        }
+      ]
+    },
+    {
+      "name": "as-const",
+      "nodeId": "pGFnTqi0-RSj0YRmNA5iy",
+      "title": "as const",
+      "description": "`as const` is a TypeScript feature that allows you to tell the compiler to infer the narrowest or most specific type possible for an expression. Instead of the compiler widening the type of a value to its general type (like inferring a string variable as `string`), `as const` makes the compiler infer the value as a constant type (like inferring a string variable as the specific string literal type `\"hello\"`). This is useful for creating immutable data structures or when you need the compiler to enforce the exact values allowed.",
+      "content": "# as const\n\n`as const` is a TypeScript feature that allows you to tell the compiler to infer the narrowest or most specific type possible for an expression. Instead of the compiler widening the type of a value to its general type (like inferring a string variable as `string`), `as const` makes the compiler infer the value as a constant type (like inferring a string variable as the specific string literal type `\"hello\"`). This is useful for creating immutable data structures or when you need the compiler to enforce the exact values allowed.\n\nVisit the following resources to learn more:\n\n- [@official@const assertions](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "const assertions",
+          "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions"
+        }
+      ]
+    },
+    {
+      "name": "awaited",
+      "nodeId": "aEhI_9mFWXRIZh1ZxTuzu",
+      "title": "Awaited",
+      "description": "Awaited is a utility type that models the process of unwrapping a Promise. It is used to determine the type that a Promise resolves to, regardless of how many layers of nested Promises are involved. By applying this utility, you can extract the underlying value from an asynchronous function's return type or any other Promise-like structure.",
+      "content": "# Awaited\n\nAwaited is a utility type that models the process of unwrapping a Promise. It is used to determine the type that a Promise resolves to, regardless of how many layers of nested Promises are involved. By applying this utility, you can extract the underlying value from an asynchronous function's return type or any other Promise-like structure.",
+      "resources": []
+    },
+    {
+      "name": "boolean",
+      "nodeId": "hfIHxa5i_5rEpjtzqEsic",
+      "title": "Boolean Type in TypeScript",
+      "description": "A boolean type represents a logical value that can be either `true` or `false`. It is commonly used in programming to control the flow of execution based on certain conditions, allowing programs to make decisions and execute different code blocks depending on whether a condition is met. Boolean values are fundamental for expressing logical operations and comparisons.",
+      "content": "# Boolean Type in TypeScript\n\nA boolean type represents a logical value that can be either `true` or `false`. It is commonly used in programming to control the flow of execution based on certain conditions, allowing programs to make decisions and execute different code blocks depending on whether a condition is met. Boolean values are fundamental for expressing logical operations and comparisons.\n\nVisit the following resources to learn more:\n\n- [@article@Number, String, Boolean, Symbol and Object](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)",
+      "resources": [
+        {
+          "type": "article",
+          "title": "Number, String, Boolean, Symbol and Object",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean"
+        }
+      ]
+    },
+    {
+      "name": "build-tools",
+      "nodeId": "I5uwfej5XMwR2N2gpBILh",
+      "title": "Build Tools",
+      "description": "Task runners automatically execute commands and carry out processes behind the scenes. This helps automate your workflow by performing mundane, repetitive tasks that you would otherwise waste an egregious amount of time repeating. Common usages of task runners include numerous development tasks such as: spinning up development servers, compiling code (ex. SCSS to CSS), running linters, serving files up from a local port on your computer, and many more!",
+      "content": "# Build Tools\n\nTask runners automatically execute commands and carry out processes behind the scenes. This helps automate your workflow by performing mundane, repetitive tasks that you would otherwise waste an egregious amount of time repeating. Common usages of task runners include numerous development tasks such as: spinning up development servers, compiling code (ex. SCSS to CSS), running linters, serving files up from a local port on your computer, and many more!\n\nVisit the following resources to learn more:\n\n- [@official@webpack is a static module bundler for modern JavaScript applications](https://webpack.js.org/)\n- [@official@Vite Next Generation Frontend Tooling](https://vitejs.dev)\n- [@official@Parcel is a zero configuration build tool for the web](https://parceljs.org/)\n- [@official@esbuild is an extremely fast JavaScript bundler and minifier](https://esbuild.github.io/)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "webpack is a static module bundler for modern JavaScript applications",
+          "url": "https://webpack.js.org/"
+        },
+        {
+          "type": "official",
+          "title": "Vite Next Generation Frontend Tooling",
+          "url": "https://vitejs.dev"
+        },
+        {
+          "type": "official",
+          "title": "Parcel is a zero configuration build tool for the web",
+          "url": "https://parceljs.org/"
+        },
+        {
+          "type": "official",
+          "title": "esbuild is an extremely fast JavaScript bundler and minifier",
+          "url": "https://esbuild.github.io/"
+        }
+      ]
+    },
+    {
+      "name": "class",
+      "nodeId": "tTSITP1W1ymS-njbFb8Ts",
+      "title": "Class",
+      "description": "A class is a blueprint for creating objects (instances) that share similar characteristics. It defines the properties (data) and methods (functions) that the objects will possess. Classes allow you to create reusable code structures by defining a template that you can then use to instantiate multiple objects with the same basic features.",
+      "content": "# Class\n\nA class is a blueprint for creating objects (instances) that share similar characteristics. It defines the properties (data) and methods (functions) that the objects will possess. Classes allow you to create reusable code structures by defining a template that you can then use to instantiate multiple objects with the same basic features.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript Classes",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html"
+        }
+      ]
+    },
+    {
+      "name": "classes",
+      "nodeId": "ib0jfZzukYOZ42AdJqt_W",
+      "title": "Classes",
+      "description": "Classes are blueprints for creating objects, encapsulating data (properties) and behavior (methods) into a single unit. They provide a structured way to define the characteristics and actions that an object of that class can possess. This allows for creating multiple instances of the same object type with consistent properties and methods.",
+      "content": "# Classes\n\nClasses are blueprints for creating objects, encapsulating data (properties) and behavior (methods) into a single unit. They provide a structured way to define the characteristics and actions that an object of that class can possess. This allows for creating multiple instances of the same object type with consistent properties and methods.\n\nVisit the following resources to learn more:\n\n- [@official@Tutorial - Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Tutorial - Classes",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html"
+        }
+      ]
+    },
+    {
+      "name": "combining-types",
+      "nodeId": "qefnsugcveizVq2TORRgn",
+      "title": "Combining Types",
+      "description": "Combining types in TypeScript allows you to create new, more complex types from existing ones. This is achieved through features like unions and intersections. A union type lets a variable hold values of different types, while an intersection type combines multiple types into a single type that has all the properties of each individual type. These mechanisms provide flexibility and expressiveness when defining the shape of your data.",
+      "content": "# Combining Types\n\nCombining types in TypeScript allows you to create new, more complex types from existing ones. This is achieved through features like unions and intersections. A union type lets a variable hold values of different types, while an intersection type combines multiple types into a single type that has all the properties of each individual type. These mechanisms provide flexibility and expressiveness when defining the shape of your data.\n\nVisit the following resources to learn more:\n\n- [@official@Union Types in TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)\n- [@article@Intersection Types in TypeScript](https://www.typescripttutorial.net/typescript-tutorial/typescript-intersection-types/)\n- [@article@Type Aliases](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)\n- [@article@Keyof Type Operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Union Types in TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types"
+        },
+        {
+          "type": "article",
+          "title": "Intersection Types in TypeScript",
+          "url": "https://www.typescripttutorial.net/typescript-tutorial/typescript-intersection-types/"
+        },
+        {
+          "type": "article",
+          "title": "Type Aliases",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases"
+        },
+        {
+          "type": "article",
+          "title": "Keyof Type Operator",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "compiler-options",
+      "nodeId": "RrExVb7l2gd0s_TlNdLeD",
+      "title": "Compiler Options",
+      "description": "Compiler options in TypeScript provide fine-grained control over how the TypeScript compiler (`tsc`) transforms `.ts` files into JavaScript. These options are typically configured within a `tsconfig.json` file or passed directly via the command line. They dictate aspects like target ECMAScript version, module system, strictness of type checking, source map generation, and many other behaviors of the compilation process.",
+      "content": "# Compiler Options\n\nCompiler options in TypeScript provide fine-grained control over how the TypeScript compiler (`tsc`) transforms `.ts` files into JavaScript. These options are typically configured within a `tsconfig.json` file or passed directly via the command line. They dictate aspects like target ECMAScript version, module system, strictness of type checking, source map generation, and many other behaviors of the compilation process.\n\nVisit the following resources to learn more:\n\n- [@official@Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Compiler Options",
+          "url": "https://www.typescriptlang.org/docs/handbook/compiler-options.html"
+        }
+      ]
+    },
+    {
+      "name": "conditional-types",
+      "nodeId": "ubGIhi-WLE0EopTYXzmPL",
+      "title": "Conditional Types",
+      "description": "Conditional types in TypeScript allow you to define types that depend on other types, similar to a ternary operator in JavaScript. They enable you to express type relationships that change based on whether a specific type condition is met. This feature makes your type definitions more flexible and capable of handling complex scenarios where the resulting type depends on the structure or nature of another type.",
+      "content": "# Conditional Types\n\nConditional types in TypeScript allow you to define types that depend on other types, similar to a ternary operator in JavaScript. They enable you to express type relationships that change based on whether a specific type condition is met. This feature makes your type definitions more flexible and capable of handling complex scenarios where the resulting type depends on the structure or nature of another type.\n\nVisit the following resources to learn more:\n\n- [@official@Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#handbook-content)\n- [@video@Conditional Types - Advanced TypeScript](https://www.youtube.com/watch?v=QFWrbNehKk0)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Conditional Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#handbook-content"
+        },
+        {
+          "type": "video",
+          "title": "Conditional Types - Advanced TypeScript",
+          "url": "https://www.youtube.com/watch?v=QFWrbNehKk0"
+        }
+      ]
+    },
+    {
+      "name": "constructor-overloading",
+      "nodeId": "oxzcYXxy2I7GI7nbvFYVa",
+      "title": "Constructor Overloading",
+      "description": "Constructor overloading allows a class to have multiple constructors with different parameter lists. This enables you to create objects of the class in different ways, providing flexibility in initialization based on the provided arguments. Each constructor variation handles the object's initialization differently depending on the types and number of arguments passed during instantiation.",
+      "content": "# Constructor Overloading\n\nConstructor overloading allows a class to have multiple constructors with different parameter lists. This enables you to create objects of the class in different ways, providing flexibility in initialization based on the provided arguments. Each constructor variation handles the object's initialization differently depending on the types and number of arguments passed during instantiation.\n\nVisit the following resources to learn more:\n\n- [@official@Constructors - TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html#constructors)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Constructors - TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html#constructors"
+        }
+      ]
+    },
+    {
+      "name": "constructor-params",
+      "nodeId": "3XrKbK5Od2eoM0BLaS4kU",
+      "title": "Constructor Parameters",
+      "description": "In TypeScript classes, constructor parameters provide a concise way to define and initialize class properties directly within the constructor's parameter list. By using access modifiers like `public`, `private`, or `protected` before a constructor parameter, TypeScript automatically creates a corresponding class property with that name and assigns the constructor argument's value to it. This streamlines the process of property declaration and initialization, reducing boilerplate code.",
+      "content": "# Constructor Parameters\n\nIn TypeScript classes, constructor parameters provide a concise way to define and initialize class properties directly within the constructor's parameter list. By using access modifiers like `public`, `private`, or `protected` before a constructor parameter, TypeScript automatically creates a corresponding class property with that name and assigns the constructor argument's value to it. This streamlines the process of property declaration and initialization, reducing boilerplate code.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript - Construct](https://www.typescriptlang.org/docs/handbook/2/classes.html#constructors)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript - Construct",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html#constructors"
+        }
+      ]
+    },
+    {
+      "name": "decorators",
+      "nodeId": "TRx3wvWnRdJJf5eL-GBG4",
+      "title": "Decorators",
+      "description": "Decorators are a special kind of declaration that can be attached to a class declaration, method, accessor, property, or parameter. They use the form `@expression`, where `expression` must evaluate to a function that will be called at runtime with information about the decorated declaration. Decorators provide a way to add both annotations and a meta-programming syntax for class declarations and members. They essentially modify the behavior or functionality of the decorated code in a declarative way.",
+      "content": "# Decorators\n\nDecorators are a special kind of declaration that can be attached to a class declaration, method, accessor, property, or parameter. They use the form `@expression`, where `expression` must evaluate to a function that will be called at runtime with information about the decorated declaration. Decorators provide a way to add both annotations and a meta-programming syntax for class declarations and members. They essentially modify the behavior or functionality of the decorated code in a declarative way.\n\nVisit the following resources to learn more:\n\n- [@official@Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Decorators",
+          "url": "https://www.typescriptlang.org/docs/handbook/decorators.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "enum",
+      "nodeId": "bfZIXHceDKDGQl-24kQpT",
+      "title": "Enum",
+      "description": "An \"enum\" (short for enumeration) is a way to define a set of named constants. It provides a way to give more friendly names to sets of numeric values, making code more readable and maintainable. Enums allow you to define a type by enumerating its possible values, which can represent options, states, or any other set of distinct possibilities.",
+      "content": "# Enum\n\nAn \"enum\" (short for enumeration) is a way to define a set of named constants. It provides a way to give more friendly names to sets of numeric values, making code more readable and maintainable. Enums allow you to define a type by enumerating its possible values, which can represent options, states, or any other set of distinct possibilities.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript - Enums](https://www.typescriptlang.org/docs/handbook/enums.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript - Enums",
+          "url": "https://www.typescriptlang.org/docs/handbook/enums.html"
+        }
+      ]
+    },
+    {
+      "name": "equality",
+      "nodeId": "Wy2yIK5vgLjEcc9VjuQK5",
+      "title": "Equality in Type Guards and Narrowing",
+      "description": "Equality in the context of type guards and narrowing refers to using comparison operators (like `===`, `!==`, `==`, `!=`) to refine the type of a variable within a TypeScript program. By comparing a variable against a specific value (or another variable), TypeScript can infer a more specific type for that variable within a certain scope, enabling safer and more accurate code execution by ruling out possibilities. This mechanism enhances type safety by allowing the compiler to understand the possible values and types a variable can hold at different points in the code.",
+      "content": "# Equality in Type Guards and Narrowing\n\nEquality in the context of type guards and narrowing refers to using comparison operators (like `===`, `!==`, `==`, `!=`) to refine the type of a variable within a TypeScript program. By comparing a variable against a specific value (or another variable), TypeScript can infer a more specific type for that variable within a certain scope, enabling safer and more accurate code execution by ruling out possibilities. This mechanism enhances type safety by allowing the compiler to understand the possible values and types a variable can hold at different points in the code.\n\nVisit the following resources to learn more:\n\n- [@official@Equality Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#equality-narrowing)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Equality Narrowing",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#equality-narrowing"
+        }
+      ]
+    },
+    {
+      "name": "exclude",
+      "nodeId": "0fvOXi9gJbEc7etqTggNE",
+      "title": "Exclude",
+      "description": "`Exclude` is a utility type in TypeScript that constructs a new type by removing types from a union type. Given two types, `Type` and `ExcludedUnion`, `Exclude<Type, ExcludedUnion>` creates a type that includes all members of `Type` that are _not_ assignable to `ExcludedUnion`. This is useful for filtering out specific types from a union, resulting in a more refined and specific type.",
+      "content": "# Exclude\n\n`Exclude` is a utility type in TypeScript that constructs a new type by removing types from a union type. Given two types, `Type` and `ExcludedUnion`, `Exclude<Type, ExcludedUnion>` creates a type that includes all members of `Type` that are _not_ assignable to `ExcludedUnion`. This is useful for filtering out specific types from a union, resulting in a more refined and specific type.\n\nVisit the following resources to learn more:\n\n- [@official@Exclude\\<UnionType, ExcludedMembers\\>](https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Exclude\\<UnionType, ExcludedMembers\\>",
+          "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers"
+        }
+      ]
+    },
+    {
+      "name": "extending-interfaces",
+      "nodeId": "O-9WQqidujLIEOTcOfy4n",
+      "title": "Extending Interfaces",
+      "description": "Extending interfaces in TypeScript allows you to create new interfaces based on existing ones. This means a new interface can inherit all the properties and methods of a parent interface and add its own unique members, promoting code reuse and establishing a clear hierarchy of types. Think of it like inheritance in classes, but for interface definitions.",
+      "content": "# Extending Interfaces\n\nExtending interfaces in TypeScript allows you to create new interfaces based on existing ones. This means a new interface can inherit all the properties and methods of a parent interface and add its own unique members, promoting code reuse and establishing a clear hierarchy of types. Think of it like inheritance in classes, but for interface definitions.\n\nVisit the following resources to learn more:\n\n- [@official@Extending Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Extending Interfaces",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/objects.html"
+        }
+      ]
+    },
+    {
+      "name": "external-modules",
+      "nodeId": "egQWk1n3p8Pep83yIwCtI",
+      "title": "External Modules in TypeScript",
+      "description": "External modules in TypeScript are files containing code that can be imported and used in other files. They help organize and structure your project by dividing code into logical units, improving maintainability and reusability. Each external module has its own scope, preventing naming conflicts and allowing you to explicitly control what is exposed from the module using `export` and what is consumed from other modules using `import`.",
+      "content": "# External Modules in TypeScript\n\nExternal modules in TypeScript are files containing code that can be imported and used in other files. They help organize and structure your project by dividing code into logical units, improving maintainability and reusability. Each external module has its own scope, preventing naming conflicts and allowing you to explicitly control what is exposed from the module using `export` and what is consumed from other modules using `import`.\n\nVisit the following resources to learn more:\n\n- [@article@TypeScript - External Module](https://learncodeweb.com/typescript/modules-in-typescript-explain-with-an-example/)",
+      "resources": [
+        {
+          "type": "article",
+          "title": "TypeScript - External Module",
+          "url": "https://learncodeweb.com/typescript/modules-in-typescript-explain-with-an-example/"
+        }
+      ]
+    },
+    {
+      "name": "extract",
+      "nodeId": "IIAbAzXiVQm1JEi2MTMZN",
+      "title": "Extract",
+      "description": "Extract allows you to create a new type by picking out specific types from a union based on a condition. Essentially, it filters a union type, keeping only those members that are assignable to a specified type. This is useful when you need to narrow down the possible types in a union to only those that meet a certain criteria.",
+      "content": "# Extract\n\nExtract allows you to create a new type by picking out specific types from a union based on a condition. Essentially, it filters a union type, keeping only those members that are assignable to a specified type. This is useful when you need to narrow down the possible types in a union to only those that meet a certain criteria.\n\nVisit the following resources to learn more:\n\n- [@official@Extract\\<Type, Union\\>](https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Extract\\<Type, Union\\>",
+          "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union"
+        }
+      ]
+    },
+    {
+      "name": "formatting",
+      "nodeId": "fU8Vnw1DobM4iXl1Tq6EK",
+      "title": "Formatting",
+      "description": "Formatting tools automatically adjust the way your code looks, making it consistent and easier to read. These tools can handle things like spacing, indentation, and line breaks. This makes your code cleaner and helps everyone on a team follow the same style. A popular tool for formatting code is Prettier. It supports TypeScript and can be configured to enforce a specific style guide.",
+      "content": "# Formatting\n\nFormatting tools automatically adjust the way your code looks, making it consistent and easier to read. These tools can handle things like spacing, indentation, and line breaks. This makes your code cleaner and helps everyone on a team follow the same style. A popular tool for formatting code is Prettier. It supports TypeScript and can be configured to enforce a specific style guide.\n\nVisit the following resources to learn more:\n\n- [@article@Prettier Website](https://prettier.io)\n- [@article@Why Prettier](https://prettier.io/docs/en/why-prettier.html)\n- [@article@BiomeJS Website](https://biomejs.dev)",
+      "resources": [
+        {
+          "type": "article",
+          "title": "Prettier Website",
+          "url": "https://prettier.io"
+        },
+        {
+          "type": "article",
+          "title": "Why Prettier",
+          "url": "https://prettier.io/docs/en/why-prettier.html"
+        },
+        {
+          "type": "article",
+          "title": "BiomeJS Website",
+          "url": "https://biomejs.dev"
+        }
+      ]
+    },
+    {
+      "name": "function-overloading",
+      "nodeId": "-0Zp6b8NjDyz9MAQE3HfS",
+      "title": "Function Overloading",
+      "description": "Function overloading allows you to define multiple function signatures with the same name but different parameter types or numbers of parameters. This lets you provide specific type information based on how the function is called, enhancing type safety and code clarity. When you call an overloaded function, TypeScript picks the most appropriate function signature based on the provided arguments.",
+      "content": "# Function Overloading\n\nFunction overloading allows you to define multiple function signatures with the same name but different parameter types or numbers of parameters. This lets you provide specific type information based on how the function is called, enhancing type safety and code clarity. When you call an overloaded function, TypeScript picks the most appropriate function signature based on the provided arguments.\n\nVisit the following resources to learn more:\n\n- [@official@Function Overloads](https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Function Overloads",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads"
+        }
+      ]
+    },
+    {
+      "name": "generic-constraints",
+      "nodeId": "0NXHAOUYGIwuPwlN7r_B3",
+      "title": "Generic Constraints",
+      "description": "Generic constraints in TypeScript allow you to limit the types that can be used as type arguments for a generic type or function. They ensure that the type argument satisfies a specific requirement, like having certain properties or methods. This provides more type safety and enables you to work with specific properties of the generic type, knowing they are guaranteed to exist.",
+      "content": "# Generic Constraints\n\nGeneric constraints in TypeScript allow you to limit the types that can be used as type arguments for a generic type or function. They ensure that the type argument satisfies a specific requirement, like having certain properties or methods. This provides more type safety and enables you to work with specific properties of the generic type, knowing they are guaranteed to exist.\n\nVisit the following resources to learn more:\n\n- [@official@Generic Constraints - TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Generic Constraints - TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints"
+        }
+      ]
+    },
+    {
+      "name": "generic-types",
+      "nodeId": "T2-VAVfntouJOoWHpHZ3n",
+      "title": "Generic Types",
+      "description": "Generic types allow you to write code that can work with a variety of types without sacrificing type safety. Think of them as placeholders for types that you specify later when you use the code. To create a generic type, you use angle brackets `<>` to define type parameters. These parameters act as variables that represent the specific type you want to work with, allowing you to write reusable components that adapt to different data types.",
+      "content": "# Generic Types\n\nGeneric types allow you to write code that can work with a variety of types without sacrificing type safety. Think of them as placeholders for types that you specify later when you use the code. To create a generic type, you use angle brackets `<>` to define type parameters. These parameters act as variables that represent the specific type you want to work with, allowing you to write reusable components that adapt to different data types.\n\nVisit the following resources to learn more:\n\n- [@official@Hello World of Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html#hello-world-of-generics)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Hello World of Generics",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html#hello-world-of-generics"
+        }
+      ]
+    },
+    {
+      "name": "generics",
+      "nodeId": "4gaKqNtGLFqpk9WVKZl0v",
+      "title": "Generics",
+      "description": "Generics are a way to write code that can work with a variety of types without knowing those types ahead of time. They allow you to define type variables that can be used to represent the specific type that will be used when the code is actually executed. This makes your code more reusable and type-safe by preventing errors that could occur if you were to use `any` or other less specific types.",
+      "content": "# Generics\n\nGenerics are a way to write code that can work with a variety of types without knowing those types ahead of time. They allow you to define type variables that can be used to represent the specific type that will be used when the code is actually executed. This makes your code more reusable and type-safe by preventing errors that could occur if you were to use `any` or other less specific types.\n\nVisit the following resources to learn more:\n\n- [@official@Hello World of Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html#hello-world-of-generics)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Hello World of Generics",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html#hello-world-of-generics"
+        }
+      ]
+    },
+    {
+      "name": "global-augmentation",
+      "nodeId": "JQwWeB1gkANSYfQmH69Bs",
+      "title": "Global Augmentation",
+      "description": "Global augmentation in TypeScript lets you add or modify existing global types and interfaces. This is particularly useful when working with JavaScript libraries that don't have TypeScript definitions or when you want to extend existing TypeScript definitions to suit your specific project needs. It essentially allows you to declare properties or methods on globally available objects (like `window` or built-in JavaScript objects) from within your TypeScript code.",
+      "content": "# Global Augmentation\n\nGlobal augmentation in TypeScript lets you add or modify existing global types and interfaces. This is particularly useful when working with JavaScript libraries that don't have TypeScript definitions or when you want to extend existing TypeScript definitions to suit your specific project needs. It essentially allows you to declare properties or methods on globally available objects (like `window` or built-in JavaScript objects) from within your TypeScript code.\n\nVisit the following resources to learn more:\n\n- [@official@Global augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#global-augmentation)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Global augmentation",
+          "url": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html#global-augmentation"
+        }
+      ]
+    },
+    {
+      "name": "hybrid-types",
+      "nodeId": "lvtTSHH9yBTCiLng8btnI",
+      "title": "Hybrid Types",
+      "description": "Hybrid types describe objects that act as both an object and a function. In essence, they possess properties and methods like a regular object, but they can also be invoked or called directly like a function. This unusual structure is often used when a function needs to maintain state or have additional properties associated with it.",
+      "content": "# Hybrid Types\n\nHybrid types describe objects that act as both an object and a function. In essence, they possess properties and methods like a regular object, but they can also be invoked or called directly like a function. This unusual structure is often used when a function needs to maintain state or have additional properties associated with it.",
+      "resources": []
+    },
+    {
+      "name": "inheritance-vs-polymorphism",
+      "nodeId": "8P0-vb9nlnmz7iC4UvyJZ",
+      "title": "Inheritance vs. Polymorphism",
+      "description": "Inheritance is a mechanism where a class (the subclass or derived class) acquires the properties and methods of another class (the superclass or base class), establishing an \"is-a\" relationship. Polymorphism, meaning \"many forms,\" allows objects of different classes to be treated as objects of a common type, enabling you to write code that can work with objects of multiple classes without knowing their specific types at compile time.",
+      "content": "# Inheritance vs. Polymorphism\n\nInheritance is a mechanism where a class (the subclass or derived class) acquires the properties and methods of another class (the superclass or base class), establishing an \"is-a\" relationship. Polymorphism, meaning \"many forms,\" allows objects of different classes to be treated as objects of a common type, enabling you to write code that can work with objects of multiple classes without knowing their specific types at compile time.\n\nVisit the following resources to learn more:\n\n- [@article@Dev.to - Mastering OOP in TypeScript](https://dev.to/rajrathod/mastering-object-oriented-programming-with-typescript-encapsulation-abstraction-inheritance-and-polymorphism-explained-c6p)\n- [@video@Inheritance and Polymorphism In TypeScript](https://www.youtube.com/watch?v=Sn6K57YSuwU)",
+      "resources": [
+        {
+          "type": "article",
+          "title": "Dev.to - Mastering OOP in TypeScript",
+          "url": "https://dev.to/rajrathod/mastering-object-oriented-programming-with-typescript-encapsulation-abstraction-inheritance-and-polymorphism-explained-c6p"
+        },
+        {
+          "type": "video",
+          "title": "Inheritance and Polymorphism In TypeScript",
+          "url": "https://www.youtube.com/watch?v=Sn6K57YSuwU"
+        }
+      ]
+    },
+    {
+      "name": "installation-and-configuration",
+      "nodeId": "dA8CNQOgJRDa0T7rmyS7f",
+      "title": "Installation and Configuration",
+      "description": "The installation process of TypeScript generally includes installing the TypeScript compiler, which translates TypeScript code into JavaScript, and configuring your project with a `tsconfig.json` file to manage compiler options and project settings. This setup enables you to write, compile, and run TypeScript code effectively.",
+      "content": "# Installation and Configuration\n\nThe installation process of TypeScript generally includes installing the TypeScript compiler, which translates TypeScript code into JavaScript, and configuring your project with a `tsconfig.json` file to manage compiler options and project settings. This setup enables you to write, compile, and run TypeScript code effectively.\n\nVisit the following resources to learn more:\n\n- [@official@Install and Configure TypeScript](https://www.typescriptlang.org/download)\n- [@article@TypeScript Getting Started](https://thenewstack.io/typescript-tutorial-a-guide-to-using-the-programming-language/)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Install and Configure TypeScript",
+          "url": "https://www.typescriptlang.org/download"
+        },
+        {
+          "type": "article",
+          "title": "TypeScript Getting Started",
+          "url": "https://thenewstack.io/typescript-tutorial-a-guide-to-using-the-programming-language/"
+        }
+      ]
+    },
+    {
+      "name": "instanceof",
+      "nodeId": "EDOU5a7UK17yp3PdFBJMc",
+      "title": "instanceof Operator",
+      "description": "The `instanceof` operator checks if an object is an instance of a specific class or constructor function. It determines if the prototype property of a constructor appears anywhere in the prototype chain of an object. The result of this check is a boolean value, indicating whether the object is considered an instance of the specified type.",
+      "content": "# instanceof Operator\n\nThe `instanceof` operator checks if an object is an instance of a specific class or constructor function. It determines if the prototype property of a constructor appears anywhere in the prototype chain of an object. The result of this check is a boolean value, indicating whether the object is considered an instance of the specified type.\n\nVisit the following resources to learn more:\n\n- [@official@instanceOf Operator](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "instanceOf Operator",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing"
+        }
+      ]
+    },
+    {
+      "name": "instancetype",
+      "nodeId": "izGAjNtrh3BzQt3KiZX0W",
+      "title": "InstanceType",
+      "description": "InstanceType is a built-in utility type that constructs a type consisting of the instance type of a constructor function. It extracts the type returned by a class constructor when it is instantiated with the `new` keyword. This is useful for capturing the specific shape of an object that is created from a class, allowing developers to ensure that variables or function parameters match the structure of that class instance.",
+      "content": "# InstanceType\n\nInstanceType is a built-in utility type that constructs a type consisting of the instance type of a constructor function. It extracts the type returned by a class constructor when it is instantiated with the `new` keyword. This is useful for capturing the specific shape of an object that is created from a class, allowing developers to ensure that variables or function parameters match the structure of that class instance.",
+      "resources": []
+    },
+    {
+      "name": "interface",
+      "nodeId": "mVKsM7R4Ivpdhnbwt1aRb",
+      "title": "Interface",
+      "description": "An interface in TypeScript is a way to define a contract for the shape of an object. It names a set of properties and their types that an object must have. Think of it as a blueprint that specifies the properties (and optionally, methods) that an object should possess, allowing you to ensure that different parts of your code work together smoothly by enforcing a consistent structure.",
+      "content": "# Interface\n\nAn interface in TypeScript is a way to define a contract for the shape of an object. It names a set of properties and their types that an object must have. Think of it as a blueprint that specifies the properties (and optionally, methods) that an object should possess, allowing you to ensure that different parts of your code work together smoothly by enforcing a consistent structure.\n\nVisit the following resources to learn more:\n\n- [@official@Object Types - Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Object Types - Interfaces",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/objects.html"
+        }
+      ]
+    },
+    {
+      "name": "interface-declaration",
+      "nodeId": "fY40W8prpgiNqRL50w7ub",
+      "title": "Interface Declaration",
+      "description": "An interface declaration introduces a new named type into the TypeScript type system. It specifies a contract that an object (or other type) can adhere to, defining the names and types of properties and methods that implementing objects must possess. Interfaces do not produce JavaScript code; they exist purely for type-checking purposes, enabling stronger static typing and improved code maintainability.",
+      "content": "# Interface Declaration\n\nAn interface declaration introduces a new named type into the TypeScript type system. It specifies a contract that an object (or other type) can adhere to, defining the names and types of properties and methods that implementing objects must possess. Interfaces do not produce JavaScript code; they exist purely for type-checking purposes, enabling stronger static typing and improved code maintainability.\n\nVisit the following resources to learn more:\n\n- [@official@Extending Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Extending Interfaces",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/objects.html"
+        }
+      ]
+    },
+    {
+      "name": "intersection-types",
+      "nodeId": "RWYXEZMODUrqwRWf_Lqi9",
+      "title": "Intersection Types",
+      "description": "Intersection types in TypeScript allow you to combine multiple types into a single type. The resulting type has all the features (properties, methods, etc.) of all the constituent types. This is particularly useful when you want to create a type that represents an object that must satisfy multiple type constraints simultaneously.",
+      "content": "# Intersection Types\n\nIntersection types in TypeScript allow you to combine multiple types into a single type. The resulting type has all the features (properties, methods, etc.) of all the constituent types. This is particularly useful when you want to create a type that represents an object that must satisfy multiple type constraints simultaneously.\n\nVisit the following resources to learn more:\n\n- [@article@Intersection Types in TypeScript](https://www.typescripttutorial.net/typescript-tutorial/typescript-intersection-types/)",
+      "resources": [
+        {
+          "type": "article",
+          "title": "Intersection Types in TypeScript",
+          "url": "https://www.typescripttutorial.net/typescript-tutorial/typescript-intersection-types/"
+        }
+      ]
+    },
+    {
+      "name": "introduction-to-typescript",
+      "nodeId": "KDd40JOAvZ8O1mfhTYB3K",
+      "title": "Introduction to TypeScript",
+      "description": "TypeScript is a programming language that builds on JavaScript by adding static types. It essentially acts as a superset of JavaScript, meaning that all valid JavaScript code is also valid TypeScript code. The key addition of static typing allows developers to define the expected data types of variables, function parameters, and return values, which helps catch errors during development and improves code maintainability.",
+      "content": "# Introduction to TypeScript\n\nTypeScript is a programming language that builds on JavaScript by adding static types. It essentially acts as a superset of JavaScript, meaning that all valid JavaScript code is also valid TypeScript code. The key addition of static typing allows developers to define the expected data types of variables, function parameters, and return values, which helps catch errors during development and improves code maintainability.\n\nVisit the following resources to learn more:\n\n- [@official@Overview of TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html)\n- [@official@TypeScript Official Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)\n- [@article@What Is TypeScript?](https://thenewstack.io/what-is-typescript/)\n- [@video@Video: Where TypeScript Excels](https://youtu.be/BUo7B6UuoJ4)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Overview of TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html"
+        },
+        {
+          "type": "official",
+          "title": "TypeScript Official Handbook",
+          "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+        },
+        {
+          "type": "article",
+          "title": "What Is TypeScript?",
+          "url": "https://thenewstack.io/what-is-typescript/"
+        },
+        {
+          "type": "video",
+          "title": "Video: Where TypeScript Excels",
+          "url": "https://youtu.be/BUo7B6UuoJ4"
+        }
+      ]
+    },
+    {
+      "name": "keyof-operator",
+      "nodeId": "t1Tcesfq7bV2TkHcfD6lU",
+      "title": "keyof Operator",
+      "description": "The `keyof` operator in TypeScript creates a union of all the keys (property names) of a given object type. It essentially extracts the names of the properties as string literal types. This allows you to work with the properties of an object type in a type-safe way, especially when dealing with generic functions or situations where you need to ensure that you're only accessing valid properties.",
+      "content": "# keyof Operator\n\nThe `keyof` operator in TypeScript creates a union of all the keys (property names) of a given object type. It essentially extracts the names of the properties as string literal types. This allows you to work with the properties of an object type in a type-safe way, especially when dealing with generic functions or situations where you need to ensure that you're only accessing valid properties.\n\nVisit the following resources to learn more:\n\n- [@official@keyof Type Operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "keyof Type Operator",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "linting",
+      "nodeId": "8PcAPOrKisKRYPWamz4nV",
+      "title": "Linting",
+      "description": "Linting is the process of running a program that analyzes code for potential errors, stylistic issues, and code quality problems. It helps developers identify and fix issues early in the development cycle, leading to more maintainable and consistent codebases. ESLint is a popular linting tool for JavaScript and TypeScript that can be configured with rules to enforce specific coding standards and best practices.",
+      "content": "# Linting\n\nLinting is the process of running a program that analyzes code for potential errors, stylistic issues, and code quality problems. It helps developers identify and fix issues early in the development cycle, leading to more maintainable and consistent codebases. ESLint is a popular linting tool for JavaScript and TypeScript that can be configured with rules to enforce specific coding standards and best practices.\n\nVisit the following resources to learn more:\n\n- [@article@ESLint Official Website](https://eslint.org/)\n- [@article@Introduction to ESLint](https://dev.to/shivambmgupta/eslint-what-why-when-how-5f1d)\n- [@video@ESLint Quickstart - find errors automatically](https://www.youtube.com/watch?v=qhuFviJn-es)",
+      "resources": [
+        {
+          "type": "article",
+          "title": "ESLint Official Website",
+          "url": "https://eslint.org/"
+        },
+        {
+          "type": "article",
+          "title": "Introduction to ESLint",
+          "url": "https://dev.to/shivambmgupta/eslint-what-why-when-how-5f1d"
+        },
+        {
+          "type": "video",
+          "title": "ESLint Quickstart - find errors automatically",
+          "url": "https://www.youtube.com/watch?v=qhuFviJn-es"
+        }
+      ]
+    },
+    {
+      "name": "literal-types",
+      "nodeId": "CWzGwvl6NwYCaLYSLIjqQ",
+      "title": "Literal Types",
+      "description": "Literal types are a feature that allows you to specify the exact value a variable can hold. Instead of just saying a variable is a `string` or a `number`, you can specify that it can only be a particular string like `\"hello\"` or a particular number like `42`. This enables more precise type checking and helps catch errors at compile time by ensuring that variables only hold the intended values.",
+      "content": "# Literal Types\n\nLiteral types are a feature that allows you to specify the exact value a variable can hold. Instead of just saying a variable is a `string` or a `number`, you can specify that it can only be a particular string like `\"hello\"` or a particular number like `42`. This enables more precise type checking and helps catch errors at compile time by ensuring that variables only hold the intended values.\n\nVisit the following resources to learn more:\n\n- [@official@Literal Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Literal Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types"
+        }
+      ]
+    },
+    {
+      "name": "mapped-types",
+      "nodeId": "VQ-V9qIdKgnpSJg2UnpuB",
+      "title": "Mapped Types",
+      "description": "Mapped types in TypeScript allow you to create new types based on existing ones by transforming each property. They iterate over the keys of an existing type and apply a transformation to each key and/or value, effectively mapping the original type to a new type structure. This provides a concise and powerful way to generate types that are variations of other types, promoting code reuse and reducing redundancy.",
+      "content": "# Mapped Types\n\nMapped types in TypeScript allow you to create new types based on existing ones by transforming each property. They iterate over the keys of an existing type and apply a transformation to each key and/or value, effectively mapping the original type to a new type structure. This provides a concise and powerful way to generate types that are variations of other types, promoting code reuse and reducing redundancy.\n\nVisit the following resources to learn more:\n\n- [@official@Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Mapped Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/mapped-types.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "method-overriding",
+      "nodeId": "aknqutxN2WDQ4RFcT-szM",
+      "title": "Method Overriding",
+      "description": "Method overriding allows a subclass to provide a specific implementation for a method that is already defined in its superclass. When a method in a subclass has the same name, same parameters, and same return type (or a more specific return type, known as covariant return type) as a method in its superclass, the subclass's method overrides the superclass's method. This means that when the method is called on an object of the subclass, the subclass's version of the method will be executed instead of the superclass's version.",
+      "content": "# Method Overriding\n\nMethod overriding allows a subclass to provide a specific implementation for a method that is already defined in its superclass. When a method in a subclass has the same name, same parameters, and same return type (or a more specific return type, known as covariant return type) as a method in its superclass, the subclass's method overrides the superclass's method. This means that when the method is called on an object of the subclass, the subclass's version of the method will be executed instead of the superclass's version.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript - Overriding Methods](https://www.typescriptlang.org/docs/handbook/2/classes.html#overriding-methods)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript - Overriding Methods",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html#overriding-methods"
+        }
+      ]
+    },
+    {
+      "name": "namespace-augmentation",
+      "nodeId": "16TT8R4N-9tCfWmPetqMP",
+      "title": "Namespace Augmentation",
+      "description": "Namespace augmentation in TypeScript allows you to add new properties or methods to an existing namespace, even if that namespace is defined in a separate file or module. This feature is particularly useful for extending namespaces declared in external libraries or modules without directly modifying the original source code. It provides a way to customize or add functionality to existing namespaces in a modular and organized manner.",
+      "content": "# Namespace Augmentation\n\nNamespace augmentation in TypeScript allows you to add new properties or methods to an existing namespace, even if that namespace is defined in a separate file or module. This feature is particularly useful for extending namespaces declared in external libraries or modules without directly modifying the original source code. It provides a way to customize or add functionality to existing namespaces in a modular and organized manner.\n\nVisit the following resources to learn more:\n\n- [@official@Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Module Augmentation",
+          "url": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation"
+        }
+      ]
+    },
+    {
+      "name": "namespaces",
+      "nodeId": "EtVwQ4lnWi3IIFHGb2Qib",
+      "title": "Namespaces",
+      "description": "Namespaces in TypeScript are a way to organize code into logical groups, preventing naming collisions and improving code maintainability. They create a named container where you can define variables, functions, classes, and interfaces. By using namespaces, you can encapsulate related functionality under a specific name, making your code more structured and easier to understand.",
+      "content": "# Namespaces\n\nNamespaces in TypeScript are a way to organize code into logical groups, preventing naming collisions and improving code maintainability. They create a named container where you can define variables, functions, classes, and interfaces. By using namespaces, you can encapsulate related functionality under a specific name, making your code more structured and easier to understand.\n\nVisit the following resources to learn more:\n\n- [@official@Overview of Namespaces](https://www.typescriptlang.org/docs/handbook/namespaces.html)\n- [@official@Namespaces and Modules](https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html)\n- [@official@TypeScript - Using Namespaces](https://typescriptlang.org/docs/handbook/namespaces-and-modules.html#using-namespaces)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Overview of Namespaces",
+          "url": "https://www.typescriptlang.org/docs/handbook/namespaces.html"
+        },
+        {
+          "type": "official",
+          "title": "Namespaces and Modules",
+          "url": "https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html"
+        },
+        {
+          "type": "official",
+          "title": "TypeScript - Using Namespaces",
+          "url": "https://typescriptlang.org/docs/handbook/namespaces-and-modules.html#using-namespaces"
+        }
+      ]
+    },
+    {
+      "name": "never",
+      "nodeId": "0pi9VTbngcAIswuu5LIYg",
+      "title": "Never Type",
+      "description": "The `never` type in TypeScript represents the type of values that will never occur. This means a function that always throws an error or runs forever (infinite loop) implicitly returns `never`. It is also useful for exhaustive checking in discriminated unions, ensuring that all possible cases are handled. Essentially, you cannot assign any type to a variable of type `never` (except `never` itself), making it the bottom type in TypeScript's type system.",
+      "content": "# Never Type\n\nThe `never` type in TypeScript represents the type of values that will never occur. This means a function that always throws an error or runs forever (infinite loop) implicitly returns `never`. It is also useful for exhaustive checking in discriminated unions, ensuring that all possible cases are handled. Essentially, you cannot assign any type to a variable of type `never` (except `never` itself), making it the bottom type in TypeScript's type system.\n\nVisit the following resources to learn more:\n\n- [@official@Never Type](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Never Type",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type"
+        }
+      ]
+    },
+    {
+      "name": "non-null-assertion",
+      "nodeId": "mjaL5ocLnM8VQlhUxW6KU",
+      "title": "Non-null Assertion",
+      "description": "The non-null assertion operator in TypeScript is a way to tell the compiler that you are certain a value is not null or undefined, even if the TypeScript's type checker thinks it could be. It is denoted by an exclamation mark (`!`) placed after a variable or expression. Using this operator effectively tells the compiler to suppress strict null checks for that particular expression, trusting that you, the developer, have enough context to know the value will be present at runtime.",
+      "content": "# Non-null Assertion\n\nThe non-null assertion operator in TypeScript is a way to tell the compiler that you are certain a value is not null or undefined, even if the TypeScript's type checker thinks it could be. It is denoted by an exclamation mark (`!`) placed after a variable or expression. Using this operator effectively tells the compiler to suppress strict null checks for that particular expression, trusting that you, the developer, have enough context to know the value will be present at runtime.\n\nVisit the following resources to learn more:\n\n- [@official@Non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Non-null assertion operator",
+          "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator"
+        }
+      ]
+    },
+    {
+      "name": "nonnullable",
+      "nodeId": "_BAZlBEzE7ddr315OeHvl",
+      "title": "NonNullable Utility Type",
+      "description": "`NonNullable` is a utility type that removes `null` and `undefined` from a type. If you have a type that could potentially be `null` or `undefined`, applying `NonNullable` ensures that the resulting type will only consist of the original type's other possible values, effectively guaranteeing that `null` and `undefined` are excluded.",
+      "content": "# NonNullable Utility Type\n\n`NonNullable` is a utility type that removes `null` and `undefined` from a type. If you have a type that could potentially be `null` or `undefined`, applying `NonNullable` ensures that the resulting type will only consist of the original type's other possible values, effectively guaranteeing that `null` and `undefined` are excluded.",
+      "resources": []
+    },
+    {
+      "name": "null",
+      "nodeId": "cjAwawhZLo1qVQ93XIdm2",
+      "title": "Null Type in TypeScript",
+      "description": "The `null` type represents the intentional absence of a value. It's a primitive data type that has only one possible value: `null`. It signifies that a variable or property has no value assigned to it, or that a value has been explicitly removed.",
+      "content": "# Null Type in TypeScript\n\nThe `null` type represents the intentional absence of a value. It's a primitive data type that has only one possible value: `null`. It signifies that a variable or property has no value assigned to it, or that a value has been explicitly removed.\n\nVisit the following resources to learn more:\n\n- [@official@null and undefined](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#null-and-undefined)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "null and undefined",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#null-and-undefined"
+        }
+      ]
+    },
+    {
+      "name": "number",
+      "nodeId": "UH9d3cvGy_e67WFNFwCyf",
+      "title": "Number Type in TypeScript",
+      "description": "The `number` type in TypeScript represents numeric values. This includes integers (whole numbers like 1, 42, -10) and floating-point numbers (numbers with decimal points like 3.14, -0.5). TypeScript uses double-precision 64-bit floating point format (IEEE 754) to represent all numbers.",
+      "content": "# Number Type in TypeScript\n\nThe `number` type in TypeScript represents numeric values. This includes integers (whole numbers like 1, 42, -10) and floating-point numbers (numbers with decimal points like 3.14, -0.5). TypeScript uses double-precision 64-bit floating point format (IEEE 754) to represent all numbers.\n\nVisit the following resources to learn more:\n\n- [@official@Number, String, Boolean, Symbol and Object](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Number, String, Boolean, Symbol and Object",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean"
+        }
+      ]
+    },
+    {
+      "name": "object",
+      "nodeId": "vnqvm_WiaKqpdxrW4wRGa",
+      "title": "Object Types in TypeScript",
+      "description": "In TypeScript, an object type defines the structure of a JavaScript object. It specifies the names, types, and optionality of the properties an object should have. You can define object types using curly braces `{}` and listing the properties with their corresponding types, separated by semicolons or commas. This allows TypeScript to enforce that objects conform to a specific shape, enhancing code safety and providing better autocompletion during development.",
+      "content": "# Object Types in TypeScript\n\nIn TypeScript, an object type defines the structure of a JavaScript object. It specifies the names, types, and optionality of the properties an object should have. You can define object types using curly braces `{}` and listing the properties with their corresponding types, separated by semicolons or commas. This allows TypeScript to enforce that objects conform to a specific shape, enhancing code safety and providing better autocompletion during development.\n\nVisit the following resources to learn more:\n\n- [@official@Object Types in TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#object-types)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Object Types in TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#object-types"
+        }
+      ]
+    },
+    {
+      "name": "omit",
+      "nodeId": "yjlxygHl8QONNUrdx-Q0A",
+      "title": "Omit",
+      "description": "`Omit` is a utility type in TypeScript that constructs a new type by picking all properties from an existing type and then removing the specified properties (keys). Essentially, it creates a subset of the original type by excluding certain keys you define. The resulting type will only contain the properties that were not omitted.",
+      "content": "# Omit\n\n`Omit` is a utility type in TypeScript that constructs a new type by picking all properties from an existing type and then removing the specified properties (keys). Essentially, it creates a subset of the original type by excluding certain keys you define. The resulting type will only contain the properties that were not omitted.\n\nVisit the following resources to learn more:\n\n- [@official@Omit\\<Type, Keys\\>](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Omit\\<Type, Keys\\>",
+          "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+        }
+      ]
+    },
+    {
+      "name": "parameters",
+      "nodeId": "a7hl0iMZ-jcUACxqIYVqv",
+      "title": "Parameters Utility Type",
+      "description": "The `Parameters` utility type in TypeScript extracts the parameter types of a function type into a tuple. This allows you to programmatically determine the expected arguments of a function and use them in other type definitions, providing type safety and flexibility when working with function signatures. The result is a tuple type where each element represents the type of a parameter in the function.",
+      "content": "# Parameters Utility Type\n\nThe `Parameters` utility type in TypeScript extracts the parameter types of a function type into a tuple. This allows you to programmatically determine the expected arguments of a function and use them in other type definitions, providing type safety and flexibility when working with function signatures. The result is a tuple type where each element represents the type of a parameter in the function.",
+      "resources": []
+    },
+    {
+      "name": "partial",
+      "nodeId": "gBTem9Dp3IQLAkqGX4fOF",
+      "title": "Partial Type",
+      "description": "The `Partial<Type>` utility type in TypeScript constructs a type where all properties of the original `Type` are set to optional. This means that when you use `Partial<Type>`, you can create objects that only include a subset of the properties defined in the original `Type`, or even have no properties at all. Essentially, it makes all properties of a type nullable.",
+      "content": "# Partial Type\n\nThe `Partial<Type>` utility type in TypeScript constructs a type where all properties of the original `Type` are set to optional. This means that when you use `Partial<Type>`, you can create objects that only include a subset of the properties defined in the original `Type`, or even have no properties at all. Essentially, it makes all properties of a type nullable.",
+      "resources": []
+    },
+    {
+      "name": "pick",
+      "nodeId": "E88tHQvARkHURZwGaO02l",
+      "title": "Pick",
+      "description": "`Pick` is a utility type that constructs a new type by selecting a set of properties from an existing type. You specify which properties you want to include in the new type using their keys. This is useful when you need a subset of properties from a larger type definition.",
+      "content": "# Pick\n\n`Pick` is a utility type that constructs a new type by selecting a set of properties from an existing type. You specify which properties you want to include in the new type using their keys. This is useful when you need a subset of properties from a larger type definition.\n\nVisit the following resources to learn more:\n\n- [@official@Pick\\<Type, Keys\\>](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Pick\\<Type, Keys\\>",
+          "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
+        }
+      ]
+    },
+    {
+      "name": "readonly",
+      "nodeId": "IuO9-O_DQdDYuAbdGWdgb",
+      "title": "Readonly",
+      "description": "The `Readonly` utility type in TypeScript constructs a new type where all properties of the original type are set as read-only. This means that once a property is initialized, its value cannot be changed later. This is useful for creating immutable objects and ensuring that data is not accidentally modified.",
+      "content": "# Readonly\n\nThe `Readonly` utility type in TypeScript constructs a new type where all properties of the original type are set as read-only. This means that once a property is initialized, its value cannot be changed later. This is useful for creating immutable objects and ensuring that data is not accidentally modified.",
+      "resources": []
+    },
+    {
+      "name": "record",
+      "nodeId": "DRdBmF5Dt_r09LoPOxOuq",
+      "title": "Record Utility Type",
+      "description": "The `Record` utility type in TypeScript is used to construct a new type where the keys are of a specific type (typically a string, number, or symbol) and the values are of another specified type. This is useful when you want to define an object structure with a predefined set of keys and a consistent type for the values associated with those keys. Essentially, it's a shorthand for defining object types with specific key-value pairings.",
+      "content": "# Record Utility Type\n\nThe `Record` utility type in TypeScript is used to construct a new type where the keys are of a specific type (typically a string, number, or symbol) and the values are of another specified type. This is useful when you want to define an object structure with a predefined set of keys and a consistent type for the values associated with those keys. Essentially, it's a shorthand for defining object types with specific key-value pairings.\n\nVisit the following resources to learn more:\n\n- [@official@Record\\<Keys, Type\\>](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Record\\<Keys, Type\\>",
+          "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
+        }
+      ]
+    },
+    {
+      "name": "recursive-types",
+      "nodeId": "N8xBTJ74xv1E5hSLYZtze",
+      "title": "Recursive Types",
+      "description": "Recursive types in TypeScript allow you to define types that refer to themselves. This is especially useful for representing data structures that have a nested or hierarchical structure, like trees or linked lists. By using recursion in type definitions, you can ensure that the type system accurately reflects the self-referential nature of these data structures, enabling strong type checking throughout your code.",
+      "content": "# Recursive Types\n\nRecursive types in TypeScript allow you to define types that refer to themselves. This is especially useful for representing data structures that have a nested or hierarchical structure, like trees or linked lists. By using recursion in type definitions, you can ensure that the type system accurately reflects the self-referential nature of these data structures, enabling strong type checking throughout your code.\n\nVisit the following resources to learn more:\n\n- [@official@Recursive Types in TypeScript](https://www.typescriptlang.org/play/3-7/types-and-code-flow/recursive-type-references.ts.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Recursive Types in TypeScript",
+          "url": "https://www.typescriptlang.org/play/3-7/types-and-code-flow/recursive-type-references.ts.html"
+        }
+      ]
+    },
+    {
+      "name": "returntype",
+      "nodeId": "On75JR_UkiIlha0_qaSeu",
+      "title": "ReturnType",
+      "description": "`ReturnType` is a utility type that extracts the return type of a function. Given a function type, `ReturnType<Type>` produces a new type that represents the type of value that the function returns. This is useful when you need to work with the output of a function without knowing its exact return type beforehand.",
+      "content": "# ReturnType\n\n`ReturnType` is a utility type that extracts the return type of a function. Given a function type, `ReturnType<Type>` produces a new type that represents the type of value that the function returns. This is useful when you need to work with the output of a function without knowing its exact return type beforehand.",
+      "resources": []
+    },
+    {
+      "name": "running-typescript",
+      "nodeId": "qdy4ZIY2EKgmPNdu_ndcg",
+      "title": "Running TypeScript",
+      "description": "Running TypeScript involves converting your `.ts` files into JavaScript files that can be executed by a JavaScript runtime environment, such as a web browser or Node.js. This conversion, known as compilation or transpilation, is performed by the TypeScript compiler (`tsc`). After compilation, the resulting JavaScript files can then be run in the appropriate environment, allowing you to leverage the benefits of TypeScript during development while maintaining compatibility with standard JavaScript execution environments.",
+      "content": "# Running TypeScript\n\nRunning TypeScript involves converting your `.ts` files into JavaScript files that can be executed by a JavaScript runtime environment, such as a web browser or Node.js. This conversion, known as compilation or transpilation, is performed by the TypeScript compiler (`tsc`). After compilation, the resulting JavaScript files can then be run in the appropriate environment, allowing you to leverage the benefits of TypeScript during development while maintaining compatibility with standard JavaScript execution environments.\n\nVisit the following resources to learn more:\n\n- [@official@Running your TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Running your TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html"
+        }
+      ]
+    },
+    {
+      "name": "satisfies-keyword",
+      "nodeId": "HD1UGOidp7JGKdW6CEdQ_",
+      "title": "Satisfies Keyword",
+      "description": "The `satisfies` keyword in TypeScript is used to ensure that a value conforms to a specific type without explicitly declaring that type. This is particularly useful when you want to check that an object's structure matches a type definition but still allow TypeScript to infer a more specific type for the object's properties. It validates the shape of the value against the specified type, and if valid it retains the initial type information.",
+      "content": "# Satisfies Keyword\n\nThe `satisfies` keyword in TypeScript is used to ensure that a value conforms to a specific type without explicitly declaring that type. This is particularly useful when you want to check that an object's structure matches a type definition but still allow TypeScript to infer a more specific type for the object's properties. It validates the shape of the value against the specified type, and if valid it retains the initial type information.\n\nVisit the following resources to learn more:\n\n- [@official@satisfies Keyword](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "satisfies Keyword",
+          "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator"
+        }
+      ]
+    },
+    {
+      "name": "string",
+      "nodeId": "d8iV-IBZ6cSnH8Z5_HRmc",
+      "title": "String",
+      "description": "A string represents a sequence of characters. It's used to store and manipulate textual data, like words, sentences, or any sequence of symbols. Strings are typically enclosed in single quotes (`'...'`), double quotes (`\"...\"`), or backticks (`` `...` ``).",
+      "content": "# String\n\nA string represents a sequence of characters. It's used to store and manipulate textual data, like words, sentences, or any sequence of symbols. Strings are typically enclosed in single quotes (`'...'`), double quotes (`\"...\"`), or backticks (`` `...` ``).\n\nVisit the following resources to learn more:\n\n- [@official@Number, String, Boolean, Symbol and Object](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Number, String, Boolean, Symbol and Object",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean"
+        }
+      ]
+    },
+    {
+      "name": "template-literal-types",
+      "nodeId": "xP25nGw42VqdfZ_9pDMXd",
+      "title": "Template Literal Types",
+      "description": "Template literal types in TypeScript are a way to create new string literal types by combining existing string literal types, much like template literals in JavaScript. They allow you to define string types that are composed of other string types with specific patterns or structures. This is done by embedding other types within a string literal definition, enabling you to enforce stricter type safety and create more descriptive types based on string manipulation.",
+      "content": "# Template Literal Types\n\nTemplate literal types in TypeScript are a way to create new string literal types by combining existing string literal types, much like template literals in JavaScript. They allow you to define string types that are composed of other string types with specific patterns or structures. This is done by embedding other types within a string literal definition, enabling you to enforce stricter type safety and create more descriptive types based on string manipulation.\n\nVisit the following resources to learn more:\n\n- [@official@Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Template Literal Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "truthiness",
+      "nodeId": "Xonbxc7MvMEonKBvbkCAH",
+      "title": "Truthiness",
+      "description": "Truthiness in TypeScript, as in JavaScript, refers to the concept of a value evaluating to `true` when encountered in a Boolean context. Certain values are inherently \"truthy\" while others are \"falsy.\" TypeScript uses this understanding to refine the type of a variable based on the outcome of a truthiness check, effectively narrowing its potential types to those that are compatible with a `true` outcome. This allows for more precise type checking within conditional blocks.",
+      "content": "# Truthiness\n\nTruthiness in TypeScript, as in JavaScript, refers to the concept of a value evaluating to `true` when encountered in a Boolean context. Certain values are inherently \"truthy\" while others are \"falsy.\" TypeScript uses this understanding to refine the type of a variable based on the outcome of a truthiness check, effectively narrowing its potential types to those that are compatible with a `true` outcome. This allows for more precise type checking within conditional blocks.\n\nVisit the following resources to learn more:\n\n- [@official@Truthiness Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#truthiness-narrowing)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Truthiness Narrowing",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#truthiness-narrowing"
+        }
+      ]
+    },
+    {
+      "name": "ts-and-js-interoperability",
+      "nodeId": "dcLaEU_lb0z_QypL1ZhpX",
+      "title": "TS and JS Interoperability",
+      "description": "TypeScript and JavaScript interoperability refers to the ability of TypeScript code to work seamlessly with existing JavaScript code and vice versa. This means you can use JavaScript libraries in your TypeScript projects and gradually migrate JavaScript code to TypeScript without rewriting everything at once. It allows for a smooth transition by leveraging existing codebases and libraries while adopting the benefits of TypeScript.",
+      "content": "# TS and JS Interoperability\n\nTypeScript and JavaScript interoperability refers to the ability of TypeScript code to work seamlessly with existing JavaScript code and vice versa. This means you can use JavaScript libraries in your TypeScript projects and gradually migrate JavaScript code to TypeScript without rewriting everything at once. It allows for a smooth transition by leveraging existing codebases and libraries while adopting the benefits of TypeScript.\n\nVisit the following resources to learn more:\n\n- [@official@Type Checking JavaScript Files](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html)\n- [@video@Using JavaScript in TypeScript](https://youtu.be/AZhZlEbBaB4)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Checking JavaScript Files",
+          "url": "https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html"
+        },
+        {
+          "type": "video",
+          "title": "Using JavaScript in TypeScript",
+          "url": "https://youtu.be/AZhZlEbBaB4"
+        }
+      ]
+    },
+    {
+      "name": "ts-playground",
+      "nodeId": "_bZ71i36haWgHQTY0yMOx",
+      "title": "TS Playground",
+      "description": "The TS Playground is an online, interactive environment that allows you to write, compile, and share TypeScript code directly in your web browser. It provides immediate feedback on your code, showing compilation errors and the resulting JavaScript output in real-time. This makes it a convenient tool for experimenting with TypeScript features, prototyping small projects, and quickly testing code snippets without needing a local development environment.",
+      "content": "# TS Playground\n\nThe TS Playground is an online, interactive environment that allows you to write, compile, and share TypeScript code directly in your web browser. It provides immediate feedback on your code, showing compilation errors and the resulting JavaScript output in real-time. This makes it a convenient tool for experimenting with TypeScript features, prototyping small projects, and quickly testing code snippets without needing a local development environment.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript Official - Playground](https://www.typescriptlang.org/play)\n- [@feed@Explore top posts about TypeScript](https://app.daily.dev/tags/typescript?ref=roadmapsh)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript Official - Playground",
+          "url": "https://www.typescriptlang.org/play"
+        },
+        {
+          "type": "feed",
+          "title": "Explore top posts about TypeScript",
+          "url": "https://app.daily.dev/tags/typescript?ref=roadmapsh"
+        }
+      ]
+    },
+    {
+      "name": "ts-node",
+      "nodeId": "ZCM2_X4BiKh5FTCizrr-E",
+      "title": "ts-node",
+      "description": "ts-node is a package that lets you directly run TypeScript code without needing to pre-compile it into JavaScript. It does this by providing a TypeScript execution environment for Node.js, allowing you to execute `.ts` files directly from the command line or by using it as a Node.js module. Essentially, it combines the TypeScript compiler (`tsc`) and Node.js into a single, streamlined process.",
+      "content": "# ts-node\n\nts-node is a package that lets you directly run TypeScript code without needing to pre-compile it into JavaScript. It does this by providing a TypeScript execution environment for Node.js, allowing you to execute `.ts` files directly from the command line or by using it as a Node.js module. Essentially, it combines the TypeScript compiler (`tsc`) and Node.js into a single, streamlined process.\n\nVisit the following resources to learn more:\n\n- [@opensource@ts-node - GitHub Project](https://github.com/TypeStrong/ts-node)\n- [@article@How To Run TypeScript Scripts with ts-node](https://www.digitalocean.com/community/tutorials/typescript-running-typescript-ts-node)",
+      "resources": [
+        {
+          "type": "opensource",
+          "title": "ts-node - GitHub Project",
+          "url": "https://github.com/TypeStrong/ts-node"
+        },
+        {
+          "type": "article",
+          "title": "How To Run TypeScript Scripts with ts-node",
+          "url": "https://www.digitalocean.com/community/tutorials/typescript-running-typescript-ts-node"
+        }
+      ]
+    },
+    {
+      "name": "tsc",
+      "nodeId": "Iv_t13PSVzet5VPKFtAp1",
+      "title": "tsc",
+      "description": "`tsc` is the command-line compiler for TypeScript. It takes TypeScript code as input and transforms it into JavaScript code that can be executed by browsers or other JavaScript runtimes like Node.js. You use `tsc` to check for type errors, enforce coding standards, and ultimately prepare your TypeScript code for deployment.",
+      "content": "# tsc\n\n`tsc` is the command-line compiler for TypeScript. It takes TypeScript code as input and transforms it into JavaScript code that can be executed by browsers or other JavaScript runtimes like Node.js. You use `tsc` to check for type errors, enforce coding standards, and ultimately prepare your TypeScript code for deployment.\n\nVisit the following resources to learn more:\n\n- [@official@tsc CLI Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#using-the-cli)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "tsc CLI Options",
+          "url": "https://www.typescriptlang.org/docs/handbook/compiler-options.html#using-the-cli"
+        }
+      ]
+    },
+    {
+      "name": "tsconfigjson",
+      "nodeId": "DmqrX56d9KnBcOSwlJR2q",
+      "title": "tsconfig.json",
+      "description": "`tsconfig.json` is a configuration file that specifies how the TypeScript compiler should transpile your TypeScript code into JavaScript. It controls various compilation options such as target ECMAScript version, module system, and source maps. This file lives at the root of a TypeScript project and allows you to define the project's compilation settings in a declarative and reproducible manner.",
+      "content": "# tsconfig.json\n\n`tsconfig.json` is a configuration file that specifies how the TypeScript compiler should transpile your TypeScript code into JavaScript. It controls various compilation options such as target ECMAScript version, module system, and source maps. This file lives at the root of a TypeScript project and allows you to define the project's compilation settings in a declarative and reproducible manner.\n\nVisit the following resources to learn more:\n\n- [@official@What is a tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "What is a tsconfig.json",
+          "url": "https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "tuple",
+      "nodeId": "jq-GD0DLyzrEXQKUmt5kv",
+      "title": "Tuple",
+      "description": "A tuple is a typed array with a pre-defined length and types for each index. Each position in the tuple can have its own specific type, allowing you to create arrays with a known structure where the type of element is known at each index. Tuples ensure that the number of elements matches the defined length and that each element is of the expected type.",
+      "content": "# Tuple\n\nA tuple is a typed array with a pre-defined length and types for each index. Each position in the tuple can have its own specific type, allowing you to create arrays with a known structure where the type of element is known at each index. Tuples ensure that the number of elements matches the defined length and that each element is of the expected type.\n\nVisit the following resources to learn more:\n\n- [@official@Tuple Types](https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Tuple Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types"
+        }
+      ]
+    },
+    {
+      "name": "type-aliases",
+      "nodeId": "M_3O21zjppgWptIT5dtu8",
+      "title": "Type Aliases",
+      "description": "Type aliases in TypeScript create a new name for an existing type. This new name can then be used anywhere you would normally use the original type. They don't create a new type; instead, they offer a more readable and convenient way to refer to potentially complex or frequently used types, such as unions, intersections, or tuple types.",
+      "content": "# Type Aliases\n\nType aliases in TypeScript create a new name for an existing type. This new name can then be used anywhere you would normally use the original type. They don't create a new type; instead, they offer a more readable and convenient way to refer to potentially complex or frequently used types, such as unions, intersections, or tuple types.\n\nVisit the following resources to learn more:\n\n- [@official@Type Aliases](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Aliases",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases"
+        }
+      ]
+    },
+    {
+      "name": "as-type",
+      "nodeId": "Ba0baUbomrW9td_K8U-5L",
+      "title": "Type Assertions with as",
+      "description": "Type assertions in TypeScript are a way to tell the compiler the specific type of a variable. They allow you to override TypeScript's type inference when you know more about the type of a value than the compiler does. Using `as [type]` is one syntax for type assertions, allowing you to explicitly cast a variable to a more specific type. This doesn't perform any runtime type checking or conversion, it simply instructs the compiler to treat the variable as if it were of the specified type.",
+      "content": "# Type Assertions with as\n\nType assertions in TypeScript are a way to tell the compiler the specific type of a variable. They allow you to override TypeScript's type inference when you know more about the type of a value than the compiler does. Using `as [type]` is one syntax for type assertions, allowing you to explicitly cast a variable to a more specific type. This doesn't perform any runtime type checking or conversion, it simply instructs the compiler to treat the variable as if it were of the specified type.\n\nVisit the following resources to learn more:\n\n- [@official@Type assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type assertions",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions"
+        }
+      ]
+    },
+    {
+      "name": "type-compatibility",
+      "nodeId": "alMJCEyUZ90xz-2_g3YRj",
+      "title": "Type Compatibility",
+      "description": "Type compatibility is a mechanism in TypeScript that determines whether one type can be assigned to another based on the structure of the types. Unlike languages that use nominal typing where compatibility is based on explicit declarations, TypeScript uses structural typing to compare members. If a target type has all the required members of a source type, the compiler considers them compatible, regardless of their specific names or hierarchies.",
+      "content": "# Type Compatibility\n\nType compatibility is a mechanism in TypeScript that determines whether one type can be assigned to another based on the structure of the types. Unlike languages that use nominal typing where compatibility is based on explicit declarations, TypeScript uses structural typing to compare members. If a target type has all the required members of a source type, the compiler considers them compatible, regardless of their specific names or hierarchies.\n\nVisit the following resources to learn more:\n\n- [@official@Type Compatibility](https://www.typescriptlang.org/docs/handbook/type-compatibility.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Compatibility",
+          "url": "https://www.typescriptlang.org/docs/handbook/type-compatibility.html"
+        }
+      ]
+    },
+    {
+      "name": "type-guards--narrowing",
+      "nodeId": "cFZsxpYHDxm7IWwergb3r",
+      "title": "Type Guards / Narrowing",
+      "description": "Type guards and narrowing are techniques in TypeScript used to refine the type of a variable within a specific scope. They allow you to tell the TypeScript compiler that a variable is more specific than its declared type, enabling you to safely perform operations that would otherwise result in type errors. This is particularly useful when dealing with union types or situations where the initial type of a variable is broad.",
+      "content": "# Type Guards / Narrowing\n\nType guards and narrowing are techniques in TypeScript used to refine the type of a variable within a specific scope. They allow you to tell the TypeScript compiler that a variable is more specific than its declared type, enabling you to safely perform operations that would otherwise result in type errors. This is particularly useful when dealing with union types or situations where the initial type of a variable is broad.\n\nVisit the following resources to learn more:\n\n- [@official@Type Guards - TypeScript Docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Guards - TypeScript Docs",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+        }
+      ]
+    },
+    {
+      "name": "type-inference",
+      "nodeId": "KUur-gfOBQodTS-irFet7",
+      "title": "Type Inference",
+      "description": "Type inference is the automatic deduction of the data type of an expression in a programming language. Instead of explicitly declaring the type of a variable, the compiler or interpreter can infer it based on the value assigned to it or how it's used within the code. This reduces the need for verbose type annotations, making code more concise and readable while still providing the benefits of type safety.",
+      "content": "# Type Inference\n\nType inference is the automatic deduction of the data type of an expression in a programming language. Instead of explicitly declaring the type of a variable, the compiler or interpreter can infer it based on the value assigned to it or how it's used within the code. This reduces the need for verbose type annotations, making code more concise and readable while still providing the benefits of type safety.\n\nVisit the following resources to learn more:\n\n- [@official@Type Inference](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Inference",
+          "url": "https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content"
+        }
+      ]
+    },
+    {
+      "name": "type-predicates",
+      "nodeId": "1DOSAieOmWUNNsQQrqf2m",
+      "title": "Type Predicates",
+      "description": "Type predicates are a way to refine the type of a variable within a TypeScript function. They're used to tell the TypeScript compiler that a specific condition guarantees a variable is of a certain type. Instead of the compiler inferring the type based on basic checks, a type predicate explicitly asserts that if a function returns `true`, the argument must be of the specified type.",
+      "content": "# Type Predicates\n\nType predicates are a way to refine the type of a variable within a TypeScript function. They're used to tell the TypeScript compiler that a specific condition guarantees a variable is of a certain type. Instead of the compiler inferring the type based on basic checks, a type predicate explicitly asserts that if a function returns `true`, the argument must be of the specified type.\n\nVisit the following resources to learn more:\n\n- [@official@Type Guards and Differentiating Types](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Guards and Differentiating Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates"
+        }
+      ]
+    },
+    {
+      "name": "typeof",
+      "nodeId": "ZiOcFZy85p7tLzUkyKDei",
+      "title": "typeof Type Guards",
+      "description": "`typeof` in TypeScript is a way to narrow down the type of a variable based on its JavaScript `typeof` operator result. This allows you to write more precise code by checking the type of a variable (like string, number, boolean, symbol, or object) and then treating it accordingly within a specific block of code. By inspecting a variable's fundamental JavaScript type, TypeScript can infer a more specific type within that conditional block, helping catch potential errors and enabling safer operations.",
+      "content": "# typeof Type Guards\n\n`typeof` in TypeScript is a way to narrow down the type of a variable based on its JavaScript `typeof` operator result. This allows you to write more precise code by checking the type of a variable (like string, number, boolean, symbol, or object) and then treating it accordingly within a specific block of code. By inspecting a variable's fundamental JavaScript type, TypeScript can infer a more specific type within that conditional block, helping catch potential errors and enabling safer operations.\n\nVisit the following resources to learn more:\n\n- [@official@Type Guards and Differentiating Types](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Type Guards and Differentiating Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+        }
+      ]
+    },
+    {
+      "name": "types-vs-interfaces",
+      "nodeId": "TxkEpoOiuUm-fXJuFVKcH",
+      "title": "Types vs Interfaces",
+      "description": "In TypeScript, both types and interfaces are ways to define the shape of an object. They specify what properties an object should have and the data type of those properties. Types can describe simple types like primitives (string, number, boolean) or more complex structures like unions and intersections, while interfaces are primarily used to define the structure of objects, including their properties and methods. The key difference lies in their extensibility and use cases.",
+      "content": "# Types vs Interfaces\n\nIn TypeScript, both types and interfaces are ways to define the shape of an object. They specify what properties an object should have and the data type of those properties. Types can describe simple types like primitives (string, number, boolean) or more complex structures like unions and intersections, while interfaces are primarily used to define the structure of objects, including their properties and methods. The key difference lies in their extensibility and use cases.\n\nVisit the following resources to learn more:\n\n- [@official@Interfaces vs. Type Aliases](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)\n- [@article@Interfaces vs Types in TypeScript](https://stackoverflow.com/questions/37233735/interfaces-vs-types-in-typescript)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Interfaces vs. Type Aliases",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces"
+        },
+        {
+          "type": "article",
+          "title": "Interfaces vs Types in TypeScript",
+          "url": "https://stackoverflow.com/questions/37233735/interfaces-vs-types-in-typescript"
+        }
+      ]
+    },
+    {
+      "name": "ecosystem",
+      "nodeId": "RqZaWGxxNRItBhVwWKysc",
+      "title": "TypeScript Ecosystem",
+      "description": "The TypeScript ecosystem refers to the collection of tools, libraries, frameworks, and resources that support and enhance TypeScript development. It includes everything from build tools and linters to UI libraries and server-side frameworks that have TypeScript definitions available or are specifically designed to work well with TypeScript. The ecosystem also incorporates community resources like documentation, tutorials, and open-source projects that help developers learn and use TypeScript effectively.",
+      "content": "# TypeScript Ecosystem\n\nThe TypeScript ecosystem refers to the collection of tools, libraries, frameworks, and resources that support and enhance TypeScript development. It includes everything from build tools and linters to UI libraries and server-side frameworks that have TypeScript definitions available or are specifically designed to work well with TypeScript. The ecosystem also incorporates community resources like documentation, tutorials, and open-source projects that help developers learn and use TypeScript effectively.",
+      "resources": []
+    },
+    {
+      "name": "typescript-functions",
+      "nodeId": "qOynVkDi1gFz0mxyJHjfJ",
+      "title": "TypeScript Functions",
+      "description": "Functions in TypeScript are reusable blocks of code designed to perform specific tasks. They can accept inputs (parameters), process them, and return a result. TypeScript enhances JavaScript functions by adding type annotations to parameters and return values, enabling better code clarity and error checking during development. This helps ensure that functions receive and produce the expected data types, leading to more robust and maintainable code.",
+      "content": "# TypeScript Functions\n\nFunctions in TypeScript are reusable blocks of code designed to perform specific tasks. They can accept inputs (parameters), process them, and return a result. TypeScript enhances JavaScript functions by adding type annotations to parameters and return values, enabling better code clarity and error checking during development. This helps ensure that functions receive and produce the expected data types, leading to more robust and maintainable code.\n\nVisit the following resources to learn more:\n\n- [@official@Functions in TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Functions in TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html"
+        }
+      ]
+    },
+    {
+      "name": "typescript-interfaces",
+      "nodeId": "aH1DxiG5xrdNlKutJ_gTz",
+      "title": "TypeScript Interfaces",
+      "description": "Interfaces in TypeScript are a way to define a contract for the structure of an object. They describe the shape that an object should have, specifying the names, types, and optionality of its properties. Essentially, an interface names a specific combination of fields and their types. These interfaces don't compile into JavaScript; they are purely a TypeScript construct used for type-checking during development.",
+      "content": "# TypeScript Interfaces\n\nInterfaces in TypeScript are a way to define a contract for the structure of an object. They describe the shape that an object should have, specifying the names, types, and optionality of its properties. Essentially, an interface names a specific combination of fields and their types. These interfaces don't compile into JavaScript; they are purely a TypeScript construct used for type-checking during development.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript - Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript - Interfaces",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/objects.html"
+        }
+      ]
+    },
+    {
+      "name": "typescript-modules",
+      "nodeId": "sE9lqkkqwnsVJxTJv37YZ",
+      "title": "TypeScript Modules",
+      "description": "Modules in TypeScript (and JavaScript) are a way to organize code into reusable and manageable blocks. Each module encapsulates its own variables, functions, classes, and interfaces, preventing naming collisions and promoting code modularity. Modules explicitly export parts that other code can use and import modules to gain access to their exported functionalities.",
+      "content": "# TypeScript Modules\n\nModules in TypeScript (and JavaScript) are a way to organize code into reusable and manageable blocks. Each module encapsulates its own variables, functions, classes, and interfaces, preventing naming collisions and promoting code modularity. Modules explicitly export parts that other code can use and import modules to gain access to their exported functionalities.\n\nVisit the following resources to learn more:\n\n- [@official@Modules](https://www.typescriptlang.org/docs/handbook/modules.html#handbook-content)\n- [@video@TypeScript - Modules](https://www.youtube.com/watch?v=EpOPR03z4Vw)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Modules",
+          "url": "https://www.typescriptlang.org/docs/handbook/modules.html#handbook-content"
+        },
+        {
+          "type": "video",
+          "title": "TypeScript - Modules",
+          "url": "https://www.youtube.com/watch?v=EpOPR03z4Vw"
+        }
+      ]
+    },
+    {
+      "name": "typescript-types",
+      "nodeId": "qcrGApxNzkGYxgcd7o45d",
+      "title": "TypeScript Types",
+      "description": "TypeScript Types define the kind of values a variable can hold. They essentially act as labels that specify the allowed data types, like numbers, strings, or more complex objects. By assigning types, TypeScript can perform static type checking, catching potential errors during development before the code is even run. This helps improve code reliability and makes it easier to understand how data flows through your application.",
+      "content": "# TypeScript Types\n\nTypeScript Types define the kind of values a variable can hold. They essentially act as labels that specify the allowed data types, like numbers, strings, or more complex objects. By assigning types, TypeScript can perform static type checking, catching potential errors during development before the code is even run. This helps improve code reliability and makes it easier to understand how data flows through your application.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript - Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)\n- [@feed@Explore top posts about TypeScript](https://app.daily.dev/tags/typescript?ref=roadmapsh)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript - Everyday Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html"
+        },
+        {
+          "type": "feed",
+          "title": "Explore top posts about TypeScript",
+          "url": "https://app.daily.dev/tags/typescript?ref=roadmapsh"
+        }
+      ]
+    },
+    {
+      "name": "typescript-vs-javascript",
+      "nodeId": "MQWzN_kXxVJMOYbRXSGJc",
+      "title": "TypeScript vs JavaScript",
+      "description": "TypeScript and JavaScript are both programming languages used for web development. JavaScript is a dynamic language that is interpreted at runtime by the browser, meaning that type errors are only caught when the code is executed. TypeScript, on the other hand, is a superset of JavaScript that adds optional static typing. This allows developers to catch errors during development and before runtime, leading to more robust and maintainable code. TypeScript code must be compiled into JavaScript before it can be run in a browser or other JavaScript environment.",
+      "content": "# TypeScript vs JavaScript\n\nTypeScript and JavaScript are both programming languages used for web development. JavaScript is a dynamic language that is interpreted at runtime by the browser, meaning that type errors are only caught when the code is executed. TypeScript, on the other hand, is a superset of JavaScript that adds optional static typing. This allows developers to catch errors during development and before runtime, leading to more robust and maintainable code. TypeScript code must be compiled into JavaScript before it can be run in a browser or other JavaScript environment.\n\nVisit the following resources to learn more:\n\n- [@official@Learning JavaScript and TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#learning-javascript-and-typescript)\n- [@article@TypeScript vs. JavaScript](https://thenewstack.io/typescript-vs-javascript/)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Learning JavaScript and TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#learning-javascript-and-typescript"
+        },
+        {
+          "type": "article",
+          "title": "TypeScript vs. JavaScript",
+          "url": "https://thenewstack.io/typescript-vs-javascript/"
+        }
+      ]
+    },
+    {
+      "name": "typing-functions",
+      "nodeId": "9FIhHwDNzyKpb42NmSv3K",
+      "title": "Typing Functions",
+      "description": "Functions in programming are reusable blocks of code that perform specific tasks. Typing functions in TypeScript means defining the types of the parameters a function accepts and the type of value it returns. This allows the TypeScript compiler to verify that functions are used correctly, preventing type-related errors at runtime and enhancing code maintainability and readability.",
+      "content": "# Typing Functions\n\nFunctions in programming are reusable blocks of code that perform specific tasks. Typing functions in TypeScript means defining the types of the parameters a function accepts and the type of value it returns. This allows the TypeScript compiler to verify that functions are used correctly, preventing type-related errors at runtime and enhancing code maintainability and readability.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript Functions](https://www.typescriptlang.org/docs/handbook/2/functions.html)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript Functions",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html"
+        }
+      ]
+    },
+    {
+      "name": "undefined",
+      "nodeId": "Sa6IZtM4XJstultz-pbh0",
+      "title": "undefined",
+      "description": "`undefined` is a primitive type in TypeScript that represents a variable that has been declared but has not yet been assigned a value. When a variable is initialized without a value or a function reaches the end of its execution without a return statement, it implicitly holds this value. It signifies the absence of any object or meaningful data.",
+      "content": "# undefined\n\n`undefined` is a primitive type in TypeScript that represents a variable that has been declared but has not yet been assigned a value. When a variable is initialized without a value or a function reaches the end of its execution without a return statement, it implicitly holds this value. It signifies the absence of any object or meaningful data.\n\nVisit the following resources to learn more:\n\n- [@official@null and undefined](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#null-and-undefined)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "null and undefined",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#null-and-undefined"
+        }
+      ]
+    },
+    {
+      "name": "union-types",
+      "nodeId": "5z5w3yv1HbOpMlzEd4Iot",
+      "title": "Union Types",
+      "description": "Union types allow a variable to hold values of different types. This means you can specify that a variable can be, for example, either a `string` or a `number`. You define a union type using the pipe (`|`) symbol to separate the possible types. This provides flexibility in situations where a variable might accept multiple different data types.",
+      "content": "# Union Types\n\nUnion types allow a variable to hold values of different types. This means you can specify that a variable can be, for example, either a `string` or a `number`. You define a union type using the pipe (`|`) symbol to separate the possible types. This provides flexibility in situations where a variable might accept multiple different data types.\n\nVisit the following resources to learn more:\n\n- [@official@Union Types in TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Union Types in TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types"
+        }
+      ]
+    },
+    {
+      "name": "unknown",
+      "nodeId": "O2TYbd9i_OQwQk2dKh-ly",
+      "title": "Unknown Type",
+      "description": "The `unknown` type in TypeScript represents a value that can be anything. Unlike `any`, which essentially disables type checking, `unknown` forces you to perform type checks or type assertions before you can perform operations on a value declared as `unknown`. This helps prevent unexpected errors at runtime by ensuring you've handled the potential type of the value.",
+      "content": "# Unknown Type\n\nThe `unknown` type in TypeScript represents a value that can be anything. Unlike `any`, which essentially disables type checking, `unknown` forces you to perform type checks or type assertions before you can perform operations on a value declared as `unknown`. This helps prevent unexpected errors at runtime by ensuring you've handled the potential type of the value.\n\nVisit the following resources to learn more:\n\n- [@official@Unknown Type in TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "Unknown Type in TypeScript",
+          "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type"
+        }
+      ]
+    },
+    {
+      "name": "useful-packages",
+      "nodeId": "PCX3KcvMUW3mmQEepLTXp",
+      "title": "Useful Packages",
+      "description": "TypeScript has a large ecosystem of packages that can be used to extend the language or to add functionality to your project.",
+      "content": "# Useful Packages\n\nTypeScript has a large ecosystem of packages that can be used to extend the language or to add functionality to your project.\n\nVisit the following resources to learn more:\n\n- [@official@zod](https://zod.dev/)\n- [@official@valibot](https://valibot.dev/)\n- [@official@ts-node](https://typestrong.org/ts-node)\n- [@opensource@ts-morph](https://github.com/dsherret/ts-morph)\n- [@opensource@ts-jest](https://github.com/kulshekhar/ts-jest)\n- [@opensource@typesync](https://github.com/jeffijoe/typesync)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "zod",
+          "url": "https://zod.dev/"
+        },
+        {
+          "type": "official",
+          "title": "valibot",
+          "url": "https://valibot.dev/"
+        },
+        {
+          "type": "official",
+          "title": "ts-node",
+          "url": "https://typestrong.org/ts-node"
+        },
+        {
+          "type": "opensource",
+          "title": "ts-morph",
+          "url": "https://github.com/dsherret/ts-morph"
+        },
+        {
+          "type": "opensource",
+          "title": "ts-jest",
+          "url": "https://github.com/kulshekhar/ts-jest"
+        },
+        {
+          "type": "opensource",
+          "title": "typesync",
+          "url": "https://github.com/jeffijoe/typesync"
+        }
+      ]
+    },
+    {
+      "name": "utility-types",
+      "nodeId": "LSwUHfalnk5MgHt21PANb",
+      "title": "Utility Types",
+      "description": "Utility Types in TypeScript are built-in generic types that perform common type transformations. They allow you to create new types based on existing ones by applying operations like making properties optional, required, readonly, or picking specific properties. These utilities enhance type safety and code reusability by enabling you to express complex type manipulations in a concise and declarative way.",
+      "content": "# Utility Types\n\nUtility Types in TypeScript are built-in generic types that perform common type transformations. They allow you to create new types based on existing ones by applying operations like making properties optional, required, readonly, or picking specific properties. These utilities enhance type safety and code reusability by enabling you to express complex type manipulations in a concise and declarative way.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript - Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)\n- [@article@TypeScript Utility Types Guide](https://camchenry.com/blog/typescript-utility-types)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "TypeScript - Utility Types",
+          "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html"
+        },
+        {
+          "type": "article",
+          "title": "TypeScript Utility Types Guide",
+          "url": "https://camchenry.com/blog/typescript-utility-types"
+        }
+      ]
+    },
+    {
+      "name": "void",
+      "nodeId": "yLlQg7BF--ZwRHbXBWfOi",
+      "title": "Void Type",
+      "description": "The `void` type in TypeScript represents the absence of a value. It is commonly used as the return type of functions that do not return any value, essentially indicating that the function performs an action but doesn't produce a result. A function declared with a `void` return type is not expected to return any data back to the caller.",
+      "content": "# Void Type\n\nThe `void` type in TypeScript represents the absence of a value. It is commonly used as the return type of functions that do not return any value, essentially indicating that the function performs an action but doesn't produce a result. A function declared with a `void` return type is not expected to return any data back to the caller.\n\nVisit the following resources to learn more:\n\n- [@official@void - TypeScript Docs](https://www.typescriptlang.org/docs/handbook/2/functions.html#void)",
+      "resources": [
+        {
+          "type": "official",
+          "title": "void - TypeScript Docs",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html#void"
+        }
+      ]
+    }
+  ],
+  "updatedAt": "2026-09-11T03:29:50.032Z"
+}

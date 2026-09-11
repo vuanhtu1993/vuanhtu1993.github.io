@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-09-11T06:13:41.716Z",
+  "sourceRepo": "kamranahmedse/developer-roadmap",
+  "totalRoadmaps": 8,
+  "totalModules": 72,
+  "totalTopics": 782,
+  "categories": [
+    {
+      "key": "role-based",
+      "nameVi": "Lộ trình theo Vị trí Công việc (Role-based)",
+      "nameEn": "Role-based Roadmaps",
+      "count": 1,
+      "roadmaps": [
+        {
+          "slug": "frontend",
+          "title": "Frontend",
+          "moduleCount": 38,
+          "topicCount": 123,
+          "filePath": "role-based/frontend.json"
+        }
+      ]
+    },
+    {
+      "key": "skill-based",
+      "nameVi": "Lộ trình theo Kỹ năng & Ngôn ngữ (Skill-based)",
+      "nameEn": "Skill-based Roadmaps",
+      "count": 3,
+      "roadmaps": [
+        {
+          "slug": "nodejs",
+          "title": "Node.js",
+          "moduleCount": 1,
+          "topicCount": 113,
+          "filePath": "skill-based/nodejs.json"
+        },
+        {
+          "slug": "react",
+          "title": "React",
+          "moduleCount": 1,
+          "topicCount": 83,
+          "filePath": "skill-based/react.json"
+        },
+        {
+          "slug": "typescript",
+          "title": "Typescript",
+          "moduleCount": 1,
+          "topicCount": 93,
+          "filePath": "skill-based/typescript.json"
+        }
+      ]
+    },
+    {
+      "key": "tool-platform",
+      "nameVi": "Lộ trình theo Công cụ & Nền tảng (Tool & Platform)",
+      "nameEn": "Tool & Platform Roadmaps",
+      "count": 2,
+      "roadmaps": [
+        {
+          "slug": "docker",
+          "title": "Docker",
+          "moduleCount": 1,
+          "topicCount": 56,
+          "filePath": "tool-platform/docker.json"
+        },
+        {
+          "slug": "kubernetes",
+          "title": "Kubernetes",
+          "moduleCount": 1,
+          "topicCount": 67,
+          "filePath": "tool-platform/kubernetes.json"
+        }
+      ]
+    },
+    {
+      "key": "best-practice",
+      "nameVi": "Quy chuẩn & Thực hành Tốt nhất (Best Practices & Architecture)",
+      "nameEn": "Best Practices & Methodologies",
+      "count": 2,
+      "roadmaps": [
+        {
+          "slug": "api-design",
+          "title": "Api Design",
+          "moduleCount": 1,
+          "topicCount": 99,
+          "filePath": "best-practice/api-design.json"
+        },
+        {
+          "slug": "system-design",
+          "title": "System Design",
+          "moduleCount": 28,
+          "topicCount": 148,
+          "filePath": "best-practice/system-design.json"
+        }
+      ]
+    }
+  ]
+}

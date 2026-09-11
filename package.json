@@ -18,7 +18,8 @@
     "aha-mind:mcp": "tsx scripts/aha-mind/mcp-server.ts",
     "aha-mind:interpreter": "tsx scripts/aha-mind/interpreter_agent/pipeline.ts",
     "aha-mind:docs-crawler": "tsx scripts/aha-mind/docs_crawler_agent/pipeline.ts",
-    "aha-mind:ontology": "tsx scripts/aha-mind/ontology_agent/pipeline.ts"
+    "aha-mind:ontology": "tsx scripts/aha-mind/ontology_agent/pipeline.ts",
+    "aha-mind:roadmap-crawler": "tsx scripts/aha-mind/roadmap_crawler_agent/pipeline.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",

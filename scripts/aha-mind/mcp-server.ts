@@ -7,6 +7,7 @@ import pdfParse from "pdf-parse";
 import { stringify } from "csv-stringify/sync";
 import { crawl } from "./docs_crawler_agent/crawler.js";
 import { listCrawledFiles } from "./docs_crawler_agent/file-writer.js";
+import { buildGraph as buildRoadmapGraph } from "./roadmap_crawler_agent/graph.js";
 
 // Khởi tạo MCP Server
 const server = new Server(
@@ -104,6 +105,47 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             }
           },
           required: ["outputPath", "questions"],
+        },
+      },
+      {
+        name: "crawl_roadmaps",
+        description:
+          "Crawl dữ liệu lộ trình kỹ thuật từ roadmap.sh (qua GitHub repo nilbuild/developer-roadmap), phân loại vào 4 nhóm và lưu thành các file JSON.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            slugs: {
+              type: "array",
+              items: { type: "string" },
+              description:
+                "Danh sách các slug roadmap cần crawl (vd: ['frontend', 'backend', 'nextjs']). Để trống để crawl tất cả.",
+            },
+            outputDir: {
+              type: "string",
+              description:
+                "Thư mục lưu trữ dữ liệu (mặc định: ./sources/roadmap-data)",
+            },
+            dryRun: {
+              type: "boolean",
+              description:
+                "Chỉ kiểm tra và log thông tin, không ghi file ra đĩa (mặc định: false)",
+            },
+          },
+        },
+      },
+      {
+        name: "list_roadmap_data",
+        description:
+          "Đọc danh sách tổng hợp và thông tin chi tiết các roadmaps đã crawl trong thư mục output (từ index.json).",
+        inputSchema: {
+          type: "object",
+          properties: {
+            outputDir: {
+              type: "string",
+              description:
+                "Đường dẫn thư mục lưu trữ (mặc định: ./sources/roadmap-data)",
+            },
+          },
         },
       }
     ],
@@ -240,6 +282,108 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     } catch (e) {
       return {
         content: [{ type: "text", text: `Lỗi khi lưu CSV: ${e}` }],
+      };
+    }
+  }
+
+  // --- Tool: crawl_roadmaps ---
+  if (request.params.name === "crawl_roadmaps") {
+    const { slugs = [], outputDir = "./sources/roadmap-data", dryRun = false } =
+      (request.params.arguments || {}) as {
+        slugs?: string[];
+        outputDir?: string;
+        dryRun?: boolean;
+      };
+
+    try {
+      const app = buildRoadmapGraph();
+      const finalState = await app.invoke(
+        {
+          targetSlugs: slugs,
+          outputDir,
+          dryRun,
+        },
+        {
+          configurable: {
+            thread_id: `mcp-roadmap-crawl-${Date.now()}`,
+          },
+        }
+      );
+
+      const summary = [
+        `🗺️ Crawl Roadmaps hoàn tất:`,
+        `- Số roadmaps đã xử lý: ${finalState.parsedRoadmaps?.length || 0}`,
+        `- Số file đã tạo: ${finalState.outputPaths?.length || 0}`,
+        `- Thư mục output: ${path.resolve(process.cwd(), outputDir)}`,
+      ];
+
+      if (finalState.errors && finalState.errors.length > 0) {
+        summary.push(``, `⚠️ Cảnh báo/Lỗi:`);
+        for (const err of finalState.errors) {
+          summary.push(`  - ${err}`);
+        }
+      }
+
+      return { content: [{ type: "text", text: summary.join("\n") }] };
+    } catch (err) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `❌ Lỗi khi crawl roadmaps: ${err instanceof Error ? err.message : String(err)}`,
+          },
+        ],
+      };
+    }
+  }
+
+  // --- Tool: list_roadmap_data ---
+  if (request.params.name === "list_roadmap_data") {
+    const { outputDir = "./sources/roadmap-data" } =
+      (request.params.arguments || {}) as { outputDir?: string };
+
+    const absDir = path.resolve(process.cwd(), outputDir);
+    const indexPath = path.join(absDir, "index.json");
+
+    if (!fs.existsSync(indexPath)) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `📭 Chưa tìm thấy dữ liệu index tại ${indexPath}. Hãy gọi tool crawl_roadmaps trước.`,
+          },
+        ],
+      };
+    }
+
+    try {
+      const raw = fs.readFileSync(indexPath, "utf-8");
+      const data = JSON.parse(raw);
+
+      const lines = [
+        `📚 Tổng hợp dữ liệu Roadmaps tại: ${absDir}`,
+        `⏰ Cập nhật lúc: ${data.generatedAt}`,
+        `📊 Tổng cộng: ${data.totalRoadmaps} roadmaps | ${data.totalTopics} topics`,
+        ``,
+      ];
+
+      for (const cat of data.categories || []) {
+        lines.push(`📂 [${cat.nameVi}] (${cat.count} roadmaps):`);
+        for (const rm of cat.roadmaps || []) {
+          lines.push(`  - 🗺️ ${rm.title} (${rm.slug}) - ${rm.topicCount} topics`);
+        }
+        lines.push(``);
+      }
+
+      return { content: [{ type: "text", text: lines.join("\n") }] };
+    } catch (e) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `❌ Lỗi khi đọc dữ liệu roadmaps: ${e instanceof Error ? e.message : String(e)}`,
+          },
+        ],
       };
     }
   }
