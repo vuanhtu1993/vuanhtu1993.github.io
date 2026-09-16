@@ -107,6 +107,7 @@ const config = {
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           { to: '/ontology', label: 'Ontology', position: 'left' },
+          { to: '/roadmap', label: 'Roadmap', position: 'left' },
           {
             href: 'https://github.com/vuanhtu1993',
             label: 'GitHub',

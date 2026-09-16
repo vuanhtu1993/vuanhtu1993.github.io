@@ -61,34 +61,19 @@ export class GitHubClient {
   }
 
   /**
-   * Helper tải JSON qua Node https native chống ECONNRESET khi payload lớn
+   * Helper tải JSON qua fetch native hỗ trợ auto redirect, gzip và payload lớn
    */
-  private httpsGetJson<T>(
+  private async httpsGetJson<T>(
     url: string,
     headers: Record<string, string>
   ): Promise<{ status: number; headers: Record<string, any>; data: T }> {
-    return new Promise((resolve, reject) => {
-      const req = https.get(url, { headers }, (res) => {
-        let rawData = "";
-        res.on("data", (chunk) => (rawData += chunk));
-        res.on("end", () => {
-          try {
-            const parsed = JSON.parse(rawData);
-            resolve({
-              status: res.statusCode || 200,
-              headers: res.headers as Record<string, any>,
-              data: parsed,
-            });
-          } catch (err) {
-            reject(new Error(`JSON parse error từ ${url}: ${err}`));
-          }
-        });
-      });
-      req.on("error", reject);
-      req.setTimeout(20000, () => {
-        req.destroy(new Error(`Hết thời gian chờ (Timeout) khi tải: ${url}`));
-      });
-    });
+    const res = await fetch(url, { headers });
+    const data = (await res.json()) as T;
+    return {
+      status: res.status,
+      headers: res.headers,
+      data,
+    };
   }
 
   /**

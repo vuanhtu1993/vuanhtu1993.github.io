@@ -27,9 +27,10 @@ export const parseNormalizeNode = async (
     const category = getCategoryForSlug(slug);
     const title = slugToTitle(slug);
     const graphData = state.graphDataMap?.[slug] || null;
+    const llmGrouping = state.llmGroupingMap?.[slug] || undefined;
 
-    // Xây dựng cây phân cấp và thứ tự học
-    const { modules, topics, graph } = buildHierarchicalRoadmap(slug, rawTopics, graphData);
+    // Xây dựng cây phân cấp và cấu trúc module lộ trình
+    const { modules, topics, graph } = buildHierarchicalRoadmap(slug, rawTopics, graphData, llmGrouping);
 
     for (const t of topics) {
       totalResources += t.resources.length;

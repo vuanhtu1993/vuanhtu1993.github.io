@@ -5,9 +5,9 @@
 ## 1. Thống Kê Tổng Quan
 
 - **Tổng số Lộ trình (Roadmaps):** 8
-- **Tổng số Modules (Phân cấp):** 72
-- **Tổng số Chủ đề (Topics):** 782
-- **Thời gian tạo:** 13:13:41 11/9/2026
+- **Tổng số Modules (Phân cấp):** 145
+- **Tổng số Chủ đề (Topics):** 781
+- **Thời gian tạo:** 00:08:23 17/9/2026
 
 ## 2. Bản Đồ Phân Loại (Mermaid Graph)
 
@@ -32,9 +32,9 @@ graph TD
 
 | STT | Tên Lộ Trình (Title) | Slug | Số Modules | Số Topics | Đường Dẫn File JSON |
 |:---:|:---|:---|:---:|:---:|:---|
-| 1 | **Node.js** | `nodejs` | 1 | 113 | `skill-based/nodejs.json` |
-| 2 | **React** | `react` | 1 | 83 | `skill-based/react.json` |
-| 3 | **Typescript** | `typescript` | 1 | 93 | `skill-based/typescript.json` |
+| 1 | **NestJS** | `nestjs` | 24 | 78 | `skill-based/nestjs.json` |
+| 2 | **Next.js** | `nextjs` | 33 | 96 | `skill-based/nextjs.json` |
+| 3 | **Node.js** | `nodejs` | 19 | 114 | `skill-based/nodejs.json` |
 
 ### 🔹 Lộ trình theo Công cụ & Nền tảng (Tool & Platform) (2 roadmaps)
 

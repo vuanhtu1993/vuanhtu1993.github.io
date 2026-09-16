@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-11T06:13:41.716Z",
+  "generatedAt": "2026-09-16T17:08:23.235Z",
   "sourceRepo": "kamranahmedse/developer-roadmap",
   "totalRoadmaps": 8,
-  "totalModules": 72,
-  "totalTopics": 782,
+  "totalModules": 145,
+  "totalTopics": 781,
   "categories": [
     {
       "key": "role-based",
@@ -27,25 +27,25 @@
       "count": 3,
       "roadmaps": [
         {
+          "slug": "nestjs",
+          "title": "NestJS",
+          "moduleCount": 24,
+          "topicCount": 78,
+          "filePath": "skill-based/nestjs.json"
+        },
+        {
+          "slug": "nextjs",
+          "title": "Next.js",
+          "moduleCount": 33,
+          "topicCount": 96,
+          "filePath": "skill-based/nextjs.json"
+        },
+        {
           "slug": "nodejs",
           "title": "Node.js",
-          "moduleCount": 1,
-          "topicCount": 113,
+          "moduleCount": 19,
+          "topicCount": 114,
           "filePath": "skill-based/nodejs.json"
-        },
-        {
-          "slug": "react",
-          "title": "React",
-          "moduleCount": 1,
-          "topicCount": 83,
-          "filePath": "skill-based/react.json"
-        },
-        {
-          "slug": "typescript",
-          "title": "Typescript",
-          "moduleCount": 1,
-          "topicCount": 93,
-          "filePath": "skill-based/typescript.json"
         }
       ]
     },

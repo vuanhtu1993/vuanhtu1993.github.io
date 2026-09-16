@@ -1,0 +1,392 @@
+.hubContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.heroHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ecfdf5;
+  color: #047857;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  border: 1px solid #a7f3d0;
+}
+
+:global([data-theme='dark']) .heroBadge {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  color: #0f172a !important;
+}
+
+:global([data-theme='dark']) .heroTitle {
+  color: #f8fafc !important;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  color: #334155;
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+
+:global([data-theme='dark']) .heroSubtitle {
+  color: #cbd5e1;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  min-width: 150px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+:global([data-theme='dark']) .statItem {
+  background-color: #1e1f22;
+  border-color: #2e2e32;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.statNumber {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #10b981;
+}
+
+:global([data-theme='dark']) .statNumber {
+  color: #34d399;
+}
+
+.statLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #475569;
+  margin-top: 0.25rem;
+}
+
+:global([data-theme='dark']) .statLabel {
+  color: #94a3b8;
+}
+
+.filterControls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.75rem;
+}
+
+.categoryPills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.categoryPill {
+  padding: 0.55rem 1.1rem;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+:global([data-theme='dark']) .categoryPill {
+  background-color: #1e1f22;
+  border-color: #3f4045;
+  color: #cbd5e1;
+}
+
+.categoryPill:hover {
+  border-color: #10b981;
+  color: #10b981;
+  transform: translateY(-1px);
+}
+
+:global([data-theme='dark']) .categoryPill:hover {
+  border-color: #34d399;
+  color: #34d399;
+}
+
+.categoryPillActive {
+  background-color: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.searchWrapper {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.8rem 1.25rem 0.8rem 2.8rem;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+:global([data-theme='dark']) .searchInput {
+  background-color: #1e1f22;
+  border-color: #3f4045;
+  color: #f8fafc;
+}
+
+.searchInput:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+.searchIconSvg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+}
+
+:global([data-theme='dark']) .searchIconSvg {
+  color: #94a3b8;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.roadmapCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+:global([data-theme='dark']) .roadmapCard {
+  background-color: #1e1f22;
+  border-color: #2e2e32;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.roadmapCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: #10b981;
+}
+
+:global([data-theme='dark']) .roadmapCard:hover {
+  border-color: #34d399;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.techBadge {
+  font-family: var(--ifm-font-family-monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global([data-theme='dark']) .techBadge {
+  background-color: #27282b;
+  border-color: #3f4045;
+  color: #f1f5f9;
+}
+
+.categoryBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+:global([data-theme='dark']) .categoryBadge {
+  background-color: #27282b;
+  color: #94a3b8;
+  border-color: #3f4045;
+}
+
+.cardTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #0f172a !important;
+}
+
+:global([data-theme='dark']) .cardTitle {
+  color: #f8fafc !important;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 1.35rem;
+}
+
+.metaDot {
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+:global([data-theme='dark']) .cardMeta {
+  color: #94a3b8;
+}
+
+.progressContainer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+:global([data-theme='dark']) .progressContainer {
+  border-top-color: #2e2e32;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+  color: #334155;
+}
+
+:global([data-theme='dark']) .progressHeader {
+  color: #cbd5e1;
+}
+
+.progressBarBg {
+  width: 100%;
+  height: 7px;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+:global([data-theme='dark']) .progressBarBg {
+  background-color: #334155;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: #10b981;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.progressBarComplete {
+  background-color: #059669;
+}
+
+.cardAction {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.95rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+:global([data-theme='dark']) .cardAction {
+  color: #34d399;
+}
+
+.footerCopyright {
+  text-align: center;
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+:global([data-theme='dark']) .footerCopyright {
+  border-top-color: #2e2e32;
+  color: #94a3b8;
+}
+
+.noResults {
+  text-align: center;
+  padding: 3.5rem 1rem;
+  color: #64748b;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+}

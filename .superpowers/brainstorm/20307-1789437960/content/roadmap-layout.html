@@ -1,0 +1,92 @@
+<h2>Bố Cục Giao Diện Chi Tiết Khi Xem Một Roadmap (Detail View Layout)</h2>
+<p class="subtitle">Khi người học bấm vào một lộ trình cụ thể (ví dụ: Frontend, React, Docker...), bạn muốn giao diện hiển thị thế nào?</p>
+
+<div class="cards">
+  <!-- Layout 1 -->
+  <div class="card" data-choice="full-canvas-drawer" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: var(--bg-primary); padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+      <!-- Wireframe Header -->
+      <div style="height: 18px; background: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; padding: 0 8px; justify-content: space-between;">
+        <span style="font-size: 9px; font-weight: 600;">← Back to Hub | React Roadmap</span>
+        <span style="font-size: 8px; background: var(--accent); color: #fff; padding: 1px 4px; border-radius: 3px;">[Graph ⇄ Timeline]</span>
+      </div>
+      <!-- Wireframe Body -->
+      <div style="flex: 1; display: flex; gap: 6px; position: relative; min-height: 120px; background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+        <!-- Canvas area -->
+        <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: radial-gradient(circle, #e5e5e7 1px, transparent 1px); background-size: 10px 10px;">
+          <div style="padding: 4px 8px; background: #0071e3; color: white; border-radius: 4px; font-size: 9px; font-weight: 600;">Internet & Basics</div>
+          <div style="width: 2px; height: 10px; background: #0071e3;"></div>
+          <div style="padding: 4px 8px; background: #34c759; color: white; border-radius: 4px; font-size: 9px; font-weight: 600;">React Core</div>
+        </div>
+        <!-- Slide-over Drawer -->
+        <div style="width: 45%; background: var(--bg-secondary); border-left: 2px solid var(--accent); padding: 8px; display: flex; flex-direction: column; gap: 4px; box-shadow: -2px 0 8px rgba(0,0,0,0.08);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 9px; font-weight: bold; color: var(--accent);">Topic: State Management</span>
+            <span style="font-size: 8px; color: var(--text-secondary);">✕</span>
+          </div>
+          <div style="font-size: 8px; color: var(--text-secondary); line-height: 1.2;">Định nghĩa & bài giảng, tài liệu tham khảo, video...</div>
+          <div style="margin-top: auto; padding: 3px; background: #e8f4fd; border-radius: 3px; font-size: 8px; color: #0071e3; text-align: center;">Đánh dấu đã học ✓</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>1. Canvas Rộng Rãi + Slide-over Drawer (Khuyến nghị)</h3>
+      <p>Mặc định không gian đồ thị/timeline chiếm toàn bộ màn hình rất thoáng. Khi click vào topic nào thì một Slide-over Drawer trượt ra từ bên phải hiển thị toàn bộ nội dung, bài viết, tài liệu. Đóng drawer để tiếp tục tương tác.</p>
+    </div>
+  </div>
+
+  <!-- Layout 2 -->
+  <div class="card" data-choice="split-screen" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: var(--bg-primary); padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+      <!-- Wireframe Header -->
+      <div style="height: 18px; background: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; padding: 0 8px;">
+        <span style="font-size: 9px; font-weight: 600;">React Roadmap (2 Cột cố định)</span>
+      </div>
+      <!-- Wireframe Body -->
+      <div style="flex: 1; display: flex; gap: 6px; min-height: 120px;">
+        <!-- Left: Graph/List (55%) -->
+        <div style="flex: 1.1; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px;">
+          <div style="font-size: 8px; font-weight: bold; color: var(--text-secondary);">Bản đồ Lộ trình</div>
+          <div style="padding: 4px; background: var(--bg-primary); border-radius: 3px; font-size: 8px;">1. Fundamentals</div>
+          <div style="padding: 4px; background: #e8f4fd; border: 1px solid #0071e3; border-radius: 3px; font-size: 8px; font-weight: bold; color: #0071e3;">2. Hooks & State (Đang chọn)</div>
+          <div style="padding: 4px; background: var(--bg-primary); border-radius: 3px; font-size: 8px;">3. Routing & SSR</div>
+        </div>
+        <!-- Right: Fixed Detail Panel (45%) -->
+        <div style="flex: 1; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px;">
+          <div style="font-size: 8px; font-weight: bold; color: var(--accent);">Hooks & State</div>
+          <div style="font-size: 8px; color: var(--text-secondary); line-height: 1.2;">Nội dung luôn luôn hiển thị song song bên cạnh, cuộn độc lập.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>2. Split-Screen (Chia 2 Cột Song Song Cố Định)</h3>
+      <p>Cột bên trái là danh sách/đồ thị thu nhỏ, cột bên phải là khung nội dung chi tiết cố định. Người học không cần đóng mở drawer mà xem được tài liệu ngay lập tức khi click.</p>
+    </div>
+  </div>
+
+  <!-- Layout 3 -->
+  <div class="card" data-choice="modal-popup" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: var(--bg-primary); padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative;">
+      <!-- Wireframe Header -->
+      <div style="height: 18px; background: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; padding: 0 8px;">
+        <span style="font-size: 9px; font-weight: 600;">React Roadmap</span>
+      </div>
+      <!-- Wireframe Body -->
+      <div style="flex: 1; background: #fff; border: 1px solid var(--border); border-radius: 6px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; opacity: 0.85;">
+        <div style="padding: 6px; background: #0071e3; color: #fff; border-radius: 4px; font-size: 9px;">Node clicked</div>
+        <!-- Modal overlay -->
+        <div style="position: absolute; inset: 10px; background: var(--bg-secondary); border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.25); border: 1px solid var(--border); padding: 8px; display: flex; flex-direction: column; gap: 4px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span style="font-size: 9px; font-weight: bold;">📖 Modal Chi tiết Topic</span>
+            <span style="font-size: 8px;">✕</span>
+          </div>
+          <div style="font-size: 8px; color: var(--text-secondary);">Nội dung bài học, tài nguyên dạng pop-up ở giữa màn hình.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>3. Full Screen + Central Dialog Modal</h3>
+      <p>Đồ thị chiếm 100% diện tích trang. Khi click vào một topic sẽ mở Modal Popup căn giữa màn hình với nền mờ (Backdrop). Rất quen thuộc và dễ tập trung đọc chuyên sâu.</p>
+    </div>
+  </div>
+</div>

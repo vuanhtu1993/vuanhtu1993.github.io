@@ -18,31 +18,14 @@ export interface HierarchicalBuildResult {
 }
 
 /**
- * Hàm so sánh chuỗi số thứ tự phân cấp: "1.0" < "1.1" < "1.2" < "2.0" < "2.10"
- */
-export function compareOrders(a: string, b: string): number {
-  const partsA = a.split(".").map((n) => parseInt(n, 10) || 0);
-  const partsB = b.split(".").map((n) => parseInt(n, 10) || 0);
-
-  const len = Math.max(partsA.length, partsB.length);
-  for (let i = 0; i < len; i++) {
-    const numA = partsA[i] ?? 0;
-    const numB = partsB[i] ?? 0;
-    if (numA !== numB) {
-      return numA - numB;
-    }
-  }
-  return 0;
-}
-
-/**
- * Xây dựng cây phân cấp (Hierarchy) và thứ tự học tập tuyến tính (Linear Order)
- * từ Graph Topology của roadmap.sh kết hợp với nội dung markdown đã crawl.
+ * Xây dựng cây phân cấp (Hierarchy) và cấu trúc module lộ trình học tập
+ * từ Graph Topology của roadmap.sh kết hợp với nội dung markdown và phân loại ngữ nghĩa LLM.
  */
 export function buildHierarchicalRoadmap(
   slug: string,
   rawTopics: RawTopic[],
-  graphData: RoadmapGraphData | null
+  graphData: RoadmapGraphData | null,
+  llmGrouping?: Record<string, string>
 ): HierarchicalBuildResult {
   // 1. Phân tích trước toàn bộ file raw markdown thành ParsedTopic
   const topicByNodeId = new Map<string, ParsedTopic>();
@@ -55,16 +38,11 @@ export function buildHierarchicalRoadmap(
 
   // --- TRƯỜNG HỢP A: Không có dữ liệu Graph Topology (Fallback) ---
   if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
-    const fallbackTopics: ParsedTopic[] = rawTopics.map((raw, idx) => {
-      const parsed = parseTopicMarkdown(raw);
-      return {
-        ...parsed,
-        order: `1.${idx + 1}`,
-      };
+    const fallbackTopics: ParsedTopic[] = rawTopics.map((raw) => {
+      return parseTopicMarkdown(raw);
     });
 
     const fallbackModule: RoadmapModule = {
-      order: 1,
       id: `${slug}-core`,
       name: slug,
       title: slugToTitle(slug),
@@ -108,13 +86,16 @@ export function buildHierarchicalRoadmap(
   const childrenOf = new Map<string, string[]>();
   const parentOf = new Map<string, string>();
 
+  // 1. Nạp quan hệ từ dashed edges (Ground Truth từ roadmap.sh)
   for (const e of dashedEdges) {
     if (!childrenOf.has(e.source)) childrenOf.set(e.source, []);
-    childrenOf.get(e.source)!.push(e.target);
+    if (!childrenOf.get(e.source)!.includes(e.target)) {
+      childrenOf.get(e.source)!.push(e.target);
+    }
     parentOf.set(e.target, e.source);
   }
 
-  // Ghi nhận thêm các node có trường parentId
+  // 2. Ghi nhận thêm các node có thuộc tính parentId
   for (const n of graphData.nodes) {
     if (n.parentId) {
       if (!childrenOf.has(n.parentId)) childrenOf.set(n.parentId, []);
@@ -125,16 +106,36 @@ export function buildHierarchicalRoadmap(
     }
   }
 
+  // 3. Nạp quan hệ phân tích ngữ nghĩa từ LLM Grouping (loại bỏ hoàn toàn cơ chế toạ độ Y)
+  if (llmGrouping) {
+    for (const [subId, parentId] of Object.entries(llmGrouping)) {
+      // Chỉ gán nếu node chưa có cha được xác định trước đó
+      if (!parentOf.has(subId)) {
+        parentOf.set(subId, parentId);
+        if (!childrenOf.has(parentId)) childrenOf.set(parentId, []);
+        if (!childrenOf.get(parentId)!.includes(subId)) {
+          childrenOf.get(parentId)!.push(subId);
+        }
+      }
+    }
+  }
+
   // Xác định các Node chính làm Module:
   // Là các node có con, hoặc node kiểu "topic" không phải là con của node khác
+  const excludedTypes = new Set([
+    "title",
+    "paragraph",
+    "button",
+    "section",
+    "horizontal",
+    "vertical",
+    "label",
+    "linksgroup",
+  ]);
+
   const mainNodes = graphData.nodes
     .filter((n) => {
-      if (
-        n.type === "title" ||
-        n.type === "paragraph" ||
-        n.type === "button" ||
-        n.type === "section"
-      ) {
+      if (excludedTypes.has(n.type)) {
         return false;
       }
       // Node có subtopics con
@@ -147,43 +148,15 @@ export function buildHierarchicalRoadmap(
       }
       return false;
     })
-    // Sắp xếp thứ tự học theo toạ độ Y từ trên xuống dưới
+    // Sắp xếp thứ tự module theo toạ độ Y từ trên xuống dưới
     .sort((a, b) => a.position.y - b.position.y);
-
-  // Gom các subtopics chưa có cạnh dashed vào module gần nhất về mặt toạ độ Y (Spatial Proximity)
-  const unassignedNodes = graphData.nodes.filter((n) => {
-    if (n.type !== "subtopic" && n.type !== "topic") return false;
-    if (mainNodes.some((m) => m.id === n.id)) return false;
-    if (parentOf.has(n.id)) return false;
-    return true;
-  });
-
-  for (const u of unassignedNodes) {
-    let closestMain: GraphNode | null = null;
-    let minDy = Infinity;
-
-    for (const m of mainNodes) {
-      const dy = Math.abs(m.position.y - u.position.y);
-      if (dy < minDy && dy <= 160) {
-        minDy = dy;
-        closestMain = m;
-      }
-    }
-
-    if (closestMain) {
-      if (!childrenOf.has(closestMain.id)) childrenOf.set(closestMain.id, []);
-      childrenOf.get(closestMain.id)!.push(u.id);
-      parentOf.set(u.id, closestMain.id);
-    }
-  }
 
   const assignedNodeIds = new Set<string>();
   const modules: RoadmapModule[] = [];
   const allEnrichedTopics: ParsedTopic[] = [];
 
   // Duyệt qua từng mainNode để tạo Module và các Subtopics
-  mainNodes.forEach((mainNode, mIdx) => {
-    const moduleOrder = mIdx + 1;
+  mainNodes.forEach((mainNode) => {
     const moduleTitle = mainNode.data?.label || slugToTitle(mainNode.id);
 
     // Lấy điều kiện tiên quyết và các module tiếp theo
@@ -205,10 +178,8 @@ export function buildHierarchicalRoadmap(
       moduleResources = parsedMain.resources;
       assignedNodeIds.add(mainNode.id);
 
-      // Thêm chính main topic này vào danh sách tổng hợp với order là `${moduleOrder}.0`
       const mainTopicEnriched: ParsedTopic = {
         ...parsedMain,
-        order: `${moduleOrder}.0`,
         prerequisites: prereqs,
         nextTopics: nextMods,
       };
@@ -217,7 +188,7 @@ export function buildHierarchicalRoadmap(
 
     // Lấy danh sách subtopics con
     const rawChildIds = childrenOf.get(mainNode.id) || [];
-    // Sắp xếp các subtopics theo toạ độ Y rồi tới X
+    // Sắp xếp các subtopics theo toạ độ Y rồi tới X để hiển thị ổn định
     const sortedChildNodes = rawChildIds
       .map((id) => nodeMap.get(id))
       .filter((n): n is GraphNode => Boolean(n))
@@ -230,8 +201,7 @@ export function buildHierarchicalRoadmap(
 
     const subtopics: ParsedTopic[] = [];
 
-    sortedChildNodes.forEach((cNode, cIdx) => {
-      const subOrder = `${moduleOrder}.${cIdx + 1}`;
+    sortedChildNodes.forEach((cNode) => {
       const childTitle = cNode.data?.label || slugToTitle(cNode.id);
 
       if (topicByNodeId.has(cNode.id)) {
@@ -239,7 +209,6 @@ export function buildHierarchicalRoadmap(
         const enriched: ParsedTopic = {
           ...pTopic,
           title: pTopic.title || childTitle,
-          order: subOrder,
           parentTopic: { id: mainNode.id, title: moduleTitle },
         };
         subtopics.push(enriched);
@@ -254,7 +223,6 @@ export function buildHierarchicalRoadmap(
           description: "",
           content: "",
           resources: [],
-          order: subOrder,
           parentTopic: { id: mainNode.id, title: moduleTitle },
         };
         subtopics.push(stubTopic);
@@ -264,7 +232,6 @@ export function buildHierarchicalRoadmap(
     });
 
     modules.push({
-      order: moduleOrder,
       id: mainNode.id,
       name: mainNode.id,
       title: moduleTitle,
@@ -285,17 +252,14 @@ export function buildHierarchicalRoadmap(
   }
 
   if (remainingTopics.length > 0) {
-    const extraModuleOrder = modules.length + 1;
     const extraModuleTitle = "Các Chủ Đề Mở Rộng & Bổ Trợ";
 
-    const extraSubtopics: ParsedTopic[] = remainingTopics.map((t, idx) => ({
+    const extraSubtopics: ParsedTopic[] = remainingTopics.map((t) => ({
       ...t,
-      order: `${extraModuleOrder}.${idx + 1}`,
       parentTopic: { id: "extra-topics", title: extraModuleTitle },
     }));
 
     modules.push({
-      order: extraModuleOrder,
       id: "extra-topics",
       name: "additional-topics",
       title: extraModuleTitle,
@@ -308,9 +272,6 @@ export function buildHierarchicalRoadmap(
 
     allEnrichedTopics.push(...extraSubtopics);
   }
-
-  // Sắp xếp lại toàn bộ topics theo thứ tự phân cấp học tập
-  allEnrichedTopics.sort((a, b) => compareOrders(a.order, b.order));
 
   // Tạo danh sách edges chuẩn hóa cho đồ thị
   const graphEdges = [

@@ -1,0 +1,549 @@
+.timelineWrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  position: relative;
+}
+
+/* Metro line chạy dọc */
+.timelineTrack {
+  position: relative;
+  padding-left: 3.25rem;
+}
+
+.timelineTrack::before {
+  content: '';
+  position: absolute;
+  left: 1.35rem;
+  top: 1rem;
+  bottom: 2rem;
+  width: 4px;
+  background-color: #cbd5e1;
+  border-radius: 2px;
+}
+
+:global([data-theme='dark']) .timelineTrack::before {
+  background-color: #3f4045;
+}
+
+.stationItem {
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+
+/* Trạm dừng Metro */
+.stationStop {
+  position: absolute;
+  left: -3.25rem;
+  top: 0.95rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2.5px solid #10b981;
+  color: #047857;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  z-index: 2;
+  box-shadow: 0 0 0 4px #f8fafc;
+  transition: all 0.2s ease;
+}
+
+:global([data-theme='dark']) .stationStop {
+  background-color: #202124;
+  border-color: #10b981;
+  color: #34d399;
+  box-shadow: 0 0 0 4px #121214;
+}
+
+.stationStopCompleted {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 5px #ecfdf5 !important;
+}
+
+:global([data-theme='dark']) .stationStopCompleted {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2) !important;
+}
+
+.stationCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+:global([data-theme='dark']) .stationCard {
+  background-color: #1e1f22;
+  border-color: #2e2e32;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stationCard:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+:global([data-theme='dark']) .stationCard:hover {
+  border-color: #3f4045;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.stationHeader {
+  padding: 0.95rem 1.35rem;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  user-select: none;
+  background-color: #ffffff;
+  transition: background-color 0.15s ease;
+}
+
+:global([data-theme='dark']) .stationHeader {
+  background-color: #1e1f22;
+}
+
+.stationHeader:hover {
+  background-color: #f8fafc;
+}
+
+:global([data-theme='dark']) .stationHeader:hover {
+  background-color: #25262a;
+}
+
+.stationInfo {
+  flex: 1;
+}
+
+.stationTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.stationTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a !important;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+:global([data-theme='dark']) .stationTitle {
+  color: #f8fafc !important;
+}
+
+.stationBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+:global([data-theme='dark']) .stationBadge {
+  background-color: #2a2b2e;
+  color: #cbd5e1;
+  border-color: #3f4045;
+}
+
+.stationBadgeCompleted {
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+
+:global([data-theme='dark']) .stationBadgeCompleted {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
+}
+
+.stationDesc {
+  font-size: 0.88rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.45;
+}
+
+:global([data-theme='dark']) .stationDesc {
+  color: #94a3b8;
+}
+
+.chevronIcon {
+  font-size: 0.85rem;
+  color: #64748b;
+  transition: transform 0.25s ease;
+  margin-top: 0.25rem;
+}
+
+:global([data-theme='dark']) .chevronIcon {
+  color: #94a3b8;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.subtopicsList {
+  border-top: 1px solid #e2e8f0;
+  padding: 0.4rem 0;
+  background-color: #fafafa;
+}
+
+:global([data-theme='dark']) .subtopicsList {
+  background-color: #191a1c;
+  border-top-color: #2e2e32;
+}
+
+/* ===== 1. LINEAR STEP ROW ===== */
+
+.topicRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.35rem;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+:global([data-theme='dark']) .topicRow {
+  border-bottom-color: #222326;
+}
+
+.topicRow:last-child {
+  border-bottom: none;
+}
+
+.topicRow:hover {
+  background-color: #f1f5f9;
+}
+
+:global([data-theme='dark']) .topicRow:hover {
+  background-color: #25262a;
+}
+
+.topicLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.checkboxBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 2px solid #94a3b8;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+:global([data-theme='dark']) .checkboxBtn {
+  border-color: #64748b;
+  background-color: #2a2b2e;
+}
+
+.checkboxBtn:hover {
+  border-color: #10b981;
+  transform: scale(1.08);
+}
+
+.checkboxChecked {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+}
+
+.topicName {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global([data-theme='dark']) .topicName {
+  color: #f1f5f9;
+}
+
+.topicNameChecked {
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+:global([data-theme='dark']) .topicNameChecked {
+  color: #64748b;
+}
+
+.topicRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.resourceCountBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  background-color: #e2e8f0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+}
+
+:global([data-theme='dark']) .resourceCountBadge {
+  background-color: #2a2b2e;
+  color: #cbd5e1;
+}
+
+.openDrawerArrow {
+  font-size: 0.95rem;
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* ===== 2. BRANCH SECTION & MULTI-TRACK FORK ===== */
+
+.branchSection {
+  margin: 0.75rem 1rem;
+  padding: 0.85rem 1.15rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+:global([data-theme='dark']) .branchSection {
+  background-color: #1a1b1e;
+  border-color: #3f4045;
+}
+
+.branchForkHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+
+.branchForkTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.branchDotMarker {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  flex-shrink: 0;
+}
+
+.branchForkTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a !important;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+:global([data-theme='dark']) .branchForkTitle {
+  color: #f8fafc !important;
+}
+
+
+.branchForkDesc {
+  font-size: 0.88rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.5;
+}
+
+:global([data-theme='dark']) .branchForkDesc {
+  color: #94a3b8;
+}
+
+.leadTopicLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0284c7;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  width: fit-content;
+}
+
+.leadTopicLink:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+:global([data-theme='dark']) .leadTopicLink {
+  color: #38bdf8;
+}
+
+/* Đồ họa đường rẽ nhánh (Fork Stem & Bar) */
+.branchConnectorWrapper {
+  margin: 0.5rem 0 1.25rem;
+}
+
+.branchConnectorStem {
+  width: 3px;
+  height: 14px;
+  background-color: #94a3b8;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+:global([data-theme='dark']) .branchConnectorStem {
+  background-color: #64748b;
+}
+
+.branchConnectorBar {
+  width: 85%;
+  height: 3px;
+  background-color: #94a3b8;
+  margin: 0 auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+:global([data-theme='dark']) .branchConnectorBar {
+  background-color: #64748b;
+}
+
+/* Lưới thẻ bài nhánh con */
+.branchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.branchCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.6rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+:global([data-theme='dark']) .branchCard {
+  background-color: #222326;
+  border-color: #333438;
+}
+
+.branchCard:hover {
+  border-color: #10b981;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.12);
+}
+
+:global([data-theme='dark']) .branchCard:hover {
+  border-color: #34d399;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.branchCardCompleted {
+  border-color: #10b981 !important;
+  background-color: #f0fdf4 !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15) !important;
+}
+
+:global([data-theme='dark']) .branchCardCompleted {
+  border-color: #059669 !important;
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.branchCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.branchCardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a !important;
+  margin: 0;
+  line-height: 1.35;
+}
+
+:global([data-theme='dark']) .branchCardTitle {
+  color: #f8fafc !important;
+}
+
+.branchCardDesc {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+:global([data-theme='dark']) .branchCardDesc {
+  color: #94a3b8;
+}
+
+.branchCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+:global([data-theme='dark']) .branchCardFooter {
+  border-top-color: #2a2b2e;
+}
+
+.branchCardAction {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+:global([data-theme='dark']) .branchCardAction {
+  color: #34d399;
+}

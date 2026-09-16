@@ -3,13 +3,14 @@ import { RoadmapCrawlerState, RoadmapCrawlerStateType } from "./state";
 import { fetchIndexNode } from "./nodes/fetch-index";
 import { classifyNode } from "./nodes/classify";
 import { crawlBatchNode } from "./nodes/crawl-batch";
+import { llmGroupingNode } from "./nodes/llm-grouping";
 import { parseNormalizeNode } from "./nodes/parse-normalize";
 import { saveOutputNode } from "./nodes/save-output";
 
 /**
  * Điều kiện rẽ nhánh kiểm soát vòng lặp crawl:
  * - Nếu còn roadmap trong pendingQueue và rateLimitRemaining vẫn còn đủ: tiếp tục crawl batch tiếp theo
- * - Nếu đã crawl hết hoặc quota bị cạn kiệt: chuyển sang bước parse và lưu trữ
+ * - Nếu đã crawl hết hoặc quota bị cạn kiệt: chuyển sang bước LLM Grouping và parse
  */
 export function shouldContinue(state: RoadmapCrawlerStateType): string {
   if (state.pendingQueue && state.pendingQueue.length > 0) {
@@ -17,10 +18,10 @@ export function shouldContinue(state: RoadmapCrawlerStateType): string {
       return "crawlBatch";
     } else {
       console.warn("⚠️ Rate limit gần cạn, dừng crawl batch để bảo toàn quota và tiến hành xử lý dữ liệu hiện có.");
-      return "parseNormalize";
+      return "llmGrouping";
     }
   }
-  return "parseNormalize";
+  return "llmGrouping";
 }
 
 /**
@@ -31,6 +32,7 @@ export function buildGraph() {
     .addNode("fetchIndex", fetchIndexNode)
     .addNode("classify", classifyNode)
     .addNode("crawlBatch", crawlBatchNode)
+    .addNode("llmGrouping", llmGroupingNode)
     .addNode("parseNormalize", parseNormalizeNode)
     .addNode("saveOutput", saveOutputNode)
 
@@ -42,10 +44,11 @@ export function buildGraph() {
     // Vòng lặp có điều kiện xử lý từng batch
     .addConditionalEdges("crawlBatch", shouldContinue, {
       crawlBatch: "crawlBatch",
-      parseNormalize: "parseNormalize",
+      llmGrouping: "llmGrouping",
     })
 
-    // Parse nội dung -> Ghi file -> Kết thúc
+    // Gom nhóm LLM -> Parse nội dung -> Ghi file -> Kết thúc
+    .addEdge("llmGrouping", "parseNormalize")
     .addEdge("parseNormalize", "saveOutput")
     .addEdge("saveOutput", END);
 

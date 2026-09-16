@@ -1,0 +1,55 @@
+<h2>Chọn Định Hướng Trải Nghiệm Visual Cho Trang Roadmap</h2>
+<p class="subtitle">Dữ liệu từ <code>sources/roadmap-data</code> gồm 10 lộ trình (Role-based, Skill-based, Tool-platform, Best-practice) với hơn 1.000 topics và liên kết tài liệu. Bạn muốn người học trải nghiệm trang này theo hướng nào?</p>
+
+<div class="options">
+  <div class="option" data-choice="option-c" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>🌟 Hybrid Roadmap Hub (Được khuyến nghị)</h3>
+      <p><strong>Catalog Dashboard + Chuyển đổi linh hoạt giữa Graph & Timeline:</strong> Trang đích phân nhóm 4 danh mục (Frontend, React, Docker, System Design...), có Search & Filter. Khi click vào từng lộ trình, người học có thể chuyển đổi giữa <em>Interactive Graph</em> (khám phá tổng quan) và <em>Linear Timeline Checklist</em> (học tuần tự).</p>
+      
+      <div style="margin-top: 12px; padding: 12px; background: var(--bg-primary); border-radius: 8px; border: 1px dashed var(--border);">
+        <div style="display: flex; gap: 8px; margin-bottom: 8px; font-size: 0.8rem; font-weight: 600;">
+          <span style="background: var(--accent); color: white; padding: 2px 8px; border-radius: 4px;">1. Catalog Hub</span>
+          <span>➔</span>
+          <span style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">2. Chi tiết Roadmap [Graph ⇄ Stepper]</span>
+          <span>➔</span>
+          <span style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">3. Topic Detail Drawer</span>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+          ✅ Ưu điểm: Phục vụ cả 2 đối tượng (người thích nhìn tổng quan dạng mạng lưới & người thích học theo checklist tuyến tính từng bước).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="option-a" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>🕸️ Pure Interactive Flow Graph (Tập trung đồ thị tương tác mạng lưới)</h3>
+      <p><strong>Bản đồ Node & Flow trực quan (kiểu Roadmap.sh / Cytoscape / D3):</strong> Trực tiếp đưa người dùng vào canvas đồ thị tương tác toàn màn hình. Các module và topic liên kết bằng đường nối có hướng thể hiện prerequisite. Click node mở Modal/Drawer học tập.</p>
+      
+      <div style="margin-top: 12px; padding: 12px; background: var(--bg-primary); border-radius: 8px; border: 1px dashed var(--border);">
+        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+          ✅ Cực kỳ bắt mắt, hiệu ứng thị giác mạnh mẽ, giống trang <code>/ontology</code> hiện có trên web.<br/>
+          ⚠️ Thách thức: Trên màn hình điện thoại nhỏ cần xử lý zoom/pan cẩn thận.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="option-b" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>📋 Phased Milestone & Stepper (Checklist tuần tự theo giai đoạn)</h3>
+      <p><strong>Timeline dọc phân theo từng Chặng (Phase / Step by Step):</strong> Chia lộ trình thành các cột mốc tuần tự (VD: Chặng 1: Nền tảng ➔ Chặng 2: Core Concepts ➔ Chặng 3: Advanced/Ecosystem). Mỗi mốc có danh sách topics và thanh % hoàn thành.</p>
+      
+      <div style="margin-top: 12px; padding: 12px; background: var(--bg-primary); border-radius: 8px; border: 1px dashed var(--border);">
+        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+          ✅ Gọn gàng, dễ đọc trên di động, định hướng sư phạm rõ ràng cho sinh viên/junior theo dõi tiến độ.<br/>
+          ⚠️ Thiếu cảm giác "bản đồ khám phá tự do" so với đồ thị mạng lưới.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

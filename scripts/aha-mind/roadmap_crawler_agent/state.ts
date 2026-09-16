@@ -81,7 +81,6 @@ export interface ParsedTopic {
   description: string;
   content: string;
   resources: ParsedResource[];
-  order: string; // Số thứ tự phân cấp, vd: "1.0", "1.1", "2.1"
   parentTopic?: { id: string; title: string };
   prerequisites?: { id: string; title: string }[];
   nextTopics?: { id: string; title: string }[];
@@ -91,7 +90,6 @@ export interface ParsedTopic {
  * Module/Chủ đề chính trong lộ trình học tập tuần tự
  */
 export interface RoadmapModule {
-  order: number; // Thứ tự module chính: 1, 2, 3...
   id: string;
   name: string;
   title: string;
@@ -174,6 +172,12 @@ export const RoadmapCrawlerState = Annotation.Root({
 
   // Map lưu graph topology (nodes & edges) theo slug từ roadmap.sh API
   graphDataMap: Annotation<Record<string, RoadmapGraphData>>({
+    reducer: (x, y) => ({ ...x, ...y }),
+    default: () => ({}),
+  }),
+
+  // Map quan hệ cha-con { [subtopicNodeId]: parentTopicNodeId } do LLM phân tích ngữ nghĩa
+  llmGroupingMap: Annotation<Record<string, Record<string, string>>>({
     reducer: (x, y) => ({ ...x, ...y }),
     default: () => ({}),
   }),

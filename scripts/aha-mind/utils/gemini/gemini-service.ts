@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { geminiRateLimiter } from "./rate-limiter";
 

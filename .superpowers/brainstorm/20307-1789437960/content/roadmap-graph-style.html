@@ -1,0 +1,55 @@
+<h2>Phong Cách Hiển Thị Đồ Thị Lộ Trình (Graph Visual Style)</h2>
+<p class="subtitle">Lộ trình học tập (Roadmap) có tính chất thứ tự trước - sau (tiền đề / prerequisites). Bạn muốn đồ thị trực quan hóa theo phong cách nào?</p>
+
+<div class="cards">
+  <!-- Style 1: Hierarchical Flow (DAG) -->
+  <div class="card" data-choice="dag-flow" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: var(--bg-primary); padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <!-- Miniature Hierarchical DAG -->
+      <div style="padding: 6px 14px; background: #0071e3; color: white; border-radius: 6px; font-size: 10px; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        1. Nền Tảng (Basics)
+      </div>
+      <div style="width: 2px; height: 12px; background: #0071e3;"></div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="padding: 5px 10px; background: var(--bg-secondary); border: 1.5px solid #0071e3; color: var(--accent); border-radius: 6px; font-size: 9px; font-weight: 600;">
+          TypeScript
+        </div>
+        <div style="padding: 5px 10px; background: var(--bg-secondary); border: 1.5px solid #0071e3; color: var(--accent); border-radius: 6px; font-size: 9px; font-weight: 600;">
+          Node.js Core
+        </div>
+      </div>
+      <div style="display: flex; gap: 24px;">
+        <div style="width: 2px; height: 12px; background: var(--border);"></div>
+        <div style="width: 2px; height: 12px; background: var(--border);"></div>
+      </div>
+      <div style="padding: 6px 14px; background: #34c759; color: white; border-radius: 6px; font-size: 10px; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        2. Frameworks & Architecture (NestJS / React)
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>1. Phân Tầng Tuyến Tính (Hierarchical DAG / Flow) (Khuyến nghị)</h3>
+      <p><strong>Chuẩn phong cách Roadmap.sh:</strong> Các khối kiến thức sắp xếp theo tầng từ trên xuống dưới (hoặc từ trái sang phải). Mũi tên chỉ rõ module nào cần học trước (prerequisite), nhánh nào học song song. Rất dễ định hướng học tập cho sinh viên & junior.</p>
+    </div>
+  </div>
+
+  <!-- Style 2: Force-Directed / Cluster (như Ontology) -->
+  <div class="card" data-choice="force-cluster" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: var(--bg-primary); padding: 16px; display: flex; align-items: center; justify-content: center; position: relative;">
+      <!-- Miniature Force Graph -->
+      <div style="width: 140px; height: 120px; position: relative; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 32px; height: 32px; border-radius: 50%; background: #ff9f0a; color: white; font-size: 8px; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+          React
+        </div>
+        <!-- Orbit nodes -->
+        <div style="position: absolute; top: 10px; left: 15px; width: 22px; height: 22px; border-radius: 50%; background: #0071e3; color: white; font-size: 7px; display: flex; align-items: center; justify-content: center;">Hooks</div>
+        <div style="position: absolute; bottom: 10px; left: 20px; width: 22px; height: 22px; border-radius: 50%; background: #0071e3; color: white; font-size: 7px; display: flex; align-items: center; justify-content: center;">Router</div>
+        <div style="position: absolute; top: 15px; right: 15px; width: 22px; height: 22px; border-radius: 50%; background: #0071e3; color: white; font-size: 7px; display: flex; align-items: center; justify-content: center;">State</div>
+        <div style="position: absolute; bottom: 15px; right: 20px; width: 22px; height: 22px; border-radius: 50%; background: #0071e3; color: white; font-size: 7px; display: flex; align-items: center; justify-content: center;">SSR</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>2. Mạng Lưới Đàn Hồi Cụm (Force-Directed Radial / Cluster)</h3>
+      <p><strong>Tương tự trang Ontology hiện có:</strong> Các chủ đề tỏa tròn từ tâm hoặc liên kết theo lực đàn hồi dạng mạng nhện. Phù hợp để khám phá bản đồ concept tự do, nhưng khó thể hiện thứ tự học tuần tự từng bước.</p>
+    </div>
+  </div>
+</div>
