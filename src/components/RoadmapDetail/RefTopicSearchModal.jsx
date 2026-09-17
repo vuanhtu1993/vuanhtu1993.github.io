@@ -70,7 +70,7 @@ export default function RefTopicSearchModal({
         {/* Header */}
         <div className={styles.modalHeader}>
           <div>
-            <h3 className={styles.modalTitle}>🔗 Tham chiếu Topic con</h3>
+            <h3 className={styles.modalTitle}>Tham chiếu Topic con</h3>
             <p className={styles.modalSubtitle}>
               Gán topic vào chủ đề cha: <strong>{parentTopic.title}</strong>
             </p>
@@ -138,14 +138,13 @@ export default function RefTopicSearchModal({
             </div>
           ) : results.length === 0 ? (
             <div className={styles.idleState}>
-              <span className={styles.idleIcon}>💡</span>
-              <p>Nhập từ khóa phía trên để tìm kiếm bất kỳ topic nào trong hệ thống.</p>
+              <p>Nhập từ khóa phía trên để tìm kiếm chủ đề trong hệ thống.</p>
             </div>
           ) : (
             <div className={styles.resultsList}>
               {!searchTerm.trim() && (
                 <div style={{ fontSize: '0.85rem', color: '#059669', marginBottom: '0.6rem', fontWeight: 600 }}>
-                  💡 Gợi ý một số chủ đề từ các lộ trình khác:
+                  Gợi ý chủ đề từ các lộ trình:
                 </div>
               )}
               {results.map((topic) => (
@@ -154,7 +153,7 @@ export default function RefTopicSearchModal({
                     <div className={styles.itemTitleRow}>
                       <span className={styles.itemTitle}>{topic.title}</span>
                       <span className={styles.roadmapBadge}>
-                        🗺️ {topic.roadmapTitle || topic.roadmapSlug}
+                        {topic.roadmapTitle || topic.roadmapSlug}
                       </span>
                     </div>
                     {topic.description && (
@@ -182,7 +181,7 @@ export default function RefTopicSearchModal({
         {/* Footer info */}
         <div className={styles.modalFooter}>
           <span className={styles.footerHint}>
-            ℹ️ Topic con được gán sẽ hiển thị dưới dạng nhánh phân nhánh (Branch) trên sơ đồ.
+            Topic con được gán sẽ hiển thị dưới dạng nhánh phân nhánh (Branch) trên sơ đồ.
           </span>
           <button
             type="button"

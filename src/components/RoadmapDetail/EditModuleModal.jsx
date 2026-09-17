@@ -46,7 +46,7 @@ export default function EditModuleModal({
     <div className={styles.modalOverlay} onClick={isSaving ? undefined : onCancel}>
       <div className={styles.modalDialog} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>✏️ Chỉnh sửa Chặng Module</h3>
+          <h3 className={styles.modalTitle}>Chỉnh sửa Chặng Module</h3>
           <button
             type="button"
             className={styles.closeIconBtn}
@@ -81,7 +81,7 @@ export default function EditModuleModal({
                 className={styles.previewToggleBtn}
                 onClick={() => setShowPreview((prev) => !prev)}
               >
-                {showPreview ? '📝 Viết' : '👁️ Xem trước'}
+                {showPreview ? 'Soạn thảo' : 'Xem trước'}
               </button>
             </div>
 

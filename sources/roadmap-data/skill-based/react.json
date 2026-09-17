@@ -261,7 +261,7 @@
       }
     ]
   },
-  "moduleCount": 22,
+  "moduleCount": 17,
   "modules": [
     {
       "id": "79K4xgljcoSHkCYI1D55O",
@@ -1026,8 +1026,8 @@
           "name": "usecontext",
           "nodeId": "D5_O-uElftYGQr_bTU_se",
           "title": "useContext",
-          "description": "The `useContext` Hook lets us share data between components without having to pass props down through every level of the component tree. This is particularly useful when many components need to access the same data or when components are deeply nested.",
-          "content": "# useContext\n\nThe `useContext` Hook lets us share data between components without having to pass props down through every level of the component tree. This is particularly useful when many components need to access the same data or when components are deeply nested.\n\nVisit the following resources to learn more:\n\n- [@official@Using useContext](https://react.dev/reference/react/useContext)\n- [@official@Explore the concept of context](https://react.dev/learn/passing-data-deeply-with-context)\n- [@video@Learn useContext In 13 Minutes](https://www.youtube.com/watch?v=5LrDIWkK_Bc)",
+          "description": "`useContext` Hook lets us share data between components without having to pass props down through every level of the component tree. This is particularly useful when many components need to access the same data or when components are deeply nested.",
+          "content": "# useContext\n\n`useContext` Hook lets us share data between components without having to pass props down through every level of the component tree. This is particularly useful when many components need to access the same data or when components are deeply nested.\n\nVisit the following resources to learn more:\n\n- [@official@Using useContext](https://react.dev/reference/react/useContext)\n- [@official@Explore the concept of context](https://react.dev/learn/passing-data-deeply-with-context)\n- [@video@Learn useContext In 13 Minutes](https://www.youtube.com/watch?v=5LrDIWkK_Bc)",
           "resources": [
             {
               "type": "official",
@@ -1048,7 +1048,8 @@
           "parentTopic": {
             "id": "LbLQhonBqzxHU6B-L--Vq",
             "title": "Hooks"
-          }
+          },
+          "updatedAt": "2026-09-17T06:55:07.398Z"
         }
       ]
     },
@@ -1767,7 +1768,7 @@
           "order": 0,
           "name": "apollo",
           "nodeId": "8nMbfGxe3STMbrAVcqHHh",
-          "title": "Apollo",
+          "title": "GraphQL Apollo",
           "description": "Apollo Client is a library for working with GraphQL APIs in React. It handles sending queries and mutations, caching the results, and keeping the UI in sync as data changes. It is one of the most established tools for GraphQL in the React ecosystem, with hooks like useQuery and useMutation built in.",
           "content": "# Apollo\n\nApollo Client is a library for working with GraphQL APIs in React. It handles sending queries and mutations, caching the results, and keeping the UI in sync as data changes. It is one of the most established tools for GraphQL in the React ecosystem, with hooks like useQuery and useMutation built in.\n\nVisit the following resources to learn more:\n\n- [@article@Apollo Website](https://www.apollographql.com)\n- [@article@Official Docs](https://www.apollographql.com/docs/)\n- [@video@Official YouTube Channel](https://www.youtube.com/c/ApolloGraphQL/)\n- [@video@GraphQL With React Tutorial - Apollo Client](https://www.youtube.com/watch?v=YyUWW04HwKY)",
           "resources": [
@@ -1795,7 +1796,8 @@
           "parentTopic": {
             "id": "b4AP2OggxFAwsQtUwiUJJ",
             "title": "API Calls"
-          }
+          },
+          "updatedAt": "2026-09-17T07:04:06.746Z"
         },
         {
           "_id": "6aab68a23645eb382c9ad8f5",
@@ -1804,7 +1806,7 @@
           "order": 1,
           "name": "relay",
           "nodeId": "cLfM342sZfsCwmPPxQpEI",
-          "title": "Relay",
+          "title": "GraphQL Relay",
           "description": "Relay is a JavaScript client used in the browser to fetch GraphQL data. It's a JavaScript framework developed by Facebook for managing and fetching data in React applications. It is built with scalability in mind in order to power complex applications like Facebook. The ultimate goal of GraphQL and Relay is to deliver instant UI-response interactions.",
           "content": "# Relay\n\nRelay is a JavaScript client used in the browser to fetch GraphQL data. It's a JavaScript framework developed by Facebook for managing and fetching data in React applications. It is built with scalability in mind in order to power complex applications like Facebook. The ultimate goal of GraphQL and Relay is to deliver instant UI-response interactions.\n\nVisit the following resources to learn more:\n\n- [@official@Official Website](https://relay.dev/)\n- [@official@Introduction to Relay modern](https://relay.dev/docs/)",
           "resources": [
@@ -1822,7 +1824,8 @@
           "parentTopic": {
             "id": "b4AP2OggxFAwsQtUwiUJJ",
             "title": "API Calls"
-          }
+          },
+          "updatedAt": "2026-09-17T07:04:32.274Z"
         },
         {
           "_id": "6aab68a23645eb382c9ad8f6",
@@ -1831,7 +1834,7 @@
           "order": 2,
           "name": "urql",
           "nodeId": "9M5jRu0pj8KMvg9f-2oqZ",
-          "title": "urql",
+          "title": "GraphQL urql",
           "description": "urql is a lightweight GraphQL client for React, built to be simpler and smaller than alternatives like Apollo or Relay. It supports caching, and its behavior can be extended through a system of exchanges, which are similar to middleware. It suits projects that want GraphQL support without a heavy setup.",
           "content": "# urql\n\nurql is a lightweight GraphQL client for React, built to be simpler and smaller than alternatives like Apollo or Relay. It supports caching, and its behavior can be extended through a system of exchanges, which are similar to middleware. It suits projects that want GraphQL support without a heavy setup.\n\nVisit the following resources to learn more:\n\n- [@article@urql - Formidable Labs](https://formidable.com/open-source/urql/)",
           "resources": [
@@ -1844,7 +1847,8 @@
           "parentTopic": {
             "id": "b4AP2OggxFAwsQtUwiUJJ",
             "title": "API Calls"
-          }
+          },
+          "updatedAt": "2026-09-17T07:04:50.755Z"
         },
         {
           "_id": "6aab68a23645eb382c9ad8f7",
@@ -2518,54 +2522,6 @@
       ]
     },
     {
-      "id": "ElgRwv5LSVg5FXGx-2K2s",
-      "name": "ElgRwv5LSVg5FXGx-2K2s",
-      "title": "TypeScript",
-      "description": "TypeScript is a superset of JavaScript that adds static typing, letting you catch type-related errors before running the code. In React, it is used to type props, state, and function signatures, which helps catch mistakes like passing the wrong data to a component. Most modern React projects use TypeScript instead of plain JavaScript.",
-      "resources": [
-        {
-          "type": "roadmap",
-          "title": "Visit the Dedicated TypeScript Roadmap",
-          "url": "https://roadmap.sh/typescript"
-        },
-        {
-          "type": "official",
-          "title": "Official Website",
-          "url": "https://www.typescriptlang.org/"
-        },
-        {
-          "type": "article",
-          "title": "The TypeScript Handbook",
-          "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
-        },
-        {
-          "type": "video",
-          "title": "TypeScript for Beginners",
-          "url": "https://www.youtube.com/watch?v=BwuLxPH8IDs"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": [
-        {
-          "_id": "6aab68a23645eb382c9ad909",
-          "roadmapSlug": "react",
-          "moduleId": "ElgRwv5LSVg5FXGx-2K2s",
-          "order": 0,
-          "name": "typescript",
-          "nodeId": "IrZWMq0wdl-sy9ciKTXdB",
-          "title": "TypeScript",
-          "description": "",
-          "content": "",
-          "resources": [],
-          "parentTopic": {
-            "id": "ElgRwv5LSVg5FXGx-2K2s",
-            "title": "TypeScript"
-          }
-        }
-      ]
-    },
-    {
       "id": "bRpeoo9zXrnZ2IHSI7JX4",
       "name": "bRpeoo9zXrnZ2IHSI7JX4",
       "title": "Animation",
@@ -2705,22 +2661,6 @@
       "subtopics": []
     },
     {
-      "id": "SUeXDkmOLipdRP4fSrZOH",
-      "name": "SUeXDkmOLipdRP4fSrZOH",
-      "title": "Server APIs",
-      "description": "The react-dom/server APIs let you render React components to HTML on the server. These APIs are only used on the server at the top level of your app to generate the initial HTML. A [framework](https://react.dev/learn/start-a-new-react-project#production-grade-react-frameworks) may call them for you. Most of your components don’t need to import or use them.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Documentation For API",
-          "url": "https://react.dev/reference/react-dom/server"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": []
-    },
-    {
       "id": "_F3WMxhzaK9F8_-zHDDMF",
       "name": "_F3WMxhzaK9F8_-zHDDMF",
       "title": "Suspense",
@@ -2761,139 +2701,10 @@
       "prerequisites": [],
       "nextModules": [],
       "subtopics": []
-    },
-    {
-      "id": "txARr3lgTvy-vJCj5zAb1",
-      "name": "txARr3lgTvy-vJCj5zAb1",
-      "title": "Mobile Applications",
-      "description": "React can be extended beyond the web to build mobile applications, reusing similar concepts like components, props, and state. This lets developers apply React knowledge to build apps that run on iOS and Android, instead of learning a completely separate native development stack.",
-      "resources": [
-        {
-          "type": "article",
-          "title": "React Native Official website",
-          "url": "https://reactnative.dev/"
-        },
-        {
-          "type": "video",
-          "title": "React Native Course for Beginners",
-          "url": "https://www.youtube.com/watch?v=ZBCUegTZF7M"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [
-        {
-          "id": "GV_zWF6rSWg5bqgiXhOEf",
-          "title": "Have a look at the following related roadmaps"
-        }
-      ],
-      "subtopics": [
-        {
-          "_id": "6aab68a23645eb382c9ad90d",
-          "roadmapSlug": "react",
-          "moduleId": "txARr3lgTvy-vJCj5zAb1",
-          "order": 0,
-          "name": "react-native",
-          "nodeId": "NvXAq1vN2wpncdW-yTL4c",
-          "title": "React Native",
-          "description": "React Native is an open-source UI software framework created by Meta Platforms, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities.",
-          "content": "# React Native\n\nReact Native is an open-source UI software framework created by Meta Platforms, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities.\n\nVisit the following resources to learn more:\n\n- [@roadmap@Visit the Dedicated React Native Roadmap](https://roadmap.sh/react-native)\n- [@official@React Native: Official Website](https://reactnative.dev/)\n- [@official@Official Getting Started](https://reactnative.dev/docs/getting-started)",
-          "resources": [
-            {
-              "type": "roadmap",
-              "title": "Visit the Dedicated React Native Roadmap",
-              "url": "https://roadmap.sh/react-native"
-            },
-            {
-              "type": "official",
-              "title": "React Native: Official Website",
-              "url": "https://reactnative.dev/"
-            },
-            {
-              "type": "official",
-              "title": "Official Getting Started",
-              "url": "https://reactnative.dev/docs/getting-started"
-            }
-          ],
-          "parentTopic": {
-            "id": "txARr3lgTvy-vJCj5zAb1",
-            "title": "Mobile Applications"
-          }
-        }
-      ]
-    },
-    {
-      "id": "NvXAq1vN2wpncdW-yTL4c",
-      "name": "NvXAq1vN2wpncdW-yTL4c",
-      "title": "React Native",
-      "description": "React Native is an open-source UI software framework created by Meta Platforms, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities.",
-      "resources": [
-        {
-          "type": "roadmap",
-          "title": "Visit the Dedicated React Native Roadmap",
-          "url": "https://roadmap.sh/react-native"
-        },
-        {
-          "type": "official",
-          "title": "React Native: Official Website",
-          "url": "https://reactnative.dev/"
-        },
-        {
-          "type": "official",
-          "title": "Official Getting Started",
-          "url": "https://reactnative.dev/docs/getting-started"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": [
-        {
-          "_id": "6aab68a23645eb382c9ad90e",
-          "roadmapSlug": "react",
-          "moduleId": "NvXAq1vN2wpncdW-yTL4c",
-          "order": 0,
-          "name": "react-native",
-          "nodeId": "e4eYTirpJWGELBC2kvCYd",
-          "title": "React Native",
-          "description": "",
-          "content": "",
-          "resources": [],
-          "parentTopic": {
-            "id": "NvXAq1vN2wpncdW-yTL4c",
-            "title": "React Native"
-          }
-        }
-      ]
-    },
-    {
-      "id": "extra-topics",
-      "name": "additional-topics",
-      "title": "Các Chủ Đề Mở Rộng & Bổ Trợ",
-      "description": "Các chủ đề chuyên sâu mở rộng bổ trợ cho lộ trình chính",
-      "resources": [],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": [
-        {
-          "_id": "6aab68a23645eb382c9ad90f",
-          "roadmapSlug": "react",
-          "moduleId": "extra-topics",
-          "order": 0,
-          "name": "usestate",
-          "nodeId": "YEpkbNzEMzS6wAKg85J_N",
-          "title": "useState",
-          "description": "`useState` is a React Hook that adds state to function components. It returns an array with the current state value and a setter function; calling the setter with a new value schedules a re-render, and you can pass a function to compute the new state from the previous one.",
-          "content": "# useState\n\n`useState` is a React Hook that adds state to function components. It returns an array with the current state value and a setter function; calling the setter with a new value schedules a re-render, and you can pass a function to compute the new state from the previous one.",
-          "resources": [],
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        }
-      ]
     }
   ],
   "title": "React",
-  "topicCount": 63,
+  "topicCount": 59,
   "topics": [
     {
       "name": "cli-tools",

@@ -581,11 +581,12 @@
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid #ef4444;
   color: #ef4444;
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.45rem;
   border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.15s ease;
 }
 
@@ -599,16 +600,18 @@
   border: none;
   color: #94a3b8;
   cursor: pointer;
-  font-size: 0.95rem;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  margin-left: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  border-radius: 6px;
+  margin-left: 0.25rem;
   transition: color 0.15s ease, background 0.15s ease;
 }
 
 .quickDeleteTopicBtn:hover {
   color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(239, 68, 68, 0.12);
 }
 
 /* Thẻ Dấu cộng (+) Thêm Topic Con vào cụm ngã rẽ */

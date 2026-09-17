@@ -183,6 +183,16 @@
   border-color: #059669 !important;
 }
 
+.editModeDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: currentColor;
+  margin-right: 6px;
+  box-shadow: 0 0 6px currentColor;
+}
+
 .headerBottomRow {
   display: flex;
   align-items: center;

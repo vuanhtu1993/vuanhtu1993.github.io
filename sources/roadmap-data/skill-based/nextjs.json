@@ -256,7 +256,7 @@
       }
     ]
   },
-  "moduleCount": 33,
+  "moduleCount": 32,
   "modules": [
     {
       "id": "tcDL4OEbZplbjNa8VTLpv",
@@ -318,70 +318,6 @@
               "type": "article",
               "title": "Next.js 15 Tutorial - Introduction",
               "url": "https://www.youtube.com/watch?v=b4ba60j_4o8"
-            }
-          ],
-          "parentTopic": {
-            "id": "tcDL4OEbZplbjNa8VTLpv",
-            "title": "Introduction"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4339",
-          "roadmapSlug": "nextjs",
-          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
-          "order": 1,
-          "name": "javascript-basics",
-          "nodeId": "DlUQkDRPUcjC3pO4P5zCQ",
-          "title": "JavaScript Basics",
-          "description": "JavaScript is a programming language that adds interactivity to websites. It allows you to create dynamic content, control multimedia, animate images, and much more. Think of HTML as the structure of a house, CSS as the interior design, and JavaScript as the electrical system that makes everything work. Understanding JavaScript is crucial before diving into Next.js because Next.js is built on top of React, which itself is a JavaScript library. Without a solid grasp of JavaScript fundamentals, you'll find it difficult to understand and effectively use Next.js's features and concepts.",
-          "content": "# JavaScript Basics\n\nJavaScript is a programming language that adds interactivity to websites. It allows you to create dynamic content, control multimedia, animate images, and much more. Think of HTML as the structure of a house, CSS as the interior design, and JavaScript as the electrical system that makes everything work. Understanding JavaScript is crucial before diving into Next.js because Next.js is built on top of React, which itself is a JavaScript library. Without a solid grasp of JavaScript fundamentals, you'll find it difficult to understand and effectively use Next.js's features and concepts.\n\nVisit the following resources to learn more:\n\n- [@roadmap@Visit Dedicated JavaScript Roadmap](https://roadmap.sh/javascript)\n- [@article@The Modern JavaScript Tutorial](https://javascript.info/)\n- [@video@JavaScript Crash Course for Beginners](https://youtu.be/hdI2bqOjy3c)",
-          "resources": [
-            {
-              "type": "roadmap",
-              "title": "Visit Dedicated JavaScript Roadmap",
-              "url": "https://roadmap.sh/javascript"
-            },
-            {
-              "type": "article",
-              "title": "The Modern JavaScript Tutorial",
-              "url": "https://javascript.info/"
-            },
-            {
-              "type": "video",
-              "title": "JavaScript Crash Course for Beginners",
-              "url": "https://youtu.be/hdI2bqOjy3c"
-            }
-          ],
-          "parentTopic": {
-            "id": "tcDL4OEbZplbjNa8VTLpv",
-            "title": "Introduction"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f433a",
-          "roadmapSlug": "nextjs",
-          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
-          "order": 2,
-          "name": "why-frontend-frameworks",
-          "nodeId": "rJ3vuI58Z9u2SKTDgpTE2",
-          "title": "Why Frontend Frameworks?",
-          "description": "Building modern web applications often involves managing complex user interfaces, handling data efficiently, and ensuring a smooth user experience. Frontend frameworks like React, Angular, and Next.js provide a structured approach to these challenges. They offer pre-built components, routing solutions, state management tools, and optimized build processes, allowing developers to focus on building features rather than reinventing the wheel. This leads to faster development cycles, more maintainable code, and ultimately, better web applications.",
-          "content": "# Why Frontend Frameworks?\n\nBuilding modern web applications often involves managing complex user interfaces, handling data efficiently, and ensuring a smooth user experience. Frontend frameworks like React, Angular, and Next.js provide a structured approach to these challenges. They offer pre-built components, routing solutions, state management tools, and optimized build processes, allowing developers to focus on building features rather than reinventing the wheel. This leads to faster development cycles, more maintainable code, and ultimately, better web applications.\n\nVisit the following resources to learn more:\n\n- [@article@Web3 Frontend – Everything You Need to Learn About Building Dapp Frontends](https://moralis.io/web3-frontend-everything-you-need-to-learn-about-building-dapp-frontends/)\n- [@video@What is the difference between a framework and a library?](https://www.youtube.com/watch?v=D_MO9vIRBcA)\n- [@video@Which JS Framework is best?](https://www.youtube.com/watch?v=cuHDQhDhvPE)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Web3 Frontend – Everything You Need to Learn About Building Dapp Frontends",
-              "url": "https://moralis.io/web3-frontend-everything-you-need-to-learn-about-building-dapp-frontends/"
-            },
-            {
-              "type": "video",
-              "title": "What is the difference between a framework and a library?",
-              "url": "https://www.youtube.com/watch?v=D_MO9vIRBcA"
-            },
-            {
-              "type": "video",
-              "title": "Which JS Framework is best?",
-              "url": "https://www.youtube.com/watch?v=cuHDQhDhvPE"
             }
           ],
           "parentTopic": {
@@ -552,36 +488,10 @@
       ]
     },
     {
-      "id": "3tTTKj6PWsRoRRXH5tXxS",
-      "name": "3tTTKj6PWsRoRRXH5tXxS",
-      "title": "create-next-app",
-      "description": "The create-next-app CLI allow you to create a new Next.js application using the default template or an example from a public GitHub repository. It is the easiest way to get started with Next.js.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "create-next-app",
-          "url": "https://nextjs.org/docs/app/api-reference/cli/create-next-app"
-        },
-        {
-          "type": "video",
-          "title": "Create Next App | Create Next Js Project",
-          "url": "https://www.youtube.com/watch?v=o1cRvsrHbfo"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [
-        {
-          "id": "sSrfdCJ4_yjx_kUAti_dm",
-          "title": "Getting Started"
-        }
-      ],
-      "subtopics": []
-    },
-    {
       "id": "xRZqBd5-QO8zh7ksHlRjK",
       "name": "xRZqBd5-QO8zh7ksHlRjK",
       "title": "Next.js Routing Basics",
-      "description": "Routing is the process of defining how an application responds to client requests to specific endpoints (URIs). In Next.js, routing is primarily file-system based. This means that the structure of your `pages` directory directly corresponds to the routes of your application. Each file in the `pages` directory becomes a route based on its filename. For example, a file named `about.js` in the `pages` directory will be accessible at the `/about` route.",
+      "description": "Routing is the process of defining how an application responds to client requests to specific endpoints (URIs). In Next.js, routing is primarily file-system based. This means that the structure of your \"pages\" directory directly corresponds to the routes of your application. Each file in the \"pages\" directory becomes a route based on its filename. For example, a file named \"about.js\" in the \"pages\" directory will be accessible at the \"/about\" route.",
       "resources": [
         {
           "type": "official",
@@ -2858,7 +2768,7 @@
     }
   ],
   "title": "Next.js",
-  "topicCount": 63,
+  "topicCount": 61,
   "topics": [
     {
       "name": "introduction",

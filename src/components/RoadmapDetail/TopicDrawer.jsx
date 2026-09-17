@@ -246,10 +246,10 @@ export default function TopicDrawer({
             {/* Edit Mode Notification Banner */}
             {isEditMode && (
               <div className={styles.editBanner}>
-                <span>✏️ Chế độ chỉnh sửa đang bật — Mọi thay đổi sẽ được lưu vào MongoDB Atlas</span>
-                {saveStatus === 'saving' && <span>⏳ Đang lưu...</span>}
-                {saveStatus === 'saved' && <span>✅ Đã lưu!</span>}
-                {saveStatus === 'error' && <span>❌ Lỗi lưu!</span>}
+                <span>Chế độ chỉnh sửa đang bật — Mọi thay đổi sẽ được lưu vào database</span>
+                {saveStatus === 'saving' && <span className={styles.statusSaving}>Đang lưu...</span>}
+                {saveStatus === 'saved' && <span className={styles.statusSaved}>Đã lưu</span>}
+                {saveStatus === 'error' && <span className={styles.statusError}>Lỗi lưu</span>}
               </div>
             )}
 
@@ -286,7 +286,7 @@ export default function TopicDrawer({
                     className={styles.previewToggleBtn}
                     onClick={() => setShowDescPreview((prev) => !prev)}
                   >
-                    {showDescPreview ? '📝 Viết' : '👁️ Xem trước'}
+                    {showDescPreview ? 'Soạn thảo' : 'Xem trước'}
                   </button>
                 </div>
                 {showDescPreview ? (
@@ -326,14 +326,14 @@ export default function TopicDrawer({
                       onClick={() => setShowImageInserter((prev) => !prev)}
                       title="Chèn ảnh từ link Cloudinary"
                     >
-                      {showImageInserter ? '✕ Đóng chèn ảnh' : '🖼️ Chèn ảnh Cloudinary'}
+                      {showImageInserter ? 'Đóng chèn ảnh' : 'Chèn ảnh Cloudinary'}
                     </button>
                     <button
                       type="button"
                       className={styles.previewToggleBtn}
                       onClick={() => setShowContentPreview((prev) => !prev)}
                     >
-                      {showContentPreview ? '📝 Viết' : '👁️ Xem trước'}
+                      {showContentPreview ? 'Soạn thảo' : 'Xem trước'}
                     </button>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export default function TopicDrawer({
                     }}
                   >
                     <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#2563eb' }}>
-                      🖼️ Chèn hình ảnh Cloudinary vào nội dung:
+                      Chèn hình ảnh Cloudinary vào nội dung:
                     </span>
                     <div className={styles.addResourceInputs}>
                       <input
@@ -535,7 +535,7 @@ export default function TopicDrawer({
                             <span className={styles.childTopicTitle}>{child.title}</span>
                             {isRef && (
                               <span className={styles.refBadge}>
-                                🔗 Tham chiếu từ [{sourceSlug}]
+                                Tham chiếu từ [{sourceSlug}]
                               </span>
                             )}
                           </div>
@@ -546,7 +546,7 @@ export default function TopicDrawer({
                             title="Gỡ liên kết chủ đề con này khỏi topic cha"
                             disabled={saveStatus === 'saving'}
                           >
-                            ✕ Gỡ liên kết
+                            Gỡ liên kết
                           </button>
                         </div>
                       );
@@ -564,7 +564,7 @@ export default function TopicDrawer({
                   onClick={() => setShowRefSearchModal(true)}
                   disabled={saveStatus === 'saving'}
                 >
-                  🔗 + Thêm topic con (Ref từ kho lộ trình)
+                  + Thêm topic con (Tham chiếu từ kho)
                 </button>
               </div>
             )}
@@ -580,7 +580,7 @@ export default function TopicDrawer({
                   onClick={() => setShowDeleteModal(true)}
                   disabled={saveStatus === 'saving'}
                 >
-                  🗑️ Xoá Topic
+                  Xoá Topic
                 </button>
                 <button
                   type="button"
@@ -588,7 +588,7 @@ export default function TopicDrawer({
                   onClick={handleSaveTopic}
                   disabled={saveStatus === 'saving' || !title.trim()}
                 >
-                  {saveStatus === 'saving' ? '⏳ Đang lưu...' : '💾 Lưu Thay Đổi'}
+                  {saveStatus === 'saving' ? 'Đang lưu...' : 'Lưu Thay Đổi'}
                 </button>
               </div>
             ) : (

@@ -167,7 +167,8 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                   onClick={toggleEditMode}
                   title={isEditMode ? 'Tắt chế độ chỉnh sửa' : 'Bật chế độ chỉnh sửa (Dev only)'}
                 >
-                  {isEditMode ? '✅ Đang sửa (Dev)' : '✏️ Chế độ sửa'}
+                  <span className={styles.editModeDot} />
+                  <span>{isEditMode ? 'Đang sửa (Dev)' : 'Chế độ sửa'}</span>
                 </button>
               )}
 
