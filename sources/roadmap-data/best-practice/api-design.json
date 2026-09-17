@@ -1,8 +1,11 @@
 {
+  "_id": "6aab5fc55306e7f1dec46c2d",
   "slug": "api-design",
-  "title": "Api Design",
   "category": "best-practice",
-  "topicCount": 99,
+  "moduleCount": 0,
+  "modules": [],
+  "title": "Api Design",
+  "topicCount": 0,
   "topics": [
     {
       "name": "api-documentation-tools",
@@ -2150,5 +2153,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-09-11T03:26:56.565Z"
+  "updatedAt": "2026-09-17T03:34:29.263Z"
 }

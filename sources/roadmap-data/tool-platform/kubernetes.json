@@ -1,8 +1,11 @@
 {
+  "_id": "6aab5fc55306e7f1dec46c2c",
   "slug": "kubernetes",
-  "title": "Kubernetes",
   "category": "tool-platform",
-  "topicCount": 67,
+  "moduleCount": 0,
+  "modules": [],
+  "title": "Kubernetes",
+  "topicCount": 0,
   "topics": [
     {
       "name": "advanced-topics",
@@ -1673,5 +1676,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-09-11T03:29:50.031Z"
+  "updatedAt": "2026-09-17T03:34:29.077Z"
 }

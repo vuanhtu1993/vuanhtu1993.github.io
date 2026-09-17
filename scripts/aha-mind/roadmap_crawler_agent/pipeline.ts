@@ -15,16 +15,18 @@ program
 
 // Lệnh chính: Crawl roadmaps
 program
+  .argument("[slugs]", "Chỉ crawl các roadmap cụ thể, phân cách bằng dấu phẩy (vd: react hoặc frontend,backend)")
   .option("-s, --slug <slugs>", "Chỉ crawl các roadmap cụ thể, phân cách bằng dấu phẩy (vd: frontend,backend,nextjs)", "")
   .option("-o, --output <dir>", "Đường dẫn thư mục lưu trữ dữ liệu", "./sources/roadmap-data")
   .option("--dry-run", "Chạy thử kiểm tra luồng đồ thị (chỉ log, không ghi file ra đĩa)", false)
-  .action(async (options) => {
+  .action(async (slugsArg, options) => {
     console.log("================================================================================");
     console.log("🚀 KHỞI ĐỘNG ROADMAP.SH CRAWLER AGENT (LangGraph StateGraph)");
     console.log("================================================================================");
 
-    const targetSlugs = options.slug
-      ? options.slug
+    const rawSlugs = slugsArg || options.slug || "";
+    const targetSlugs = rawSlugs
+      ? rawSlugs
           .split(",")
           .map((s: string) => s.trim())
           .filter(Boolean)
@@ -76,41 +78,52 @@ program
     }
   });
 
-// Lệnh phụ: Liệt kê dữ liệu đã crawl
+// Lệnh phụ: Liệt kê dữ liệu đã crawl từ MongoDB Atlas
 program
   .command("list")
-  .description("Liệt kê các roadmaps đã crawl trong thư mục output")
-  .option("-o, --output <dir>", "Đường dẫn thư mục lưu trữ dữ liệu", "./sources/roadmap-data")
-  .action((options) => {
-    const baseDir = path.resolve(process.cwd(), options.output);
-    const indexPath = path.join(baseDir, "index.json");
-
-    if (!fs.existsSync(indexPath)) {
-      console.log(`📭 Chưa tìm thấy dữ liệu index tại: ${indexPath}`);
-      console.log("👉 Hãy chạy: pnpm aha-mind:roadmap-crawler để bắt đầu crawl.");
-      return;
-    }
-
+  .description("Liệt kê các roadmaps đã lưu trong MongoDB Atlas")
+  .action(async () => {
     try {
-      const raw = fs.readFileSync(indexPath, "utf-8");
-      const data = JSON.parse(raw);
+      const { getDb, closeDb } = await import("../lib/mongo");
+      const db = await getDb();
+      const roadmapsCol = db.collection("roadmaps");
+      const topicsCol = db.collection("topics");
+
+      const roadmaps = await roadmapsCol.find({}).sort({ category: 1, title: 1 }).toArray();
+      const totalTopics = await topicsCol.countDocuments({});
+
+      if (roadmaps.length === 0) {
+        console.log("📭 Chưa tìm thấy dữ liệu roadmap trong MongoDB Atlas (database: stories).");
+        console.log("👉 Hãy chạy: pnpm aha-mind:roadmap-crawler để bắt đầu crawl.");
+        await closeDb();
+        return;
+      }
 
       console.log("\n================================================================================");
-      console.log(`📚 DANH SÁCH ROADMAPS ĐÃ CRAWL TẠI: ${baseDir}`);
-      console.log(`⏰ Cập nhật lần cuối: ${data.generatedAt}`);
-      console.log(`📊 Tổng số: ${data.totalRoadmaps} roadmaps | ${data.totalModules || 0} modules | ${data.totalTopics} topics`);
+      console.log("📚 DANH SÁCH ROADMAPS TRONG MONGODB ATLAS (Database: stories)");
+      console.log(`📊 Tổng số: ${roadmaps.length} roadmaps | ${totalTopics} topics`);
       console.log("================================================================================");
 
-      for (const cat of data.categories || []) {
-        console.log(`\n📂 [${cat.nameVi}] - ${cat.count} roadmaps:`);
-        for (const rm of cat.roadmaps || []) {
-          console.log(`  - 🗺️  ${rm.title.padEnd(30)} (slug: ${rm.slug}, ${rm.moduleCount || 1} modules, ${rm.topicCount} topics)`);
+      // Nhóm theo category
+      const categories: Record<string, any[]> = {};
+      for (const rm of roadmaps) {
+        const cat = rm.category || "other";
+        if (!categories[cat]) categories[cat] = [];
+        categories[cat].push(rm);
+      }
+
+      for (const [cat, list] of Object.entries(categories)) {
+        console.log(`\n📂 [${cat}] - ${list.length} roadmaps:`);
+        for (const rm of list) {
+          console.log(`  - 🗺️  ${(rm.title || rm.slug).padEnd(30)} (slug: ${rm.slug}, ${rm.modules?.length || 0} modules, ${rm.topicCount || 0} topics)`);
         }
       }
       console.log("\n");
+      await closeDb();
     } catch (e) {
-      console.error("❌ Lỗi khi đọc file index.json:", e);
+      console.error("❌ Lỗi khi truy vấn MongoDB Atlas:", e);
     }
   });
 
 program.parse(process.argv);
+

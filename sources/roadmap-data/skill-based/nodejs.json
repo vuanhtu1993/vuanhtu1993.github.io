@@ -1,8 +1,211 @@
 {
+  "_id": "6aab5fc35306e7f1dec46c29",
   "slug": "nodejs",
-  "title": "Node.js",
   "category": "skill-based",
-  "topicCount": 114,
+  "graph": {
+    "edges": [
+      {
+        "source": "iogwMmOvub2ZF4zgg6WyF",
+        "target": "DAwKHBng7Tytlcd2_8GOR",
+        "type": "flow"
+      },
+      {
+        "source": "DAwKHBng7Tytlcd2_8GOR",
+        "target": "KDd40JOAvZ8O1mfhTYB3K",
+        "type": "flow"
+      },
+      {
+        "source": "KDd40JOAvZ8O1mfhTYB3K",
+        "target": "mbGFT6S7mL3bHHEZv0_s2",
+        "type": "flow"
+      },
+      {
+        "source": "mbGFT6S7mL3bHHEZv0_s2",
+        "target": "jQJ9aOKtg-O-GhWk5OgCK",
+        "type": "flow"
+      },
+      {
+        "source": "jQJ9aOKtg-O-GhWk5OgCK",
+        "target": "t_kfKdNSKVBPYQ9zF9VqQ",
+        "type": "flow"
+      },
+      {
+        "source": "wEK77A6MPQBCBUSJKMiaY",
+        "target": "Ce-dP-OXu0mEm30rzp2hW",
+        "type": "flow"
+      },
+      {
+        "source": "5l-lZ8gwVLqqAF_n99vIO",
+        "target": "90NIFfbWjTbyKZKwyJlfI",
+        "type": "flow"
+      },
+      {
+        "source": "90NIFfbWjTbyKZKwyJlfI",
+        "target": "b7ZAEqo0ZU6TNf18Bo0mI",
+        "type": "flow"
+      },
+      {
+        "source": "b7ZAEqo0ZU6TNf18Bo0mI",
+        "target": "af7n-J7VvbdpZh9lwA773",
+        "type": "flow"
+      },
+      {
+        "source": "af7n-J7VvbdpZh9lwA773",
+        "target": "KzUmXkwrmU_ssVBjSHAiY",
+        "type": "flow"
+      },
+      {
+        "source": "KzUmXkwrmU_ssVBjSHAiY",
+        "target": "WrnjjUDXQwwMXQjmgK72U",
+        "type": "flow"
+      },
+      {
+        "source": "WrnjjUDXQwwMXQjmgK72U",
+        "target": "ZLNUuDKhJ03Kw7xMVc7IR",
+        "type": "flow"
+      },
+      {
+        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
+        "target": "M62lAWBOrTe99TfpFOQ-Y",
+        "type": "flow"
+      },
+      {
+        "source": "M62lAWBOrTe99TfpFOQ-Y",
+        "target": "0vLaVNJaJSHZ_bHli6Qzs",
+        "type": "flow"
+      },
+      {
+        "source": "KDd40JOAvZ8O1mfhTYB3K",
+        "target": "Mp056kNnwsRWeEXuhGPy-",
+        "type": "subtopic"
+      },
+      {
+        "source": "KDd40JOAvZ8O1mfhTYB3K",
+        "target": "ex8FOKrUlbu4MuEq2czyW",
+        "type": "subtopic"
+      },
+      {
+        "source": "KDd40JOAvZ8O1mfhTYB3K",
+        "target": "Vrcv5px-3fqmyJnQv3WBK",
+        "type": "subtopic"
+      },
+      {
+        "source": "KDd40JOAvZ8O1mfhTYB3K",
+        "target": "ebVb0anYmbD1Y9ZTFXKFp",
+        "type": "subtopic"
+      },
+      {
+        "source": "KDd40JOAvZ8O1mfhTYB3K",
+        "target": "uPJqdMQQJRkTMMhNORDeH",
+        "type": "subtopic"
+      },
+      {
+        "source": "wEK77A6MPQBCBUSJKMiaY",
+        "target": "QT2QE2FLkyUDpwMKYkFQL",
+        "type": "subtopic"
+      },
+      {
+        "source": "wEK77A6MPQBCBUSJKMiaY",
+        "target": "Blzb-fdQZMu6Xq5JDJW0_",
+        "type": "subtopic"
+      },
+      {
+        "source": "wEK77A6MPQBCBUSJKMiaY",
+        "target": "b1r1X3XCoPSayQjDBcy54",
+        "type": "subtopic"
+      },
+      {
+        "source": "swp4wBgA7z-sd64VDkMrw",
+        "target": "812bVEzxwTsYzLG_PmLqN",
+        "type": "subtopic"
+      },
+      {
+        "source": "swp4wBgA7z-sd64VDkMrw",
+        "target": "2Ym2jMvov0lZ79aJFaw29",
+        "type": "subtopic"
+      },
+      {
+        "source": "Ce-dP-OXu0mEm30rzp2hW",
+        "target": "XteNExIZN3_g95_dPCopY",
+        "type": "subtopic"
+      },
+      {
+        "source": "J0ErCAZT5B97ZMogU2JHd",
+        "target": "O67e2qyhxP5joR5LGyZ2N",
+        "type": "subtopic"
+      },
+      {
+        "source": "J0ErCAZT5B97ZMogU2JHd",
+        "target": "L-_N7OxxuHCXsdWYBgZGu",
+        "type": "subtopic"
+      },
+      {
+        "source": "J0ErCAZT5B97ZMogU2JHd",
+        "target": "f2DyjBIglAZ6NoHaRnlzt",
+        "type": "subtopic"
+      },
+      {
+        "source": "90NIFfbWjTbyKZKwyJlfI",
+        "target": "qjToBaMenW3SDtEfoCbQ6",
+        "type": "subtopic"
+      },
+      {
+        "source": "90NIFfbWjTbyKZKwyJlfI",
+        "target": "oSLpy31XEcA2nRq9ks_LJ",
+        "type": "subtopic"
+      },
+      {
+        "source": "90NIFfbWjTbyKZKwyJlfI",
+        "target": "3Fh3-V1kCZtlUTvEoloIO",
+        "type": "subtopic"
+      },
+      {
+        "source": "90NIFfbWjTbyKZKwyJlfI",
+        "target": "Ix-g9pgJjEI04bSfROvlq",
+        "type": "subtopic"
+      },
+      {
+        "source": "b7ZAEqo0ZU6TNf18Bo0mI",
+        "target": "Oe9cQCz2lwSaot7miZOta",
+        "type": "subtopic"
+      },
+      {
+        "source": "b7ZAEqo0ZU6TNf18Bo0mI",
+        "target": "CTHFGgtXFpke4aPhh5vRY",
+        "type": "subtopic"
+      },
+      {
+        "source": "af7n-J7VvbdpZh9lwA773",
+        "target": "7WAuMMyelUbgwEHtnMmJv",
+        "type": "subtopic"
+      },
+      {
+        "source": "KzUmXkwrmU_ssVBjSHAiY",
+        "target": "lzPrWD3pxQmpbqgYPL-zW",
+        "type": "subtopic"
+      },
+      {
+        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
+        "target": "oU9I7KBZoTSXXFmYscEIq",
+        "type": "subtopic"
+      },
+      {
+        "source": "oU9I7KBZoTSXXFmYscEIq",
+        "target": "SJ01N7vMZkNiIuMYQhdpj",
+        "type": "subtopic"
+      },
+      {
+        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
+        "target": "DcmGcVlEHL4IV7yPMDpVa",
+        "type": "subtopic"
+      },
+      {
+        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
+        "target": "CvkjlOpT34lOHgzQHL40s",
+        "type": "subtopic"
+      }
+    ]
+  },
   "moduleCount": 19,
   "modules": [
     {
@@ -36,6 +239,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f4377",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 0,
           "name": "commonjs",
           "nodeId": "mhjswf17nhq075NTYV5gE",
           "title": "CommonJS vs ESM",
@@ -74,6 +281,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4378",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 1,
           "name": "what-is-nodejs",
           "nodeId": "Mp056kNnwsRWeEXuhGPy-",
           "title": "What is Node.js?",
@@ -107,6 +318,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4379",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 2,
           "name": "esm",
           "nodeId": "mKccfWOhC1Aj4VnaOqryA",
           "title": "ESM",
@@ -125,6 +340,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f437a",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 3,
           "name": "why-use-nodejs",
           "nodeId": "ex8FOKrUlbu4MuEq2czyW",
           "title": "Why use Node.js?",
@@ -153,6 +372,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f437b",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 4,
           "name": "history-of-nodejs",
           "nodeId": "Vrcv5px-3fqmyJnQv3WBK",
           "title": "History of Node.js",
@@ -181,6 +404,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f437c",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 5,
           "name": "nodejs-vs-browser",
           "nodeId": "ebVb0anYmbD1Y9ZTFXKFp",
           "title": "Node.js vs Browser",
@@ -199,6 +426,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f437d",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 6,
           "name": "creating--importing",
           "nodeId": "EEnmOcDKPZzY_O1NwP_5j",
           "title": "Creating & Importing",
@@ -227,6 +458,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f437e",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KDd40JOAvZ8O1mfhTYB3K",
+          "order": 7,
           "name": "running-nodejs-code",
           "nodeId": "uPJqdMQQJRkTMMhNORDeH",
           "title": "Running Node.js Code",
@@ -318,6 +553,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f437f",
+          "roadmapSlug": "nodejs",
+          "moduleId": "jQJ9aOKtg-O-GhWk5OgCK",
+          "order": 0,
           "name": "npx",
           "nodeId": "YdpJ-DUo8Q5ATRmF4s4YS",
           "title": "npx",
@@ -341,6 +580,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4380",
+          "roadmapSlug": "nodejs",
+          "moduleId": "jQJ9aOKtg-O-GhWk5OgCK",
+          "order": 1,
           "name": "global-keyword",
           "nodeId": "PEGHvFT2Eg-1OyfhxYu22",
           "title": "global keyword",
@@ -374,6 +617,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4381",
+          "roadmapSlug": "nodejs",
+          "moduleId": "jQJ9aOKtg-O-GhWk5OgCK",
+          "order": 2,
           "name": "global-installation",
           "nodeId": "l24OMkPAEDnEDAVAMrMuG",
           "title": "Global Installation",
@@ -402,6 +649,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4382",
+          "roadmapSlug": "nodejs",
+          "moduleId": "jQJ9aOKtg-O-GhWk5OgCK",
+          "order": 3,
           "name": "local-installation",
           "nodeId": "oYeux7PbveYaVwXRzAg5x",
           "title": "Local Installation",
@@ -425,6 +676,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4383",
+          "roadmapSlug": "nodejs",
+          "moduleId": "jQJ9aOKtg-O-GhWk5OgCK",
+          "order": 4,
           "name": "semantic-versioning",
           "nodeId": "dOlzIXBfAPmbY542lNOe6",
           "title": "Semantic Versioning",
@@ -453,6 +708,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4384",
+          "roadmapSlug": "nodejs",
+          "moduleId": "jQJ9aOKtg-O-GhWk5OgCK",
+          "order": 5,
           "name": "system-errors",
           "nodeId": "05YY-AhLKzn4Ypr4eow5E",
           "title": "System Errors",
@@ -524,6 +783,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f4385",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 0,
           "name": "updating-packages",
           "nodeId": "bYBz12FUiJ1qLgdQSGyGK",
           "title": "Updating Packages",
@@ -552,6 +815,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4386",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 1,
           "name": "promises",
           "nodeId": "QcOqhuKWOUUUBSiu5Oelv",
           "title": "Promises",
@@ -580,6 +847,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4387",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 2,
           "name": "event-emitter",
           "nodeId": "bgEHTBYzRDJqZ6gLqLbsz",
           "title": "Event Emitter",
@@ -603,6 +874,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4388",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 3,
           "name": "user-specified-errors",
           "nodeId": "wQ4i6_a1EFk9HHc6Sll-3",
           "title": "User Specified Errors",
@@ -621,6 +896,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4389",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 4,
           "name": "running-scripts",
           "nodeId": "64pgc7rcgboFcNYuOlX8e",
           "title": "Running Scripts",
@@ -644,6 +923,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f438a",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 5,
           "name": "asyncawait",
           "nodeId": "a26qNCyMcT5GsVzxeNCLk",
           "title": "Async/Await",
@@ -672,6 +955,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f438b",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 6,
           "name": "event-loop",
           "nodeId": "b679H8gEBuvrHQ8ik7e96",
           "title": "Event Loop",
@@ -705,6 +992,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f438c",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 7,
           "name": "assertion-errors",
           "nodeId": "do-tdCUfDtiZHBg4ZO3dC",
           "title": "Assertion Errors",
@@ -723,6 +1014,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f438d",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 8,
           "name": "npm-workspaces",
           "nodeId": "WvxCGVKLvTUVEHeOcUQPg",
           "title": "npm workspaces",
@@ -746,6 +1041,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f438e",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 9,
           "name": "callbacks",
           "nodeId": "GwInWcbQn18PnzKGXzmln",
           "title": "Callbacks",
@@ -769,6 +1068,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f438f",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 10,
           "name": "javascript-errors",
           "nodeId": "Wg7KSpAPxjeFMxC6PBnHO",
           "title": "JavaScript Errors",
@@ -787,6 +1090,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4390",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 11,
           "name": "creating-packages",
           "nodeId": "Uh9hmEy7o1EJLg4E--ku2",
           "title": "Creating Packages",
@@ -805,6 +1112,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4391",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 12,
           "name": "settimeout",
           "nodeId": "W2Dbj4Y78Bgdx7og5xkrg",
           "title": "setTimeout",
@@ -833,6 +1144,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4392",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 13,
           "name": "setinterval",
           "nodeId": "T5I-mFKK6bKzXrzkECI0P",
           "title": "setInterval",
@@ -851,6 +1166,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4393",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 14,
           "name": "uncaught-exceptions",
           "nodeId": "uzOmaTZrHhBxx5plb345Z",
           "title": "Uncaught Exceptions",
@@ -879,6 +1198,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4394",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 15,
           "name": "processenv",
           "nodeId": "wthXp2YGg3eTMbxsek77C",
           "title": "process.env",
@@ -902,6 +1225,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4395",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 16,
           "name": "setimmediate",
           "nodeId": "YvTPpoIiSqjDYi0Q10kWh",
           "title": "setImmediate",
@@ -925,6 +1252,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4396",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 17,
           "name": "handling-async-errors",
           "nodeId": "3MpxV23lNpuKg0--e_9m7",
           "title": "Async errors",
@@ -943,6 +1274,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4397",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 18,
           "name": "dotenv-package",
           "nodeId": "fE9C7Resn4EcL-hYHbsaZ",
           "title": "Dotenv Package",
@@ -981,6 +1316,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4398",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 19,
           "name": "processnexttick",
           "nodeId": "ATu9-29yJWcDOik5FTOgf",
           "title": "process.nextTick()",
@@ -1004,6 +1343,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f4399",
+          "roadmapSlug": "nodejs",
+          "moduleId": "uE7fvHSTSdebMf5RsNyaY",
+          "order": 20,
           "name": "callstack--stack-trace",
           "nodeId": "wIieXdFtoZWJ-ht8qqWbp",
           "title": "Stack Trace",
@@ -1049,6 +1392,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f439a",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 0,
           "name": "__dirname",
           "nodeId": "1AaGG660rvZlNYMOA35qO",
           "title": "__dirname",
@@ -1072,6 +1419,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f439b",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 1,
           "name": "using-debugger",
           "nodeId": "XEGTeGWw05xWYOfUo3POE",
           "title": "Using Debugger",
@@ -1100,6 +1451,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f439c",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 2,
           "name": "__filename",
           "nodeId": "P2gdwx1qCxvg1Ppfw0aqQ",
           "title": "__filename",
@@ -1118,6 +1473,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f439d",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 3,
           "name": "processstdin",
           "nodeId": "betuntelnEMSHdatO6VPl",
           "title": "process.stdin",
@@ -1146,6 +1505,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f439e",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 4,
           "name": "inquirer-package",
           "nodeId": "WFJJtIqVoBIhK10XY-d7l",
           "title": "Inquirer Package",
@@ -1174,6 +1537,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f439f",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 5,
           "name": "processcwd",
           "nodeId": "QT2QE2FLkyUDpwMKYkFQL",
           "title": "process.cwd()",
@@ -1197,6 +1564,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a0",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 6,
           "name": "prompts-package",
           "nodeId": "xgsKrUdfB0g0DMQCLK3aY",
           "title": "prompts package",
@@ -1215,6 +1586,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a1",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 7,
           "name": "path-module",
           "nodeId": "Blzb-fdQZMu6Xq5JDJW0_",
           "title": "path module",
@@ -1243,6 +1618,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a2",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 8,
           "name": "fs-module",
           "nodeId": "b1r1X3XCoPSayQjDBcy54",
           "title": "fs module",
@@ -1266,6 +1645,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a3",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 9,
           "name": "glob",
           "nodeId": "CWH0ZsxJ8beLvwMYJyH52",
           "title": "glob",
@@ -1284,6 +1667,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a4",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 10,
           "name": "globby",
           "nodeId": "HYTw74rrd7kkOemCxfT9I",
           "title": "globby",
@@ -1307,6 +1694,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a5",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 11,
           "name": "stdout--stderr",
           "nodeId": "N2vR1_NyDn4rYLXJzxWBZ",
           "title": "Process stdout",
@@ -1330,6 +1721,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a6",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 12,
           "name": "jsonwebtoken",
           "nodeId": "7u2WMxjLx3mMtn0cha4M7",
           "title": "JSON Web Token",
@@ -1358,6 +1753,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a7",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 13,
           "name": "fs-extra",
           "nodeId": "zDmWGRrgwq3Gjfkyk6crK",
           "title": "fs-extra",
@@ -1381,6 +1780,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43a8",
+          "roadmapSlug": "nodejs",
+          "moduleId": "wEK77A6MPQBCBUSJKMiaY",
+          "order": 14,
           "name": "chokidar",
           "nodeId": "een1zhvgN_33Cu6OiWtyX",
           "title": "chokidar",
@@ -1426,6 +1829,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43a9",
+          "roadmapSlug": "nodejs",
+          "moduleId": "Ce-dP-OXu0mEm30rzp2hW",
+          "order": 0,
           "name": "exiting--exit-codes",
           "nodeId": "XteNExIZN3_g95_dPCopY",
           "title": "Exiting / Exit Codes",
@@ -1471,6 +1878,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43aa",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 0,
           "name": "chalk-package",
           "nodeId": "V4OWIC1cnw8EFyu26Y_dA",
           "title": "chalk package",
@@ -1489,6 +1900,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43ab",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 1,
           "name": "passportjs",
           "nodeId": "mIyv6S9a5dCHkk-JhhjKV",
           "title": "Passport js",
@@ -1517,6 +1932,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43ac",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 2,
           "name": "figlet-package",
           "nodeId": "PHLdJylzNZDJBGi8FFsfO",
           "title": "figlet package",
@@ -1535,6 +1954,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43ad",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 3,
           "name": "cli-progress",
           "nodeId": "iW9je5Pq7bjxWZDERv_p5",
           "title": "cli-progress",
@@ -1553,6 +1976,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43ae",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 4,
           "name": "expressjs",
           "nodeId": "1vq_KcYR_pkfp1MtXaL75",
           "title": "Express.js",
@@ -1586,6 +2013,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43af",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 5,
           "name": "http-module",
           "nodeId": "Sjc1YDtbzXyLQH711_3nj",
           "title": "http module",
@@ -1614,6 +2045,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b0",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 6,
           "name": "fastify",
           "nodeId": "WkU_rI4i-UmNSxb5F9TI-",
           "title": "fastify",
@@ -1637,6 +2072,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b1",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 7,
           "name": "axios",
           "nodeId": "BOLiZg8YDKADMwP01U5ph",
           "title": "Axios",
@@ -1660,6 +2099,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b2",
+          "roadmapSlug": "nodejs",
+          "moduleId": "fFVCb6aZWRHdNDFt5C09R",
+          "order": 8,
           "name": "ky",
           "nodeId": "-_2letLUta5Ymc5eEOKhn",
           "title": "Ky",
@@ -1694,6 +2137,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43b3",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 0,
           "name": "processargv",
           "nodeId": "lT2DDRtbFfEjb_cmsQx8i",
           "title": "process.argv",
@@ -1717,6 +2164,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b4",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 1,
           "name": "--watch",
           "nodeId": "812bVEzxwTsYzLG_PmLqN",
           "title": "--watch",
@@ -1745,6 +2196,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b5",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 2,
           "name": "nestjs",
           "nodeId": "tGD8XLHnfspfv8CbguGwV",
           "title": "NestJS",
@@ -1768,6 +2223,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b6",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 3,
           "name": "fetch",
           "nodeId": "B_3rTGQxJneMREXoi2gQn",
           "title": "fetch",
@@ -1801,6 +2260,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b7",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 4,
           "name": "commander",
           "nodeId": "BxxLQUI7JcQgF6TK3L5uU",
           "title": "Commander.js",
@@ -1819,6 +2282,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b8",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 5,
           "name": "nodemon",
           "nodeId": "2Ym2jMvov0lZ79aJFaw29",
           "title": "Nodemon",
@@ -1847,6 +2314,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43b9",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 6,
           "name": "hono",
           "nodeId": "Xa-lA1wbZ9JZ_XpXfhhw5",
           "title": "Hono",
@@ -1870,6 +2341,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43ba",
+          "roadmapSlug": "nodejs",
+          "moduleId": "swp4wBgA7z-sd64VDkMrw",
+          "order": 7,
           "name": "got-package",
           "nodeId": "6stiDKubT6XVAOGiJ6wsx",
           "title": "Got",
@@ -1920,6 +2395,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43bb",
+          "roadmapSlug": "nodejs",
+          "moduleId": "J0ErCAZT5B97ZMogU2JHd",
+          "order": 0,
           "name": "ejs",
           "nodeId": "L-_N7OxxuHCXsdWYBgZGu",
           "title": "EJS",
@@ -1953,6 +2432,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43bc",
+          "roadmapSlug": "nodejs",
+          "moduleId": "J0ErCAZT5B97ZMogU2JHd",
+          "order": 1,
           "name": "pug",
           "nodeId": "O67e2qyhxP5joR5LGyZ2N",
           "title": "Pug",
@@ -1981,6 +2464,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43bd",
+          "roadmapSlug": "nodejs",
+          "moduleId": "J0ErCAZT5B97ZMogU2JHd",
+          "order": 2,
           "name": "mongoose",
           "nodeId": "NDf-o-WECK02mVnZ8IFxy",
           "title": "Mongoose",
@@ -2009,6 +2496,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43be",
+          "roadmapSlug": "nodejs",
+          "moduleId": "J0ErCAZT5B97ZMogU2JHd",
+          "order": 3,
           "name": "marko",
           "nodeId": "f2DyjBIglAZ6NoHaRnlzt",
           "title": "Marko",
@@ -2027,6 +2518,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43bf",
+          "roadmapSlug": "nodejs",
+          "moduleId": "J0ErCAZT5B97ZMogU2JHd",
+          "order": 4,
           "name": "jest",
           "nodeId": "5xrbKv2stKPJRv7Vzf9nM",
           "title": "Jest",
@@ -2077,6 +2572,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43c0",
+          "roadmapSlug": "nodejs",
+          "moduleId": "5l-lZ8gwVLqqAF_n99vIO",
+          "order": 0,
           "name": "prisma",
           "nodeId": "3Qxtf8n6gJYdnRsuqa52Q",
           "title": "Prisma",
@@ -2100,6 +2599,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c1",
+          "roadmapSlug": "nodejs",
+          "moduleId": "5l-lZ8gwVLqqAF_n99vIO",
+          "order": 1,
           "name": "native-drivers",
           "nodeId": "5WqLm53CHDT5uBoMH-iPl",
           "title": "Native Drivers (NoSQL)",
@@ -2155,6 +2658,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43c2",
+          "roadmapSlug": "nodejs",
+          "moduleId": "90NIFfbWjTbyKZKwyJlfI",
+          "order": 0,
           "name": "vitest",
           "nodeId": "qjToBaMenW3SDtEfoCbQ6",
           "title": "Vitest",
@@ -2178,6 +2685,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c3",
+          "roadmapSlug": "nodejs",
+          "moduleId": "90NIFfbWjTbyKZKwyJlfI",
+          "order": 1,
           "name": "nodetest",
           "nodeId": "oSLpy31XEcA2nRq9ks_LJ",
           "title": "node:test",
@@ -2201,6 +2712,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c4",
+          "roadmapSlug": "nodejs",
+          "moduleId": "90NIFfbWjTbyKZKwyJlfI",
+          "order": 2,
           "name": "cypress",
           "nodeId": "3Fh3-V1kCZtlUTvEoloIO",
           "title": "Cypress",
@@ -2224,6 +2739,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c5",
+          "roadmapSlug": "nodejs",
+          "moduleId": "90NIFfbWjTbyKZKwyJlfI",
+          "order": 3,
           "name": "playwright",
           "nodeId": "Ix-g9pgJjEI04bSfROvlq",
           "title": "Playwright",
@@ -2284,6 +2803,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43c6",
+          "roadmapSlug": "nodejs",
+          "moduleId": "b7ZAEqo0ZU6TNf18Bo0mI",
+          "order": 0,
           "name": "drizzle",
           "nodeId": "JXQF9H4_N0rM7ZDKcCZNn",
           "title": "Drizzle",
@@ -2307,6 +2830,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c7",
+          "roadmapSlug": "nodejs",
+          "moduleId": "b7ZAEqo0ZU6TNf18Bo0mI",
+          "order": 1,
           "name": "typeorm",
           "nodeId": "rk5FtAPDi1TpvWd0yBbtl",
           "title": "TypeORM",
@@ -2330,6 +2857,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c8",
+          "roadmapSlug": "nodejs",
+          "moduleId": "b7ZAEqo0ZU6TNf18Bo0mI",
+          "order": 2,
           "name": "winston",
           "nodeId": "Oe9cQCz2lwSaot7miZOta",
           "title": "Winston",
@@ -2353,6 +2884,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43c9",
+          "roadmapSlug": "nodejs",
+          "moduleId": "b7ZAEqo0ZU6TNf18Bo0mI",
+          "order": 3,
           "name": "morgan",
           "nodeId": "CTHFGgtXFpke4aPhh5vRY",
           "title": "Morgan",
@@ -2403,6 +2938,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43ca",
+          "roadmapSlug": "nodejs",
+          "moduleId": "af7n-J7VvbdpZh9lwA773",
+          "order": 0,
           "name": "pm2",
           "nodeId": "7WAuMMyelUbgwEHtnMmJv",
           "title": "Pm2",
@@ -2426,6 +2965,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43cb",
+          "roadmapSlug": "nodejs",
+          "moduleId": "af7n-J7VvbdpZh9lwA773",
+          "order": 1,
           "name": "knex",
           "nodeId": "HDDnt79_PCB5JU-KnHKUh",
           "title": "Knex",
@@ -2471,6 +3014,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43cc",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KzUmXkwrmU_ssVBjSHAiY",
+          "order": 0,
           "name": "sequelize",
           "nodeId": "fOm-ktIaLqrmA0zln0Bga",
           "title": "Sequelize",
@@ -2504,6 +3051,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43cd",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KzUmXkwrmU_ssVBjSHAiY",
+          "order": 1,
           "name": "prisma",
           "nodeId": "O7Cy2g_GPxKU6vPfEmNyi",
           "title": "Prisma",
@@ -2527,6 +3078,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43ce",
+          "roadmapSlug": "nodejs",
+          "moduleId": "KzUmXkwrmU_ssVBjSHAiY",
+          "order": 2,
           "name": "child-process",
           "nodeId": "lzPrWD3pxQmpbqgYPL-zW",
           "title": "Child Process",
@@ -2613,6 +3168,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43cf",
+          "roadmapSlug": "nodejs",
+          "moduleId": "oU9I7KBZoTSXXFmYscEIq",
+          "order": 0,
           "name": "garbage-collection",
           "nodeId": "SJ01N7vMZkNiIuMYQhdpj",
           "title": "Garbage Collection",
@@ -2636,6 +3195,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43d0",
+          "roadmapSlug": "nodejs",
+          "moduleId": "oU9I7KBZoTSXXFmYscEIq",
+          "order": 1,
           "name": "native-drivers",
           "nodeId": "KpC-QYKalUp7VUvnMKBoW",
           "title": "Native Drivers (Relational)",
@@ -2680,6 +3243,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc313e4b2aeae8f43d1",
+          "roadmapSlug": "nodejs",
+          "moduleId": "ZLNUuDKhJ03Kw7xMVc7IR",
+          "order": 0,
           "name": "memory-leaks",
           "nodeId": "oU9I7KBZoTSXXFmYscEIq",
           "title": "Memory Leaks",
@@ -2708,6 +3275,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43d2",
+          "roadmapSlug": "nodejs",
+          "moduleId": "ZLNUuDKhJ03Kw7xMVc7IR",
+          "order": 1,
           "name": "cluster",
           "nodeId": "PkQ_sQ0YFPCZGx4BRgG0t",
           "title": "Cluster",
@@ -2726,6 +3297,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43d3",
+          "roadmapSlug": "nodejs",
+          "moduleId": "ZLNUuDKhJ03Kw7xMVc7IR",
+          "order": 2,
           "name": "node---inspect",
           "nodeId": "DcmGcVlEHL4IV7yPMDpVa",
           "title": "node --inspect",
@@ -2744,6 +3319,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43d4",
+          "roadmapSlug": "nodejs",
+          "moduleId": "ZLNUuDKhJ03Kw7xMVc7IR",
+          "order": 3,
           "name": "worker-threads",
           "nodeId": "bH2Iv3BX0ZiWD3lOmC_m_",
           "title": "Worker Threads",
@@ -2762,6 +3341,10 @@
           }
         },
         {
+          "_id": "6aab5fc313e4b2aeae8f43d5",
+          "roadmapSlug": "nodejs",
+          "moduleId": "ZLNUuDKhJ03Kw7xMVc7IR",
+          "order": 4,
           "name": "using-apm",
           "nodeId": "CvkjlOpT34lOHgzQHL40s",
           "title": "Using APM",
@@ -2858,6 +3441,8 @@
       "subtopics": []
     }
   ],
+  "title": "Node.js",
+  "topicCount": 95,
   "topics": [
     {
       "name": "introduction-to-nodejs",
@@ -5697,209 +6282,5 @@
       ]
     }
   ],
-  "graph": {
-    "edges": [
-      {
-        "source": "iogwMmOvub2ZF4zgg6WyF",
-        "target": "DAwKHBng7Tytlcd2_8GOR",
-        "type": "flow"
-      },
-      {
-        "source": "DAwKHBng7Tytlcd2_8GOR",
-        "target": "KDd40JOAvZ8O1mfhTYB3K",
-        "type": "flow"
-      },
-      {
-        "source": "KDd40JOAvZ8O1mfhTYB3K",
-        "target": "mbGFT6S7mL3bHHEZv0_s2",
-        "type": "flow"
-      },
-      {
-        "source": "mbGFT6S7mL3bHHEZv0_s2",
-        "target": "jQJ9aOKtg-O-GhWk5OgCK",
-        "type": "flow"
-      },
-      {
-        "source": "jQJ9aOKtg-O-GhWk5OgCK",
-        "target": "t_kfKdNSKVBPYQ9zF9VqQ",
-        "type": "flow"
-      },
-      {
-        "source": "wEK77A6MPQBCBUSJKMiaY",
-        "target": "Ce-dP-OXu0mEm30rzp2hW",
-        "type": "flow"
-      },
-      {
-        "source": "5l-lZ8gwVLqqAF_n99vIO",
-        "target": "90NIFfbWjTbyKZKwyJlfI",
-        "type": "flow"
-      },
-      {
-        "source": "90NIFfbWjTbyKZKwyJlfI",
-        "target": "b7ZAEqo0ZU6TNf18Bo0mI",
-        "type": "flow"
-      },
-      {
-        "source": "b7ZAEqo0ZU6TNf18Bo0mI",
-        "target": "af7n-J7VvbdpZh9lwA773",
-        "type": "flow"
-      },
-      {
-        "source": "af7n-J7VvbdpZh9lwA773",
-        "target": "KzUmXkwrmU_ssVBjSHAiY",
-        "type": "flow"
-      },
-      {
-        "source": "KzUmXkwrmU_ssVBjSHAiY",
-        "target": "WrnjjUDXQwwMXQjmgK72U",
-        "type": "flow"
-      },
-      {
-        "source": "WrnjjUDXQwwMXQjmgK72U",
-        "target": "ZLNUuDKhJ03Kw7xMVc7IR",
-        "type": "flow"
-      },
-      {
-        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
-        "target": "M62lAWBOrTe99TfpFOQ-Y",
-        "type": "flow"
-      },
-      {
-        "source": "M62lAWBOrTe99TfpFOQ-Y",
-        "target": "0vLaVNJaJSHZ_bHli6Qzs",
-        "type": "flow"
-      },
-      {
-        "source": "KDd40JOAvZ8O1mfhTYB3K",
-        "target": "Mp056kNnwsRWeEXuhGPy-",
-        "type": "subtopic"
-      },
-      {
-        "source": "KDd40JOAvZ8O1mfhTYB3K",
-        "target": "ex8FOKrUlbu4MuEq2czyW",
-        "type": "subtopic"
-      },
-      {
-        "source": "KDd40JOAvZ8O1mfhTYB3K",
-        "target": "Vrcv5px-3fqmyJnQv3WBK",
-        "type": "subtopic"
-      },
-      {
-        "source": "KDd40JOAvZ8O1mfhTYB3K",
-        "target": "ebVb0anYmbD1Y9ZTFXKFp",
-        "type": "subtopic"
-      },
-      {
-        "source": "KDd40JOAvZ8O1mfhTYB3K",
-        "target": "uPJqdMQQJRkTMMhNORDeH",
-        "type": "subtopic"
-      },
-      {
-        "source": "wEK77A6MPQBCBUSJKMiaY",
-        "target": "QT2QE2FLkyUDpwMKYkFQL",
-        "type": "subtopic"
-      },
-      {
-        "source": "wEK77A6MPQBCBUSJKMiaY",
-        "target": "Blzb-fdQZMu6Xq5JDJW0_",
-        "type": "subtopic"
-      },
-      {
-        "source": "wEK77A6MPQBCBUSJKMiaY",
-        "target": "b1r1X3XCoPSayQjDBcy54",
-        "type": "subtopic"
-      },
-      {
-        "source": "swp4wBgA7z-sd64VDkMrw",
-        "target": "812bVEzxwTsYzLG_PmLqN",
-        "type": "subtopic"
-      },
-      {
-        "source": "swp4wBgA7z-sd64VDkMrw",
-        "target": "2Ym2jMvov0lZ79aJFaw29",
-        "type": "subtopic"
-      },
-      {
-        "source": "Ce-dP-OXu0mEm30rzp2hW",
-        "target": "XteNExIZN3_g95_dPCopY",
-        "type": "subtopic"
-      },
-      {
-        "source": "J0ErCAZT5B97ZMogU2JHd",
-        "target": "O67e2qyhxP5joR5LGyZ2N",
-        "type": "subtopic"
-      },
-      {
-        "source": "J0ErCAZT5B97ZMogU2JHd",
-        "target": "L-_N7OxxuHCXsdWYBgZGu",
-        "type": "subtopic"
-      },
-      {
-        "source": "J0ErCAZT5B97ZMogU2JHd",
-        "target": "f2DyjBIglAZ6NoHaRnlzt",
-        "type": "subtopic"
-      },
-      {
-        "source": "90NIFfbWjTbyKZKwyJlfI",
-        "target": "qjToBaMenW3SDtEfoCbQ6",
-        "type": "subtopic"
-      },
-      {
-        "source": "90NIFfbWjTbyKZKwyJlfI",
-        "target": "oSLpy31XEcA2nRq9ks_LJ",
-        "type": "subtopic"
-      },
-      {
-        "source": "90NIFfbWjTbyKZKwyJlfI",
-        "target": "3Fh3-V1kCZtlUTvEoloIO",
-        "type": "subtopic"
-      },
-      {
-        "source": "90NIFfbWjTbyKZKwyJlfI",
-        "target": "Ix-g9pgJjEI04bSfROvlq",
-        "type": "subtopic"
-      },
-      {
-        "source": "b7ZAEqo0ZU6TNf18Bo0mI",
-        "target": "Oe9cQCz2lwSaot7miZOta",
-        "type": "subtopic"
-      },
-      {
-        "source": "b7ZAEqo0ZU6TNf18Bo0mI",
-        "target": "CTHFGgtXFpke4aPhh5vRY",
-        "type": "subtopic"
-      },
-      {
-        "source": "af7n-J7VvbdpZh9lwA773",
-        "target": "7WAuMMyelUbgwEHtnMmJv",
-        "type": "subtopic"
-      },
-      {
-        "source": "KzUmXkwrmU_ssVBjSHAiY",
-        "target": "lzPrWD3pxQmpbqgYPL-zW",
-        "type": "subtopic"
-      },
-      {
-        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
-        "target": "oU9I7KBZoTSXXFmYscEIq",
-        "type": "subtopic"
-      },
-      {
-        "source": "oU9I7KBZoTSXXFmYscEIq",
-        "target": "SJ01N7vMZkNiIuMYQhdpj",
-        "type": "subtopic"
-      },
-      {
-        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
-        "target": "DcmGcVlEHL4IV7yPMDpVa",
-        "type": "subtopic"
-      },
-      {
-        "source": "ZLNUuDKhJ03Kw7xMVc7IR",
-        "target": "CvkjlOpT34lOHgzQHL40s",
-        "type": "subtopic"
-      }
-    ]
-  },
-  "updatedAt": "2026-09-16T17:08:23.187Z"
+  "updatedAt": "2026-09-17T03:34:27.084Z"
 }

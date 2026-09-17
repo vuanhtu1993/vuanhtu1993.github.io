@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-16T17:08:23.235Z",
-  "sourceRepo": "kamranahmedse/developer-roadmap",
-  "totalRoadmaps": 8,
-  "totalModules": 145,
-  "totalTopics": 781,
+  "generatedAt": "2026-09-17T05:07:19.771Z",
+  "source": "MongoDB Atlas (Database: stories)",
+  "totalRoadmaps": 9,
+  "totalModules": 167,
+  "totalTopics": 506,
   "categories": [
     {
       "key": "role-based",
-      "nameVi": "Lộ trình theo Vị trí Công việc (Role-based)",
+      "nameVi": "Theo Vị Trí (Role-based)",
       "nameEn": "Role-based Roadmaps",
       "count": 1,
       "roadmaps": [
@@ -15,16 +15,16 @@
           "slug": "frontend",
           "title": "Frontend",
           "moduleCount": 38,
-          "topicCount": 123,
+          "topicCount": 86,
           "filePath": "role-based/frontend.json"
         }
       ]
     },
     {
       "key": "skill-based",
-      "nameVi": "Lộ trình theo Kỹ năng & Ngôn ngữ (Skill-based)",
+      "nameVi": "Theo Kỹ Năng (Skill-based)",
       "nameEn": "Skill-based Roadmaps",
-      "count": 3,
+      "count": 4,
       "roadmaps": [
         {
           "slug": "nestjs",
@@ -37,58 +37,65 @@
           "slug": "nextjs",
           "title": "Next.js",
           "moduleCount": 33,
-          "topicCount": 96,
+          "topicCount": 63,
           "filePath": "skill-based/nextjs.json"
         },
         {
           "slug": "nodejs",
           "title": "Node.js",
           "moduleCount": 19,
-          "topicCount": 114,
+          "topicCount": 95,
           "filePath": "skill-based/nodejs.json"
+        },
+        {
+          "slug": "react",
+          "title": "React",
+          "moduleCount": 22,
+          "topicCount": 63,
+          "filePath": "skill-based/react.json"
         }
       ]
     },
     {
       "key": "tool-platform",
-      "nameVi": "Lộ trình theo Công cụ & Nền tảng (Tool & Platform)",
-      "nameEn": "Tool & Platform Roadmaps",
+      "nameVi": "Công Cụ & Nền Tảng (Tool/Platform)",
+      "nameEn": "Tools & Platforms",
       "count": 2,
       "roadmaps": [
         {
           "slug": "docker",
           "title": "Docker",
           "moduleCount": 1,
-          "topicCount": 56,
+          "topicCount": 0,
           "filePath": "tool-platform/docker.json"
         },
         {
           "slug": "kubernetes",
           "title": "Kubernetes",
           "moduleCount": 1,
-          "topicCount": 67,
+          "topicCount": 0,
           "filePath": "tool-platform/kubernetes.json"
         }
       ]
     },
     {
       "key": "best-practice",
-      "nameVi": "Quy chuẩn & Thực hành Tốt nhất (Best Practices & Architecture)",
-      "nameEn": "Best Practices & Methodologies",
+      "nameVi": "Thực Hành Tốt Nhất (Best Practices)",
+      "nameEn": "Best Practices",
       "count": 2,
       "roadmaps": [
         {
           "slug": "api-design",
           "title": "Api Design",
           "moduleCount": 1,
-          "topicCount": 99,
+          "topicCount": 0,
           "filePath": "best-practice/api-design.json"
         },
         {
           "slug": "system-design",
           "title": "System Design",
           "moduleCount": 28,
-          "topicCount": 148,
+          "topicCount": 121,
           "filePath": "best-practice/system-design.json"
         }
       ]

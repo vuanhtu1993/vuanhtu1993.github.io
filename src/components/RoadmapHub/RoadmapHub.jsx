@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import roadmapIndexData from '@site/sources/roadmap-data/index.json';
 import { getSavedProgress } from '../RoadmapDetail/useRoadmapProgress';
 import { isRoadmapAvailable } from '../RoadmapDetail/dataLoader';
@@ -29,25 +29,38 @@ const CATEGORIES = [
 export default function RoadmapHub({ onSelectRoadmap }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [indexData, setIndexData] = useState(roadmapIndexData);
 
-  // Thu thập danh sách các roadmaps thực tế đang có sẵn trên đĩa từ dataLoader
+  // Ở môi trường dev, fetch live từ MongoDB để cập nhật thống kê và lộ trình mới tức thì
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      fetch('/api/roadmap/list')
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (data && data.categories) {
+            setIndexData(data);
+          }
+        })
+        .catch(() => {});
+    }
+  }, []);
+
+  // Thu thập danh sách các roadmaps thực tế đang có sẵn
   const allRoadmaps = useMemo(() => {
     const list = [];
-    if (roadmapIndexData?.categories) {
-      roadmapIndexData.categories.forEach((cat) => {
+    if (indexData?.categories) {
+      indexData.categories.forEach((cat) => {
         cat.roadmaps.forEach((rm) => {
-          if (isRoadmapAvailable(rm.slug)) {
-            list.push({
-              ...rm,
-              categoryKey: cat.key,
-              categoryNameVi: cat.nameVi,
-            });
-          }
+          list.push({
+            ...rm,
+            categoryKey: cat.key,
+            categoryNameVi: cat.nameVi,
+          });
         });
       });
     }
     return list;
-  }, []);
+  }, [indexData]);
 
   // Lọc theo danh mục và từ khóa tìm kiếm
   const filteredRoadmaps = useMemo(() => {

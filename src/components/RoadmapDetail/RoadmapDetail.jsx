@@ -1,22 +1,32 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { loadRoadmapData } from './dataLoader';
+import { loadRoadmapData, invalidateCache } from './dataLoader';
 import { useRoadmapProgress } from './useRoadmapProgress';
+import { EditModeProvider, useEditMode } from './EditModeContext';
 import RoadmapTimeline from './RoadmapTimeline';
 import TopicDrawer from './TopicDrawer';
 import styles from './RoadmapDetail.module.css';
 
-// Roadmap detail component
-
-export default function RoadmapDetail({ slug, onBack }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+/**
+ * Giao diện chi tiết lộ trình kèm theo tương tác tiến độ và Edit Mode (dev-only)
+ */
+function RoadmapDetailView({ slug, onBack, data, setData }) {
+  const { isEditMode, toggleEditMode, isDevMode } = useEditMode();
 
   // Bộ lọc tìm kiếm topic trong roadmap
   const [searchQuery, setSearchQuery] = useState('');
 
   // Quản lý các Module mở rộng
-  const [expandedModules, setExpandedModules] = useState(new Set());
+  const [expandedModules, setExpandedModules] = useState(() => {
+    const initialExpanded = new Set();
+    if (data?.modules && data.modules.length > 0) {
+      data.modules.slice(0, 3).forEach((m, idx) => {
+        initialExpanded.add(m.id || `mod-${idx}`);
+      });
+    } else if (data?.topics && data.topics.length > 0) {
+      initialExpanded.add(`${data.slug || 'roadmap'}-main`);
+    }
+    return initialExpanded;
+  });
 
   // Quản lý Topic Drawer
   const [activeTopic, setActiveTopic] = useState(null);
@@ -24,40 +34,6 @@ export default function RoadmapDetail({ slug, onBack }) {
 
   // Modal xác nhận Reset State
   const [showResetModal, setShowResetModal] = useState(false);
-
-  // Tải dữ liệu JSON của roadmap
-  useEffect(() => {
-    let isMounted = true;
-    setLoading(true);
-    setError(null);
-
-    loadRoadmapData(slug)
-      .then((res) => {
-        if (!isMounted) return;
-        setData(res);
-        setLoading(false);
-
-        // Mở sẵn 3 module đầu tiên để người học dễ tiếp cận
-        const initialExpanded = new Set();
-        if (res.modules && res.modules.length > 0) {
-          res.modules.slice(0, 3).forEach((m, idx) => {
-            initialExpanded.add(m.id || `mod-${idx}`);
-          });
-        } else if (res.topics && res.topics.length > 0) {
-          initialExpanded.add(`${res.slug || 'roadmap'}-main`);
-        }
-        setExpandedModules(initialExpanded);
-      })
-      .catch((err) => {
-        if (!isMounted) return;
-        setError(err.message || 'Không thể tải dữ liệu lộ trình.');
-        setLoading(false);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [slug]);
 
   // Thu thập danh sách toàn bộ các topic (phẳng) theo thứ tự để phục vụ chuyển tiếp trước / sau
   const flattenedTopics = useMemo(() => {
@@ -147,32 +123,22 @@ export default function RoadmapDetail({ slug, onBack }) {
     }
   }, [hasNext, currentTopicIndex, flattenedTopics]);
 
+  // Đồng bộ activeTopic khi data cập nhật từ server/MongoDB
+  useEffect(() => {
+    if (activeTopic && flattenedTopics.length > 0) {
+      const activeId = activeTopic.nodeId || activeTopic.name || activeTopic.id;
+      const updated = flattenedTopics.find((t) => (t.nodeId || t.name || t.id) === activeId);
+      if (updated) {
+        setActiveTopic(updated);
+      }
+    }
+  }, [flattenedTopics]);
+
   // Xác nhận Reset Progress
   const handleConfirmReset = () => {
     resetProgress();
     setShowResetModal(false);
   };
-
-  if (loading) {
-    return (
-      <div className={styles.statusContainer}>
-        <div className={styles.spinner} />
-        <p>Đang tải dữ liệu lộ trình...</p>
-      </div>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <div className={styles.statusContainer}>
-        <h2 style={{ color: 'var(--ifm-color-danger, #ef4444)' }}>Không tìm thấy lộ trình</h2>
-        <p>{error || 'Dữ liệu không tồn tại.'}</p>
-        <button type="button" className={styles.backBtn} onClick={onBack}>
-          ← Quay lại danh sách Lộ trình
-        </button>
-      </div>
-    );
-  }
 
   const isAllComplete = percentage === 100;
 
@@ -191,6 +157,20 @@ export default function RoadmapDetail({ slug, onBack }) {
             </div>
 
             <div className={styles.actionsArea}>
+              {/* Nút Toggle Edit Mode (Chỉ hiển thị trên môi trường Dev) */}
+              {isDevMode && (
+                <button
+                  type="button"
+                  className={`${styles.actionBtn} ${
+                    isEditMode ? styles.editToggleBtnActive : styles.editToggleBtn
+                  }`}
+                  onClick={toggleEditMode}
+                  title={isEditMode ? 'Tắt chế độ chỉnh sửa' : 'Bật chế độ chỉnh sửa (Dev only)'}
+                >
+                  {isEditMode ? '✅ Đang sửa (Dev)' : '✏️ Chế độ sửa'}
+                </button>
+              )}
+
               <button
                 type="button"
                 className={styles.actionBtn}
@@ -270,6 +250,8 @@ export default function RoadmapDetail({ slug, onBack }) {
       {/* Slide-over Topic Drawer */}
       <TopicDrawer
         topic={activeTopic}
+        allTopics={flattenedTopics}
+        onSelectTopic={handleSelectTopic}
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         isCompleted={
@@ -316,5 +298,72 @@ export default function RoadmapDetail({ slug, onBack }) {
       {/* Footer */}
       <div className={styles.footerCopyright}>Made by Anh Tu - Share to be share</div>
     </div>
+  );
+}
+
+export default function RoadmapDetail({ slug, onBack }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Tải lại dữ liệu mới nhất từ MongoDB Atlas sau khi người dùng sửa/xoá
+  const refreshData = useCallback(async () => {
+    invalidateCache(slug);
+    try {
+      const res = await loadRoadmapData(slug);
+      setData(res);
+    } catch (err) {
+      console.error('Lỗi khi tải lại dữ liệu lộ trình:', err);
+    }
+  }, [slug]);
+
+  // Tải dữ liệu ban đầu
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+    setError(null);
+
+    loadRoadmapData(slug)
+      .then((res) => {
+        if (!isMounted) return;
+        setData(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (!isMounted) return;
+        setError(err.message || 'Không thể tải dữ liệu lộ trình.');
+        setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className={styles.statusContainer}>
+        <div className={styles.spinner} />
+        <p>Đang tải dữ liệu lộ trình...</p>
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className={styles.statusContainer}>
+        <h2 style={{ color: 'var(--ifm-color-danger, #ef4444)' }}>Không tìm thấy lộ trình</h2>
+        <p>{error || 'Dữ liệu không tồn tại.'}</p>
+        <button type="button" className={styles.backBtn} onClick={onBack}>
+          ← Quay lại danh sách Lộ trình
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <EditModeProvider slug={slug} onDataChanged={refreshData}>
+      <RoadmapDetailView slug={slug} onBack={onBack} data={data} setData={setData} />
+    </EditModeProvider>
   );
 }

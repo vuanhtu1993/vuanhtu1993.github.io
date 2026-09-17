@@ -1,0 +1,310 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modalDialog {
+  background: var(--ifm-background-surface-color, #ffffff);
+  border: 1px solid var(--ifm-toc-border-color, #e2e8f0);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 620px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.28);
+  animation: slideUp 0.2s ease-out;
+  overflow: hidden;
+}
+
+:global([data-theme='dark']) .modalDialog {
+  background: #1e1f22;
+  border-color: #333539;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65);
+}
+
+.modalHeader {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--ifm-toc-border-color, #e2e8f0);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+:global([data-theme='dark']) .modalHeader {
+  border-bottom-color: #2e3034;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color, #0f172a);
+}
+
+.modalSubtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700, #64748b);
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--ifm-color-emphasis-600, #64748b);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  background: var(--ifm-color-emphasis-100, #f1f5f9);
+  color: var(--ifm-font-color-base, #0f172a);
+}
+
+/* Search Box */
+.searchBoxWrapper {
+  position: relative;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--ifm-toc-border-color, #f1f5f9);
+  display: flex;
+  align-items: center;
+}
+
+:global([data-theme='dark']) .searchBoxWrapper {
+  border-bottom-color: #2e3034;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 2.25rem;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.65rem 2.5rem 0.65rem 2.4rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--ifm-background-color, #ffffff);
+  color: var(--ifm-font-color-base, #0f172a);
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+
+:global([data-theme='dark']) .searchInput {
+  background: #25262a;
+  border-color: #3f4247;
+  color: #f1f5f9;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary, #25c2a0);
+  box-shadow: 0 0 0 3px rgba(37, 194, 160, 0.2);
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 2.25rem;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.25rem;
+}
+
+/* Results Container */
+.resultsContainer {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 240px;
+  max-height: 380px;
+  padding: 0.75rem 1.5rem;
+}
+
+.loadingState,
+.emptyState,
+.idleState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--ifm-color-emphasis-700, #64748b);
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(37, 194, 160, 0.2);
+  border-top-color: var(--ifm-color-primary, #25c2a0);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 0.75rem;
+}
+
+.idleIcon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.emptyHint {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-top: 0.35rem;
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ifm-toc-border-color, #e2e8f0);
+  border-radius: 9px;
+  background: var(--ifm-color-emphasis-100, #f8fafc);
+  transition: all 0.15s ease;
+}
+
+:global([data-theme='dark']) .resultItem {
+  background: #25262a;
+  border-color: #333539;
+}
+
+.resultItem:hover {
+  border-color: var(--ifm-color-primary, #25c2a0);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.itemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.itemTitle {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color, #0f172a);
+}
+
+.roadmapBadge {
+  background: rgba(37, 194, 160, 0.12);
+  color: var(--ifm-color-primary, #25c2a0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+:global([data-theme='dark']) .roadmapBadge {
+  background: rgba(37, 194, 160, 0.2);
+}
+
+.itemDesc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-700, #64748b);
+  line-height: 1.4;
+}
+
+.selectBtn {
+  background: var(--ifm-color-primary, #25c2a0);
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.selectBtn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.selectBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.modalFooter {
+  padding: 0.85rem 1.5rem;
+  border-top: 1px solid var(--ifm-toc-border-color, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--ifm-color-emphasis-100, #f8fafc);
+}
+
+:global([data-theme='dark']) .modalFooter {
+  background: #1e1f22;
+  border-top-color: #2e3034;
+}
+
+.footerHint {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700, #64748b);
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid var(--ifm-toc-border-color, #cbd5e1);
+  color: var(--ifm-font-color-base, #0f172a);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background: var(--ifm-color-emphasis-200, #e2e8f0);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

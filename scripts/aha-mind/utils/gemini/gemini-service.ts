@@ -11,6 +11,19 @@ export class GeminiService {
   private apiKeys: string[] = [];
   private currentKeyIndex: number = 0;
 
+  /**
+   * Circular Key Rotation — Cooldown tracking
+   *
+   * Tại sao cần? Hệ thống cũ chỉ rotate một chiều (0 → 1 → 2 → crash).
+   * Nếu key #0 bị rate-limit tạm thời (60s), hệ thống chuyển sang key #1,
+   * nhưng KHÔNG BAO GIỜ quay lại key #0 dù nó đã hết cooldown.
+   *
+   * Giải pháp: Track cooldown timestamp cho mỗi key, quay vòng circular,
+   * chờ nếu tất cả keys đều trong cooldown (thay vì crash).
+   */
+  private keyCooldowns: Map<number, number> = new Map(); // keyIndex → cooldownEndTimestamp
+  private readonly KEY_COOLDOWN_MS = 60_000; // 1 phút cooldown cho mỗi key bị 429
+
   // Expose llm for cases where custom temp/maxTokens is needed, though prefer using methods below.
   public get baseLlm(): ChatGoogleGenerativeAI {
     return this.llm;
@@ -40,6 +53,8 @@ export class GeminiService {
       console.error("[GeminiService] ❌ Không tìm thấy API Key nào trong .env (các biến bắt đầu bằng GOOGLE_API_KEY)");
       process.exit(1);
     }
+
+    console.log(`[GeminiService] 🔑 Loaded ${this.apiKeys.length} API key(s) — Circular Rotation enabled`);
   }
 
   private initLlm() {
@@ -48,7 +63,19 @@ export class GeminiService {
       apiKey: currentKey,
       model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
       temperature: 0.1, // Default temperature, can be customized locally if needed
-      maxRetries: 2,
+      /**
+       * maxRetries: 0 — TẮT retry nội bộ của LangChain
+       *
+       * Tại sao? LangChain tự retry khi gặp 429, tạo ra "shadow requests"
+       * mà Rate Limiter KHÔNG ĐẾM. VD:
+       *   - Rate Limiter cho phép request #5
+       *   - Request #5 bị 429
+       *   - LangChain tự retry 2 lần (#6, #7) → Rate Limiter không biết
+       *   - Cả 3 đều fail → Rate Limiter vẫn nghĩ chỉ gửi 5 requests
+       *
+       * Giải pháp: maxRetries: 0 → mọi retry do executeWithRotation quản lý.
+       */
+      maxRetries: 0,
     });
   }
 
@@ -59,23 +86,80 @@ export class GeminiService {
     return GeminiService.instance;
   }
 
+  // ============================================================
+  // Circular Key Rotation
+  // ============================================================
+
   /**
-   * Đổi sang API Key tiếp theo nếu có lỗi Quota.
-   * Trả về true nếu đổi thành công, false nếu đã hết tất cả các keys.
+   * Đánh dấu key hiện tại là "exhausted" và tìm key tiếp theo khả dụng.
+   * Quay vòng circular: 0 → 1 → 2 → 0 → 1 → ...
+   * Nếu tất cả keys đều trong cooldown → chờ key sớm nhất hết cooldown.
+   *
+   * @returns luôn trả về true (không bao giờ crash, chỉ chờ)
    */
-  private rotateKey(): boolean {
-    this.currentKeyIndex++;
-    if (this.currentKeyIndex >= this.apiKeys.length) {
-      console.error(`[GeminiService] ❌ Đã dùng hết toàn bộ ${this.apiKeys.length} API Keys. Hệ thống sẽ dừng!`);
-      return false; // Hết key
+  private async rotateKey(): Promise<boolean> {
+    // Đánh dấu key hiện tại vào cooldown
+    this.keyCooldowns.set(
+      this.currentKeyIndex,
+      Date.now() + this.KEY_COOLDOWN_MS
+    );
+
+    const totalKeys = this.apiKeys.length;
+
+    // Thử từng key theo thứ tự circular
+    for (let i = 1; i <= totalKeys; i++) {
+      const candidateIndex = (this.currentKeyIndex + i) % totalKeys;
+      const cooldownUntil = this.keyCooldowns.get(candidateIndex);
+
+      if (!cooldownUntil || Date.now() >= cooldownUntil) {
+        // Key này khả dụng — sử dụng ngay
+        this.keyCooldowns.delete(candidateIndex);
+        this.currentKeyIndex = candidateIndex;
+        console.log(
+          `\n[GeminiService] 🔄 Rotate → Key #${candidateIndex + 1}/${totalKeys}`
+        );
+        this.initLlm();
+        return true;
+      }
     }
-    console.log(`\n[GeminiService] 🔄 Tự động chuyển sang API Key thứ ${this.currentKeyIndex + 1}/${this.apiKeys.length}...`);
+
+    // Tất cả keys đều trong cooldown → tìm key sớm nhất hết cooldown và chờ
+    let shortestWait = Infinity;
+    let bestKeyIndex = 0;
+
+    for (const [keyIndex, cooldownUntil] of this.keyCooldowns.entries()) {
+      const remaining = cooldownUntil - Date.now();
+      if (remaining < shortestWait) {
+        shortestWait = remaining;
+        bestKeyIndex = keyIndex;
+      }
+    }
+
+    // Chờ + buffer 500ms
+    const waitMs = Math.max(0, shortestWait) + 500;
+    console.log(
+      `\n[GeminiService] ⏳ Tất cả ${totalKeys} key(s) đều trong cooldown. ` +
+      `Chờ ${Math.ceil(waitMs / 1000)}s cho Key #${bestKeyIndex + 1}...`
+    );
+    await new Promise(resolve => setTimeout(resolve, waitMs));
+
+    // Sau khi chờ, clear cooldown và sử dụng key này
+    this.keyCooldowns.delete(bestKeyIndex);
+    this.currentKeyIndex = bestKeyIndex;
+    console.log(
+      `[GeminiService] ✅ Key #${bestKeyIndex + 1}/${totalKeys} đã hết cooldown, sử dụng lại.`
+    );
     this.initLlm();
     return true;
   }
 
+  // ============================================================
+  // Execute with Rate Limiting + Key Rotation
+  // ============================================================
+
   /**
-   * Helper function bọc execution block trong vòng lặp retry API Key.
+   * Bọc operation trong Rate Limiter + Key Rotation.
+   * Flow: Rate Limiter (Token Bucket) → Execute → Nếu 429 → Rotate Key → Retry
    */
   private async executeWithRotation<T>(
     estimatedTokens: number, 
@@ -89,21 +173,31 @@ export class GeminiService {
           return await operation(modelToUse);
         });
       } catch (error: any) {
-        // Chỉ bắt lỗi quota nếu sử dụng default LLM (không truyền customLlm với key khác vào)
+        // Chỉ rotate nếu sử dụng default LLM (customLlm bypass rotation)
         if (!customLlm) {
           const errMsg = error?.message?.toLowerCase() || '';
-          if (errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('exhausted') || errMsg.includes('503')) {
-             console.warn(`[GeminiService] ⚠️ Lỗi Quota/429/503 ở API Key thứ ${this.currentKeyIndex + 1}. Đang thử Rotate Key...`);
-             const hasNextKey = this.rotateKey();
-             if (hasNextKey) {
-               continue; // Thử lại vòng lặp với Key mới
-             }
+          if (
+            errMsg.includes('429') ||
+            errMsg.includes('quota') ||
+            errMsg.includes('exhausted') ||
+            errMsg.includes('503') ||
+            errMsg.includes('resource_exhausted')
+          ) {
+            console.warn(
+              `[GeminiService] ⚠️ Rate-limit hit ở Key #${this.currentKeyIndex + 1}. Rotating...`
+            );
+            await this.rotateKey(); // async, có thể chờ nếu tất cả keys cooldown
+            continue; // Retry với key mới
           }
         }
-        throw error; // Quăng lỗi ra nếu không phải lỗi quota hoặc hết key
+        throw error; // Lỗi khác (không phải rate-limit) → throw
       }
     }
   }
+
+  // ============================================================
+  // Public API
+  // ============================================================
 
   /**
    * Gọi LLM thông thường (trả về nội dung dạng text).

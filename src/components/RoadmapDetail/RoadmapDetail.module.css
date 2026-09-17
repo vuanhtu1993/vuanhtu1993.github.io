@@ -154,6 +154,35 @@
   border-color: #f87171 !important;
 }
 
+.editToggleBtn {
+  background-color: #fefce8 !important;
+  color: #ca8a04 !important;
+  border-color: #fde047 !important;
+}
+
+.editToggleBtn:hover {
+  background-color: #fef9c3 !important;
+  border-color: #eab308 !important;
+}
+
+:global([data-theme='dark']) .editToggleBtn {
+  background-color: rgba(234, 179, 8, 0.15) !important;
+  color: #facc15 !important;
+  border-color: rgba(234, 179, 8, 0.35) !important;
+}
+
+.editToggleBtnActive {
+  background-color: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+
+.editToggleBtnActive:hover {
+  background-color: #059669 !important;
+  border-color: #059669 !important;
+}
+
 .headerBottomRow {
   display: flex;
   align-items: center;

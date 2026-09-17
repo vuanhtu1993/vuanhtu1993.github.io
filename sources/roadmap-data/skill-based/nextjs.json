@@ -1,8 +1,261 @@
 {
+  "_id": "6aab5fc25306e7f1dec46c28",
   "slug": "nextjs",
-  "title": "Next.js",
   "category": "skill-based",
-  "topicCount": 96,
+  "graph": {
+    "edges": [
+      {
+        "source": "HU7wZWiES3m3xl1-NYP6F",
+        "target": "tcDL4OEbZplbjNa8VTLpv",
+        "type": "flow"
+      },
+      {
+        "source": "tcDL4OEbZplbjNa8VTLpv",
+        "target": "FdvaN6BOxUEJt7TarSDmo",
+        "type": "flow"
+      },
+      {
+        "source": "1ch6ZXZP46FP8q3HeCqWM",
+        "target": "sSrfdCJ4_yjx_kUAti_dm",
+        "type": "flow"
+      },
+      {
+        "source": "FdvaN6BOxUEJt7TarSDmo",
+        "target": "1ch6ZXZP46FP8q3HeCqWM",
+        "type": "flow"
+      },
+      {
+        "source": "3tTTKj6PWsRoRRXH5tXxS",
+        "target": "sSrfdCJ4_yjx_kUAti_dm",
+        "type": "flow"
+      },
+      {
+        "source": "sSrfdCJ4_yjx_kUAti_dm",
+        "target": "NFLIWBJm_cQ7oCsP00Qy4",
+        "type": "flow"
+      },
+      {
+        "source": "NFLIWBJm_cQ7oCsP00Qy4",
+        "target": "xRZqBd5-QO8zh7ksHlRjK",
+        "type": "flow"
+      },
+      {
+        "source": "NFLIWBJm_cQ7oCsP00Qy4",
+        "target": "km7dLVpl76c5EfWvhhbRh",
+        "type": "flow"
+      },
+      {
+        "source": "km7dLVpl76c5EfWvhhbRh",
+        "target": "oFhmV5Xv0KJ-SjeYVZBpi",
+        "type": "flow"
+      },
+      {
+        "source": "pxltXOWgpbo95V4u2ryX7",
+        "target": "09uWsmXOXU0Ox7F3qsjRx",
+        "type": "flow"
+      },
+      {
+        "source": "09uWsmXOXU0Ox7F3qsjRx",
+        "target": "4H8aOVYsZiPbTQUYcZjb_",
+        "type": "flow"
+      },
+      {
+        "source": "4H8aOVYsZiPbTQUYcZjb_",
+        "target": "9egFwmy-o7Fx-M7FcPXXy",
+        "type": "flow"
+      },
+      {
+        "source": "9egFwmy-o7Fx-M7FcPXXy",
+        "target": "gpZNwsh075wl5eH2gLKro",
+        "type": "flow"
+      },
+      {
+        "source": "gpZNwsh075wl5eH2gLKro",
+        "target": "bSsM7VLZcJKYL5XXSG0r-",
+        "type": "flow"
+      },
+      {
+        "source": "bSsM7VLZcJKYL5XXSG0r-",
+        "target": "tDkcsilfh67BwS5MCM7j8",
+        "type": "flow"
+      },
+      {
+        "source": "tDkcsilfh67BwS5MCM7j8",
+        "target": "lkdBRzC8lAvRYKBt7E37V",
+        "type": "flow"
+      },
+      {
+        "source": "lkdBRzC8lAvRYKBt7E37V",
+        "target": "77i6HVsnX-uSDw8vz3afD",
+        "type": "flow"
+      },
+      {
+        "source": "77i6HVsnX-uSDw8vz3afD",
+        "target": "GAHFfQ8CviNxV7ITpt--q",
+        "type": "flow"
+      },
+      {
+        "source": "GAHFfQ8CviNxV7ITpt--q",
+        "target": "Ti_Bl5NnRIY9UTNTH15xA",
+        "type": "flow"
+      },
+      {
+        "source": "IuBZY-ISP1Sy_5OQ99jLY",
+        "target": "66SYQ12xP7AaDVVf62fkF",
+        "type": "flow"
+      },
+      {
+        "source": "66SYQ12xP7AaDVVf62fkF",
+        "target": "HdSmD_nDV5BPO5JJqs1k8",
+        "type": "flow"
+      },
+      {
+        "source": "6O9c3J-1JQtZTXXIDDXSM",
+        "target": "jHryqAWmvzY4Ftw_aWGC2",
+        "type": "flow"
+      },
+      {
+        "source": "jHryqAWmvzY4Ftw_aWGC2",
+        "target": "LN7SHgcQp9gX_jfEN84YP",
+        "type": "flow"
+      },
+      {
+        "source": "jHryqAWmvzY4Ftw_aWGC2",
+        "target": "siGnXWFqy2ZMkv7Wi1UVG",
+        "type": "flow"
+      },
+      {
+        "source": "siGnXWFqy2ZMkv7Wi1UVG",
+        "target": "2Jnj0GxjwGcNdwJcUNSnZ",
+        "type": "flow"
+      },
+      {
+        "source": "siGnXWFqy2ZMkv7Wi1UVG",
+        "target": "qvCk1UegUncBnCCfwgFnT",
+        "type": "flow"
+      },
+      {
+        "source": "qvCk1UegUncBnCCfwgFnT",
+        "target": "_c8Fms25UcktRjNaOMZR0",
+        "type": "flow"
+      },
+      {
+        "source": "_c8Fms25UcktRjNaOMZR0",
+        "target": "ThrO72opK7xGWpy0GG63T",
+        "type": "flow"
+      },
+      {
+        "source": "Hj01UZuHkQppXTq6XV9Pn",
+        "target": "YP34tozqTte5s52QBnrKD",
+        "type": "flow"
+      },
+      {
+        "source": "YP34tozqTte5s52QBnrKD",
+        "target": "-9Y8zMcO-6lPoGWkCbKWI",
+        "type": "flow"
+      },
+      {
+        "source": "-9Y8zMcO-6lPoGWkCbKWI",
+        "target": "-yiJSBIoczJHOW8YMdWFI",
+        "type": "flow"
+      },
+      {
+        "source": "-9Y8zMcO-6lPoGWkCbKWI",
+        "target": "BPStVqWV0660A-_fJSuM7",
+        "type": "flow"
+      },
+      {
+        "source": "BPStVqWV0660A-_fJSuM7",
+        "target": "O5dely89N5UCMBeUfh8ud",
+        "type": "flow"
+      },
+      {
+        "source": "YP34tozqTte5s52QBnrKD",
+        "target": "_BCC4r0kAPPHQ_1ToVSJd",
+        "type": "flow"
+      },
+      {
+        "source": "tcDL4OEbZplbjNa8VTLpv",
+        "target": "DlUQkDRPUcjC3pO4P5zCQ",
+        "type": "subtopic"
+      },
+      {
+        "source": "tcDL4OEbZplbjNa8VTLpv",
+        "target": "ch5gUr8xeCIp-i48N5qew",
+        "type": "subtopic"
+      },
+      {
+        "source": "tcDL4OEbZplbjNa8VTLpv",
+        "target": "ey6z7Y4WtNtQJ50n-3j5P",
+        "type": "subtopic"
+      },
+      {
+        "source": "tcDL4OEbZplbjNa8VTLpv",
+        "target": "rJ3vuI58Z9u2SKTDgpTE2",
+        "type": "subtopic"
+      },
+      {
+        "source": "dP6cZkEZ6lxPsy5SjvuZA",
+        "target": "09uWsmXOXU0Ox7F3qsjRx",
+        "type": "subtopic"
+      },
+      {
+        "source": "4H8aOVYsZiPbTQUYcZjb_",
+        "target": "hQHvu7MzNwA2lL9ADm5YQ",
+        "type": "subtopic"
+      },
+      {
+        "source": "gpZNwsh075wl5eH2gLKro",
+        "target": "XwDF-Kt9K5smm3ruxlkR2",
+        "type": "subtopic"
+      },
+      {
+        "source": "gpZNwsh075wl5eH2gLKro",
+        "target": "8kUhcd2-BlqOKInEuSI95",
+        "type": "subtopic"
+      },
+      {
+        "source": "gpZNwsh075wl5eH2gLKro",
+        "target": "Sn-8ztsjjtUxD_SP6w3cS",
+        "type": "subtopic"
+      },
+      {
+        "source": "gpZNwsh075wl5eH2gLKro",
+        "target": "54Cc_GdL327tzkdYBA305",
+        "type": "subtopic"
+      },
+      {
+        "source": "77i6HVsnX-uSDw8vz3afD",
+        "target": "UZCMVpg5YIDxu-AMah3S-",
+        "type": "subtopic"
+      },
+      {
+        "source": "GAHFfQ8CviNxV7ITpt--q",
+        "target": "SjJQ7ceU6vBhlhrN8hcvy",
+        "type": "subtopic"
+      },
+      {
+        "source": "BPStVqWV0660A-_fJSuM7",
+        "target": "y5_zX209AaHOf_wQibo12",
+        "type": "subtopic"
+      },
+      {
+        "source": "BPStVqWV0660A-_fJSuM7",
+        "target": "evmzZ6F7TWgYhdaahnZHY",
+        "type": "subtopic"
+      },
+      {
+        "source": "BPStVqWV0660A-_fJSuM7",
+        "target": "fXXlJ6oN_YPWVr-fqEar3",
+        "type": "subtopic"
+      },
+      {
+        "source": "BPStVqWV0660A-_fJSuM7",
+        "target": "Okw_IjU2iRSvSQVdKeeCo",
+        "type": "subtopic"
+      }
+    ]
+  },
   "moduleCount": 33,
   "modules": [
     {
@@ -46,6 +299,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4338",
+          "roadmapSlug": "nextjs",
+          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
+          "order": 0,
           "name": "why-nextjs",
           "nodeId": "WxoMZRRiW9CGDZ9i80nbf",
           "title": "Why Next.js?",
@@ -69,6 +326,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4339",
+          "roadmapSlug": "nextjs",
+          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
+          "order": 1,
           "name": "javascript-basics",
           "nodeId": "DlUQkDRPUcjC3pO4P5zCQ",
           "title": "JavaScript Basics",
@@ -97,6 +358,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f433a",
+          "roadmapSlug": "nextjs",
+          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
+          "order": 2,
           "name": "why-frontend-frameworks",
           "nodeId": "rJ3vuI58Z9u2SKTDgpTE2",
           "title": "Why Frontend Frameworks?",
@@ -125,6 +390,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f433b",
+          "roadmapSlug": "nextjs",
+          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
+          "order": 3,
           "name": "why-react",
           "nodeId": "ey6z7Y4WtNtQJ50n-3j5P",
           "title": "Why React?",
@@ -153,6 +422,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f433c",
+          "roadmapSlug": "nextjs",
+          "moduleId": "tcDL4OEbZplbjNa8VTLpv",
+          "order": 4,
           "name": "spa-vs-ssr",
           "nodeId": "ch5gUr8xeCIp-i48N5qew",
           "title": "SPA vs SSR",
@@ -208,6 +481,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f433d",
+          "roadmapSlug": "nextjs",
+          "moduleId": "FdvaN6BOxUEJt7TarSDmo",
+          "order": 0,
           "name": "nextjs",
           "nodeId": "uJrOHRLmEBZtHJzAAusUe",
           "title": "Next.js",
@@ -241,6 +518,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f433e",
+          "roadmapSlug": "nextjs",
+          "moduleId": "FdvaN6BOxUEJt7TarSDmo",
+          "order": 1,
           "name": "remix",
           "nodeId": "G_33yo1MshQbiaGTPtTdK",
           "title": "Remix",
@@ -327,6 +608,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f433f",
+          "roadmapSlug": "nextjs",
+          "moduleId": "xRZqBd5-QO8zh7ksHlRjK",
+          "order": 0,
           "name": "why-use-app-router",
           "nodeId": "e_rwwlKsvyv9OMDDBXo_N",
           "title": "App Router",
@@ -345,6 +630,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4340",
+          "roadmapSlug": "nextjs",
+          "moduleId": "xRZqBd5-QO8zh7ksHlRjK",
+          "order": 1,
           "name": "reditects",
           "nodeId": "K1wGmAy9L0VE6cwYE2pA6",
           "title": "Redirects in Next.js API Endpoints",
@@ -405,6 +694,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4341",
+          "roadmapSlug": "nextjs",
+          "moduleId": "1ch6ZXZP46FP8q3HeCqWM",
+          "order": 0,
           "name": "ssr",
           "nodeId": "7EYQnX3cEAjSL-iJSprEI",
           "title": "Server-Side Rendering (SSR)",
@@ -428,6 +721,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4342",
+          "roadmapSlug": "nextjs",
+          "moduleId": "1ch6ZXZP46FP8q3HeCqWM",
+          "order": 1,
           "name": "spa",
           "nodeId": "NC7s-EOLWhjXR70JFZxcg",
           "title": "Single-Page Application (SPA) Rendering",
@@ -456,6 +753,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4343",
+          "roadmapSlug": "nextjs",
+          "moduleId": "1ch6ZXZP46FP8q3HeCqWM",
+          "order": 2,
           "name": "csr",
           "nodeId": "4CcK-BLP5NM3ZrCIEG4s8",
           "title": "Client-Side Rendering (CSR)",
@@ -479,6 +780,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4344",
+          "roadmapSlug": "nextjs",
+          "moduleId": "1ch6ZXZP46FP8q3HeCqWM",
+          "order": 3,
           "name": "ssg",
           "nodeId": "CqPZHOs1Iew6PCIjwiqUt",
           "title": "Static Site Generation (SSG)",
@@ -529,6 +834,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4345",
+          "roadmapSlug": "nextjs",
+          "moduleId": "km7dLVpl76c5EfWvhhbRh",
+          "order": 0,
           "name": "pages",
           "nodeId": "htuyzi5_N-fqnx_SsO_DS",
           "title": "Pages Router",
@@ -552,6 +861,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4346",
+          "roadmapSlug": "nextjs",
+          "moduleId": "km7dLVpl76c5EfWvhhbRh",
+          "order": 1,
           "name": "app",
           "nodeId": "3VXKRDxDmqJObkoW8ndrz",
           "title": "App Router",
@@ -695,6 +1008,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4347",
+          "roadmapSlug": "nextjs",
+          "moduleId": "dP6cZkEZ6lxPsy5SjvuZA",
+          "order": 0,
           "name": "routing-patterns",
           "nodeId": "09uWsmXOXU0Ox7F3qsjRx",
           "title": "Routing Patterns",
@@ -745,6 +1062,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4348",
+          "roadmapSlug": "nextjs",
+          "moduleId": "b2LcPc5MfoyF0W9Y0aGpR",
+          "order": 0,
           "name": "streaming",
           "nodeId": "lR7oPh0DCY_BhzXH31N36",
           "title": "Streaming in Next.js API Endpoints",
@@ -800,6 +1121,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4349",
+          "roadmapSlug": "nextjs",
+          "moduleId": "pxltXOWgpbo95V4u2ryX7",
+          "order": 0,
           "name": "revalidation-errors",
           "nodeId": "qMYuXOlr_c-6oQKVOdGci",
           "title": "Revalidation Errors",
@@ -845,6 +1170,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f434a",
+          "roadmapSlug": "nextjs",
+          "moduleId": "09uWsmXOXU0Ox7F3qsjRx",
+          "order": 0,
           "name": "parallel-routes",
           "nodeId": "2N_hm9Zx_Lp-RFEMP9HFb",
           "title": "Parallel Routes",
@@ -868,6 +1197,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f434b",
+          "roadmapSlug": "nextjs",
+          "moduleId": "09uWsmXOXU0Ox7F3qsjRx",
+          "order": 1,
           "name": "intercepting-routes",
           "nodeId": "dP6cZkEZ6lxPsy5SjvuZA",
           "title": "Intercepting Routes",
@@ -933,6 +1266,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f434c",
+          "roadmapSlug": "nextjs",
+          "moduleId": "4H8aOVYsZiPbTQUYcZjb_",
+          "order": 0,
           "name": "static-vs-dynamic",
           "nodeId": "hQHvu7MzNwA2lL9ADm5YQ",
           "title": "Static vs Dynamic API Endpoints",
@@ -1039,6 +1376,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f434d",
+          "roadmapSlug": "nextjs",
+          "moduleId": "gpZNwsh075wl5eH2gLKro",
+          "order": 0,
           "name": "use-cases",
           "nodeId": "54Cc_GdL327tzkdYBA305",
           "title": "Middleware Use Cases",
@@ -1057,6 +1398,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f434e",
+          "roadmapSlug": "nextjs",
+          "moduleId": "gpZNwsh075wl5eH2gLKro",
+          "order": 1,
           "name": "route-matcher",
           "nodeId": "Sn-8ztsjjtUxD_SP6w3cS",
           "title": "Route Matcher",
@@ -1080,6 +1425,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f434f",
+          "roadmapSlug": "nextjs",
+          "moduleId": "gpZNwsh075wl5eH2gLKro",
+          "order": 2,
           "name": "using-cookies",
           "nodeId": "8kUhcd2-BlqOKInEuSI95",
           "title": "Using Cookies in Next.js Middleware",
@@ -1098,6 +1447,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4350",
+          "roadmapSlug": "nextjs",
+          "moduleId": "gpZNwsh075wl5eH2gLKro",
+          "order": 3,
           "name": "setting-headers",
           "nodeId": "XwDF-Kt9K5smm3ruxlkR2",
           "title": "Setting Headers in Next.js Middleware",
@@ -1210,6 +1563,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4351",
+          "roadmapSlug": "nextjs",
+          "moduleId": "77i6HVsnX-uSDw8vz3afD",
+          "order": 0,
           "name": "caching",
           "nodeId": "0Rgs7jaFX1Gl5KDT6DKbX",
           "title": "Caching API Endpoints in Next.js",
@@ -1238,6 +1595,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4352",
+          "roadmapSlug": "nextjs",
+          "moduleId": "77i6HVsnX-uSDw8vz3afD",
+          "order": 1,
           "name": "memoization-in-fetch",
           "nodeId": "UZCMVpg5YIDxu-AMah3S-",
           "title": "Memoization in Fetch",
@@ -1261,6 +1622,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4353",
+          "roadmapSlug": "nextjs",
+          "moduleId": "77i6HVsnX-uSDw8vz3afD",
+          "order": 2,
           "name": "react-cache",
           "nodeId": "crBlqiS78n7yz28cT2GGz",
           "title": "React Cache function",
@@ -1279,6 +1644,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4354",
+          "roadmapSlug": "nextjs",
+          "moduleId": "77i6HVsnX-uSDw8vz3afD",
+          "order": 3,
           "name": "revalidating-cached-data",
           "nodeId": "N5siOJO3dc9vJUTpbdm04",
           "title": "Revalidating Cached Data",
@@ -1329,6 +1698,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4355",
+          "roadmapSlug": "nextjs",
+          "moduleId": "GAHFfQ8CviNxV7ITpt--q",
+          "order": 0,
           "name": "parallel-vs-sequential",
           "nodeId": "SjJQ7ceU6vBhlhrN8hcvy",
           "title": "Parallel vs Sequential",
@@ -1341,6 +1714,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4356",
+          "roadmapSlug": "nextjs",
+          "moduleId": "GAHFfQ8CviNxV7ITpt--q",
+          "order": 1,
           "name": "preloading-data",
           "nodeId": "Ve1Pa7IhGHPZ_F-sCMcNb",
           "title": "Preloading data",
@@ -1433,6 +1810,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4357",
+          "roadmapSlug": "nextjs",
+          "moduleId": "LN7SHgcQp9gX_jfEN84YP",
+          "order": 0,
           "name": "nodejs",
           "nodeId": "0S37ka1K-TdYLnjCBrKSH",
           "title": "Node.js",
@@ -1461,6 +1842,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4358",
+          "roadmapSlug": "nextjs",
+          "moduleId": "LN7SHgcQp9gX_jfEN84YP",
+          "order": 1,
           "name": "edge",
           "nodeId": "SYUKB1Afciqz7hA1n5yIx",
           "title": "Edge Runtime",
@@ -1484,6 +1869,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4359",
+          "roadmapSlug": "nextjs",
+          "moduleId": "LN7SHgcQp9gX_jfEN84YP",
+          "order": 2,
           "name": "typescript",
           "nodeId": "ZFHkHmvjndPjDAB-MAtb7",
           "title": "TypeScript",
@@ -1539,6 +1928,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f435a",
+          "roadmapSlug": "nextjs",
+          "moduleId": "HdSmD_nDV5BPO5JJqs1k8",
+          "order": 0,
           "name": "client",
           "nodeId": "jYSa7UMmjb51pGAyU4PoB",
           "title": "Client-Side Data Fetching",
@@ -1599,6 +1992,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f435b",
+          "roadmapSlug": "nextjs",
+          "moduleId": "m7eKlykOZCA3BLuBHioDj",
+          "order": 0,
           "name": "server",
           "nodeId": "QDxYlIyFOuGUIy_ZovHs0",
           "title": "Server-Side Data Fetching for Locations",
@@ -1639,6 +2036,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f435c",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BfNON3Vp3zSWBurSS4ZHo",
+          "order": 0,
           "name": "css-modules",
           "nodeId": "tlg5XMVcAHmhey-efjf3M",
           "title": "CSS Modules",
@@ -1657,6 +2058,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f435d",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BfNON3Vp3zSWBurSS4ZHo",
+          "order": 1,
           "name": "tailwind-css",
           "nodeId": "3IKXvlA9P06GiOi34zv5H",
           "title": "Tailwind CSS",
@@ -1680,6 +2085,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f435e",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BfNON3Vp3zSWBurSS4ZHo",
+          "order": 2,
           "name": "sass",
           "nodeId": "5H7toz-DxtnwjozCgLuk6",
           "title": "Sass in Next.js",
@@ -1708,6 +2117,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f435f",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BfNON3Vp3zSWBurSS4ZHo",
+          "order": 3,
           "name": "css-in-js",
           "nodeId": "j5jIZvz_bMZqmr_gl0pQF",
           "title": "CSS in JS",
@@ -1784,6 +2197,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4360",
+          "roadmapSlug": "nextjs",
+          "moduleId": "ThrO72opK7xGWpy0GG63T",
+          "order": 0,
           "name": "eslint",
           "nodeId": "CvrHzkxg7ndCvd_tbYnK4",
           "title": "ESLint",
@@ -1802,6 +2219,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4361",
+          "roadmapSlug": "nextjs",
+          "moduleId": "ThrO72opK7xGWpy0GG63T",
+          "order": 1,
           "name": "prettier",
           "nodeId": "efMytbUmw44M8dPL4ItsX",
           "title": "Prettier",
@@ -1900,6 +2321,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4362",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 0,
           "name": "images",
           "nodeId": "1t9iOcmrEmuwOxOZ0vlY7",
           "title": "Images",
@@ -1918,6 +2343,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4363",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 1,
           "name": "videos",
           "nodeId": "1SJX-nGuhIxGH0ukfluoQ",
           "title": "Videos in Next.js",
@@ -1941,6 +2370,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4364",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 2,
           "name": "fonts",
           "nodeId": "ZptECTASMX97m5yCZ-XO8",
           "title": "Font Optimization",
@@ -1959,6 +2392,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4365",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 3,
           "name": "metadata",
           "nodeId": "45XMR5imHEDF_X8wcgjGW",
           "title": "Metadata",
@@ -1977,6 +2414,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4366",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 4,
           "name": "package-bundling",
           "nodeId": "qM_Za9NiCiCG5-kf5RCXF",
           "title": "Package Bundling",
@@ -1995,6 +2436,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4367",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 5,
           "name": "lazy-loading",
           "nodeId": "3_Mpvkxp9A7PMogxxMikQ",
           "title": "Lazy Loading",
@@ -2018,6 +2463,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4368",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 6,
           "name": "analytics",
           "nodeId": "a34ZmSk5VYVLq8wsEvOcI",
           "title": "Analytics",
@@ -2041,6 +2490,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4369",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 7,
           "name": "instrumentation",
           "nodeId": "DHqdXJFhVZWaNa5zSX8Wk",
           "title": "instrumentation",
@@ -2059,6 +2512,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f436a",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 8,
           "name": "opentelemetry",
           "nodeId": "mTh5PZNpzJNKPqpu5PVL6",
           "title": "OpenTelemetry",
@@ -2082,6 +2539,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f436b",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 9,
           "name": "static-assets",
           "nodeId": "iabbuLHqAiRkgj03t64x7",
           "title": "Static Assets",
@@ -2100,6 +2561,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f436c",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 10,
           "name": "scripts",
           "nodeId": "JFrpy3dGt-UP9Weo1VBvN",
           "title": "Third-Party Scripts",
@@ -2118,6 +2583,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f436d",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 11,
           "name": "third-party-libraries",
           "nodeId": "-j38AhG6LUCH5GupGiqUM",
           "title": "Third Party Libraries",
@@ -2136,6 +2605,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f436e",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 12,
           "name": "memory-usage",
           "nodeId": "SI7KzNSLP0ccH_P94StGL",
           "title": "Memory Usage",
@@ -2154,6 +2627,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f436f",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 13,
           "name": "vitest",
           "nodeId": "KTZRo1Y_Z-7eMYzZ9W0Vl",
           "title": "Vitest",
@@ -2177,6 +2654,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4370",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 14,
           "name": "jest",
           "nodeId": "sc5Pliyq6bfeFXp0ca5yH",
           "title": "Jest",
@@ -2200,6 +2681,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4371",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 15,
           "name": "playwright",
           "nodeId": "qFDdfOBdOlGMjTEOiiuTe",
           "title": "Playwright",
@@ -2223,6 +2708,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4372",
+          "roadmapSlug": "nextjs",
+          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
+          "order": 16,
           "name": "cypress",
           "nodeId": "KmOTgclnf-QYDYK0QwwVe",
           "title": "Cypress",
@@ -2273,6 +2762,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc213e4b2aeae8f4373",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BPStVqWV0660A-_fJSuM7",
+          "order": 0,
           "name": "nodejs-server",
           "nodeId": "Okw_IjU2iRSvSQVdKeeCo",
           "title": "Node.js Server",
@@ -2291,6 +2784,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4374",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BPStVqWV0660A-_fJSuM7",
+          "order": 1,
           "name": "docker-container",
           "nodeId": "y5_zX209AaHOf_wQibo12",
           "title": "Docker Container",
@@ -2314,6 +2811,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4375",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BPStVqWV0660A-_fJSuM7",
+          "order": 2,
           "name": "static-export",
           "nodeId": "evmzZ6F7TWgYhdaahnZHY",
           "title": "Static Export",
@@ -2332,6 +2833,10 @@
           }
         },
         {
+          "_id": "6aab5fc213e4b2aeae8f4376",
+          "roadmapSlug": "nextjs",
+          "moduleId": "BPStVqWV0660A-_fJSuM7",
+          "order": 3,
           "name": "adapters",
           "nodeId": "fXXlJ6oN_YPWVr-fqEar3",
           "title": "Adapter",
@@ -2352,6 +2857,8 @@
       ]
     }
   ],
+  "title": "Next.js",
+  "topicCount": 63,
   "topics": [
     {
       "name": "introduction",
@@ -4680,259 +5187,5 @@
       }
     }
   ],
-  "graph": {
-    "edges": [
-      {
-        "source": "HU7wZWiES3m3xl1-NYP6F",
-        "target": "tcDL4OEbZplbjNa8VTLpv",
-        "type": "flow"
-      },
-      {
-        "source": "tcDL4OEbZplbjNa8VTLpv",
-        "target": "FdvaN6BOxUEJt7TarSDmo",
-        "type": "flow"
-      },
-      {
-        "source": "1ch6ZXZP46FP8q3HeCqWM",
-        "target": "sSrfdCJ4_yjx_kUAti_dm",
-        "type": "flow"
-      },
-      {
-        "source": "FdvaN6BOxUEJt7TarSDmo",
-        "target": "1ch6ZXZP46FP8q3HeCqWM",
-        "type": "flow"
-      },
-      {
-        "source": "3tTTKj6PWsRoRRXH5tXxS",
-        "target": "sSrfdCJ4_yjx_kUAti_dm",
-        "type": "flow"
-      },
-      {
-        "source": "sSrfdCJ4_yjx_kUAti_dm",
-        "target": "NFLIWBJm_cQ7oCsP00Qy4",
-        "type": "flow"
-      },
-      {
-        "source": "NFLIWBJm_cQ7oCsP00Qy4",
-        "target": "xRZqBd5-QO8zh7ksHlRjK",
-        "type": "flow"
-      },
-      {
-        "source": "NFLIWBJm_cQ7oCsP00Qy4",
-        "target": "km7dLVpl76c5EfWvhhbRh",
-        "type": "flow"
-      },
-      {
-        "source": "km7dLVpl76c5EfWvhhbRh",
-        "target": "oFhmV5Xv0KJ-SjeYVZBpi",
-        "type": "flow"
-      },
-      {
-        "source": "pxltXOWgpbo95V4u2ryX7",
-        "target": "09uWsmXOXU0Ox7F3qsjRx",
-        "type": "flow"
-      },
-      {
-        "source": "09uWsmXOXU0Ox7F3qsjRx",
-        "target": "4H8aOVYsZiPbTQUYcZjb_",
-        "type": "flow"
-      },
-      {
-        "source": "4H8aOVYsZiPbTQUYcZjb_",
-        "target": "9egFwmy-o7Fx-M7FcPXXy",
-        "type": "flow"
-      },
-      {
-        "source": "9egFwmy-o7Fx-M7FcPXXy",
-        "target": "gpZNwsh075wl5eH2gLKro",
-        "type": "flow"
-      },
-      {
-        "source": "gpZNwsh075wl5eH2gLKro",
-        "target": "bSsM7VLZcJKYL5XXSG0r-",
-        "type": "flow"
-      },
-      {
-        "source": "bSsM7VLZcJKYL5XXSG0r-",
-        "target": "tDkcsilfh67BwS5MCM7j8",
-        "type": "flow"
-      },
-      {
-        "source": "tDkcsilfh67BwS5MCM7j8",
-        "target": "lkdBRzC8lAvRYKBt7E37V",
-        "type": "flow"
-      },
-      {
-        "source": "lkdBRzC8lAvRYKBt7E37V",
-        "target": "77i6HVsnX-uSDw8vz3afD",
-        "type": "flow"
-      },
-      {
-        "source": "77i6HVsnX-uSDw8vz3afD",
-        "target": "GAHFfQ8CviNxV7ITpt--q",
-        "type": "flow"
-      },
-      {
-        "source": "GAHFfQ8CviNxV7ITpt--q",
-        "target": "Ti_Bl5NnRIY9UTNTH15xA",
-        "type": "flow"
-      },
-      {
-        "source": "IuBZY-ISP1Sy_5OQ99jLY",
-        "target": "66SYQ12xP7AaDVVf62fkF",
-        "type": "flow"
-      },
-      {
-        "source": "66SYQ12xP7AaDVVf62fkF",
-        "target": "HdSmD_nDV5BPO5JJqs1k8",
-        "type": "flow"
-      },
-      {
-        "source": "6O9c3J-1JQtZTXXIDDXSM",
-        "target": "jHryqAWmvzY4Ftw_aWGC2",
-        "type": "flow"
-      },
-      {
-        "source": "jHryqAWmvzY4Ftw_aWGC2",
-        "target": "LN7SHgcQp9gX_jfEN84YP",
-        "type": "flow"
-      },
-      {
-        "source": "jHryqAWmvzY4Ftw_aWGC2",
-        "target": "siGnXWFqy2ZMkv7Wi1UVG",
-        "type": "flow"
-      },
-      {
-        "source": "siGnXWFqy2ZMkv7Wi1UVG",
-        "target": "2Jnj0GxjwGcNdwJcUNSnZ",
-        "type": "flow"
-      },
-      {
-        "source": "siGnXWFqy2ZMkv7Wi1UVG",
-        "target": "qvCk1UegUncBnCCfwgFnT",
-        "type": "flow"
-      },
-      {
-        "source": "qvCk1UegUncBnCCfwgFnT",
-        "target": "_c8Fms25UcktRjNaOMZR0",
-        "type": "flow"
-      },
-      {
-        "source": "_c8Fms25UcktRjNaOMZR0",
-        "target": "ThrO72opK7xGWpy0GG63T",
-        "type": "flow"
-      },
-      {
-        "source": "Hj01UZuHkQppXTq6XV9Pn",
-        "target": "YP34tozqTte5s52QBnrKD",
-        "type": "flow"
-      },
-      {
-        "source": "YP34tozqTte5s52QBnrKD",
-        "target": "-9Y8zMcO-6lPoGWkCbKWI",
-        "type": "flow"
-      },
-      {
-        "source": "-9Y8zMcO-6lPoGWkCbKWI",
-        "target": "-yiJSBIoczJHOW8YMdWFI",
-        "type": "flow"
-      },
-      {
-        "source": "-9Y8zMcO-6lPoGWkCbKWI",
-        "target": "BPStVqWV0660A-_fJSuM7",
-        "type": "flow"
-      },
-      {
-        "source": "BPStVqWV0660A-_fJSuM7",
-        "target": "O5dely89N5UCMBeUfh8ud",
-        "type": "flow"
-      },
-      {
-        "source": "YP34tozqTte5s52QBnrKD",
-        "target": "_BCC4r0kAPPHQ_1ToVSJd",
-        "type": "flow"
-      },
-      {
-        "source": "tcDL4OEbZplbjNa8VTLpv",
-        "target": "DlUQkDRPUcjC3pO4P5zCQ",
-        "type": "subtopic"
-      },
-      {
-        "source": "tcDL4OEbZplbjNa8VTLpv",
-        "target": "ch5gUr8xeCIp-i48N5qew",
-        "type": "subtopic"
-      },
-      {
-        "source": "tcDL4OEbZplbjNa8VTLpv",
-        "target": "ey6z7Y4WtNtQJ50n-3j5P",
-        "type": "subtopic"
-      },
-      {
-        "source": "tcDL4OEbZplbjNa8VTLpv",
-        "target": "rJ3vuI58Z9u2SKTDgpTE2",
-        "type": "subtopic"
-      },
-      {
-        "source": "dP6cZkEZ6lxPsy5SjvuZA",
-        "target": "09uWsmXOXU0Ox7F3qsjRx",
-        "type": "subtopic"
-      },
-      {
-        "source": "4H8aOVYsZiPbTQUYcZjb_",
-        "target": "hQHvu7MzNwA2lL9ADm5YQ",
-        "type": "subtopic"
-      },
-      {
-        "source": "gpZNwsh075wl5eH2gLKro",
-        "target": "XwDF-Kt9K5smm3ruxlkR2",
-        "type": "subtopic"
-      },
-      {
-        "source": "gpZNwsh075wl5eH2gLKro",
-        "target": "8kUhcd2-BlqOKInEuSI95",
-        "type": "subtopic"
-      },
-      {
-        "source": "gpZNwsh075wl5eH2gLKro",
-        "target": "Sn-8ztsjjtUxD_SP6w3cS",
-        "type": "subtopic"
-      },
-      {
-        "source": "gpZNwsh075wl5eH2gLKro",
-        "target": "54Cc_GdL327tzkdYBA305",
-        "type": "subtopic"
-      },
-      {
-        "source": "77i6HVsnX-uSDw8vz3afD",
-        "target": "UZCMVpg5YIDxu-AMah3S-",
-        "type": "subtopic"
-      },
-      {
-        "source": "GAHFfQ8CviNxV7ITpt--q",
-        "target": "SjJQ7ceU6vBhlhrN8hcvy",
-        "type": "subtopic"
-      },
-      {
-        "source": "BPStVqWV0660A-_fJSuM7",
-        "target": "y5_zX209AaHOf_wQibo12",
-        "type": "subtopic"
-      },
-      {
-        "source": "BPStVqWV0660A-_fJSuM7",
-        "target": "evmzZ6F7TWgYhdaahnZHY",
-        "type": "subtopic"
-      },
-      {
-        "source": "BPStVqWV0660A-_fJSuM7",
-        "target": "fXXlJ6oN_YPWVr-fqEar3",
-        "type": "subtopic"
-      },
-      {
-        "source": "BPStVqWV0660A-_fJSuM7",
-        "target": "Okw_IjU2iRSvSQVdKeeCo",
-        "type": "subtopic"
-      }
-    ]
-  },
-  "updatedAt": "2026-09-16T09:06:58.312Z"
+  "updatedAt": "2026-09-17T03:34:26.080Z"
 }

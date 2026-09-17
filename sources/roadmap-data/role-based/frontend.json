@@ -1,8 +1,356 @@
 {
+  "_id": "6aab5fc45306e7f1dec46c2a",
   "slug": "frontend",
-  "title": "Frontend",
   "category": "role-based",
-  "topicCount": 123,
+  "graph": {
+    "edges": [
+      {
+        "source": "jJebnKe4JftMXZ1lCsipq",
+        "target": "VlNNwIEDWqQXtqkHWJYzC",
+        "type": "flow"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "yWG2VUkaF5IJVVut6AiSy",
+        "type": "flow"
+      },
+      {
+        "source": "ODcfFEorkfJNupoQygM53",
+        "target": "NIY7c4TQEEHx0hATu-k5C",
+        "type": "flow"
+      },
+      {
+        "source": "MXnFhZlNB1zTsBFDyni9H",
+        "target": "IqvS1V-98cxko3e9sBQgP",
+        "type": "flow"
+      },
+      {
+        "source": "IqvS1V-98cxko3e9sBQgP",
+        "target": "XDTD8el6OwuQ55wC-X4iV",
+        "type": "flow"
+      },
+      {
+        "source": "DI8pvEosrUU7lcaGa7-Kc",
+        "target": "eXezX7CVNyC1RuyU_I4yP",
+        "type": "flow"
+      },
+      {
+        "source": "RDWbG3Iui6IPgp0shvXtg",
+        "target": "Cxspmb14_0i1tfw-ZLxEu",
+        "type": "flow"
+      },
+      {
+        "source": "Cxspmb14_0i1tfw-ZLxEu",
+        "target": "n0q32YhWEIAUwbGXexoqV",
+        "type": "flow"
+      },
+      {
+        "source": "ruoFa3M4bUE3Dg6GXSiUI",
+        "target": "L7AllJfKvClaam3y-u6DP",
+        "type": "flow"
+      },
+      {
+        "source": "PoM77O2OtxPELxfrW1wtl",
+        "target": "VOGKiG2EZVfCBAaa7Df0W",
+        "type": "flow"
+      },
+      {
+        "source": "KMA7NkxFbPoUDtFnGBFnj",
+        "target": "VOGKiG2EZVfCBAaa7Df0W",
+        "type": "flow"
+      },
+      {
+        "source": "xL8d-uHMpJKwUvT8z-Jia",
+        "target": "MdYPIf_9ezbIp6Dm5Fyme",
+        "type": "flow"
+      },
+      {
+        "source": "Gv_g4gK6pZK6l_0xAn34X",
+        "target": "e4j6u0e_WqK1vfrUwJJ4M",
+        "type": "flow"
+      },
+      {
+        "source": "eXezX7CVNyC1RuyU_I4yP",
+        "target": "M56-ufyFSwaQYPISuwUcj",
+        "type": "flow"
+      },
+      {
+        "source": "M56-ufyFSwaQYPISuwUcj",
+        "target": "UTupdqjOyLh7-56_0SXJ8",
+        "type": "flow"
+      },
+      {
+        "source": "eXezX7CVNyC1RuyU_I4yP",
+        "target": "ipcNHz8KbfpE57kNP15hP",
+        "type": "flow"
+      },
+      {
+        "source": "ipcNHz8KbfpE57kNP15hP",
+        "target": "Gv_g4gK6pZK6l_0xAn34X",
+        "type": "flow"
+      },
+      {
+        "source": "MdYPIf_9ezbIp6Dm5Fyme",
+        "target": "flwf3QbJioovtOpMw4obo",
+        "type": "flow"
+      },
+      {
+        "source": "flwf3QbJioovtOpMw4obo",
+        "target": "9VcGfDBBD8YcKatj4VcH1",
+        "type": "flow"
+      },
+      {
+        "source": "9VcGfDBBD8YcKatj4VcH1",
+        "target": "hkSc_1x09m7-7BO7WzlDT",
+        "type": "flow"
+      },
+      {
+        "source": "hkSc_1x09m7-7BO7WzlDT",
+        "target": "U5mD5FmVx7VWeKxDpQxB5",
+        "type": "flow"
+      },
+      {
+        "source": "U5mD5FmVx7VWeKxDpQxB5",
+        "target": "igg4_hb3XE3vuvY8ufV-4",
+        "type": "flow"
+      },
+      {
+        "source": "ydZRVWQrJUl3LZfjhR8QT",
+        "target": "3HgiMfqihjWceSxd6ei8s",
+        "type": "flow"
+      },
+      {
+        "source": "3HgiMfqihjWceSxd6ei8s",
+        "target": "RDWbG3Iui6IPgp0shvXtg",
+        "type": "flow"
+      },
+      {
+        "source": "n0q32YhWEIAUwbGXexoqV",
+        "target": "NQ95TJCe3E1IwEuBa__D6",
+        "type": "flow"
+      },
+      {
+        "source": "NQ95TJCe3E1IwEuBa__D6",
+        "target": "A1ZUy16cVRYqmHxoCtUb0",
+        "type": "flow"
+      },
+      {
+        "source": "A1ZUy16cVRYqmHxoCtUb0",
+        "target": "ap4h4v5Sr4jBH3GwWSH8x",
+        "type": "flow"
+      },
+      {
+        "source": "ap4h4v5Sr4jBH3GwWSH8x",
+        "target": "6d8cjWZ4BuUjwT0seiuzJ",
+        "type": "flow"
+      },
+      {
+        "source": "6d8cjWZ4BuUjwT0seiuzJ",
+        "target": "ruoFa3M4bUE3Dg6GXSiUI",
+        "type": "flow"
+      },
+      {
+        "source": "L7AllJfKvClaam3y-u6DP",
+        "target": "e-k6EhoxYG9h0x6vWOrDh",
+        "type": "flow"
+      },
+      {
+        "source": "e-k6EhoxYG9h0x6vWOrDh",
+        "target": "PoM77O2OtxPELxfrW1wtl",
+        "type": "flow"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "yCnn-NfSxIybUQ2iTuUGq",
+        "type": "subtopic"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "R12sArWVpbIs_PHxBqVaR",
+        "type": "subtopic"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "ZhSuu2VArnzPDp6dPQQSC",
+        "type": "subtopic"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "aqMaEY8gkKMikiqleV5EP",
+        "type": "subtopic"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "hkxw9jPGYphmjhTjw8766",
+        "type": "subtopic"
+      },
+      {
+        "source": "VlNNwIEDWqQXtqkHWJYzC",
+        "target": "P82WFaTPgQEPNp5IIuZ1Y",
+        "type": "subtopic"
+      },
+      {
+        "source": "ruoFa3M4bUE3Dg6GXSiUI",
+        "target": "Hk8AVonOd693_y1sykPqd",
+        "type": "subtopic"
+      },
+      {
+        "source": "NIY7c4TQEEHx0hATu-k5C",
+        "target": "R_I4SGYqLk5zze5I1zS_E",
+        "type": "subtopic"
+      },
+      {
+        "source": "MXnFhZlNB1zTsBFDyni9H",
+        "target": "qmTVMJDsEhNIkiwE_UTYu",
+        "type": "subtopic"
+      },
+      {
+        "source": "XDTD8el6OwuQ55wC-X4iV",
+        "target": "eghnfG4p7i-EDWfp3CQXC",
+        "type": "subtopic"
+      },
+      {
+        "source": "hkSc_1x09m7-7BO7WzlDT",
+        "target": "0Awx3zEI5_gYEIrD7IVX6",
+        "type": "subtopic"
+      },
+      {
+        "source": "RDWbG3Iui6IPgp0shvXtg",
+        "target": "JanR7I_lNnUCXhCMGLdn-",
+        "type": "subtopic"
+      },
+      {
+        "source": "Cxspmb14_0i1tfw-ZLxEu",
+        "target": "a8oOlkyM_C8vHuHqeiOAK",
+        "type": "subtopic"
+      },
+      {
+        "source": "n0q32YhWEIAUwbGXexoqV",
+        "target": "iUxXq7beg55y76dkwhM13",
+        "type": "subtopic"
+      },
+      {
+        "source": "6d8cjWZ4BuUjwT0seiuzJ",
+        "target": "JWU9jc12_ewaIKt3qWLcp",
+        "type": "subtopic"
+      },
+      {
+        "source": "6d8cjWZ4BuUjwT0seiuzJ",
+        "target": "dz7_QXoO7X0WmS5xuAhhJ",
+        "type": "subtopic"
+      },
+      {
+        "source": "6d8cjWZ4BuUjwT0seiuzJ",
+        "target": "66ya3WdtlkjQyBTc3Lein",
+        "type": "subtopic"
+      },
+      {
+        "source": "6d8cjWZ4BuUjwT0seiuzJ",
+        "target": "FyNXhHq1VIASNq-LI7JIu",
+        "type": "subtopic"
+      },
+      {
+        "source": "NQ95TJCe3E1IwEuBa__D6",
+        "target": "6kWlgayUZQnr9z88fUOkk",
+        "type": "subtopic"
+      },
+      {
+        "source": "6d8cjWZ4BuUjwT0seiuzJ",
+        "target": "tWDmeXItfQDxB8Jij_V4L",
+        "type": "subtopic"
+      },
+      {
+        "source": "VOGKiG2EZVfCBAaa7Df0W",
+        "target": "dsTegXTyupjS8iU6I7Xiv",
+        "type": "subtopic"
+      },
+      {
+        "source": "MdYPIf_9ezbIp6Dm5Fyme",
+        "target": "Bic4PHhz-YqzPWRimJO83",
+        "type": "subtopic"
+      },
+      {
+        "source": "MdYPIf_9ezbIp6Dm5Fyme",
+        "target": "-ye5ZtYFDoYGpj-UJaBP8",
+        "type": "subtopic"
+      },
+      {
+        "source": "MdYPIf_9ezbIp6Dm5Fyme",
+        "target": "Lw2nR7x8PYgq1P5CxPAxi",
+        "type": "subtopic"
+      },
+      {
+        "source": "UTupdqjOyLh7-56_0SXJ8",
+        "target": "yKNdBbahm_h81xdMDT-qx",
+        "type": "subtopic"
+      },
+      {
+        "source": "Nx7mjvYgqLpmJ0_iSx5of",
+        "target": "0TMdly8yiqnNR8sx36iqc",
+        "type": "subtopic"
+      },
+      {
+        "source": "ipcNHz8KbfpE57kNP15hP",
+        "target": "CKlkVK_7GZ7xzIUHJqZr8",
+        "type": "subtopic"
+      },
+      {
+        "source": "ipcNHz8KbfpE57kNP15hP",
+        "target": "E7-LveK7jO2npxVTLUDfw",
+        "type": "subtopic"
+      },
+      {
+        "source": "ipcNHz8KbfpE57kNP15hP",
+        "target": "RcC1fVuePQZ59AsJfeTdR",
+        "type": "subtopic"
+      },
+      {
+        "source": "ipcNHz8KbfpE57kNP15hP",
+        "target": "HQrxxDxKN8gizvXRU5psW",
+        "type": "subtopic"
+      },
+      {
+        "source": "Gv_g4gK6pZK6l_0xAn34X",
+        "target": "k4hMVVBMatedUq5EKiMo4",
+        "type": "subtopic"
+      },
+      {
+        "source": "vpimgXt10UQFBDVHR21IU",
+        "target": "e4j6u0e_WqK1vfrUwJJ4M",
+        "type": "subtopic"
+      },
+      {
+        "source": "9VcGfDBBD8YcKatj4VcH1",
+        "target": "UvCVChB6NZ_yUg0RdIJ2o",
+        "type": "subtopic"
+      },
+      {
+        "source": "igg4_hb3XE3vuvY8ufV-4",
+        "target": "hVQ89f6G0LXEgHIOKHDYq",
+        "type": "subtopic"
+      },
+      {
+        "source": "L7AllJfKvClaam3y-u6DP",
+        "target": "5eUbDdOTOfaOhUlZAmmXW",
+        "type": "subtopic"
+      },
+      {
+        "source": "KMA7NkxFbPoUDtFnGBFnj",
+        "target": "mQHpSyMR4Rra4mqAslgiS",
+        "type": "subtopic"
+      },
+      {
+        "source": "KMA7NkxFbPoUDtFnGBFnj",
+        "target": "GJctl0tVXe4B70s35RkLT",
+        "type": "subtopic"
+      },
+      {
+        "source": "KMA7NkxFbPoUDtFnGBFnj",
+        "target": "2MRvAK9G9RGM_auWytcKh",
+        "type": "subtopic"
+      }
+    ]
+  },
   "moduleCount": 38,
   "modules": [
     {
@@ -37,6 +385,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43d6",
+          "roadmapSlug": "frontend",
+          "moduleId": "VlNNwIEDWqQXtqkHWJYzC",
+          "order": "1.1",
           "name": "how-does-the-internet-work",
           "nodeId": "yCnn-NfSxIybUQ2iTuUGq",
           "title": "How Does The Internet Work",
@@ -64,13 +416,16 @@
               "url": "https://www.youtube.com/watch?v=7_LPdttKXPc"
             }
           ],
-          "order": "1.1",
           "parentTopic": {
             "id": "VlNNwIEDWqQXtqkHWJYzC",
             "title": "Internet"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43d7",
+          "roadmapSlug": "frontend",
+          "moduleId": "VlNNwIEDWqQXtqkHWJYzC",
+          "order": "1.2",
           "name": "what-is-http",
           "nodeId": "R12sArWVpbIs_PHxBqVaR",
           "title": "What is HTTP?",
@@ -98,13 +453,16 @@
               "url": "https://thenewstack.io/http-3-is-now-a-standard-why-use-it-and-how-to-get-started/"
             }
           ],
-          "order": "1.2",
           "parentTopic": {
             "id": "VlNNwIEDWqQXtqkHWJYzC",
             "title": "Internet"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43d8",
+          "roadmapSlug": "frontend",
+          "moduleId": "VlNNwIEDWqQXtqkHWJYzC",
+          "order": "1.3",
           "name": "what-is-domain-name",
           "nodeId": "ZhSuu2VArnzPDp6dPQQSC",
           "title": "Domain Name",
@@ -127,13 +485,16 @@
               "url": "https://www.youtube.com/watch?v=lMHzpBwPuG8"
             }
           ],
-          "order": "1.3",
           "parentTopic": {
             "id": "VlNNwIEDWqQXtqkHWJYzC",
             "title": "Internet"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43d9",
+          "roadmapSlug": "frontend",
+          "moduleId": "VlNNwIEDWqQXtqkHWJYzC",
+          "order": "1.4",
           "name": "what-is-hosting",
           "nodeId": "aqMaEY8gkKMikiqleV5EP",
           "title": "Hosting",
@@ -156,13 +517,16 @@
               "url": "https://www.youtube.com/watch?v=Kx_1NYYJS7Q"
             }
           ],
-          "order": "1.4",
           "parentTopic": {
             "id": "VlNNwIEDWqQXtqkHWJYzC",
             "title": "Internet"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43da",
+          "roadmapSlug": "frontend",
+          "moduleId": "VlNNwIEDWqQXtqkHWJYzC",
+          "order": "1.5",
           "name": "dns-and-how-it-works",
           "nodeId": "hkxw9jPGYphmjhTjw8766",
           "title": "DNS",
@@ -190,13 +554,16 @@
               "url": "https://www.youtube.com/watch?v=Wj0od2ag5sk"
             }
           ],
-          "order": "1.5",
           "parentTopic": {
             "id": "VlNNwIEDWqQXtqkHWJYzC",
             "title": "Internet"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43db",
+          "roadmapSlug": "frontend",
+          "moduleId": "VlNNwIEDWqQXtqkHWJYzC",
+          "order": "1.6",
           "name": "browsers-and-how-they-work",
           "nodeId": "P82WFaTPgQEPNp5IIuZ1Y",
           "title": "Browsers",
@@ -219,7 +586,6 @@
               "url": "https://www.youtube.com/watch?v=5rLFYtXHo9s"
             }
           ],
-          "order": "1.6",
           "parentTopic": {
             "id": "VlNNwIEDWqQXtqkHWJYzC",
             "title": "Internet"
@@ -328,6 +694,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43dc",
+          "roadmapSlug": "frontend",
+          "moduleId": "ODcfFEorkfJNupoQygM53",
+          "order": "4.1",
           "name": "npm",
           "nodeId": "ib_FHinhrw8VuSet-xMF7",
           "title": "npm",
@@ -350,13 +720,16 @@
               "url": "https://www.youtube.com/watch?v=2V1UUhBJ62Y"
             }
           ],
-          "order": "4.1",
           "parentTopic": {
             "id": "ODcfFEorkfJNupoQygM53",
             "title": "JavaScript"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43dd",
+          "roadmapSlug": "frontend",
+          "moduleId": "ODcfFEorkfJNupoQygM53",
+          "order": "4.2",
           "name": "yarn",
           "nodeId": "yrq3nOwFREzl-9EKnpU-e",
           "title": "Yarn",
@@ -374,7 +747,6 @@
               "url": "https://www.youtube.com/watch?v=g9_6KmiBISk"
             }
           ],
-          "order": "4.2",
           "parentTopic": {
             "id": "ODcfFEorkfJNupoQygM53",
             "title": "JavaScript"
@@ -419,6 +791,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43de",
+          "roadmapSlug": "frontend",
+          "moduleId": "NIY7c4TQEEHx0hATu-k5C",
+          "order": "5.1",
           "name": "pnpm",
           "nodeId": "SLxA5qJFp_28TRzr1BjxZ",
           "title": "pnpm",
@@ -441,13 +817,16 @@
               "url": "https://www.youtube.com/watch?v=MvbReZDSKHI"
             }
           ],
-          "order": "5.1",
           "parentTopic": {
             "id": "NIY7c4TQEEHx0hATu-k5C",
             "title": "Version Control "
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43df",
+          "roadmapSlug": "frontend",
+          "moduleId": "NIY7c4TQEEHx0hATu-k5C",
+          "order": "5.2",
           "name": "bun",
           "nodeId": "j2H1qGosbveayviOCVkUs",
           "title": "Bun",
@@ -475,13 +854,16 @@
               "url": "https://www.youtube.com/watch?v=U4JVw8K19uY"
             }
           ],
-          "order": "5.2",
           "parentTopic": {
             "id": "NIY7c4TQEEHx0hATu-k5C",
             "title": "Version Control "
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43e0",
+          "roadmapSlug": "frontend",
+          "moduleId": "NIY7c4TQEEHx0hATu-k5C",
+          "order": "5.3",
           "name": "git",
           "nodeId": "R_I4SGYqLk5zze5I1zS_E",
           "title": "Git",
@@ -509,7 +891,6 @@
               "url": "https://www.youtube.com/watch?v=SWYqp7iY_Tc"
             }
           ],
-          "order": "5.3",
           "parentTopic": {
             "id": "NIY7c4TQEEHx0hATu-k5C",
             "title": "Version Control "
@@ -554,6 +935,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43e1",
+          "roadmapSlug": "frontend",
+          "moduleId": "MXnFhZlNB1zTsBFDyni9H",
+          "order": "6.1",
           "name": "gitlab",
           "nodeId": "zIoSJMX3cuzCgDYHjgbEh",
           "title": "GitLab",
@@ -576,13 +961,16 @@
               "url": "https://thenewstack.io/development-connect-git-to-gitlab-for-small-projects/"
             }
           ],
-          "order": "6.1",
           "parentTopic": {
             "id": "MXnFhZlNB1zTsBFDyni9H",
             "title": "VCS Hosting"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43e2",
+          "roadmapSlug": "frontend",
+          "moduleId": "MXnFhZlNB1zTsBFDyni9H",
+          "order": "6.2",
           "name": "github",
           "nodeId": "qmTVMJDsEhNIkiwE_UTYu",
           "title": "GitHub",
@@ -610,7 +998,6 @@
               "url": "https://www.youtube.com/watch?v=w3jLJU7DT5E"
             }
           ],
-          "order": "6.2",
           "parentTopic": {
             "id": "MXnFhZlNB1zTsBFDyni9H",
             "title": "VCS Hosting"
@@ -692,6 +1079,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43e3",
+          "roadmapSlug": "frontend",
+          "moduleId": "XDTD8el6OwuQ55wC-X4iV",
+          "order": "8.1",
           "name": "react",
           "nodeId": "tG5v3O4lNIFc2uCnacPak",
           "title": "React",
@@ -714,13 +1105,16 @@
               "url": "https://react.dev"
             }
           ],
-          "order": "8.1",
           "parentTopic": {
             "id": "XDTD8el6OwuQ55wC-X4iV",
             "title": "CSS Frameworks"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43e4",
+          "roadmapSlug": "frontend",
+          "moduleId": "XDTD8el6OwuQ55wC-X4iV",
+          "order": "8.2",
           "name": "vuejs",
           "nodeId": "ERAdwL1G9M1bnx-fOm5ZA",
           "title": "Vue.js",
@@ -743,13 +1137,16 @@
               "url": "https://www.youtube.com/watch?v=VeNfHj6MhgA"
             }
           ],
-          "order": "8.2",
           "parentTopic": {
             "id": "XDTD8el6OwuQ55wC-X4iV",
             "title": "CSS Frameworks"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43e5",
+          "roadmapSlug": "frontend",
+          "moduleId": "XDTD8el6OwuQ55wC-X4iV",
+          "order": "8.3",
           "name": "angular",
           "nodeId": "-bHFIiXnoUQSov64WI9yo",
           "title": "Angular",
@@ -772,13 +1169,16 @@
               "url": "https://www.youtube.com/watch?v=3qBXWUpoPHo"
             }
           ],
-          "order": "8.3",
           "parentTopic": {
             "id": "XDTD8el6OwuQ55wC-X4iV",
             "title": "CSS Frameworks"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43e6",
+          "roadmapSlug": "frontend",
+          "moduleId": "XDTD8el6OwuQ55wC-X4iV",
+          "order": "8.4",
           "name": "tailwind",
           "nodeId": "eghnfG4p7i-EDWfp3CQXC",
           "title": "Tailwind CSS",
@@ -806,7 +1206,6 @@
               "url": "https://www.youtube.com/c/TailwindLabs/videos"
             }
           ],
-          "order": "8.4",
           "parentTopic": {
             "id": "XDTD8el6OwuQ55wC-X4iV",
             "title": "CSS Frameworks"
@@ -850,6 +1249,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43e7",
+          "roadmapSlug": "frontend",
+          "moduleId": "eXezX7CVNyC1RuyU_I4yP",
+          "order": "9.1",
           "name": "svelte",
           "nodeId": "ZR-qZ2Lcbu3FtqaMd3wM4",
           "title": "Svelte",
@@ -872,13 +1275,16 @@
               "url": "https://thenewstack.io/svelte-and-the-future-of-front-end-development/"
             }
           ],
-          "order": "9.1",
           "parentTopic": {
             "id": "eXezX7CVNyC1RuyU_I4yP",
             "title": "Learn a Framework"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43e8",
+          "roadmapSlug": "frontend",
+          "moduleId": "eXezX7CVNyC1RuyU_I4yP",
+          "order": "9.2",
           "name": "solid-js",
           "nodeId": "DxOSKnqAjZOPP-dq_U7oP",
           "title": "SolidJS",
@@ -901,7 +1307,6 @@
               "url": "https://www.youtube.com/watch?v=hw3Bx5vxKl0"
             }
           ],
-          "order": "9.2",
           "parentTopic": {
             "id": "eXezX7CVNyC1RuyU_I4yP",
             "title": "Learn a Framework"
@@ -946,6 +1351,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43e9",
+          "roadmapSlug": "frontend",
+          "moduleId": "UTupdqjOyLh7-56_0SXJ8",
+          "order": "10.1",
           "name": "how-llms-work",
           "nodeId": "yKNdBbahm_h81xdMDT-qx",
           "title": "How LLMs Work",
@@ -973,7 +1382,6 @@
               "url": "https://www.youtube.com/watch?v=5sLYAQS9sWQ"
             }
           ],
-          "order": "10.1",
           "parentTopic": {
             "id": "UTupdqjOyLh7-56_0SXJ8",
             "title": "Learn the Basics"
@@ -1023,6 +1431,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43ea",
+          "roadmapSlug": "frontend",
+          "moduleId": "ipcNHz8KbfpE57kNP15hP",
+          "order": "11.1",
           "name": "claude-code",
           "nodeId": "RcC1fVuePQZ59AsJfeTdR",
           "title": "Claude Code",
@@ -1050,13 +1462,16 @@
               "url": "https://www.youtube.com/watch?v=AJpK3YTTKZ4"
             }
           ],
-          "order": "11.1",
           "parentTopic": {
             "id": "ipcNHz8KbfpE57kNP15hP",
             "title": "AI Assisted Coding"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43eb",
+          "roadmapSlug": "frontend",
+          "moduleId": "ipcNHz8KbfpE57kNP15hP",
+          "order": "11.2",
           "name": "cursor",
           "nodeId": "CKlkVK_7GZ7xzIUHJqZr8",
           "title": "Cursor",
@@ -1084,13 +1499,16 @@
               "url": "https://www.youtube.com/watch?v=ocMOZpuAMw4"
             }
           ],
-          "order": "11.2",
           "parentTopic": {
             "id": "ipcNHz8KbfpE57kNP15hP",
             "title": "AI Assisted Coding"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43ec",
+          "roadmapSlug": "frontend",
+          "moduleId": "ipcNHz8KbfpE57kNP15hP",
+          "order": "11.3",
           "name": "copilot",
           "nodeId": "HQrxxDxKN8gizvXRU5psW",
           "title": "GitHub Copilot",
@@ -1118,13 +1536,16 @@
               "url": "https://www.youtube.com/watch?v=z1ycDvspv8U"
             }
           ],
-          "order": "11.3",
           "parentTopic": {
             "id": "ipcNHz8KbfpE57kNP15hP",
             "title": "AI Assisted Coding"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43ed",
+          "roadmapSlug": "frontend",
+          "moduleId": "ipcNHz8KbfpE57kNP15hP",
+          "order": "11.4",
           "name": "antigravity",
           "nodeId": "E7-LveK7jO2npxVTLUDfw",
           "title": "Antigravity",
@@ -1152,7 +1573,6 @@
               "url": "https://www.youtube.com/watch?v=SVCBA-pBgt0"
             }
           ],
-          "order": "11.4",
           "parentTopic": {
             "id": "ipcNHz8KbfpE57kNP15hP",
             "title": "AI Assisted Coding"
@@ -1202,6 +1622,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43ee",
+          "roadmapSlug": "frontend",
+          "moduleId": "Gv_g4gK6pZK6l_0xAn34X",
+          "order": "12.1",
           "name": "ai-vs-traditional-coding",
           "nodeId": "IZKl6PxbvgNkryAkdy3-p",
           "title": "AI vs. Traditional Software Development",
@@ -1229,20 +1653,22 @@
               "url": "https://www.youtube.com/watch?v=P7lryCIvxgA"
             }
           ],
-          "order": "12.1",
           "parentTopic": {
             "id": "Gv_g4gK6pZK6l_0xAn34X",
             "title": "Prompting Techniques"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43ef",
+          "roadmapSlug": "frontend",
+          "moduleId": "Gv_g4gK6pZK6l_0xAn34X",
+          "order": "12.2",
           "name": "prompt-engineering",
           "nodeId": "k4hMVVBMatedUq5EKiMo4",
           "title": "Prompt Engineering",
           "description": "",
           "content": "",
           "resources": [],
-          "order": "12.2",
           "parentTopic": {
             "id": "Gv_g4gK6pZK6l_0xAn34X",
             "title": "Prompting Techniques"
@@ -1277,6 +1703,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43f0",
+          "roadmapSlug": "frontend",
+          "moduleId": "Nx7mjvYgqLpmJ0_iSx5of",
+          "order": "13.1",
           "name": "code-reviews",
           "nodeId": "0TMdly8yiqnNR8sx36iqc",
           "title": "AI-Powered Code Reviews",
@@ -1304,7 +1734,6 @@
               "url": "https://www.youtube.com/watch?v=HwbSWVg5Ln4&t=83s"
             }
           ],
-          "order": "13.1",
           "parentTopic": {
             "id": "Nx7mjvYgqLpmJ0_iSx5of",
             "title": "Applications"
@@ -1344,6 +1773,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43f1",
+          "roadmapSlug": "frontend",
+          "moduleId": "XFy2gj7DmXeaCoc6MZo_j",
+          "order": "14.1",
           "name": "refactoring",
           "nodeId": "EYT2rTLZ8tUW2u8DOnAWF",
           "title": "Refactoring with AI",
@@ -1371,7 +1804,6 @@
               "url": "https://www.youtube.com/watch?v=u8tvVxUOwvY"
             }
           ],
-          "order": "14.1",
           "parentTopic": {
             "id": "XFy2gj7DmXeaCoc6MZo_j",
             "title": "MCP"
@@ -1416,6 +1848,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43f2",
+          "roadmapSlug": "frontend",
+          "moduleId": "xL8d-uHMpJKwUvT8z-Jia",
+          "order": "15.1",
           "name": "docs-generation",
           "nodeId": "q7NpwqQXUp4wt2to-yFiP",
           "title": "Documentation Generation with AI",
@@ -1443,7 +1879,6 @@
               "url": "https://www.youtube.com/watch?v=QYchuz6nBR8"
             }
           ],
-          "order": "15.1",
           "parentTopic": {
             "id": "xL8d-uHMpJKwUvT8z-Jia",
             "title": "Skills"
@@ -1478,6 +1913,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43f3",
+          "roadmapSlug": "frontend",
+          "moduleId": "MdYPIf_9ezbIp6Dm5Fyme",
+          "order": "16.1",
           "name": "gemini",
           "nodeId": "Bic4PHhz-YqzPWRimJO83",
           "title": "Gemini",
@@ -1500,13 +1939,16 @@
               "url": "https://www.youtube.com/watch?v=_fuimO6ErKI"
             }
           ],
-          "order": "16.1",
           "parentTopic": {
             "id": "MdYPIf_9ezbIp6Dm5Fyme",
             "title": "Implementing AI"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43f4",
+          "roadmapSlug": "frontend",
+          "moduleId": "MdYPIf_9ezbIp6Dm5Fyme",
+          "order": "16.2",
           "name": "openai",
           "nodeId": "-ye5ZtYFDoYGpj-UJaBP8",
           "title": "OpenAI",
@@ -1529,13 +1971,16 @@
               "url": "https://academy.openai.com/"
             }
           ],
-          "order": "16.2",
           "parentTopic": {
             "id": "MdYPIf_9ezbIp6Dm5Fyme",
             "title": "Implementing AI"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43f5",
+          "roadmapSlug": "frontend",
+          "moduleId": "MdYPIf_9ezbIp6Dm5Fyme",
+          "order": "16.3",
           "name": "anthropic",
           "nodeId": "Lw2nR7x8PYgq1P5CxPAxi",
           "title": "Anthropic",
@@ -1563,7 +2008,6 @@
               "url": "https://builtin.com/articles/anthropic"
             }
           ],
-          "order": "16.3",
           "parentTopic": {
             "id": "MdYPIf_9ezbIp6Dm5Fyme",
             "title": "Implementing AI"
@@ -1598,6 +2042,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43f6",
+          "roadmapSlug": "frontend",
+          "moduleId": "9VcGfDBBD8YcKatj4VcH1",
+          "order": "17.1",
           "name": "biome",
           "nodeId": "UvCVChB6NZ_yUg0RdIJ2o",
           "title": "Biome",
@@ -1625,13 +2073,16 @@
               "url": "https://www.youtube.com/watch?v=lEkXbneUnWg"
             }
           ],
-          "order": "17.1",
           "parentTopic": {
             "id": "9VcGfDBBD8YcKatj4VcH1",
             "title": "Linters & Formatters"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43f7",
+          "roadmapSlug": "frontend",
+          "moduleId": "9VcGfDBBD8YcKatj4VcH1",
+          "order": "17.2",
           "name": "swc",
           "nodeId": "h26uS3muFCabe6ekElZcI",
           "title": "SWC (Speedy Web Compiler)",
@@ -1654,13 +2105,16 @@
               "url": "https://www.youtube.com/watch?v=RXQlPpbdn_E"
             }
           ],
-          "order": "17.2",
           "parentTopic": {
             "id": "9VcGfDBBD8YcKatj4VcH1",
             "title": "Linters & Formatters"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43f8",
+          "roadmapSlug": "frontend",
+          "moduleId": "9VcGfDBBD8YcKatj4VcH1",
+          "order": "17.3",
           "name": "esbuild",
           "nodeId": "4W7UXfdKIUsm1bUrjdTVT",
           "title": "esbuild",
@@ -1683,13 +2137,16 @@
               "url": "https://www.youtube.com/watch?v=ZY8Vu8cbWF0"
             }
           ],
-          "order": "17.3",
           "parentTopic": {
             "id": "9VcGfDBBD8YcKatj4VcH1",
             "title": "Linters & Formatters"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43f9",
+          "roadmapSlug": "frontend",
+          "moduleId": "9VcGfDBBD8YcKatj4VcH1",
+          "order": "17.4",
           "name": "prettier",
           "nodeId": "zbkpu_gvQ4mgCiZKzS1xv",
           "title": "Prettier",
@@ -1712,7 +2169,6 @@
               "url": "https://www.youtube.com/watch?v=DqfQ4DPnRqI"
             }
           ],
-          "order": "17.4",
           "parentTopic": {
             "id": "9VcGfDBBD8YcKatj4VcH1",
             "title": "Linters & Formatters"
@@ -1762,6 +2218,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43fa",
+          "roadmapSlug": "frontend",
+          "moduleId": "hkSc_1x09m7-7BO7WzlDT",
+          "order": "18.1",
           "name": "vite",
           "nodeId": "0Awx3zEI5_gYEIrD7IVX6",
           "title": "Vite",
@@ -1789,7 +2249,6 @@
               "url": "https://www.youtube.com/watch?v=VAeRhmpcWEQ"
             }
           ],
-          "order": "18.1",
           "parentTopic": {
             "id": "hkSc_1x09m7-7BO7WzlDT",
             "title": "Module Bundlers"
@@ -1876,6 +2335,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f43fb",
+          "roadmapSlug": "frontend",
+          "moduleId": "igg4_hb3XE3vuvY8ufV-4",
+          "order": "20.1",
           "name": "parcel",
           "nodeId": "NS-hwaWa5ebSmNNRoxFDp",
           "title": "Parcel",
@@ -1893,13 +2356,16 @@
               "url": "https://www.youtube.com/watch?v=R02ehdTzi3I"
             }
           ],
-          "order": "20.1",
           "parentTopic": {
             "id": "igg4_hb3XE3vuvY8ufV-4",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43fc",
+          "roadmapSlug": "frontend",
+          "moduleId": "igg4_hb3XE3vuvY8ufV-4",
+          "order": "20.2",
           "name": "cors",
           "nodeId": "AfH2zCbqzw0Nisg1yyISS",
           "title": "CORS",
@@ -1922,13 +2388,16 @@
               "url": "https://www.youtube.com/watch?v=PNtFSVU-YTI"
             }
           ],
-          "order": "20.2",
           "parentTopic": {
             "id": "igg4_hb3XE3vuvY8ufV-4",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43fd",
+          "roadmapSlug": "frontend",
+          "moduleId": "igg4_hb3XE3vuvY8ufV-4",
+          "order": "20.3",
           "name": "https",
           "nodeId": "uum7vOhOUR38vLuGZy8Oa",
           "title": "HTTPS",
@@ -1956,13 +2425,16 @@
               "url": "https://www.youtube.com/watch?v=hExRDVZHhig"
             }
           ],
-          "order": "20.3",
           "parentTopic": {
             "id": "igg4_hb3XE3vuvY8ufV-4",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43fe",
+          "roadmapSlug": "frontend",
+          "moduleId": "igg4_hb3XE3vuvY8ufV-4",
+          "order": "20.4",
           "name": "csp",
           "nodeId": "rmcm0CZbtNVC9LZ14-H6h",
           "title": "Content Security Policy",
@@ -1980,13 +2452,16 @@
               "url": "https://web.dev/csp/"
             }
           ],
-          "order": "20.4",
           "parentTopic": {
             "id": "igg4_hb3XE3vuvY8ufV-4",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f43ff",
+          "roadmapSlug": "frontend",
+          "moduleId": "igg4_hb3XE3vuvY8ufV-4",
+          "order": "20.5",
           "name": "vitest",
           "nodeId": "hVQ89f6G0LXEgHIOKHDYq",
           "title": "Vitest",
@@ -2009,7 +2484,6 @@
               "url": "https://www.youtube.com/watch?v=snCLQmINqCU"
             }
           ],
-          "order": "20.5",
           "parentTopic": {
             "id": "igg4_hb3XE3vuvY8ufV-4",
             "title": "Testing"
@@ -2059,6 +2533,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4400",
+          "roadmapSlug": "frontend",
+          "moduleId": "RDWbG3Iui6IPgp0shvXtg",
+          "order": "21.1",
           "name": "owasp-risks",
           "nodeId": "JanR7I_lNnUCXhCMGLdn-",
           "title": "OWASP Security Risks",
@@ -2086,13 +2564,16 @@
               "url": "https://thenewstack.io/owasp-top-10-a-guide-to-the-worst-software-vulnerabilities/"
             }
           ],
-          "order": "21.1",
           "parentTopic": {
             "id": "RDWbG3Iui6IPgp0shvXtg",
             "title": "Web Security"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4401",
+          "roadmapSlug": "frontend",
+          "moduleId": "RDWbG3Iui6IPgp0shvXtg",
+          "order": "21.2",
           "name": "playwright",
           "nodeId": "jramLk8FGuaEH4YpHIyZT",
           "title": "Playwright",
@@ -2115,13 +2596,16 @@
               "url": "https://www.youtube.com/playlist?list=PLQ6Buerc008ed-F9OksF7ek37wR3y916p"
             }
           ],
-          "order": "21.2",
           "parentTopic": {
             "id": "RDWbG3Iui6IPgp0shvXtg",
             "title": "Web Security"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4402",
+          "roadmapSlug": "frontend",
+          "moduleId": "RDWbG3Iui6IPgp0shvXtg",
+          "order": "21.3",
           "name": "cypress",
           "nodeId": "DaynCz5RR26gjT6N6gTDL",
           "title": "Cypress",
@@ -2144,13 +2628,16 @@
               "url": "https://www.youtube.com/watch?v=BQqzfHQkREo"
             }
           ],
-          "order": "21.3",
           "parentTopic": {
             "id": "RDWbG3Iui6IPgp0shvXtg",
             "title": "Web Security"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4403",
+          "roadmapSlug": "frontend",
+          "moduleId": "RDWbG3Iui6IPgp0shvXtg",
+          "order": "21.4",
           "name": "jest",
           "nodeId": "g5itUjgRXd9vs9ujHezFl",
           "title": "Jest",
@@ -2168,7 +2655,6 @@
               "url": "https://youtu.be/IPiUDhwnZxA?si=2_lE2bDo2fRuo2CU"
             }
           ],
-          "order": "21.4",
           "parentTopic": {
             "id": "RDWbG3Iui6IPgp0shvXtg",
             "title": "Web Security"
@@ -2240,6 +2726,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4404",
+          "roadmapSlug": "frontend",
+          "moduleId": "SGDf_rbfmFSHlxI-Czzlz",
+          "order": "23.1",
           "name": "angular",
           "nodeId": "k6rp6Ua9qUEW_DA_fOg5u",
           "title": "Angular",
@@ -2262,7 +2752,6 @@
               "url": "https://www.youtube.com/watch?v=3qBXWUpoPHo"
             }
           ],
-          "order": "23.1",
           "parentTopic": {
             "id": "SGDf_rbfmFSHlxI-Czzlz",
             "title": "React"
@@ -2297,6 +2786,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4405",
+          "roadmapSlug": "frontend",
+          "moduleId": "3TE_iYvbklXK0be-5f2M7",
+          "order": "24.1",
           "name": "github-pages",
           "nodeId": "vpzh9bNXCxgdDFQLsot2_",
           "title": "GitHub Pages",
@@ -2324,13 +2817,16 @@
               "url": "https://www.youtube.com/watch?v=o5g-lUuFgpg"
             }
           ],
-          "order": "24.1",
           "parentTopic": {
             "id": "3TE_iYvbklXK0be-5f2M7",
             "title": "Vue.js"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4406",
+          "roadmapSlug": "frontend",
+          "moduleId": "3TE_iYvbklXK0be-5f2M7",
+          "order": "24.2",
           "name": "nextjs",
           "nodeId": "zNFYAJaSq0YZXL5Rpx1NX",
           "title": "Next.js",
@@ -2353,7 +2849,6 @@
               "url": "https://youtu.be/1WmNXEVia8I"
             }
           ],
-          "order": "24.2",
           "parentTopic": {
             "id": "3TE_iYvbklXK0be-5f2M7",
             "title": "Vue.js"
@@ -2398,19 +2893,26 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4407",
+          "roadmapSlug": "frontend",
+          "moduleId": "Cxspmb14_0i1tfw-ZLxEu",
+          "order": "25.1",
           "name": "a8oolkym-c8vhuhqeioak",
           "nodeId": "a8oOlkyM_C8vHuHqeiOAK",
           "title": "A8oOlkyM_C8vHuHqeiOAK",
           "description": "",
           "content": "",
           "resources": [],
-          "order": "25.1",
           "parentTopic": {
             "id": "Cxspmb14_0i1tfw-ZLxEu",
             "title": "SSR"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4408",
+          "roadmapSlug": "frontend",
+          "moduleId": "Cxspmb14_0i1tfw-ZLxEu",
+          "order": "25.2",
           "name": "vercel",
           "nodeId": "kPJ0jZo5AbOzvZgv0zwp0",
           "title": "Vercel",
@@ -2433,13 +2935,16 @@
               "url": "https://www.youtube.com/watch?v=Vx5nPGdsFaU"
             }
           ],
-          "order": "25.2",
           "parentTopic": {
             "id": "Cxspmb14_0i1tfw-ZLxEu",
             "title": "SSR"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4409",
+          "roadmapSlug": "frontend",
+          "moduleId": "Cxspmb14_0i1tfw-ZLxEu",
+          "order": "25.3",
           "name": "netlify",
           "nodeId": "o8GstE5gxcGByh-D7lwqT",
           "title": "Netlify",
@@ -2467,13 +2972,16 @@
               "url": "https://www.youtube.com/watch?v=FMhVXOA54x8"
             }
           ],
-          "order": "25.3",
           "parentTopic": {
             "id": "Cxspmb14_0i1tfw-ZLxEu",
             "title": "SSR"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f440a",
+          "roadmapSlug": "frontend",
+          "moduleId": "Cxspmb14_0i1tfw-ZLxEu",
+          "order": "25.4",
           "name": "nuxtjs",
           "nodeId": "BBsXxkbbEG-gnbM1xXKrj",
           "title": "Nuxt.js",
@@ -2496,13 +3004,16 @@
               "url": "https://explorers.netlify.com/learn/get-started-with-nuxt"
             }
           ],
-          "order": "25.4",
           "parentTopic": {
             "id": "Cxspmb14_0i1tfw-ZLxEu",
             "title": "SSR"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f440b",
+          "roadmapSlug": "frontend",
+          "moduleId": "Cxspmb14_0i1tfw-ZLxEu",
+          "order": "25.5",
           "name": "tanstack-start",
           "nodeId": "f9zlP6lGhfe6HBHVYiySu",
           "title": "Tanstack Start",
@@ -2530,7 +3041,6 @@
               "url": "https://www.youtube.com/watch?v=s4I4JtOZNgg"
             }
           ],
-          "order": "25.5",
           "parentTopic": {
             "id": "Cxspmb14_0i1tfw-ZLxEu",
             "title": "SSR"
@@ -2565,6 +3075,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f440c",
+          "roadmapSlug": "frontend",
+          "moduleId": "P4st_telfCwKLSAU2WsQP",
+          "order": "26.1",
           "name": "cloudflare",
           "nodeId": "_Uh-UFNe2wP2TV0x2lKY_",
           "title": "Cloudflare",
@@ -2592,13 +3106,16 @@
               "url": "https://www.youtube.com/watch?v=H7Qe96fqg1M"
             }
           ],
-          "order": "26.1",
           "parentTopic": {
             "id": "P4st_telfCwKLSAU2WsQP",
             "title": "SvelteKit"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f440d",
+          "roadmapSlug": "frontend",
+          "moduleId": "P4st_telfCwKLSAU2WsQP",
+          "order": "26.2",
           "name": "astro",
           "nodeId": "wA2fSYsbBYU02VJXAvUz8",
           "title": "Astro",
@@ -2621,13 +3138,16 @@
               "url": "https://www.contentful.com/blog/what-is-astro/"
             }
           ],
-          "order": "26.2",
           "parentTopic": {
             "id": "P4st_telfCwKLSAU2WsQP",
             "title": "SvelteKit"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f440e",
+          "roadmapSlug": "frontend",
+          "moduleId": "P4st_telfCwKLSAU2WsQP",
+          "order": "26.3",
           "name": "railway",
           "nodeId": "PJRsqg5Vx9gQTodxaeZfz",
           "title": "Railway",
@@ -2655,13 +3175,16 @@
               "url": "https://www.youtube.com/watch?v=DyQz2DgSToU"
             }
           ],
-          "order": "26.3",
           "parentTopic": {
             "id": "P4st_telfCwKLSAU2WsQP",
             "title": "SvelteKit"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f440f",
+          "roadmapSlug": "frontend",
+          "moduleId": "P4st_telfCwKLSAU2WsQP",
+          "order": "26.4",
           "name": "render",
           "nodeId": "wfGz8pshGQARZ7qStGoSD",
           "title": "Render",
@@ -2689,13 +3212,16 @@
               "url": "https://www.youtube.com/watch?v=yWxBUcG_C7g"
             }
           ],
-          "order": "26.4",
           "parentTopic": {
             "id": "P4st_telfCwKLSAU2WsQP",
             "title": "SvelteKit"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4410",
+          "roadmapSlug": "frontend",
+          "moduleId": "P4st_telfCwKLSAU2WsQP",
+          "order": "26.5",
           "name": "react-router",
           "nodeId": "KJRkrFZIihCUBrOf579EU",
           "title": "react-router",
@@ -2718,13 +3244,16 @@
               "url": "https://www.youtube.com/watch?v=oTIJunBa6MA"
             }
           ],
-          "order": "26.5",
           "parentTopic": {
             "id": "P4st_telfCwKLSAU2WsQP",
             "title": "SvelteKit"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4411",
+          "roadmapSlug": "frontend",
+          "moduleId": "P4st_telfCwKLSAU2WsQP",
+          "order": "26.6",
           "name": "svelte",
           "nodeId": "OL8I6nOZ8hGGWmtxg_Mv8",
           "title": "Svelte",
@@ -2752,7 +3281,6 @@
               "url": "https://thenewstack.io/svelte-and-the-future-of-front-end-development/"
             }
           ],
-          "order": "26.6",
           "parentTopic": {
             "id": "P4st_telfCwKLSAU2WsQP",
             "title": "SvelteKit"
@@ -2787,13 +3315,16 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4412",
+          "roadmapSlug": "frontend",
+          "moduleId": "NQ95TJCe3E1IwEuBa__D6",
+          "order": "27.1",
           "name": "typescript",
           "nodeId": "6kWlgayUZQnr9z88fUOkk",
           "title": "TypeScript",
           "description": "",
           "content": "",
           "resources": [],
-          "order": "27.1",
           "parentTopic": {
             "id": "NQ95TJCe3E1IwEuBa__D6",
             "title": "Type Checkers"
@@ -2838,6 +3369,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4413",
+          "roadmapSlug": "frontend",
+          "moduleId": "n0q32YhWEIAUwbGXexoqV",
+          "order": "28.1",
           "name": "astro",
           "nodeId": "iUxXq7beg55y76dkwhM13",
           "title": "Astro",
@@ -2860,7 +3395,6 @@
               "url": "https://www.contentful.com/blog/what-is-astro/"
             }
           ],
-          "order": "28.1",
           "parentTopic": {
             "id": "n0q32YhWEIAUwbGXexoqV",
             "title": "SSG"
@@ -2952,6 +3486,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4414",
+          "roadmapSlug": "frontend",
+          "moduleId": "ap4h4v5Sr4jBH3GwWSH8x",
+          "order": "30.1",
           "name": "nextjs",
           "nodeId": "V70884VcuXkfrfHyLGtUg",
           "title": "Next.js",
@@ -2974,7 +3512,6 @@
               "url": "https://youtu.be/1WmNXEVia8I"
             }
           ],
-          "order": "30.1",
           "parentTopic": {
             "id": "ap4h4v5Sr4jBH3GwWSH8x",
             "title": "Design Systems"
@@ -3024,6 +3561,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4415",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.1",
           "name": "lighthouse",
           "nodeId": "dz7_QXoO7X0WmS5xuAhhJ",
           "title": "Lighthouse",
@@ -3051,13 +3592,16 @@
               "url": "https://www.youtube.com/watch?v=VyaHwvPWuZU"
             }
           ],
-          "order": "31.1",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4416",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.2",
           "name": "devtools-usage",
           "nodeId": "JWU9jc12_ewaIKt3qWLcp",
           "title": "DevTools Usage",
@@ -3085,13 +3629,16 @@
               "url": "https://www.youtube.com/watch?v=2CC0fugc_2o"
             }
           ],
-          "order": "31.2",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4417",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.3",
           "name": "vuepress",
           "nodeId": "CMrss8E2W0eA6DVEqtPjT",
           "title": "Vuepress",
@@ -3109,13 +3656,16 @@
               "url": "https://www.youtube.com/watch?v=iRhRdY7SQJg"
             }
           ],
-          "order": "31.3",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4418",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.4",
           "name": "service-workers",
           "nodeId": "66ya3WdtlkjQyBTc3Lein",
           "title": "Service Workers",
@@ -3143,13 +3693,16 @@
               "url": "https://www.youtube.com/watch?v=A6MHtKkA0CA"
             }
           ],
-          "order": "31.4",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4419",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.5",
           "name": "eleventy",
           "nodeId": "io0RHJWIcVxDhcYkV9d38",
           "title": "Eleventy",
@@ -3172,13 +3725,16 @@
               "url": "https://www.youtube.com/watch?v=-dM6AmNmMFA"
             }
           ],
-          "order": "31.5",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f441a",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.6",
           "name": "cache-control",
           "nodeId": "tWDmeXItfQDxB8Jij_V4L",
           "title": "Cache-Control",
@@ -3206,13 +3762,16 @@
               "url": "https://www.youtube.com/watch?v=Cy2ZJOBgk84"
             }
           ],
-          "order": "31.6",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f441b",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.7",
           "name": "nuxtjs",
           "nodeId": "XWJxV42Dpu2D3xDK10Pn3",
           "title": "Nuxt.js",
@@ -3235,13 +3794,16 @@
               "url": "https://explorers.netlify.com/learn/get-started-with-nuxt"
             }
           ],
-          "order": "31.7",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f441c",
+          "roadmapSlug": "frontend",
+          "moduleId": "6d8cjWZ4BuUjwT0seiuzJ",
+          "order": "31.8",
           "name": "streamed-responses",
           "nodeId": "FyNXhHq1VIASNq-LI7JIu",
           "title": "Streamed Responses",
@@ -3264,7 +3826,6 @@
               "url": "https://dev.to/pranshu_kabra_fe98a73547a/streaming-responses-in-ai-how-ai-outputs-are-generated-in-real-time-18kb"
             }
           ],
-          "order": "31.8",
           "parentTopic": {
             "id": "6d8cjWZ4BuUjwT0seiuzJ",
             "title": "Performance"
@@ -3314,6 +3875,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f441d",
+          "roadmapSlug": "frontend",
+          "moduleId": "ruoFa3M4bUE3Dg6GXSiUI",
+          "order": "32.1",
           "name": "html-templates",
           "nodeId": "Hk8AVonOd693_y1sykPqd",
           "title": "HTML Templates",
@@ -3331,7 +3896,6 @@
               "url": "https://app.daily.dev/tags/html?ref=roadmapsh"
             }
           ],
-          "order": "32.1",
           "parentTopic": {
             "id": "ruoFa3M4bUE3Dg6GXSiUI",
             "title": "Web Components"
@@ -3381,6 +3945,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f441e",
+          "roadmapSlug": "frontend",
+          "moduleId": "L7AllJfKvClaam3y-u6DP",
+          "order": "33.1",
           "name": "apollo",
           "nodeId": "5eUbDdOTOfaOhUlZAmmXW",
           "title": "Apollo",
@@ -3403,7 +3971,6 @@
               "url": "https://www.apollographql.com/docs/"
             }
           ],
-          "order": "33.1",
           "parentTopic": {
             "id": "L7AllJfKvClaam3y-u6DP",
             "title": "GraphQL"
@@ -3480,6 +4047,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f441f",
+          "roadmapSlug": "frontend",
+          "moduleId": "PoM77O2OtxPELxfrW1wtl",
+          "order": "35.1",
           "name": "custom-elements",
           "nodeId": "VxiQPgcYDFAT6WgSRWpIA",
           "title": "Custom Elements",
@@ -3502,13 +4073,16 @@
               "url": "https://app.daily.dev/tags/webdev?ref=roadmapsh"
             }
           ],
-          "order": "35.1",
           "parentTopic": {
             "id": "PoM77O2OtxPELxfrW1wtl",
             "title": "PWAs"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4420",
+          "roadmapSlug": "frontend",
+          "moduleId": "PoM77O2OtxPELxfrW1wtl",
+          "order": "35.2",
           "name": "relay-modern",
           "nodeId": "0moPO23ol33WsjVXSpTGf",
           "title": "Relay Modern",
@@ -3531,13 +4105,16 @@
               "url": "https://www.youtube.com/watch?v=A4POd93GI_I"
             }
           ],
-          "order": "35.2",
           "parentTopic": {
             "id": "PoM77O2OtxPELxfrW1wtl",
             "title": "PWAs"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4421",
+          "roadmapSlug": "frontend",
+          "moduleId": "PoM77O2OtxPELxfrW1wtl",
+          "order": "35.3",
           "name": "shadow-dom",
           "nodeId": "-SpsNeOZBkQfDA-rwzgPg",
           "title": "Shadow DOM",
@@ -3560,7 +4137,6 @@
               "url": "https://app.daily.dev/tags/dom?ref=roadmapsh"
             }
           ],
-          "order": "35.3",
           "parentTopic": {
             "id": "PoM77O2OtxPELxfrW1wtl",
             "title": "PWAs"
@@ -3609,6 +4185,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4422",
+          "roadmapSlug": "frontend",
+          "moduleId": "VOGKiG2EZVfCBAaa7Df0W",
+          "order": "36.1",
           "name": "react-native",
           "nodeId": "dsTegXTyupjS8iU6I7Xiv",
           "title": "React Native",
@@ -3626,13 +4206,16 @@
               "url": "https://reactnative.dev/"
             }
           ],
-          "order": "36.1",
           "parentTopic": {
             "id": "VOGKiG2EZVfCBAaa7Df0W",
             "title": "Mobile Apps"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4423",
+          "roadmapSlug": "frontend",
+          "moduleId": "VOGKiG2EZVfCBAaa7Df0W",
+          "order": "36.2",
           "name": "flutter",
           "nodeId": "dIQXjFEUAJAGxxfAYceHU",
           "title": "Flutter",
@@ -3660,7 +4243,6 @@
               "url": "https://thenewstack.io/12-ways-flutter-streamlines-app-development/"
             }
           ],
-          "order": "36.2",
           "parentTopic": {
             "id": "VOGKiG2EZVfCBAaa7Df0W",
             "title": "Mobile Apps"
@@ -3700,6 +4282,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4424",
+          "roadmapSlug": "frontend",
+          "moduleId": "KMA7NkxFbPoUDtFnGBFnj",
+          "order": "37.1",
           "name": "electron",
           "nodeId": "mQHpSyMR4Rra4mqAslgiS",
           "title": "Electron",
@@ -3722,13 +4308,16 @@
               "url": "https://www.youtube.com/watch?v=ML743nrkMHw"
             }
           ],
-          "order": "37.1",
           "parentTopic": {
             "id": "KMA7NkxFbPoUDtFnGBFnj",
             "title": "Desktop Apps"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4425",
+          "roadmapSlug": "frontend",
+          "moduleId": "KMA7NkxFbPoUDtFnGBFnj",
+          "order": "37.2",
           "name": "tauri",
           "nodeId": "GJctl0tVXe4B70s35RkLT",
           "title": "Tauri",
@@ -3751,13 +4340,16 @@
               "url": "https://thenewstack.io/how-tauri-turns-web-designs-into-compact-native-apps/"
             }
           ],
-          "order": "37.2",
           "parentTopic": {
             "id": "KMA7NkxFbPoUDtFnGBFnj",
             "title": "Desktop Apps"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4426",
+          "roadmapSlug": "frontend",
+          "moduleId": "KMA7NkxFbPoUDtFnGBFnj",
+          "order": "37.3",
           "name": "flutter",
           "nodeId": "2MRvAK9G9RGM_auWytcKh",
           "title": "Flutter",
@@ -3785,7 +4377,6 @@
               "url": "https://thenewstack.io/12-ways-flutter-streamlines-app-development/"
             }
           ],
-          "order": "37.3",
           "parentTopic": {
             "id": "KMA7NkxFbPoUDtFnGBFnj",
             "title": "Desktop Apps"
@@ -3804,6 +4395,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc413e4b2aeae8f4427",
+          "roadmapSlug": "frontend",
+          "moduleId": "extra-topics",
+          "order": "38.1",
           "name": "agents",
           "nodeId": "e4j6u0e_WqK1vfrUwJJ4M",
           "title": "AI Agents",
@@ -3831,13 +4426,16 @@
               "url": "https://www.youtube.com/watch?v=F8NKVhkZZWI"
             }
           ],
-          "order": "38.1",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4428",
+          "roadmapSlug": "frontend",
+          "moduleId": "extra-topics",
+          "order": "38.2",
           "name": "eslint",
           "nodeId": "NFjsI712_qP0IOmjuqXar",
           "title": "ESLint",
@@ -3860,13 +4458,16 @@
               "url": "https://www.youtube.com/watch?v=qhuFviJn-es"
             }
           ],
-          "order": "38.2",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f4429",
+          "roadmapSlug": "frontend",
+          "moduleId": "extra-topics",
+          "order": "38.3",
           "name": "ionic",
           "nodeId": "Pxyk3nBlWbgmMjsA93E70",
           "title": "Ionic",
@@ -3884,13 +4485,16 @@
               "url": "https://www.youtube.com/watch?v=5Gj4Y8zvl-s&list=PLlyAM-8-I7S9iNcZRfP4SQJhm4Mw5q5ku"
             }
           ],
-          "order": "38.3",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f442a",
+          "roadmapSlug": "frontend",
+          "moduleId": "extra-topics",
+          "order": "38.4",
           "name": "rolldown",
           "nodeId": "hE-DbpBpYrfB8tmBEjTnG",
           "title": "Rolldown",
@@ -3913,13 +4517,16 @@
               "url": "https://www.youtube.com/watch?v=3PFLeteDuyQ"
             }
           ],
-          "order": "38.4",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc413e4b2aeae8f442b",
+          "roadmapSlug": "frontend",
+          "moduleId": "extra-topics",
+          "order": "38.5",
           "name": "rollup",
           "nodeId": "sCjErk7rfWAUvhl8Kfm3n",
           "title": "Rollup",
@@ -3937,7 +4544,6 @@
               "url": "https://www.youtube.com/watch?v=ICYLOZuFMz8"
             }
           ],
-          "order": "38.5",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
@@ -3946,6 +4552,8 @@
       ]
     }
   ],
+  "title": "Frontend",
+  "topicCount": 86,
   "topics": [
     {
       "name": "internet",
@@ -7846,354 +8454,5 @@
       }
     }
   ],
-  "graph": {
-    "edges": [
-      {
-        "source": "jJebnKe4JftMXZ1lCsipq",
-        "target": "VlNNwIEDWqQXtqkHWJYzC",
-        "type": "flow"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "yWG2VUkaF5IJVVut6AiSy",
-        "type": "flow"
-      },
-      {
-        "source": "ODcfFEorkfJNupoQygM53",
-        "target": "NIY7c4TQEEHx0hATu-k5C",
-        "type": "flow"
-      },
-      {
-        "source": "MXnFhZlNB1zTsBFDyni9H",
-        "target": "IqvS1V-98cxko3e9sBQgP",
-        "type": "flow"
-      },
-      {
-        "source": "IqvS1V-98cxko3e9sBQgP",
-        "target": "XDTD8el6OwuQ55wC-X4iV",
-        "type": "flow"
-      },
-      {
-        "source": "DI8pvEosrUU7lcaGa7-Kc",
-        "target": "eXezX7CVNyC1RuyU_I4yP",
-        "type": "flow"
-      },
-      {
-        "source": "RDWbG3Iui6IPgp0shvXtg",
-        "target": "Cxspmb14_0i1tfw-ZLxEu",
-        "type": "flow"
-      },
-      {
-        "source": "Cxspmb14_0i1tfw-ZLxEu",
-        "target": "n0q32YhWEIAUwbGXexoqV",
-        "type": "flow"
-      },
-      {
-        "source": "ruoFa3M4bUE3Dg6GXSiUI",
-        "target": "L7AllJfKvClaam3y-u6DP",
-        "type": "flow"
-      },
-      {
-        "source": "PoM77O2OtxPELxfrW1wtl",
-        "target": "VOGKiG2EZVfCBAaa7Df0W",
-        "type": "flow"
-      },
-      {
-        "source": "KMA7NkxFbPoUDtFnGBFnj",
-        "target": "VOGKiG2EZVfCBAaa7Df0W",
-        "type": "flow"
-      },
-      {
-        "source": "xL8d-uHMpJKwUvT8z-Jia",
-        "target": "MdYPIf_9ezbIp6Dm5Fyme",
-        "type": "flow"
-      },
-      {
-        "source": "Gv_g4gK6pZK6l_0xAn34X",
-        "target": "e4j6u0e_WqK1vfrUwJJ4M",
-        "type": "flow"
-      },
-      {
-        "source": "eXezX7CVNyC1RuyU_I4yP",
-        "target": "M56-ufyFSwaQYPISuwUcj",
-        "type": "flow"
-      },
-      {
-        "source": "M56-ufyFSwaQYPISuwUcj",
-        "target": "UTupdqjOyLh7-56_0SXJ8",
-        "type": "flow"
-      },
-      {
-        "source": "eXezX7CVNyC1RuyU_I4yP",
-        "target": "ipcNHz8KbfpE57kNP15hP",
-        "type": "flow"
-      },
-      {
-        "source": "ipcNHz8KbfpE57kNP15hP",
-        "target": "Gv_g4gK6pZK6l_0xAn34X",
-        "type": "flow"
-      },
-      {
-        "source": "MdYPIf_9ezbIp6Dm5Fyme",
-        "target": "flwf3QbJioovtOpMw4obo",
-        "type": "flow"
-      },
-      {
-        "source": "flwf3QbJioovtOpMw4obo",
-        "target": "9VcGfDBBD8YcKatj4VcH1",
-        "type": "flow"
-      },
-      {
-        "source": "9VcGfDBBD8YcKatj4VcH1",
-        "target": "hkSc_1x09m7-7BO7WzlDT",
-        "type": "flow"
-      },
-      {
-        "source": "hkSc_1x09m7-7BO7WzlDT",
-        "target": "U5mD5FmVx7VWeKxDpQxB5",
-        "type": "flow"
-      },
-      {
-        "source": "U5mD5FmVx7VWeKxDpQxB5",
-        "target": "igg4_hb3XE3vuvY8ufV-4",
-        "type": "flow"
-      },
-      {
-        "source": "ydZRVWQrJUl3LZfjhR8QT",
-        "target": "3HgiMfqihjWceSxd6ei8s",
-        "type": "flow"
-      },
-      {
-        "source": "3HgiMfqihjWceSxd6ei8s",
-        "target": "RDWbG3Iui6IPgp0shvXtg",
-        "type": "flow"
-      },
-      {
-        "source": "n0q32YhWEIAUwbGXexoqV",
-        "target": "NQ95TJCe3E1IwEuBa__D6",
-        "type": "flow"
-      },
-      {
-        "source": "NQ95TJCe3E1IwEuBa__D6",
-        "target": "A1ZUy16cVRYqmHxoCtUb0",
-        "type": "flow"
-      },
-      {
-        "source": "A1ZUy16cVRYqmHxoCtUb0",
-        "target": "ap4h4v5Sr4jBH3GwWSH8x",
-        "type": "flow"
-      },
-      {
-        "source": "ap4h4v5Sr4jBH3GwWSH8x",
-        "target": "6d8cjWZ4BuUjwT0seiuzJ",
-        "type": "flow"
-      },
-      {
-        "source": "6d8cjWZ4BuUjwT0seiuzJ",
-        "target": "ruoFa3M4bUE3Dg6GXSiUI",
-        "type": "flow"
-      },
-      {
-        "source": "L7AllJfKvClaam3y-u6DP",
-        "target": "e-k6EhoxYG9h0x6vWOrDh",
-        "type": "flow"
-      },
-      {
-        "source": "e-k6EhoxYG9h0x6vWOrDh",
-        "target": "PoM77O2OtxPELxfrW1wtl",
-        "type": "flow"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "yCnn-NfSxIybUQ2iTuUGq",
-        "type": "subtopic"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "R12sArWVpbIs_PHxBqVaR",
-        "type": "subtopic"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "ZhSuu2VArnzPDp6dPQQSC",
-        "type": "subtopic"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "aqMaEY8gkKMikiqleV5EP",
-        "type": "subtopic"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "hkxw9jPGYphmjhTjw8766",
-        "type": "subtopic"
-      },
-      {
-        "source": "VlNNwIEDWqQXtqkHWJYzC",
-        "target": "P82WFaTPgQEPNp5IIuZ1Y",
-        "type": "subtopic"
-      },
-      {
-        "source": "ruoFa3M4bUE3Dg6GXSiUI",
-        "target": "Hk8AVonOd693_y1sykPqd",
-        "type": "subtopic"
-      },
-      {
-        "source": "NIY7c4TQEEHx0hATu-k5C",
-        "target": "R_I4SGYqLk5zze5I1zS_E",
-        "type": "subtopic"
-      },
-      {
-        "source": "MXnFhZlNB1zTsBFDyni9H",
-        "target": "qmTVMJDsEhNIkiwE_UTYu",
-        "type": "subtopic"
-      },
-      {
-        "source": "XDTD8el6OwuQ55wC-X4iV",
-        "target": "eghnfG4p7i-EDWfp3CQXC",
-        "type": "subtopic"
-      },
-      {
-        "source": "hkSc_1x09m7-7BO7WzlDT",
-        "target": "0Awx3zEI5_gYEIrD7IVX6",
-        "type": "subtopic"
-      },
-      {
-        "source": "RDWbG3Iui6IPgp0shvXtg",
-        "target": "JanR7I_lNnUCXhCMGLdn-",
-        "type": "subtopic"
-      },
-      {
-        "source": "Cxspmb14_0i1tfw-ZLxEu",
-        "target": "a8oOlkyM_C8vHuHqeiOAK",
-        "type": "subtopic"
-      },
-      {
-        "source": "n0q32YhWEIAUwbGXexoqV",
-        "target": "iUxXq7beg55y76dkwhM13",
-        "type": "subtopic"
-      },
-      {
-        "source": "6d8cjWZ4BuUjwT0seiuzJ",
-        "target": "JWU9jc12_ewaIKt3qWLcp",
-        "type": "subtopic"
-      },
-      {
-        "source": "6d8cjWZ4BuUjwT0seiuzJ",
-        "target": "dz7_QXoO7X0WmS5xuAhhJ",
-        "type": "subtopic"
-      },
-      {
-        "source": "6d8cjWZ4BuUjwT0seiuzJ",
-        "target": "66ya3WdtlkjQyBTc3Lein",
-        "type": "subtopic"
-      },
-      {
-        "source": "6d8cjWZ4BuUjwT0seiuzJ",
-        "target": "FyNXhHq1VIASNq-LI7JIu",
-        "type": "subtopic"
-      },
-      {
-        "source": "NQ95TJCe3E1IwEuBa__D6",
-        "target": "6kWlgayUZQnr9z88fUOkk",
-        "type": "subtopic"
-      },
-      {
-        "source": "6d8cjWZ4BuUjwT0seiuzJ",
-        "target": "tWDmeXItfQDxB8Jij_V4L",
-        "type": "subtopic"
-      },
-      {
-        "source": "VOGKiG2EZVfCBAaa7Df0W",
-        "target": "dsTegXTyupjS8iU6I7Xiv",
-        "type": "subtopic"
-      },
-      {
-        "source": "MdYPIf_9ezbIp6Dm5Fyme",
-        "target": "Bic4PHhz-YqzPWRimJO83",
-        "type": "subtopic"
-      },
-      {
-        "source": "MdYPIf_9ezbIp6Dm5Fyme",
-        "target": "-ye5ZtYFDoYGpj-UJaBP8",
-        "type": "subtopic"
-      },
-      {
-        "source": "MdYPIf_9ezbIp6Dm5Fyme",
-        "target": "Lw2nR7x8PYgq1P5CxPAxi",
-        "type": "subtopic"
-      },
-      {
-        "source": "UTupdqjOyLh7-56_0SXJ8",
-        "target": "yKNdBbahm_h81xdMDT-qx",
-        "type": "subtopic"
-      },
-      {
-        "source": "Nx7mjvYgqLpmJ0_iSx5of",
-        "target": "0TMdly8yiqnNR8sx36iqc",
-        "type": "subtopic"
-      },
-      {
-        "source": "ipcNHz8KbfpE57kNP15hP",
-        "target": "CKlkVK_7GZ7xzIUHJqZr8",
-        "type": "subtopic"
-      },
-      {
-        "source": "ipcNHz8KbfpE57kNP15hP",
-        "target": "E7-LveK7jO2npxVTLUDfw",
-        "type": "subtopic"
-      },
-      {
-        "source": "ipcNHz8KbfpE57kNP15hP",
-        "target": "RcC1fVuePQZ59AsJfeTdR",
-        "type": "subtopic"
-      },
-      {
-        "source": "ipcNHz8KbfpE57kNP15hP",
-        "target": "HQrxxDxKN8gizvXRU5psW",
-        "type": "subtopic"
-      },
-      {
-        "source": "Gv_g4gK6pZK6l_0xAn34X",
-        "target": "k4hMVVBMatedUq5EKiMo4",
-        "type": "subtopic"
-      },
-      {
-        "source": "vpimgXt10UQFBDVHR21IU",
-        "target": "e4j6u0e_WqK1vfrUwJJ4M",
-        "type": "subtopic"
-      },
-      {
-        "source": "9VcGfDBBD8YcKatj4VcH1",
-        "target": "UvCVChB6NZ_yUg0RdIJ2o",
-        "type": "subtopic"
-      },
-      {
-        "source": "igg4_hb3XE3vuvY8ufV-4",
-        "target": "hVQ89f6G0LXEgHIOKHDYq",
-        "type": "subtopic"
-      },
-      {
-        "source": "L7AllJfKvClaam3y-u6DP",
-        "target": "5eUbDdOTOfaOhUlZAmmXW",
-        "type": "subtopic"
-      },
-      {
-        "source": "KMA7NkxFbPoUDtFnGBFnj",
-        "target": "mQHpSyMR4Rra4mqAslgiS",
-        "type": "subtopic"
-      },
-      {
-        "source": "KMA7NkxFbPoUDtFnGBFnj",
-        "target": "GJctl0tVXe4B70s35RkLT",
-        "type": "subtopic"
-      },
-      {
-        "source": "KMA7NkxFbPoUDtFnGBFnj",
-        "target": "2MRvAK9G9RGM_auWytcKh",
-        "type": "subtopic"
-      }
-    ]
-  },
-  "updatedAt": "2026-09-11T06:13:14.682Z"
+  "updatedAt": "2026-09-17T03:34:28.164Z"
 }

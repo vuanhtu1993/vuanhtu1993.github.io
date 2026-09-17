@@ -1,8 +1,221 @@
 {
+  "_id": "6aab5fc55306e7f1dec46c2e",
   "slug": "system-design",
-  "title": "System Design",
   "category": "best-practice",
-  "topicCount": 148,
+  "graph": {
+    "edges": [
+      {
+        "source": "iogwMmOvub2ZF4zgg6WyF",
+        "target": "_hYN0gEi9BL24nptEtXWU",
+        "type": "flow"
+      },
+      {
+        "source": "GHe8V-REu1loRpDnHbyUn",
+        "target": "ezptoTqeaepByegxS5kHL",
+        "type": "flow"
+      },
+      {
+        "source": "ezptoTqeaepByegxS5kHL",
+        "target": "DOESIlBThd_wp2uOSd_CS",
+        "type": "flow"
+      },
+      {
+        "source": "DOESIlBThd_wp2uOSd_CS",
+        "target": "Uk6J8JRcKVEFz4_8rLfnQ",
+        "type": "flow"
+      },
+      {
+        "source": "Uk6J8JRcKVEFz4_8rLfnQ",
+        "target": "O730v5Ww3ByAiBSs6fwyM",
+        "type": "flow"
+      },
+      {
+        "source": "14KqLKgh090Rb3MDwelWY",
+        "target": "XXuzTrP5UNVwSpAk-tAGr",
+        "type": "flow"
+      },
+      {
+        "source": "XXuzTrP5UNVwSpAk-tAGr",
+        "target": "5FXwwRMNBhG7LT5ub6t2L",
+        "type": "flow"
+      },
+      {
+        "source": "5FXwwRMNBhG7LT5ub6t2L",
+        "target": "-X4g8kljgVBOBcf1DDzgi",
+        "type": "flow"
+      },
+      {
+        "source": "-X4g8kljgVBOBcf1DDzgi",
+        "target": "84N4XY31PwXRntXX1sdCU",
+        "type": "flow"
+      },
+      {
+        "source": "3pRi8M4xQXsehkdfUNtYL",
+        "target": "uQFzD_ryd-8Dr1ppjorYJ",
+        "type": "flow"
+      },
+      {
+        "source": "p--uEm6klLx_hKxKJiXE5",
+        "target": "hDFYlGFYwcwWXLmrxodFX",
+        "type": "flow"
+      },
+      {
+        "source": "THlzcZTNnPGLRiHPWT-Jv",
+        "target": "DYkdM_L7T2GcTPAoZNnUR",
+        "type": "flow"
+      },
+      {
+        "source": "DYkdM_L7T2GcTPAoZNnUR",
+        "target": "0vLaVNJaJSHZ_bHli6Qzs",
+        "type": "flow"
+      },
+      {
+        "source": "_hYN0gEi9BL24nptEtXWU",
+        "target": "idLHBxhvcIqZTqmh_E8Az",
+        "type": "subtopic"
+      },
+      {
+        "source": "_hYN0gEi9BL24nptEtXWU",
+        "target": "os3Pa6W9SSNEzgmlBbglQ",
+        "type": "subtopic"
+      },
+      {
+        "source": "GHe8V-REu1loRpDnHbyUn",
+        "target": "rRDGVynX43inSeQ9lR_FS",
+        "type": "subtopic"
+      },
+      {
+        "source": "GHe8V-REu1loRpDnHbyUn",
+        "target": "EKD5AikZtwjtsEYRPJhQ2",
+        "type": "subtopic"
+      },
+      {
+        "source": "GHe8V-REu1loRpDnHbyUn",
+        "target": "JjB7eB8gdRCAYf5M0RcT7",
+        "type": "subtopic"
+      },
+      {
+        "source": "zoViI4kzpKIxpU20T89K_",
+        "target": "2gRIstNT-fTkv5GZ692gx",
+        "type": "subtopic"
+      },
+      {
+        "source": "DOESIlBThd_wp2uOSd_CS",
+        "target": "NEsPjQifNDlZJE-2YLVl1",
+        "type": "subtopic"
+      },
+      {
+        "source": "DOESIlBThd_wp2uOSd_CS",
+        "target": "zoViI4kzpKIxpU20T89K_",
+        "type": "subtopic"
+      },
+      {
+        "source": "O730v5Ww3ByAiBSs6fwyM",
+        "target": "HkXiEMLqxJoQyAHav3ccL",
+        "type": "subtopic"
+      },
+      {
+        "source": "O730v5Ww3ByAiBSs6fwyM",
+        "target": "uIerrf_oziiLg-KEyz8WM",
+        "type": "subtopic"
+      },
+      {
+        "source": "14KqLKgh090Rb3MDwelWY",
+        "target": "ocdcbhHrwjJX0KWgmsOL6",
+        "type": "subtopic"
+      },
+      {
+        "source": "14KqLKgh090Rb3MDwelWY",
+        "target": "urSjLyLTE5IIz0TFxMBWL",
+        "type": "subtopic"
+      },
+      {
+        "source": "14KqLKgh090Rb3MDwelWY",
+        "target": "e69-JVbDj7dqV_p1j1kML",
+        "type": "subtopic"
+      },
+      {
+        "source": "14KqLKgh090Rb3MDwelWY",
+        "target": "MpM9rT1-_LGD7YbnBjqOk",
+        "type": "subtopic"
+      },
+      {
+        "source": "14KqLKgh090Rb3MDwelWY",
+        "target": "IkUCfSWNY-02wg2WCo1c6",
+        "type": "subtopic"
+      },
+      {
+        "source": "XXuzTrP5UNVwSpAk-tAGr",
+        "target": "Nt0HUWLOl4O77elF8Is1S",
+        "type": "subtopic"
+      },
+      {
+        "source": "5FXwwRMNBhG7LT5ub6t2L",
+        "target": "KLnpMR2FxlQkCHZP6-tZm",
+        "type": "subtopic"
+      },
+      {
+        "source": "84N4XY31PwXRntXX1sdCU",
+        "target": "a9wGW_H1HpvvdYCXoS-Rf",
+        "type": "subtopic"
+      },
+      {
+        "source": "84N4XY31PwXRntXX1sdCU",
+        "target": "37X1_9eCmkZkz5RDudE5N",
+        "type": "subtopic"
+      },
+      {
+        "source": "84N4XY31PwXRntXX1sdCU",
+        "target": "YiYRZFE_zwPMiCZxz9FnP",
+        "type": "subtopic"
+      },
+      {
+        "source": "uQFzD_ryd-8Dr1ppjorYJ",
+        "target": "LC5aTmUKNiw9RuSUt3fSE",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "I_NfmDcBph8-oyFVFTknL",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "hkjYvLoVt9xKDzubm0Jy3",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "rVrwaioGURvrqNBufF2dj",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "x1i3qWFtNNjd00-kAvFHw",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "eSZq74lROh5lllLyTBK5a",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "Q0fKphqmPwjTD0dhqiP6K",
+        "type": "subtopic"
+      },
+      {
+        "source": "hDFYlGFYwcwWXLmrxodFX",
+        "target": "IwMOTpsYHApdvHZOhXtIw",
+        "type": "subtopic"
+      },
+      {
+        "source": "THlzcZTNnPGLRiHPWT-Jv",
+        "target": "PtJ7-v1VCLsyaWWYHYujV",
+        "type": "subtopic"
+      }
+    ]
+  },
   "moduleCount": 28,
   "modules": [
     {
@@ -21,6 +234,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f442c",
+          "roadmapSlug": "system-design",
+          "moduleId": "_hYN0gEi9BL24nptEtXWU",
+          "order": "1.1",
           "name": "what-is-system-design",
           "nodeId": "idLHBxhvcIqZTqmh_E8Az",
           "title": "What is System Design?",
@@ -38,13 +255,16 @@
               "url": "https://www.crio.do/blog/a-comprehensive-guide-to-system-design/"
             }
           ],
-          "order": "1.1",
           "parentTopic": {
             "id": "_hYN0gEi9BL24nptEtXWU",
             "title": "Introduction"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f442d",
+          "roadmapSlug": "system-design",
+          "moduleId": "_hYN0gEi9BL24nptEtXWU",
+          "order": "1.2",
           "name": "how-to-approach-system-design",
           "nodeId": "os3Pa6W9SSNEzgmlBbglQ",
           "title": "How to approach System Design?",
@@ -72,7 +292,6 @@
               "url": "https://www.youtube.com/watch?v=ZgdS0EUmn70"
             }
           ],
-          "order": "1.2",
           "parentTopic": {
             "id": "_hYN0gEi9BL24nptEtXWU",
             "title": "Introduction"
@@ -166,6 +385,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f442e",
+          "roadmapSlug": "system-design",
+          "moduleId": "uJc27BNAuP321HQNbjftn",
+          "order": "4.1",
           "name": "cap-theorem",
           "nodeId": "tcGdVQsCEobdV9hgOq3eG",
           "title": "CAP Theorem",
@@ -193,7 +416,6 @@
               "url": "https://www.youtube.com/watch?v=k-Yaq8AHlFA"
             }
           ],
-          "order": "4.1",
           "parentTopic": {
             "id": "uJc27BNAuP321HQNbjftn",
             "title": "Availability vs Consistency"
@@ -223,6 +445,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f442f",
+          "roadmapSlug": "system-design",
+          "moduleId": "GHe8V-REu1loRpDnHbyUn",
+          "order": "5.1",
           "name": "weak-consistency",
           "nodeId": "EKD5AikZtwjtsEYRPJhQ2",
           "title": "Weak Consistency",
@@ -235,13 +461,16 @@
               "url": "https://cs.fyi/guide/consistency-patterns-week-strong-eventual/"
             }
           ],
-          "order": "5.1",
           "parentTopic": {
             "id": "GHe8V-REu1loRpDnHbyUn",
             "title": "Consistency Patterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4430",
+          "roadmapSlug": "system-design",
+          "moduleId": "GHe8V-REu1loRpDnHbyUn",
+          "order": "5.2",
           "name": "eventual-consistency",
           "nodeId": "rRDGVynX43inSeQ9lR_FS",
           "title": "Eventual Consistency",
@@ -254,13 +483,16 @@
               "url": "https://cs.fyi/guide/consistency-patterns-week-strong-eventual/"
             }
           ],
-          "order": "5.2",
           "parentTopic": {
             "id": "GHe8V-REu1loRpDnHbyUn",
             "title": "Consistency Patterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4431",
+          "roadmapSlug": "system-design",
+          "moduleId": "GHe8V-REu1loRpDnHbyUn",
+          "order": "5.3",
           "name": "strong-consistency",
           "nodeId": "JjB7eB8gdRCAYf5M0RcT7",
           "title": "Strong Consistency",
@@ -273,7 +505,6 @@
               "url": "https://cs.fyi/guide/consistency-patterns-week-strong-eventual/"
             }
           ],
-          "order": "5.3",
           "parentTopic": {
             "id": "GHe8V-REu1loRpDnHbyUn",
             "title": "Consistency Patterns"
@@ -318,6 +549,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4432",
+          "roadmapSlug": "system-design",
+          "moduleId": "ezptoTqeaepByegxS5kHL",
+          "order": "6.1",
           "name": "fail-over",
           "nodeId": "L_jRfjvMGjFbHEbozeVQl",
           "title": "Fail-Over",
@@ -335,13 +570,16 @@
               "url": "https://www.serverion.com/uncategorized/active-passive-vs-active-active-failover/"
             }
           ],
-          "order": "6.1",
           "parentTopic": {
             "id": "ezptoTqeaepByegxS5kHL",
             "title": "Availability Patterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4433",
+          "roadmapSlug": "system-design",
+          "moduleId": "ezptoTqeaepByegxS5kHL",
+          "order": "6.2",
           "name": "replication",
           "nodeId": "0RQ5jzZKdadYY0h_QZ0Bb",
           "title": "Replication",
@@ -359,7 +597,6 @@
               "url": "https://www.enjoyalgorithms.com/blog/introduction-to-database-replication-system-design"
             }
           ],
-          "order": "6.2",
           "parentTopic": {
             "id": "ezptoTqeaepByegxS5kHL",
             "title": "Availability Patterns"
@@ -394,6 +631,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4434",
+          "roadmapSlug": "system-design",
+          "moduleId": "DOESIlBThd_wp2uOSd_CS",
+          "order": "7.1",
           "name": "event-driven",
           "nodeId": "NEsPjQifNDlZJE-2YLVl1",
           "title": "Event-Driven",
@@ -406,13 +647,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/background-jobs#event-driven-triggers"
             }
           ],
-          "order": "7.1",
           "parentTopic": {
             "id": "DOESIlBThd_wp2uOSd_CS",
             "title": "Background Jobs"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4435",
+          "roadmapSlug": "system-design",
+          "moduleId": "DOESIlBThd_wp2uOSd_CS",
+          "order": "7.2",
           "name": "availability-in-numbers",
           "nodeId": "uHdrZllrZFAnVkwIB3y5-",
           "title": "Availability in Numbers",
@@ -430,13 +674,16 @@
               "url": "https://uptime.is/"
             }
           ],
-          "order": "7.2",
           "parentTopic": {
             "id": "DOESIlBThd_wp2uOSd_CS",
             "title": "Background Jobs"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4436",
+          "roadmapSlug": "system-design",
+          "moduleId": "DOESIlBThd_wp2uOSd_CS",
+          "order": "7.3",
           "name": "schedule-driven",
           "nodeId": "zoViI4kzpKIxpU20T89K_",
           "title": "Schedule Driven",
@@ -449,7 +696,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/background-jobs#schedule-driven-triggers"
             }
           ],
-          "order": "7.3",
           "parentTopic": {
             "id": "DOESIlBThd_wp2uOSd_CS",
             "title": "Background Jobs"
@@ -474,6 +720,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4437",
+          "roadmapSlug": "system-design",
+          "moduleId": "zoViI4kzpKIxpU20T89K_",
+          "order": "8.1",
           "name": "returning-results",
           "nodeId": "2gRIstNT-fTkv5GZ692gx",
           "title": "Returning Results",
@@ -486,7 +736,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/background-jobs#returning-results"
             }
           ],
-          "order": "8.1",
           "parentTopic": {
             "id": "zoViI4kzpKIxpU20T89K_",
             "title": "Schedule Driven"
@@ -536,6 +785,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4438",
+          "roadmapSlug": "system-design",
+          "moduleId": "Uk6J8JRcKVEFz4_8rLfnQ",
+          "order": "9.1",
           "name": "key-value-store",
           "nodeId": "KFtdmmce4bRkDyvFXZzLN",
           "title": "Key-Value Store",
@@ -553,13 +806,16 @@
               "url": "https://stackoverflow.com/questions/4056093/what-are-the-disadvantages-of-using-a-key-value-table-over-nullable-columns-or"
             }
           ],
-          "order": "9.1",
           "parentTopic": {
             "id": "Uk6J8JRcKVEFz4_8rLfnQ",
             "title": "Domain Name System"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4439",
+          "roadmapSlug": "system-design",
+          "moduleId": "Uk6J8JRcKVEFz4_8rLfnQ",
+          "order": "9.2",
           "name": "microservices",
           "nodeId": "UKTiaHCzYXnrNw31lHriv",
           "title": "Microservices",
@@ -582,7 +838,6 @@
               "url": "https://martinfowler.com/articles/microservices.html"
             }
           ],
-          "order": "9.2",
           "parentTopic": {
             "id": "Uk6J8JRcKVEFz4_8rLfnQ",
             "title": "Domain Name System"
@@ -622,6 +877,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f443a",
+          "roadmapSlug": "system-design",
+          "moduleId": "O730v5Ww3ByAiBSs6fwyM",
+          "order": "10.1",
           "name": "pull-cdns",
           "nodeId": "HkXiEMLqxJoQyAHav3ccL",
           "title": "Pull CDNs",
@@ -639,13 +898,16 @@
               "url": "http://www.travelblogadvice.com/technical/the-differences-between-push-and-pull-cdns/"
             }
           ],
-          "order": "10.1",
           "parentTopic": {
             "id": "O730v5Ww3ByAiBSs6fwyM",
             "title": "Content Delivery Networks"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f443b",
+          "roadmapSlug": "system-design",
+          "moduleId": "O730v5Ww3ByAiBSs6fwyM",
+          "order": "10.2",
           "name": "push-cdns",
           "nodeId": "uIerrf_oziiLg-KEyz8WM",
           "title": "Push CDNs",
@@ -658,7 +920,6 @@
               "url": "https://github.com/donnemartin/system-design-primer#content-delivery-network"
             }
           ],
-          "order": "10.2",
           "parentTopic": {
             "id": "O730v5Ww3ByAiBSs6fwyM",
             "title": "Content Delivery Networks"
@@ -698,6 +959,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f443c",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.1",
           "name": "lb-vs-reverse-proxy",
           "nodeId": "ocdcbhHrwjJX0KWgmsOL6",
           "title": "LB vs Reverse Proxy",
@@ -725,13 +990,16 @@
               "url": "https://en.wikipedia.org/wiki/Reverse_proxy"
             }
           ],
-          "order": "11.1",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f443d",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.2",
           "name": "document-store",
           "nodeId": "didEznSlVHqqlijtyOSr3",
           "title": "Document Store",
@@ -744,13 +1012,16 @@
               "url": "https://en.wikipedia.org/wiki/Document-oriented_database"
             }
           ],
-          "order": "11.2",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f443e",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.3",
           "name": "load-balancing-algorithms",
           "nodeId": "urSjLyLTE5IIz0TFxMBWL",
           "title": "Load Balancing Algorithms",
@@ -768,13 +1039,16 @@
               "url": "https://app.daily.dev/tags/algorithms?ref=roadmapsh"
             }
           ],
-          "order": "11.3",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f443f",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.4",
           "name": "wide-column-store",
           "nodeId": "WHq1AdISkcgthaugE9uY7",
           "title": "Wide Column Store",
@@ -787,26 +1061,32 @@
               "url": "https://www.read.seas.harvard.edu/~kohler/class/cs239-w08/chang06bigtable.pdf"
             }
           ],
-          "order": "11.4",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4440",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.5",
           "name": "layer-7-load-balancing",
           "nodeId": "e69-JVbDj7dqV_p1j1kML",
           "title": "Layer 7 Load Balancing",
           "description": "Layer 7 load balancing operates at the application layer of the network stack, meaning it can inspect the actual content of a request, such as the URL, headers, or cookies. This allows routing decisions based on the content of the request itself, like sending API traffic to one set of servers and image requests to another. It offers more flexibility than lower-layer balancing but requires more processing per request.",
           "content": "# Layer 7 Load Balancing\n \nLayer 7 load balancing operates at the application layer of the network stack, meaning it can inspect the actual content of a request, such as the URL, headers, or cookies. This allows routing decisions based on the content of the request itself, like sending API traffic to one set of servers and image requests to another. It offers more flexibility than lower-layer balancing but requires more processing per request.",
           "resources": [],
-          "order": "11.5",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4441",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.6",
           "name": "graph-databases",
           "nodeId": "6RLgnL8qLBzYkllHeaI-Z",
           "title": "Graph Databases",
@@ -824,13 +1104,16 @@
               "url": "https://www.youtube.com/watch?v=qI_g07C_Q5I"
             }
           ],
-          "order": "11.6",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4442",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.7",
           "name": "layer-4-load-balancing",
           "nodeId": "MpM9rT1-_LGD7YbnBjqOk",
           "title": "Layer 4 Load Balancing",
@@ -843,20 +1126,22 @@
               "url": "https://www.f5.com/glossary/layer-4-load-balancing"
             }
           ],
-          "order": "11.7",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4443",
+          "roadmapSlug": "system-design",
+          "moduleId": "14KqLKgh090Rb3MDwelWY",
+          "order": "11.8",
           "name": "horizontal-scaling",
           "nodeId": "IkUCfSWNY-02wg2WCo1c6",
           "title": "Horizontal Scaling",
           "description": "Horizontal scaling means adding more machines to a system to handle increased load, as opposed to vertical scaling, which adds more resources to an existing machine. It generally offers better fault tolerance, since the failure of one machine does not take down the entire system. Horizontal scaling requires a load balancer to distribute work across the added machines.",
           "content": "# Horizontal Scaling\n \nHorizontal scaling means adding more machines to a system to handle increased load, as opposed to vertical scaling, which adds more resources to an existing machine. It generally offers better fault tolerance, since the failure of one machine does not take down the entire system. Horizontal scaling requires a load balancer to distribute work across the added machines.",
           "resources": [],
-          "order": "11.8",
           "parentTopic": {
             "id": "14KqLKgh090Rb3MDwelWY",
             "title": "Load Balancers"
@@ -891,6 +1176,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4444",
+          "roadmapSlug": "system-design",
+          "moduleId": "XXuzTrP5UNVwSpAk-tAGr",
+          "order": "12.1",
           "name": "service-discovery",
           "nodeId": "Nt0HUWLOl4O77elF8Is1S",
           "title": "Service Discovery",
@@ -913,7 +1202,6 @@
               "url": "https://app.daily.dev/tags/architecture?ref=roadmapsh"
             }
           ],
-          "order": "12.1",
           "parentTopic": {
             "id": "XXuzTrP5UNVwSpAk-tAGr",
             "title": "Application Layer"
@@ -953,19 +1241,26 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4445",
+          "roadmapSlug": "system-design",
+          "moduleId": "5FXwwRMNBhG7LT5ub6t2L",
+          "order": "13.1",
           "name": "replication",
           "nodeId": "dc-aIbBwUdlwgwQKGrq49",
           "title": "Replication",
           "description": "Replication means keeping copies of the same data or service on multiple servers. It improves availability, since a failure on one node does not take down the whole system, and it can improve read performance by spreading requests across replicas. Replication introduces its own challenge of keeping the copies consistent with each other.",
           "content": "# Replication\n \nReplication means keeping copies of the same data or service on multiple servers. It improves availability, since a failure on one node does not take down the whole system, and it can improve read performance by spreading requests across replicas. Replication introduces its own challenge of keeping the copies consistent with each other.",
           "resources": [],
-          "order": "13.1",
           "parentTopic": {
             "id": "5FXwwRMNBhG7LT5ub6t2L",
             "title": "Databases"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4446",
+          "roadmapSlug": "system-design",
+          "moduleId": "5FXwwRMNBhG7LT5ub6t2L",
+          "order": "13.2",
           "name": "sql-vs-nosql",
           "nodeId": "KLnpMR2FxlQkCHZP6-tZm",
           "title": "SQL vs NoSQL",
@@ -993,7 +1288,6 @@
               "url": "https://www.mongodb.com/nosql-explained/nosql-vs-sql"
             }
           ],
-          "order": "13.2",
           "parentTopic": {
             "id": "5FXwwRMNBhG7LT5ub6t2L",
             "title": "Databases"
@@ -1028,6 +1322,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4447",
+          "roadmapSlug": "system-design",
+          "moduleId": "-X4g8kljgVBOBcf1DDzgi",
+          "order": "14.1",
           "name": "sharding",
           "nodeId": "FX6dcV_93zOfbZMdM_-li",
           "title": "Sharding",
@@ -1045,13 +1343,16 @@
               "url": "https://en.wikipedia.org/wiki/Shard_(database_architecture"
             }
           ],
-          "order": "14.1",
           "parentTopic": {
             "id": "-X4g8kljgVBOBcf1DDzgi",
             "title": "Caching"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4448",
+          "roadmapSlug": "system-design",
+          "moduleId": "-X4g8kljgVBOBcf1DDzgi",
+          "order": "14.2",
           "name": "refresh-ahead",
           "nodeId": "Bgqgl67FK56ioLNFivIsc",
           "title": "Refresh Ahead",
@@ -1069,26 +1370,32 @@
               "url": "https://www.enjoyalgorithms.com/blog/refresh-ahead-caching-pattern"
             }
           ],
-          "order": "14.2",
           "parentTopic": {
             "id": "-X4g8kljgVBOBcf1DDzgi",
             "title": "Caching"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4449",
+          "roadmapSlug": "system-design",
+          "moduleId": "-X4g8kljgVBOBcf1DDzgi",
+          "order": "14.3",
           "name": "federation",
           "nodeId": "DGmVRI7oWdSOeIUn_g0rI",
           "title": "Federation",
           "description": "Federation (or functional partitioning) splits up databases by function. For example, instead of a single, monolithic database, you could have three databases: forums, users, and products, resulting in less read and write traffic to each database and therefore less replication lag. Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality. With no single central master serializing writes you can write in parallel, increasing throughput.",
           "content": "# Federation\n\nFederation (or functional partitioning) splits up databases by function. For example, instead of a single, monolithic database, you could have three databases: forums, users, and products, resulting in less read and write traffic to each database and therefore less replication lag. Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality. With no single central master serializing writes you can write in parallel, increasing throughput.",
           "resources": [],
-          "order": "14.3",
           "parentTopic": {
             "id": "-X4g8kljgVBOBcf1DDzgi",
             "title": "Caching"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f444a",
+          "roadmapSlug": "system-design",
+          "moduleId": "-X4g8kljgVBOBcf1DDzgi",
+          "order": "14.4",
           "name": "write-behind",
           "nodeId": "vNndJ-MWetcbaF2d-3-JP",
           "title": "Write-behind",
@@ -1101,7 +1408,6 @@
               "url": "http://www.slideshare.net/jboner/scalability-availability-stability-patterns/"
             }
           ],
-          "order": "14.4",
           "parentTopic": {
             "id": "-X4g8kljgVBOBcf1DDzgi",
             "title": "Caching"
@@ -1146,6 +1452,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f444b",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.1",
           "name": "denormalization",
           "nodeId": "Zp9D4--DgtlAjE2nIfaO_",
           "title": "Denormalization",
@@ -1158,26 +1468,32 @@
               "url": "https://en.wikipedia.org/wiki/Denormalization"
             }
           ],
-          "order": "15.1",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f444c",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.2",
           "name": "back-pressure",
           "nodeId": "YiYRZFE_zwPMiCZxz9FnP",
           "title": "Back Pressure",
           "description": "Back pressure is a mechanism for controlling the flow of data or requests when a system component cannot keep up with incoming volume. Instead of letting a queue or buffer grow unbounded, the system slows down or rejects new work until the backlog clears. This protects downstream components from being overwhelmed and crashing.",
           "content": "# Back Pressure\n \nBack pressure is a mechanism for controlling the flow of data or requests when a system component cannot keep up with incoming volume. Instead of letting a queue or buffer grow unbounded, the system slows down or rejects new work until the backlog clears. This protects downstream components from being overwhelmed and crashing.",
           "resources": [],
-          "order": "15.2",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f444d",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.3",
           "name": "write-through",
           "nodeId": "RNITLR1FUQWkRbSBXTD_z",
           "title": "Write-through",
@@ -1190,13 +1506,16 @@
               "url": "http://www.slideshare.net/jboner/scalability-availability-stability-patterns/"
             }
           ],
-          "order": "15.3",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f444e",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.4",
           "name": "sql-tuning",
           "nodeId": "fY8zgbB13wxZ1CFtMSdZZ",
           "title": "SQL Tuning",
@@ -1214,13 +1533,16 @@
               "url": "https://towardsdatascience.com/query-optimization-for-mere-humans-in-postgresql-875ab864390a/"
             }
           ],
-          "order": "15.4",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f444f",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.5",
           "name": "task-queues",
           "nodeId": "a9wGW_H1HpvvdYCXoS-Rf",
           "title": "Task Queues",
@@ -1233,13 +1555,16 @@
               "url": "https://docs.celeryq.dev/en/stable/"
             }
           ],
-          "order": "15.5",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4450",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.6",
           "name": "cache-aside",
           "nodeId": "bffJlvoLHFldS0CluWifP",
           "title": "Cache-Aside",
@@ -1252,13 +1577,16 @@
               "url": "https://www.slideshare.net/tmatyashovsky/from-cache-to-in-memory-data-grid-introduction-to-hazelcast"
             }
           ],
-          "order": "15.6",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4451",
+          "roadmapSlug": "system-design",
+          "moduleId": "84N4XY31PwXRntXX1sdCU",
+          "order": "15.7",
           "name": "message-queues",
           "nodeId": "37X1_9eCmkZkz5RDudE5N",
           "title": "Message Queues",
@@ -1286,7 +1614,6 @@
               "url": "https://kafka.apache.org/"
             }
           ],
-          "order": "15.7",
           "parentTopic": {
             "id": "84N4XY31PwXRntXX1sdCU",
             "title": "Asynchronism"
@@ -1310,6 +1637,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4452",
+          "roadmapSlug": "system-design",
+          "moduleId": "uQFzD_ryd-8Dr1ppjorYJ",
+          "order": "16.1",
           "name": "client-caching",
           "nodeId": "RHNRb6QWiGvCK3KQOPK3u",
           "title": "Client Caching",
@@ -1322,13 +1653,16 @@
               "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching"
             }
           ],
-          "order": "16.1",
           "parentTopic": {
             "id": "uQFzD_ryd-8Dr1ppjorYJ",
             "title": "Communication"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4453",
+          "roadmapSlug": "system-design",
+          "moduleId": "uQFzD_ryd-8Dr1ppjorYJ",
+          "order": "16.2",
           "name": "http",
           "nodeId": "I_nR6EwjNXSG7_hw-_VhX",
           "title": "HTTP",
@@ -1351,13 +1685,16 @@
               "url": "https://www.quora.com/What-is-the-difference-between-HTTP-protocol-and-TCP-protocol"
             }
           ],
-          "order": "16.2",
           "parentTopic": {
             "id": "uQFzD_ryd-8Dr1ppjorYJ",
             "title": "Communication"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4454",
+          "roadmapSlug": "system-design",
+          "moduleId": "uQFzD_ryd-8Dr1ppjorYJ",
+          "order": "16.3",
           "name": "tcp",
           "nodeId": "2nF5uC6fYKbf0RFgGNHiP",
           "title": "TCP",
@@ -1385,13 +1722,16 @@
               "url": "http://www.cyberciti.biz/faq/key-differences-between-tcp-and-udp-protocols/"
             }
           ],
-          "order": "16.3",
           "parentTopic": {
             "id": "uQFzD_ryd-8Dr1ppjorYJ",
             "title": "Communication"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4455",
+          "roadmapSlug": "system-design",
+          "moduleId": "uQFzD_ryd-8Dr1ppjorYJ",
+          "order": "16.4",
           "name": "udp",
           "nodeId": "LC5aTmUKNiw9RuSUt3fSE",
           "title": "UDP",
@@ -1414,7 +1754,6 @@
               "url": "http://stackoverflow.com/questions/5970383/difference-between-tcp-and-udp"
             }
           ],
-          "order": "16.4",
           "parentTopic": {
             "id": "uQFzD_ryd-8Dr1ppjorYJ",
             "title": "Communication"
@@ -1449,19 +1788,26 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4456",
+          "roadmapSlug": "system-design",
+          "moduleId": "3pRi8M4xQXsehkdfUNtYL",
+          "order": "17.1",
           "name": "cdn-caching",
           "nodeId": "Kisvxlrjb7XnKFCOdxRtb",
           "title": "CDN Caching",
           "description": "CDN caching stores static content, like images, stylesheets, and scripts, on distributed edge servers close to end users. This reduces the distance data has to travel and offloads traffic from the origin server. Content can be cached for a set duration or invalidated when it changes.",
           "content": "# CDN Caching\n \nCDN caching stores static content, like images, stylesheets, and scripts, on distributed edge servers close to end users. This reduces the distance data has to travel and offloads traffic from the origin server. Content can be cached for a set duration or invalidated when it changes.",
           "resources": [],
-          "order": "17.1",
           "parentTopic": {
             "id": "3pRi8M4xQXsehkdfUNtYL",
             "title": "Idempotent Operations"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4457",
+          "roadmapSlug": "system-design",
+          "moduleId": "3pRi8M4xQXsehkdfUNtYL",
+          "order": "17.2",
           "name": "rpc",
           "nodeId": "ixqucoAkgnphWYAFnsMe-",
           "title": "RPC",
@@ -1474,7 +1820,6 @@
               "url": "https://github.com/donnemartin/system-design-primer#remote-procedure-call-rpc"
             }
           ],
-          "order": "17.2",
           "parentTopic": {
             "id": "3pRi8M4xQXsehkdfUNtYL",
             "title": "Idempotent Operations"
@@ -1504,6 +1849,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4458",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.1",
           "name": "grpc",
           "nodeId": "Hw2v1rCYn24qxBhhmdc28",
           "title": "gRPC",
@@ -1516,26 +1865,54 @@
               "url": "https://www.wallarm.com/what/the-concept-of-grpc"
             }
           ],
-          "order": "18.1",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4461",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.10",
+          "name": "busy-frontend",
+          "nodeId": "i_2M3VloG-xTgWDWp4ngt",
+          "title": "Busy Frontend",
+          "description": "The busy frontend antipattern happens when resource-intensive tasks that could run in the background are instead performed directly within a user-facing request, making the frontend do more work than necessary. This slows down response times for users and limits how many requests the frontend can handle concurrently. Offloading heavy work to background jobs keeps the frontend responsive.",
+          "content": "# Busy Frontend\n \nThe busy frontend antipattern happens when resource-intensive tasks that could run in the background are instead performed directly within a user-facing request, making the frontend do more work than necessary. This slows down response times for users and limits how many requests the frontend can handle concurrently. Offloading heavy work to background jobs keeps the frontend responsive.\n\nVisit the following resources to learn more:\n\n- [@article@Busy Front End antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/busy-front-end/)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Busy Front End antipattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/busy-front-end/"
+            }
+          ],
+          "parentTopic": {
+            "id": "p--uEm6klLx_hKxKJiXE5",
+            "title": "Performance Antipatterns"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4459",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.2",
           "name": "web-server-caching",
           "nodeId": "o532nPnL-d2vXJn9k6vMl",
           "title": "Web Server Caching",
           "description": "Web server caching stores responses at the web server level, such as full HTML pages or static resources, so the server can serve them directly without regenerating them for each request. Reverse proxies like Varnish or Nginx are commonly used for this purpose. It reduces the load on application servers for content that does not change on every request.",
           "content": "# Web Server Caching\n \nWeb server caching stores responses at the web server level, such as full HTML pages or static resources, so the server can serve them directly without regenerating them for each request. Reverse proxies like Varnish or Nginx are commonly used for this purpose. It reduces the load on application servers for content that does not change on every request.",
           "resources": [],
-          "order": "18.2",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f445a",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.3",
           "name": "rest",
           "nodeId": "6-bgmfDTAQ9zABhpmVoHV",
           "title": "REST",
@@ -1558,13 +1935,16 @@
               "url": "https://www.quora.com/What-are-the-drawbacks-of-using-RESTful-APIs"
             }
           ],
-          "order": "18.3",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f445b",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.4",
           "name": "graphql",
           "nodeId": "jwv2g2Yeq-6Xv5zSd746R",
           "title": "GraphQL",
@@ -1587,13 +1967,16 @@
               "url": "https://www.redhat.com/en/topics/api/what-is-graphql"
             }
           ],
-          "order": "18.4",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f445c",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.5",
           "name": "database-caching",
           "nodeId": "BeIg4jzbij2cwc_a_VpYG",
           "title": "Database Caching",
@@ -1616,13 +1999,16 @@
               "url": "https://medium.com/@sesmiat/database-caching-strategies-f5e40c3c9b74"
             }
           ],
-          "order": "18.5",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f445d",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.6",
           "name": "application-caching",
           "nodeId": "5Ux_JBDOkflCaIm4tVBgO",
           "title": "Application Caching",
@@ -1635,13 +2021,16 @@
               "url": "https://github.com/donnemartin/system-design-primer#application-caching"
             }
           ],
-          "order": "18.6",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f445e",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.7",
           "name": "improper-instantiation",
           "nodeId": "lwMs4yiUHF3nQwcvauers",
           "title": "Improper Instantiation",
@@ -1654,13 +2043,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/improper-instantiation/"
             }
           ],
-          "order": "18.7",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f445f",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.8",
           "name": "busy-database",
           "nodeId": "hxiV2uF7tvhZKe4K-4fTn",
           "title": "Busy Database",
@@ -1673,13 +2065,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/busy-database/"
             }
           ],
-          "order": "18.8",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4460",
+          "roadmapSlug": "system-design",
+          "moduleId": "p--uEm6klLx_hKxKJiXE5",
+          "order": "18.9",
           "name": "monolithic-persistence",
           "nodeId": "p1QhCptnwzTGUXVMnz_Oz",
           "title": "Monolithic Persistence",
@@ -1692,26 +2087,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/monolithic-persistence/"
             }
           ],
-          "order": "18.9",
-          "parentTopic": {
-            "id": "p--uEm6klLx_hKxKJiXE5",
-            "title": "Performance Antipatterns"
-          }
-        },
-        {
-          "name": "busy-frontend",
-          "nodeId": "i_2M3VloG-xTgWDWp4ngt",
-          "title": "Busy Frontend",
-          "description": "The busy frontend antipattern happens when resource-intensive tasks that could run in the background are instead performed directly within a user-facing request, making the frontend do more work than necessary. This slows down response times for users and limits how many requests the frontend can handle concurrently. Offloading heavy work to background jobs keeps the frontend responsive.",
-          "content": "# Busy Frontend\n \nThe busy frontend antipattern happens when resource-intensive tasks that could run in the background are instead performed directly within a user-facing request, making the frontend do more work than necessary. This slows down response times for users and limits how many requests the frontend can handle concurrently. Offloading heavy work to background jobs keeps the frontend responsive.\n\nVisit the following resources to learn more:\n\n- [@article@Busy Front End antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/busy-front-end/)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Busy Front End antipattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/busy-front-end/"
-            }
-          ],
-          "order": "18.10",
           "parentTopic": {
             "id": "p--uEm6klLx_hKxKJiXE5",
             "title": "Performance Antipatterns"
@@ -1741,6 +2116,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4462",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.1",
           "name": "health-monitoring",
           "nodeId": "hkjYvLoVt9xKDzubm0Jy3",
           "title": "Health Monitoring",
@@ -1753,170 +2132,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#health-monitoring"
             }
           ],
-          "order": "19.1",
           "parentTopic": {
             "id": "hDFYlGFYwcwWXLmrxodFX",
             "title": "Monitoring"
           }
         },
         {
-          "name": "synchronous-io",
-          "nodeId": "Ihnmxo_bVgZABDwg1QGGk",
-          "title": "Synchronous I/O",
-          "description": "Synchronous I/O blocks the calling thread until an input or output operation, like a network call or disk read, completes. Under high load, this ties up threads waiting on slow operations instead of doing useful work, which limits how many concurrent requests a system can handle. Switching to asynchronous I/O lets a thread continue other work while waiting for the operation to finish.",
-          "content": "# Synchronous I/O\n \nSynchronous I/O blocks the calling thread until an input or output operation, like a network call or disk read, completes. Under high load, this ties up threads waiting on slow operations instead of doing useful work, which limits how many concurrent requests a system can handle. Switching to asynchronous I/O lets a thread continue other work while waiting for the operation to finish.\n\nVisit the following resources to learn more:\n\n- [@article@What is Synchronous I/O antipattern?](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/synchronous-io/)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "What is Synchronous I/O antipattern?",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/synchronous-io/"
-            }
-          ],
-          "order": "19.2",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "retry-storm",
-          "nodeId": "LNmAJmh2ndFtOQIpvX_ga",
-          "title": "Retry Storm",
-          "description": "A retry storm happens when many clients or services retry failed requests at the same time, often after a shared dependency recovers from an outage, overwhelming that dependency again right after it comes back up. This can turn a brief failure into a prolonged outage. Techniques like exponential backoff and jitter help spread out retries to avoid this.",
-          "content": "# Retry Storm\n \nA retry storm happens when many clients or services retry failed requests at the same time, often after a shared dependency recovers from an outage, overwhelming that dependency again right after it comes back up. This can turn a brief failure into a prolonged outage. Techniques like exponential backoff and jitter help spread out retries to avoid this.\n\nVisit the following resources to learn more:\n\n- [@article@Retry Storm antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/retry-storm/)\n- [@article@How To Avoid Retry Storms In Distributed Systems](https://faun.pub/how-to-avoid-retry-storms-in-distributed-systems-91bf34f43c7f)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Retry Storm antipattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/retry-storm/"
-            },
-            {
-              "type": "article",
-              "title": "How To Avoid Retry Storms In Distributed Systems",
-              "url": "https://faun.pub/how-to-avoid-retry-storms-in-distributed-systems-91bf34f43c7f"
-            }
-          ],
-          "order": "19.3",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "availability-monitoring",
-          "nodeId": "rVrwaioGURvrqNBufF2dj",
-          "title": "Availability Monitoring",
-          "description": "Availability monitoring tracks whether a system or service is reachable and responding to requests from the perspective of its users. It often involves synthetic checks that simulate real user requests from different locations to measure uptime. This differs from health monitoring in that it focuses on the end-to-end experience rather than individual components.",
-          "content": "# Availability Monitoring\n \nAvailability monitoring tracks whether a system or service is reachable and responding to requests from the perspective of its users. It often involves synthetic checks that simulate real user requests from different locations to measure uptime. This differs from health monitoring in that it focuses on the end-to-end experience rather than individual components.\n\nVisit the following resources to learn more:\n\n- [@article@Availability Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#availability-monitoring)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Availability Monitoring",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#availability-monitoring"
-            }
-          ],
-          "order": "19.4",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "extraneous-fetching",
-          "nodeId": "6u3XmtJFWyJnyZUnJcGYb",
-          "title": "Extraneous Fetching",
-          "description": "Extraneous fetching happens when an application retrieves more data than it actually needs for a given operation, wasting bandwidth and processing time. This often occurs from overly broad queries or APIs that always return full objects regardless of what the caller uses. Fetching only the required fields reduces unnecessary load on the system.",
-          "content": "# Extraneous Fetching\n \nExtraneous fetching happens when an application retrieves more data than it actually needs for a given operation, wasting bandwidth and processing time. This often occurs from overly broad queries or APIs that always return full objects regardless of what the caller uses. Fetching only the required fields reduces unnecessary load on the system.\n\nVisit the following resources to learn more:\n\n- [@article@Extraneous Fetching antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Extraneous Fetching antipattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/"
-            }
-          ],
-          "order": "19.5",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "no-caching",
-          "nodeId": "klvHk1_e03Jarn5T46QNi",
-          "title": "No Caching",
-          "description": "The no caching antipattern refers to an application that repeatedly performs expensive operations, like database queries or external API calls, without caching results that could be reused. This creates unnecessary load and latency for data that does not change often. Adding an appropriate caching layer can significantly reduce this overhead.",
-          "content": "# No Caching\n \nThe no caching antipattern refers to an application that repeatedly performs expensive operations, like database queries or external API calls, without caching results that could be reused. This creates unnecessary load and latency for data that does not change often. Adding an appropriate caching layer can significantly reduce this overhead.\n\nVisit the following resources to learn more:\n\n- [@article@No Caching antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "No Caching antipattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/"
-            }
-          ],
-          "order": "19.6",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "performance-monitoring",
-          "nodeId": "x1i3qWFtNNjd00-kAvFHw",
-          "title": "Performance Monitoring",
-          "description": "Performance monitoring tracks metrics like response time, throughput, and resource usage to understand how well a system is performing under real conditions. It helps identify bottlenecks, slow endpoints, or degrading trends before they cause noticeable problems for users. This data is often visualized on dashboards for ongoing observation.",
-          "content": "# Performance Monitoring\n \nPerformance monitoring tracks metrics like response time, throughput, and resource usage to understand how well a system is performing under real conditions. It helps identify bottlenecks, slow endpoints, or degrading trends before they cause noticeable problems for users. This data is often visualized on dashboards for ongoing observation.\n\nVisit the following resources to learn more:\n\n- [@article@Performance Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#performance-monitoring)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Performance Monitoring",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#performance-monitoring"
-            }
-          ],
-          "order": "19.7",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "security-monitoring",
-          "nodeId": "I_NfmDcBph8-oyFVFTknL",
-          "title": "Security Monitoring",
-          "description": "Security monitoring tracks events related to the security of a system, such as failed login attempts, unusual access patterns, or potential intrusions. It helps detect and respond to threats in real time, rather than discovering a breach after the fact. This often feeds into automated alerting or incident response processes.",
-          "content": "# Security Monitoring\n \nSecurity monitoring tracks events related to the security of a system, such as failed login attempts, unusual access patterns, or potential intrusions. It helps detect and respond to threats in real time, rather than discovering a breach after the fact. This often feeds into automated alerting or incident response processes.\n\nVisit the following resources to learn more:\n\n- [@article@Security Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#security-monitoring)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Security Monitoring",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#security-monitoring"
-            }
-          ],
-          "order": "19.8",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
-          "name": "usage-monitoring",
-          "nodeId": "eSZq74lROh5lllLyTBK5a",
-          "title": "Usage Monitoring",
-          "description": "Usage monitoring tracks how a system's resources and features are being used, such as request volume, active users, or feature adoption. This data helps with capacity planning and understanding which parts of a system need more investment. It is also useful for billing in systems with usage-based pricing.",
-          "content": "# Usage Monitoring\n \nUsage monitoring tracks how a system's resources and features are being used, such as request volume, active users, or feature adoption. This data helps with capacity planning and understanding which parts of a system need more investment. It is also useful for billing in systems with usage-based pricing.\n\nVisit the following resources to learn more:\n\n- [@article@Usage Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#usage-monitoring)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Usage Monitoring",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#usage-monitoring"
-            }
-          ],
-          "order": "19.9",
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
+          "_id": "6aab5fc513e4b2aeae8f446b",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.10",
           "name": "instrumentation",
           "nodeId": "Q0fKphqmPwjTD0dhqiP6K",
           "title": "Instrumentation",
@@ -1934,13 +2159,16 @@
               "url": "https://opentelemetry.io/docs/concepts/what-is-opentelemetry"
             }
           ],
-          "order": "19.10",
           "parentTopic": {
             "id": "hDFYlGFYwcwWXLmrxodFX",
             "title": "Monitoring"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f446c",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.11",
           "name": "visualization--alerts",
           "nodeId": "IwMOTpsYHApdvHZOhXtIw",
           "title": "Visualization & Alerts",
@@ -1953,7 +2181,187 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#visualizing-data-and-raising-alerts"
             }
           ],
-          "order": "19.11",
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4463",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.2",
+          "name": "synchronous-io",
+          "nodeId": "Ihnmxo_bVgZABDwg1QGGk",
+          "title": "Synchronous I/O",
+          "description": "Synchronous I/O blocks the calling thread until an input or output operation, like a network call or disk read, completes. Under high load, this ties up threads waiting on slow operations instead of doing useful work, which limits how many concurrent requests a system can handle. Switching to asynchronous I/O lets a thread continue other work while waiting for the operation to finish.",
+          "content": "# Synchronous I/O\n \nSynchronous I/O blocks the calling thread until an input or output operation, like a network call or disk read, completes. Under high load, this ties up threads waiting on slow operations instead of doing useful work, which limits how many concurrent requests a system can handle. Switching to asynchronous I/O lets a thread continue other work while waiting for the operation to finish.\n\nVisit the following resources to learn more:\n\n- [@article@What is Synchronous I/O antipattern?](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/synchronous-io/)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "What is Synchronous I/O antipattern?",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/synchronous-io/"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4464",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.3",
+          "name": "retry-storm",
+          "nodeId": "LNmAJmh2ndFtOQIpvX_ga",
+          "title": "Retry Storm",
+          "description": "A retry storm happens when many clients or services retry failed requests at the same time, often after a shared dependency recovers from an outage, overwhelming that dependency again right after it comes back up. This can turn a brief failure into a prolonged outage. Techniques like exponential backoff and jitter help spread out retries to avoid this.",
+          "content": "# Retry Storm\n \nA retry storm happens when many clients or services retry failed requests at the same time, often after a shared dependency recovers from an outage, overwhelming that dependency again right after it comes back up. This can turn a brief failure into a prolonged outage. Techniques like exponential backoff and jitter help spread out retries to avoid this.\n\nVisit the following resources to learn more:\n\n- [@article@Retry Storm antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/retry-storm/)\n- [@article@How To Avoid Retry Storms In Distributed Systems](https://faun.pub/how-to-avoid-retry-storms-in-distributed-systems-91bf34f43c7f)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Retry Storm antipattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/retry-storm/"
+            },
+            {
+              "type": "article",
+              "title": "How To Avoid Retry Storms In Distributed Systems",
+              "url": "https://faun.pub/how-to-avoid-retry-storms-in-distributed-systems-91bf34f43c7f"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4465",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.4",
+          "name": "availability-monitoring",
+          "nodeId": "rVrwaioGURvrqNBufF2dj",
+          "title": "Availability Monitoring",
+          "description": "Availability monitoring tracks whether a system or service is reachable and responding to requests from the perspective of its users. It often involves synthetic checks that simulate real user requests from different locations to measure uptime. This differs from health monitoring in that it focuses on the end-to-end experience rather than individual components.",
+          "content": "# Availability Monitoring\n \nAvailability monitoring tracks whether a system or service is reachable and responding to requests from the perspective of its users. It often involves synthetic checks that simulate real user requests from different locations to measure uptime. This differs from health monitoring in that it focuses on the end-to-end experience rather than individual components.\n\nVisit the following resources to learn more:\n\n- [@article@Availability Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#availability-monitoring)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Availability Monitoring",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#availability-monitoring"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4466",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.5",
+          "name": "extraneous-fetching",
+          "nodeId": "6u3XmtJFWyJnyZUnJcGYb",
+          "title": "Extraneous Fetching",
+          "description": "Extraneous fetching happens when an application retrieves more data than it actually needs for a given operation, wasting bandwidth and processing time. This often occurs from overly broad queries or APIs that always return full objects regardless of what the caller uses. Fetching only the required fields reduces unnecessary load on the system.",
+          "content": "# Extraneous Fetching\n \nExtraneous fetching happens when an application retrieves more data than it actually needs for a given operation, wasting bandwidth and processing time. This often occurs from overly broad queries or APIs that always return full objects regardless of what the caller uses. Fetching only the required fields reduces unnecessary load on the system.\n\nVisit the following resources to learn more:\n\n- [@article@Extraneous Fetching antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Extraneous Fetching antipattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4467",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.6",
+          "name": "no-caching",
+          "nodeId": "klvHk1_e03Jarn5T46QNi",
+          "title": "No Caching",
+          "description": "The no caching antipattern refers to an application that repeatedly performs expensive operations, like database queries or external API calls, without caching results that could be reused. This creates unnecessary load and latency for data that does not change often. Adding an appropriate caching layer can significantly reduce this overhead.",
+          "content": "# No Caching\n \nThe no caching antipattern refers to an application that repeatedly performs expensive operations, like database queries or external API calls, without caching results that could be reused. This creates unnecessary load and latency for data that does not change often. Adding an appropriate caching layer can significantly reduce this overhead.\n\nVisit the following resources to learn more:\n\n- [@article@No Caching antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "No Caching antipattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4468",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.7",
+          "name": "performance-monitoring",
+          "nodeId": "x1i3qWFtNNjd00-kAvFHw",
+          "title": "Performance Monitoring",
+          "description": "Performance monitoring tracks metrics like response time, throughput, and resource usage to understand how well a system is performing under real conditions. It helps identify bottlenecks, slow endpoints, or degrading trends before they cause noticeable problems for users. This data is often visualized on dashboards for ongoing observation.",
+          "content": "# Performance Monitoring\n \nPerformance monitoring tracks metrics like response time, throughput, and resource usage to understand how well a system is performing under real conditions. It helps identify bottlenecks, slow endpoints, or degrading trends before they cause noticeable problems for users. This data is often visualized on dashboards for ongoing observation.\n\nVisit the following resources to learn more:\n\n- [@article@Performance Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#performance-monitoring)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Performance Monitoring",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#performance-monitoring"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4469",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.8",
+          "name": "security-monitoring",
+          "nodeId": "I_NfmDcBph8-oyFVFTknL",
+          "title": "Security Monitoring",
+          "description": "Security monitoring tracks events related to the security of a system, such as failed login attempts, unusual access patterns, or potential intrusions. It helps detect and respond to threats in real time, rather than discovering a breach after the fact. This often feeds into automated alerting or incident response processes.",
+          "content": "# Security Monitoring\n \nSecurity monitoring tracks events related to the security of a system, such as failed login attempts, unusual access patterns, or potential intrusions. It helps detect and respond to threats in real time, rather than discovering a breach after the fact. This often feeds into automated alerting or incident response processes.\n\nVisit the following resources to learn more:\n\n- [@article@Security Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#security-monitoring)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Security Monitoring",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#security-monitoring"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f446a",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.9",
+          "name": "usage-monitoring",
+          "nodeId": "eSZq74lROh5lllLyTBK5a",
+          "title": "Usage Monitoring",
+          "description": "Usage monitoring tracks how a system's resources and features are being used, such as request volume, active users, or feature adoption. This data helps with capacity planning and understanding which parts of a system need more investment. It is also useful for billing in systems with usage-based pricing.",
+          "content": "# Usage Monitoring\n \nUsage monitoring tracks how a system's resources and features are being used, such as request volume, active users, or feature adoption. This data helps with capacity planning and understanding which parts of a system need more investment. It is also useful for billing in systems with usage-based pricing.\n\nVisit the following resources to learn more:\n\n- [@article@Usage Monitoring](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#usage-monitoring)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Usage Monitoring",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#usage-monitoring"
+            }
+          ],
           "parentTopic": {
             "id": "hDFYlGFYwcwWXLmrxodFX",
             "title": "Monitoring"
@@ -1983,6 +2391,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f446d",
+          "roadmapSlug": "system-design",
+          "moduleId": "THlzcZTNnPGLRiHPWT-Jv",
+          "order": "20.1",
           "name": "design--implementation",
           "nodeId": "PtJ7-v1VCLsyaWWYHYujV",
           "title": "Design and Implementation",
@@ -1995,7 +2407,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/category/design-implementation"
             }
           ],
-          "order": "20.1",
           "parentTopic": {
             "id": "THlzcZTNnPGLRiHPWT-Jv",
             "title": "Cloud Design Patterns"
@@ -2020,6 +2431,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f446e",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.1",
           "name": "strangler-fig",
           "nodeId": "VIbXf7Jh9PbQ9L-g6pHUG",
           "title": "Strangler fig",
@@ -2032,13 +2447,60 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig"
             }
           ],
-          "order": "21.1",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4477",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.10",
+          "name": "pipes--filters",
+          "nodeId": "WkoFezOXLf1H2XI9AtBtv",
+          "title": "Pipes and Filters",
+          "description": "Decompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.",
+          "content": "# Pipes and Filters\n\nDecompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.\n\nVisit the following resources to learn more:\n\n- [@article@Pipe and Filter Architectural Style](https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Pipe and Filter Architectural Style",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters"
+            }
+          ],
+          "parentTopic": {
+            "id": "dsWpta3WIBvv2K9pNVPo0",
+            "title": "Messaging"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4478",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.11",
+          "name": "ambassador",
+          "nodeId": "Hja4YF3JcgM6CPwB1mxmo",
+          "title": "Ambassador",
+          "description": "The ambassador pattern places a helper service in front of a client to handle networking concerns, like retries, monitoring, or protocol translation, on the client's behalf. This lets the main application focus on its core logic while the ambassador manages the complexity of communicating with external services. It is often implemented as a sidecar deployed alongside the client.",
+          "content": "# Ambassador\n \nThe ambassador pattern places a helper service in front of a client to handle networking concerns, like retries, monitoring, or protocol translation, on the client's behalf. This lets the main application focus on its core logic while the ambassador manages the complexity of communicating with external services. It is often implemented as a sidecar deployed alongside the client.\n\nVisit the following resources to learn more:\n\n- [@article@Ambassador pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/ambassador)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Ambassador pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/ambassador"
+            }
+          ],
+          "parentTopic": {
+            "id": "dsWpta3WIBvv2K9pNVPo0",
+            "title": "Messaging"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f446f",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.2",
           "name": "sidecar",
           "nodeId": "AAgOGrra5Yz3_eG6tD2Fx",
           "title": "Sidecar",
@@ -2051,13 +2513,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar"
             }
           ],
-          "order": "21.2",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4470",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.3",
           "name": "static-content-hosting",
           "nodeId": "izPT8NfJy1JC6h3i7GJYl",
           "title": "Static Content Hosting",
@@ -2070,13 +2535,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/static-content-hosting"
             }
           ],
-          "order": "21.3",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4471",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.4",
           "name": "valet-key",
           "nodeId": "stZOcr8EUBOK_ZB48uToj",
           "title": "Valet Key",
@@ -2089,13 +2557,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key"
             }
           ],
-          "order": "21.4",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4472",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.5",
           "name": "sequential-convoy",
           "nodeId": "VgvUWAC6JYFyPZKBRoEqf",
           "title": "Sequential Convoy",
@@ -2113,13 +2584,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sequential-convoy"
             }
           ],
-          "order": "21.5",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4473",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.6",
           "name": "leader-election",
           "nodeId": "beWKUIB6Za27yhxQwEYe3",
           "title": "Leader Election",
@@ -2132,13 +2606,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/leader-election"
             }
           ],
-          "order": "21.6",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4474",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.7",
           "name": "cqrs",
           "nodeId": "ivr3mh0OES5n86FI1PN4N",
           "title": "CQRS",
@@ -2151,13 +2628,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs"
             }
           ],
-          "order": "21.7",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4475",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.8",
           "name": "static-content-hosting",
           "nodeId": "-lKq-LT7EPK7r3xbXLgwS",
           "title": "Static Content Hosting",
@@ -2170,13 +2650,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/static-content-hosting"
             }
           ],
-          "order": "21.8",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4476",
+          "roadmapSlug": "system-design",
+          "moduleId": "dsWpta3WIBvv2K9pNVPo0",
+          "order": "21.9",
           "name": "scheduling-agent-supervisor",
           "nodeId": "uR1fU6pm7zTtdBcNgSRi4",
           "title": "Scheduling Agent Supervisor",
@@ -2189,45 +2672,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor"
             }
           ],
-          "order": "21.9",
-          "parentTopic": {
-            "id": "dsWpta3WIBvv2K9pNVPo0",
-            "title": "Messaging"
-          }
-        },
-        {
-          "name": "pipes--filters",
-          "nodeId": "WkoFezOXLf1H2XI9AtBtv",
-          "title": "Pipes and Filters",
-          "description": "Decompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.",
-          "content": "# Pipes and Filters\n\nDecompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.\n\nVisit the following resources to learn more:\n\n- [@article@Pipe and Filter Architectural Style](https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Pipe and Filter Architectural Style",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters"
-            }
-          ],
-          "order": "21.10",
-          "parentTopic": {
-            "id": "dsWpta3WIBvv2K9pNVPo0",
-            "title": "Messaging"
-          }
-        },
-        {
-          "name": "ambassador",
-          "nodeId": "Hja4YF3JcgM6CPwB1mxmo",
-          "title": "Ambassador",
-          "description": "The ambassador pattern places a helper service in front of a client to handle networking concerns, like retries, monitoring, or protocol translation, on the client's behalf. This lets the main application focus on its core logic while the ambassador manages the complexity of communicating with external services. It is often implemented as a sidecar deployed alongside the client.",
-          "content": "# Ambassador\n \nThe ambassador pattern places a helper service in front of a client to handle networking concerns, like retries, monitoring, or protocol translation, on the client's behalf. This lets the main application focus on its core logic while the ambassador manages the complexity of communicating with external services. It is often implemented as a sidecar deployed alongside the client.\n\nVisit the following resources to learn more:\n\n- [@article@Ambassador pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/ambassador)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Ambassador pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/ambassador"
-            }
-          ],
-          "order": "21.11",
           "parentTopic": {
             "id": "dsWpta3WIBvv2K9pNVPo0",
             "title": "Messaging"
@@ -2279,6 +2723,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4479",
+          "roadmapSlug": "system-design",
+          "moduleId": "DYkdM_L7T2GcTPAoZNnUR",
+          "order": "23.1",
           "name": "claim-check",
           "nodeId": "kl4upCnnZvJSf2uII1Pa0",
           "title": "Claim Check",
@@ -2291,13 +2739,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/claim-check"
             }
           ],
-          "order": "23.1",
           "parentTopic": {
             "id": "DYkdM_L7T2GcTPAoZNnUR",
             "title": "Reliability Patterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f447a",
+          "roadmapSlug": "system-design",
+          "moduleId": "DYkdM_L7T2GcTPAoZNnUR",
+          "order": "23.2",
           "name": "anti-corruption-layer",
           "nodeId": "4hi7LvjLcv8eR6m-uk8XQ",
           "title": "Anti-Corruption Layer",
@@ -2310,13 +2761,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer"
             }
           ],
-          "order": "23.2",
           "parentTopic": {
             "id": "DYkdM_L7T2GcTPAoZNnUR",
             "title": "Reliability Patterns"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f447b",
+          "roadmapSlug": "system-design",
+          "moduleId": "DYkdM_L7T2GcTPAoZNnUR",
+          "order": "23.3",
           "name": "async-request-reply",
           "nodeId": "eNFNXPsFiryVxFe4unVxk",
           "title": "Async Request Reply",
@@ -2329,7 +2783,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/async-request-reply"
             }
           ],
-          "order": "23.3",
           "parentTopic": {
             "id": "DYkdM_L7T2GcTPAoZNnUR",
             "title": "Reliability Patterns"
@@ -2388,6 +2841,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f447c",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.1",
           "name": "deployment-stamps",
           "nodeId": "FPPJw-I1cw8OxKwmDh0dT",
           "title": "Deployment Stamps",
@@ -2405,13 +2862,16 @@
               "url": "https://blog.devgenius.io/deployment-stamps-101-7c04a6f704a2"
             }
           ],
-          "order": "26.1",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f447d",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.2",
           "name": "deployment-stamps",
           "nodeId": "Ze471tPbAwlwZyU4oIzH9",
           "title": "Deployment Stamps",
@@ -2429,13 +2889,16 @@
               "url": "https://blog.devgenius.io/deployment-stamps-101-7c04a6f704a2"
             }
           ],
-          "order": "26.2",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f447e",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.3",
           "name": "bulkhead",
           "nodeId": "PLn9TF9GYnPcbpTdDMQbG",
           "title": "Bulkhead",
@@ -2453,13 +2916,16 @@
               "url": "https://dzone.com/articles/resilient-microservices-pattern-bulkhead-pattern"
             }
           ],
-          "order": "26.3",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f447f",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.4",
           "name": "geodes",
           "nodeId": "Ml9lPDGjRAJTHkBnX51Un",
           "title": "Geodes",
@@ -2477,13 +2943,16 @@
               "url": "https://study.com/academy/lesson/geode-formation-types-appearance.html"
             }
           ],
-          "order": "26.4",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4480",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.5",
           "name": "throttling",
           "nodeId": "6YVkguDOtwveyeP4Z1NL3",
           "title": "Throttling",
@@ -2496,13 +2965,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/throttling"
             }
           ],
-          "order": "26.5",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4481",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.6",
           "name": "geodes",
           "nodeId": "6hOSEZJZ7yezVN67h5gmS",
           "title": "Geodes",
@@ -2515,13 +2987,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/geodes"
             }
           ],
-          "order": "26.6",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4482",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.7",
           "name": "bulkhead",
           "nodeId": "IR2_kgs2U9rnAJiDBmpqK",
           "title": "Bulkhead",
@@ -2539,13 +3014,16 @@
               "url": "https://dzone.com/articles/resilient-microservices-pattern-bulkhead-pattern"
             }
           ],
-          "order": "26.7",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4483",
+          "roadmapSlug": "system-design",
+          "moduleId": "wlAWMjxZF6yav3ZXOScxH",
+          "order": "26.8",
           "name": "circuit-breaker",
           "nodeId": "O4zYDqvVWD7sMI27k_0Nl",
           "title": "Circuit Breaker",
@@ -2563,7 +3041,6 @@
               "url": "https://medium.com/geekculture/design-patterns-for-microservices-circuit-breaker-pattern-276249ffab33"
             }
           ],
-          "order": "26.8",
           "parentTopic": {
             "id": "wlAWMjxZF6yav3ZXOScxH",
             "title": "Resiliency"
@@ -2588,6 +3065,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4484",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.1",
           "name": "health-endpoint-monitoring",
           "nodeId": "cNJQoMNZmxNygWAJIA8HI",
           "title": "Health Endpoint Monitoring",
@@ -2605,13 +3086,82 @@
               "url": "https://www.oreilly.com/library/view/java-ee-8/9781788830621/5012c01e-90ca-4809-a210-d3736574f5b3.xhtml"
             }
           ],
-          "order": "27.1",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f448d",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.10",
+          "name": "gatekeeper",
+          "nodeId": "DTQJu0AvgWOhMFcOYqzTD",
+          "title": "Gatekeeper",
+          "description": "Protect applications and services using a dedicated host instance that acts as a broker between clients and the application or service, validates and sanitizes requests, and passes requests and data between them. This can provide an additional layer of security and limit the system's attack surface.",
+          "content": "# Gatekeeper\n\nProtect applications and services using a dedicated host instance that acts as a broker between clients and the application or service, validates and sanitizes requests, and passes requests and data between them. This can provide an additional layer of security and limit the system's attack surface.\n\nVisit the following resources to learn more:\n\n- [@article@Gatekeeper pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gatekeeper)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Gatekeeper pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gatekeeper"
+            }
+          ],
+          "parentTopic": {
+            "id": "ZvYpE6-N5dAtRDIwqcAu6",
+            "title": "Security"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f448e",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.11",
+          "name": "retry",
+          "nodeId": "xX_9VGUaOkBYFH3jPjnww",
+          "title": "Retry",
+          "description": "The retry pattern automatically re-attempts a failed operation, under the assumption that many failures in distributed systems are transient and will succeed if tried again shortly after. Retries are usually combined with strategies like exponential backoff to avoid overwhelming a struggling service. Care is needed to ensure the retried operation is safe to repeat, ideally by making it idempotent.",
+          "content": "# Retry\n \nThe retry pattern automatically re-attempts a failed operation, under the assumption that many failures in distributed systems are transient and will succeed if tried again shortly after. Retries are usually combined with strategies like exponential backoff to avoid overwhelming a struggling service. Care is needed to ensure the retried operation is safe to repeat, ideally by making it idempotent.\n\nVisit the following resources to learn more:\n\n- [@article@Retry pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/retry)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Retry pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry"
+            }
+          ],
+          "parentTopic": {
+            "id": "ZvYpE6-N5dAtRDIwqcAu6",
+            "title": "Security"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f448f",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.12",
+          "name": "scheduler-agent-supervisor",
+          "nodeId": "RTEJHZ26znfBLrpQPtNvn",
+          "title": "Scheduling Agent Supervisor",
+          "description": "Coordinate a set of distributed actions as a single operation. If any of the actions fail, try to handle the failures transparently, or else undo the work that was performed, so the entire operation succeeds or fails as a whole. This can add resiliency to a distributed system, by enabling it to recover and retry actions that fail due to transient exceptions, long-lasting faults, and process failures.",
+          "content": "# Scheduling Agent Supervisor\n\nCoordinate a set of distributed actions as a single operation. If any of the actions fail, try to handle the failures transparently, or else undo the work that was performed, so the entire operation succeeds or fails as a whole. This can add resiliency to a distributed system, by enabling it to recover and retry actions that fail due to transient exceptions, long-lasting faults, and process failures.\n\nVisit the following resources to learn more:\n\n- [@article@Scheduler Agent Supervisor pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Scheduler Agent Supervisor pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor"
+            }
+          ],
+          "parentTopic": {
+            "id": "ZvYpE6-N5dAtRDIwqcAu6",
+            "title": "Security"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4485",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.2",
           "name": "health-endpoint-monitoring",
           "nodeId": "uK5o7NgDvr2pV0ulF0Fh9",
           "title": "Health Endpoint Monitoring",
@@ -2629,13 +3179,16 @@
               "url": "https://www.oreilly.com/library/view/java-ee-8/9781788830621/5012c01e-90ca-4809-a210-d3736574f5b3.xhtml"
             }
           ],
-          "order": "27.2",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4486",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.3",
           "name": "compensating-transaction",
           "nodeId": "MNlWNjrG8eh5OzPVlbb9t",
           "title": "Compensating Transaction",
@@ -2653,13 +3206,16 @@
               "url": "https://en.wikipedia.org/wiki/Compensating_transaction"
             }
           ],
-          "order": "27.3",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4487",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.4",
           "name": "queue-based-load-leveling",
           "nodeId": "-M3Zd8w79sKBAY6_aJRE8",
           "title": "Queue-Based load leveling",
@@ -2672,13 +3228,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling"
             }
           ],
-          "order": "27.4",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4488",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.5",
           "name": "circuit-breaker",
           "nodeId": "D1OmCoqvd3-_af3u0ciHr",
           "title": "Circuit Breaker",
@@ -2696,13 +3255,16 @@
               "url": "https://medium.com/geekculture/design-patterns-for-microservices-circuit-breaker-pattern-276249ffab33"
             }
           ],
-          "order": "27.5",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4489",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.6",
           "name": "health-endpoint-monitoring",
           "nodeId": "CKCNk3obx4u43rBqUj2Yf",
           "title": "Health Endpoint Monitoring",
@@ -2720,13 +3282,16 @@
               "url": "https://www.oreilly.com/library/view/java-ee-8/9781788830621/5012c01e-90ca-4809-a210-d3736574f5b3.xhtml"
             }
           ],
-          "order": "27.6",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f448a",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.7",
           "name": "leader-election",
           "nodeId": "AJLBFyAsEdQYF6ygO0MmQ",
           "title": "Leader Election",
@@ -2739,13 +3304,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/leader-election"
             }
           ],
-          "order": "27.7",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f448b",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.8",
           "name": "federated-identity",
           "nodeId": "lHPl-kr1ArblR7bJeQEB9",
           "title": "Federated Identity pattern",
@@ -2758,13 +3326,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/federated-identity"
             }
           ],
-          "order": "27.8",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f448c",
+          "roadmapSlug": "system-design",
+          "moduleId": "ZvYpE6-N5dAtRDIwqcAu6",
+          "order": "27.9",
           "name": "queue-based-load-leveling",
           "nodeId": "NybkOwl1lgaglZPRJQJ_Z",
           "title": "Queue-Based load leveling",
@@ -2777,64 +3348,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling"
             }
           ],
-          "order": "27.9",
-          "parentTopic": {
-            "id": "ZvYpE6-N5dAtRDIwqcAu6",
-            "title": "Security"
-          }
-        },
-        {
-          "name": "gatekeeper",
-          "nodeId": "DTQJu0AvgWOhMFcOYqzTD",
-          "title": "Gatekeeper",
-          "description": "Protect applications and services using a dedicated host instance that acts as a broker between clients and the application or service, validates and sanitizes requests, and passes requests and data between them. This can provide an additional layer of security and limit the system's attack surface.",
-          "content": "# Gatekeeper\n\nProtect applications and services using a dedicated host instance that acts as a broker between clients and the application or service, validates and sanitizes requests, and passes requests and data between them. This can provide an additional layer of security and limit the system's attack surface.\n\nVisit the following resources to learn more:\n\n- [@article@Gatekeeper pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gatekeeper)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Gatekeeper pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gatekeeper"
-            }
-          ],
-          "order": "27.10",
-          "parentTopic": {
-            "id": "ZvYpE6-N5dAtRDIwqcAu6",
-            "title": "Security"
-          }
-        },
-        {
-          "name": "retry",
-          "nodeId": "xX_9VGUaOkBYFH3jPjnww",
-          "title": "Retry",
-          "description": "The retry pattern automatically re-attempts a failed operation, under the assumption that many failures in distributed systems are transient and will succeed if tried again shortly after. Retries are usually combined with strategies like exponential backoff to avoid overwhelming a struggling service. Care is needed to ensure the retried operation is safe to repeat, ideally by making it idempotent.",
-          "content": "# Retry\n \nThe retry pattern automatically re-attempts a failed operation, under the assumption that many failures in distributed systems are transient and will succeed if tried again shortly after. Retries are usually combined with strategies like exponential backoff to avoid overwhelming a struggling service. Care is needed to ensure the retried operation is safe to repeat, ideally by making it idempotent.\n\nVisit the following resources to learn more:\n\n- [@article@Retry pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/retry)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Retry pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry"
-            }
-          ],
-          "order": "27.11",
-          "parentTopic": {
-            "id": "ZvYpE6-N5dAtRDIwqcAu6",
-            "title": "Security"
-          }
-        },
-        {
-          "name": "scheduler-agent-supervisor",
-          "nodeId": "RTEJHZ26znfBLrpQPtNvn",
-          "title": "Scheduling Agent Supervisor",
-          "description": "Coordinate a set of distributed actions as a single operation. If any of the actions fail, try to handle the failures transparently, or else undo the work that was performed, so the entire operation succeeds or fails as a whole. This can add resiliency to a distributed system, by enabling it to recover and retry actions that fail due to transient exceptions, long-lasting faults, and process failures.",
-          "content": "# Scheduling Agent Supervisor\n\nCoordinate a set of distributed actions as a single operation. If any of the actions fail, try to handle the failures transparently, or else undo the work that was performed, so the entire operation succeeds or fails as a whole. This can add resiliency to a distributed system, by enabling it to recover and retry actions that fail due to transient exceptions, long-lasting faults, and process failures.\n\nVisit the following resources to learn more:\n\n- [@article@Scheduler Agent Supervisor pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Scheduler Agent Supervisor pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor"
-            }
-          ],
-          "order": "27.12",
           "parentTopic": {
             "id": "ZvYpE6-N5dAtRDIwqcAu6",
             "title": "Security"
@@ -2853,6 +3366,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc513e4b2aeae8f4490",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.1",
           "name": "backends-for-frontend",
           "nodeId": "n4It-lr7FFtSY83DcGydX",
           "title": "Backends for Frontend",
@@ -2865,13 +3382,236 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends"
             }
           ],
-          "order": "28.1",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4499",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.10",
+          "name": "gateway-aggregation",
+          "nodeId": "bANGLm_5zR9mqMd6Oox8s",
+          "title": "Gateway Aggregation",
+          "description": "Gateway aggregation combines multiple backend requests into a single request from the client's perspective, with the gateway making the individual calls to different services and merging the results. This reduces the number of round trips a client needs to make, which is especially useful for clients on slower networks, like mobile devices. It does add some coordination overhead at the gateway itself.",
+          "content": "# Gateway Aggregation\n \nGateway aggregation combines multiple backend requests into a single request from the client's perspective, with the gateway making the individual calls to different services and merging the results. This reduces the number of round trips a client needs to make, which is especially useful for clients on slower networks, like mobile devices. It does add some coordination overhead at the gateway itself.\n\nVisit the following resources to learn more:\n\n- [@article@Gateway Aggregation pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Gateway Aggregation pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f449a",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.11",
+          "name": "gateway-offloading",
+          "nodeId": "0SOWAA8hrLM-WsG5k66fd",
+          "title": "Gateway Offloading",
+          "description": "Offload shared or specialized service functionality to a gateway proxy. This pattern can simplify application development by moving shared service functionality, such as the use of SSL certificates, from other parts of the application into the gateway.",
+          "content": "# Gateway Offloading\n\nOffload shared or specialized service functionality to a gateway proxy. This pattern can simplify application development by moving shared service functionality, such as the use of SSL certificates, from other parts of the application into the gateway.\n\nVisit the following resources to learn more:\n\n- [@article@Gateway Offloading pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-offloading)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Gateway Offloading pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-offloading"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f449b",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.12",
+          "name": "gateway-routing",
+          "nodeId": "LXH_mDlILqcyIKtMYTWqy",
+          "title": "Gateway Routing",
+          "description": "Gateway routing uses a single entry point to route incoming requests to different backend services based on the request's path, headers, or other attributes. This lets a system present a unified API to clients while internally splitting functionality across multiple services. It also makes it easier to change backend services without affecting how clients connect.",
+          "content": "# Gateway Routing\n \nGateway routing uses a single entry point to route incoming requests to different backend services based on the request's path, headers, or other attributes. This lets a system present a unified API to clients while internally splitting functionality across multiple services. It also makes it easier to change backend services without affecting how clients connect.\n\nVisit the following resources to learn more:\n\n- [@article@Gateway Routing pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-routing)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Gateway Routing pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-routing"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f449c",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.13",
+          "name": "index-table",
+          "nodeId": "AH0nVeVsfYOjcI3vZvcdz",
+          "title": "Index Table",
+          "description": "Create indexes over the fields in data stores that are frequently referenced by queries. This pattern can improve query performance by allowing applications to more quickly locate the data to retrieve from a data store.",
+          "content": "# Index Table\n\nCreate indexes over the fields in data stores that are frequently referenced by queries. This pattern can improve query performance by allowing applications to more quickly locate the data to retrieve from a data store.\n\nVisit the following resources to learn more:\n\n- [@article@Index Table pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/index-table)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Index Table pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/index-table"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f449d",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.14",
+          "name": "materialized-view",
+          "nodeId": "WB7vQ4IJ0TPh2MbZvxP6V",
+          "title": "Materialized View",
+          "description": "Generate prepopulated views over the data in one or more data stores when the data isn't ideally formatted for required query operations. This can help support efficient querying and data extraction, and improve application performance.",
+          "content": "# Materialized View\n\nGenerate prepopulated views over the data in one or more data stores when the data isn't ideally formatted for required query operations. This can help support efficient querying and data extraction, and improve application performance.\n\nVisit the following resources to learn more:\n\n- [@article@Materialized View pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Materialized View pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f449e",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.15",
+          "name": "noisy-neighbor",
+          "nodeId": "r7uQxmurvfsYtTCieHqly",
+          "title": "Noisy Neighbor",
+          "description": "The noisy neighbor problem occurs when one tenant or workload on a shared resource consumes a disproportionate amount of capacity, degrading performance for other tenants sharing the same infrastructure. It commonly shows up in multi-tenant systems or shared cloud infrastructure. Solutions include resource quotas, throttling, and isolating workloads onto separate resources.",
+          "content": "# Noisy Neighbor\n \nThe noisy neighbor problem occurs when one tenant or workload on a shared resource consumes a disproportionate amount of capacity, degrading performance for other tenants sharing the same infrastructure. It commonly shows up in multi-tenant systems or shared cloud infrastructure. Solutions include resource quotas, throttling, and isolating workloads onto separate resources.\n\nVisit the following resources to learn more:\n\n- [@article@Noisy Neighbor antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/noisy-neighbor/noisy-neighbor)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Noisy Neighbor antipattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/noisy-neighbor/noisy-neighbor"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f449f",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.16",
+          "name": "pipes-and-filters",
+          "nodeId": "siXdR3TB9-4wx_qWieJ5w",
+          "title": "Pipes and Filters",
+          "description": "Decompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.",
+          "content": "# Pipes and Filters\n\nDecompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.\n\nVisit the following resources to learn more:\n\n- [@article@Pipes and Filters pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Pipes and Filters pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f44a0",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.17",
+          "name": "priority-queue",
+          "nodeId": "DZcZEOi7h3u0744YhASet",
+          "title": "Priority Queue",
+          "description": "Prioritize requests sent to services so that requests with a higher priority are received and processed more quickly than those with a lower priority. This pattern is useful in applications that offer different service level guarantees to individual clients.",
+          "content": "# Priority Queue\n\nPrioritize requests sent to services so that requests with a higher priority are received and processed more quickly than those with a lower priority. This pattern is useful in applications that offer different service level guarantees to individual clients.\n\nVisit the following resources to learn more:\n\n- [@article@Priority Queue pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/priority-queue)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Priority Queue pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/priority-queue"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f44a1",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.18",
+          "name": "publishersubscriber",
+          "nodeId": "2ryzJhRDTo98gGgn9mAxR",
+          "title": "Publisher/Subscriber",
+          "description": "The publisher/subscriber pattern lets a component, the publisher, broadcast messages to multiple subscribers without knowing who or how many are listening. Subscribers register interest in certain types of messages and receive them as they are published. This decouples producers from consumers entirely, since neither needs direct knowledge of the other.",
+          "content": "# Publisher/Subscriber\n \nThe publisher/subscriber pattern lets a component, the publisher, broadcast messages to multiple subscribers without knowing who or how many are listening. Subscribers register interest in certain types of messages and receive them as they are published. This decouples producers from consumers entirely, since neither needs direct knowledge of the other.\n\nVisit the following resources to learn more:\n\n- [@article@Publisher-Subscriber pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Publisher-Subscriber pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f44a2",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.19",
+          "name": "queue-based-load-leveling",
+          "nodeId": "LncTxPg-wx8loy55r5NmV",
+          "title": "Queue-Based Load Leveling",
+          "description": "Use a queue that acts as a buffer between a task and a service it invokes in order to smooth intermittent heavy loads that can cause the service to fail or the task to time out. This can help to minimize the impact of peaks in demand on availability and responsiveness for both the task and the service.",
+          "content": "# Queue-Based Load Leveling\n\nUse a queue that acts as a buffer between a task and a service it invokes in order to smooth intermittent heavy loads that can cause the service to fail or the task to time out. This can help to minimize the impact of peaks in demand on availability and responsiveness for both the task and the service.\n\nVisit the following resources to learn more:\n\n- [@article@Queue-Based Load Leveling pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Queue-Based Load Leveling pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4491",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.2",
           "name": "cache-aside",
           "nodeId": "PK4V9OWNVi8StdA2N13X2",
           "title": "Cache Aside",
@@ -2884,13 +3624,60 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
             }
           ],
-          "order": "28.2",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f44a3",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.20",
+          "name": "sharding",
+          "nodeId": "R6YehzA3X6DDo6oGBoBAx",
+          "title": "Sharding",
+          "description": "Sharding splits a database horizontally, distributing rows of the same table across multiple database servers based on a shard key, such as user ID. Each shard holds a subset of the total data, which allows the system to scale beyond what a single server could handle. Choosing a good shard key is critical, since a poor choice can lead to uneven load across shards.",
+          "content": "# Sharding\n \nSharding splits a database horizontally, distributing rows of the same table across multiple database servers based on a shard key, such as user ID. Each shard holds a subset of the total data, which allows the system to scale beyond what a single server could handle. Choosing a good shard key is critical, since a poor choice can lead to uneven load across shards.\n\nVisit the following resources to learn more:\n\n- [@article@Sharding pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Sharding pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f44a4",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.21",
+          "name": "valet-key",
+          "nodeId": "VltZgIrApHOwZ8YHvdmHB",
+          "title": "Valet Key",
+          "description": "Use a token that provides clients with restricted direct access to a specific resource, in order to offload data transfer from the application. This is particularly useful in applications that use cloud-hosted storage systems or queues, and can minimize cost and maximize scalability and performance.",
+          "content": "# Valet Key\n\nUse a token that provides clients with restricted direct access to a specific resource, in order to offload data transfer from the application. This is particularly useful in applications that use cloud-hosted storage systems or queues, and can minimize cost and maximize scalability and performance.\n\nVisit the following resources to learn more:\n\n- [@article@Valet Key pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Valet Key pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4492",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.3",
           "name": "chatty-io",
           "nodeId": "0IzQwuYi_E00bJwxDuw2B",
           "title": "Chatty I/O",
@@ -2903,13 +3690,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/chatty-io/"
             }
           ],
-          "order": "28.3",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4493",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.4",
           "name": "choreography",
           "nodeId": "aCzRgUkVBvtHUeLU6p5ZH",
           "title": "Choreography",
@@ -2922,13 +3712,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/choreography"
             }
           ],
-          "order": "28.4",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4494",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.5",
           "name": "competing-consumers",
           "nodeId": "9Ld07KLOqP0ICtXEjngYM",
           "title": "Competing Consumers",
@@ -2941,13 +3734,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/competing-consumers"
             }
           ],
-          "order": "28.5",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4495",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.6",
           "name": "compute-resource-consolidation",
           "nodeId": "ODjVoXnvJasPvCS2A5iMO",
           "title": "Compute Resource Consolidation",
@@ -2960,13 +3756,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/compute-resource-consolidation"
             }
           ],
-          "order": "28.6",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4496",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.7",
           "name": "cqrs",
           "nodeId": "LTD3dn05c0ruUJW0IQO7z",
           "title": "CQRS",
@@ -2979,13 +3778,16 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs"
             }
           ],
-          "order": "28.7",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4497",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.8",
           "name": "event-sourcing",
           "nodeId": "7OgRKlwFqrk3XO2z49EI1",
           "title": "Event Sourcing",
@@ -3003,13 +3805,16 @@
               "url": "https://www.youtube.com/watch?v=xPmQxYIi5fA&list=PLCl5BUbK0jXt5l18S5UNAoUc4eQ2PJDye"
             }
           ],
-          "order": "28.8",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
           }
         },
         {
+          "_id": "6aab5fc513e4b2aeae8f4498",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.9",
           "name": "external-config-store",
           "nodeId": "BrgXwf7g2F-6Rqfjryvpj",
           "title": "External Configuration Store",
@@ -3022,235 +3827,6 @@
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/external-configuration-store"
             }
           ],
-          "order": "28.9",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "gateway-aggregation",
-          "nodeId": "bANGLm_5zR9mqMd6Oox8s",
-          "title": "Gateway Aggregation",
-          "description": "Gateway aggregation combines multiple backend requests into a single request from the client's perspective, with the gateway making the individual calls to different services and merging the results. This reduces the number of round trips a client needs to make, which is especially useful for clients on slower networks, like mobile devices. It does add some coordination overhead at the gateway itself.",
-          "content": "# Gateway Aggregation\n \nGateway aggregation combines multiple backend requests into a single request from the client's perspective, with the gateway making the individual calls to different services and merging the results. This reduces the number of round trips a client needs to make, which is especially useful for clients on slower networks, like mobile devices. It does add some coordination overhead at the gateway itself.\n\nVisit the following resources to learn more:\n\n- [@article@Gateway Aggregation pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Gateway Aggregation pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation"
-            }
-          ],
-          "order": "28.10",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "gateway-offloading",
-          "nodeId": "0SOWAA8hrLM-WsG5k66fd",
-          "title": "Gateway Offloading",
-          "description": "Offload shared or specialized service functionality to a gateway proxy. This pattern can simplify application development by moving shared service functionality, such as the use of SSL certificates, from other parts of the application into the gateway.",
-          "content": "# Gateway Offloading\n\nOffload shared or specialized service functionality to a gateway proxy. This pattern can simplify application development by moving shared service functionality, such as the use of SSL certificates, from other parts of the application into the gateway.\n\nVisit the following resources to learn more:\n\n- [@article@Gateway Offloading pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-offloading)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Gateway Offloading pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-offloading"
-            }
-          ],
-          "order": "28.11",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "gateway-routing",
-          "nodeId": "LXH_mDlILqcyIKtMYTWqy",
-          "title": "Gateway Routing",
-          "description": "Gateway routing uses a single entry point to route incoming requests to different backend services based on the request's path, headers, or other attributes. This lets a system present a unified API to clients while internally splitting functionality across multiple services. It also makes it easier to change backend services without affecting how clients connect.",
-          "content": "# Gateway Routing\n \nGateway routing uses a single entry point to route incoming requests to different backend services based on the request's path, headers, or other attributes. This lets a system present a unified API to clients while internally splitting functionality across multiple services. It also makes it easier to change backend services without affecting how clients connect.\n\nVisit the following resources to learn more:\n\n- [@article@Gateway Routing pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-routing)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Gateway Routing pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-routing"
-            }
-          ],
-          "order": "28.12",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "index-table",
-          "nodeId": "AH0nVeVsfYOjcI3vZvcdz",
-          "title": "Index Table",
-          "description": "Create indexes over the fields in data stores that are frequently referenced by queries. This pattern can improve query performance by allowing applications to more quickly locate the data to retrieve from a data store.",
-          "content": "# Index Table\n\nCreate indexes over the fields in data stores that are frequently referenced by queries. This pattern can improve query performance by allowing applications to more quickly locate the data to retrieve from a data store.\n\nVisit the following resources to learn more:\n\n- [@article@Index Table pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/index-table)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Index Table pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/index-table"
-            }
-          ],
-          "order": "28.13",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "materialized-view",
-          "nodeId": "WB7vQ4IJ0TPh2MbZvxP6V",
-          "title": "Materialized View",
-          "description": "Generate prepopulated views over the data in one or more data stores when the data isn't ideally formatted for required query operations. This can help support efficient querying and data extraction, and improve application performance.",
-          "content": "# Materialized View\n\nGenerate prepopulated views over the data in one or more data stores when the data isn't ideally formatted for required query operations. This can help support efficient querying and data extraction, and improve application performance.\n\nVisit the following resources to learn more:\n\n- [@article@Materialized View pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Materialized View pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view"
-            }
-          ],
-          "order": "28.14",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "noisy-neighbor",
-          "nodeId": "r7uQxmurvfsYtTCieHqly",
-          "title": "Noisy Neighbor",
-          "description": "The noisy neighbor problem occurs when one tenant or workload on a shared resource consumes a disproportionate amount of capacity, degrading performance for other tenants sharing the same infrastructure. It commonly shows up in multi-tenant systems or shared cloud infrastructure. Solutions include resource quotas, throttling, and isolating workloads onto separate resources.",
-          "content": "# Noisy Neighbor\n \nThe noisy neighbor problem occurs when one tenant or workload on a shared resource consumes a disproportionate amount of capacity, degrading performance for other tenants sharing the same infrastructure. It commonly shows up in multi-tenant systems or shared cloud infrastructure. Solutions include resource quotas, throttling, and isolating workloads onto separate resources.\n\nVisit the following resources to learn more:\n\n- [@article@Noisy Neighbor antipattern](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/noisy-neighbor/noisy-neighbor)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Noisy Neighbor antipattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/noisy-neighbor/noisy-neighbor"
-            }
-          ],
-          "order": "28.15",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "pipes-and-filters",
-          "nodeId": "siXdR3TB9-4wx_qWieJ5w",
-          "title": "Pipes and Filters",
-          "description": "Decompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.",
-          "content": "# Pipes and Filters\n\nDecompose a task that performs complex processing into a series of separate elements that can be reused. This can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.\n\nVisit the following resources to learn more:\n\n- [@article@Pipes and Filters pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Pipes and Filters pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters"
-            }
-          ],
-          "order": "28.16",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "priority-queue",
-          "nodeId": "DZcZEOi7h3u0744YhASet",
-          "title": "Priority Queue",
-          "description": "Prioritize requests sent to services so that requests with a higher priority are received and processed more quickly than those with a lower priority. This pattern is useful in applications that offer different service level guarantees to individual clients.",
-          "content": "# Priority Queue\n\nPrioritize requests sent to services so that requests with a higher priority are received and processed more quickly than those with a lower priority. This pattern is useful in applications that offer different service level guarantees to individual clients.\n\nVisit the following resources to learn more:\n\n- [@article@Priority Queue pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/priority-queue)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Priority Queue pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/priority-queue"
-            }
-          ],
-          "order": "28.17",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "publishersubscriber",
-          "nodeId": "2ryzJhRDTo98gGgn9mAxR",
-          "title": "Publisher/Subscriber",
-          "description": "The publisher/subscriber pattern lets a component, the publisher, broadcast messages to multiple subscribers without knowing who or how many are listening. Subscribers register interest in certain types of messages and receive them as they are published. This decouples producers from consumers entirely, since neither needs direct knowledge of the other.",
-          "content": "# Publisher/Subscriber\n \nThe publisher/subscriber pattern lets a component, the publisher, broadcast messages to multiple subscribers without knowing who or how many are listening. Subscribers register interest in certain types of messages and receive them as they are published. This decouples producers from consumers entirely, since neither needs direct knowledge of the other.\n\nVisit the following resources to learn more:\n\n- [@article@Publisher-Subscriber pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Publisher-Subscriber pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber"
-            }
-          ],
-          "order": "28.18",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "queue-based-load-leveling",
-          "nodeId": "LncTxPg-wx8loy55r5NmV",
-          "title": "Queue-Based Load Leveling",
-          "description": "Use a queue that acts as a buffer between a task and a service it invokes in order to smooth intermittent heavy loads that can cause the service to fail or the task to time out. This can help to minimize the impact of peaks in demand on availability and responsiveness for both the task and the service.",
-          "content": "# Queue-Based Load Leveling\n\nUse a queue that acts as a buffer between a task and a service it invokes in order to smooth intermittent heavy loads that can cause the service to fail or the task to time out. This can help to minimize the impact of peaks in demand on availability and responsiveness for both the task and the service.\n\nVisit the following resources to learn more:\n\n- [@article@Queue-Based Load Leveling pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Queue-Based Load Leveling pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling"
-            }
-          ],
-          "order": "28.19",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "sharding",
-          "nodeId": "R6YehzA3X6DDo6oGBoBAx",
-          "title": "Sharding",
-          "description": "Sharding splits a database horizontally, distributing rows of the same table across multiple database servers based on a shard key, such as user ID. Each shard holds a subset of the total data, which allows the system to scale beyond what a single server could handle. Choosing a good shard key is critical, since a poor choice can lead to uneven load across shards.",
-          "content": "# Sharding\n \nSharding splits a database horizontally, distributing rows of the same table across multiple database servers based on a shard key, such as user ID. Each shard holds a subset of the total data, which allows the system to scale beyond what a single server could handle. Choosing a good shard key is critical, since a poor choice can lead to uneven load across shards.\n\nVisit the following resources to learn more:\n\n- [@article@Sharding pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Sharding pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding"
-            }
-          ],
-          "order": "28.20",
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
-          "name": "valet-key",
-          "nodeId": "VltZgIrApHOwZ8YHvdmHB",
-          "title": "Valet Key",
-          "description": "Use a token that provides clients with restricted direct access to a specific resource, in order to offload data transfer from the application. This is particularly useful in applications that use cloud-hosted storage systems or queues, and can minimize cost and maximize scalability and performance.",
-          "content": "# Valet Key\n\nUse a token that provides clients with restricted direct access to a specific resource, in order to offload data transfer from the application. This is particularly useful in applications that use cloud-hosted storage systems or queues, and can minimize cost and maximize scalability and performance.\n\nVisit the following resources to learn more:\n\n- [@article@Valet Key pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Valet Key pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key"
-            }
-          ],
-          "order": "28.21",
           "parentTopic": {
             "id": "extra-topics",
             "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
@@ -3259,6 +3835,8 @@
       ]
     }
   ],
+  "title": "System Design",
+  "topicCount": 121,
   "topics": [
     {
       "name": "introduction",
@@ -6480,219 +7058,5 @@
       }
     }
   ],
-  "graph": {
-    "edges": [
-      {
-        "source": "iogwMmOvub2ZF4zgg6WyF",
-        "target": "_hYN0gEi9BL24nptEtXWU",
-        "type": "flow"
-      },
-      {
-        "source": "GHe8V-REu1loRpDnHbyUn",
-        "target": "ezptoTqeaepByegxS5kHL",
-        "type": "flow"
-      },
-      {
-        "source": "ezptoTqeaepByegxS5kHL",
-        "target": "DOESIlBThd_wp2uOSd_CS",
-        "type": "flow"
-      },
-      {
-        "source": "DOESIlBThd_wp2uOSd_CS",
-        "target": "Uk6J8JRcKVEFz4_8rLfnQ",
-        "type": "flow"
-      },
-      {
-        "source": "Uk6J8JRcKVEFz4_8rLfnQ",
-        "target": "O730v5Ww3ByAiBSs6fwyM",
-        "type": "flow"
-      },
-      {
-        "source": "14KqLKgh090Rb3MDwelWY",
-        "target": "XXuzTrP5UNVwSpAk-tAGr",
-        "type": "flow"
-      },
-      {
-        "source": "XXuzTrP5UNVwSpAk-tAGr",
-        "target": "5FXwwRMNBhG7LT5ub6t2L",
-        "type": "flow"
-      },
-      {
-        "source": "5FXwwRMNBhG7LT5ub6t2L",
-        "target": "-X4g8kljgVBOBcf1DDzgi",
-        "type": "flow"
-      },
-      {
-        "source": "-X4g8kljgVBOBcf1DDzgi",
-        "target": "84N4XY31PwXRntXX1sdCU",
-        "type": "flow"
-      },
-      {
-        "source": "3pRi8M4xQXsehkdfUNtYL",
-        "target": "uQFzD_ryd-8Dr1ppjorYJ",
-        "type": "flow"
-      },
-      {
-        "source": "p--uEm6klLx_hKxKJiXE5",
-        "target": "hDFYlGFYwcwWXLmrxodFX",
-        "type": "flow"
-      },
-      {
-        "source": "THlzcZTNnPGLRiHPWT-Jv",
-        "target": "DYkdM_L7T2GcTPAoZNnUR",
-        "type": "flow"
-      },
-      {
-        "source": "DYkdM_L7T2GcTPAoZNnUR",
-        "target": "0vLaVNJaJSHZ_bHli6Qzs",
-        "type": "flow"
-      },
-      {
-        "source": "_hYN0gEi9BL24nptEtXWU",
-        "target": "idLHBxhvcIqZTqmh_E8Az",
-        "type": "subtopic"
-      },
-      {
-        "source": "_hYN0gEi9BL24nptEtXWU",
-        "target": "os3Pa6W9SSNEzgmlBbglQ",
-        "type": "subtopic"
-      },
-      {
-        "source": "GHe8V-REu1loRpDnHbyUn",
-        "target": "rRDGVynX43inSeQ9lR_FS",
-        "type": "subtopic"
-      },
-      {
-        "source": "GHe8V-REu1loRpDnHbyUn",
-        "target": "EKD5AikZtwjtsEYRPJhQ2",
-        "type": "subtopic"
-      },
-      {
-        "source": "GHe8V-REu1loRpDnHbyUn",
-        "target": "JjB7eB8gdRCAYf5M0RcT7",
-        "type": "subtopic"
-      },
-      {
-        "source": "zoViI4kzpKIxpU20T89K_",
-        "target": "2gRIstNT-fTkv5GZ692gx",
-        "type": "subtopic"
-      },
-      {
-        "source": "DOESIlBThd_wp2uOSd_CS",
-        "target": "NEsPjQifNDlZJE-2YLVl1",
-        "type": "subtopic"
-      },
-      {
-        "source": "DOESIlBThd_wp2uOSd_CS",
-        "target": "zoViI4kzpKIxpU20T89K_",
-        "type": "subtopic"
-      },
-      {
-        "source": "O730v5Ww3ByAiBSs6fwyM",
-        "target": "HkXiEMLqxJoQyAHav3ccL",
-        "type": "subtopic"
-      },
-      {
-        "source": "O730v5Ww3ByAiBSs6fwyM",
-        "target": "uIerrf_oziiLg-KEyz8WM",
-        "type": "subtopic"
-      },
-      {
-        "source": "14KqLKgh090Rb3MDwelWY",
-        "target": "ocdcbhHrwjJX0KWgmsOL6",
-        "type": "subtopic"
-      },
-      {
-        "source": "14KqLKgh090Rb3MDwelWY",
-        "target": "urSjLyLTE5IIz0TFxMBWL",
-        "type": "subtopic"
-      },
-      {
-        "source": "14KqLKgh090Rb3MDwelWY",
-        "target": "e69-JVbDj7dqV_p1j1kML",
-        "type": "subtopic"
-      },
-      {
-        "source": "14KqLKgh090Rb3MDwelWY",
-        "target": "MpM9rT1-_LGD7YbnBjqOk",
-        "type": "subtopic"
-      },
-      {
-        "source": "14KqLKgh090Rb3MDwelWY",
-        "target": "IkUCfSWNY-02wg2WCo1c6",
-        "type": "subtopic"
-      },
-      {
-        "source": "XXuzTrP5UNVwSpAk-tAGr",
-        "target": "Nt0HUWLOl4O77elF8Is1S",
-        "type": "subtopic"
-      },
-      {
-        "source": "5FXwwRMNBhG7LT5ub6t2L",
-        "target": "KLnpMR2FxlQkCHZP6-tZm",
-        "type": "subtopic"
-      },
-      {
-        "source": "84N4XY31PwXRntXX1sdCU",
-        "target": "a9wGW_H1HpvvdYCXoS-Rf",
-        "type": "subtopic"
-      },
-      {
-        "source": "84N4XY31PwXRntXX1sdCU",
-        "target": "37X1_9eCmkZkz5RDudE5N",
-        "type": "subtopic"
-      },
-      {
-        "source": "84N4XY31PwXRntXX1sdCU",
-        "target": "YiYRZFE_zwPMiCZxz9FnP",
-        "type": "subtopic"
-      },
-      {
-        "source": "uQFzD_ryd-8Dr1ppjorYJ",
-        "target": "LC5aTmUKNiw9RuSUt3fSE",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "I_NfmDcBph8-oyFVFTknL",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "hkjYvLoVt9xKDzubm0Jy3",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "rVrwaioGURvrqNBufF2dj",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "x1i3qWFtNNjd00-kAvFHw",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "eSZq74lROh5lllLyTBK5a",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "Q0fKphqmPwjTD0dhqiP6K",
-        "type": "subtopic"
-      },
-      {
-        "source": "hDFYlGFYwcwWXLmrxodFX",
-        "target": "IwMOTpsYHApdvHZOhXtIw",
-        "type": "subtopic"
-      },
-      {
-        "source": "THlzcZTNnPGLRiHPWT-Jv",
-        "target": "PtJ7-v1VCLsyaWWYHYujV",
-        "type": "subtopic"
-      }
-    ]
-  },
-  "updatedAt": "2026-09-11T06:13:41.663Z"
+  "updatedAt": "2026-09-17T03:34:29.545Z"
 }

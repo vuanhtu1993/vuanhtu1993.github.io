@@ -1,8 +1,11 @@
 {
+  "_id": "6aab5fc45306e7f1dec46c2b",
   "slug": "docker",
-  "title": "Docker",
   "category": "tool-platform",
-  "topicCount": 56,
+  "moduleCount": 0,
+  "modules": [],
+  "title": "Docker",
+  "topicCount": 0,
   "topics": [
     {
       "name": "application-architecture",
@@ -1268,5 +1271,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-09-11T03:26:56.566Z"
+  "updatedAt": "2026-09-17T03:34:28.686Z"
 }

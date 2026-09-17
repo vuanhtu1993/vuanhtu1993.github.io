@@ -1,8 +1,7 @@
 {
+  "_id": "6aab5fc15306e7f1dec46c27",
   "slug": "nestjs",
-  "title": "NestJS",
   "category": "skill-based",
-  "topicCount": 78,
   "moduleCount": 24,
   "modules": [
     {
@@ -37,6 +36,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f42ea",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EQomcF-juXvs-NLFYOUf",
+          "order": "1.1",
           "name": "what-is-nestjs",
           "nodeId": "18JkO4e2tXKJLl7HC866",
           "title": "What is NestJS?",
@@ -69,13 +72,16 @@
               "url": "https://www.youtube.com/watch?v=2n3xS89TJMI"
             }
           ],
-          "order": "1.1",
           "parentTopic": {
             "id": "EQomcF-juXvs-NLFYOUf",
             "title": "Introduction to NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42eb",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EQomcF-juXvs-NLFYOUf",
+          "order": "1.2",
           "name": "why-nestjs",
           "nodeId": "l08ZAYz0WvMcAlH5X2GC",
           "title": "Why use NestJS?",
@@ -103,13 +109,17 @@
               "url": "https://www.youtube.com/watch?v=qnJfTMpSuVQ"
             }
           ],
-          "order": "1.2",
           "parentTopic": {
             "id": "EQomcF-juXvs-NLFYOUf",
             "title": "Introduction to NestJS"
-          }
+          },
+          "updatedAt": "2026-09-17T03:49:41.875Z"
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42ec",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EQomcF-juXvs-NLFYOUf",
+          "order": "1.3",
           "name": "nestjs-vs-express",
           "nodeId": "4sSYt2nlJXtAoZTHLWkk",
           "title": "NestJS vs Express",
@@ -137,13 +147,16 @@
               "url": "https://www.toptal.com/express-js/nodejs-framework-nestjs-express"
             }
           ],
-          "order": "1.3",
           "parentTopic": {
             "id": "EQomcF-juXvs-NLFYOUf",
             "title": "Introduction to NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42ed",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EQomcF-juXvs-NLFYOUf",
+          "order": "1.4",
           "name": "installation-and-setup",
           "nodeId": "_pJydA26idgLIjZjR3jY",
           "title": "Installation & Setup",
@@ -171,7 +184,6 @@
               "url": "https://www.youtube.com/watch?v=oU5Di3be-Sk"
             }
           ],
-          "order": "1.4",
           "parentTopic": {
             "id": "EQomcF-juXvs-NLFYOUf",
             "title": "Introduction to NestJS"
@@ -211,6 +223,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f42ee",
+          "roadmapSlug": "nestjs",
+          "moduleId": "LLkS2lhF_S1vTTcmTANb",
+          "order": "2.1",
           "name": "modules",
           "nodeId": "ZtLk0_5PlorkjY1b5paZ",
           "title": "Modules",
@@ -243,13 +259,16 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "2.1",
           "parentTopic": {
             "id": "LLkS2lhF_S1vTTcmTANb",
             "title": "Core Concepts"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42ef",
+          "roadmapSlug": "nestjs",
+          "moduleId": "LLkS2lhF_S1vTTcmTANb",
+          "order": "2.2",
           "name": "controllers",
           "nodeId": "UVi_S0xu8Kc6IHqnNI4W",
           "title": "Controllers",
@@ -277,13 +296,16 @@
               "url": "https://www.youtube.com/watch?v=TeBpMkCbMuI"
             }
           ],
-          "order": "2.2",
           "parentTopic": {
             "id": "LLkS2lhF_S1vTTcmTANb",
             "title": "Core Concepts"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f0",
+          "roadmapSlug": "nestjs",
+          "moduleId": "LLkS2lhF_S1vTTcmTANb",
+          "order": "2.3",
           "name": "providers-and-services",
           "nodeId": "o7CuTBtJDvw9RZjJcYtu",
           "title": "Providers & Services",
@@ -311,13 +333,16 @@
               "url": "https://www.youtube.com/watch?v=_TGfnYCqWnM"
             }
           ],
-          "order": "2.3",
           "parentTopic": {
             "id": "LLkS2lhF_S1vTTcmTANb",
             "title": "Core Concepts"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f1",
+          "roadmapSlug": "nestjs",
+          "moduleId": "LLkS2lhF_S1vTTcmTANb",
+          "order": "2.4",
           "name": "dependency-injection",
           "nodeId": "o33CWCrbsY_y8O-pWSiE",
           "title": "Dependency Injection",
@@ -350,13 +375,16 @@
               "url": "https://www.youtube.com/watch?v=KkLOVFiGNMM"
             }
           ],
-          "order": "2.4",
           "parentTopic": {
             "id": "LLkS2lhF_S1vTTcmTANb",
             "title": "Core Concepts"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f2",
+          "roadmapSlug": "nestjs",
+          "moduleId": "LLkS2lhF_S1vTTcmTANb",
+          "order": "2.5",
           "name": "decorators",
           "nodeId": "nsFBhwLiIgHs-9-dXT5z",
           "title": "Decorators",
@@ -384,11 +412,11 @@
               "url": "https://www.youtube.com/watch?v=O6A-u_FoEX8"
             }
           ],
-          "order": "2.5",
           "parentTopic": {
             "id": "LLkS2lhF_S1vTTcmTANb",
             "title": "Core Concepts"
-          }
+          },
+          "updatedAt": "2026-09-17T03:42:57.358Z"
         }
       ]
     },
@@ -424,6 +452,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f42f3",
+          "roadmapSlug": "nestjs",
+          "moduleId": "qSqXmkDK2WmCHaDxEDxo",
+          "order": "3.1",
           "name": "interfaces-and-types",
           "nodeId": "UZopJFgfjjQavC46BbPD",
           "title": "Interfaces & Types",
@@ -451,13 +483,16 @@
               "url": "https://www.youtube.com/watch?v=nViEqpgwxHE"
             }
           ],
-          "order": "3.1",
           "parentTopic": {
             "id": "qSqXmkDK2WmCHaDxEDxo",
             "title": "TypeScript Basics for NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f4",
+          "roadmapSlug": "nestjs",
+          "moduleId": "qSqXmkDK2WmCHaDxEDxo",
+          "order": "3.2",
           "name": "enums",
           "nodeId": "LoYg_YHhQYm4lvI_X_B2",
           "title": "Enums",
@@ -485,13 +520,16 @@
               "url": "https://www.youtube.com/watch?v=aJnajQyP4nM"
             }
           ],
-          "order": "3.2",
           "parentTopic": {
             "id": "qSqXmkDK2WmCHaDxEDxo",
             "title": "TypeScript Basics for NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f5",
+          "roadmapSlug": "nestjs",
+          "moduleId": "qSqXmkDK2WmCHaDxEDxo",
+          "order": "3.3",
           "name": "classes-and-oop",
           "nodeId": "XA0qC5EtNE0TViurcqUw",
           "title": "Classes & OOP",
@@ -519,13 +557,16 @@
               "url": "https://www.youtube.com/watch?v=fsVL_xrYO0w"
             }
           ],
-          "order": "3.3",
           "parentTopic": {
             "id": "qSqXmkDK2WmCHaDxEDxo",
             "title": "TypeScript Basics for NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f6",
+          "roadmapSlug": "nestjs",
+          "moduleId": "qSqXmkDK2WmCHaDxEDxo",
+          "order": "3.4",
           "name": "generics",
           "nodeId": "GGGIOu9XFof160W-7AWt",
           "title": "Generics",
@@ -553,7 +594,6 @@
               "url": "https://www.youtube.com/watch?v=nViEqpgwxHE"
             }
           ],
-          "order": "3.4",
           "parentTopic": {
             "id": "qSqXmkDK2WmCHaDxEDxo",
             "title": "TypeScript Basics for NestJS"
@@ -593,6 +633,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f42f7",
+          "roadmapSlug": "nestjs",
+          "moduleId": "Z1oGzjFOUVhGFXuY-vJL",
+          "order": "4.1",
           "name": "route-decorators",
           "nodeId": "XPh3UnEf1tAcHSV4yGnq",
           "title": "Route Decorators (@Get, @Post, @Put, @Delete)",
@@ -620,13 +664,16 @@
               "url": "https://www.youtube.com/watch?v=F_oOtaxb0L8"
             }
           ],
-          "order": "4.1",
           "parentTopic": {
             "id": "Z1oGzjFOUVhGFXuY-vJL",
             "title": "Building REST APIs"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f8",
+          "roadmapSlug": "nestjs",
+          "moduleId": "Z1oGzjFOUVhGFXuY-vJL",
+          "order": "4.2",
           "name": "request-payloads-and-dtos",
           "nodeId": "ys9yioDzME4C1A5DG5ZY",
           "title": "Request Payloads & DTOs",
@@ -654,13 +701,16 @@
               "url": "https://www.youtube.com/watch?v=gkTQhWiiOjQ"
             }
           ],
-          "order": "4.2",
           "parentTopic": {
             "id": "Z1oGzjFOUVhGFXuY-vJL",
             "title": "Building REST APIs"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42f9",
+          "roadmapSlug": "nestjs",
+          "moduleId": "Z1oGzjFOUVhGFXuY-vJL",
+          "order": "4.3",
           "name": "response-handling",
           "nodeId": "LSKL8EDfsQI1L_stzNQp",
           "title": "Response Handling",
@@ -688,7 +738,6 @@
               "url": "https://www.youtube.com/watch?v=2n3xS89TJMI"
             }
           ],
-          "order": "4.3",
           "parentTopic": {
             "id": "Z1oGzjFOUVhGFXuY-vJL",
             "title": "Building REST APIs"
@@ -728,6 +777,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f42fa",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EcMitPZV091OF9Aktmht",
+          "order": "5.1",
           "name": "class-validator",
           "nodeId": "VDbNFg54HqdMb-k1ogO5",
           "title": "class-validator",
@@ -760,13 +813,16 @@
               "url": "https://www.youtube.com/watch?v=gkTQhWiiOjQ"
             }
           ],
-          "order": "5.1",
           "parentTopic": {
             "id": "EcMitPZV091OF9Aktmht",
             "title": "Validation"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42fb",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EcMitPZV091OF9Aktmht",
+          "order": "5.2",
           "name": "class-transformer",
           "nodeId": "0URWU4q8WXTZhxcMQDa1",
           "title": "class-transformer",
@@ -794,13 +850,16 @@
               "url": "https://www.youtube.com/watch?v=gkTQhWiiOjQ"
             }
           ],
-          "order": "5.2",
           "parentTopic": {
             "id": "EcMitPZV091OF9Aktmht",
             "title": "Validation"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42fc",
+          "roadmapSlug": "nestjs",
+          "moduleId": "EcMitPZV091OF9Aktmht",
+          "order": "5.3",
           "name": "validation-pipe",
           "nodeId": "seaEFLeU0oOz-JNh6FpJ",
           "title": "ValidationPipe",
@@ -828,7 +887,6 @@
               "url": "https://www.youtube.com/watch?v=ET39-fpjPEo"
             }
           ],
-          "order": "5.3",
           "parentTopic": {
             "id": "EcMitPZV091OF9Aktmht",
             "title": "Validation"
@@ -868,6 +926,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f42fd",
+          "roadmapSlug": "nestjs",
+          "moduleId": "cfkSVQYw0eTPOJnDSpXk",
+          "order": "6.1",
           "name": "typeorm-integration",
           "nodeId": "OYCkNd-ZhRjTjKud1L4u",
           "title": "TypeORM Integration",
@@ -900,13 +962,16 @@
               "url": "https://www.youtube.com/watch?v=W1gvIw0GNl8"
             }
           ],
-          "order": "6.1",
           "parentTopic": {
             "id": "cfkSVQYw0eTPOJnDSpXk",
             "title": "Database Integration"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42fe",
+          "roadmapSlug": "nestjs",
+          "moduleId": "cfkSVQYw0eTPOJnDSpXk",
+          "order": "6.2",
           "name": "prisma-integration",
           "nodeId": "H6DZOa8ejwomUKMRXkhV",
           "title": "Prisma Integration",
@@ -939,13 +1004,16 @@
               "url": "https://www.youtube.com/watch?v=LMjj1_EK4y8"
             }
           ],
-          "order": "6.2",
           "parentTopic": {
             "id": "cfkSVQYw0eTPOJnDSpXk",
             "title": "Database Integration"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f42ff",
+          "roadmapSlug": "nestjs",
+          "moduleId": "cfkSVQYw0eTPOJnDSpXk",
+          "order": "6.3",
           "name": "mongoose-integration",
           "nodeId": "tU7MZHlsHPyUovTRqPBk",
           "title": "Mongoose Integration",
@@ -973,13 +1041,16 @@
               "url": "https://www.youtube.com/watch?v=ulfU5vY6I78"
             }
           ],
-          "order": "6.3",
           "parentTopic": {
             "id": "cfkSVQYw0eTPOJnDSpXk",
             "title": "Database Integration"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4300",
+          "roadmapSlug": "nestjs",
+          "moduleId": "cfkSVQYw0eTPOJnDSpXk",
+          "order": "6.4",
           "name": "crud-operations",
           "nodeId": "2kYv-EyC-T8f4_rSIEOB",
           "title": "Basic CRUD Operations",
@@ -1007,7 +1078,6 @@
               "url": "https://www.youtube.com/watch?v=GHTA143_b-s"
             }
           ],
-          "order": "6.4",
           "parentTopic": {
             "id": "cfkSVQYw0eTPOJnDSpXk",
             "title": "Database Integration"
@@ -1047,6 +1117,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4301",
+          "roadmapSlug": "nestjs",
+          "moduleId": "aPma34T9jfvypiRT9V21",
+          "order": "7.1",
           "name": "creating-middleware",
           "nodeId": "C33io5BshEZmgzyt2a_r",
           "title": "Creating Middleware",
@@ -1074,13 +1148,16 @@
               "url": "https://www.youtube.com/watch?v=Lqg7H9Ov_aU"
             }
           ],
-          "order": "7.1",
           "parentTopic": {
             "id": "aPma34T9jfvypiRT9V21",
             "title": "Middleware"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4302",
+          "roadmapSlug": "nestjs",
+          "moduleId": "aPma34T9jfvypiRT9V21",
+          "order": "7.2",
           "name": "applying-middleware",
           "nodeId": "6oH8UIgkqXAI37yIahj4",
           "title": "Applying Middleware",
@@ -1103,13 +1180,16 @@
               "url": "https://www.youtube.com/watch?v=Lqg7H9Ov_aU"
             }
           ],
-          "order": "7.2",
           "parentTopic": {
             "id": "aPma34T9jfvypiRT9V21",
             "title": "Middleware"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4303",
+          "roadmapSlug": "nestjs",
+          "moduleId": "aPma34T9jfvypiRT9V21",
+          "order": "7.3",
           "name": "logging-middleware",
           "nodeId": "rJYjpKvJ6eX1BlwormVQ",
           "title": "Logging Middleware",
@@ -1137,7 +1217,6 @@
               "url": "https://www.youtube.com/watch?v=mJqSv6pt3E8"
             }
           ],
-          "order": "7.3",
           "parentTopic": {
             "id": "aPma34T9jfvypiRT9V21",
             "title": "Middleware"
@@ -1177,6 +1256,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4304",
+          "roadmapSlug": "nestjs",
+          "moduleId": "gYB3R8LfYENFWNfJXhfz",
+          "order": "8.1",
           "name": "canactivate-interface",
           "nodeId": "2YLaE_9mJXckcf6-beP-",
           "title": "CanActivate Interface",
@@ -1204,13 +1287,16 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "8.1",
           "parentTopic": {
             "id": "gYB3R8LfYENFWNfJXhfz",
             "title": "Guards"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4305",
+          "roadmapSlug": "nestjs",
+          "moduleId": "gYB3R8LfYENFWNfJXhfz",
+          "order": "8.2",
           "name": "auth-guard",
           "nodeId": "3xg5aNPhFBzD5H0JKvHc",
           "title": "AuthGuard",
@@ -1238,13 +1324,16 @@
               "url": "https://www.youtube.com/watch?v=_L225zpUK0M"
             }
           ],
-          "order": "8.2",
           "parentTopic": {
             "id": "gYB3R8LfYENFWNfJXhfz",
             "title": "Guards"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4306",
+          "roadmapSlug": "nestjs",
+          "moduleId": "gYB3R8LfYENFWNfJXhfz",
+          "order": "8.3",
           "name": "custom-guards",
           "nodeId": "EnGRWStKfGEqazxbwQTn",
           "title": "Custom Guards",
@@ -1272,7 +1361,6 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "8.3",
           "parentTopic": {
             "id": "gYB3R8LfYENFWNfJXhfz",
             "title": "Guards"
@@ -1312,6 +1400,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4307",
+          "roadmapSlug": "nestjs",
+          "moduleId": "5WsmpXFJppbDIycvYo6H",
+          "order": "9.1",
           "name": "custom-pipes",
           "nodeId": "5yiI1UTOibF1Gs24Vw09",
           "title": "Custom Pipes",
@@ -1339,13 +1431,16 @@
               "url": "https://www.youtube.com/watch?v=ET39-fpjPEo"
             }
           ],
-          "order": "9.1",
           "parentTopic": {
             "id": "5WsmpXFJppbDIycvYo6H",
             "title": "Interceptors and Pipes"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4308",
+          "roadmapSlug": "nestjs",
+          "moduleId": "5WsmpXFJppbDIycvYo6H",
+          "order": "9.2",
           "name": "interceptors",
           "nodeId": "LIRgtvU-W-aTr69Ji1q2",
           "title": "Interceptors",
@@ -1373,13 +1468,16 @@
               "url": "https://www.youtube.com/watch?v=p0O0gKdHRuU"
             }
           ],
-          "order": "9.2",
           "parentTopic": {
             "id": "5WsmpXFJppbDIycvYo6H",
             "title": "Interceptors and Pipes"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4309",
+          "roadmapSlug": "nestjs",
+          "moduleId": "5WsmpXFJppbDIycvYo6H",
+          "order": "9.3",
           "name": "response-transformation",
           "nodeId": "0vDby8G6jZP3IPo-AgRI",
           "title": "Response Transformation",
@@ -1407,7 +1505,6 @@
               "url": "https://www.youtube.com/watch?v=p0O0gKdHRuU"
             }
           ],
-          "order": "9.3",
           "parentTopic": {
             "id": "5WsmpXFJppbDIycvYo6H",
             "title": "Interceptors and Pipes"
@@ -1447,6 +1544,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f430a",
+          "roadmapSlug": "nestjs",
+          "moduleId": "fO8v38KlmKKgT0ZDi0pt",
+          "order": "10.1",
           "name": "jwt-authentication",
           "nodeId": "sbMPNtQI0nf9UYK20S-j",
           "title": "JWT Authentication",
@@ -1479,13 +1580,16 @@
               "url": "https://www.youtube.com/watch?v=GHTA143_b-s"
             }
           ],
-          "order": "10.1",
           "parentTopic": {
             "id": "fO8v38KlmKKgT0ZDi0pt",
             "title": "Authentication & Authorization"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f430b",
+          "roadmapSlug": "nestjs",
+          "moduleId": "fO8v38KlmKKgT0ZDi0pt",
+          "order": "10.2",
           "name": "passport-integration",
           "nodeId": "3j4rYpGsN5TZE-4-amjE",
           "title": "Passport.js Integration",
@@ -1513,13 +1617,16 @@
               "url": "https://www.youtube.com/watch?v=_L225zpUK0M"
             }
           ],
-          "order": "10.2",
           "parentTopic": {
             "id": "fO8v38KlmKKgT0ZDi0pt",
             "title": "Authentication & Authorization"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f430c",
+          "roadmapSlug": "nestjs",
+          "moduleId": "fO8v38KlmKKgT0ZDi0pt",
+          "order": "10.3",
           "name": "role-based-access-control",
           "nodeId": "caunsc-uwIR7FitOt0BG",
           "title": "Role-Based Access Control (RBAC)",
@@ -1547,7 +1654,6 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "10.3",
           "parentTopic": {
             "id": "fO8v38KlmKKgT0ZDi0pt",
             "title": "Authentication & Authorization"
@@ -1587,6 +1693,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f430d",
+          "roadmapSlug": "nestjs",
+          "moduleId": "KCWpNlziJXnEJKqfvhfh",
+          "order": "11.1",
           "name": "relational-database-design",
           "nodeId": "yUR1UdPmCfPg0hqjM2WJ",
           "title": "Relational Database Design",
@@ -1614,13 +1724,16 @@
               "url": "https://www.youtube.com/watch?v=ztHopE5Wnpc"
             }
           ],
-          "order": "11.1",
           "parentTopic": {
             "id": "KCWpNlziJXnEJKqfvhfh",
             "title": "Database Mastery"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f430e",
+          "roadmapSlug": "nestjs",
+          "moduleId": "KCWpNlziJXnEJKqfvhfh",
+          "order": "11.2",
           "name": "migrations",
           "nodeId": "-tQjF0IWdYj3uBeM_xVy",
           "title": "Migrations",
@@ -1648,13 +1761,16 @@
               "url": "https://www.youtube.com/watch?v=W1gvIw0GNl8"
             }
           ],
-          "order": "11.2",
           "parentTopic": {
             "id": "KCWpNlziJXnEJKqfvhfh",
             "title": "Database Mastery"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f430f",
+          "roadmapSlug": "nestjs",
+          "moduleId": "KCWpNlziJXnEJKqfvhfh",
+          "order": "11.3",
           "name": "relationships",
           "nodeId": "3PXydZpfLIO9Z146A1l2",
           "title": "Relationships (OneToMany, ManyToMany)",
@@ -1687,7 +1803,6 @@
               "url": "https://www.youtube.com/watch?v=W1gvIw0GNl8"
             }
           ],
-          "order": "11.3",
           "parentTopic": {
             "id": "KCWpNlziJXnEJKqfvhfh",
             "title": "Database Mastery"
@@ -1727,6 +1842,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4310",
+          "roadmapSlug": "nestjs",
+          "moduleId": "QZa8hDOiHLk2RGME5B1L",
+          "order": "12.1",
           "name": "http-exceptions",
           "nodeId": "GMFhIOSwBvA8buSpmacr",
           "title": "HttpException",
@@ -1754,13 +1873,16 @@
               "url": "https://www.youtube.com/watch?v=F_oOtaxb0L8"
             }
           ],
-          "order": "12.1",
           "parentTopic": {
             "id": "QZa8hDOiHLk2RGME5B1L",
             "title": "Error Handling"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4311",
+          "roadmapSlug": "nestjs",
+          "moduleId": "QZa8hDOiHLk2RGME5B1L",
+          "order": "12.2",
           "name": "exception-filters",
           "nodeId": "-86BkBRdUkjC0D13GTId",
           "title": "Exception Filters",
@@ -1788,13 +1910,16 @@
               "url": "https://www.youtube.com/watch?v=F_oOtaxb0L8"
             }
           ],
-          "order": "12.2",
           "parentTopic": {
             "id": "QZa8hDOiHLk2RGME5B1L",
             "title": "Error Handling"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4312",
+          "roadmapSlug": "nestjs",
+          "moduleId": "QZa8hDOiHLk2RGME5B1L",
+          "order": "12.3",
           "name": "global-error-handling",
           "nodeId": "PIqQToE5zKnqUS1n6hjf",
           "title": "Global Error Handling",
@@ -1822,7 +1947,6 @@
               "url": "https://www.youtube.com/watch?v=F_oOtaxb0L8"
             }
           ],
-          "order": "12.3",
           "parentTopic": {
             "id": "QZa8hDOiHLk2RGME5B1L",
             "title": "Error Handling"
@@ -1862,6 +1986,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4313",
+          "roadmapSlug": "nestjs",
+          "moduleId": "TMn7062m_0P5B0dI0FZb",
+          "order": "13.1",
           "name": "swagger-setup",
           "nodeId": "KZwvChGzmx4YS2hsGoaH",
           "title": "Swagger Setup",
@@ -1889,13 +2017,16 @@
               "url": "https://www.youtube.com/watch?v=1cc9b9PJiag"
             }
           ],
-          "order": "13.1",
           "parentTopic": {
             "id": "TMn7062m_0P5B0dI0FZb",
             "title": "Swagger & API Documentation"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4314",
+          "roadmapSlug": "nestjs",
+          "moduleId": "TMn7062m_0P5B0dI0FZb",
+          "order": "13.2",
           "name": "swagger-decorators",
           "nodeId": "iOr9O_AT9KOUsy5yBa9d",
           "title": "Swagger Decorators",
@@ -1923,13 +2054,16 @@
               "url": "https://www.youtube.com/watch?v=1cc9b9PJiag"
             }
           ],
-          "order": "13.2",
           "parentTopic": {
             "id": "TMn7062m_0P5B0dI0FZb",
             "title": "Swagger & API Documentation"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4315",
+          "roadmapSlug": "nestjs",
+          "moduleId": "TMn7062m_0P5B0dI0FZb",
+          "order": "13.3",
           "name": "api-schema-generation",
           "nodeId": "9g9r4leUrn2MVqLr4DdA",
           "title": "API Schema Generation",
@@ -1957,7 +2091,6 @@
               "url": "https://www.youtube.com/watch?v=1cc9b9PJiag"
             }
           ],
-          "order": "13.3",
           "parentTopic": {
             "id": "TMn7062m_0P5B0dI0FZb",
             "title": "Swagger & API Documentation"
@@ -1997,6 +2130,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4316",
+          "roadmapSlug": "nestjs",
+          "moduleId": "guAYALttJPFlXH1kDi_t",
+          "order": "14.1",
           "name": "jest-setup",
           "nodeId": "xWSk7HzG3whfdvQxtL8h",
           "title": "Jest Setup & Configuration",
@@ -2024,13 +2161,16 @@
               "url": "https://www.youtube.com/watch?v=dXOfOgFFKuY"
             }
           ],
-          "order": "14.1",
           "parentTopic": {
             "id": "guAYALttJPFlXH1kDi_t",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4317",
+          "roadmapSlug": "nestjs",
+          "moduleId": "guAYALttJPFlXH1kDi_t",
+          "order": "14.2",
           "name": "unit-testing-services",
           "nodeId": "_2go-0eDU3YjzO1BiCzA",
           "title": "Unit Testing Services",
@@ -2058,13 +2198,16 @@
               "url": "https://www.youtube.com/watch?v=dXOfOgFFKuY"
             }
           ],
-          "order": "14.2",
           "parentTopic": {
             "id": "guAYALttJPFlXH1kDi_t",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4318",
+          "roadmapSlug": "nestjs",
+          "moduleId": "guAYALttJPFlXH1kDi_t",
+          "order": "14.3",
           "name": "unit-testing-controllers",
           "nodeId": "H28Hq0MrppB-Rw2wgEAk",
           "title": "Unit Testing Controllers",
@@ -2092,13 +2235,16 @@
               "url": "https://www.youtube.com/watch?v=dXOfOgFFKuY"
             }
           ],
-          "order": "14.3",
           "parentTopic": {
             "id": "guAYALttJPFlXH1kDi_t",
             "title": "Testing"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4319",
+          "roadmapSlug": "nestjs",
+          "moduleId": "guAYALttJPFlXH1kDi_t",
+          "order": "14.4",
           "name": "e2e-testing",
           "nodeId": "_IhInCeY3Ad4Osqqp9Wn",
           "title": "E2E Testing",
@@ -2126,7 +2272,6 @@
               "url": "https://www.youtube.com/watch?v=dXOfOgFFKuY"
             }
           ],
-          "order": "14.4",
           "parentTopic": {
             "id": "guAYALttJPFlXH1kDi_t",
             "title": "Testing"
@@ -2166,6 +2311,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f431a",
+          "roadmapSlug": "nestjs",
+          "moduleId": "XfvPPtjpQXMawhPBDbQE",
+          "order": "15.1",
           "name": "nestjs-microservices-basics",
           "nodeId": "bgz7Kynj1JJ5pYmO365H",
           "title": "@nestjs/microservices Basics",
@@ -2193,13 +2342,16 @@
               "url": "https://www.youtube.com/watch?v=IsubcKdZPyE"
             }
           ],
-          "order": "15.1",
           "parentTopic": {
             "id": "XfvPPtjpQXMawhPBDbQE",
             "title": "Microservices Architecture"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f431b",
+          "roadmapSlug": "nestjs",
+          "moduleId": "XfvPPtjpQXMawhPBDbQE",
+          "order": "15.2",
           "name": "rabbitmq-transport",
           "nodeId": "spg7fkx6L6b9mdmDdt-I",
           "title": "RabbitMQ Transport",
@@ -2227,13 +2379,16 @@
               "url": "https://www.youtube.com/watch?v=IsubcKdZPyE"
             }
           ],
-          "order": "15.2",
           "parentTopic": {
             "id": "XfvPPtjpQXMawhPBDbQE",
             "title": "Microservices Architecture"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f431c",
+          "roadmapSlug": "nestjs",
+          "moduleId": "XfvPPtjpQXMawhPBDbQE",
+          "order": "15.3",
           "name": "kafka-transport",
           "nodeId": "_JuGojRqIgERoDptubfJ",
           "title": "Kafka Transport",
@@ -2261,13 +2416,16 @@
               "url": "https://www.youtube.com/watch?v=IsubcKdZPyE"
             }
           ],
-          "order": "15.3",
           "parentTopic": {
             "id": "XfvPPtjpQXMawhPBDbQE",
             "title": "Microservices Architecture"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f431d",
+          "roadmapSlug": "nestjs",
+          "moduleId": "XfvPPtjpQXMawhPBDbQE",
+          "order": "15.4",
           "name": "redis-transport",
           "nodeId": "Bzy3ik8KxsB7lmi_yWkE",
           "title": "Redis Transport",
@@ -2295,7 +2453,6 @@
               "url": "https://www.youtube.com/watch?v=IsubcKdZPyE"
             }
           ],
-          "order": "15.4",
           "parentTopic": {
             "id": "XfvPPtjpQXMawhPBDbQE",
             "title": "Microservices Architecture"
@@ -2335,6 +2492,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f431e",
+          "roadmapSlug": "nestjs",
+          "moduleId": "uhCNo2LHJuihkrhDcIBa",
+          "order": "16.1",
           "name": "oauth2-sso",
           "nodeId": "zXfsEDtIt4Cp6_N0H8tF",
           "title": "OAuth2 & SSO",
@@ -2362,13 +2523,16 @@
               "url": "https://www.youtube.com/watch?v=GHTA143_b-s"
             }
           ],
-          "order": "16.1",
           "parentTopic": {
             "id": "uhCNo2LHJuihkrhDcIBa",
             "title": "Advanced Authentication"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f431f",
+          "roadmapSlug": "nestjs",
+          "moduleId": "uhCNo2LHJuihkrhDcIBa",
+          "order": "16.2",
           "name": "passport-strategies",
           "nodeId": "Qh8GYQlkIGp8awqolEzJ",
           "title": "Passport Strategies (Google, GitHub)",
@@ -2396,7 +2560,6 @@
               "url": "https://www.youtube.com/watch?v=GHTA143_b-s"
             }
           ],
-          "order": "16.2",
           "parentTopic": {
             "id": "uhCNo2LHJuihkrhDcIBa",
             "title": "Advanced Authentication"
@@ -2436,6 +2599,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4320",
+          "roadmapSlug": "nestjs",
+          "moduleId": "UJdGkcgWdL_5Lrqw_nUX",
+          "order": "17.1",
           "name": "redis-caching",
           "nodeId": "MTAQCyau2BoqcU2d3mc-",
           "title": "Redis Caching",
@@ -2463,13 +2630,16 @@
               "url": "https://www.youtube.com/watch?v=LMjj1_EK4y8"
             }
           ],
-          "order": "17.1",
           "parentTopic": {
             "id": "UJdGkcgWdL_5Lrqw_nUX",
             "title": "Caching & Performance"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4321",
+          "roadmapSlug": "nestjs",
+          "moduleId": "UJdGkcgWdL_5Lrqw_nUX",
+          "order": "17.2",
           "name": "in-memory-cache",
           "nodeId": "JZAWCttD5pwmV2ebZpMu",
           "title": "In-Memory Cache",
@@ -2497,13 +2667,16 @@
               "url": "https://www.youtube.com/watch?v=LMjj1_EK4y8"
             }
           ],
-          "order": "17.2",
           "parentTopic": {
             "id": "UJdGkcgWdL_5Lrqw_nUX",
             "title": "Caching & Performance"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4322",
+          "roadmapSlug": "nestjs",
+          "moduleId": "UJdGkcgWdL_5Lrqw_nUX",
+          "order": "17.3",
           "name": "query-optimization",
           "nodeId": "CmLRar9ug41b1QFM27pJ",
           "title": "Query Optimization",
@@ -2531,7 +2704,6 @@
               "url": "https://www.youtube.com/watch?v=ztHopE5Wnpc"
             }
           ],
-          "order": "17.3",
           "parentTopic": {
             "id": "UJdGkcgWdL_5Lrqw_nUX",
             "title": "Caching & Performance"
@@ -2571,6 +2743,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4323",
+          "roadmapSlug": "nestjs",
+          "moduleId": "BEgbEiJnxGU4Yqi-HMfg",
+          "order": "18.1",
           "name": "websocket-gateway",
           "nodeId": "posguKjr433qcsNs2izc",
           "title": "WebSocket Gateway",
@@ -2598,13 +2774,16 @@
               "url": "https://www.youtube.com/watch?v=7xpLmk_sPZo"
             }
           ],
-          "order": "18.1",
           "parentTopic": {
             "id": "BEgbEiJnxGU4Yqi-HMfg",
             "title": "WebSockets & Real-Time"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4324",
+          "roadmapSlug": "nestjs",
+          "moduleId": "BEgbEiJnxGU4Yqi-HMfg",
+          "order": "18.2",
           "name": "real-time-events",
           "nodeId": "T8qnpt6QJQ_JL2rJ2s_n",
           "title": "Real-Time Events",
@@ -2632,7 +2811,6 @@
               "url": "https://www.youtube.com/watch?v=7xpLmk_sPZo"
             }
           ],
-          "order": "18.2",
           "parentTopic": {
             "id": "BEgbEiJnxGU4Yqi-HMfg",
             "title": "WebSockets & Real-Time"
@@ -2672,6 +2850,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4325",
+          "roadmapSlug": "nestjs",
+          "moduleId": "zfNsB3JYzQrKEG5TgUPO",
+          "order": "19.1",
           "name": "docker-containerization",
           "nodeId": "9GV5KC5rOTaIhrDGYBpk",
           "title": "Docker Containerization",
@@ -2699,13 +2881,16 @@
               "url": "https://www.youtube.com/watch?v=dLjkp0Fj7tw"
             }
           ],
-          "order": "19.1",
           "parentTopic": {
             "id": "zfNsB3JYzQrKEG5TgUPO",
             "title": "Deployment & CI/CD"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4326",
+          "roadmapSlug": "nestjs",
+          "moduleId": "zfNsB3JYzQrKEG5TgUPO",
+          "order": "19.2",
           "name": "cloud-deployment",
           "nodeId": "_KPaq7pU8fs7TOVQYz_M",
           "title": "Cloud Deployment (AWS, GCP, Azure)",
@@ -2733,13 +2918,16 @@
               "url": "https://www.youtube.com/watch?v=dLjkp0Fj7tw"
             }
           ],
-          "order": "19.2",
           "parentTopic": {
             "id": "zfNsB3JYzQrKEG5TgUPO",
             "title": "Deployment & CI/CD"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4327",
+          "roadmapSlug": "nestjs",
+          "moduleId": "zfNsB3JYzQrKEG5TgUPO",
+          "order": "19.3",
           "name": "ci-cd-pipelines",
           "nodeId": "UkTi7HvgPcboz7MhsGsg",
           "title": "CI/CD Pipelines",
@@ -2767,7 +2955,6 @@
               "url": "https://www.youtube.com/watch?v=dLjkp0Fj7tw"
             }
           ],
-          "order": "19.3",
           "parentTopic": {
             "id": "zfNsB3JYzQrKEG5TgUPO",
             "title": "Deployment & CI/CD"
@@ -2807,6 +2994,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4328",
+          "roadmapSlug": "nestjs",
+          "moduleId": "Hx2CJhzh0VldBKsdNwWx",
+          "order": "20.1",
           "name": "domain-driven-design",
           "nodeId": "vQYF2hyJ1bajTXmlI6Mz",
           "title": "Domain-Driven Design (DDD)",
@@ -2834,13 +3025,16 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "20.1",
           "parentTopic": {
             "id": "Hx2CJhzh0VldBKsdNwWx",
             "title": "System Design with NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4329",
+          "roadmapSlug": "nestjs",
+          "moduleId": "Hx2CJhzh0VldBKsdNwWx",
+          "order": "20.2",
           "name": "cqrs-pattern",
           "nodeId": "0hgzKwz0UCyuxekjLuTO",
           "title": "CQRS (Command Query Responsibility Segregation)",
@@ -2868,13 +3062,16 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "20.2",
           "parentTopic": {
             "id": "Hx2CJhzh0VldBKsdNwWx",
             "title": "System Design with NestJS"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f432a",
+          "roadmapSlug": "nestjs",
+          "moduleId": "Hx2CJhzh0VldBKsdNwWx",
+          "order": "20.3",
           "name": "event-sourcing",
           "nodeId": "mzueHsG6nsB3aApG0uP2",
           "title": "Event Sourcing",
@@ -2902,7 +3099,6 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "20.3",
           "parentTopic": {
             "id": "Hx2CJhzh0VldBKsdNwWx",
             "title": "System Design with NestJS"
@@ -2942,6 +3138,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f432b",
+          "roadmapSlug": "nestjs",
+          "moduleId": "aqqCxtXh4hSZJIA0FOp5",
+          "order": "21.1",
           "name": "distributed-tracing",
           "nodeId": "CpAaGTUQUkakWbBjLGfV",
           "title": "Distributed Tracing (OpenTelemetry)",
@@ -2969,13 +3169,16 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "21.1",
           "parentTopic": {
             "id": "aqqCxtXh4hSZJIA0FOp5",
             "title": "Advanced Microservices"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f432c",
+          "roadmapSlug": "nestjs",
+          "moduleId": "aqqCxtXh4hSZJIA0FOp5",
+          "order": "21.2",
           "name": "service-discovery",
           "nodeId": "KLPy7oS-6f-upU13Z30j",
           "title": "Service Discovery (Consul)",
@@ -3003,13 +3206,16 @@
               "url": "https://www.youtube.com/watch?v=IsubcKdZPyE"
             }
           ],
-          "order": "21.2",
           "parentTopic": {
             "id": "aqqCxtXh4hSZJIA0FOp5",
             "title": "Advanced Microservices"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f432d",
+          "roadmapSlug": "nestjs",
+          "moduleId": "aqqCxtXh4hSZJIA0FOp5",
+          "order": "21.3",
           "name": "saga-pattern",
           "nodeId": "gvUcwtz8-ckx35EfhscT",
           "title": "Saga Pattern",
@@ -3037,7 +3243,6 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "21.3",
           "parentTopic": {
             "id": "aqqCxtXh4hSZJIA0FOp5",
             "title": "Advanced Microservices"
@@ -3077,6 +3282,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f432e",
+          "roadmapSlug": "nestjs",
+          "moduleId": "tML4wbtb98HvSWy4UE02",
+          "order": "22.1",
           "name": "event-emitter",
           "nodeId": "2ml7bEQtcF_4xEM-VtGu",
           "title": "Event Emitter (@nestjs/event-emitter)",
@@ -3104,13 +3313,16 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "22.1",
           "parentTopic": {
             "id": "tML4wbtb98HvSWy4UE02",
             "title": "Event-Driven Architecture"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f432f",
+          "roadmapSlug": "nestjs",
+          "moduleId": "tML4wbtb98HvSWy4UE02",
+          "order": "22.2",
           "name": "message-brokers",
           "nodeId": "wNs4D23mgk4wPrsqnu0l",
           "title": "Message Brokers (Kafka, RabbitMQ, SQS)",
@@ -3138,13 +3350,16 @@
               "url": "https://www.youtube.com/watch?v=IsubcKdZPyE"
             }
           ],
-          "order": "22.2",
           "parentTopic": {
             "id": "tML4wbtb98HvSWy4UE02",
             "title": "Event-Driven Architecture"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4330",
+          "roadmapSlug": "nestjs",
+          "moduleId": "tML4wbtb98HvSWy4UE02",
+          "order": "22.3",
           "name": "event-based-communication",
           "nodeId": "t58hSi1xUowSoskejMxS",
           "title": "Event-Based Communication Patterns",
@@ -3172,7 +3387,6 @@
               "url": "https://www.youtube.com/watch?v=dRbMFsAB_90"
             }
           ],
-          "order": "22.3",
           "parentTopic": {
             "id": "tML4wbtb98HvSWy4UE02",
             "title": "Event-Driven Architecture"
@@ -3212,6 +3426,10 @@
       ],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4331",
+          "roadmapSlug": "nestjs",
+          "moduleId": "HVfPhpOZMeg5s9lko3Nh",
+          "order": "23.1",
           "name": "rate-limiting",
           "nodeId": "UKhh-EJkl7kOqnb5JvLM",
           "title": "Rate Limiting",
@@ -3239,13 +3457,16 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "23.1",
           "parentTopic": {
             "id": "HVfPhpOZMeg5s9lko3Nh",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4332",
+          "roadmapSlug": "nestjs",
+          "moduleId": "HVfPhpOZMeg5s9lko3Nh",
+          "order": "23.2",
           "name": "csrf-protection",
           "nodeId": "3B8ZmubbuOFjXvTsOaCz",
           "title": "CSRF & XSS Protection",
@@ -3273,13 +3494,16 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "23.2",
           "parentTopic": {
             "id": "HVfPhpOZMeg5s9lko3Nh",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4333",
+          "roadmapSlug": "nestjs",
+          "moduleId": "HVfPhpOZMeg5s9lko3Nh",
+          "order": "23.3",
           "name": "cors-configuration",
           "nodeId": "wUtQjlnPzDVaOgvLw4qc",
           "title": "CORS Configuration",
@@ -3307,13 +3531,16 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "23.3",
           "parentTopic": {
             "id": "HVfPhpOZMeg5s9lko3Nh",
             "title": "Security"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4334",
+          "roadmapSlug": "nestjs",
+          "moduleId": "HVfPhpOZMeg5s9lko3Nh",
+          "order": "23.4",
           "name": "security-auditing",
           "nodeId": "bLc-cRp1AHQn8sJD3AFP",
           "title": "Security Auditing (Snyk)",
@@ -3341,7 +3568,6 @@
               "url": "https://www.youtube.com/watch?v=7UitC_TDJcY"
             }
           ],
-          "order": "23.4",
           "parentTopic": {
             "id": "HVfPhpOZMeg5s9lko3Nh",
             "title": "Security"
@@ -3376,6 +3602,10 @@
       "nextModules": [],
       "subtopics": [
         {
+          "_id": "6aab5fc113e4b2aeae8f4335",
+          "roadmapSlug": "nestjs",
+          "moduleId": "bKUFeOof7dCAzisCoOmP",
+          "order": "24.1",
           "name": "prometheus-grafana",
           "nodeId": "0rHdAGNk1mN7BCFjbxFn",
           "title": "Monitoring with Prometheus & Grafana",
@@ -3403,13 +3633,16 @@
               "url": "https://www.youtube.com/watch?v=QoDqxm7ybLc"
             }
           ],
-          "order": "24.1",
           "parentTopic": {
             "id": "bKUFeOof7dCAzisCoOmP",
             "title": "DevOps Mastery"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4336",
+          "roadmapSlug": "nestjs",
+          "moduleId": "bKUFeOof7dCAzisCoOmP",
+          "order": "24.2",
           "name": "serverless-deployment",
           "nodeId": "wI15K26hI0Vah65NmATp",
           "title": "Serverless (AWS Lambda, Azure Functions)",
@@ -3437,13 +3670,16 @@
               "url": "https://www.youtube.com/watch?v=dLjkp0Fj7tw"
             }
           ],
-          "order": "24.2",
           "parentTopic": {
             "id": "bKUFeOof7dCAzisCoOmP",
             "title": "DevOps Mastery"
           }
         },
         {
+          "_id": "6aab5fc113e4b2aeae8f4337",
+          "roadmapSlug": "nestjs",
+          "moduleId": "bKUFeOof7dCAzisCoOmP",
+          "order": "24.3",
           "name": "logging-aggregation",
           "nodeId": "JX1Z4ZH-Qu8e4C0phMVe",
           "title": "Logging & Observability",
@@ -3471,7 +3707,6 @@
               "url": "https://www.youtube.com/watch?v=mJqSv6pt3E8"
             }
           ],
-          "order": "24.3",
           "parentTopic": {
             "id": "bKUFeOof7dCAzisCoOmP",
             "title": "DevOps Mastery"
@@ -3479,5 +3714,8 @@
         }
       ]
     }
-  ]
+  ],
+  "title": "NestJS",
+  "topicCount": 78,
+  "updatedAt": "2026-09-17T03:34:25.446Z"
 }
