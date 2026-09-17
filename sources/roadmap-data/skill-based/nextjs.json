@@ -890,7 +890,27 @@
       "description": "Data fetching in Next.js allows you to render your content in different ways, depending on your application's use case. By default, layouts and pages are Server Components, which lets you fetch data and render parts of your UI on the server, optionally cache the result, and stream it to the client. When you need interactivity or browser APIs, you can use Client Components to layer in functionality.\n\nThese include pre-rendering with Server-side Rendering or Static Generation, and updating or creating content at runtime with Incremental Static Regeneration.",
       "resources": [],
       "order": 6,
-      "subtopics": []
+      "subtopics": [
+        {
+          "_id": "6aabb676032a7102ae1800e0",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_data-fetching_mu5b5eb8",
+          "nodeId": "topic_fetch-api_mu5cexap",
+          "name": "topic_fetch-api_mu5cexap",
+          "title": "Fetch API",
+          "description": "The Fetch API provides a JavaScript interface for accessing and manipulating parts of the protocol",
+          "content": "# Fetch API",
+          "resources": [],
+          "parentTopic": null,
+          "order": 0,
+          "createdAt": "2026-09-17T09:44:22.801Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "javascript",
+            "sourceNodeId": "fetch-api"
+          }
+        }
+      ]
     },
     {
       "id": "b2LcPc5MfoyF0W9Y0aGpR",
@@ -2063,7 +2083,7 @@
     }
   ],
   "title": "Next.js",
-  "topicCount": 41,
+  "topicCount": 42,
   "topics": [
     {
       "name": "introduction",

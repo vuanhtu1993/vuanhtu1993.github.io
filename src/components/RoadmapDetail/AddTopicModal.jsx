@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useEditMode } from './EditModeContext';
-import styles from './AddParentTopicModal.module.css';
+import styles from './AddTopicModal.module.css';
 
-export default function AddParentTopicModal({
+export default function AddTopicModal({
   isOpen,
   station,
   initialInsertPosition = null,
+  initialTab = 'ref',
   onClose,
   onSave,
   isProcessing = false,
@@ -13,7 +14,7 @@ export default function AddParentTopicModal({
   const { searchTopics } = useEditMode();
 
   // Tab: 'new' (Tạo mới) | 'ref' (Từ kho tri thức)
-  const [activeTab, setActiveTab] = useState('new');
+  const [activeTab, setActiveTab] = useState('ref');
 
   // Form state tạo mới
   const [title, setTitle] = useState('');
@@ -32,24 +33,13 @@ export default function AddParentTopicModal({
   const titleInputRef = useRef(null);
   const searchInputRef = useRef(null);
 
-  // Danh sách các bước tuần tự (Linear Topics) hiện có trong chặng để chọn vị trí
-  const availableSteps = React.useMemo(() => {
-    if (!station?.blocks) return [];
-    const steps = [];
-    station.blocks.forEach((block) => {
-      if (block.type === 'linear' && block.topic) {
-        steps.push({
-          nodeId: block.topic.nodeId || block.topic.name || block.topic.id,
-          title: block.topic.title,
-        });
-      } else if (block.type === 'branch' && block.leadTopic) {
-        steps.push({
-          nodeId: block.leadTopic.nodeId || block.leadTopic.name || block.leadTopic.id,
-          title: block.leadTopic.title,
-        });
-      }
-    });
-    return steps;
+  // Danh sách các chủ đề hiện có trong chặng để chọn vị trí chèn
+  const availableSteps = useMemo(() => {
+    if (!station?.subtopics) return [];
+    return station.subtopics.map((t) => ({
+      nodeId: t.nodeId || t.name || t.id,
+      title: t.title || 'Chủ đề',
+    }));
   }, [station]);
 
   // Reset form khi mở modal
@@ -61,7 +51,8 @@ export default function AddParentTopicModal({
       setSearchTerm('');
       setSearchResults([]);
       setSelectedRefTopic(null);
-      setActiveTab('new');
+      const tabToUse = initialTab || 'ref';
+      setActiveTab(tabToUse);
 
       // Khởi tạo vị trí dựa trên initialInsertPosition
       if (initialInsertPosition?.type === 'start') {
@@ -73,10 +64,14 @@ export default function AddParentTopicModal({
       }
 
       setTimeout(() => {
-        titleInputRef.current?.focus();
+        if (tabToUse === 'ref') {
+          searchInputRef.current?.focus();
+        } else {
+          titleInputRef.current?.focus();
+        }
       }, 100);
     }
-  }, [isOpen, initialInsertPosition]);
+  }, [isOpen, initialInsertPosition, initialTab]);
 
   // Tìm kiếm topic từ kho khi đổi tab hoặc gõ từ khóa
   useEffect(() => {
@@ -177,7 +172,7 @@ export default function AddParentTopicModal({
         {/* Modal Header */}
         <div className={styles.modalHeader}>
           <div>
-            <h3 className={styles.modalTitle}>Thêm Chủ đề chính (Topic cha)</h3>
+            <h3 className={styles.modalTitle}>Thêm Chủ đề vào Chặng</h3>
             <p className={styles.modalSubtitle}>
               Chặng: <strong>{station.title}</strong>
             </p>
@@ -221,11 +216,11 @@ export default function AddParentTopicModal({
         <form onSubmit={handleSubmit} className={styles.modalBody}>
           {/* Dropdown Vị trí chèn */}
           <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="position-select">
+            <label className={styles.label} htmlFor="topic-position-select">
               <span>Vị trí xuất hiện trong chặng:</span>
             </label>
             <select
-              id="position-select"
+              id="topic-position-select"
               className={styles.select}
               value={selectedPositionKey}
               onChange={(e) => setSelectedPositionKey(e.target.value)}
@@ -245,17 +240,17 @@ export default function AddParentTopicModal({
           {activeTab === 'new' && (
             <>
               <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="topic-title">
+                <label className={styles.label} htmlFor="new-topic-title">
                   <span>
                     Tên chủ đề <span className={styles.labelRequired}>*</span>
                   </span>
                 </label>
                 <input
-                  id="topic-title"
+                  id="new-topic-title"
                   ref={titleInputRef}
                   type="text"
                   className={styles.input}
-                  placeholder="Ví dụ: Giới thiệu kiến trúc Microservices..."
+                  placeholder="Ví dụ: Server-side Rendering (SSR)..."
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   disabled={isProcessing}
@@ -263,11 +258,11 @@ export default function AddParentTopicModal({
               </div>
 
               <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="topic-desc">
+                <label className={styles.label} htmlFor="new-topic-desc">
                   <span>Mô tả ngắn gọn</span>
                 </label>
                 <input
-                  id="topic-desc"
+                  id="new-topic-desc"
                   type="text"
                   className={styles.input}
                   placeholder="Tóm tắt nội dung cốt lõi của chủ đề..."
@@ -391,7 +386,11 @@ export default function AddParentTopicModal({
             type="button"
             className={styles.submitBtn}
             onClick={handleSubmit}
-            disabled={isProcessing || (activeTab === 'new' && !title.trim()) || (activeTab === 'ref' && !selectedRefTopic)}
+            disabled={
+              isProcessing ||
+              (activeTab === 'new' && !title.trim()) ||
+              (activeTab === 'ref' && !selectedRefTopic)
+            }
           >
             {isProcessing ? 'Đang lưu...' : '+ Thêm chủ đề'}
           </button>

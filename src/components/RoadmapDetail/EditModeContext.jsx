@@ -236,8 +236,8 @@ export function EditModeProvider({ children, slug, onDataChanged }) {
     [slug, onDataChanged]
   );
 
-  // Tạo 1 topic cha mới (hỗ trợ chèn vào vị trí bất kỳ)
-  const addParentTopic = useCallback(
+  // Tạo 1 topic mới trong module (hỗ trợ chèn vào vị trí bất kỳ)
+  const addTopic = useCallback(
     async ({ moduleId, title, description, content, resources, ref, insertPosition }) => {
       setSaveStatus('saving');
       try {
@@ -299,7 +299,8 @@ export function EditModeProvider({ children, slug, onDataChanged }) {
         searchTopics,
         addRefChildTopic,
         unlinkChildTopic,
-        addParentTopic,
+        addTopic,
+        addParentTopic: addTopic, // Alias tương thích ngược
       }}
     >
       {children}

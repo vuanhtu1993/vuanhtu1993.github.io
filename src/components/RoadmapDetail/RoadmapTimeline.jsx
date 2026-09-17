@@ -3,8 +3,7 @@ import MarkdownRenderer from '../shared/MarkdownRenderer';
 import { useEditMode } from './EditModeContext';
 import EditModuleModal from './EditModuleModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
-import RefTopicSearchModal from './RefTopicSearchModal';
-import AddParentTopicModal from './AddParentTopicModal';
+import AddTopicModal from './AddTopicModal';
 import AddModuleModal from './AddModuleModal';
 import styles from './RoadmapTimeline.module.css';
 
@@ -42,113 +41,6 @@ const TrashIcon = () => (
   </svg>
 );
 
-/**
- * Thuật toán phân nhóm các subtopics trong một trạm thành:
- * - Các bước tuần tự (Linear Steps)
- * - Các cụm ngã rẽ công nghệ (Branch Clusters) dựa trên parentTopic
- */
-function organizeSubtopicsIntoBlocks(subtopics = []) {
-  if (!subtopics || subtopics.length === 0) return [];
-
-  // Tìm các nhóm có parentTopic
-  const parentGroups = new Map();
-  const childTopicIds = new Set();
-
-  subtopics.forEach((topic) => {
-    if (topic.parentTopic && topic.parentTopic.title) {
-      const parentKey = topic.parentTopic.id || topic.parentTopic.title;
-      if (!parentGroups.has(parentKey)) {
-        parentGroups.set(parentKey, {
-          parentInfo: topic.parentTopic,
-          children: [],
-        });
-      }
-      parentGroups.get(parentKey).children.push(topic);
-      childTopicIds.add(topic.nodeId || topic.name || topic.id);
-    }
-  });
-
-  // Xác định các nhóm thực sự phân nhánh (có từ 2 topic con trở lên hoặc parentTopic rõ rệt)
-  const validBranchKeys = new Set();
-  parentGroups.forEach((val, key) => {
-    if (val.children.length >= 2 || val.parentInfo?.title) {
-      validBranchKeys.add(key);
-    }
-  });
-
-  // Tìm các topic đóng vai trò là "Parent Lead topic" (nếu có trong danh sách)
-  const parentLeadTopicIds = new Set();
-  const parentLeadMap = new Map(); // parentKey -> leadTopic
-
-  subtopics.forEach((topic) => {
-    const topicId = topic.nodeId || topic.name || topic.id;
-    for (const [key, group] of parentGroups.entries()) {
-      if (
-        key === topicId ||
-        group.parentInfo.id === topicId ||
-        group.parentInfo.title?.toLowerCase() === topic.title?.toLowerCase()
-      ) {
-        parentLeadTopicIds.add(topicId);
-        parentLeadMap.set(key, topic);
-      }
-    }
-  });
-
-  // Xây dựng danh sách các blocks theo đúng thứ tự xuất hiện ban đầu
-  const blocks = [];
-  const processedBranchKeys = new Set();
-
-  subtopics.forEach((topic) => {
-    const topicId = topic.nodeId || topic.name || topic.id;
-
-    // Nếu topic này là parent lead topic của một nhánh
-    for (const [key, group] of parentGroups.entries()) {
-      if (
-        validBranchKeys.has(key) &&
-        !processedBranchKeys.has(key) &&
-        (parentLeadMap.get(key) === topic ||
-          topic.parentTopic?.id === key ||
-          topic.parentTopic?.title === key)
-      ) {
-        processedBranchKeys.add(key);
-        const leadTopic = parentLeadMap.get(key);
-
-        const branchTitle = leadTopic?.title || group.parentInfo?.title || 'Phân nhánh';
-
-        blocks.push({
-          type: 'branch',
-          key: `branch-${key}`,
-          title: branchTitle,
-          description: leadTopic?.description || '',
-          leadTopic: leadTopic || null,
-          parentInfo: group.parentInfo || null,
-          parentKey: key,
-          topics: group.children,
-        });
-        return;
-      }
-    }
-
-    // Nếu topic này là con của một nhánh đã xử lý thì bỏ qua
-    if (childTopicIds.has(topicId)) {
-      return;
-    }
-
-    // Nếu là parent lead đã được gộp vào nhánh thì bỏ qua
-    if (parentLeadTopicIds.has(topicId)) {
-      return;
-    }
-
-    // Ngược lại, là một bước tuần tự cốt lõi (Linear Step)
-    blocks.push({
-      type: 'linear',
-      topic,
-    });
-  });
-
-  return blocks;
-}
-
 export default function RoadmapTimeline({
   roadmapData,
   isCompleted,
@@ -158,7 +50,7 @@ export default function RoadmapTimeline({
   expandedModules,
   onToggleModule,
 }) {
-  const { isEditMode, updateModule, deleteModule, addModule, deleteTopic, addRefChildTopic, addParentTopic } = useEditMode();
+  const { isEditMode, isDevMode, updateModule, deleteModule, addModule, deleteTopic, addTopic } = useEditMode();
 
   // Modals state
   const [editingModule, setEditingModule] = useState(null);
@@ -167,44 +59,49 @@ export default function RoadmapTimeline({
   const [isDeletingModule, setIsDeletingModule] = useState(false);
   const [deletingTopic, setDeletingTopic] = useState(null);
   const [isDeletingTopic, setIsDeletingTopic] = useState(false);
-  const [refParentTarget, setRefParentTarget] = useState(null);
-  const [isAddingRefBranch, setIsAddingRefBranch] = useState(false);
 
-  // Modal thêm topic cha
-  const [addingParentStation, setAddingParentStation] = useState(null);
+  // Modal thêm topic mới vào chặng
+  const [addingTopicStation, setAddingTopicStation] = useState(null);
   const [initialInsertPosition, setInitialInsertPosition] = useState(null);
-  const [isAddingParentTopic, setIsAddingParentTopic] = useState(false);
+  const [initialTopicTab, setInitialTopicTab] = useState('ref');
+  const [isAddingTopic, setIsAddingTopic] = useState(false);
 
   // Modal thêm chặng mới (Module)
   const [addingModulePosition, setAddingModulePosition] = useState(null);
   const [isAddingModule, setIsAddingModule] = useState(false);
 
-  // Chuẩn hóa cấu trúc dữ liệu thành danh sách các Station (Modules / Chặng)
+  // Chuẩn hóa cấu trúc dữ liệu: Mô hình 2 tầng chuẩn mực (Module -> Topics)
   const stations = useMemo(() => {
     if (!roadmapData) return [];
 
     // Nếu roadmap có sẵn modules (Frontend, Javascript, NestJS, NextJS, NodeJS, System Design...)
     if (Array.isArray(roadmapData.modules) && roadmapData.modules.length > 0) {
-      return roadmapData.modules.map((mod, idx) => ({
-        id: mod.id || `mod-${idx}`,
-        order: mod.order || idx + 1,
-        title: mod.title || mod.name || `Chặng ${idx + 1}`,
-        description: mod.description || '',
-        subtopics: mod.subtopics || [],
-        blocks: organizeSubtopicsIntoBlocks(mod.subtopics || []),
-      }));
+      return roadmapData.modules.map((mod, idx) => {
+        const sortedSubtopics = [...(mod.subtopics || [])].sort(
+          (a, b) => (a.order ?? 0) - (b.order ?? 0)
+        );
+        return {
+          id: mod.id || `mod-${idx}`,
+          order: mod.order || idx + 1,
+          title: mod.title || mod.name || `Chặng ${idx + 1}`,
+          description: mod.description || '',
+          subtopics: sortedSubtopics,
+        };
+      });
     }
 
     // Nếu roadmap chỉ có danh sách topics phẳng (React, Typescript, Docker, Kubernetes, Api Design...)
     if (Array.isArray(roadmapData.topics) && roadmapData.topics.length > 0) {
+      const sortedTopics = [...roadmapData.topics].sort(
+        (a, b) => (a.order ?? 0) - (b.order ?? 0)
+      );
       return [
         {
           id: `${roadmapData.slug || 'roadmap'}-main`,
           order: 1,
           title: roadmapData.title || 'Chủ đề Lộ trình',
           description: roadmapData.description || '',
-          subtopics: roadmapData.topics,
-          blocks: organizeSubtopicsIntoBlocks(roadmapData.topics),
+          subtopics: sortedTopics,
         },
       ];
     }
@@ -229,11 +126,9 @@ export default function RoadmapTimeline({
         });
 
         if (matchStationTitle || matchedTopics.length > 0) {
-          const filteredSubtopics = matchStationTitle ? st.subtopics : matchedTopics;
           return {
             ...st,
-            subtopics: filteredSubtopics,
-            blocks: organizeSubtopicsIntoBlocks(filteredSubtopics),
+            subtopics: matchStationTitle ? st.subtopics : matchedTopics,
           };
         }
         return null;
@@ -284,43 +179,24 @@ export default function RoadmapTimeline({
     }
   };
 
-  // Xử lý gán topic con vào nhánh từ Timeline
-  const handleSelectRefTopicForBranch = async (selectedTopic) => {
-    if (!refParentTarget) return;
-    setIsAddingRefBranch(true);
-    try {
-      const parentNodeId = refParentTarget.nodeId || refParentTarget.id;
-      await addRefChildTopic(parentNodeId, {
-        sourceRoadmapSlug: selectedTopic.roadmapSlug,
-        sourceNodeId: selectedTopic.nodeId,
-        moduleId: refParentTarget.moduleId,
-        parentTitle: refParentTarget.title,
-      });
-      setRefParentTarget(null);
-    } catch (err) {
-      alert(`Lỗi khi gán topic con: ${err.message}`);
-    } finally {
-      setIsAddingRefBranch(false);
-    }
-  };
-
-  // Mở modal thêm Topic cha (có thể chỉ định vị trí chèn)
-  const handleOpenAddParentTopic = (station, insertPosition = null) => {
-    setAddingParentStation(station);
+  // Mở modal thêm Topic vào chặng (có thể chỉ định vị trí chèn và tab)
+  const handleOpenAddTopic = (station, insertPosition = null, tab = 'ref') => {
+    setAddingTopicStation(station);
     setInitialInsertPosition(insertPosition);
+    setInitialTopicTab(tab);
   };
 
-  // Xử lý lưu Topic cha mới
-  const handleSaveParentTopic = async (topicData) => {
-    setIsAddingParentTopic(true);
+  // Xử lý lưu Topic mới
+  const handleSaveTopic = async (topicData) => {
+    setIsAddingTopic(true);
     try {
-      await addParentTopic(topicData);
-      setAddingParentStation(null);
+      await addTopic(topicData);
+      setAddingTopicStation(null);
       setInitialInsertPosition(null);
     } catch (err) {
       alert(`Lỗi khi thêm chủ đề: ${err.message}`);
     } finally {
-      setIsAddingParentTopic(false);
+      setIsAddingTopic(false);
     }
   };
 
@@ -373,306 +249,237 @@ export default function RoadmapTimeline({
                 )}
 
                 <div className={styles.stationItem}>
-                {/* Trạm dừng Metro số thứ tự */}
-                <div
-                  className={`${styles.stationStop} ${
-                    isStationAllDone ? styles.stationStopCompleted : ''
-                  }`}
-                >
-                  {isStationAllDone ? '✓' : station.order}
-                </div>
-
-                {/* Station Card */}
-                <div className={styles.stationCard}>
+                  {/* Trạm dừng Metro số thứ tự */}
                   <div
-                    className={styles.stationHeader}
-                    onClick={() => onToggleModule(station.id)}
+                    className={`${styles.stationStop} ${
+                      isStationAllDone ? styles.stationStopCompleted : ''
+                    }`}
                   >
-                    <div className={styles.stationInfo}>
-                      <div className={styles.stationTitleRow}>
-                        <h3 className={styles.stationTitle}>{station.title}</h3>
-                        <span
-                          className={`${styles.stationBadge} ${
-                            isStationAllDone ? styles.stationBadgeCompleted : ''
-                          }`}
-                        >
-                          {completedInStation}/{totalInStation} hoàn thành
-                        </span>
+                    {isStationAllDone ? '✓' : station.order}
+                  </div>
 
-                        {/* Edit Mode Buttons cho Module */}
-                        {isEditMode && (
-                          <div
-                            className={styles.moduleActionGroup}
-                            onClick={(e) => e.stopPropagation()}
+                  {/* Station Card */}
+                  <div className={styles.stationCard}>
+                    <div
+                      className={styles.stationHeader}
+                      onClick={() => onToggleModule(station.id)}
+                    >
+                      <div className={styles.stationInfo}>
+                        <div className={styles.stationTitleRow}>
+                          <h3 className={styles.stationTitle}>{station.title}</h3>
+                          <span
+                            className={`${styles.stationBadge} ${
+                              isStationAllDone ? styles.stationBadgeCompleted : ''
+                            }`}
                           >
-                            <button
-                              type="button"
-                              className={styles.moduleEditBtn}
-                              onClick={() => setEditingModule(station)}
-                              title="Chỉnh sửa Module"
+                            {completedInStation}/{totalInStation} hoàn thành
+                          </span>
+
+                          {/* Edit Mode Buttons cho Module */}
+                          {isEditMode && (
+                            <div
+                              className={styles.moduleActionGroup}
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              <EditIcon />
-                              <span>Sửa</span>
-                            </button>
-                            <button
-                              type="button"
-                              className={styles.moduleDeleteBtn}
-                              onClick={() => setDeletingModule(station)}
-                              title="Xoá Module này"
-                            >
-                              <TrashIcon />
-                            </button>
-                          </div>
+                              <button
+                                type="button"
+                                className={styles.moduleEditBtn}
+                                onClick={() => setEditingModule(station)}
+                                title="Chỉnh sửa Module"
+                              >
+                                <EditIcon />
+                                <span>Sửa</span>
+                              </button>
+                              <button
+                                type="button"
+                                className={styles.moduleDeleteBtn}
+                                onClick={() => setDeletingModule(station)}
+                                title="Xoá Module này"
+                              >
+                                <TrashIcon />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Station text snippet khi thu gọn (loại bỏ code blocks để không vỡ header) */}
+                        {!isExpanded && station.description && (
+                          <p className={styles.stationHeaderSnippet}>
+                            {(() => {
+                              const clean = station.description
+                                .replace(/```[\s\S]*?```/g, '')
+                                .replace(/[#*`_\[\]()]/g, '')
+                                .trim();
+                              return clean.length > 140 ? clean.slice(0, 140) + '...' : clean;
+                            })()}
+                          </p>
                         )}
                       </div>
 
-                      {/* Station text snippet khi thu gọn (loại bỏ code blocks để không vỡ header) */}
-                      {!isExpanded && station.description && (
-                        <p className={styles.stationHeaderSnippet}>
-                          {(() => {
-                            const clean = station.description
-                              .replace(/```[\s\S]*?```/g, '')
-                              .replace(/[#*`_\[\]()]/g, '')
-                              .trim();
-                            return clean.length > 140 ? clean.slice(0, 140) + '...' : clean;
-                          })()}
-                        </p>
-                      )}
+                      <span
+                        className={`${styles.chevronIcon} ${
+                          isExpanded ? styles.chevronOpen : ''
+                        }`}
+                      >
+                        ▼
+                      </span>
                     </div>
 
-                    <span
-                      className={`${styles.chevronIcon} ${
-                        isExpanded ? styles.chevronOpen : ''
-                      }`}
-                    >
-                      ▼
-                    </span>
-                  </div>
+                    {/* Danh sách các chủ đề (Topics) trực tiếp bên trong Chặng */}
+                    {isExpanded && (
+                      <div className={styles.subtopicsList}>
+                        {/* Mô tả chi tiết và sơ đồ của Chặng khi mở rộng */}
+                        {station.description && (
+                          <div className={styles.stationOverview}>
+                            <MarkdownRenderer content={station.description} />
+                          </div>
+                        )}
 
-                  {/* Danh sách các blocks (Linear Steps + Branch Sections) */}
-                  {isExpanded && (
-                    <div className={styles.subtopicsList}>
-                      {/* Mô tả chi tiết và sơ đồ của Chặng khi mở rộng */}
-                      {station.description && (
-                        <div className={styles.stationOverview}>
-                          <MarkdownRenderer content={station.description} />
-                        </div>
-                      )}
-
-                      {station.blocks.length === 0 && (
-                        <div className={styles.emptyModuleNotice}>
-                          <p>Chặng này chưa có chủ đề nào.</p>
-                          {isEditMode && (
-                            <button
-                              type="button"
-                              className={styles.addFirstChildBtn}
-                              onClick={() => {
-                                handleOpenAddParentTopic(station, { type: 'start' });
-                              }}
-                            >
-                              + Thêm chủ đề đầu tiên (Topic cha)
-                            </button>
-                          )}
-                        </div>
-                      )}
-
-                      {station.blocks.map((block, bIdx) => {
-                        let prevTopicId = null;
-                        let prevTopicTitle = null;
-
-                        if (block.type === 'linear') {
-                          prevTopicId = block.topic?.nodeId || block.topic?.name || block.topic?.id;
-                          prevTopicTitle = block.topic?.title;
-                        } else if (block.type === 'branch') {
-                          prevTopicId = block.leadTopic?.nodeId || block.leadTopic?.name || block.leadTopic?.id || block.parentKey;
-                          prevTopicTitle = block.leadTopic?.title || block.title;
-                        }
-
-                        return (
-                          <React.Fragment
-                            key={
-                              block.key ||
-                              (block.type === 'linear'
-                                ? block.topic?.nodeId || `linear-${bIdx}`
-                                : `branch-${bIdx}`)
-                            }
-                          >
-                            {/* Nút chèn lên đầu chặng trước block số 0 */}
-                            {isEditMode && bIdx === 0 && (
-                              <div className={styles.inBetweenInsertDivider}>
+                        {/* Trạng thái chặng rỗng */}
+                        {station.subtopics.length === 0 && (
+                          <div className={styles.emptyModuleNotice}>
+                            <p>Chặng này chưa có chủ đề nào.</p>
+                            {(isEditMode || isDevMode) && (
+                              <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                                 <button
                                   type="button"
-                                  className={styles.inBetweenInsertBtn}
-                                  onClick={() =>
-                                    handleOpenAddParentTopic(station, { type: 'start' })
-                                  }
-                                  title="Chèn chủ đề lên đầu chặng này"
+                                  className={styles.addFirstChildBtn}
+                                  onClick={() => {
+                                    handleOpenAddTopic(station, { type: 'start' }, 'ref');
+                                  }}
                                 >
-                                  <span className={styles.inBetweenPlus}>+</span>
-                                  <span className={styles.inBetweenText}>Chèn lên đầu chặng</span>
+                                  🔍 Tìm kiếm từ kho (Ref)
+                                </button>
+                                <button
+                                  type="button"
+                                  className={styles.addFirstChildBtn}
+                                  style={{ background: '#475569' }}
+                                  onClick={() => {
+                                    handleOpenAddTopic(station, { type: 'start' }, 'new');
+                                  }}
+                                >
+                                  ✏️ Tạo chủ đề mới
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Danh sách các chủ đề dạng Card Grid */}
+                        {station.subtopics.length > 0 && (
+                          <div className={styles.topicsContainer}>
+                            {/* Thanh công cụ chèn lên đầu khi ở Edit Mode */}
+                            {(isEditMode || isDevMode) && (
+                              <div className={styles.topicGridHeader}>
+                                <button
+                                  type="button"
+                                  className={styles.insertTopTopicBtn}
+                                  onClick={() => handleOpenAddTopic(station, { type: 'start' }, 'ref')}
+                                  title="Chèn chủ đề lên đầu chặng"
+                                >
+                                  <span>+</span>
+                                  <span>Chèn chủ đề lên đầu chặng</span>
                                 </button>
                               </div>
                             )}
 
-                            {/* 1. Dòng tuần tự cốt lõi (Linear Step) */}
-                            {block.type === 'linear' && (() => {
-                              const topic = block.topic;
-                              const topicId = topic.nodeId || topic.name || topic.id;
-                              const done = isCompleted(topicId);
-                              const resCount = topic.resources?.length || 0;
+                            <div className={styles.topicGrid}>
+                              {station.subtopics.map((topic, tIdx) => {
+                                const topicId = topic.nodeId || topic.name || topic.id;
+                                const done = isCompleted(topicId);
+                                const resCount = topic.resources?.length || 0;
 
-                              return (
-                                <div
-                                  className={styles.topicRow}
-                                  onClick={() => onSelectTopic(topic)}
-                                >
-                                  <div className={styles.topicLeft}>
-                                    <button
-                                      type="button"
-                                      className={`${styles.checkboxBtn} ${
-                                        done ? styles.checkboxChecked : ''
-                                      }`}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        onToggleCompleted(topicId);
-                                      }}
-                                      aria-label={`Đánh dấu ${topic.title}`}
-                                    >
-                                      {done ? '✓' : ''}
-                                    </button>
+                                // Xử lý mô tả rút gọn
+                                const cleanDesc = topic.description
+                                  ? topic.description
+                                      .replace(/```[\s\S]*?```/g, '')
+                                      .replace(/[#*`_\[\]()]/g, '')
+                                      .trim()
+                                  : '';
 
-                                    <span
-                                      className={`${styles.topicName} ${
-                                        done ? styles.topicNameChecked : ''
-                                      }`}
-                                    >
-                                      {topic.title}
-                                    </span>
-
-                                    {topic.ref && (
-                                      <span
-                                        className={styles.refBadge}
-                                        title={`Tham chiếu từ ${topic.ref.sourceRoadmapSlug}`}
-                                      >
-                                        REF
-                                      </span>
-                                    )}
-
-                                    {resCount > 0 && (
-                                      <span className={styles.resourceTag}>{resCount} TL</span>
-                                    )}
-                                  </div>
-
-                                  <div className={styles.topicRight}>
-                                    {isEditMode && (
-                                      <button
-                                        type="button"
-                                        className={styles.quickDeleteTopicBtn}
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          setDeletingTopic(topic);
-                                        }}
-                                        title="Xoá chủ đề này"
-                                      >
-                                        <TrashIcon />
-                                      </button>
-                                    )}
-
-                                    <span className={styles.openDrawerArrow}>→</span>
-                                  </div>
-                                </div>
-                              );
-                            })()}
-
-                            {/* 2. Cụm ngã rẽ công nghệ (Branch Section) */}
-                            {block.type === 'branch' && (
-                              <div key={block.key || `branch-${bIdx}`} className={styles.branchSection}>
-                                {/* Header Ngã rẽ */}
-                                <div className={styles.branchForkHeader}>
-                                <div className={styles.branchForkTitleRow}>
-                                  <div className={styles.branchDotMarker} />
-                                  <h4 className={styles.branchForkTitle}>{block.title}</h4>
-                                </div>
-
-                                {block.description && (
-                                  <div className={styles.branchForkDesc}>
-                                    <MarkdownRenderer content={block.description} inline />
-                                  </div>
-                                )}
-
-                                {block.leadTopic && (
+                                return (
                                   <div
-                                    className={styles.leadTopicLink}
-                                    onClick={() => onSelectTopic(block.leadTopic)}
+                                    key={topicId || `topic-${tIdx}`}
+                                    className={`${styles.topicCard} ${
+                                      done ? styles.topicCardCompleted : ''
+                                    }`}
+                                    onClick={() => onSelectTopic(topic)}
                                   >
-                                    <span>Xem tổng quan chủ đề này</span>
-                                    <span>→</span>
-                                  </div>
-                                )}
-                              </div>
+                                    {/* Header Card: Tiêu đề + Actions */}
+                                    <div className={styles.topicCardHeader}>
+                                      <h4
+                                        className={`${styles.topicCardTitle} ${
+                                          done ? styles.topicCardTitleChecked : ''
+                                        }`}
+                                      >
+                                        {topic.title}
+                                      </h4>
 
-                              {/* Đồ họa đường rẽ nhánh */}
-                              <div className={styles.branchConnectorWrapper}>
-                                <div className={styles.branchConnectorStem} />
-                                <div className={styles.branchConnectorBar} />
-                              </div>
-
-                              {/* Lưới các thẻ bài nhánh con (Branch Cards Grid) */}
-                              <div className={styles.branchGrid}>
-                                {block.topics.map((topic, cIdx) => {
-                                  const topicId = topic.nodeId || topic.name || topic.id;
-                                  const done = isCompleted(topicId);
-                                  const resCount = topic.resources?.length || 0;
-
-                                  return (
-                                    <div
-                                      key={topicId || `card-${cIdx}`}
-                                      className={`${styles.branchCard} ${
-                                        done ? styles.branchCardCompleted : ''
-                                      }`}
-                                      onClick={() => onSelectTopic(topic)}
-                                    >
-                                      <div className={styles.branchCardHeader}>
-                                        <h5 className={styles.branchCardTitle}>{topic.title}</h5>
-
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                                          {isEditMode && (
+                                      <div
+                                        className={styles.topicCardActions}
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        {(isEditMode || isDevMode) && (
+                                          <>
+                                            <button
+                                              type="button"
+                                              className={styles.cardInsertAfterBtn}
+                                              onClick={() =>
+                                                handleOpenAddTopic(
+                                                  station,
+                                                  {
+                                                    type: 'after',
+                                                    targetNodeId: topicId,
+                                                    targetTitle: topic.title,
+                                                  },
+                                                  'ref'
+                                                )
+                                              }
+                                              title={`Chèn chủ đề vào sau "${topic.title}"`}
+                                            >
+                                              +
+                                            </button>
                                             <button
                                               type="button"
                                               className={styles.quickDeleteTopicBtn}
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                setDeletingTopic(topic);
-                                              }}
+                                              onClick={() => setDeletingTopic(topic)}
                                               title="Xoá chủ đề này"
                                             >
                                               <TrashIcon />
                                             </button>
-                                          )}
-                                          <button
-                                            type="button"
-                                            className={`${styles.checkboxBtn} ${
-                                              done ? styles.checkboxChecked : ''
-                                            }`}
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              onToggleCompleted(topicId);
-                                            }}
-                                            aria-label={`Đánh dấu ${topic.title}`}
-                                          >
-                                            {done ? '✓' : ''}
-                                          </button>
-                                        </div>
+                                          </>
+                                        )}
+
+                                        <button
+                                          type="button"
+                                          className={`${styles.checkboxBtn} ${
+                                            done ? styles.checkboxChecked : ''
+                                          }`}
+                                          onClick={() => onToggleCompleted(topicId)}
+                                          aria-label={`Đánh dấu ${topic.title}`}
+                                        >
+                                          {done ? '✓' : ''}
+                                        </button>
                                       </div>
+                                    </div>
 
-                                      {/* Truncated description with MarkdownRenderer */}
-                                      {topic.description && (
-                                        <div className={styles.branchCardDesc}>
-                                          <MarkdownRenderer content={topic.description} truncate={110} />
-                                        </div>
-                                      )}
+                                    {/* Body Card: Tóm tắt mô tả */}
+                                    {cleanDesc && (
+                                      <p className={styles.topicCardDesc}>{cleanDesc}</p>
+                                    )}
 
-                                      <div className={styles.branchCardFooter}>
+                                    {/* Footer Card: Badge tài liệu + REF + nút Khám phá */}
+                                    <div className={styles.topicCardFooter}>
+                                      <div className={styles.topicCardBadgeGroup}>
+                                        {topic.ref && (
+                                          <span
+                                            className={styles.refBadge}
+                                            title={`Tham chiếu từ ${topic.ref.sourceRoadmapSlug}`}
+                                          >
+                                            REF
+                                          </span>
+                                        )}
+
                                         {resCount > 0 ? (
                                           <span className={styles.resourceCountBadge}>
                                             {resCount} tài liệu
@@ -680,96 +487,91 @@ export default function RoadmapTimeline({
                                         ) : (
                                           <span />
                                         )}
-                                        <span className={styles.branchCardAction}>Khám phá →</span>
                                       </div>
-                                    </div>
-                                  );
-                                })}
 
-                                {/* Nút thêm topic con dạng card (+) trong chế độ Edit Mode */}
-                                {isEditMode && (
-                                  <div
-                                    className={styles.addBranchCardBtn}
-                                    onClick={() => {
-                                      const branchParentTopic = block.leadTopic || {
-                                        nodeId: block.parentInfo?.id || block.parentKey || block.key?.replace('branch-', ''),
-                                        title: block.title,
-                                        moduleId: station.id,
-                                      };
-                                      setRefParentTarget(branchParentTopic);
-                                    }}
-                                    role="button"
-                                    tabIndex={0}
-                                    title={`Thêm topic con vào cụm "${block.title}"`}
-                                  >
-                                    <div className={styles.addBranchCardInner}>
-                                      <div className={styles.plusIconCircle}>+</div>
-                                      <span className={styles.addCardText}>Thêm Topic con</span>
-                                      <span className={styles.addCardSubtext}>Tham chiếu từ kho</span>
+                                      <span className={styles.topicCardAction}>Khám phá →</span>
                                     </div>
                                   </div>
-                                )}
-                              </div>
-                            </div>
-                          )}
+                                );
+                              })}
 
-                          {/* Nút chèn ngay sau block này */}
-                          {isEditMode && (
-                            <div className={styles.inBetweenInsertDivider}>
-                              <button
-                                type="button"
-                                className={styles.inBetweenInsertBtn}
-                                onClick={() =>
-                                  handleOpenAddParentTopic(station, {
-                                    type: 'after',
-                                    targetNodeId: prevTopicId,
-                                    targetTitle: prevTopicTitle,
-                                  })
-                                }
-                                title={`Chèn chủ đề vào sau "${prevTopicTitle}"`}
-                              >
-                                <span className={styles.inBetweenPlus}>+</span>
-                                <span className={styles.inBetweenText}>Chèn chủ đề vào đây</span>
-                              </button>
+                              {/* Card thêm mới ở cuối trong chế độ Edit Mode hoặc Dev Mode */}
+                              {(isEditMode || isDevMode) && (
+                                <div
+                                  className={styles.addTopicCard}
+                                  onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'ref')}
+                                  role="button"
+                                  tabIndex={0}
+                                  title="Thêm chủ đề vào chặng này (Tìm kiếm từ kho Ref hoặc tạo mới)"
+                                >
+                                  <div className={styles.addTopicCardMain}>
+                                    <div className={styles.addTopicCardPlus}>+</div>
+                                    <h5 className={styles.addTopicCardTitle}>Thêm chủ đề mới</h5>
+                                    <p className={styles.addTopicCardSub}>
+                                      Tìm kiếm topic để ref đến hoặc tạo mới
+                                    </p>
+                                  </div>
+
+                                  <div
+                                    className={styles.addTopicCardBtnGroup}
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <button
+                                      type="button"
+                                      className={styles.addTopicCardRefBtn}
+                                      onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'ref')}
+                                      title="Tìm kiếm chủ đề từ kho tri thức để liên kết (Ref)"
+                                    >
+                                      🔍 Tìm từ kho Ref
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className={styles.addTopicCardNewBtn}
+                                      onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'new')}
+                                      title="Tạo chủ đề mới"
+                                    >
+                                      ✏️ Tạo mới
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Nút chèn chặng mới ngay sau chặng này */}
+                {isEditMode && (
+                  <div className={styles.stationInsertDivider}>
+                    <button
+                      type="button"
+                      className={styles.stationInsertBtn}
+                      onClick={() =>
+                        handleOpenAddModule({
+                          type: 'after',
+                          targetModuleId: station.id,
+                          targetTitle: station.title,
+                        })
+                      }
+                      title={`Chèn chặng mới sau "${station.title}"`}
+                    >
+                      <span className={styles.stationInsertPlus}>+</span>
+                      <span className={styles.stationInsertText}>
+                        {sIdx === filteredStations.length - 1
+                          ? 'Thêm chặng mới vào cuối'
+                          : `Chèn chặng mới sau "${station.title}"`}
+                      </span>
+                    </button>
                   </div>
                 )}
-              </div>
-            </div>
-
-            {/* Nút chèn chặng mới ngay sau chặng này */}
-            {isEditMode && (
-              <div className={styles.stationInsertDivider}>
-                <button
-                  type="button"
-                  className={styles.stationInsertBtn}
-                  onClick={() =>
-                    handleOpenAddModule({
-                      type: 'after',
-                      targetModuleId: station.id,
-                      targetTitle: station.title,
-                    })
-                  }
-                  title={`Chèn chặng mới sau "${station.title}"`}
-                >
-                  <span className={styles.stationInsertPlus}>+</span>
-                  <span className={styles.stationInsertText}>
-                    {sIdx === filteredStations.length - 1
-                      ? 'Thêm chặng mới vào cuối'
-                      : `Chèn chặng mới sau "${station.title}"`}
-                  </span>
-                </button>
-              </div>
-            )}
-          </React.Fragment>
-        );
-      })}
-    </div>
-  </div>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Modal chỉnh sửa Module */}
       <EditModuleModal
@@ -800,26 +602,18 @@ export default function RoadmapTimeline({
         isProcessing={isDeletingTopic}
       />
 
-      {/* Modal tìm kiếm và gán topic con tham chiếu từ Timeline */}
-      <RefTopicSearchModal
-        isOpen={Boolean(refParentTarget)}
-        parentTopic={refParentTarget}
-        onClose={() => setRefParentTarget(null)}
-        onSelectTopic={handleSelectRefTopicForBranch}
-        isProcessing={isAddingRefBranch}
-      />
-
-      {/* Modal thêm Topic cha với hỗ trợ vị trí bất kỳ */}
-      <AddParentTopicModal
-        isOpen={Boolean(addingParentStation)}
-        station={addingParentStation}
+      {/* Modal thêm Topic vào chặng với hỗ trợ chèn vị trí bất kỳ */}
+      <AddTopicModal
+        isOpen={Boolean(addingTopicStation)}
+        station={addingTopicStation}
         initialInsertPosition={initialInsertPosition}
+        initialTab={initialTopicTab}
         onClose={() => {
-          setAddingParentStation(null);
+          setAddingTopicStation(null);
           setInitialInsertPosition(null);
         }}
-        onSave={handleSaveParentTopic}
-        isProcessing={isAddingParentTopic}
+        onSave={handleSaveTopic}
+        isProcessing={isAddingTopic}
       />
 
       {/* Modal thêm Chặng mới (Module) với hỗ trợ vị trí bất kỳ */}
@@ -834,4 +628,3 @@ export default function RoadmapTimeline({
     </>
   );
 }
-
