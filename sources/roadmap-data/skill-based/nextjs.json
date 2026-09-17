@@ -297,6 +297,7 @@
           "title": "React Frameworks"
         }
       ],
+      "order": 1,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4338",
@@ -387,7 +388,8 @@
           "parentTopic": {
             "id": "tcDL4OEbZplbjNa8VTLpv",
             "title": "Introduction"
-          }
+          },
+          "updatedAt": "2026-09-17T08:12:10.996Z"
         }
       ]
     },
@@ -415,6 +417,7 @@
           "title": "Rendering Strategies"
         }
       ],
+      "order": 2,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f433d",
@@ -516,6 +519,7 @@
         }
       ],
       "nextModules": [],
+      "order": 3,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f433f",
@@ -564,7 +568,8 @@
           "parentTopic": {
             "id": "xRZqBd5-QO8zh7ksHlRjK",
             "title": "Next.js Routing Basics"
-          }
+          },
+          "updatedAt": "2026-09-17T08:12:24.460Z"
         }
       ]
     },
@@ -602,6 +607,7 @@
           "title": "Getting Started"
         }
       ],
+      "order": 4,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4341",
@@ -742,6 +748,7 @@
           "title": "Routing Terminology"
         }
       ],
+      "order": 5,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4345",
@@ -877,6 +884,15 @@
       ]
     },
     {
+      "id": "mod_data-fetching_mu5b5eb8",
+      "name": "mod_data-fetching_mu5b5eb8",
+      "title": "Data Fetching",
+      "description": "Data fetching in Next.js allows you to render your content in different ways, depending on your application's use case. By default, layouts and pages are Server Components, which lets you fetch data and render parts of your UI on the server, optionally cache the result, and stream it to the client. When you need interactivity or browser APIs, you can use Client Components to layer in functionality.\n\nThese include pre-rendering with Server-side Rendering or Static Generation, and updating or creating content at runtime with Incremental Static Regeneration.",
+      "resources": [],
+      "order": 6,
+      "subtopics": []
+    },
+    {
       "id": "b2LcPc5MfoyF0W9Y0aGpR",
       "name": "b2LcPc5MfoyF0W9Y0aGpR",
       "title": "Loading and Streaming",
@@ -905,6 +921,7 @@
       ],
       "prerequisites": [],
       "nextModules": [],
+      "order": 7,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4348",
@@ -964,6 +981,7 @@
           "title": "Routing Patterns"
         }
       ],
+      "order": 8,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4349",
@@ -1028,6 +1046,7 @@
           "title": "Structuring Routes"
         }
       ],
+      "order": 9,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f434c",
@@ -1097,6 +1116,7 @@
           "title": "Proxy"
         }
       ],
+      "order": 10,
       "subtopics": []
     },
     {
@@ -1138,6 +1158,7 @@
           "title": "Internationalization"
         }
       ],
+      "order": 11,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f434d",
@@ -1268,37 +1289,7 @@
           "title": "Working with data"
         }
       ],
-      "subtopics": []
-    },
-    {
-      "id": "lkdBRzC8lAvRYKBt7E37V",
-      "name": "lkdBRzC8lAvRYKBt7E37V",
-      "title": "Fetching Locations",
-      "description": "Data fetching in Next.js allows you to render your content in different ways, depending on your application's use case. By default, layouts and pages are Server Components, which lets you fetch data and render parts of your UI on the server, optionally cache the result, and stream it to the client. When you need interactivity or browser APIs, you can use Client Components to layer in functionality.\n\nThese include pre-rendering with Server-side Rendering or Static Generation, and updating or creating content at runtime with Incremental Static Regeneration.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Fetching Data",
-          "url": "https://nextjs.org/docs/app/getting-started/fetching-data"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Data Fetching",
-          "url": "https://www.youtube.com/watch?v=DRsU93Lde2"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "tDkcsilfh67BwS5MCM7j8",
-          "title": "Working with data"
-        }
-      ],
-      "nextModules": [
-        {
-          "id": "77i6HVsnX-uSDw8vz3afD",
-          "title": "Caching Data"
-        }
-      ],
+      "order": 12,
       "subtopics": []
     },
     {
@@ -1325,6 +1316,7 @@
           "title": "Data Fetching Patterns"
         }
       ],
+      "order": 13,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4351",
@@ -1460,6 +1452,7 @@
           "title": "Handling Sensitive Data"
         }
       ],
+      "order": 14,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4355",
@@ -1525,6 +1518,7 @@
         }
       ],
       "nextModules": [],
+      "order": 15,
       "subtopics": []
     },
     {
@@ -1551,6 +1545,7 @@
           "title": "Rendering"
         }
       ],
+      "order": 16,
       "subtopics": []
     },
     {
@@ -1572,6 +1567,7 @@
         }
       ],
       "nextModules": [],
+      "order": 17,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4357",
@@ -1690,6 +1686,7 @@
         }
       ],
       "nextModules": [],
+      "order": 18,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f435a",
@@ -1754,6 +1751,7 @@
       ],
       "prerequisites": [],
       "nextModules": [],
+      "order": 19,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f435b",
@@ -1798,6 +1796,7 @@
       ],
       "prerequisites": [],
       "nextModules": [],
+      "order": 20,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f435c",
@@ -1938,6 +1937,7 @@
           "title": "Runtimes"
         }
       ],
+      "order": 21,
       "subtopics": []
     },
     {
@@ -1964,6 +1964,7 @@
           "title": "Visit the following related roadmaps"
         }
       ],
+      "order": 22,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4373",

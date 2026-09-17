@@ -174,6 +174,17 @@ async function syncMongoToStaticFiles() {
   return masterIndex;
 }
 
+// Debounce đồng bộ file tĩnh để tránh ghi đĩa dồn dập khi người dùng thao tác liên tục
+let staticSyncTimeout = null;
+function scheduleStaticSync() {
+  if (staticSyncTimeout) clearTimeout(staticSyncTimeout);
+  staticSyncTimeout = setTimeout(() => {
+    syncMongoToStaticFiles().catch((err) =>
+      console.warn('[roadmap-api] Sync static warning:', err.message)
+    );
+  }, 2000);
+}
+
 module.exports = function roadmapApiPlugin(context, options) {
   return {
     name: 'roadmap-api',
@@ -208,6 +219,9 @@ module.exports = function roadmapApiPlugin(context, options) {
       if (isServer) return {};
 
       return {
+        watchOptions: {
+          ignored: ['**/sources/roadmap-data/**', '**/node_modules/**'],
+        },
         devServer: {
           setupMiddlewares(middlewares, devServer) {
             if (!devServer) {
@@ -499,12 +513,114 @@ module.exports = function roadmapApiPlugin(context, options) {
 
                 const updatedTopic = await topicsCol.findOne({ roadmapSlug: slug, nodeId });
 
-                // Đồng bộ ngầm ra file static json để dev & build luôn cập nhật
-                syncMongoToStaticFiles().catch((err) =>
-                  console.warn('[roadmap-api] Sync static warning:', err.message)
-                );
+                // Đồng bộ ngầm ra file static json (debounced)
+                scheduleStaticSync();
 
                 res.json({ success: true, topic: updatedTopic });
+              } catch (e) {
+                res.status(500).json({ error: e.message });
+              }
+            });
+
+            // 4.5. POST /api/roadmap/:slug/topic (Dev-only Write - Thêm topic cha với vị trí bất kỳ)
+            app.post('/api/roadmap/:slug/topic', async (req, res) => {
+              const { slug } = req.params;
+              const { moduleId, title, description, content, resources, ref, insertPosition } = req.body;
+
+              if (!moduleId || !title?.trim()) {
+                return res.status(400).json({ error: 'moduleId và title là bắt buộc' });
+              }
+
+              try {
+                const db = await getDb();
+                const topicsCol = db.collection('topics');
+                const roadmapsCol = db.collection('roadmaps');
+
+                // 1. Kiểm tra roadmap và module tồn tại
+                const roadmap = await roadmapsCol.findOne({ slug });
+                if (!roadmap) {
+                  return res.status(404).json({ error: `Không tìm thấy lộ trình ${slug}` });
+                }
+
+                const matchedMod = (roadmap.modules || []).find(
+                  (m) => m.id === moduleId || m.name === moduleId
+                );
+                const targetModuleId = matchedMod ? matchedMod.id : moduleId;
+
+                // 2. Tính toán order dựa trên insertPosition
+                let insertOrder = 0;
+                const existingTopics = await topicsCol
+                  .find({ roadmapSlug: slug, moduleId: targetModuleId })
+                  .sort({ order: 1 })
+                  .toArray();
+
+                if (insertPosition?.type === 'start') {
+                  insertOrder = 0;
+                } else if (insertPosition?.type === 'after' && insertPosition?.targetNodeId) {
+                  const targetTopic = existingTopics.find(
+                    (t) => t.nodeId === insertPosition.targetNodeId || t.name === insertPosition.targetNodeId
+                  );
+                  insertOrder = targetTopic != null ? (targetTopic.order ?? 0) + 1 : existingTopics.length;
+                } else {
+                  // Mặc định: Thêm vào cuối module
+                  const maxOrder = existingTopics.reduce((max, t) => Math.max(max, t.order ?? 0), -1);
+                  insertOrder = maxOrder + 1;
+                }
+
+                // 3. Shift Indexing: Dịch chuyển các topic có order >= insertOrder
+                if (existingTopics.some((t) => (t.order ?? 0) >= insertOrder)) {
+                  await topicsCol.updateMany(
+                    {
+                      roadmapSlug: slug,
+                      moduleId: targetModuleId,
+                      order: { $gte: insertOrder },
+                    },
+                    { $inc: { order: 1 } }
+                  );
+                }
+
+                // 4. Chuẩn bị nodeId
+                const cleanSlug = title
+                  .trim()
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-+|-+$/g, '');
+                const uniqueSuffix = Date.now().toString(36);
+                const nodeId = `topic_${cleanSlug || 'item'}_${uniqueSuffix}`;
+
+                // 5. Tạo Topic Document mới (Topic cha: parentTopic = null)
+                const newTopicDoc = {
+                  roadmapSlug: slug,
+                  moduleId: targetModuleId,
+                  nodeId,
+                  name: nodeId,
+                  title: title.trim(),
+                  description: description?.trim() || '',
+                  content: content != null ? content : `# ${title.trim()}\n\n${description?.trim() || ''}`,
+                  resources: Array.isArray(resources) ? resources : [],
+                  parentTopic: null,
+                  order: insertOrder,
+                  createdAt: new Date().toISOString(),
+                };
+
+                // Nếu là topic tham chiếu (ref) từ kho tri thức
+                if (ref && ref.isRef && ref.sourceRoadmapSlug && ref.sourceNodeId) {
+                  newTopicDoc.ref = {
+                    isRef: true,
+                    sourceRoadmapSlug: ref.sourceRoadmapSlug,
+                    sourceNodeId: ref.sourceNodeId,
+                  };
+                }
+
+                await topicsCol.insertOne(newTopicDoc);
+
+                // 6. Tăng topicCount trong roadmaps
+                await roadmapsCol.updateOne({ slug }, { $inc: { topicCount: 1 } });
+
+                // 7. Đồng bộ ngầm static files (debounced 2s)
+                scheduleStaticSync();
+
+                res.json({ success: true, topic: newTopicDoc });
               } catch (e) {
                 res.status(500).json({ error: e.message });
               }
@@ -526,12 +642,78 @@ module.exports = function roadmapApiPlugin(context, options) {
                 // Giảm topicCount trong roadmaps
                 await roadmapsCol.updateOne({ slug }, { $inc: { topicCount: -1 } });
 
-                // Đồng bộ ngầm ra file static
-                syncMongoToStaticFiles().catch((err) =>
-                  console.warn('[roadmap-api] Sync static warning:', err.message)
-                );
+                // Đồng bộ ngầm ra file static (debounced)
+                scheduleStaticSync();
 
                 res.json({ success: true });
+              } catch (e) {
+                res.status(500).json({ error: e.message });
+              }
+            });
+
+            // 5.5. POST /api/roadmap/:slug/module (Dev-only Write - Thêm chặng mới với vị trí bất kỳ)
+            app.post('/api/roadmap/:slug/module', async (req, res) => {
+              const { slug } = req.params;
+              const { title, description, insertPosition } = req.body;
+
+              if (!title?.trim()) {
+                return res.status(400).json({ error: 'Tiêu đề chặng là bắt buộc' });
+              }
+
+              try {
+                const db = await getDb();
+                const roadmapsCol = db.collection('roadmaps');
+                const roadmap = await roadmapsCol.findOne({ slug });
+                if (!roadmap) {
+                  return res.status(404).json({ error: `Không tìm thấy lộ trình ${slug}` });
+                }
+
+                const existingModules = roadmap.modules || [];
+                const cleanSlug = title
+                  .trim()
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-+|-+$/g, '');
+                const uniqueId = `mod_${cleanSlug || 'station'}_${Date.now().toString(36)}`;
+
+                const newModule = {
+                  id: uniqueId,
+                  name: uniqueId,
+                  title: title.trim(),
+                  description: description?.trim() || '',
+                  resources: [],
+                  order: 1,
+                };
+
+                let insertIndex = existingModules.length;
+                if (insertPosition?.type === 'start') {
+                  insertIndex = 0;
+                } else if (insertPosition?.type === 'after' && insertPosition?.targetModuleId) {
+                  const targetIdx = existingModules.findIndex(
+                    (m) => m.id === insertPosition.targetModuleId || m.name === insertPosition.targetModuleId
+                  );
+                  insertIndex = targetIdx !== -1 ? targetIdx + 1 : existingModules.length;
+                }
+
+                const updatedModules = [...existingModules];
+                updatedModules.splice(insertIndex, 0, newModule);
+
+                // Re-index order 1..N
+                updatedModules.forEach((m, idx) => {
+                  m.order = idx + 1;
+                });
+
+                await roadmapsCol.updateOne(
+                  { slug },
+                  {
+                    $set: { modules: updatedModules },
+                    $inc: { moduleCount: 1 },
+                  }
+                );
+
+                scheduleStaticSync();
+
+                res.json({ success: true, module: newModule });
               } catch (e) {
                 res.status(500).json({ error: e.message });
               }
@@ -559,9 +741,7 @@ module.exports = function roadmapApiPlugin(context, options) {
                   return res.status(404).json({ error: `Không tìm thấy module với id: ${moduleId}` });
                 }
 
-                syncMongoToStaticFiles().catch((err) =>
-                  console.warn('[roadmap-api] Sync static warning:', err.message)
-                );
+                scheduleStaticSync();
 
                 res.json({ success: true });
               } catch (e) {
@@ -598,9 +778,7 @@ module.exports = function roadmapApiPlugin(context, options) {
                   }
                 );
 
-                syncMongoToStaticFiles().catch((err) =>
-                  console.warn('[roadmap-api] Sync static warning:', err.message)
-                );
+                scheduleStaticSync();
 
                 res.json({ success: true, deletedTopics: topicCountToRemove });
               } catch (e) {
@@ -703,10 +881,8 @@ module.exports = function roadmapApiPlugin(context, options) {
                 // Tăng topicCount trong roadmaps
                 await roadmapsCol.updateOne({ slug }, { $inc: { topicCount: 1 } });
 
-                // Đồng bộ ngầm static files
-                syncMongoToStaticFiles().catch((err) =>
-                  console.warn('[roadmap-api] Sync static warning:', err.message)
-                );
+                // Đồng bộ ngầm static files (debounced)
+                scheduleStaticSync();
 
                 res.json({ success: true, refTopic: refDoc });
               } catch (e) {
@@ -734,9 +910,7 @@ module.exports = function roadmapApiPlugin(context, options) {
                 // Giảm topicCount trong roadmaps
                 await roadmapsCol.updateOne({ slug }, { $inc: { topicCount: -1 } });
 
-                syncMongoToStaticFiles().catch((err) =>
-                  console.warn('[roadmap-api] Sync static warning:', err.message)
-                );
+                scheduleStaticSync();
 
                 res.json({ success: true });
               } catch (e) {
