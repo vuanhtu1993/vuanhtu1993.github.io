@@ -277,10 +277,11 @@ module.exports = function roadmapApiPlugin(context, options) {
                 const roadmapsCol = db.collection('roadmaps');
 
                 let filter = {};
+                let regex = null;
                 if (query) {
                   // Tìm kiếm không phân biệt hoa thường theo title, name hoặc description
                   const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                  const regex = new RegExp(escaped, 'i');
+                  regex = new RegExp(escaped, 'i');
                   filter = {
                     $or: [{ title: regex }, { name: regex }, { description: regex }],
                   };
@@ -290,9 +291,10 @@ module.exports = function roadmapApiPlugin(context, options) {
                   filter.nodeId = { $ne: excludeNodeId };
                 }
 
+                // 1. Tìm các topic từ topicsCol
                 const matches = await topicsCol
                   .find(filter)
-                  .limit(20)
+                  .limit(25)
                   .project({
                     nodeId: 1,
                     title: 1,
@@ -303,8 +305,8 @@ module.exports = function roadmapApiPlugin(context, options) {
                   })
                   .toArray();
 
-                // Lấy thông tin roadmaps để gắn badge
-                const roadmaps = await roadmapsCol.find({}).project({ slug: 1, title: 1, category: 1 }).toArray();
+                // Lấy thông tin roadmaps để gắn badge và tìm kiếm cả trong modules
+                const roadmaps = await roadmapsCol.find({}).project({ slug: 1, title: 1, category: 1, modules: 1 }).toArray();
                 const rmMap = new Map(roadmaps.map((r) => [r.slug, r]));
 
                 const results = matches.map((m) => {
@@ -317,10 +319,54 @@ module.exports = function roadmapApiPlugin(context, options) {
                     roadmapTitle: rm ? rm.title : m.roadmapSlug,
                     category: rm ? rm.category : 'skill-based',
                     isRef: Boolean(m.ref?.isRef),
+                    isModule: false,
                   };
                 });
 
-                res.json(results);
+                // 2. Tìm kiếm trong danh sách modules của các roadmaps (đặc biệt là các module độc lập như Routing Terminology)
+                const existingKeys = new Set(results.map((r) => `${r.roadmapSlug}-${r.nodeId}`));
+                const moduleResults = [];
+
+                for (const rm of roadmaps) {
+                  const modules = rm.modules || [];
+                  for (const mod of modules) {
+                    if (excludeNodeId && (mod.id === excludeNodeId || mod.name === excludeNodeId)) {
+                      continue;
+                    }
+                    const key = `${rm.slug}-${mod.id}`;
+                    if (existingKeys.has(key)) continue;
+
+                    let isMatch = false;
+                    if (!query) {
+                      // Nếu không có query, lấy một vài module tiêu biểu làm gợi ý
+                      isMatch = moduleResults.length < 5;
+                    } else if (regex) {
+                      isMatch =
+                        regex.test(mod.title || '') ||
+                        regex.test(mod.name || '') ||
+                        regex.test(mod.description || '');
+                    }
+
+                    if (isMatch) {
+                      existingKeys.add(key);
+                      moduleResults.push({
+                        nodeId: mod.id,
+                        title: mod.title || mod.name,
+                        description: mod.description || '',
+                        roadmapSlug: rm.slug,
+                        roadmapTitle: rm.title || rm.slug,
+                        category: rm.category || 'skill-based',
+                        isRef: false,
+                        isModule: true,
+                      });
+                    }
+                  }
+                }
+
+                // Gộp kết quả topic và module, ưu tiên topic match trực tiếp rồi đến module
+                const combined = [...results, ...moduleResults].slice(0, 30);
+
+                res.json(combined);
               } catch (e) {
                 res.status(500).json({ error: e.message });
               }
@@ -349,6 +395,26 @@ module.exports = function roadmapApiPlugin(context, options) {
                   }));
                   const sources = await db.collection('topics').find({ $or: sourceKeys }).toArray();
                   sourceMap = new Map(sources.map((s) => [`${s.roadmapSlug}:${s.nodeId}`, s]));
+
+                  // Với các ref node mà source là module trong roadmaps, tìm trong roadmapsCol
+                  const missingKeys = refTopics.filter(
+                    (t) => !sourceMap.has(`${t.ref.sourceRoadmapSlug}:${t.ref.sourceNodeId}`)
+                  );
+                  if (missingKeys.length > 0) {
+                    const slugs = [...new Set(missingKeys.map((t) => t.ref.sourceRoadmapSlug))];
+                    const refRoadmaps = await db.collection('roadmaps').find({ slug: { $in: slugs } }).toArray();
+                    for (const rm of refRoadmaps) {
+                      for (const mod of rm.modules || []) {
+                        sourceMap.set(`${rm.slug}:${mod.id}`, {
+                          nodeId: mod.id,
+                          title: mod.title || mod.name,
+                          description: mod.description || '',
+                          content: mod.description ? `# ${mod.title || mod.name}\n\n${mod.description}` : '',
+                          resources: mod.resources || [],
+                        });
+                      }
+                    }
+                  }
                 }
 
                 const topics = rawTopics.map((t) => {
@@ -358,9 +424,9 @@ module.exports = function roadmapApiPlugin(context, options) {
                       return {
                         ...t,
                         title: t.title || source.title,
-                        description: source.description,
-                        content: source.content,
-                        resources: source.resources,
+                        description: source.description || t.description,
+                        content: source.content || t.content,
+                        resources: source.resources || t.resources || [],
                       };
                     }
                   }
@@ -556,11 +622,29 @@ module.exports = function roadmapApiPlugin(context, options) {
                 const topicsCol = db.collection('topics');
                 const roadmapsCol = db.collection('roadmaps');
 
-                // 1. Tìm topic nguồn trong DB
-                const sourceTopic = await topicsCol.findOne({
+                // 1. Tìm topic nguồn trong DB (topicsCol hoặc modules trong roadmapsCol)
+                let sourceTopic = await topicsCol.findOne({
                   roadmapSlug: sourceRoadmapSlug,
                   nodeId: sourceNodeId,
                 });
+
+                if (!sourceTopic) {
+                  const sRoadmap = await roadmapsCol.findOne({ slug: sourceRoadmapSlug });
+                  const matchedMod = (sRoadmap?.modules || []).find(
+                    (m) => m.id === sourceNodeId || m.name === sourceNodeId
+                  );
+                  if (matchedMod) {
+                    sourceTopic = {
+                      nodeId: matchedMod.id,
+                      name: matchedMod.name || matchedMod.id,
+                      title: matchedMod.title || matchedMod.name,
+                      description: matchedMod.description || '',
+                      content: matchedMod.description ? `# ${matchedMod.title || matchedMod.name}\n\n${matchedMod.description}` : '',
+                      resources: matchedMod.resources || [],
+                      roadmapSlug: sourceRoadmapSlug,
+                    };
+                  }
+                }
 
                 if (!sourceTopic) {
                   return res.status(404).json({ error: 'Không tìm thấy topic nguồn trong database' });
@@ -603,7 +687,7 @@ module.exports = function roadmapApiPlugin(context, options) {
                   resources: sourceTopic.resources || [],
                   parentTopic: {
                     id: parentNodeId,
-                    title: parentTopic.title,
+                    title: parentTitle || 'Chủ đề cha',
                   },
                   ref: {
                     isRef: true,

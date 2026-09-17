@@ -361,11 +361,17 @@ export default function RoadmapTimeline({
                         )}
                       </div>
 
-                      {/* Station Description rendered via MarkdownRenderer */}
-                      {station.description && (
-                        <div className={styles.stationDesc}>
-                          <MarkdownRenderer content={station.description} inline />
-                        </div>
+                      {/* Station text snippet khi thu gọn (loại bỏ code blocks để không vỡ header) */}
+                      {!isExpanded && station.description && (
+                        <p className={styles.stationHeaderSnippet}>
+                          {(() => {
+                            const clean = station.description
+                              .replace(/```[\s\S]*?```/g, '')
+                              .replace(/[#*`_\[\]()]/g, '')
+                              .trim();
+                            return clean.length > 140 ? clean.slice(0, 140) + '...' : clean;
+                          })()}
+                        </p>
                       )}
                     </div>
 
@@ -381,6 +387,34 @@ export default function RoadmapTimeline({
                   {/* Danh sách các blocks (Linear Steps + Branch Sections) */}
                   {isExpanded && (
                     <div className={styles.subtopicsList}>
+                      {/* Mô tả chi tiết và sơ đồ của Chặng khi mở rộng */}
+                      {station.description && (
+                        <div className={styles.stationOverview}>
+                          <MarkdownRenderer content={station.description} />
+                        </div>
+                      )}
+
+                      {station.blocks.length === 0 && (
+                        <div className={styles.emptyModuleNotice}>
+                          <p>Chặng này chưa có chủ đề con nào.</p>
+                          {isEditMode && (
+                            <button
+                              type="button"
+                              className={styles.addFirstChildBtn}
+                              onClick={() => {
+                                setRefParentTarget({
+                                  nodeId: station.id,
+                                  title: station.title,
+                                  moduleId: station.id,
+                                });
+                              }}
+                            >
+                              + Thêm topic con đầu tiên vào chặng này
+                            </button>
+                          )}
+                        </div>
+                      )}
+
                       {station.blocks.map((block, bIdx) => {
                         // 1. Dòng tuần tự cốt lõi (Linear Step)
                         if (block.type === 'linear') {

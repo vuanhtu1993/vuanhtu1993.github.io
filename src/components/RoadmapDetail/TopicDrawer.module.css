@@ -628,6 +628,22 @@
   cursor: pointer;
 }
 
+.insertMermaidBtn {
+  background: transparent;
+  border: 1px solid var(--ifm-color-primary, #25c2a0);
+  color: var(--ifm-color-primary, #25c2a0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.insertMermaidBtn:hover {
+  background: rgba(37, 194, 160, 0.1);
+}
+
 .insertImageBtn {
   background: transparent;
   border: 1px solid #3b82f6;

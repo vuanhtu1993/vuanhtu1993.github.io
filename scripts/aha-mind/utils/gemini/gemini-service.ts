@@ -7,7 +7,7 @@ import { geminiRateLimiter } from "./rate-limiter";
 export class GeminiService {
   private static instance: GeminiService;
   private llm!: ChatGoogleGenerativeAI;
-  
+
   private apiKeys: string[] = [];
   private currentKeyIndex: number = 0;
 
@@ -36,7 +36,7 @@ export class GeminiService {
 
   private initKeys() {
     const keys: string[] = [];
-    
+
     // Quét toàn bộ biến môi trường, lấy những biến bắt đầu bằng GOOGLE_API_KEY
     for (const [key, value] of Object.entries(process.env)) {
       if (key.startsWith("GOOGLE_API_KEY") && value) {
@@ -61,20 +61,7 @@ export class GeminiService {
     const currentKey = this.apiKeys[this.currentKeyIndex] || "";
     this.llm = new ChatGoogleGenerativeAI({
       apiKey: currentKey,
-      model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-      temperature: 0.1, // Default temperature, can be customized locally if needed
-      /**
-       * maxRetries: 0 — TẮT retry nội bộ của LangChain
-       *
-       * Tại sao? LangChain tự retry khi gặp 429, tạo ra "shadow requests"
-       * mà Rate Limiter KHÔNG ĐẾM. VD:
-       *   - Rate Limiter cho phép request #5
-       *   - Request #5 bị 429
-       *   - LangChain tự retry 2 lần (#6, #7) → Rate Limiter không biết
-       *   - Cả 3 đều fail → Rate Limiter vẫn nghĩ chỉ gửi 5 requests
-       *
-       * Giải pháp: maxRetries: 0 → mọi retry do executeWithRotation quản lý.
-       */
+      model: process.env.GEMINI_MODEL || "gemini-3.5-flash",
       maxRetries: 0,
     });
   }
@@ -162,7 +149,7 @@ export class GeminiService {
    * Flow: Rate Limiter (Token Bucket) → Execute → Nếu 429 → Rotate Key → Retry
    */
   private async executeWithRotation<T>(
-    estimatedTokens: number, 
+    estimatedTokens: number,
     operation: (model: ChatGoogleGenerativeAI) => Promise<T>,
     customLlm?: ChatGoogleGenerativeAI
   ): Promise<T> {
@@ -216,10 +203,10 @@ export class GeminiService {
    * Gọi LLM trả về Structured Output (JSON).
    */
   public async invokeStructured(schema: any, prompt: string | any[], customLlm?: ChatGoogleGenerativeAI): Promise<any> {
-    const promptText = typeof prompt === "string" 
-      ? prompt 
+    const promptText = typeof prompt === "string"
+      ? prompt
       : prompt.map(m => m.content?.toString() || "").join("\\n");
-      
+
     const estimatedTokens = Math.ceil(promptText.length / 4);
 
     return await this.executeWithRotation(estimatedTokens, async (model) => {

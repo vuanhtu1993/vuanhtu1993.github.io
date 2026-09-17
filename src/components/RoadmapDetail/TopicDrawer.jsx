@@ -168,6 +168,12 @@ export default function TopicDrawer({
     setShowImageInserter(false);
   };
 
+  // Chèn mẫu sơ đồ Mermaid vào nội dung
+  const handleInsertMermaid = () => {
+    const template = `\n\n\`\`\`mermaid\ngraph TD\n    Start["Bắt đầu (Start)"] --> Process["Xử lý (Process)"]\n    Process --> Check{"Điều kiện hợp lệ?"}\n    Check -- "Hợp lệ" --> Success["Thành công (Success)"]\n    Check -- "Không" --> Fallback["Xử lý lỗi (Fallback)"]\n\`\`\`\n\n`;
+    setContent((prev) => (prev ? prev.trimEnd() + template : template));
+  };
+
   // Xử lý gán topic con tham chiếu từ modal tìm kiếm
   const handleSelectRefTopic = async (selectedTopic) => {
     setIsAddingRef(true);
@@ -320,6 +326,14 @@ export default function TopicDrawer({
                 <div className={styles.editLabelRow}>
                   <label className={styles.editLabel}>Nội Dung Chi Tiết (Markdown)</label>
                   <div style={{ display: 'flex', gap: '0.4rem' }}>
+                    <button
+                      type="button"
+                      className={styles.insertMermaidBtn}
+                      onClick={handleInsertMermaid}
+                      title="Chèn mẫu sơ đồ Mermaid vào bài viết"
+                    >
+                      + Sơ đồ Mermaid
+                    </button>
                     <button
                       type="button"
                       className={styles.insertImageBtn}

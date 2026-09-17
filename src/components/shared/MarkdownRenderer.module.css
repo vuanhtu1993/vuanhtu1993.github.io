@@ -106,13 +106,13 @@
 }
 
 /* Biến thể inline dùng cho cards và header descriptions */
-.inline p {
-  display: inline;
-  margin: 0;
+.inline {
+  display: block;
 }
 
-.inline {
+.inline > p {
   display: inline;
+  margin: 0;
 }
 
 /* Hình ảnh và Caption */

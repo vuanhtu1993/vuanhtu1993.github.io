@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-17T07:14:26.892Z",
+  "generatedAt": "2026-09-17T08:04:54.439Z",
   "source": "MongoDB Atlas (Database: stories)",
   "totalRoadmaps": 9,
-  "totalModules": 161,
-  "totalTopics": 500,
+  "totalModules": 151,
+  "totalTopics": 480,
   "categories": [
     {
       "key": "role-based",
@@ -36,8 +36,8 @@
         {
           "slug": "nextjs",
           "title": "Next.js",
-          "moduleCount": 32,
-          "topicCount": 61,
+          "moduleCount": 22,
+          "topicCount": 41,
           "filePath": "skill-based/nextjs.json"
         },
         {

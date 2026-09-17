@@ -256,7 +256,7 @@
       }
     ]
   },
-  "moduleCount": 32,
+  "moduleCount": 22,
   "modules": [
     {
       "id": "tcDL4OEbZplbjNa8VTLpv",
@@ -572,7 +572,7 @@
       "id": "1ch6ZXZP46FP8q3HeCqWM",
       "name": "1ch6ZXZP46FP8q3HeCqWM",
       "title": "Rendering Strategies",
-      "description": "Rendering strategies determine how your application's user interface is generated and delivered to the user's browser. Different strategies offer varying trade-offs between performance, SEO, and data freshness. Choosing the right rendering strategy is crucial for optimizing your application based on its specific requirements and content characteristics.",
+      "description": "Rendering strategies determine how your application's user interface is generated and delivered to the user's browser. Different strategies offer varying trade-offs between performance, SEO, and data freshness. Choosing the right rendering strategy is crucial for optimizing your application based on its specific requirements and content characteristics.\n\n```mermaid\nsequenceDiagram\n    participant U as Người dùng (Browser)\n    participant C as CDN\n    participant S as Server\n    participant DB as Database\n\n    rect rgb(200, 255, 200)\n    Note over U,DB: 1. Static Rendering (Nhanh nhất)\n    U->>C: GET /about\n    C-->>U: Trả về HTML tĩnh (Ngay lập tức)\n    Note left of U: Thấy nội dung\n    end\n\n    rect rgb(255, 255, 200)\n    Note over U,DB: 2. Dynamic Rendering (Chậm hơn)\n    U->>S: GET /dashboard\n    S->>DB: Lấy dữ liệu user\n    DB-->>S: Trả dữ liệu\n    S->>S: Render HTML\n    S-->>U: Trả về HTML động\n    Note left of U: Thấy nội dung\n    end\n\n    rect rgb(255, 200, 200)\n    Note over U,DB: 3. Client-side Rendering (Chờ JS tải)\n    U->>S: GET /app\n    S-->>U: Trả HTML trắng + Link tới bundle.js\n    U->>S: Yêu cầu tải bundle.js\n    S-->>U: Trả file JS (Nặng)\n    U->>U: Browser chạy JS\n    U->>S: Gọi API lấy dữ liệu (Fetch)\n    S-->>U: JSON data\n    U->>U: JS tự vẽ ra giao diện (DOM manipulation)\n    Note left of U: Cuối cùng mới thấy nội dung\n    end\n```",
       "resources": [
         {
           "type": "official",
@@ -751,8 +751,8 @@
           "name": "pages",
           "nodeId": "htuyzi5_N-fqnx_SsO_DS",
           "title": "Pages Router",
-          "description": "The Pages Router in Next.js is a file-system based router built around the `pages` directory. Each file in the `pages` directory becomes a route based on its file name. For example, a file named `about.js` would create a route at `/about`. This approach simplifies routing by automatically mapping files to routes, making it easy to create and manage different pages within your application.",
-          "content": "# Pages Router\n\nThe Pages Router in Next.js is a file-system based router built around the `pages` directory. Each file in the `pages` directory becomes a route based on its file name. For example, a file named `about.js` would create a route at `/about`. This approach simplifies routing by automatically mapping files to routes, making it easy to create and manage different pages within your application.\n\nVisit the following resources to learn more:\n\n- [@official@Pages Router](https://nextjs.org/docs/pages)\n- [@official@Pages Router Tutorial](https://nextjs.org/learn/pages-router)",
+          "description": "The Pages Router in Next.js is a file-system based router built around the \"pages\" directory. Each file in the \"pages\" directory becomes a route based on its file name. For example, a file named \"about.js\" would create a route at \"/about\". This approach simplifies routing by automatically mapping files to routes, making it easy to create and manage different pages within your application.",
+          "content": "# Pages Router\n\nThe Pages Router in Next.js is a file-system based router built around the \"pages\" directory. Each file in the \"pages\" directory becomes a route based on its file name. For example, a file named \"about.js\" would create a route at \"/about\". This approach simplifies routing by automatically mapping files to routes, making it easy to create and manage different pages within your application.\n\nVisit the following resources to learn more:\n\n- [@official@Pages Router](https://nextjs.org/docs/pages)\n- [@official@Pages Router Tutorial](https://nextjs.org/learn/pages-router)",
           "resources": [
             {
               "type": "official",
@@ -768,7 +768,8 @@
           "parentTopic": {
             "id": "km7dLVpl76c5EfWvhhbRh",
             "title": "Types of routers"
-          }
+          },
+          "updatedAt": "2026-09-17T07:33:12.640Z"
         },
         {
           "_id": "6aab5fc213e4b2aeae8f4346",
@@ -796,137 +797,64 @@
             "id": "km7dLVpl76c5EfWvhhbRh",
             "title": "Types of routers"
           }
-        }
-      ]
-    },
-    {
-      "id": "oFhmV5Xv0KJ-SjeYVZBpi",
-      "name": "oFhmV5Xv0KJ-SjeYVZBpi",
-      "title": "Routing Terminology",
-      "description": "In Next.js, routing is primarily handled through the `app` directory (introduced in Next.js 13) and the older `pages` directory. Key terms include:\n\n*   **Route:** A specific URL path that maps to a particular component or page. For example, `/blog/my-first-post`.\n\n*   **Route Segment:** A part of the URL path. In `/blog/my-first-post`, `blog` and `my-first-post` are route segments.\n\n*   **File-System Routing:** Next.js uses a file-system based router. The structure of your directories and files within the `app` or `pages` directory directly defines your application's routes.\n\n*   **Dynamic Routes:** Routes that include parameters, allowing you to create pages based on data. For example, `/blog/[slug]` where `[slug]` is a dynamic parameter.\n\n*   **Index Route:** The route that is served when a user visits a directory. Typically represented by an `index.js` or `page.js` file within a directory.\n\n*   **Layout:** A component that wraps multiple pages, providing a consistent UI structure (like headers and footers) across different routes.\n\n*   **Link Component:** The `<Link>` component from `next/link` is used for client-side navigation between routes, providing better performance than traditional `<a>` tags.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Project structure and organization",
-          "url": "https://nextjs.org/docs/app/getting-started/project-structure"
         },
         {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Routing",
-          "url": "https://www.youtube.com/watch?v=9602Yzvd7i"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Nested Routes",
-          "url": "https://www.youtube.com/watch?v=H7JjKjkC33c"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Dynamic Routes",
-          "url": "https://www.youtube.com/watch?v=k9g6aVLH3p4"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Nested Dynamic Routes",
-          "url": "https://www.youtube.com/watch?v=edrJf0GKfAI"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "km7dLVpl76c5EfWvhhbRh",
-          "title": "Types of routers"
-        }
-      ],
-      "nextModules": [],
-      "subtopics": []
-    },
-    {
-      "id": "IlWFMh44HtHDnIr7nqwtI",
-      "name": "IlWFMh44HtHDnIr7nqwtI",
-      "title": "Rendering Pages",
-      "description": "Rendering refers to the process of converting your code into HTML that can be displayed in a web browser. Next.js offers different strategies for this, including server-side rendering (SSR), static site generation (SSG), incremental static regeneration (ISR), and client-side rendering (CSR). Each method determines when and where the HTML is generated, impacting performance, SEO, and interactivity. Choosing the right rendering strategy depends on the specific needs of each page in your application.\n\nRecently, Next.js has launched a partial prerendering feature, that allows you to combine static and dynamic content in the same route. This improves the initial page performance while still supporting personalized, dynamic data. However, this feature is currently experimental and subject to change, it's not recommended for production.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Rendering Strategies",
-          "url": "https://nextjs.org/learn/seo/rendering-strategies"
-        },
-        {
-          "type": "official",
-          "title": "Partial Prerendering",
-          "url": "https://nextjs.org/docs/app/getting-started/partial-prerendering"
-        },
-        {
-          "type": "official",
-          "title": "Rendering User Interfaces (UI)",
-          "url": "https://nextjs.org/learn/react-foundations/rendering-ui"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": []
-    },
-    {
-      "id": "zJXCS7U9NUsn7cuEx3YMs",
-      "name": "zJXCS7U9NUsn7cuEx3YMs",
-      "title": "Layouts and Templates",
-      "description": "Layouts and templates provide a way to share UI elements across multiple pages, maintaining state and avoiding unnecessary re-renders. Layouts wrap around pages, persisting across route changes to preserve things like navigation bars or sidebars.\n\nTemplates are similar to layouts in that they wrap each child layout or page. Unlike layouts that persist across routes and maintain state, templates create a new instance for each of their children on navigation. This means that when a user navigates between routes that share a template, a new instance of the component is mounted, DOM elements are recreated, state is not preserved, and effects are re-synchronized.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Layouts for App Router",
-          "url": "https://nextjs.org/docs/app/api-reference/file-conventions/layout#root-layouts"
-        },
-        {
-          "type": "official",
-          "title": "Layouts for Pages Router",
-          "url": "https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts"
-        },
-        {
-          "type": "article",
-          "title": "A guide to Next.js layouts and nested layouts",
-          "url": "https://blog.logrocket.com/guide-next-js-layouts-nested-layouts/"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Layouts",
-          "url": "https://www.youtube.com/watch?v=NK-8a8EzWrU"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": []
-    },
-    {
-      "id": "dP6cZkEZ6lxPsy5SjvuZA",
-      "name": "dP6cZkEZ6lxPsy5SjvuZA",
-      "title": "Intercepting Routes",
-      "description": "Intercepting routes allows you to load a route from another part of your application within the current layout. This routing paradigm can be useful when you want to display the content of a route without the user switching to a different context. For example, when clicking on a photo in a feed, you can display the photo in a modal, overlaying the feed.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Intercepting Routes",
-          "url": "https://nextjs.org/docs/app/api-reference/file-conventions/intercepting-routes"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Intercepting Routes",
-          "url": "https://www.youtube.com/watch?v=FTiwIVxWC00"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f4347",
+          "_id": "6aab9ea1568ca5c7a8edea86",
           "roadmapSlug": "nextjs",
-          "moduleId": "dP6cZkEZ6lxPsy5SjvuZA",
-          "order": 0,
-          "name": "routing-patterns",
-          "nodeId": "09uWsmXOXU0Ox7F3qsjRx",
+          "moduleId": "km7dLVpl76c5EfWvhhbRh",
+          "nodeId": "ref_1789632161003_tx0kgm",
+          "name": "oFhmV5Xv0KJ-SjeYVZBpi",
+          "title": "Routing Terminology",
+          "description": "In Next.js, routing is primarily handled through the \"app\" directory (introduced in Next.js 13) and the older \"pages\" directory. Key terms include:\n\n*   **Route:** A specific URL path that maps to a particular component or page. For example, \"/blog/my-first-post\".\n\n*   **Route Segment:** A part of the URL path. In \"/blog/my-first-post\", \"blog\" and \"my-first-post\" are route segments.\n\n*   **File-System Routing:** Next.js uses a file-system based router. The structure of your directories and files within the \"app\" or \"pages\" directory directly defines your application's routes.\n\n*   **Dynamic Routes:** Routes that include parameters, allowing you to create pages based on data. For example, \"/blog/[slug]\" where \"[slug]\" is a dynamic parameter.\n\n*   **Index Route:** The route that is served when a user visits a directory. Typically represented by an \"index.js\" or \"page.js\" file within a directory.\n\n*   **Layout:** A component that wraps multiple pages, providing a consistent UI structure (like headers and footers) across different routes.\n\n*   **Link Component:** The \"<Link>\" component from \"next/link\" is used for client-side navigation between routes, providing better performance than traditional \"<a>\" tags.",
+          "content": "# Routing Terminology\n\nIn Next.js, routing is primarily handled through the \"app\" directory (introduced in Next.js 13) and the older \"pages\" directory. Key terms include:\n\n*   **Route:** A specific URL path that maps to a particular component or page. For example, \"/blog/my-first-post\".\n\n*   **Route Segment:** A part of the URL path. In \"/blog/my-first-post\", \"blog\" and \"my-first-post\" are route segments.\n\n*   **File-System Routing:** Next.js uses a file-system based router. The structure of your directories and files within the \"app\" or \"pages\" directory directly defines your application's routes.\n\n*   **Dynamic Routes:** Routes that include parameters, allowing you to create pages based on data. For example, \"/blog/[slug]\" where \"[slug]\" is a dynamic parameter.\n\n*   **Index Route:** The route that is served when a user visits a directory. Typically represented by an \"index.js\" or \"page.js\" file within a directory.\n\n*   **Layout:** A component that wraps multiple pages, providing a consistent UI structure (like headers and footers) across different routes.\n\n*   **Link Component:** The \"<Link>\" component from \"next/link\" is used for client-side navigation between routes, providing better performance than traditional \"<a>\" tags.",
+          "resources": [
+            {
+              "type": "official",
+              "title": "Project structure and organization",
+              "url": "https://nextjs.org/docs/app/getting-started/project-structure"
+            },
+            {
+              "type": "video",
+              "title": "Next.js 15 Tutorial - Routing",
+              "url": "https://www.youtube.com/watch?v=9602Yzvd7i"
+            },
+            {
+              "type": "video",
+              "title": "Next.js 15 Tutorial - Nested Routes",
+              "url": "https://www.youtube.com/watch?v=H7JjKjkC33c"
+            },
+            {
+              "type": "video",
+              "title": "Next.js 15 Tutorial - Dynamic Routes",
+              "url": "https://www.youtube.com/watch?v=k9g6aVLH3p4"
+            },
+            {
+              "type": "video",
+              "title": "Next.js 15 Tutorial - Nested Dynamic Routes",
+              "url": "https://www.youtube.com/watch?v=edrJf0GKfAI"
+            }
+          ],
+          "parentTopic": {
+            "id": "km7dLVpl76c5EfWvhhbRh",
+            "title": "Types of routers"
+          },
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "oFhmV5Xv0KJ-SjeYVZBpi"
+          },
+          "order": 999,
+          "createdAt": "2026-09-17T08:02:41.003Z"
+        },
+        {
+          "_id": "6aab9ece568ca5c7a8edea87",
+          "roadmapSlug": "nextjs",
+          "moduleId": "km7dLVpl76c5EfWvhhbRh",
+          "nodeId": "ref_1789632206948_rydjft",
+          "name": "09uWsmXOXU0Ox7F3qsjRx",
           "title": "Routing Patterns",
           "description": "The App Router provides a set of conventions to help you implement more advanced routing patterns. These include:\n\n*   Parallel Routes: Allow you to simultaneously show two or more pages in the same view that can be navigated independently.\n\n*   Intercepting Routes: Allow you to intercept a route and show it in the context of another route.\n\nThese patterns allow you to build richer and more complex UIs, democratizing features that were historically complex for small teams and individual developers to implement.",
-          "content": "# Routing Patterns\n\nThe App Router provides a set of conventions to help you implement more advanced routing patterns. These include:\n\n*   Parallel Routes: Allow you to simultaneously show two or more pages in the same view that can be navigated independently.\n*   Intercepting Routes: Allow you to intercept a route and show it in the context of another route.\n\nThese patterns allow you to build richer and more complex UIs, democratizing features that were historically complex for small teams and individual developers to implement.\n\nVisit the following resources to learn more:\n\n- [@official@Advanced Routing Patterns](https://nextjs.org/docs/13/app/building-your-application/routing#advanced-routing-patterns)",
+          "content": "# Routing Patterns\n\nThe App Router provides a set of conventions to help you implement more advanced routing patterns. These include:\n\n*   Parallel Routes: Allow you to simultaneously show two or more pages in the same view that can be navigated independently.\n\n*   Intercepting Routes: Allow you to intercept a route and show it in the context of another route.\n\nThese patterns allow you to build richer and more complex UIs, democratizing features that were historically complex for small teams and individual developers to implement.",
           "resources": [
             {
               "type": "official",
@@ -935,9 +863,16 @@
             }
           ],
           "parentTopic": {
-            "id": "dP6cZkEZ6lxPsy5SjvuZA",
-            "title": "Intercepting Routes"
-          }
+            "id": "km7dLVpl76c5EfWvhhbRh",
+            "title": "Types of routers"
+          },
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "09uWsmXOXU0Ox7F3qsjRx"
+          },
+          "order": 999,
+          "createdAt": "2026-09-17T08:03:26.948Z"
         }
       ]
     },
@@ -1050,87 +985,6 @@
           "parentTopic": {
             "id": "pxltXOWgpbo95V4u2ryX7",
             "title": "Error States"
-          }
-        }
-      ]
-    },
-    {
-      "id": "09uWsmXOXU0Ox7F3qsjRx",
-      "name": "09uWsmXOXU0Ox7F3qsjRx",
-      "title": "Routing Patterns",
-      "description": "The App Router provides a set of conventions to help you implement more advanced routing patterns. These include:\n\n*   Parallel Routes: Allow you to simultaneously show two or more pages in the same view that can be navigated independently.\n\n*   Intercepting Routes: Allow you to intercept a route and show it in the context of another route.\n\nThese patterns allow you to build richer and more complex UIs, democratizing features that were historically complex for small teams and individual developers to implement.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Advanced Routing Patterns",
-          "url": "https://nextjs.org/docs/13/app/building-your-application/routing#advanced-routing-patterns"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "pxltXOWgpbo95V4u2ryX7",
-          "title": "Error States"
-        }
-      ],
-      "nextModules": [
-        {
-          "id": "4H8aOVYsZiPbTQUYcZjb_",
-          "title": "API Endpoints"
-        }
-      ],
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f434a",
-          "roadmapSlug": "nextjs",
-          "moduleId": "09uWsmXOXU0Ox7F3qsjRx",
-          "order": 0,
-          "name": "parallel-routes",
-          "nodeId": "2N_hm9Zx_Lp-RFEMP9HFb",
-          "title": "Parallel Routes",
-          "description": "Parallel Routes allows you to simultaneously or conditionally render one or more pages within the same layout. They are useful for highly dynamic sections of an app, such as dashboards and feeds on social sites.",
-          "content": "# Parallel Routes\n\nParallel Routes allows you to simultaneously or conditionally render one or more pages within the same layout. They are useful for highly dynamic sections of an app, such as dashboards and feeds on social sites.\n\nVisit the following resources to learn more:\n\n- [@official@Parallel Routes](https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)\n- [@video@Next.js 15 Tutorial - Parallel Routes](https://www.youtube.com/watch?v=697kNwfU-4M)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Parallel Routes",
-              "url": "https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes"
-            },
-            {
-              "type": "video",
-              "title": "Next.js 15 Tutorial - Parallel Routes",
-              "url": "https://www.youtube.com/watch?v=697kNwfU-4M"
-            }
-          ],
-          "parentTopic": {
-            "id": "09uWsmXOXU0Ox7F3qsjRx",
-            "title": "Routing Patterns"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f434b",
-          "roadmapSlug": "nextjs",
-          "moduleId": "09uWsmXOXU0Ox7F3qsjRx",
-          "order": 1,
-          "name": "intercepting-routes",
-          "nodeId": "dP6cZkEZ6lxPsy5SjvuZA",
-          "title": "Intercepting Routes",
-          "description": "Intercepting routes allows you to load a route from another part of your application within the current layout. This routing paradigm can be useful when you want to display the content of a route without the user switching to a different context. For example, when clicking on a photo in a feed, you can display the photo in a modal, overlaying the feed.",
-          "content": "# Intercepting Routes\n\nIntercepting routes allows you to load a route from another part of your application within the current layout. This routing paradigm can be useful when you want to display the content of a route without the user switching to a different context. For example, when clicking on a photo in a feed, you can display the photo in a modal, overlaying the feed.\n\nVisit the following resources to learn more:\n\n- [@official@Intercepting Routes](https://nextjs.org/docs/app/api-reference/file-conventions/intercepting-routes)\n- [@video@Next.js 15 Tutorial - Intercepting Routes](https://www.youtube.com/watch?v=FTiwIVxWC00)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Intercepting Routes",
-              "url": "https://nextjs.org/docs/app/api-reference/file-conventions/intercepting-routes"
-            },
-            {
-              "type": "video",
-              "title": "Next.js 15 Tutorial - Intercepting Routes",
-              "url": "https://www.youtube.com/watch?v=FTiwIVxWC00"
-            }
-          ],
-          "parentTopic": {
-            "id": "09uWsmXOXU0Ox7F3qsjRx",
-            "title": "Routing Patterns"
           }
         }
       ]
@@ -2087,566 +1941,6 @@
       "subtopics": []
     },
     {
-      "id": "ThrO72opK7xGWpy0GG63T",
-      "name": "ThrO72opK7xGWpy0GG63T",
-      "title": "Setting things Up",
-      "description": "Next.js allows you to customize your project to meet specific requirements. This includes integrations with TypeScript, ESlint, and more, as well as internal configuration options such as Absolute Imports and Environment Variables.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Configuration",
-          "url": "https://nextjs.org/docs/app/api-reference/config"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "_c8Fms25UcktRjNaOMZR0",
-          "title": "Configuring"
-        }
-      ],
-      "nextModules": [],
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f4360",
-          "roadmapSlug": "nextjs",
-          "moduleId": "ThrO72opK7xGWpy0GG63T",
-          "order": 0,
-          "name": "eslint",
-          "nodeId": "CvrHzkxg7ndCvd_tbYnK4",
-          "title": "ESLint",
-          "description": "ESLint is an open-source static code analysis tool for JavaScript that identifies problematic patterns and style issues in your code, helping to enforce coding standards and prevent bugs before they occur\n\nNext.js provides an ESLint plugin, `eslint-plugin-next`, already bundled within the base configuration that makes it possible to catch common issues and problems in a Next.js application.",
-          "content": "# ESLint\n\nESLint is an open-source static code analysis tool for JavaScript that identifies problematic patterns and style issues in your code, helping to enforce coding standards and prevent bugs before they occur\n\nNext.js provides an ESLint plugin, `eslint-plugin-next`, already bundled within the base configuration that makes it possible to catch common issues and problems in a Next.js application.\n\nVisit the following resources to learn more:\n\n- [@official@ESLint Plugin](https://nextjs.org/docs/app/api-reference/config/eslint)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "ESLint Plugin",
-              "url": "https://nextjs.org/docs/app/api-reference/config/eslint"
-            }
-          ],
-          "parentTopic": {
-            "id": "ThrO72opK7xGWpy0GG63T",
-            "title": "Setting things Up"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4361",
-          "roadmapSlug": "nextjs",
-          "moduleId": "ThrO72opK7xGWpy0GG63T",
-          "order": 1,
-          "name": "prettier",
-          "nodeId": "efMytbUmw44M8dPL4ItsX",
-          "title": "Prettier",
-          "description": "Prettier is an opinionated code formatter that supports many languages, including JavaScript, TypeScript, and CSS. It automatically formats your code to adhere to a consistent style, ensuring readability and maintainability across your project.\n\nThe ESLint Plugin contains code formatting rules, which may conflict with your existing Prettier setup. To make ESLint and Prettier work together, you can include `eslint-config-prettier` in your ESLint config.",
-          "content": "# Prettier\n\nPrettier is an opinionated code formatter that supports many languages, including JavaScript, TypeScript, and CSS. It automatically formats your code to adhere to a consistent style, ensuring readability and maintainability across your project.\n\nThe ESLint Plugin contains code formatting rules, which may conflict with your existing Prettier setup. To make ESLint and Prettier work together, you can include `eslint-config-prettier` in your ESLint config.\n\nVisit the following resources to learn more:\n\n- [@official@ESLint Plugin with Prettier](https://nextjs.org/docs/app/api-reference/config/eslint#with-prettier)\n- [@opensource@eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "ESLint Plugin with Prettier",
-              "url": "https://nextjs.org/docs/app/api-reference/config/eslint#with-prettier"
-            },
-            {
-              "type": "opensource",
-              "title": "eslint-config-prettier",
-              "url": "https://github.com/prettier/eslint-config-prettier"
-            }
-          ],
-          "parentTopic": {
-            "id": "ThrO72opK7xGWpy0GG63T",
-            "title": "Setting things Up"
-          }
-        }
-      ]
-    },
-    {
-      "id": "iv6rWEqjh07d0n2kAQedO",
-      "name": "iv6rWEqjh07d0n2kAQedO",
-      "title": "Environment Variables",
-      "description": "Environment variables are dynamic values that can affect the behavior of programs on a computer. They are typically used to store configuration settings, API keys, and other sensitive information that should not be hardcoded directly into the application's source code. This allows you to easily change the application's behavior without modifying the code itself, making it more flexible and secure across different environments like development, testing, and production.\n\nNext.js comes with built-in support for environment variables, which allows you to use `.env` to load environment variables, and bundle environment variables for the browser by prefixing with `NEXT_PUBLIC_`",
-      "resources": [
-        {
-          "type": "official",
-          "title": "How to use environment variables in Next.js",
-          "url": "https://nextjs.org/docs/app/guides/environment-variables"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": []
-    },
-    {
-      "id": "3GI0xHGG_qgpLfEjaLYxr",
-      "name": "3GI0xHGG_qgpLfEjaLYxr",
-      "title": "Markdown and MDX",
-      "description": "Markdown is a lightweight markup language used to format text. It allows you to write using plain text syntax and convert it to structurally valid HTML. It's commonly used for writing content on websites and blogs. MDX is a superset of markdown that lets you write JSX directly in your markdown files. It is a powerful way to add dynamic interactivity and embed React components within your content.\n\nNext.js can support both local MDX content inside your application, as well as remote MDX files fetched dynamically on the server. The Next.js plugin handles transforming markdown and React components into HTML, including support for usage in Server Components (the default in App Router).",
-      "resources": [
-        {
-          "type": "official",
-          "title": "How to use markdown and MDX in Next.js",
-          "url": "https://nextjs.org/docs/app/guides/mdx"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "subtopics": []
-    },
-    {
-      "id": "Hj01UZuHkQppXTq6XV9Pn",
-      "name": "Hj01UZuHkQppXTq6XV9Pn",
-      "title": "Custom Server",
-      "description": "Next.js includes its own server with `next start` by default. If you have an existing backend, you can still use it with Next.js (this is not a custom server). A custom Next.js server allows you to programmatically start a server for custom patterns. The majority of the time, you will not need this approach. However, it's available if you need to eject.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "How to set up a custom server in Next.js",
-          "url": "https://nextjs.org/docs/app/guides/custom-server"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [
-        {
-          "id": "YP34tozqTte5s52QBnrKD",
-          "title": "Testing"
-        }
-      ],
-      "subtopics": []
-    },
-    {
-      "id": "-yiJSBIoczJHOW8YMdWFI",
-      "name": "-yiJSBIoczJHOW8YMdWFI",
-      "title": "Preparing for Production",
-      "description": "Before taking Next.js application to production, there are some optimizations and patterns you should consider implementing for the best user experience, performance, and security. Next.js provides a list of best practices when building your application and before going to production. In addition, you should be aware of the automatic Next.js optimizations.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "How to optimize your Next.js application for production",
-          "url": "https://nextjs.org/docs/app/guides/production-checklist"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "-9Y8zMcO-6lPoGWkCbKWI",
-          "title": "Deployment"
-        }
-      ],
-      "nextModules": [],
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f4362",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 0,
-          "name": "images",
-          "nodeId": "1t9iOcmrEmuwOxOZ0vlY7",
-          "title": "Images",
-          "description": "images account for a huge portion of the typical website’s page weight and can have a sizable impact on your website's LCP performance. The Next.js Image component extends the HTML  element with features for automatic image optimization, including:\n\n*   Size Optimization: Automatically serve correctly sized images for each device, using modern image formats like WebP and AVIF.\n\n*   Visual Stability: Prevent layout shift automatically when images are loading.\n\n*   Faster Page Loads: Images are only loaded when they enter the viewport using native browser lazy loading, with optional blur-up placeholders.\n\n*   Asset Flexibility: On-demand image resizing, even for images stored on remote servers",
-          "content": "# Images\n\nimages account for a huge portion of the typical website’s page weight and can have a sizable impact on your website's LCP performance. The Next.js Image component extends the HTML  element with features for automatic image optimization, including:\n\n*   Size Optimization: Automatically serve correctly sized images for each device, using modern image formats like WebP and AVIF.\n*   Visual Stability: Prevent layout shift automatically when images are loading.\n*   Faster Page Loads: Images are only loaded when they enter the viewport using native browser lazy loading, with optional blur-up placeholders.\n*   Asset Flexibility: On-demand image resizing, even for images stored on remote servers\n\nVisit the following resources to learn more:\n\n- [@official@Image Optimization](https://nextjs.org/docs/app/getting-started/images)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Image Optimization",
-              "url": "https://nextjs.org/docs/app/getting-started/images"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4363",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 1,
-          "name": "videos",
-          "nodeId": "1SJX-nGuhIxGH0ukfluoQ",
-          "title": "Videos in Next.js",
-          "description": "Next.js provides various approaches and techniques to store and display video files without affecting performance. Videos can be embedded on the page using the HTML `<video>` tag for direct video files and `<iframe>` for external platform-hosted videos.",
-          "content": "# Videos in Next.js\n\nNext.js provides various approaches and techniques to store and display video files without affecting performance. Videos can be embedded on the page using the HTML `<video>` tag for direct video files and `<iframe>` for external platform-hosted videos.\n\nVisit the following resources to learn more:\n\n- [@official@How to use and optimize videos](https://nextjs.org/docs/app/guides/videos)\n- [@video@Add high-performance video to your Nextjs app](https://next-video.dev/docs)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to use and optimize videos",
-              "url": "https://nextjs.org/docs/app/guides/videos"
-            },
-            {
-              "type": "video",
-              "title": "Add high-performance video to your Nextjs app",
-              "url": "https://next-video.dev/docs"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4364",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 2,
-          "name": "fonts",
-          "nodeId": "ZptECTASMX97m5yCZ-XO8",
-          "title": "Font Optimization",
-          "description": "The `next/font` module automatically optimizes your fonts and removes external network requests for improved privacy and performance. It includes built-in self-hosting for any font file. This means you can optimally load web fonts with no layout shift.",
-          "content": "# Font Optimization\n\nThe `next/font` module automatically optimizes your fonts and removes external network requests for improved privacy and performance. It includes built-in self-hosting for any font file. This means you can optimally load web fonts with no layout shift.\n\nVisit the following resources to learn more:\n\n- [@official@Font Optimization](https://nextjs.org/docs/app/getting-started/fonts)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Font Optimization",
-              "url": "https://nextjs.org/docs/app/getting-started/fonts"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4365",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 3,
-          "name": "metadata",
-          "nodeId": "45XMR5imHEDF_X8wcgjGW",
-          "title": "Metadata",
-          "description": "The Metadata APIs can be used to define your application metadata for improved SEO and web shareability and include:\n\n*   The static `metadata` object\n\n*   The dynamic `generateMetadata` function\n\n*   Special file conventions that can be used to add static or dynamically generated favicons and OG images.",
-          "content": "# Metadata\n\nThe Metadata APIs can be used to define your application metadata for improved SEO and web shareability and include:\n\n*   The static `metadata` object\n*   The dynamic `generateMetadata` function\n*   Special file conventions that can be used to add static or dynamically generated favicons and OG images.\n\nVisit the following resources to learn more:\n\n- [@official@Metadata and OG images](https://nextjs.org/docs/app/getting-started/metadata-and-og-images#static-open-graph-images)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Metadata and OG images",
-              "url": "https://nextjs.org/docs/app/getting-started/metadata-and-og-images#static-open-graph-images"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4366",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 4,
-          "name": "package-bundling",
-          "nodeId": "qM_Za9NiCiCG5-kf5RCXF",
-          "title": "Package Bundling",
-          "description": "Bundling external packages can significantly improve the performance of your application. By default, packages imported inside Server Components and Route Handlers are automatically bundled by Next.js for enhanced optimization.",
-          "content": "# Package Bundling\n\nBundling external packages can significantly improve the performance of your application. By default, packages imported inside Server Components and Route Handlers are automatically bundled by Next.js for enhanced optimization.\n\nVisit the following resources to learn more:\n\n- [@official@How to optimize package bundling](https://nextjs.org/docs/app/guides/package-bundling)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to optimize package bundling",
-              "url": "https://nextjs.org/docs/app/guides/package-bundling"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4367",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 5,
-          "name": "lazy-loading",
-          "nodeId": "3_Mpvkxp9A7PMogxxMikQ",
-          "title": "Lazy Loading",
-          "description": "Lazy loading in Next.js helps improve the initial loading performance of an application by decreasing the amount of JavaScript needed to render a route. It allows you to defer loading of Client Components and imported libraries, and only include them in the client bundle when they're needed. For example, you might want to defer loading a modal until a user clicks to open it.",
-          "content": "# Lazy Loading\n\nLazy loading in Next.js helps improve the initial loading performance of an application by decreasing the amount of JavaScript needed to render a route. It allows you to defer loading of Client Components and imported libraries, and only include them in the client bundle when they're needed. For example, you might want to defer loading a modal until a user clicks to open it.\n\nVisit the following resources to learn more:\n\n- [@official@How to lazy load Client Components and libraries](https://nextjs.org/docs/app/guides/lazy-loading)\n- [@article@Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to lazy load Client Components and libraries",
-              "url": "https://nextjs.org/docs/app/guides/lazy-loading"
-            },
-            {
-              "type": "article",
-              "title": "Lazy loading",
-              "url": "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4368",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 6,
-          "name": "analytics",
-          "nodeId": "a34ZmSk5VYVLq8wsEvOcI",
-          "title": "Analytics",
-          "description": "Next.js has built-in support for measuring and reporting performance metrics. You can either use the `useReportWebVitals` hook to manage reporting yourself, or alternatively, Vercel provides a managed service to automatically collect and visualize metrics for you.",
-          "content": "# Analytics\n\nNext.js has built-in support for measuring and reporting performance metrics. You can either use the `useReportWebVitals` hook to manage reporting yourself, or alternatively, Vercel provides a managed service to automatically collect and visualize metrics for you.\n\nVisit the following resources to learn more:\n\n- [@official@How to add analytics to your Next.js application](https://nextjs.org/docs/app/guides/analytics)\n- [@official@useReportWebVitals](https://nextjs.org/docs/app/api-reference/functions/use-report-web-vitals)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to add analytics to your Next.js application",
-              "url": "https://nextjs.org/docs/app/guides/analytics"
-            },
-            {
-              "type": "official",
-              "title": "useReportWebVitals",
-              "url": "https://nextjs.org/docs/app/api-reference/functions/use-report-web-vitals"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4369",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 7,
-          "name": "instrumentation",
-          "nodeId": "DHqdXJFhVZWaNa5zSX8Wk",
-          "title": "instrumentation",
-          "description": "Instrumentation is the process of using code to integrate monitoring and logging tools into your application. This allows you to track the performance and behavior of your application, and to debug issues in production.",
-          "content": "# instrumentation\n\nInstrumentation is the process of using code to integrate monitoring and logging tools into your application. This allows you to track the performance and behavior of your application, and to debug issues in production.\n\nVisit the following resources to learn more:\n\n- [@official@How to set up instrumentation](https://nextjs.org/docs/app/guides/instrumentation)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to set up instrumentation",
-              "url": "https://nextjs.org/docs/app/guides/instrumentation"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f436a",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 8,
-          "name": "opentelemetry",
-          "nodeId": "mTh5PZNpzJNKPqpu5PVL6",
-          "title": "OpenTelemetry",
-          "description": "Observability is crucial for understanding and optimizing the behavior and performance of your Next.js app. With observability, developers can proactively address issues before they become major problems and provide a better user experience.\n\nNext.js recommends using OpenTelemetry for instrumenting your apps. It's a platform-agnostic way to instrument apps that allows you to change your observability provider without changing your code. Next.js supports OpenTelemetry instrumentation out of the box, which means that we already instrumented Next.js itself.",
-          "content": "# OpenTelemetry\n\nObservability is crucial for understanding and optimizing the behavior and performance of your Next.js app. With observability, developers can proactively address issues before they become major problems and provide a better user experience.\n\nNext.js recommends using OpenTelemetry for instrumenting your apps. It's a platform-agnostic way to instrument apps that allows you to change your observability provider without changing your code. Next.js supports OpenTelemetry instrumentation out of the box, which means that we already instrumented Next.js itself.\n\nVisit the following resources to learn more:\n\n- [@official@How to set up instrumentation with OpenTelemetry](https://nextjs.org/docs/app/guides/open-telemetry)\n- [@official@OpenTelemetry Docs](https://opentelemetry.io/docs/)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to set up instrumentation with OpenTelemetry",
-              "url": "https://nextjs.org/docs/app/guides/open-telemetry"
-            },
-            {
-              "type": "official",
-              "title": "OpenTelemetry Docs",
-              "url": "https://opentelemetry.io/docs/"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f436b",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 9,
-          "name": "static-assets",
-          "nodeId": "iabbuLHqAiRkgj03t64x7",
-          "title": "Static Assets",
-          "description": "Static content is any file that is stored in a server and is the same every time it is delivered to users. HTML files and images are examples of this kind of content. Next.js can serve static files under a folder called `public` in the root directory. Files inside `public` can then be referenced by your code starting from the base URL (`/`). It's important to note that Next.js cannot safely cache assets in the public folder because they may change.",
-          "content": "# Static Assets\n\nStatic content is any file that is stored in a server and is the same every time it is delivered to users. HTML files and images are examples of this kind of content. Next.js can serve static files under a folder called `public` in the root directory. Files inside `public` can then be referenced by your code starting from the base URL (`/`). It's important to note that Next.js cannot safely cache assets in the public folder because they may change.\n\nVisit the following resources to learn more:\n\n- [@official@public Folder](https://nextjs.org/docs/app/api-reference/file-conventions/public-folder)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "public Folder",
-              "url": "https://nextjs.org/docs/app/api-reference/file-conventions/public-folder"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f436c",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 10,
-          "name": "scripts",
-          "nodeId": "JFrpy3dGt-UP9Weo1VBvN",
-          "title": "Third-Party Scripts",
-          "description": "Third-party scripts are code snippets from external sources that add functionality to your website, such as analytics, advertising, or social media widgets. Next.js allows you to load a third-party script for multiple routes through the `next/script` component, optimizing performance and enhancing control over when and how scripts are executed within your application.\n\nThese scripts can impact your website's performance because they often require downloading and executing code from external servers. Managing these scripts effectively is crucial for maintaining a fast and responsive user experience.",
-          "content": "# Third-Party Scripts\n\nThird-party scripts are code snippets from external sources that add functionality to your website, such as analytics, advertising, or social media widgets. Next.js allows you to load a third-party script for multiple routes through the `next/script` component, optimizing performance and enhancing control over when and how scripts are executed within your application.\n\nThese scripts can impact your website's performance because they often require downloading and executing code from external servers. Managing these scripts effectively is crucial for maintaining a fast and responsive user experience.\n\nVisit the following resources to learn more:\n\n- [@official@How to load and optimize scripts](https://nextjs.org/docs/app/guides/scripts)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to load and optimize scripts",
-              "url": "https://nextjs.org/docs/app/guides/scripts"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f436d",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 11,
-          "name": "third-party-libraries",
-          "nodeId": "-j38AhG6LUCH5GupGiqUM",
-          "title": "Third Party Libraries",
-          "description": "`@next/third-parties` is a library that provides a collection of components and utilities that improve the performance and developer experience of loading popular third-party libraries, like Google Tag Manager and Google Analytics, in your Next.js application. All third-party integrations provided by `@next/third-parties` have been optimized for performance and ease of use.",
-          "content": "# Third Party Libraries\n\n`@next/third-parties` is a library that provides a collection of components and utilities that improve the performance and developer experience of loading popular third-party libraries, like Google Tag Manager and Google Analytics, in your Next.js application. All third-party integrations provided by `@next/third-parties` have been optimized for performance and ease of use.\n\nVisit the following resources to learn more:\n\n- [@official@How to optimize third-party libraries](https://nextjs.org/docs/app/guides/third-party-libraries)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to optimize third-party libraries",
-              "url": "https://nextjs.org/docs/app/guides/third-party-libraries"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f436e",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 12,
-          "name": "memory-usage",
-          "nodeId": "SI7KzNSLP0ccH_P94StGL",
-          "title": "Memory Usage",
-          "description": "As applications grow and become more feature rich, they can demand more resources when developing locally or creating production builds. Next.js provides several strategies and techniques to optimize memory and address common memory issues in Next.js.",
-          "content": "# Memory Usage\n\nAs applications grow and become more feature rich, they can demand more resources when developing locally or creating production builds. Next.js provides several strategies and techniques to optimize memory and address common memory issues in Next.js.\n\nVisit the following resources to learn more:\n\n- [@official@How to optimize memory usage](https://nextjs.org/docs/app/guides/memory-usage)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to optimize memory usage",
-              "url": "https://nextjs.org/docs/app/guides/memory-usage"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f436f",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 13,
-          "name": "vitest",
-          "nodeId": "KTZRo1Y_Z-7eMYzZ9W0Vl",
-          "title": "Vitest",
-          "description": "Next.js allows you to use Vitest for unit testing. Vitest is a fast unit test framework powered by Vite. It offers a development experience similar to Vite, making it easy to set up and use in projects that already use Vite for building. Vitest focuses on speed and simplicity, providing features like instant hot module replacement (HMR) and built-in support for TypeScript and JSX.",
-          "content": "# Vitest\n\nNext.js allows you to use Vitest for unit testing. Vitest is a fast unit test framework powered by Vite. It offers a development experience similar to Vite, making it easy to set up and use in projects that already use Vite for building. Vitest focuses on speed and simplicity, providing features like instant hot module replacement (HMR) and built-in support for TypeScript and JSX.\n\nVisit the following resources to learn more:\n\n- [@official@How to set up Vitest with Next.js](https://nextjs.org/docs/app/guides/testing/vitest)\n- [@official@Vitest](https://vitest.dev/)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to set up Vitest with Next.js",
-              "url": "https://nextjs.org/docs/app/guides/testing/vitest"
-            },
-            {
-              "type": "official",
-              "title": "Vitest",
-              "url": "https://vitest.dev/"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4370",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 14,
-          "name": "jest",
-          "nodeId": "sc5Pliyq6bfeFXp0ca5yH",
-          "title": "Jest",
-          "description": "Next.js allows you to use Jest for unit testing and snapshot testing. Jest is a JavaScript testing framework created by Facebook, designed for ensuring the correctness of JavaScript code, especially React applications. It provides a complete and easy-to-use solution for writing unit, integration, and end-to-end tests. Jest includes features like a test runner, assertion library, mocking capabilities, and code coverage reporting, making it a popular choice for developers looking to thoroughly test their code.",
-          "content": "# Jest\n\nNext.js allows you to use Jest for unit testing and snapshot testing. Jest is a JavaScript testing framework created by Facebook, designed for ensuring the correctness of JavaScript code, especially React applications. It provides a complete and easy-to-use solution for writing unit, integration, and end-to-end tests. Jest includes features like a test runner, assertion library, mocking capabilities, and code coverage reporting, making it a popular choice for developers looking to thoroughly test their code.\n\nVisit the following resources to learn more:\n\n- [@official@How to set up Jest with Next.js](https://nextjs.org/docs/app/guides/testing/jest)\n- [@official@Jest](https://jestjs.io/)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to set up Jest with Next.js",
-              "url": "https://nextjs.org/docs/app/guides/testing/jest"
-            },
-            {
-              "type": "official",
-              "title": "Jest",
-              "url": "https://jestjs.io/"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4371",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 15,
-          "name": "playwright",
-          "nodeId": "qFDdfOBdOlGMjTEOiiuTe",
-          "title": "Playwright",
-          "description": "Next.js supports Playwright for End-to-End (E2E) testing. Playwright is a testing framework that lets you automate Chromium, Firefox, and WebKit with a single API. You can use it to write E2E testing.",
-          "content": "# Playwright\n\nNext.js supports Playwright for End-to-End (E2E) testing. Playwright is a testing framework that lets you automate Chromium, Firefox, and WebKit with a single API. You can use it to write E2E testing.\n\nVisit the following resources to learn more:\n\n- [@official@How to set up Playwright with Next.js](https://nextjs.org/docs/app/guides/testing/playwright)\n- [@official@Playwright](https://playwright.dev/)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to set up Playwright with Next.js",
-              "url": "https://nextjs.org/docs/app/guides/testing/playwright"
-            },
-            {
-              "type": "official",
-              "title": "Playwright",
-              "url": "https://playwright.dev/"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4372",
-          "roadmapSlug": "nextjs",
-          "moduleId": "-yiJSBIoczJHOW8YMdWFI",
-          "order": 16,
-          "name": "cypress",
-          "nodeId": "KmOTgclnf-QYDYK0QwwVe",
-          "title": "Cypress",
-          "description": "Next.js supports Cypress for End-to-End (E2E) and Component Testing. With Cypress, you can easily create tests for your modern web applications, debug them visually, and automatically run them in your continuous integration builds.",
-          "content": "# Cypress\n\nNext.js supports Cypress for End-to-End (E2E) and Component Testing. With Cypress, you can easily create tests for your modern web applications, debug them visually, and automatically run them in your continuous integration builds.\n\nVisit the following resources to learn more:\n\n- [@official@How to set up Cypress with Next.js](https://nextjs.org/docs/app/guides/testing/cypress)\n- [@official@Cypress](https://www.cypress.io/)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to set up Cypress with Next.js",
-              "url": "https://nextjs.org/docs/app/guides/testing/cypress"
-            },
-            {
-              "type": "official",
-              "title": "Cypress",
-              "url": "https://www.cypress.io/"
-            }
-          ],
-          "parentTopic": {
-            "id": "-yiJSBIoczJHOW8YMdWFI",
-            "title": "Preparing for Production"
-          }
-        }
-      ]
-    },
-    {
       "id": "BPStVqWV0660A-_fJSuM7",
       "name": "BPStVqWV0660A-_fJSuM7",
       "title": "Deployment Options",
@@ -2768,7 +2062,7 @@
     }
   ],
   "title": "Next.js",
-  "topicCount": 61,
+  "topicCount": 41,
   "topics": [
     {
       "name": "introduction",

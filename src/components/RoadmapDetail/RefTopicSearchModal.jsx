@@ -155,12 +155,19 @@ export default function RefTopicSearchModal({
                       <span className={styles.roadmapBadge}>
                         {topic.roadmapTitle || topic.roadmapSlug}
                       </span>
+                      {topic.isModule && (
+                        <span className={styles.moduleBadge}>Chặng / Module</span>
+                      )}
                     </div>
                     {topic.description && (
                       <p className={styles.itemDesc}>
-                        {topic.description.length > 120
-                          ? topic.description.slice(0, 120) + '...'
-                          : topic.description}
+                        {(() => {
+                          const clean = topic.description
+                            .replace(/```[\s\S]*?```/g, '')
+                            .replace(/[#*`_\[\]()]/g, '')
+                            .trim();
+                          return clean.length > 120 ? clean.slice(0, 120) + '...' : clean;
+                        })()}
                       </p>
                     )}
                   </div>

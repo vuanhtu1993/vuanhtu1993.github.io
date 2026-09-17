@@ -230,6 +230,20 @@
   background: rgba(37, 194, 160, 0.2);
 }
 
+.moduleBadge {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0284c7;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+:global([data-theme='dark']) .moduleBadge {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+}
+
 .itemDesc {
   margin: 0;
   font-size: 0.82rem;

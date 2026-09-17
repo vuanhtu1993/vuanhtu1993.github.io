@@ -2,16 +2,16 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 
 const EditModeContext = createContext({
   isEditMode: false,
-  toggleEditMode: () => {},
+  toggleEditMode: () => { },
   isDevMode: false,
   saveStatus: 'idle',
-  updateTopic: async () => {},
-  deleteTopic: async () => {},
-  updateModule: async () => {},
-  deleteModule: async () => {},
+  updateTopic: async () => { },
+  deleteTopic: async () => { },
+  updateModule: async () => { },
+  deleteModule: async () => { },
   searchTopics: async () => [],
-  addRefChildTopic: async () => {},
-  unlinkChildTopic: async () => {},
+  addRefChildTopic: async () => { },
+  unlinkChildTopic: async () => { },
 });
 
 export function EditModeProvider({ children, slug, onDataChanged }) {

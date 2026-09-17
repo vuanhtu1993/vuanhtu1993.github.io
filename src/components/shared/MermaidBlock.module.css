@@ -1,0 +1,175 @@
+.container {
+  margin: 1.25rem 0;
+  border: 1px solid var(--ifm-toc-border-color, #e2e8f0);
+  border-radius: 10px;
+  background-color: var(--ifm-card-background-color, #ffffff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:global([data-theme='dark']) .container {
+  background-color: #1a1b1e;
+  border-color: #2e3035;
+}
+
+.container:hover {
+  border-color: rgba(37, 194, 160, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+:global([data-theme='dark']) .container:hover {
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.85rem;
+  background-color: rgba(0, 0, 0, 0.025);
+  border-bottom: 1px solid var(--ifm-toc-border-color, #e2e8f0);
+  font-size: 0.8rem;
+}
+
+:global([data-theme='dark']) .header {
+  background-color: rgba(255, 255, 255, 0.025);
+  border-bottom-color: #2e3035;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary, #25c2a0);
+}
+
+:global([data-theme='dark']) .badge {
+  color: #34d399;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.actionBtn {
+  background: transparent;
+  border: 1px solid var(--ifm-toc-border-color, #cbd5e1);
+  color: var(--ifm-color-emphasis-700, #475569);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+:global([data-theme='dark']) .actionBtn {
+  border-color: #475569;
+  color: #94a3b8;
+}
+
+.actionBtn:hover {
+  background-color: var(--ifm-color-primary, #25c2a0);
+  border-color: var(--ifm-color-primary, #25c2a0);
+  color: #ffffff;
+}
+
+.diagramWrapper {
+  padding: 1rem 0.85rem;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  min-height: 80px;
+}
+
+/* Căn giữa SVG bên trong */
+.diagramWrapper :global(.docusaurus-mermaid-container) {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.diagramWrapper :global(svg) {
+  max-width: 100%;
+  height: auto;
+}
+
+.sourceWrapper {
+  border-top: 1px dashed var(--ifm-toc-border-color, #e2e8f0);
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 0.75rem 1rem;
+}
+
+:global([data-theme='dark']) .sourceWrapper {
+  border-top-color: #2e3035;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sourceCode {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-800, #334155);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+:global([data-theme='dark']) .sourceCode {
+  color: #cbd5e1;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  padding: 1.5rem;
+}
+
+.errorContainer {
+  padding: 1rem;
+  background-color: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 6px;
+  width: 100%;
+}
+
+.errorHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.errorTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.errorMessage {
+  font-size: 0.8rem;
+  color: #b91c1c;
+  margin: 0 0 0.5rem 0;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+:global([data-theme='dark']) .errorMessage {
+  color: #fca5a5;
+}
+
+.errorSource {
+  margin: 0;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+}
