@@ -256,7 +256,7 @@
       }
     ]
   },
-  "moduleCount": 22,
+  "moduleCount": 11,
   "modules": [
     {
       "id": "tcDL4OEbZplbjNa8VTLpv",
@@ -491,89 +491,6 @@
       ]
     },
     {
-      "id": "xRZqBd5-QO8zh7ksHlRjK",
-      "name": "xRZqBd5-QO8zh7ksHlRjK",
-      "title": "Next.js Routing Basics",
-      "description": "Routing is the process of defining how an application responds to client requests to specific endpoints (URIs). In Next.js, routing is primarily file-system based. This means that the structure of your \"pages\" directory directly corresponds to the routes of your application. Each file in the \"pages\" directory becomes a route based on its filename. For example, a file named \"about.js\" in the \"pages\" directory will be accessible at the \"/about\" route.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "https://nextjs.org/docs/pages/building-your-application/routing",
-          "url": "https://nextjs.org/docs/pages/building-your-application/routing"
-        },
-        {
-          "type": "official",
-          "title": "Defining Routes",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/routing/defining-routes"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Routing Explained For Beginners",
-          "url": "https://www.youtube.com/watch?v=qivq_vDYFGk"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "NFLIWBJm_cQ7oCsP00Qy4",
-          "title": "Routing"
-        }
-      ],
-      "nextModules": [],
-      "order": 3,
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f433f",
-          "roadmapSlug": "nextjs",
-          "moduleId": "xRZqBd5-QO8zh7ksHlRjK",
-          "order": 0,
-          "name": "why-use-app-router",
-          "nodeId": "e_rwwlKsvyv9OMDDBXo_N",
-          "title": "App Router",
-          "description": "The App Router in Next.js is a new routing system built on React Server Components, offering enhanced flexibility and performance compared to the traditional Pages Router. Before Next.js 13, the Pages Router was the main way to create routes in Next.js. It's still supported in newer versions of Next.js, but Next.js recommends migrating to the new App Router to leverage React's latest features.",
-          "content": "# App Router\n\nThe App Router in Next.js is a new routing system built on React Server Components, offering enhanced flexibility and performance compared to the traditional Pages Router. Before Next.js 13, the Pages Router was the main way to create routes in Next.js. It's still supported in newer versions of Next.js, but Next.js recommends migrating to the new App Router to leverage React's latest features.\n\nVisit the following resources to learn more:\n\n- [@article@Next.js: App Router vs Pages Router](https://dev.to/dcs-ink/nextjs-app-router-vs-pages-router-3p57)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Next.js: App Router vs Pages Router",
-              "url": "https://dev.to/dcs-ink/nextjs-app-router-vs-pages-router-3p57"
-            }
-          ],
-          "parentTopic": {
-            "id": "xRZqBd5-QO8zh7ksHlRjK",
-            "title": "Next.js Routing Basics"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4340",
-          "roadmapSlug": "nextjs",
-          "moduleId": "xRZqBd5-QO8zh7ksHlRjK",
-          "order": 1,
-          "name": "reditects",
-          "nodeId": "K1wGmAy9L0VE6cwYE2pA6",
-          "title": "Redirects in Next.js API Endpoints",
-          "description": "Redirects in Next.js API endpoints allow you to send a user from one URL to another. This is useful for various scenarios, such as moving or renaming pages, handling temporary content changes, or guiding users to a different part of your application based on specific conditions. By sending an HTTP redirect response, the server instructs the client's browser to navigate to the new URL.",
-          "content": "# Redirects in Next.js API Endpoints\n\nRedirects in Next.js API endpoints allow you to send a user from one URL to another. This is useful for various scenarios, such as moving or renaming pages, handling temporary content changes, or guiding users to a different part of your application based on specific conditions. By sending an HTTP redirect response, the server instructs the client's browser to navigate to the new URL.\n\nVisit the following resources to learn more:\n\n- [@official@How to handle redirects in Next.js for App Router](https://nextjs.org/docs/app/guides/redirecting)\n- [@official@redirectHow to handle redirects in Next.js for Pages Router](https://nextjs.org/docs/pages/guides/redirecting)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "How to handle redirects in Next.js for App Router",
-              "url": "https://nextjs.org/docs/app/guides/redirecting"
-            },
-            {
-              "type": "official",
-              "title": "redirectHow to handle redirects in Next.js for Pages Router",
-              "url": "https://nextjs.org/docs/pages/guides/redirecting"
-            }
-          ],
-          "parentTopic": {
-            "id": "xRZqBd5-QO8zh7ksHlRjK",
-            "title": "Next.js Routing Basics"
-          },
-          "updatedAt": "2026-09-17T08:12:24.460Z"
-        }
-      ]
-    },
-    {
       "id": "1ch6ZXZP46FP8q3HeCqWM",
       "name": "1ch6ZXZP46FP8q3HeCqWM",
       "title": "Rendering Strategies",
@@ -722,7 +639,7 @@
     {
       "id": "km7dLVpl76c5EfWvhhbRh",
       "name": "km7dLVpl76c5EfWvhhbRh",
-      "title": "Types of routers",
+      "title": "NextJS Router",
       "description": "Next.js has two different routers:\n\n*   **App Router**: The newer router that supports new React features like Server Components.\n\n*   **Pages Router**: The original router, still supported and being improved.\n\nBefore Next.js 13, the Pages Router was the main way to create routes in Next.js. It's still supported in newer versions of Next.js, but Next.js recommends migrating to the new App Router to leverage React's latest features.",
       "resources": [
         {
@@ -892,137 +809,212 @@
       "order": 6,
       "subtopics": [
         {
-          "_id": "6aabb676032a7102ae1800e0",
+          "_id": "6aac9f5d193ef920adbbf6d4",
           "roadmapSlug": "nextjs",
           "moduleId": "mod_data-fetching_mu5b5eb8",
-          "nodeId": "topic_fetch-api_mu5cexap",
-          "name": "topic_fetch-api_mu5cexap",
-          "title": "Fetch API",
-          "description": "The Fetch API provides a JavaScript interface for accessing and manipulating parts of the protocol",
-          "content": "# Fetch API",
+          "nodeId": "topic_client-side-data-fetching_mu6bwuqe",
+          "name": "topic_client-side-data-fetching_mu6bwuqe",
+          "title": "Client-Side Data Fetching",
+          "description": "Client-side data fetching involves retrieving data directly in the user's browser using JavaScript. This happens after the initial HTML content is loaded. When a user interacts with a page, or after a certain event, the browser makes a request to an API or data source. The fetched data is then used to update the user interface dynamically, without requiring a full page reload.\n\nClient-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. It's important to note that using client-side data fetching can affect the performance of your application and the load speed of your pages. This is because the data fetching is done at the time of the component or pages mount, and the data is not cached.",
+          "content": "# Client-Side Data Fetching\n\nClient-side data fetching involves retrieving data directly in the user's browser using JavaScript. This happens after the initial HTML content is loaded. When a user interacts with a page, or after a certain event, the browser makes a request to an API or data source. The fetched data is then used to update the user interface dynamically, without requiring a full page reload.\n\nClient-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. It's important to note that using client-side data fetching can affect the performance of your application and the load speed of your pages. This is because the data fetching is done at the time of the component or pages mount, and the data is not cached.",
           "resources": [],
           "parentTopic": null,
           "order": 0,
-          "createdAt": "2026-09-17T09:44:22.801Z",
+          "createdAt": "2026-09-18T02:18:05.846Z",
           "ref": {
             "isRef": true,
-            "sourceRoadmapSlug": "javascript",
-            "sourceNodeId": "fetch-api"
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "jYSa7UMmjb51pGAyU4PoB"
+          }
+        },
+        {
+          "_id": "6aac9f81193ef920adbbf6d5",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_data-fetching_mu5b5eb8",
+          "nodeId": "topic_server-side-data-fetching-for-locations_mu6bxmaj",
+          "name": "topic_server-side-data-fetching-for-locations_mu6bxmaj",
+          "title": "Server-Side Data Fetching for Locations",
+          "description": "Fetching data on the server in Next.js allows you to retrieve location information before the page is rendered. This approach improves performance by reducing the amount of work the client's browser needs to do, leading to faster initial page loads and better SEO. Server-side data fetching ensures that the data is available when the page is initially rendered, providing a seamless user experience.",
+          "content": "# Server-Side Data Fetching for Locations\n\nFetching data on the server in Next.js allows you to retrieve location information before the page is rendered. This approach improves performance by reducing the amount of work the client's browser needs to do, leading to faster initial page loads and better SEO. Server-side data fetching ensures that the data is available when the page is initially rendered, providing a seamless user experience.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 1,
+          "createdAt": "2026-09-18T02:18:41.563Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "QDxYlIyFOuGUIy_ZovHs0"
+          }
+        },
+        {
+          "_id": "6aaca008193ef920adbbf6d6",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_data-fetching_mu5b5eb8",
+          "nodeId": "topic_parallel-vs-sequential_mu6c0iql",
+          "name": "topic_parallel-vs-sequential_mu6c0iql",
+          "title": "Parallel vs Sequential",
+          "description": "When fetching data inside React components, you need to understand parallel and sequential data fetching. Parallel fetching starts independent requests at the same time, while sequential fetching runs requests one after another when later requests depend on earlier results. Choosing the appropriate pattern can reduce unnecessary waiting and improve application performance.\n\n@official@Parallel and sequential data fetching",
+          "content": "# Parallel vs Sequential\n\nWhen fetching data inside React components, you need to understand parallel and sequential data fetching. Parallel fetching starts independent requests at the same time, while sequential fetching runs requests one after another when later requests depend on earlier results. Choosing the appropriate pattern can reduce unnecessary waiting and improve application performance.\n\n@official@Parallel and sequential data fetching",
+          "resources": [],
+          "parentTopic": null,
+          "order": 2,
+          "createdAt": "2026-09-18T02:20:56.925Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "SjJQ7ceU6vBhlhrN8hcvy"
+          }
+        },
+        {
+          "_id": "6aaca011193ef920adbbf6d7",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_data-fetching_mu5b5eb8",
+          "nodeId": "topic_preloading-data_mu6c0pft",
+          "name": "topic_preloading-data_mu6c0pft",
+          "title": "Preloading data",
+          "description": "Another way to optimize data fetching is to use the preload pattern. You can optionally create a preload function to further optimize parallel data fetching. With this approach, you don't have to pass promises down as props. The preload function can also have any name as it's a pattern, not an API.",
+          "content": "# Preloading data\n\nAnother way to optimize data fetching is to use the preload pattern. You can optionally create a preload function to further optimize parallel data fetching. With this approach, you don't have to pass promises down as props. The preload function can also have any name as it's a pattern, not an API.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 3,
+          "createdAt": "2026-09-18T02:21:05.609Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "Ve1Pa7IhGHPZ_F-sCMcNb"
+          }
+        },
+        {
+          "_id": "6aaca113193ef920adbbf6dc",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_data-fetching_mu5b5eb8",
+          "nodeId": "topic_loading-and-streaming_mu6c68rk",
+          "name": "topic_loading-and-streaming_mu6c68rk",
+          "title": "Loading and Streaming",
+          "description": "The special file `loading.js` helps you create meaningful Loading UI with React Suspense. With this convention, you can show an instant loading state from the server while the content of a route segment loads. The new content is automatically swapped in once rendering is complete.\n\nIn addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with Suspense for both Node.js and Edge runtimes.",
+          "content": "# Loading and Streaming\n\nThe special file `loading.js` helps you create meaningful Loading UI with React Suspense. With this convention, you can show an instant loading state from the server while the content of a route segment loads. The new content is automatically swapped in once rendering is complete.\n\nIn addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with Suspense for both Node.js and Edge runtimes.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 4,
+          "createdAt": "2026-09-18T02:25:23.936Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "b2LcPc5MfoyF0W9Y0aGpR"
           }
         }
       ]
     },
     {
-      "id": "b2LcPc5MfoyF0W9Y0aGpR",
-      "name": "b2LcPc5MfoyF0W9Y0aGpR",
-      "title": "Loading and Streaming",
-      "description": "The special file `loading.js` helps you create meaningful Loading UI with React Suspense. With this convention, you can show an instant loading state from the server while the content of a route segment loads. The new content is automatically swapped in once rendering is complete.\n\nIn addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with Suspense for both Node.js and Edge runtimes.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Loading UI and Streaming",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/routing/loading-ui-and-streaming"
-        },
-        {
-          "type": "official",
-          "title": "Instant Loading States",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states"
-        },
-        {
-          "type": "official",
-          "title": "Suspense",
-          "url": "https://react.dev/reference/react/Suspense"
-        },
-        {
-          "type": "article",
-          "title": "Next.js 15 Tutorial - Loading UI",
-          "url": "https://www.youtube.com/watch?v=0OVg4ikUaz0"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
+      "id": "mod_caching-data_mu6c1ysu",
+      "name": "mod_caching-data_mu6c1ysu",
+      "title": "Caching Data",
+      "description": "**Caching data** in Next.js involves storing the results of data fetches so that subsequent requests for the same data can be served faster. Instead of repeatedly fetching data from a database or API, Next.js can retrieve it from the cache. This improves performance and reduces the load on your data sources. Caching can be configured at different levels.\n\nCaching behavior changes depending on whether the route is statically or dynamically rendered, data is cached or uncached, and whether a request is part of an initial visit or a subsequent navigation. Depending on your use case, you can configure the caching behavior for individual routes and data requests.",
+      "resources": [],
       "order": 7,
       "subtopics": [
         {
-          "_id": "6aab5fc213e4b2aeae8f4348",
+          "_id": "6aaca067193ef920adbbf6d8",
           "roadmapSlug": "nextjs",
-          "moduleId": "b2LcPc5MfoyF0W9Y0aGpR",
-          "order": 0,
-          "name": "streaming",
-          "nodeId": "lR7oPh0DCY_BhzXH31N36",
-          "title": "Streaming in Next.js API Endpoints",
-          "description": "Streaming in Next.js API endpoints allows you to send data to the client in chunks, rather than waiting for the entire response to be generated on the server before sending anything. This can significantly improve perceived performance, especially for long-running processes or when dealing with large datasets. By sending data incrementally, the client can start processing and displaying information sooner, leading to a more responsive user experience.",
-          "content": "# Streaming in Next.js API Endpoints\n\nStreaming in Next.js API endpoints allows you to send data to the client in chunks, rather than waiting for the entire response to be generated on the server before sending anything. This can significantly improve perceived performance, especially for long-running processes or when dealing with large datasets. By sending data incrementally, the client can start processing and displaying information sooner, leading to a more responsive user experience.\n\nVisit the following resources to learn more:\n\n- [@official@Streaming](https://nextjs.org/docs/app/api-reference/file-conventions/route#streaming)\n- [@official@Streaming responses](https://nextjs.org/docs/pages/building-your-application/routing/api-routes#streaming-responses)\n- [@video@Next.js 15 Tutorial - Streaming](https://www.youtube.com/watch?v=oSf1gUDGJOA)",
+          "moduleId": "mod_caching-data_mu6c1ysu",
+          "nodeId": "topic_memoization-in-fetch_mu6c2jc5",
+          "name": "topic_memoization-in-fetch_mu6c2jc5",
+          "title": "Memoization in Fetch",
+          "description": "Memoization is an optimization technique that speeds up subsequent function calls by caching the results of previous calls with the same input parameters. This approach allows for re-use of data in a React Component tree, prevents redundant network calls and enhances performance For the initial request, data is fetched from an external source and the result is stored in memory Subsequent requests for the same data within the same render pass retrieve the result from memory, bypassing the need to make the request again.",
+          "content": "# Memoization in Fetch\n\nMemoization is an optimization technique that speeds up subsequent function calls by caching the results of previous calls with the same input parameters. This approach allows for re-use of data in a React Component tree, prevents redundant network calls and enhances performance For the initial request, data is fetched from an external source and the result is stored in memory Subsequent requests for the same data within the same render pass retrieve the result from memory, bypassing the need to make the request again.\n\nVisit the following resources to learn more:\n\n- [@official@Request Memoization](https://nextjs.org/docs/app/guides/caching#request-memoization)\n- [@video@Next.js 14 Tutorial - vRequest Memoization](https://www.youtube.com/watch?v=tcLe3Xi0fJE)",
           "resources": [
             {
               "type": "official",
-              "title": "Streaming",
-              "url": "https://nextjs.org/docs/app/api-reference/file-conventions/route#streaming"
-            },
-            {
-              "type": "official",
-              "title": "Streaming responses",
-              "url": "https://nextjs.org/docs/pages/building-your-application/routing/api-routes#streaming-responses"
+              "title": "Request Memoization",
+              "url": "https://nextjs.org/docs/app/guides/caching#request-memoization"
             },
             {
               "type": "video",
-              "title": "Next.js 15 Tutorial - Streaming",
-              "url": "https://www.youtube.com/watch?v=oSf1gUDGJOA"
+              "title": "Next.js 14 Tutorial - vRequest Memoization",
+              "url": "https://www.youtube.com/watch?v=tcLe3Xi0fJE"
             }
           ],
-          "parentTopic": {
-            "id": "b2LcPc5MfoyF0W9Y0aGpR",
-            "title": "Loading and Streaming"
+          "parentTopic": null,
+          "order": 0,
+          "createdAt": "2026-09-18T02:22:31.013Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "UZCMVpg5YIDxu-AMah3S-"
           }
-        }
-      ]
-    },
-    {
-      "id": "pxltXOWgpbo95V4u2ryX7",
-      "name": "pxltXOWgpbo95V4u2ryX7",
-      "title": "Error States",
-      "description": "Error states in Next.js routing refer to how your application handles situations where a route cannot be successfully loaded or rendered. Errors can be divided into two categories: expected errors and uncaught exceptions.\n\nExpected errors are those that can occur during the normal operation of the application, such as those from server-side form validation or failed requests. These errors should be handled explicitly and returned to the client.\n\nUncaught exceptions are unexpected errors that indicate bugs or issues that should not occur during the normal flow of your application. These should be handled by throwing errors, which will then be caught by error boundaries.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Error Handling",
-          "url": "https://nextjs.org/docs/app/getting-started/error-handling#handling-expected-errors"
         },
         {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Error Handling",
-          "url": "https://www.youtube.com/watch?v=fWV5WPSbgdg"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [
-        {
-          "id": "09uWsmXOXU0Ox7F3qsjRx",
-          "title": "Routing Patterns"
-        }
-      ],
-      "order": 8,
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f4349",
+          "_id": "6aaca0a6193ef920adbbf6d9",
           "roadmapSlug": "nextjs",
-          "moduleId": "pxltXOWgpbo95V4u2ryX7",
-          "order": 0,
-          "name": "revalidation-errors",
-          "nodeId": "qMYuXOlr_c-6oQKVOdGci",
-          "title": "Revalidation Errors",
-          "description": "When revalidation fails, it means the attempt to refresh the cached data encountered an issue, preventing the application from displaying the most up-to-date information. These errors can stem from various sources, such as network connectivity problems, issues with the data source itself (e.g., a database being unavailable), or problems within the revalidation logic. In Next.js, If an error is thrown while attempting to revalidate data, the last successfully generated data will continue to be served from the cache. On the next subsequent request, Next.js will retry revalidating the data.",
-          "content": "# Revalidation Errors\n\nWhen revalidation fails, it means the attempt to refresh the cached data encountered an issue, preventing the application from displaying the most up-to-date information. These errors can stem from various sources, such as network connectivity problems, issues with the data source itself (e.g., a database being unavailable), or problems within the revalidation logic. In Next.js, If an error is thrown while attempting to revalidate data, the last successfully generated data will continue to be served from the cache. On the next subsequent request, Next.js will retry revalidating the data.\n\nVisit the following resources to learn more:\n\n- [@official@Error handling and revalidation](https://nextjs.org/docs/14/app/building-your-application/data-fetching/fetching-caching-and-revalidating)",
+          "moduleId": "mod_caching-data_mu6c1ysu",
+          "nodeId": "topic_react-cache-function_mu6c3w5r",
+          "name": "topic_react-cache-function_mu6c3w5r",
+          "title": "React Cache function",
+          "description": "The React `cache` function allows you to memoize the return value of a function, allowing you to call the same function multiple times while only executing it once.\n\n`fetch` requests using the `GET` or `HEAD` methods are automatically memoized, so you do not need to wrap it in React `cache`. However, for other `fetch` methods, or when using data fetching libraries (such as some database, CMS, or GraphQL clients) that don't inherently memoize requests, you can use `cache` to manually memoize data requests.",
+          "content": "# React Cache function\n\nThe React `cache` function allows you to memoize the return value of a function, allowing you to call the same function multiple times while only executing it once.\n\n`fetch` requests using the `GET` or `HEAD` methods are automatically memoized, so you do not need to wrap it in React `cache`. However, for other `fetch` methods, or when using data fetching libraries (such as some database, CMS, or GraphQL clients) that don't inherently memoize requests, you can use `cache` to manually memoize data requests.\n\nVisit the following resources to learn more:\n\n- [@official@React cache function](https://nextjs.org/docs/app/guides/caching#react-cache-function)",
           "resources": [
             {
               "type": "official",
-              "title": "Error handling and revalidation",
-              "url": "https://nextjs.org/docs/14/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
+              "title": "React cache function",
+              "url": "https://nextjs.org/docs/app/guides/caching#react-cache-function"
             }
           ],
-          "parentTopic": {
-            "id": "pxltXOWgpbo95V4u2ryX7",
-            "title": "Error States"
+          "parentTopic": null,
+          "order": 1,
+          "createdAt": "2026-09-18T02:23:34.287Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "crBlqiS78n7yz28cT2GGz"
+          }
+        },
+        {
+          "_id": "6aaca0b4193ef920adbbf6da",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_caching-data_mu6c1ysu",
+          "nodeId": "topic_revalidating-cached-data_mu6c46qy",
+          "name": "topic_revalidating-cached-data_mu6c46qy",
+          "title": "Revalidating Cached Data",
+          "description": "Revalidation is the process of updating cached data. When you cache data, it's stored for a certain period. After that period, or based on specific events, you might want to refresh the data to ensure your application displays the most up-to-date information. Revalidation allows you to control when and how your cached data is updated, balancing performance with data freshness. Revalidating in Next.js is conducted through the `revalidatePath` and `revalidateTag` functions.",
+          "content": "# Revalidating Cached Data\n\nRevalidation is the process of updating cached data. When you cache data, it's stored for a certain period. After that period, or based on specific events, you might want to refresh the data to ensure your application displays the most up-to-date information. Revalidation allows you to control when and how your cached data is updated, balancing performance with data freshness. Revalidating in Next.js is conducted through the `revalidatePath` and `revalidateTag` functions.\n\nVisit the following resources to learn more:\n\n- [@official@Revalidating](https://nextjs.org/docs/app/guides/caching#revalidating-1)\n- [@official@Caching and Revalidating](https://nextjs.org/docs/app/getting-started/caching-and-revalidating#revalidatetag)",
+          "resources": [
+            {
+              "type": "official",
+              "title": "Revalidating",
+              "url": "https://nextjs.org/docs/app/guides/caching#revalidating-1"
+            },
+            {
+              "type": "official",
+              "title": "Caching and Revalidating",
+              "url": "https://nextjs.org/docs/app/getting-started/caching-and-revalidating#revalidatetag"
+            }
+          ],
+          "parentTopic": null,
+          "order": 2,
+          "createdAt": "2026-09-18T02:23:48.010Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "N5siOJO3dc9vJUTpbdm04"
+          }
+        },
+        {
+          "_id": "6aaca0c0193ef920adbbf6db",
+          "roadmapSlug": "nextjs",
+          "moduleId": "mod_caching-data_mu6c1ysu",
+          "nodeId": "topic_revalidation-errors_mu6c4g8r",
+          "name": "topic_revalidation-errors_mu6c4g8r",
+          "title": "Revalidation Errors",
+          "description": "When revalidation fails, it means the attempt to refresh the cached data encountered an issue, preventing the application from displaying the most up-to-date information. These errors can stem from various sources, such as network connectivity problems, issues with the data source itself (e.g., a database being unavailable), or problems within the revalidation logic. In Next.js, If an error is thrown while attempting to revalidate data, the last successfully generated data will continue to be served from the cache. On the next subsequent request, Next.js will retry revalidating the data.",
+          "content": "# Revalidation Errors\n\nWhen revalidation fails, it means the attempt to refresh the cached data encountered an issue, preventing the application from displaying the most up-to-date information. These errors can stem from various sources, such as network connectivity problems, issues with the data source itself (e.g., a database being unavailable), or problems within the revalidation logic. In Next.js, If an error is thrown while attempting to revalidate data, the last successfully generated data will continue to be served from the cache. On the next subsequent request, Next.js will retry revalidating the data.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 3,
+          "createdAt": "2026-09-18T02:24:00.315Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "qMYuXOlr_c-6oQKVOdGci"
           }
         }
       ]
@@ -1066,7 +1058,7 @@
           "title": "Structuring Routes"
         }
       ],
-      "order": 9,
+      "order": 10,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f434c",
@@ -1099,45 +1091,76 @@
             "id": "4H8aOVYsZiPbTQUYcZjb_",
             "title": "API Endpoints"
           }
+        },
+        {
+          "_id": "6aaca147193ef920adbbf6dd",
+          "roadmapSlug": "nextjs",
+          "moduleId": "4H8aOVYsZiPbTQUYcZjb_",
+          "nodeId": "topic_caching-api-endpoints-in-next-js_mu6c7cqr",
+          "name": "topic_caching-api-endpoints-in-next-js_mu6c7cqr",
+          "title": "Caching API Endpoints in Next.js",
+          "description": "When you don't know the exact route segment names ahead of time and want to create routes from dynamic data, you can use Dynamic Segments that are filled in at request time or prerendered at build time. One example is catch-all segments, which allow you to extend API Routes to catch all subsequent paths.",
+          "content": "# Caching API Endpoints in Next.js\n\nWhen you don't know the exact route segment names ahead of time and want to create routes from dynamic data, you can use Dynamic Segments that are filled in at request time or prerendered at build time. One example is catch-all segments, which allow you to extend API Routes to catch all subsequent paths.\n\nVisit the following resources to learn more:\n\n- [@official@Catch-all Segments for App Router](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes#catch-all-segments)\n- [@official@Catch all API routes for Page Router](https://nextjs.org/docs/pages/building-your-application/routing/api-routes#catch-all-api-routes)\n- [@video@Next.js 15 Tutorial - Catch all Segments](https://www.youtube.com/watch?v=d46hLIg1B3Q)",
+          "resources": [
+            {
+              "type": "official",
+              "title": "Catch-all Segments for App Router",
+              "url": "https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes#catch-all-segments"
+            },
+            {
+              "type": "official",
+              "title": "Catch all API routes for Page Router",
+              "url": "https://nextjs.org/docs/pages/building-your-application/routing/api-routes#catch-all-api-routes"
+            },
+            {
+              "type": "video",
+              "title": "Next.js 15 Tutorial - Catch all Segments",
+              "url": "https://www.youtube.com/watch?v=d46hLIg1B3Q"
+            }
+          ],
+          "parentTopic": null,
+          "order": 1,
+          "createdAt": "2026-09-18T02:26:15.747Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "0Rgs7jaFX1Gl5KDT6DKbX"
+          }
+        },
+        {
+          "_id": "6aaca162193ef920adbbf6de",
+          "roadmapSlug": "nextjs",
+          "moduleId": "4H8aOVYsZiPbTQUYcZjb_",
+          "nodeId": "topic_redirects-in-next-js-api-endpoints_mu6c7xpv",
+          "name": "topic_redirects-in-next-js-api-endpoints_mu6c7xpv",
+          "title": "Redirects in Next.js API Endpoints",
+          "description": "Redirects in Next.js API endpoints allow you to send a user from one URL to another. This is useful for various scenarios, such as moving or renaming pages, handling temporary content changes, or guiding users to a different part of your application based on specific conditions. By sending an HTTP redirect response, the server instructs the client's browser to navigate to the new URL.",
+          "content": "# Redirects in Next.js API Endpoints\n\nRedirects in Next.js API endpoints allow you to send a user from one URL to another. This is useful for various scenarios, such as moving or renaming pages, handling temporary content changes, or guiding users to a different part of your application based on specific conditions. By sending an HTTP redirect response, the server instructs the client's browser to navigate to the new URL.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 2,
+          "createdAt": "2026-09-18T02:26:42.931Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "nextjs",
+            "sourceNodeId": "K1wGmAy9L0VE6cwYE2pA6"
+          }
+        },
+        {
+          "_id": "6aaca18a193ef920adbbf6df",
+          "roadmapSlug": "nextjs",
+          "moduleId": "4H8aOVYsZiPbTQUYcZjb_",
+          "nodeId": "topic_streaming-in-next-js-api-endpoints_mu6c8rvn",
+          "name": "topic_streaming-in-next-js-api-endpoints_mu6c8rvn",
+          "title": "Streaming in Next.js API Endpoints",
+          "description": "Streaming in Next.js API endpoints allows you to send data to the client in chunks",
+          "content": "Streaming in Next.js API endpoints allows you to send data to the client in chunks, rather than waiting for the entire response to be generated on the server before sending anything. This can significantly improve perceived performance, especially for long-running processes or when dealing with large datasets. By sending data incrementally, the client can start processing and displaying information sooner, leading to a more responsive user experience.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 3,
+          "createdAt": "2026-09-18T02:27:22.019Z"
         }
       ]
-    },
-    {
-      "id": "9egFwmy-o7Fx-M7FcPXXy",
-      "name": "9egFwmy-o7Fx-M7FcPXXy",
-      "title": "Structuring Routes",
-      "description": "Structuring routes in Next.js involves organizing your project's file system to define the different URLs (or routes) of your application. Each file within the `app` directory (or `pages` directory in older versions) corresponds to a specific route. The file's location and name directly determine the URL path that users will access. This file-system-based routing simplifies navigation and makes it easy to create a well-organized web application.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Project structure and organization for App Router",
-          "url": "https://nextjs.org/docs/app/getting-started/project-structure"
-        },
-        {
-          "type": "official",
-          "title": "Project Structure and Organization for Pages Router",
-          "url": "https://nextjs.org/docs/pages/getting-started/project-structure"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Project Structure",
-          "url": "https://www.youtube.com/watch?v=L0g87N0piT0"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "4H8aOVYsZiPbTQUYcZjb_",
-          "title": "API Endpoints"
-        }
-      ],
-      "nextModules": [
-        {
-          "id": "gpZNwsh075wl5eH2gLKro",
-          "title": "Proxy"
-        }
-      ],
-      "order": 10,
-      "subtopics": []
     },
     {
       "id": "gpZNwsh075wl5eH2gLKro",
@@ -1178,7 +1201,7 @@
           "title": "Internationalization"
         }
       ],
-      "order": 11,
+      "order": 12,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f434d",
@@ -1281,38 +1304,6 @@
       ]
     },
     {
-      "id": "bSsM7VLZcJKYL5XXSG0r-",
-      "name": "bSsM7VLZcJKYL5XXSG0r-",
-      "title": "Internationalization",
-      "description": "Internationalization is the process of designing and developing applications that can be adapted to various languages and regions without engineering changes. Next.js enables you to configure the routing and rendering of content to support multiple languages. Making your site adaptive to different locales includes translated content (localization) and internationalized routes.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "How to implement internationalization in Next.js for App Router",
-          "url": "https://nextjs.org/docs/app/guides/internationalization"
-        },
-        {
-          "type": "official",
-          "title": "How to implement internationalization in Next.js for Pages Router",
-          "url": "https://nextjs.org/docs/pages/guides/internationalization"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "gpZNwsh075wl5eH2gLKro",
-          "title": "Proxy"
-        }
-      ],
-      "nextModules": [
-        {
-          "id": "tDkcsilfh67BwS5MCM7j8",
-          "title": "Working with data"
-        }
-      ],
-      "order": 12,
-      "subtopics": []
-    },
-    {
       "id": "77i6HVsnX-uSDw8vz3afD",
       "name": "77i6HVsnX-uSDw8vz3afD",
       "title": "Caching Data",
@@ -1336,7 +1327,7 @@
           "title": "Data Fetching Patterns"
         }
       ],
-      "order": 13,
+      "order": 14,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4351",
@@ -1449,360 +1440,6 @@
       ]
     },
     {
-      "id": "GAHFfQ8CviNxV7ITpt--q",
-      "name": "GAHFfQ8CviNxV7ITpt--q",
-      "title": "Data Fetching Patterns",
-      "description": "There are a few recommended patterns and best practices for fetching data in React and Next.js, including:\n\n*   Fetching data on the server.\n\n*   Fetching data only where it's necessary.\n\n*   Using React's streaming and Suspense features to progressively render and incrementally stream rendered units of the UI to the client.\n\n*   Using parallel or sequential fetching depending on your particular use case.\n\n*   Using preload data.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Patterns and Best Practices",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "77i6HVsnX-uSDw8vz3afD",
-          "title": "Caching Data"
-        }
-      ],
-      "nextModules": [
-        {
-          "id": "Ti_Bl5NnRIY9UTNTH15xA",
-          "title": "Handling Sensitive Data"
-        }
-      ],
-      "order": 14,
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f4355",
-          "roadmapSlug": "nextjs",
-          "moduleId": "GAHFfQ8CviNxV7ITpt--q",
-          "order": 0,
-          "name": "parallel-vs-sequential",
-          "nodeId": "SjJQ7ceU6vBhlhrN8hcvy",
-          "title": "Parallel vs Sequential",
-          "description": "When fetching data inside React components, you need to understand parallel and sequential data fetching. Parallel fetching starts independent requests at the same time, while sequential fetching runs requests one after another when later requests depend on earlier results. Choosing the appropriate pattern can reduce unnecessary waiting and improve application performance.\n\n@official@Parallel and sequential data fetching",
-          "content": "# Parallel vs Sequential\n\nWhen fetching data inside React components, you need to understand parallel and sequential data fetching. Parallel fetching starts independent requests at the same time, while sequential fetching runs requests one after another when later requests depend on earlier results. Choosing the appropriate pattern can reduce unnecessary waiting and improve application performance.\n\n@official@Parallel and sequential data fetching",
-          "resources": [],
-          "parentTopic": {
-            "id": "GAHFfQ8CviNxV7ITpt--q",
-            "title": "Data Fetching Patterns"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4356",
-          "roadmapSlug": "nextjs",
-          "moduleId": "GAHFfQ8CviNxV7ITpt--q",
-          "order": 1,
-          "name": "preloading-data",
-          "nodeId": "Ve1Pa7IhGHPZ_F-sCMcNb",
-          "title": "Preloading data",
-          "description": "Another way to optimize data fetching is to use the preload pattern. You can optionally create a preload function to further optimize parallel data fetching. With this approach, you don't have to pass promises down as props. The preload function can also have any name as it's a pattern, not an API.",
-          "content": "# Preloading data\n\nAnother way to optimize data fetching is to use the preload pattern. You can optionally create a preload function to further optimize parallel data fetching. With this approach, you don't have to pass promises down as props. The preload function can also have any name as it's a pattern, not an API.\n\nVisit the following resources to learn more:\n\n- [@official@Preloading data](https://nextjs.org/docs/14/app/building-your-application/data-fetching/patterns#preloading-data)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Preloading data",
-              "url": "https://nextjs.org/docs/14/app/building-your-application/data-fetching/patterns#preloading-data"
-            }
-          ],
-          "parentTopic": {
-            "id": "GAHFfQ8CviNxV7ITpt--q",
-            "title": "Data Fetching Patterns"
-          }
-        }
-      ]
-    },
-    {
-      "id": "Ti_Bl5NnRIY9UTNTH15xA",
-      "name": "Ti_Bl5NnRIY9UTNTH15xA",
-      "title": "Handling Sensitive Data",
-      "description": "Sensitive data, like API keys or user credentials, requires careful management to prevent exposure. In Next.js, you should avoid directly embedding such data in client-side code or committing it to your repository. Instead, leverage environment variables and server-side logic to securely access and utilize sensitive information, ensuring it remains protected from unauthorized access.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "How to think about data security in Next.js",
-          "url": "https://nextjs.org/docs/app/guides/data-security#data-fetching-approaches"
-        },
-        {
-          "type": "article",
-          "title": "How to Think About Security in Next.js",
-          "url": "https://nextjs.org/blog/security-nextjs-server-components-actions"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "GAHFfQ8CviNxV7ITpt--q",
-          "title": "Data Fetching Patterns"
-        }
-      ],
-      "nextModules": [],
-      "order": 15,
-      "subtopics": []
-    },
-    {
-      "id": "IuBZY-ISP1Sy_5OQ99jLY",
-      "name": "IuBZY-ISP1Sy_5OQ99jLY",
-      "title": "Server Actions",
-      "description": "Server Functions are asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations in Next.js applications. In an `action` or mutation context, they are also called Server Actions.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "ServerActions",
-          "url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions"
-        },
-        {
-          "type": "video",
-          "title": "Next.js Server Actions",
-          "url": "https://www.youtube.com/watch?v=gQ2bVQPFS4U"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [
-        {
-          "id": "66SYQ12xP7AaDVVf62fkF",
-          "title": "Rendering"
-        }
-      ],
-      "order": 16,
-      "subtopics": []
-    },
-    {
-      "id": "LN7SHgcQp9gX_jfEN84YP",
-      "name": "LN7SHgcQp9gX_jfEN84YP",
-      "title": "Runtimes and Types",
-      "description": "In the context of Next.js, runtime refers to the set of libraries, APIs, and general functionality available to your code during execution. On the server, there are two runtimes where parts of your application code can be rendered:\n\n*   The Node.js Runtime (default), which has access to all Node.js APIs and is used for rendering your application.\n\n*   The Edge Runtime which contains a more limited set of APIs, used in Middleware.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "https://nextjs.org/docs/app/api-reference/edge",
-          "url": "https://nextjs.org/docs/app/api-reference/edge"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "jHryqAWmvzY4Ftw_aWGC2",
-          "title": "Runtimes"
-        }
-      ],
-      "nextModules": [],
-      "order": 17,
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f4357",
-          "roadmapSlug": "nextjs",
-          "moduleId": "LN7SHgcQp9gX_jfEN84YP",
-          "order": 0,
-          "name": "nodejs",
-          "nodeId": "0S37ka1K-TdYLnjCBrKSH",
-          "title": "Node.js",
-          "description": "Node.js is a JavaScript runtime environment that executes JavaScript code outside of a web browser. It allows developers to use JavaScript for server-side scripting and to build scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it efficient and well-suited for real-time applications.",
-          "content": "# Node.js\n\nNode.js is a JavaScript runtime environment that executes JavaScript code outside of a web browser. It allows developers to use JavaScript for server-side scripting and to build scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it efficient and well-suited for real-time applications.\n\nVisit the following resources to learn more:\n\n- [@roadmap@Visit de Dedicated Node.js Roadmap](https://roadmap.sh/nodejs)\n- [@official@Node.js](https://nodejs.org/en/about/)\n- [@official@Edge Runtime](https://nextjs.org/docs/app/api-reference/edge)",
-          "resources": [
-            {
-              "type": "roadmap",
-              "title": "Visit de Dedicated Node.js Roadmap",
-              "url": "https://roadmap.sh/nodejs"
-            },
-            {
-              "type": "official",
-              "title": "Node.js",
-              "url": "https://nodejs.org/en/about/"
-            },
-            {
-              "type": "official",
-              "title": "Edge Runtime",
-              "url": "https://nextjs.org/docs/app/api-reference/edge"
-            }
-          ],
-          "parentTopic": {
-            "id": "LN7SHgcQp9gX_jfEN84YP",
-            "title": "Runtimes and Types"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4358",
-          "roadmapSlug": "nextjs",
-          "moduleId": "LN7SHgcQp9gX_jfEN84YP",
-          "order": 1,
-          "name": "edge",
-          "nodeId": "SYUKB1Afciqz7hA1n5yIx",
-          "title": "Edge Runtime",
-          "description": "The Edge Runtime is a lightweight JavaScript runtime environment based on V8, designed to execute code closer to the user. It allows you to run server-side logic, like API routes and middleware, on a globally distributed network of servers. This proximity reduces latency and improves the overall performance of your application by minimizing the distance data needs to travel.",
-          "content": "# Edge Runtime\n\nThe Edge Runtime is a lightweight JavaScript runtime environment based on V8, designed to execute code closer to the user. It allows you to run server-side logic, like API routes and middleware, on a globally distributed network of servers. This proximity reduces latency and improves the overall performance of your application by minimizing the distance data needs to travel.\n\nVisit the following resources to learn more:\n\n- [@official@What is Edge Runtime?](https://edge-runtime.vercel.app/)\n- [@official@Edge Runtime](https://nextjs.org/docs/app/api-reference/edge)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "What is Edge Runtime?",
-              "url": "https://edge-runtime.vercel.app/"
-            },
-            {
-              "type": "official",
-              "title": "Edge Runtime",
-              "url": "https://nextjs.org/docs/app/api-reference/edge"
-            }
-          ],
-          "parentTopic": {
-            "id": "LN7SHgcQp9gX_jfEN84YP",
-            "title": "Runtimes and Types"
-          }
-        },
-        {
-          "_id": "6aab5fc213e4b2aeae8f4359",
-          "roadmapSlug": "nextjs",
-          "moduleId": "LN7SHgcQp9gX_jfEN84YP",
-          "order": 2,
-          "name": "typescript",
-          "nodeId": "ZFHkHmvjndPjDAB-MAtb7",
-          "title": "TypeScript",
-          "description": "TypeScript is a syntactic superset of JavaScript which adds static typing. This means that TypeScript adds syntax on top of JavaScript, allowing developers to add types.\n\nNext.js comes with built-in TypeScript, automatically installing the necessary packages and configuring the proper settings when you create a new project with create-next-app. To add TypeScript to an existing project, rename a file to `.ts` / `.tsx`. Run `next dev` and `next build` to automatically install the necessary dependencies and add a `tsconfig.json` file with the recommended config options.",
-          "content": "# TypeScript\n\nTypeScript is a syntactic superset of JavaScript which adds static typing. This means that TypeScript adds syntax on top of JavaScript, allowing developers to add types.\n\nNext.js comes with built-in TypeScript, automatically installing the necessary packages and configuring the proper settings when you create a new project with create-next-app. To add TypeScript to an existing project, rename a file to `.ts` / `.tsx`. Run `next dev` and `next build` to automatically install the necessary dependencies and add a `tsconfig.json` file with the recommended config options.\n\nVisit the following resources to learn more:\n\n- [@official@TypeScript](https://nextjs.org/docs/app/api-reference/config/typescript)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "TypeScript",
-              "url": "https://nextjs.org/docs/app/api-reference/config/typescript"
-            }
-          ],
-          "parentTopic": {
-            "id": "LN7SHgcQp9gX_jfEN84YP",
-            "title": "Runtimes and Types"
-          }
-        }
-      ]
-    },
-    {
-      "id": "HdSmD_nDV5BPO5JJqs1k8",
-      "name": "HdSmD_nDV5BPO5JJqs1k8",
-      "title": "Client Rendered",
-      "description": "Client-Side Rendering (CSR) means the browser receives a minimal HTML page from the server. The browser then downloads the JavaScript code, which is responsible for rendering the entire user interface. The JavaScript code fetches the data and dynamically generates the HTML content in the browser. This approach shifts the rendering workload from the server to the client's browser.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Server and Client Components for App Router",
-          "url": "https://nextjs.org/docs/app/getting-started/server-and-client-components"
-        },
-        {
-          "type": "official",
-          "title": "Client-side Rendering for Pages Router",
-          "url": "https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering"
-        },
-        {
-          "type": "official",
-          "title": "Client Components",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/rendering/client-components"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Server and Client Components",
-          "url": "https://www.youtube.com/watch?v=dMCSiA5gzkU"
-        }
-      ],
-      "prerequisites": [
-        {
-          "id": "66SYQ12xP7AaDVVf62fkF",
-          "title": "Rendering"
-        }
-      ],
-      "nextModules": [],
-      "order": 18,
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f435a",
-          "roadmapSlug": "nextjs",
-          "moduleId": "HdSmD_nDV5BPO5JJqs1k8",
-          "order": 0,
-          "name": "client",
-          "nodeId": "jYSa7UMmjb51pGAyU4PoB",
-          "title": "Client-Side Data Fetching",
-          "description": "Client-side data fetching involves retrieving data directly in the user's browser using JavaScript. This happens after the initial HTML content is loaded. When a user interacts with a page, or after a certain event, the browser makes a request to an API or data source. The fetched data is then used to update the user interface dynamically, without requiring a full page reload.\n\nClient-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. It's important to note that using client-side data fetching can affect the performance of your application and the load speed of your pages. This is because the data fetching is done at the time of the component or pages mount, and the data is not cached.",
-          "content": "# Client-Side Data Fetching\n\nClient-side data fetching involves retrieving data directly in the user's browser using JavaScript. This happens after the initial HTML content is loaded. When a user interacts with a page, or after a certain event, the browser makes a request to an API or data source. The fetched data is then used to update the user interface dynamically, without requiring a full page reload.\n\nClient-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. It's important to note that using client-side data fetching can affect the performance of your application and the load speed of your pages. This is because the data fetching is done at the time of the component or pages mount, and the data is not cached.\n\nVisit the following resources to learn more:\n\n- [@official@Client-side Fetching for App Router](https://nextjs.org/docs/app/getting-started/fetching-data#client-components)\n- [@official@Client-side Fetching for Pages Router](https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side)\n- [@video@Next.js 15 Tutorial - Fetching Data in Client Components](https://www.youtube.com/watch?v=7Kz4--kCBP0)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Client-side Fetching for App Router",
-              "url": "https://nextjs.org/docs/app/getting-started/fetching-data#client-components"
-            },
-            {
-              "type": "official",
-              "title": "Client-side Fetching for Pages Router",
-              "url": "https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side"
-            },
-            {
-              "type": "video",
-              "title": "Next.js 15 Tutorial - Fetching Data in Client Components",
-              "url": "https://www.youtube.com/watch?v=7Kz4--kCBP0"
-            }
-          ],
-          "parentTopic": {
-            "id": "HdSmD_nDV5BPO5JJqs1k8",
-            "title": "Client Rendered"
-          }
-        }
-      ]
-    },
-    {
-      "id": "m7eKlykOZCA3BLuBHioDj",
-      "name": "m7eKlykOZCA3BLuBHioDj",
-      "title": "Server Rendered",
-      "description": "Server-Side Rendering (SSR) is a technique where a web application's initial HTML is generated on the server in response to a user's request. This pre-rendered HTML is then sent to the client's browser, allowing the user to see the content immediately, even before the JavaScript code is fully executed. This approach contrasts with client-side rendering, where the browser downloads a minimal HTML page and then uses JavaScript to render the content.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Server and Client Components for App Router",
-          "url": "https://nextjs.org/docs/app/getting-started/server-and-client-components#when-to-use-server-and-client-components"
-        },
-        {
-          "type": "official",
-          "title": "Server-side Rendering (SSR) for App Router",
-          "url": "https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering"
-        },
-        {
-          "type": "official",
-          "title": "Server Components",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/rendering/server-components"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Server and Client Components",
-          "url": "https://www.youtube.com/watch?v=dMCSiA5gzkU"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [],
-      "order": 19,
-      "subtopics": [
-        {
-          "_id": "6aab5fc213e4b2aeae8f435b",
-          "roadmapSlug": "nextjs",
-          "moduleId": "m7eKlykOZCA3BLuBHioDj",
-          "order": 0,
-          "name": "server",
-          "nodeId": "QDxYlIyFOuGUIy_ZovHs0",
-          "title": "Server-Side Data Fetching for Locations",
-          "description": "Fetching data on the server in Next.js allows you to retrieve location information before the page is rendered. This approach improves performance by reducing the amount of work the client's browser needs to do, leading to faster initial page loads and better SEO. Server-side data fetching ensures that the data is available when the page is initially rendered, providing a seamless user experience.",
-          "content": "# Server-Side Data Fetching for Locations\n\nFetching data on the server in Next.js allows you to retrieve location information before the page is rendered. This approach improves performance by reducing the amount of work the client's browser needs to do, leading to faster initial page loads and better SEO. Server-side data fetching ensures that the data is available when the page is initially rendered, providing a seamless user experience.\n\nVisit the following resources to learn more:\n\n- [@official@Client-side Fetching](https://nextjs.org/docs/app/getting-started/fetching-data#server-components)\n- [@video@Next.js 15 Tutorial - Fetching Data in Server Components](https://www.youtube.com/watch?v=WKfPctdIDek)",
-          "resources": [
-            {
-              "type": "official",
-              "title": "Client-side Fetching",
-              "url": "https://nextjs.org/docs/app/getting-started/fetching-data#server-components"
-            },
-            {
-              "type": "video",
-              "title": "Next.js 15 Tutorial - Fetching Data in Server Components",
-              "url": "https://www.youtube.com/watch?v=WKfPctdIDek"
-            }
-          ],
-          "parentTopic": {
-            "id": "m7eKlykOZCA3BLuBHioDj",
-            "title": "Server Rendered"
-          }
-        }
-      ]
-    },
-    {
       "id": "BfNON3Vp3zSWBurSS4ZHo",
       "name": "BfNON3Vp3zSWBurSS4ZHo",
       "title": "Global CSS",
@@ -1816,7 +1453,7 @@
       ],
       "prerequisites": [],
       "nextModules": [],
-      "order": 20,
+      "order": 21,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f435c",
@@ -1929,38 +1566,6 @@
       ]
     },
     {
-      "id": "6O9c3J-1JQtZTXXIDDXSM",
-      "name": "6O9c3J-1JQtZTXXIDDXSM",
-      "title": "Composition",
-      "description": "Rendering composition is the practice of building complex user interfaces by combining smaller, reusable components. In Next.js, this is important because it allows you to strategically decide which parts of your application should be pre-rendered on the server for better performance and SEO, and which parts can be rendered on the client for dynamic interactivity. By composing components effectively, you can optimize the rendering strategy for each part of your application, leading to a faster and more efficient user experience.",
-      "resources": [
-        {
-          "type": "official",
-          "title": "Server and Client Composition Patterns",
-          "url": "https://nextjs.org/docs/14/app/building-your-application/rendering/composition-patterns"
-        },
-        {
-          "type": "official",
-          "title": "Server and Client Components",
-          "url": "https://nextjs.org/docs/app/getting-started/server-and-client-components#how-do-server-and-client-components-work-in-nextjs"
-        },
-        {
-          "type": "video",
-          "title": "Next.js 15 Tutorial - Server and Client Components",
-          "url": "https://www.youtube.com/watch?v=dMCSiA5gzkU"
-        }
-      ],
-      "prerequisites": [],
-      "nextModules": [
-        {
-          "id": "jHryqAWmvzY4Ftw_aWGC2",
-          "title": "Runtimes"
-        }
-      ],
-      "order": 21,
-      "subtopics": []
-    },
-    {
       "id": "BPStVqWV0660A-_fJSuM7",
       "name": "BPStVqWV0660A-_fJSuM7",
       "title": "Deployment Options",
@@ -1984,7 +1589,7 @@
           "title": "Visit the following related roadmaps"
         }
       ],
-      "order": 22,
+      "order": 23,
       "subtopics": [
         {
           "_id": "6aab5fc213e4b2aeae8f4373",

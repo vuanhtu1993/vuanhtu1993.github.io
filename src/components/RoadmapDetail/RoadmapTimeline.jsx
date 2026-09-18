@@ -240,10 +240,10 @@ export default function RoadmapTimeline({
                       type="button"
                       className={styles.stationInsertBtn}
                       onClick={() => handleOpenAddModule({ type: 'start' })}
-                      title="Chèn chặng mới lên đầu lộ trình"
+                      title="Insert module at the top"
                     >
                       <span className={styles.stationInsertPlus}>+</span>
-                      <span className={styles.stationInsertText}>Chèn chặng mới lên đầu</span>
+                      <span className={styles.stationInsertText}>Insert Module at Top</span>
                     </button>
                   </div>
                 )}
@@ -285,16 +285,16 @@ export default function RoadmapTimeline({
                                 type="button"
                                 className={styles.moduleEditBtn}
                                 onClick={() => setEditingModule(station)}
-                                title="Chỉnh sửa Module"
+                                title="Edit Module"
                               >
                                 <EditIcon />
-                                <span>Sửa</span>
+                                <span>Edit</span>
                               </button>
                               <button
                                 type="button"
                                 className={styles.moduleDeleteBtn}
                                 onClick={() => setDeletingModule(station)}
-                                title="Xoá Module này"
+                                title="Delete this Module"
                               >
                                 <TrashIcon />
                               </button>
@@ -335,54 +335,16 @@ export default function RoadmapTimeline({
                           </div>
                         )}
 
-                        {/* Trạng thái chặng rỗng */}
-                        {station.subtopics.length === 0 && (
+                        {/* Trạng thái chặng rỗng khi không ở Edit Mode */}
+                        {station.subtopics.length === 0 && !isEditMode && !isDevMode && (
                           <div className={styles.emptyModuleNotice}>
                             <p>Chặng này chưa có chủ đề nào.</p>
-                            {(isEditMode || isDevMode) && (
-                              <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                                <button
-                                  type="button"
-                                  className={styles.addFirstChildBtn}
-                                  onClick={() => {
-                                    handleOpenAddTopic(station, { type: 'start' }, 'ref');
-                                  }}
-                                >
-                                  🔍 Tìm kiếm từ kho (Ref)
-                                </button>
-                                <button
-                                  type="button"
-                                  className={styles.addFirstChildBtn}
-                                  style={{ background: '#475569' }}
-                                  onClick={() => {
-                                    handleOpenAddTopic(station, { type: 'start' }, 'new');
-                                  }}
-                                >
-                                  ✏️ Tạo chủ đề mới
-                                </button>
-                              </div>
-                            )}
                           </div>
                         )}
 
                         {/* Danh sách các chủ đề dạng Card Grid */}
-                        {station.subtopics.length > 0 && (
+                        {(station.subtopics.length > 0 || isEditMode || isDevMode) && (
                           <div className={styles.topicsContainer}>
-                            {/* Thanh công cụ chèn lên đầu khi ở Edit Mode */}
-                            {(isEditMode || isDevMode) && (
-                              <div className={styles.topicGridHeader}>
-                                <button
-                                  type="button"
-                                  className={styles.insertTopTopicBtn}
-                                  onClick={() => handleOpenAddTopic(station, { type: 'start' }, 'ref')}
-                                  title="Chèn chủ đề lên đầu chặng"
-                                >
-                                  <span>+</span>
-                                  <span>Chèn chủ đề lên đầu chặng</span>
-                                </button>
-                              </div>
-                            )}
-
                             <div className={styles.topicGrid}>
                               {station.subtopics.map((topic, tIdx) => {
                                 const topicId = topic.nodeId || topic.name || topic.id;
@@ -420,34 +382,14 @@ export default function RoadmapTimeline({
                                         onClick={(e) => e.stopPropagation()}
                                       >
                                         {(isEditMode || isDevMode) && (
-                                          <>
-                                            <button
-                                              type="button"
-                                              className={styles.cardInsertAfterBtn}
-                                              onClick={() =>
-                                                handleOpenAddTopic(
-                                                  station,
-                                                  {
-                                                    type: 'after',
-                                                    targetNodeId: topicId,
-                                                    targetTitle: topic.title,
-                                                  },
-                                                  'ref'
-                                                )
-                                              }
-                                              title={`Chèn chủ đề vào sau "${topic.title}"`}
-                                            >
-                                              +
-                                            </button>
-                                            <button
-                                              type="button"
-                                              className={styles.quickDeleteTopicBtn}
-                                              onClick={() => setDeletingTopic(topic)}
-                                              title="Xoá chủ đề này"
-                                            >
-                                              <TrashIcon />
-                                            </button>
-                                          </>
+                                          <button
+                                            type="button"
+                                            className={styles.quickDeleteTopicBtn}
+                                            onClick={() => setDeletingTopic(topic)}
+                                            title="Delete this topic"
+                                          >
+                                            <TrashIcon />
+                                          </button>
                                         )}
 
                                         <button
@@ -456,7 +398,7 @@ export default function RoadmapTimeline({
                                             done ? styles.checkboxChecked : ''
                                           }`}
                                           onClick={() => onToggleCompleted(topicId)}
-                                          aria-label={`Đánh dấu ${topic.title}`}
+                                          aria-label={`Mark ${topic.title} as completed`}
                                         >
                                           {done ? '✓' : ''}
                                         </button>
@@ -489,7 +431,7 @@ export default function RoadmapTimeline({
                                         )}
                                       </div>
 
-                                      <span className={styles.topicCardAction}>Khám phá →</span>
+                                      <span className={styles.topicCardAction}>Explore →</span>
                                     </div>
                                   </div>
                                 );
@@ -502,13 +444,13 @@ export default function RoadmapTimeline({
                                   onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'ref')}
                                   role="button"
                                   tabIndex={0}
-                                  title="Thêm chủ đề vào chặng này (Tìm kiếm từ kho Ref hoặc tạo mới)"
+                                  title="Add topic to this module (Search Ref or create new)"
                                 >
                                   <div className={styles.addTopicCardMain}>
                                     <div className={styles.addTopicCardPlus}>+</div>
-                                    <h5 className={styles.addTopicCardTitle}>Thêm chủ đề mới</h5>
+                                    <h5 className={styles.addTopicCardTitle}>Add New Topic</h5>
                                     <p className={styles.addTopicCardSub}>
-                                      Tìm kiếm topic để ref đến hoặc tạo mới
+                                      Search topic to reference or create new
                                     </p>
                                   </div>
 
@@ -520,17 +462,17 @@ export default function RoadmapTimeline({
                                       type="button"
                                       className={styles.addTopicCardRefBtn}
                                       onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'ref')}
-                                      title="Tìm kiếm chủ đề từ kho tri thức để liên kết (Ref)"
+                                      title="Search topics from knowledge base to reference"
                                     >
-                                      🔍 Tìm từ kho Ref
+                                      🔍 Search Ref
                                     </button>
                                     <button
                                       type="button"
                                       className={styles.addTopicCardNewBtn}
                                       onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'new')}
-                                      title="Tạo chủ đề mới"
+                                      title="Create new topic"
                                     >
-                                      ✏️ Tạo mới
+                                      ✏️ Create New
                                     </button>
                                   </div>
                                 </div>
@@ -556,13 +498,17 @@ export default function RoadmapTimeline({
                           targetTitle: station.title,
                         })
                       }
-                      title={`Chèn chặng mới sau "${station.title}"`}
+                      title={
+                        sIdx === filteredStations.length - 1
+                          ? 'Add new module at the end'
+                          : `Insert module after "${station.title}"`
+                      }
                     >
                       <span className={styles.stationInsertPlus}>+</span>
                       <span className={styles.stationInsertText}>
                         {sIdx === filteredStations.length - 1
-                          ? 'Thêm chặng mới vào cuối'
-                          : `Chèn chặng mới sau "${station.title}"`}
+                          ? 'Add New Module'
+                          : `Insert Module after "${station.title}"`}
                       </span>
                     </button>
                   </div>

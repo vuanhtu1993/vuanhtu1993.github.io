@@ -80,7 +80,7 @@ export default function RefTopicSearchModal({
             className={styles.closeBtn}
             onClick={onClose}
             disabled={isProcessing}
-            aria-label="Đóng"
+            aria-label="Close"
           >
             ✕
           </button>
@@ -177,7 +177,7 @@ export default function RefTopicSearchModal({
                     onClick={() => onSelectTopic(topic)}
                     disabled={isProcessing}
                   >
-                    + Gán làm topic con
+                    + Assign Subtopic
                   </button>
                 </div>
               ))}
@@ -196,7 +196,7 @@ export default function RefTopicSearchModal({
             onClick={onClose}
             disabled={isProcessing}
           >
-            Đóng
+            Close
           </button>
         </div>
       </div>

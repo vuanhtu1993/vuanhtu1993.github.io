@@ -15,11 +15,11 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
   // Bộ lọc tìm kiếm topic trong roadmap
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Quản lý các Module mở rộng
+  // Quản lý các Module mở rộng (mặc định mở rộng toàn bộ các modules)
   const [expandedModules, setExpandedModules] = useState(() => {
     const initialExpanded = new Set();
     if (data?.modules && data.modules.length > 0) {
-      data.modules.slice(0, 3).forEach((m, idx) => {
+      data.modules.forEach((m, idx) => {
         initialExpanded.add(m.id || `mod-${idx}`);
       });
     } else if (data?.topics && data.topics.length > 0) {
@@ -27,6 +27,19 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
     }
     return initialExpanded;
   });
+
+  // Tự động mở rộng các module mới khi data được cập nhật
+  useEffect(() => {
+    if (data?.modules && data.modules.length > 0) {
+      setExpandedModules((prev) => {
+        const next = new Set(prev);
+        data.modules.forEach((m, idx) => {
+          next.add(m.id || `mod-${idx}`);
+        });
+        return next;
+      });
+    }
+  }, [data]);
 
   // Quản lý Topic Drawer
   const [activeTopic, setActiveTopic] = useState(null);
@@ -151,7 +164,7 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
           <div className={styles.headerTopRow}>
             <div className={styles.titleArea}>
               <button type="button" className={styles.backBtn} onClick={onBack}>
-                ← Lộ trình
+                ← Back to Roadmaps
               </button>
               <h1 className={styles.roadmapTitle}>{data.title}</h1>
             </div>
@@ -165,10 +178,10 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                     isEditMode ? styles.editToggleBtnActive : styles.editToggleBtn
                   }`}
                   onClick={toggleEditMode}
-                  title={isEditMode ? 'Tắt chế độ chỉnh sửa' : 'Bật chế độ chỉnh sửa (Dev only)'}
+                  title={isEditMode ? 'Exit edit mode' : 'Enable edit mode (Dev only)'}
                 >
                   <span className={styles.editModeDot} />
-                  <span>{isEditMode ? 'Đang sửa (Dev)' : 'Chế độ sửa'}</span>
+                  <span>{isEditMode ? 'Editing (Dev)' : 'Edit Mode (Dev)'}</span>
                 </button>
               )}
 
@@ -177,15 +190,15 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                 className={styles.actionBtn}
                 onClick={expandedModules.size > 0 ? handleCollapseAll : handleExpandAll}
               >
-                {expandedModules.size > 0 ? 'Thu gọn tất cả' : 'Mở rộng tất cả'}
+                {expandedModules.size > 0 ? 'Collapse All' : 'Expand All'}
               </button>
               <button
                 type="button"
                 className={`${styles.actionBtn} ${styles.resetBtn}`}
                 onClick={() => setShowResetModal(true)}
-                title="Đặt lại toàn bộ tiến độ của lộ trình này"
+                title="Reset all progress for this roadmap"
               >
-                Đặt lại tiến độ
+                Reset Progress
               </button>
             </div>
           </div>
@@ -282,14 +295,14 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                 className={styles.modalCancelBtn}
                 onClick={() => setShowResetModal(false)}
               >
-                Hủy bỏ
+                Cancel
               </button>
               <button
                 type="button"
                 className={styles.modalConfirmBtn}
                 onClick={handleConfirmReset}
               >
-                Xác nhận Reset
+                Confirm Reset
               </button>
             </div>
           </div>
@@ -356,7 +369,7 @@ export default function RoadmapDetail({ slug, onBack }) {
         <h2 style={{ color: 'var(--ifm-color-danger, #ef4444)' }}>Không tìm thấy lộ trình</h2>
         <p>{error || 'Dữ liệu không tồn tại.'}</p>
         <button type="button" className={styles.backBtn} onClick={onBack}>
-          ← Quay lại danh sách Lộ trình
+          ← Back to Roadmaps
         </button>
       </div>
     );

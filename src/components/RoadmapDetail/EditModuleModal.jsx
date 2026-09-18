@@ -81,7 +81,7 @@ export default function EditModuleModal({
                 className={styles.previewToggleBtn}
                 onClick={() => setShowPreview((prev) => !prev)}
               >
-                {showPreview ? 'Soạn thảo' : 'Xem trước'}
+                {showPreview ? 'Edit' : 'Preview'}
               </button>
             </div>
 
@@ -108,14 +108,14 @@ export default function EditModuleModal({
               onClick={onCancel}
               disabled={isSaving}
             >
-              Huỷ
+              Cancel
             </button>
             <button
               type="submit"
               className={styles.saveBtn}
               disabled={isSaving || !title.trim()}
             >
-              {isSaving ? 'Đang lưu vào MongoDB...' : 'Lưu Thay Đổi'}
+              {isSaving ? 'Saving...' : 'Save Changes'}
             </button>
           </div>
         </form>

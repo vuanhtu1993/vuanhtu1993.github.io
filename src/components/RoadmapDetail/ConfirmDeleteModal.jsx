@@ -56,7 +56,7 @@ export default function ConfirmDeleteModal({
             onClick={onCancel}
             disabled={isProcessing}
           >
-            Huỷ bỏ
+            Cancel
           </button>
           <button
             type="button"
@@ -64,7 +64,7 @@ export default function ConfirmDeleteModal({
             onClick={onConfirm}
             disabled={isProcessing}
           >
-            {isProcessing ? 'Đang xoá...' : 'Xác nhận Xoá'}
+            {isProcessing ? 'Deleting...' : 'Confirm Delete'}
           </button>
         </div>
       </div>

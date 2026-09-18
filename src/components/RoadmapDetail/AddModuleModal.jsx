@@ -89,7 +89,7 @@ export default function AddModuleModal({
             className={styles.closeIconBtn}
             onClick={onCancel}
             disabled={isSaving}
-            aria-label="Đóng"
+            aria-label="Close"
           >
             ✕
           </button>
@@ -146,7 +146,7 @@ export default function AddModuleModal({
                   className={styles.previewToggleBtn}
                   onClick={() => setShowPreview(!showPreview)}
                 >
-                  {showPreview ? 'Chỉnh sửa' : 'Xem trước'}
+                  {showPreview ? 'Edit' : 'Preview'}
                 </button>
               )}
             </div>
@@ -174,14 +174,14 @@ export default function AddModuleModal({
               onClick={onCancel}
               disabled={isSaving}
             >
-              Hủy
+              Cancel
             </button>
             <button
               type="submit"
               className={styles.saveBtn}
               disabled={isSaving || !title.trim()}
             >
-              {isSaving ? 'Đang tạo chặng...' : '+ Tạo Chặng mới'}
+              {isSaving ? 'Creating Module...' : '+ Create Module'}
             </button>
           </div>
         </form>

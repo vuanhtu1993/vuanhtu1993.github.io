@@ -182,7 +182,7 @@ export default function AddTopicModal({
             className={styles.closeBtn}
             onClick={onClose}
             disabled={isProcessing}
-            aria-label="Đóng"
+            aria-label="Close"
           >
             ✕
           </button>
@@ -198,7 +198,7 @@ export default function AddTopicModal({
               setTimeout(() => titleInputRef.current?.focus(), 50);
             }}
           >
-            ✏️ Tạo chủ đề mới
+            ✏️ Create New Topic
           </button>
           <button
             type="button"
@@ -208,33 +208,35 @@ export default function AddTopicModal({
               setTimeout(() => searchInputRef.current?.focus(), 50);
             }}
           >
-            📚 Chọn từ kho tri thức
+            📚 From Knowledge Base
           </button>
         </div>
 
         {/* Modal Body */}
         <form onSubmit={handleSubmit} className={styles.modalBody}>
-          {/* Dropdown Vị trí chèn */}
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="topic-position-select">
-              <span>Vị trí xuất hiện trong chặng:</span>
-            </label>
-            <select
-              id="topic-position-select"
-              className={styles.select}
-              value={selectedPositionKey}
-              onChange={(e) => setSelectedPositionKey(e.target.value)}
-              disabled={isProcessing}
-            >
-              <option value="start">📌 Ở đầu chặng (Bước đầu tiên)</option>
-              {availableSteps.map((step, idx) => (
-                <option key={step.nodeId} value={`after:${step.nodeId}`}>
-                  📌 Chèn sau bước {idx + 1}: &quot;{step.title}&quot;
-                </option>
-              ))}
-              <option value="end">📌 Ở cuối chặng (Mặc định)</option>
-            </select>
-          </div>
+          {/* Dropdown Vị trí chèn (chỉ hiển thị khi đã có ít nhất 1 chủ đề) */}
+          {availableSteps.length > 0 && (
+            <div className={styles.formGroup}>
+              <label className={styles.label} htmlFor="topic-position-select">
+                <span>Vị trí xuất hiện trong chặng:</span>
+              </label>
+              <select
+                id="topic-position-select"
+                className={styles.select}
+                value={selectedPositionKey}
+                onChange={(e) => setSelectedPositionKey(e.target.value)}
+                disabled={isProcessing}
+              >
+                <option value="start">📌 Ở đầu chặng (Bước đầu tiên)</option>
+                {availableSteps.map((step, idx) => (
+                  <option key={step.nodeId} value={`after:${step.nodeId}`}>
+                    📌 Chèn sau bước {idx + 1}: &quot;{step.title}&quot;
+                  </option>
+                ))}
+                <option value="end">📌 Ở cuối chặng (Mặc định)</option>
+              </select>
+            </div>
+          )}
 
           {/* Tab 1: Tạo mới */}
           {activeTab === 'new' && (
@@ -279,9 +281,9 @@ export default function AddTopicModal({
                     type="button"
                     className={styles.insertMermaidBtn}
                     onClick={handleInsertMermaid}
-                    title="Chèn mẫu sơ đồ Mermaid"
+                    title="Insert Mermaid diagram template"
                   >
-                    + Mẫu Mermaid
+                    + Mermaid Template
                   </button>
                 </div>
                 <textarea
@@ -380,7 +382,7 @@ export default function AddTopicModal({
             onClick={onClose}
             disabled={isProcessing}
           >
-            Hủy
+            Cancel
           </button>
           <button
             type="button"
@@ -392,7 +394,7 @@ export default function AddTopicModal({
               (activeTab === 'ref' && !selectedRefTopic)
             }
           >
-            {isProcessing ? 'Đang lưu...' : '+ Thêm chủ đề'}
+            {isProcessing ? 'Saving...' : '+ Add Topic'}
           </button>
         </div>
       </div>

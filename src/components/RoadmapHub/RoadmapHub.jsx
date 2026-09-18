@@ -19,11 +19,11 @@ const TECH_BADGES = {
 };
 
 const CATEGORIES = [
-  { key: 'all', label: 'Tất cả Lộ trình' },
-  { key: 'role-based', label: 'Vị trí Công việc (Role-based)' },
-  { key: 'skill-based', label: 'Kỹ năng & Ngôn ngữ (Skill-based)' },
-  { key: 'tool-platform', label: 'Công cụ & Nền tảng (Tool & Platform)' },
-  { key: 'best-practice', label: 'Quy chuẩn & Kiến trúc (Best Practices)' },
+  { key: 'all', label: 'All Roadmaps' },
+  { key: 'role-based', label: 'Role-based' },
+  { key: 'skill-based', label: 'Skill-based' },
+  { key: 'tool-platform', label: 'Tool & Platform' },
+  { key: 'best-practice', label: 'Best Practices' },
 ];
 
 export default function RoadmapHub({ onSelectRoadmap }) {
@@ -204,7 +204,7 @@ export default function RoadmapHub({ onSelectRoadmap }) {
                   </div>
 
                   <div className={styles.cardAction}>
-                    <span>{progress.count > 0 ? 'Tiếp tục học' : 'Bắt đầu học'}</span>
+                    <span>{progress.count > 0 ? 'Continue' : 'Start Learning'}</span>
                     <span>→</span>
                   </div>
                 </div>

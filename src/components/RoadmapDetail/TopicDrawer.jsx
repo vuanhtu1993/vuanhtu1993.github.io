@@ -241,7 +241,7 @@ export default function TopicDrawer({
               type="button"
               className={styles.closeButton}
               onClick={onClose}
-              aria-label="Đóng chi tiết"
+              aria-label="Close details"
             >
               ✕
             </button>
@@ -277,7 +277,7 @@ export default function TopicDrawer({
                   }`}
                   onClick={() => onToggleCompleted(topicNodeId)}
                 >
-                  {isCompleted ? 'Đã hoàn thành' : 'Đánh dấu đã học'}
+                  {isCompleted ? 'Completed' : 'Mark as Learned'}
                 </button>
               </div>
             )}
@@ -292,7 +292,7 @@ export default function TopicDrawer({
                     className={styles.previewToggleBtn}
                     onClick={() => setShowDescPreview((prev) => !prev)}
                   >
-                    {showDescPreview ? 'Soạn thảo' : 'Xem trước'}
+                    {showDescPreview ? 'Edit' : 'Preview'}
                   </button>
                 </div>
                 {showDescPreview ? (
@@ -330,24 +330,24 @@ export default function TopicDrawer({
                       type="button"
                       className={styles.insertMermaidBtn}
                       onClick={handleInsertMermaid}
-                      title="Chèn mẫu sơ đồ Mermaid vào bài viết"
+                      title="Insert Mermaid diagram template"
                     >
-                      + Sơ đồ Mermaid
+                      + Mermaid Diagram
                     </button>
                     <button
                       type="button"
                       className={styles.insertImageBtn}
                       onClick={() => setShowImageInserter((prev) => !prev)}
-                      title="Chèn ảnh từ link Cloudinary"
+                      title="Insert image from Cloudinary link"
                     >
-                      {showImageInserter ? 'Đóng chèn ảnh' : 'Chèn ảnh Cloudinary'}
+                      {showImageInserter ? 'Close Inserter' : 'Insert Cloudinary Image'}
                     </button>
                     <button
                       type="button"
                       className={styles.previewToggleBtn}
                       onClick={() => setShowContentPreview((prev) => !prev)}
                     >
-                      {showContentPreview ? 'Soạn thảo' : 'Xem trước'}
+                      {showContentPreview ? 'Edit' : 'Preview'}
                     </button>
                   </div>
                 </div>
@@ -387,7 +387,7 @@ export default function TopicDrawer({
                       onClick={handleInsertImage}
                       disabled={!imageUrl.trim()}
                     >
-                      + Chèn cú pháp ảnh vào bài
+                      + Insert Image Markdown
                     </button>
                   </div>
                 )}
@@ -444,7 +444,7 @@ export default function TopicDrawer({
                       type="button"
                       className={styles.deleteResourceBtn}
                       onClick={() => handleRemoveResource(index)}
-                      title="Xoá tài liệu này"
+                      title="Delete this resource"
                     >
                       ✕
                     </button>
@@ -485,7 +485,7 @@ export default function TopicDrawer({
                     className={styles.addResourceBtn}
                     onClick={handleAddResource}
                   >
-                    + Thêm vào danh sách
+                    + Add Resource
                   </button>
                 </div>
               </div>
@@ -557,10 +557,10 @@ export default function TopicDrawer({
                             type="button"
                             className={styles.unlinkBtn}
                             onClick={() => handleUnlinkChild(childId)}
-                            title="Gỡ liên kết chủ đề con này khỏi topic cha"
+                            title="Unlink this subtopic from parent topic"
                             disabled={saveStatus === 'saving'}
                           >
-                            Gỡ liên kết
+                            Unlink
                           </button>
                         </div>
                       );
@@ -578,7 +578,7 @@ export default function TopicDrawer({
                   onClick={() => setShowRefSearchModal(true)}
                   disabled={saveStatus === 'saving'}
                 >
-                  + Thêm topic con (Tham chiếu từ kho)
+                  + Add Subtopic (From Ref)
                 </button>
               </div>
             )}
@@ -594,7 +594,7 @@ export default function TopicDrawer({
                   onClick={() => setShowDeleteModal(true)}
                   disabled={saveStatus === 'saving'}
                 >
-                  Xoá Topic
+                  Delete Topic
                 </button>
                 <button
                   type="button"
@@ -602,7 +602,7 @@ export default function TopicDrawer({
                   onClick={handleSaveTopic}
                   disabled={saveStatus === 'saving' || !title.trim()}
                 >
-                  {saveStatus === 'saving' ? 'Đang lưu...' : 'Lưu Thay Đổi'}
+                  {saveStatus === 'saving' ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             ) : (
@@ -613,7 +613,7 @@ export default function TopicDrawer({
                   onClick={onPrevTopic}
                   disabled={!hasPrev}
                 >
-                  ← Chủ đề trước
+                  ← Previous Topic
                 </button>
                 <button
                   type="button"
@@ -621,7 +621,7 @@ export default function TopicDrawer({
                   onClick={onNextTopic}
                   disabled={!hasNext}
                 >
-                  Chủ đề kế tiếp →
+                  Next Topic →
                 </button>
               </div>
             )}
