@@ -594,7 +594,7 @@
       "id": "xPOeXK1EPBNG56vgfG-VV",
       "name": "xPOeXK1EPBNG56vgfG-VV",
       "title": "Data Definition Language (DDL)",
-      "description": "Data Definition Language (DDL) is a subset of SQL used to define and manage the structure of database objects. DDL commands include `CREATE`, `ALTER`, `DROP`, and `TRUNCATE`, which are used to create, modify, delete, and empty database structures such as tables, indexes, views, and schemas. These commands allow database administrators and developers to define the database schema, set up relationships between tables, and manage the overall structure of the database. DDL statements typically result in immediate changes to the database structure and can affect existing data.",
+      "description": "Data Definition Language (DDL) is a subset of SQL used to define and manage the structure of database objects. DDL commands include \"CREATE\", \"ALTER\", \"DROP\", and \"TRUNCATE\", which are used to create, modify, delete, and empty database structures such as tables, indexes, views, and schemas. These commands allow database administrators and developers to define the database schema, set up relationships between tables, and manage the overall structure of the database. DDL statements typically result in immediate changes to the database structure and can affect existing data.",
       "resources": [
         {
           "type": "article",
@@ -724,7 +724,7 @@
       "id": "WMSXi-eez_hHGDM8kUdWz",
       "name": "WMSXi-eez_hHGDM8kUdWz",
       "title": "Data Manipulation Language (DML)",
-      "description": "Data Manipulation Language (DML) is a subset of SQL used to manage data within database objects. It includes commands like `SELECT`, `INSERT`, `UPDATE`, and `DELETE`, which allow users to retrieve, add, modify, and remove data from tables. DML statements operate on the data itself rather than the database structure, enabling users to interact with the stored information. These commands are essential for day-to-day database operations, data analysis, and maintaining the accuracy and relevance of the data within a database system.",
+      "description": "Data Manipulation Language (DML) is a subset of SQL used to manage data within database objects. It includes commands like \"SELECT\", \"INSERT\", \"UPDATE\", and \"DELETE\", which allow users to retrieve, add, modify, and remove data from tables. DML statements operate on the data itself rather than the database structure, enabling users to interact with the stored information. These commands are essential for day-to-day database operations, data analysis, and maintaining the accuracy and relevance of the data within a database system.",
       "resources": [
         {
           "type": "article",
@@ -883,7 +883,7 @@
       "id": "LX9nzJ4uqznHN4SksoDvr",
       "name": "LX9nzJ4uqznHN4SksoDvr",
       "title": "Aggregate Queries",
-      "description": "Aggregate queries in SQL are used to calculate summary values from multiple rows of a table, reducing the data to a single row based on a specific calculation. These calculations provide insights like totals, averages, and counts. Commonly used aggregate functions include `COUNT()` to count rows, `SUM()` to add values, `AVG()` to calculate the average, `MIN()` to find the minimum value, and `MAX()` to find the maximum value within a group of rows.",
+      "description": "Aggregate queries in SQL are used to calculate summary values from multiple rows of a table, reducing the data to a single row based on a specific calculation. These calculations provide insights like totals, averages, and counts. Commonly used aggregate functions include \"COUNT()\" to count rows, \"SUM()\" to add values, \"AVG()\" to calculate the average, \"MIN()\" to find the minimum value, and \"MAX()\" to find the maximum value within a group of rows.",
       "resources": [],
       "prerequisites": [],
       "nextModules": [
@@ -1557,22 +1557,6 @@
       "nextModules": [],
       "subtopics": [
         {
-          "_id": "6aacb574703044c75d60b74b",
-          "roadmapSlug": "sql",
-          "moduleId": "vTMd0bqz4eTgLnhfgY61h",
-          "order": 0,
-          "name": "6fdhtzqqwjqr4czp5qxay",
-          "nodeId": "6FdHTzqQwJqR4czP5qXAY",
-          "title": "6FdHTzqQwJqR4czP5qXAY",
-          "description": "",
-          "content": "",
-          "resources": [],
-          "parentTopic": {
-            "id": "vTMd0bqz4eTgLnhfgY61h",
-            "title": "Advanced Functions"
-          }
-        },
-        {
           "_id": "6aacb574703044c75d60b74c",
           "roadmapSlug": "sql",
           "moduleId": "vTMd0bqz4eTgLnhfgY61h",
@@ -2118,7 +2102,7 @@
       "id": "LcljR70T-OnzSrJJDqOWf",
       "name": "LcljR70T-OnzSrJJDqOWf",
       "title": "Indexes",
-      "description": "Indexes in SQL are database objects that improve the speed of data retrieval operations on database tables. They work similarly to book indexes, providing a quick lookup mechanism for finding rows with specific column values. Indexes create a separate data structure that allows the database engine to locate data without scanning the entire table. While they speed up `SELECT` queries, indexes can slow down `INSERT`, `UPDATE`, and `DELETE` operations because the index structure must be updated. Proper index design is crucial for optimizing database performance, especially for large tables or frequently queried columns.",
+      "description": "Indexes in SQL are database objects that improve the speed of data retrieval operations on database tables. They work similarly to book indexes, providing a quick lookup mechanism for finding rows with specific column values. Indexes create a separate data structure that allows the database engine to locate data without scanning the entire table. While they speed up \"SELECT\" queries, indexes can slow down \"INSERT\", \"UPDATE\", and \"DELETE\" operations because the index structure must be updated. Proper index design is crucial for optimizing database performance, especially for large tables or frequently queried columns.",
       "resources": [
         {
           "type": "video",
@@ -2946,7 +2930,7 @@
     }
   ],
   "title": "SQL",
-  "topicCount": 98,
+  "topicCount": 97,
   "topics": [
     {
       "name": "learn-the-basics",
