@@ -41,7 +41,7 @@ export default function RoadmapHub({ onSelectRoadmap }) {
             setIndexData(data);
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, []);
 
@@ -88,9 +88,6 @@ export default function RoadmapHub({ onSelectRoadmap }) {
     <div className={styles.hubContainer}>
       {/* Hero Header */}
       <div className={styles.heroHeader}>
-        <div className={styles.heroBadge}>
-          <span>HỆ THỐNG LỘ TRÌNH KỸ THUẬT</span>
-        </div>
         <h1 className={styles.heroTitle}>Developer Learning Roadmaps</h1>
         <p className={styles.heroSubtitle}>
           Hệ thống hóa lộ trình phát triển kỹ thuật phần mềm từ căn bản đến chuyên sâu theo từng chặng
@@ -196,9 +193,8 @@ export default function RoadmapHub({ onSelectRoadmap }) {
                   </div>
                   <div className={styles.progressBarBg}>
                     <div
-                      className={`${styles.progressBarFill} ${
-                        isCompleted ? styles.progressBarComplete : ''
-                      }`}
+                      className={`${styles.progressBarFill} ${isCompleted ? styles.progressBarComplete : ''
+                        }`}
                       style={{ width: `${progress.percentage}%` }}
                     />
                   </div>
