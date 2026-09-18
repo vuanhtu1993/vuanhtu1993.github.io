@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-18T04:46:22.967Z",
+  "generatedAt": "2026-09-18T06:44:39.843Z",
   "source": "MongoDB Atlas (Database: stories)",
   "totalRoadmaps": 10,
-  "totalModules": 156,
-  "totalTopics": 578,
+  "totalModules": 157,
+  "totalTopics": 575,
   "categories": [
     {
       "key": "role-based",
@@ -57,8 +57,8 @@
         {
           "slug": "sql",
           "title": "SQL",
-          "moduleCount": 16,
-          "topicCount": 97,
+          "moduleCount": 17,
+          "topicCount": 94,
           "filePath": "skill-based/sql.json"
         }
       ]

@@ -171,7 +171,7 @@
       }
     ]
   },
-  "moduleCount": 16,
+  "moduleCount": 17,
   "modules": [
     {
       "id": "nhUKKWyBH80nyKfGT8ErC",
@@ -202,6 +202,7 @@
           "title": "Basic SQL Syntax"
         }
       ],
+      "order": 1,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b71b",
@@ -413,6 +414,7 @@
           "title": "Data Definition Language (DDL)"
         }
       ],
+      "order": 2,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b722",
@@ -614,6 +616,7 @@
         }
       ],
       "nextModules": [],
+      "order": 3,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b72a",
@@ -744,6 +747,7 @@
       ],
       "prerequisites": [],
       "nextModules": [],
+      "order": 4,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b72e",
@@ -812,28 +816,6 @@
           }
         },
         {
-          "_id": "6aacb574703044c75d60b731",
-          "roadmapSlug": "sql",
-          "moduleId": "WMSXi-eez_hHGDM8kUdWz",
-          "order": 3,
-          "name": "insert",
-          "nodeId": "-Hew0y53ziZK3epQnGA0O",
-          "title": "INSERT",
-          "description": "INSERT is a SQL command used to add new rows of data into a table. It specifies which table to add the data to and provides the values for each column in the new row. You can insert a single row at a time or multiple rows with a single statement.",
-          "content": "# INSERT\n\nINSERT is a SQL command used to add new rows of data into a table. It specifies which table to add the data to and provides the values for each column in the new row. You can insert a single row at a time or multiple rows with a single statement.\n\nVisit the following resources to learn more:\n\n- [@video@SQL INSERT Statement](https://www.youtube.com/watch?v=Yp1MKeIG-M4)",
-          "resources": [
-            {
-              "type": "video",
-              "title": "SQL INSERT Statement",
-              "url": "https://www.youtube.com/watch?v=Yp1MKeIG-M4"
-            }
-          ],
-          "parentTopic": {
-            "id": "WMSXi-eez_hHGDM8kUdWz",
-            "title": "Data Manipulation Language (DML)"
-          }
-        },
-        {
           "_id": "6aacb574703044c75d60b732",
           "roadmapSlug": "sql",
           "moduleId": "WMSXi-eez_hHGDM8kUdWz",
@@ -876,6 +858,50 @@
             "id": "WMSXi-eez_hHGDM8kUdWz",
             "title": "Data Manipulation Language (DML)"
           }
+        },
+        {
+          "_id": "6aaccf5ab310a9e040cdf9bb",
+          "roadmapSlug": "sql",
+          "moduleId": "WMSXi-eez_hHGDM8kUdWz",
+          "nodeId": "topic_select-statement_mu6j85b0",
+          "name": "topic_select-statement_mu6j85b0",
+          "title": "SELECT statement",
+          "description": "SELECT is one of the most fundamental SQL commands, used to retrieve data from one or more tables in a database. It allows you to specify which columns to fetch, apply filtering conditions, sort results, and perform various operations on the data. The SELECT statement is versatile, supporting joins, subqueries, aggregations, and more, making it essential for data querying and analysis in relational databases.",
+          "content": "# SELECT statement\n\nSELECT is one of the most fundamental SQL commands, used to retrieve data from one or more tables in a database. It allows you to specify which columns to fetch, apply filtering conditions, sort results, and perform various operations on the data. The SELECT statement is versatile, supporting joins, subqueries, aggregations, and more, making it essential for data querying and analysis in relational databases.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 6,
+          "createdAt": "2026-09-18T05:42:50.076Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "sql",
+            "sourceNodeId": "rmqXH29n1oXtZ8tvmcRFn"
+          }
+        },
+        {
+          "_id": "6aaccf69b310a9e040cdf9bc",
+          "roadmapSlug": "sql",
+          "moduleId": "WMSXi-eez_hHGDM8kUdWz",
+          "nodeId": "topic_order-by_mu6j8h8l",
+          "name": "topic_order-by_mu6j8h8l",
+          "title": "ORDER BY",
+          "description": "The `ORDER BY` clause in SQL is used to sort the result set of a query by one or more columns. By default, the sorting is in ascending order, but you can specify descending order using the `DESC` keyword. The clause can sort by numeric, date, or text values, and multiple columns can be sorted by listing them in the `ORDER BY` clause, each with its own sorting direction. This clause is crucial for organizing data in a meaningful sequence, such as ordering by a timestamp to show the most recent records first, or alphabetically by name.",
+          "content": "# ORDER BY\n\nThe `ORDER BY` clause in SQL is used to sort the result set of a query by one or more columns. By default, the sorting is in ascending order, but you can specify descending order using the `DESC` keyword. The clause can sort by numeric, date, or text values, and multiple columns can be sorted by listing them in the `ORDER BY` clause, each with its own sorting direction. This clause is crucial for organizing data in a meaningful sequence, such as ordering by a timestamp to show the most recent records first, or alphabetically by name.\n\nVisit the following resources to learn more:\n\n- [@video@SQL ORDER BY Sorting Clause](https://www.youtube.com/watch?v=h_HHTNjAgS8)",
+          "resources": [
+            {
+              "type": "video",
+              "title": "SQL ORDER BY Sorting Clause",
+              "url": "https://www.youtube.com/watch?v=h_HHTNjAgS8"
+            }
+          ],
+          "parentTopic": null,
+          "order": 7,
+          "createdAt": "2026-09-18T05:43:05.542Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "sql",
+            "sourceNodeId": "NfCiSPrL4upMssukcw3Kh"
+          }
         }
       ]
     },
@@ -892,6 +918,7 @@
           "title": "Data Constraints"
         }
       ],
+      "order": 5,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b734",
@@ -1071,60 +1098,6 @@
             "id": "LX9nzJ4uqznHN4SksoDvr",
             "title": "Aggregate Queries"
           }
-        },
-        {
-          "_id": "6aacb574703044c75d60b73b",
-          "roadmapSlug": "sql",
-          "moduleId": "LX9nzJ4uqznHN4SksoDvr",
-          "order": 7,
-          "name": "group-by",
-          "nodeId": "Zw8IHfCCMSxmVjx5Ho5ff",
-          "title": "GROUP BY",
-          "description": "`GROUP BY` is an SQL clause used in `SELECT` statements to arrange identical data into groups. It's typically used with aggregate functions (like `COUNT`, `SUM`, `AVG`) to perform calculations on each group of rows. `GROUP BY` collects data across multiple records and groups the results by one or more columns, allowing for analysis of data at a higher level of granularity. This clause is fundamental for generating summary reports, performing data analysis, and creating meaningful aggregations of data in relational databases.",
-          "content": "# GROUP BY\n\n`GROUP BY` is an SQL clause used in `SELECT` statements to arrange identical data into groups. It's typically used with aggregate functions (like `COUNT`, `SUM`, `AVG`) to perform calculations on each group of rows. `GROUP BY` collects data across multiple records and groups the results by one or more columns, allowing for analysis of data at a higher level of granularity. This clause is fundamental for generating summary reports, performing data analysis, and creating meaningful aggregations of data in relational databases.\n\nVisit the following resources to learn more:\n\n- [@article@SQL GROUP BY](https://www.programiz.com/sql/group-by)\n- [@video@Advanced Aggregate Functions in SQL](https://www.youtube.com/watch?v=nNrgRVIzeHg)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "SQL GROUP BY",
-              "url": "https://www.programiz.com/sql/group-by"
-            },
-            {
-              "type": "video",
-              "title": "Advanced Aggregate Functions in SQL",
-              "url": "https://www.youtube.com/watch?v=nNrgRVIzeHg"
-            }
-          ],
-          "parentTopic": {
-            "id": "LX9nzJ4uqznHN4SksoDvr",
-            "title": "Aggregate Queries"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b73c",
-          "roadmapSlug": "sql",
-          "moduleId": "LX9nzJ4uqznHN4SksoDvr",
-          "order": 8,
-          "name": "having",
-          "nodeId": "HhICJpCK5__b-itUoEBES",
-          "title": "HAVING",
-          "description": "The `HAVING` clause in SQL is used to filter the results of aggregate functions. It's similar to the `WHERE` clause, but operates on grouped rows produced by the `GROUP BY` clause. Essentially, `HAVING` allows you to specify conditions that groups must meet to be included in the final result set after aggregation has taken place.",
-          "content": "# HAVING\n\nThe `HAVING` clause in SQL is used to filter the results of aggregate functions. It's similar to the `WHERE` clause, but operates on grouped rows produced by the `GROUP BY` clause. Essentially, `HAVING` allows you to specify conditions that groups must meet to be included in the final result set after aggregation has taken place.\n\nVisit the following resources to learn more:\n\n- [@article@SQL HAVING Clause](https://www.programiz.com/sql/having)\n- [@video@HAVING Clause](https://www.youtube.com/watch?v=tYBOMw7Ob8E)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "SQL HAVING Clause",
-              "url": "https://www.programiz.com/sql/having"
-            },
-            {
-              "type": "video",
-              "title": "HAVING Clause",
-              "url": "https://www.youtube.com/watch?v=tYBOMw7Ob8E"
-            }
-          ],
-          "parentTopic": {
-            "id": "LX9nzJ4uqznHN4SksoDvr",
-            "title": "Aggregate Queries"
-          }
         }
       ]
     },
@@ -1152,6 +1125,7 @@
           "title": "JOIN Queries"
         }
       ],
+      "order": 6,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b73d",
@@ -1304,6 +1278,7 @@
           "title": "Subqueries"
         }
       ],
+      "order": 7,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b742",
@@ -1470,7 +1445,7 @@
       "id": "86iZ8s8EdhSuYwgwAM_EO",
       "name": "86iZ8s8EdhSuYwgwAM_EO",
       "title": "Subqueries",
-      "description": "Subqueries, also known as nested queries or inner queries, are SQL queries embedded within another query. They can be used in various parts of SQL statements, such as SELECT, FROM, WHERE, and HAVING clauses. Subqueries allow for complex data retrieval and manipulation by breaking down complex queries into more manageable parts. They're particularly useful for creating dynamic criteria, performing calculations, or comparing sets of results.",
+      "description": "Subqueries, also known as nested queries or inner queries, are SQL queries embedded within another query. They can be used in various parts of SQL statements, such as SELECT, FROM, WHERE, and HAVING clauses. Subqueries allow for complex data retrieval and manipulation by breaking down complex queries into more manageable parts. They're particularly useful for creating dynamic criteria, performing calculations, or comparing sets of results.\n![Nested subquery](https://www.startertutorials.com/blog/wp-content/uploads/2026/09/49-Nested-Queries-in-SQL.webp)",
       "resources": [
         {
           "type": "article",
@@ -1490,6 +1465,7 @@
         }
       ],
       "nextModules": [],
+      "order": 8,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b749",
@@ -1555,6 +1531,7 @@
       "resources": [],
       "prerequisites": [],
       "nextModules": [],
+      "order": 9,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b74c",
@@ -2004,7 +1981,7 @@
       "id": "2tyezwOIxV6O84N-Q3Awh",
       "name": "2tyezwOIxV6O84N-Q3Awh",
       "title": "Views",
-      "description": "Views are like virtual tables. Instead of physically storing data, a view's definition is based on a query against one or more tables. When you query a view, the database executes the underlying query defined in the view, and the results are presented as if they were from an actual table. This simplifies complex queries and provides a level of data abstraction and security.",
+      "description": "Views are like virtual tables. Instead of physically storing data, a view's definition is based on a query against one or more tables. When you query a view, the database executes the underlying query defined in the view, and the results are presented as if they were from an actual table. This simplifies complex queries and provides a level of data abstraction and security.\n![SQL view](https://substackcdn.com/image/fetch/$s_!mo43!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d526045-9e06-47f1-b975-774b4cf73b4b_3239x1633.png)",
       "resources": [
         {
           "type": "video",
@@ -2014,6 +1991,7 @@
       ],
       "prerequisites": [],
       "nextModules": [],
+      "order": 10,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b75f",
@@ -2102,7 +2080,7 @@
       "id": "LcljR70T-OnzSrJJDqOWf",
       "name": "LcljR70T-OnzSrJJDqOWf",
       "title": "Indexes",
-      "description": "Indexes in SQL are database objects that improve the speed of data retrieval operations on database tables. They work similarly to book indexes, providing a quick lookup mechanism for finding rows with specific column values. Indexes create a separate data structure that allows the database engine to locate data without scanning the entire table. While they speed up \"SELECT\" queries, indexes can slow down \"INSERT\", \"UPDATE\", and \"DELETE\" operations because the index structure must be updated. Proper index design is crucial for optimizing database performance, especially for large tables or frequently queried columns.",
+      "description": "Indexes in SQL are database objects that improve the speed of data retrieval operations on database tables. They work similarly to book indexes, providing a quick lookup mechanism for finding rows with specific column values. Indexes create a separate data structure that allows the database engine to locate data without scanning the entire table. While they speed up \"SELECT\" queries, indexes can slow down \"INSERT\", \"UPDATE\", and \"DELETE\" operations because the index structure must be updated. Proper index design is crucial for optimizing database performance, especially for large tables or frequently queried columns.\n![SQL Indexes](https://media.licdn.com/dms/image/v2/D5612AQGCWG2m2q9xFQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1722880433582?e=1791417600&v=beta&t=Zlt2WFJs0Hbrh8tTAfUOS1DAgYGDpBBTV3RXndFw1Y0)",
       "resources": [
         {
           "type": "video",
@@ -2117,6 +2095,7 @@
           "title": "Transactions"
         }
       ],
+      "order": 11,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b762",
@@ -2178,7 +2157,7 @@
       "id": "OdaBXz2XBAVLsQ-m7xtAM",
       "name": "OdaBXz2XBAVLsQ-m7xtAM",
       "title": "Transactions",
-      "description": "Transactions in SQL are units of work that group one or more database operations into a single, atomic unit. They ensure data integrity by following the ACID properties: Atomicity (all or nothing), Consistency (database remains in a valid state), Isolation (transactions don't interfere with each other), and Durability (committed changes are permanent). Transactions are essential for maintaining data consistency in complex operations and handling concurrent access to the database.",
+      "description": "Transactions in SQL are units of work that group one or more database operations into a single, atomic unit. They ensure data integrity by following the ACID properties: Atomicity (all or nothing), Consistency (database remains in a valid state), Isolation (transactions don't interfere with each other), and Durability (committed changes are permanent). Transactions are essential for maintaining data consistency in complex operations and handling concurrent access to the database.\n![Transaction ACID](https://motherduck.com/_next/image/?url=https%3A%2F%2Fmotherduck-com-web-prod.s3.amazonaws.com%2Fassets%2Fimg%2FACID_Transactions_Illustration_686037dddf.png&w=3840&q=75)",
       "resources": [
         {
           "type": "article",
@@ -2203,6 +2182,7 @@
           "title": "Data Integrity & Security"
         }
       ],
+      "order": 12,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b764",
@@ -2367,7 +2347,7 @@
       "id": "R1ktDJpXOz0PTllAcBrdu",
       "name": "R1ktDJpXOz0PTllAcBrdu",
       "title": "Data Integrity & Security",
-      "description": "Data integrity ensures that the information stored in a database is accurate, consistent, and reliable over its entire lifecycle. Data security involves protecting the database from unauthorized access, modification, or deletion. These two concepts are essential for maintaining the trust and value of any database system, safeguarding against corruption, breaches, and ensuring data is used appropriately.",
+      "description": "Data integrity ensures that the information stored in a database is accurate, consistent, and reliable over its entire lifecycle. Data security involves protecting the database from unauthorized access, modification, or deletion. These two concepts are essential for maintaining the trust and value of any database system, safeguarding against corruption, breaches, and ensuring data is used appropriately.\n![Data Integrity & Security](https://montecarlo.ai/wp-content/uploads/2025/12/Data-integrity-vs-data-quality.jpg)",
       "resources": [],
       "prerequisites": [
         {
@@ -2381,6 +2361,7 @@
           "title": "Stored Procedures & Functions"
         }
       ],
+      "order": 13,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b76a",
@@ -2479,6 +2460,7 @@
           "title": "Performance Optimization"
         }
       ],
+      "order": 14,
       "subtopics": []
     },
     {
@@ -2510,6 +2492,7 @@
           "title": "Advanced SQL"
         }
       ],
+      "order": 15,
       "subtopics": [
         {
           "_id": "6aacb574703044c75d60b76d",
@@ -2627,6 +2610,97 @@
       ]
     },
     {
+      "id": "mod_window-functions_mu6l8iem",
+      "name": "mod_window-functions_mu6l8iem",
+      "title": "Window Functions",
+      "description": "Window functions perform calculations across a set of rows that are related to the current row. Unlike standard aggregate functions that group rows into a single result row, window functions retain the individual rows and add a calculated value for each row based on the window frame. This allows you to perform analyses like calculating running totals, moving averages, or ranking within partitions of data without collapsing the rows.",
+      "resources": [],
+      "order": 16,
+      "subtopics": [
+        {
+          "_id": "6aacdcc3b310a9e040cdf9bd",
+          "roadmapSlug": "sql",
+          "moduleId": "mod_window-functions_mu6l8iem",
+          "nodeId": "topic_lag_mu6l9qpi",
+          "name": "topic_lag_mu6l9qpi",
+          "title": "Lag",
+          "description": "`LAG` is a window function in SQL that provides access to a row at a specified offset prior to the current row within a partition. It allows you to compare the current row's values with previous rows' values without using self-joins. LAG is particularly useful for calculating running differences, identifying trends, or comparing sequential data points in time-series analysis. The function takes the column to offset, the number of rows to offset (default is 1), and an optional default value to return when the offset goes beyond the partition's boundary.",
+          "content": "# lag\n\n`LAG` is a window function in SQL that provides access to a row at a specified offset prior to the current row within a partition. It allows you to compare the current row's values with previous rows' values without using self-joins. LAG is particularly useful for calculating running differences, identifying trends, or comparing sequential data points in time-series analysis. The function takes the column to offset, the number of rows to offset (default is 1), and an optional default value to return when the offset goes beyond the partition's boundary.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 0,
+          "createdAt": "2026-09-18T06:40:03.702Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "sql",
+            "sourceNodeId": "BcXdxY6bld5c0YNFSKkh-"
+          },
+          "updatedAt": "2026-09-18T06:41:56.921Z"
+        },
+        {
+          "_id": "6aacdcfcb310a9e040cdf9be",
+          "roadmapSlug": "sql",
+          "moduleId": "mod_window-functions_mu6l8iem",
+          "nodeId": "topic_row-number_mu6lay90",
+          "name": "topic_row-number_mu6lay90",
+          "title": "Row_number",
+          "description": "ROW\\_NUMBER() is a SQL window function that assigns a unique, sequential integer to each row within a partition of a result set. It's useful for creating row identifiers, implementing pagination, or finding the nth highest/lowest value in a group. The numbering starts at 1 for each partition and continues sequentially, allowing for versatile data analysis and manipulation tasks.",
+          "content": "# Row_number\n\nROW\\_NUMBER() is a SQL window function that assigns a unique, sequential integer to each row within a partition of a result set. It's useful for creating row identifiers, implementing pagination, or finding the nth highest/lowest value in a group. The numbering starts at 1 for each partition and continues sequentially, allowing for versatile data analysis and manipulation tasks.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 1,
+          "createdAt": "2026-09-18T06:41:00.132Z",
+          "ref": {
+            "isRef": true,
+            "sourceRoadmapSlug": "sql",
+            "sourceNodeId": "zW27ZHdLwQY-85iqbBKQZ"
+          }
+        },
+        {
+          "_id": "6aacdd25b310a9e040cdf9bf",
+          "roadmapSlug": "sql",
+          "moduleId": "mod_window-functions_mu6l8iem",
+          "nodeId": "topic_lead_mu6lbuar",
+          "name": "topic_lead_mu6lbuar",
+          "title": "Lead",
+          "description": "LEAD is a window function in SQL that provides access to a row at a specified offset after the current row within a partition",
+          "content": "LEAD is a window function in SQL that provides access to a row at a specified offset after the current row within a partition. It's the counterpart to the LAG function, allowing you to look ahead in your dataset rather than behind. LEAD is useful for comparing current values with future values, calculating forward-looking metrics, or analyzing trends in sequential data. Like LAG, it takes arguments for the column to offset, the number of rows to look ahead (default is 1), and an optional default value when the offset exceeds the partition's boundary.\n\n",
+          "resources": [],
+          "parentTopic": null,
+          "order": 2,
+          "createdAt": "2026-09-18T06:41:41.667Z"
+        },
+        {
+          "_id": "6aacdd98b310a9e040cdf9c0",
+          "roadmapSlug": "sql",
+          "moduleId": "mod_window-functions_mu6l8iem",
+          "nodeId": "topic_dense-rank_mu6leb4o",
+          "name": "topic_dense-rank_mu6leb4o",
+          "title": "Dense_rank",
+          "description": "dense_rank is a window function that assigns a rank to each row within a partition of a result set, based on the order of rows",
+          "content": "dense_rank is a window function that assigns a rank to each row within a partition of a result set, based on the order of rows. Unlike the rank function, dense_rank assigns consecutive ranks without gaps, even when there are ties in the ordering criteria. This means that if two or more rows have the same value for the ordering column(s), they will receive the same rank, and the next rank assigned will be the next consecutive integer, without skipping any numbers.",
+          "resources": [],
+          "parentTopic": null,
+          "order": 3,
+          "createdAt": "2026-09-18T06:43:36.792Z"
+        },
+        {
+          "_id": "6aacddbcb310a9e040cdf9c1",
+          "roadmapSlug": "sql",
+          "moduleId": "mod_window-functions_mu6l8iem",
+          "nodeId": "topic_rank_mu6lf314",
+          "name": "topic_rank_mu6lf314",
+          "title": "Rank",
+          "description": "The RANK function in SQL is a window function that assigns a rank to each row within a partition of a result set, based on the order specified by the ORDER BY clause",
+          "content": "The RANK function in SQL is a window function that assigns a rank to each row within a partition of a result set, based on the order specified by the ORDER BY clause. Unlike the ROW_NUMBER function, RANK allows for the possibility of ties—rows with equal values in the ordering column(s) receive the same rank, and the next rank is skipped accordingly. For example, if two rows share the same rank of 1, the next rank will be 3. This function is useful for scenarios where you need to identify relative positions within groups, such as ranking employees by salary within each department.\n\n",
+          "resources": [],
+          "parentTopic": null,
+          "order": 4,
+          "createdAt": "2026-09-18T06:44:12.952Z"
+        }
+      ]
+    },
+    {
       "id": "UDqbT1y-YzBrljfKSz_RG",
       "name": "UDqbT1y-YzBrljfKSz_RG",
       "title": "Advanced SQL",
@@ -2644,180 +2718,8 @@
           "title": "Have a look at the following related roadmaps"
         }
       ],
+      "order": 17,
       "subtopics": [
-        {
-          "_id": "6aacb574703044c75d60b772",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 0,
-          "name": "rank",
-          "nodeId": "cucCPw3KfetAP2OMFUs0X",
-          "title": "rank",
-          "description": "The `RANK` function in SQL is a window function that assigns a rank to each row within a partition of a result set, based on the order specified by the `ORDER BY` clause. Unlike the `ROW_NUMBER` function, `RANK` allows for the possibility of ties—rows with equal values in the ordering column(s) receive the same rank, and the next rank is skipped accordingly. For example, if two rows share the same rank of 1, the next rank will be 3. This function is useful for scenarios where you need to identify relative positions within groups, such as ranking employees by salary within each department.",
-          "content": "# rank\n\nThe `RANK` function in SQL is a window function that assigns a rank to each row within a partition of a result set, based on the order specified by the `ORDER BY` clause. Unlike the `ROW_NUMBER` function, `RANK` allows for the possibility of ties—rows with equal values in the ordering column(s) receive the same rank, and the next rank is skipped accordingly. For example, if two rows share the same rank of 1, the next rank will be 3. This function is useful for scenarios where you need to identify relative positions within groups, such as ranking employees by salary within each department.\n\nVisit the following resources to learn more:\n\n- [@article@Overview of SQL RANK Functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)\n- [@video@RANK, DENSE_RANK, ROW_NUMBER SQL Analytical Functions Simplified](https://www.youtube.com/watch?v=xMWEVFC4FOk)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Overview of SQL RANK Functions",
-              "url": "https://www.sqlshack.com/overview-of-sql-rank-functions/"
-            },
-            {
-              "type": "video",
-              "title": "RANK, DENSE_RANK, ROW_NUMBER SQL Analytical Functions Simplified",
-              "url": "https://www.youtube.com/watch?v=xMWEVFC4FOk"
-            }
-          ],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b773",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 1,
-          "name": "dense_rank",
-          "nodeId": "QM0ltgPu8lLLYc2MsTLj-",
-          "title": "dense_rank",
-          "description": "`dense_rank` is a window function that assigns a rank to each row within a partition of a result set, based on the order of rows. Unlike the `rank` function, `dense_rank` assigns consecutive ranks without gaps, even when there are ties in the ordering criteria. This means that if two or more rows have the same value for the ordering column(s), they will receive the same rank, and the next rank assigned will be the next consecutive integer, without skipping any numbers.",
-          "content": "# dense_rank\n\n`dense_rank` is a window function that assigns a rank to each row within a partition of a result set, based on the order of rows. Unlike the `rank` function, `dense_rank` assigns consecutive ranks without gaps, even when there are ties in the ordering criteria. This means that if two or more rows have the same value for the ordering column(s), they will receive the same rank, and the next rank assigned will be the next consecutive integer, without skipping any numbers.\n\nVisit the following resources to learn more:\n\n- [@article@SQL DENSE_RANK](https://www.sqltutorial.org/sql-window-functions/sql-dense_rank/)\n- [@article@Breaking Down DENSE_RANK](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "SQL DENSE_RANK",
-              "url": "https://www.sqltutorial.org/sql-window-functions/sql-dense_rank/"
-            },
-            {
-              "type": "article",
-              "title": "Breaking Down DENSE_RANK",
-              "url": "https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts"
-            }
-          ],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b774",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 2,
-          "name": "lead",
-          "nodeId": "aJJjaGunRrwyh9MjQfJt-",
-          "title": "lead",
-          "description": "`LEAD` is a window function in SQL that provides access to a row at a specified offset after the current row within a partition. It's the counterpart to the `LAG` function, allowing you to look ahead in your dataset rather than behind. `LEAD` is useful for comparing current values with future values, calculating forward-looking metrics, or analyzing trends in sequential data. Like `LAG`, it takes arguments for the column to offset, the number of rows to look ahead (default is 1), and an optional default value when the offset exceeds the partition's boundary.",
-          "content": "# lead\n\n`LEAD` is a window function in SQL that provides access to a row at a specified offset after the current row within a partition. It's the counterpart to the `LAG` function, allowing you to look ahead in your dataset rather than behind. `LEAD` is useful for comparing current values with future values, calculating forward-looking metrics, or analyzing trends in sequential data. Like `LAG`, it takes arguments for the column to offset, the number of rows to look ahead (default is 1), and an optional default value when the offset exceeds the partition's boundary.\n\nVisit the following resources to learn more:\n\n- [@article@SQL LEAD](https://www.codecademy.com/resources/docs/sql/window-functions/lead)\n- [@video@LAG and LEAD Window Functions in SQL](https://www.youtube.com/watch?v=nHEEyX_yDvo)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "SQL LEAD",
-              "url": "https://www.codecademy.com/resources/docs/sql/window-functions/lead"
-            },
-            {
-              "type": "video",
-              "title": "LAG and LEAD Window Functions in SQL",
-              "url": "https://www.youtube.com/watch?v=nHEEyX_yDvo"
-            }
-          ],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b775",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 3,
-          "name": "lag",
-          "nodeId": "BcXdxY6bld5c0YNFSKkh-",
-          "title": "lag",
-          "description": "`LAG` is a window function in SQL that provides access to a row at a specified offset prior to the current row within a partition. It allows you to compare the current row's values with previous rows' values without using self-joins. LAG is particularly useful for calculating running differences, identifying trends, or comparing sequential data points in time-series analysis. The function takes the column to offset, the number of rows to offset (default is 1), and an optional default value to return when the offset goes beyond the partition's boundary.",
-          "content": "# lag\n\n`LAG` is a window function in SQL that provides access to a row at a specified offset prior to the current row within a partition. It allows you to compare the current row's values with previous rows' values without using self-joins. LAG is particularly useful for calculating running differences, identifying trends, or comparing sequential data points in time-series analysis. The function takes the column to offset, the number of rows to offset (default is 1), and an optional default value to return when the offset goes beyond the partition's boundary.\n\nVisit the following resources to learn more:\n\n- [@video@LAG and LEAD functions](https://www.youtube.com/watch?v=j2u52RQ0qlw)",
-          "resources": [
-            {
-              "type": "video",
-              "title": "LAG and LEAD functions",
-              "url": "https://www.youtube.com/watch?v=j2u52RQ0qlw"
-            }
-          ],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b776",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 4,
-          "name": "row_number",
-          "nodeId": "zW27ZHdLwQY-85iqbBKQZ",
-          "title": "Row_number",
-          "description": "ROW\\_NUMBER() is a SQL window function that assigns a unique, sequential integer to each row within a partition of a result set. It's useful for creating row identifiers, implementing pagination, or finding the nth highest/lowest value in a group. The numbering starts at 1 for each partition and continues sequentially, allowing for versatile data analysis and manipulation tasks.",
-          "content": "# Row_number\n\nROW\\_NUMBER() is a SQL window function that assigns a unique, sequential integer to each row within a partition of a result set. It's useful for creating row identifiers, implementing pagination, or finding the nth highest/lowest value in a group. The numbering starts at 1 for each partition and continues sequentially, allowing for versatile data analysis and manipulation tasks.\n\nVisit the following resources to learn more:\n\n- [@article@SQL ROW_NUMBER](https://www.sqltutorial.org/sql-window-functions/sql-row_number/)\n- [@article@How to Use ROW_NUMBER OVER() in SQL to Rank Data](https://learnsql.com/blog/row-number-over-in-sql/)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "SQL ROW_NUMBER",
-              "url": "https://www.sqltutorial.org/sql-window-functions/sql-row_number/"
-            },
-            {
-              "type": "article",
-              "title": "How to Use ROW_NUMBER OVER() in SQL to Rank Data",
-              "url": "https://learnsql.com/blog/row-number-over-in-sql/"
-            }
-          ],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b777",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 5,
-          "name": "first-value",
-          "nodeId": "Xp6G2Us7Y6LeKoYQh_AKl",
-          "title": "first_value",
-          "description": "",
-          "content": "",
-          "resources": [],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
-        {
-          "_id": "6aacb574703044c75d60b778",
-          "roadmapSlug": "sql",
-          "moduleId": "UDqbT1y-YzBrljfKSz_RG",
-          "order": 6,
-          "name": "window-functions",
-          "nodeId": "tBvXLLp5FKeSSN35Kj1X4",
-          "title": "Window Functions",
-          "description": "Window functions perform calculations across a set of rows that are related to the current row. Unlike standard aggregate functions that group rows into a single result row, window functions retain the individual rows and add a calculated value for each row based on the window frame. This allows you to perform analyses like calculating running totals, moving averages, or ranking within partitions of data without collapsing the rows.",
-          "content": "# Window Functions\n\nWindow functions perform calculations across a set of rows that are related to the current row. Unlike standard aggregate functions that group rows into a single result row, window functions retain the individual rows and add a calculated value for each row based on the window frame. This allows you to perform analyses like calculating running totals, moving averages, or ranking within partitions of data without collapsing the rows.\n\nVisit the following resources to learn more:\n\n- [@article@SQL Window Functions](https://mode.com/sql-tutorial/sql-window-functions)\n- [@video@SQL Window Functions in 10 Minutes](https://www.youtube.com/watch?v=y1KCM8vbYe4)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "SQL Window Functions",
-              "url": "https://mode.com/sql-tutorial/sql-window-functions"
-            },
-            {
-              "type": "video",
-              "title": "SQL Window Functions in 10 Minutes",
-              "url": "https://www.youtube.com/watch?v=y1KCM8vbYe4"
-            }
-          ],
-          "parentTopic": {
-            "id": "UDqbT1y-YzBrljfKSz_RG",
-            "title": "Advanced SQL"
-          }
-        },
         {
           "_id": "6aacb574703044c75d60b779",
           "roadmapSlug": "sql",
@@ -2930,7 +2832,7 @@
     }
   ],
   "title": "SQL",
-  "topicCount": 97,
+  "topicCount": 94,
   "topics": [
     {
       "name": "learn-the-basics",
