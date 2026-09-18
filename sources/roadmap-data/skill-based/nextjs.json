@@ -640,7 +640,7 @@
       "id": "km7dLVpl76c5EfWvhhbRh",
       "name": "km7dLVpl76c5EfWvhhbRh",
       "title": "NextJS Router",
-      "description": "Next.js has two different routers:\n\n*   **App Router**: The newer router that supports new React features like Server Components.\n\n*   **Pages Router**: The original router, still supported and being improved.\n\nBefore Next.js 13, the Pages Router was the main way to create routes in Next.js. It's still supported in newer versions of Next.js, but Next.js recommends migrating to the new App Router to leverage React's latest features.",
+      "description": "Next.js has two different routers:\n\n*   **App Router**: The newer router that supports new React features like Server Components.\n\n*   **Pages Router**: The original router, still supported and being improved.\n\nBefore Next.js 13, the Pages Router was the main way to create routes in Next.js. It's still supported in newer versions of Next.js, but Next.js recommends migrating to the new App Router to leverage React's latest features.\n![NextJS Router](https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fnested-layouts.png&w=3840&q=75)",
       "resources": [
         {
           "type": "official",
@@ -1307,7 +1307,7 @@
       "id": "77i6HVsnX-uSDw8vz3afD",
       "name": "77i6HVsnX-uSDw8vz3afD",
       "title": "Caching Data",
-      "description": "Caching data in Next.js involves storing the results of data fetches so that subsequent requests for the same data can be served faster. Instead of repeatedly fetching data from a database or API, Next.js can retrieve it from the cache. This improves performance and reduces the load on your data sources. Caching can be configured at different levels.\n\nCaching behavior changes depending on whether the route is statically or dynamically rendered, data is cached or uncached, and whether a request is part of an initial visit or a subsequent navigation. Depending on your use case, you can configure the caching behavior for individual routes and data requests.",
+      "description": "Caching data in Next.js involves storing the results of data fetches so that subsequent requests for the same data can be served faster. Instead of repeatedly fetching data from a database or API, Next.js can retrieve it from the cache. This improves performance and reduces the load on your data sources. Caching can be configured at different levels.\n\nCaching behavior changes depending on whether the route is statically or dynamically rendered, data is cached or uncached, and whether a request is part of an initial visit or a subsequent navigation. Depending on your use case, you can configure the caching behavior for individual routes and data requests.\n![NextJS Caching](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5uR57KhwFHdtNwd-2z9FyQ.png)",
       "resources": [
         {
           "type": "official",
