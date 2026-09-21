@@ -1,0 +1,52 @@
+/* Roadmap Design Tokens & CSS Variables */
+:root {
+  --rm-primary: #10b981;
+  --rm-primary-hover: #059669;
+  --rm-primary-light: #ecfdf5;
+  --rm-primary-border: #a7f3d0;
+
+  --rm-bg-page: #f8fafc;
+  --rm-bg-card: #ffffff;
+  --rm-bg-subtle: #f1f5f9;
+  --rm-border: #e2e8f0;
+  --rm-border-subtle: #cbd5e1;
+
+  --rm-text-main: #0f172a;
+  --rm-text-body: #334155;
+  --rm-text-muted: #64748b;
+
+  --rm-radius-sm: 6px;
+  --rm-radius-md: 10px;
+  --rm-radius-lg: 14px;
+  --rm-radius-xl: 18px;
+  --rm-radius-full: 9999px;
+
+  --rm-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --rm-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+  --rm-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --rm-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12);
+
+  --rm-transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme='dark'] {
+  --rm-primary: #10b981;
+  --rm-primary-hover: #34d399;
+  --rm-primary-light: rgba(16, 185, 129, 0.15);
+  --rm-primary-border: rgba(16, 185, 129, 0.35);
+
+  --rm-bg-page: #121214;
+  --rm-bg-card: #1e1f22;
+  --rm-bg-subtle: #27282b;
+  --rm-border: #2e2e32;
+  --rm-border-subtle: #3f4045;
+
+  --rm-text-main: #f8fafc;
+  --rm-text-body: #cbd5e1;
+  --rm-text-muted: #94a3b8;
+
+  --rm-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --rm-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --rm-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --rm-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5);
+}

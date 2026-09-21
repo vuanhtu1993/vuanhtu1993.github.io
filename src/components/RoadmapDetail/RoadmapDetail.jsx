@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { loadRoadmapData, invalidateCache } from './dataLoader';
 import { useRoadmapProgress } from './useRoadmapProgress';
 import { EditModeProvider, useEditMode } from './EditModeContext';
+import * as Dialog from '@radix-ui/react-dialog';
 import RoadmapTimeline from './RoadmapTimeline';
 import TopicDrawer from './TopicDrawer';
 import styles from './RoadmapDetail.module.css';
@@ -164,7 +165,8 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
           <div className={styles.headerTopRow}>
             <div className={styles.titleArea}>
               <button type="button" className={styles.backBtn} onClick={onBack}>
-                ← Back to Roadmaps
+                <span className={styles.backIcon}>←</span>
+                <span className={styles.backText}>Roadmaps</span>
               </button>
               <h1 className={styles.roadmapTitle}>{data.title}</h1>
             </div>
@@ -181,7 +183,7 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                   title={isEditMode ? 'Exit edit mode' : 'Enable edit mode (Dev only)'}
                 >
                   <span className={styles.editModeDot} />
-                  <span>{isEditMode ? 'Editing (Dev)' : 'Edit Mode (Dev)'}</span>
+                  <span>{isEditMode ? 'Editing' : 'Edit (Dev)'}</span>
                 </button>
               )}
 
@@ -189,8 +191,9 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                 type="button"
                 className={styles.actionBtn}
                 onClick={expandedModules.size > 0 ? handleCollapseAll : handleExpandAll}
+                title={expandedModules.size > 0 ? 'Thu gọn tất cả chặng' : 'Mở rộng tất cả chặng'}
               >
-                {expandedModules.size > 0 ? 'Collapse All' : 'Expand All'}
+                {expandedModules.size > 0 ? 'Collapse' : 'Expand'}
               </button>
               <button
                 type="button"
@@ -198,7 +201,8 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                 onClick={() => setShowResetModal(true)}
                 title="Reset all progress for this roadmap"
               >
-                Reset Progress
+                <span className={styles.resetBtnFullText}>Reset Progress</span>
+                <span className={styles.resetBtnShortText}>Reset</span>
               </button>
             </div>
           </div>
@@ -280,15 +284,16 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
         hasNext={hasNext}
       />
 
-      {/* Reset Confirmation Modal */}
-      {showResetModal && (
-        <div className={styles.modalOverlay} onClick={() => setShowResetModal(false)}>
-          <div className={styles.modalBox} onClick={(e) => e.stopPropagation()}>
-            <h3 className={styles.modalTitle}>Xác nhận đặt lại tiến độ?</h3>
-            <p className={styles.modalText}>
+      {/* Reset Confirmation Modal (Radix UI Primitives) */}
+      <Dialog.Root open={showResetModal} onOpenChange={setShowResetModal}>
+        <Dialog.Portal>
+          <Dialog.Overlay className={styles.modalOverlay} />
+          <Dialog.Content className={styles.modalBox}>
+            <Dialog.Title className={styles.modalTitle}>Xác nhận đặt lại tiến độ?</Dialog.Title>
+            <Dialog.Description className={styles.modalText}>
               Toàn bộ các chủ đề bạn đã đánh dấu hoàn thành trong lộ trình <strong>{data.title}</strong>{' '}
               sẽ được đưa về trạng thái ban đầu (0%). Hành động này không thể hoàn tác.
-            </p>
+            </Dialog.Description>
             <div className={styles.modalActions}>
               <button
                 type="button"
@@ -305,9 +310,9 @@ function RoadmapDetailView({ slug, onBack, data, setData }) {
                 Confirm Reset
               </button>
             </div>
-          </div>
-        </div>
-      )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
 
       {/* Footer */}
       <div className={styles.footerCopyright}>Made by Anh Tu - Share to be share</div>
@@ -366,7 +371,7 @@ export default function RoadmapDetail({ slug, onBack }) {
   if (error || !data) {
     return (
       <div className={styles.statusContainer}>
-        <h2 style={{ color: 'var(--ifm-color-danger, #ef4444)' }}>Không tìm thấy lộ trình</h2>
+        <h2 className={styles.errorTitle}>Không tìm thấy lộ trình</h2>
         <p>{error || 'Dữ liệu không tồn tại.'}</p>
         <button type="button" className={styles.backBtn} onClick={onBack}>
           ← Back to Roadmaps

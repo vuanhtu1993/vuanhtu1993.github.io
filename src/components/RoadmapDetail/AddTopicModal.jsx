@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import { useEditMode } from './EditModeContext';
 import styles from './AddTopicModal.module.css';
 
@@ -51,10 +52,8 @@ export default function AddTopicModal({
       setSearchTerm('');
       setSearchResults([]);
       setSelectedRefTopic(null);
-      const tabToUse = initialTab || 'ref';
-      setActiveTab(tabToUse);
+      setActiveTab(initialTab);
 
-      // Khởi tạo vị trí dựa trên initialInsertPosition
       if (initialInsertPosition?.type === 'start') {
         setSelectedPositionKey('start');
       } else if (initialInsertPosition?.type === 'after' && initialInsertPosition?.targetNodeId) {
@@ -64,46 +63,40 @@ export default function AddTopicModal({
       }
 
       setTimeout(() => {
-        if (tabToUse === 'ref') {
-          searchInputRef.current?.focus();
-        } else {
+        if (initialTab === 'new') {
           titleInputRef.current?.focus();
+        } else {
+          searchInputRef.current?.focus();
         }
       }, 100);
     }
   }, [isOpen, initialInsertPosition, initialTab]);
 
-  // Tìm kiếm topic từ kho khi đổi tab hoặc gõ từ khóa
+  // Tìm kiếm topics từ kho khi ở tab 'ref'
   useEffect(() => {
     if (!isOpen || activeTab !== 'ref') return;
-    const term = searchTerm.trim();
 
+    let isMounted = true;
     setIsSearching(true);
+
     const timer = setTimeout(async () => {
       try {
-        const data = await searchTopics(term, '');
-        setSearchResults(data || []);
+        const results = await searchTopics(searchTerm);
+        if (isMounted) {
+          setSearchResults(results);
+        }
       } catch (err) {
         console.error('Lỗi tìm kiếm topics:', err);
-        setSearchResults([]);
       } finally {
-        setIsSearching(false);
+        if (isMounted) setIsSearching(false);
       }
-    }, term ? 250 : 0);
+    }, 300);
 
-    return () => clearTimeout(timer);
-  }, [searchTerm, isOpen, activeTab, searchTopics]);
-
-  // Đóng modal khi bấm ESC
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen && !isProcessing) {
-        onClose();
-      }
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, isProcessing]);
+  }, [searchTerm, isOpen, activeTab, searchTopics]);
 
   if (!isOpen || !station) return null;
 
@@ -138,11 +131,9 @@ export default function AddTopicModal({
         return;
       }
       await onSave({
-        moduleId: station.id,
         title: title.trim(),
         description: description.trim(),
-        content: content.trim() ? content : `# ${title.trim()}\n\n${description.trim()}`,
-        resources: [],
+        content: content.trim(),
         insertPosition,
       });
     } else {
@@ -151,7 +142,6 @@ export default function AddTopicModal({
         return;
       }
       await onSave({
-        moduleId: station.id,
         title: selectedRefTopic.title,
         description: selectedRefTopic.description,
         content: selectedRefTopic.content,
@@ -167,26 +157,29 @@ export default function AddTopicModal({
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={isProcessing ? undefined : onClose}>
-      <div className={styles.modalDialog} onClick={(e) => e.stopPropagation()}>
-        {/* Modal Header */}
-        <div className={styles.modalHeader}>
-          <div>
-            <h3 className={styles.modalTitle}>Thêm Chủ đề vào Chặng</h3>
-            <p className={styles.modalSubtitle}>
-              Chặng: <strong>{station.title}</strong>
-            </p>
+    <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open && !isProcessing) onClose(); }}>
+      <Dialog.Portal>
+        <Dialog.Overlay className={styles.modalOverlay} />
+        <Dialog.Content className={styles.modalDialog}>
+          {/* Modal Header */}
+          <div className={styles.modalHeader}>
+            <div>
+              <Dialog.Title className={styles.modalTitle}>Thêm Chủ đề vào Chặng</Dialog.Title>
+              <Dialog.Description className={styles.modalSubtitle}>
+                Chặng: <strong>{station.title}</strong>
+              </Dialog.Description>
+            </div>
+            <Dialog.Close asChild>
+              <button
+                type="button"
+                className={styles.closeBtn}
+                disabled={isProcessing}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </Dialog.Close>
           </div>
-          <button
-            type="button"
-            className={styles.closeBtn}
-            onClick={onClose}
-            disabled={isProcessing}
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
 
         {/* Tabs chuyển đổi chế độ */}
         <div className={styles.tabsNav}>
@@ -397,7 +390,8 @@ export default function AddTopicModal({
             {isProcessing ? 'Saving...' : '+ Add Topic'}
           </button>
         </div>
-      </div>
-    </div>
-  );
+      </Dialog.Content>
+    </Dialog.Portal>
+  </Dialog.Root>
+);
 }

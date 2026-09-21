@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import MarkdownRenderer from '../shared/MarkdownRenderer';
 import { useEditMode } from './EditModeContext';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
@@ -86,17 +87,6 @@ export default function TopicDrawer({
       setShowRefSearchModal(false);
     }
   }, [topic, isOpen]);
-
-  // Đóng drawer khi bấm phím ESC
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen && !showDeleteModal && !showRefSearchModal) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, showDeleteModal, showRefSearchModal]);
 
   if (!isOpen || !topic) return null;
 
@@ -218,37 +208,47 @@ export default function TopicDrawer({
 
   return (
     <>
-      <div className={styles.drawerOverlay} onClick={onClose}>
-        <div className={styles.drawerPanel} onClick={(e) => e.stopPropagation()}>
-          {/* Header */}
-          <div className={styles.drawerHeader}>
-            <div className={styles.headerLeft}>
-              {isEditMode ? (
-                <input
-                  type="text"
-                  className={styles.editInput}
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Tiêu đề chủ đề..."
-                />
-              ) : (
-                <h2 className={styles.topicTitle} title={topic.title}>
-                  {topic.title}
-                </h2>
-              )}
+      <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
+        <Dialog.Portal>
+          <Dialog.Overlay className={styles.drawerOverlay} />
+          <Dialog.Content
+            className={styles.drawerPanel}
+            onEscapeKeyDown={(e) => {
+              if (showDeleteModal || showRefSearchModal) {
+                e.preventDefault();
+              }
+            }}
+          >
+            {/* Header */}
+            <div className={styles.drawerHeader}>
+              <div className={styles.headerLeft}>
+                {isEditMode ? (
+                  <input
+                    type="text"
+                    className={styles.editInput}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Tiêu đề chủ đề..."
+                  />
+                ) : (
+                  <Dialog.Title className={styles.topicTitle} title={topic.title}>
+                    {topic.title}
+                  </Dialog.Title>
+                )}
+              </div>
+              <Dialog.Close asChild>
+                <button
+                  type="button"
+                  className={styles.closeButton}
+                  aria-label="Close details"
+                >
+                  ✕
+                </button>
+              </Dialog.Close>
             </div>
-            <button
-              type="button"
-              className={styles.closeButton}
-              onClick={onClose}
-              aria-label="Close details"
-            >
-              ✕
-            </button>
-          </div>
 
-          {/* Body */}
-          <div className={styles.drawerBody}>
+            {/* Body */}
+            <div className={styles.drawerBody}>
             {/* Edit Mode Notification Banner */}
             {isEditMode && (
               <div className={styles.editBanner}>
@@ -313,7 +313,7 @@ export default function TopicDrawer({
               topic.description && (
                 <div className={styles.descriptionBox}>
                   <strong>Khái quát cốt lõi:</strong>
-                  <div style={{ marginTop: '0.45rem' }}>
+                  <div className={styles.descriptionMarkdown}>
                     <MarkdownRenderer content={topic.description} />
                   </div>
                 </div>
@@ -325,7 +325,7 @@ export default function TopicDrawer({
               <div>
                 <div className={styles.editLabelRow}>
                   <label className={styles.editLabel}>Nội Dung Chi Tiết (Markdown)</label>
-                  <div style={{ display: 'flex', gap: '0.4rem' }}>
+                  <div className={styles.editActionButtons}>
                     <button
                       type="button"
                       className={styles.insertMermaidBtn}
@@ -353,15 +353,8 @@ export default function TopicDrawer({
                 </div>
 
                 {showImageInserter && (
-                  <div
-                    className={styles.addResourceForm}
-                    style={{
-                      marginBottom: '0.85rem',
-                      background: 'rgba(59, 130, 246, 0.05)',
-                      borderColor: '#3b82f6',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#2563eb' }}>
+                  <div className={`${styles.addResourceForm} ${styles.imageInserterForm}`}>
+                    <span className={styles.imageInserterTitle}>
                       Chèn hình ảnh Cloudinary vào nội dung:
                     </span>
                     <div className={styles.addResourceInputs}>
@@ -370,20 +363,19 @@ export default function TopicDrawer({
                         placeholder="Dán link Cloudinary (https://res.cloudinary.com/...)"
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
-                        style={{ flex: 2, minWidth: '220px' }}
+                        className={styles.inputUrl}
                       />
                       <input
                         type="text"
                         placeholder="Mô tả / Chú thích ảnh (Alt text)..."
                         value={imageAlt}
                         onChange={(e) => setImageAlt(e.target.value)}
-                        style={{ flex: 1, minWidth: '150px' }}
+                        className={styles.inputAlt}
                       />
                     </div>
                     <button
                       type="button"
-                      className={styles.addResourceBtn}
-                      style={{ background: '#2563eb' }}
+                      className={`${styles.addResourceBtn} ${styles.insertImageBtnSubmit}`}
                       onClick={handleInsertImage}
                       disabled={!imageUrl.trim()}
                     >
@@ -428,15 +420,14 @@ export default function TopicDrawer({
                   <div key={index} className={styles.resourceEditRow}>
                     <div>
                       <span
-                        className={`${styles.resourceTypeBadge} ${
+                        className={`${styles.resourceTypeBadge} ${styles.resourceBadgeMargin} ${
                           BADGE_CLASS_MAP[res.type?.toLowerCase()] || ''
                         }`}
-                        style={{ marginRight: '0.5rem' }}
                       >
                         {RESOURCE_LABELS[res.type?.toLowerCase()] || 'Link'}
                       </span>
                       <strong>{res.title}</strong>
-                      <span style={{ fontSize: '0.8rem', color: '#64748b', marginLeft: '0.5rem' }}>
+                      <span className={styles.resourceUrl}>
                         ({res.url})
                       </span>
                     </div>
@@ -452,7 +443,7 @@ export default function TopicDrawer({
                 ))}
 
                 <div className={styles.addResourceForm}>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Thêm tài nguyên mới:</span>
+                  <span className={styles.addResourceLabel}>Thêm tài nguyên mới:</span>
                   <div className={styles.addResourceInputs}>
                     <select
                       value={newResType}
@@ -470,14 +461,14 @@ export default function TopicDrawer({
                       placeholder="Tiêu đề tài liệu..."
                       value={newResTitle}
                       onChange={(e) => setNewResTitle(e.target.value)}
-                      style={{ flex: 1, minWidth: '150px' }}
+                      className={styles.addResourceInput}
                     />
                     <input
                       type="url"
                       placeholder="https://..."
                       value={newResUrl}
                       onChange={(e) => setNewResUrl(e.target.value)}
-                      style={{ flex: 1, minWidth: '150px' }}
+                      className={styles.addResourceInput}
                     />
                   </div>
                   <button
@@ -567,7 +558,7 @@ export default function TopicDrawer({
                     })}
                   </div>
                 ) : (
-                  <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '0.35rem 0' }}>
+                  <p className={styles.emptyChildNotice}>
                     Chưa có chủ đề con nào trực thuộc topic này.
                   </p>
                 )}
@@ -627,8 +618,9 @@ export default function TopicDrawer({
             )}
             <div className={styles.footerCopyright}>Made by Anh Tu - Share to be share</div>
           </div>
-        </div>
-      </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
 
       {/* Modal xác nhận xoá topic */}
       <ConfirmDeleteModal

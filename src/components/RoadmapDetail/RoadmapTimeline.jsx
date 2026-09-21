@@ -50,7 +50,7 @@ export default function RoadmapTimeline({
   expandedModules,
   onToggleModule,
 }) {
-  const { isEditMode, isDevMode, updateModule, deleteModule, addModule, deleteTopic, addTopic } = useEditMode();
+  const { isEditMode, updateModule, deleteModule, addModule, deleteTopic, addTopic } = useEditMode();
 
   // Modals state
   const [editingModule, setEditingModule] = useState(null);
@@ -336,14 +336,14 @@ export default function RoadmapTimeline({
                         )}
 
                         {/* Trạng thái chặng rỗng khi không ở Edit Mode */}
-                        {station.subtopics.length === 0 && !isEditMode && !isDevMode && (
+                        {station.subtopics.length === 0 && !isEditMode && (
                           <div className={styles.emptyModuleNotice}>
                             <p>Chặng này chưa có chủ đề nào.</p>
                           </div>
                         )}
 
                         {/* Danh sách các chủ đề dạng Card Grid */}
-                        {(station.subtopics.length > 0 || isEditMode || isDevMode) && (
+                        {(station.subtopics.length > 0 || isEditMode) && (
                           <div className={styles.topicsContainer}>
                             <div className={styles.topicGrid}>
                               {station.subtopics.map((topic, tIdx) => {
@@ -381,7 +381,7 @@ export default function RoadmapTimeline({
                                         className={styles.topicCardActions}
                                         onClick={(e) => e.stopPropagation()}
                                       >
-                                        {(isEditMode || isDevMode) && (
+                                        {isEditMode && (
                                           <button
                                             type="button"
                                             className={styles.quickDeleteTopicBtn}
@@ -437,8 +437,8 @@ export default function RoadmapTimeline({
                                 );
                               })}
 
-                              {/* Card thêm mới ở cuối trong chế độ Edit Mode hoặc Dev Mode */}
-                              {(isEditMode || isDevMode) && (
+                              {/* Card thêm mới ở cuối trong chế độ Edit Mode */}
+                              {isEditMode && (
                                 <div
                                   className={styles.addTopicCard}
                                   onClick={() => handleOpenAddTopic(station, { type: 'end' }, 'ref')}

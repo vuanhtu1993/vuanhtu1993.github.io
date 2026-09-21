@@ -1,0 +1,15 @@
+.loadingFallback {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+
+:global([data-theme='dark']) .loadingFallback {
+  color: #94a3b8;
+}

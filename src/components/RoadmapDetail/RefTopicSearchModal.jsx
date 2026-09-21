@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import { useEditMode } from './EditModeContext';
 import styles from './RefTopicSearchModal.module.css';
 
@@ -18,73 +19,69 @@ export default function RefTopicSearchModal({
   // Focus ô tìm kiếm khi mở modal
   useEffect(() => {
     if (isOpen) {
-      setSearchTerm('');
-      setResults([]);
       setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
     }
   }, [isOpen]);
 
-  // Tự động tải danh sách gợi ý ban đầu hoặc tìm kiếm theo từ khóa
+  // Tìm kiếm topics
   useEffect(() => {
     if (!isOpen) return;
-    const term = searchTerm.trim();
 
+    let isMounted = true;
     setIsSearching(true);
-    const handler = setTimeout(
-      async () => {
-        try {
-          const parentId = parentTopic?.nodeId || parentTopic?.id || '';
-          const data = await searchTopics(term, parentId);
-          setResults(data || []);
-        } catch (err) {
-          console.error('Lỗi khi tìm kiếm topics:', err);
-          setResults([]);
-        } finally {
-          setIsSearching(false);
+
+    const timer = setTimeout(async () => {
+      try {
+        const data = await searchTopics(searchTerm);
+        if (isMounted) {
+          const parentId = parentTopic?.nodeId || parentTopic?.id || parentTopic?.title;
+          const filtered = data.filter((t) => {
+            const tId = t.nodeId || t.id || t.title;
+            return tId !== parentId && t.title?.toLowerCase() !== parentTopic?.title?.toLowerCase();
+          });
+          setResults(filtered);
         }
-      },
-      term ? 250 : 0
-    );
-
-    return () => clearTimeout(handler);
-  }, [searchTerm, isOpen, parentTopic, searchTopics]);
-
-  // Đóng modal khi bấm ESC
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen && !isProcessing) {
-        onClose();
+      } catch (err) {
+        console.error('Lỗi khi tìm kiếm topics:', err);
+      } finally {
+        if (isMounted) setIsSearching(false);
       }
+    }, 300);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, isProcessing]);
+  }, [searchTerm, isOpen, searchTopics, parentTopic]);
 
   if (!isOpen || !parentTopic) return null;
 
   return (
-    <div className={styles.modalOverlay} onClick={isProcessing ? undefined : onClose}>
-      <div className={styles.modalDialog} onClick={(e) => e.stopPropagation()}>
-        {/* Header */}
-        <div className={styles.modalHeader}>
-          <div>
-            <h3 className={styles.modalTitle}>Tham chiếu Topic con</h3>
-            <p className={styles.modalSubtitle}>
-              Gán topic vào chủ đề cha: <strong>{parentTopic.title}</strong>
-            </p>
+    <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open && !isProcessing) onClose(); }}>
+      <Dialog.Portal>
+        <Dialog.Overlay className={styles.modalOverlay} />
+        <Dialog.Content className={styles.modalDialog}>
+          {/* Header */}
+          <div className={styles.modalHeader}>
+            <div>
+              <Dialog.Title className={styles.modalTitle}>Tham chiếu Topic con</Dialog.Title>
+              <Dialog.Description className={styles.modalSubtitle}>
+                Gán topic vào chủ đề cha: <strong>{parentTopic.title}</strong>
+              </Dialog.Description>
+            </div>
+            <Dialog.Close asChild>
+              <button
+                type="button"
+                className={styles.closeBtn}
+                disabled={isProcessing}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </Dialog.Close>
           </div>
-          <button
-            type="button"
-            className={styles.closeBtn}
-            onClick={onClose}
-            disabled={isProcessing}
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
 
         {/* Search Input */}
         <div className={styles.searchBoxWrapper}>
@@ -143,7 +140,7 @@ export default function RefTopicSearchModal({
           ) : (
             <div className={styles.resultsList}>
               {!searchTerm.trim() && (
-                <div style={{ fontSize: '0.85rem', color: '#059669', marginBottom: '0.6rem', fontWeight: 600 }}>
+                <div className={styles.suggestionTitle}>
                   Gợi ý chủ đề từ các lộ trình:
                 </div>
               )}
@@ -199,7 +196,8 @@ export default function RefTopicSearchModal({
             Close
           </button>
         </div>
-      </div>
-    </div>
+      </Dialog.Content>
+    </Dialog.Portal>
+  </Dialog.Root>
   );
 }

@@ -1,14 +1,21 @@
+@import './roadmap-theme.css';
+
 /* ===== TOPIC DRAWER OVERLAY & PANEL ===== */
 
 .drawerOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.65); /* Tối màu backdrop hơn để làm nổi bật panel */
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(6px);
-  z-index: 1000;
-  display: flex;
-  justify-content: flex-end;
+  z-index: 9990;
+}
+
+.drawerOverlay[data-state='open'] {
   animation: fadeIn 0.2s ease-out;
+}
+
+.drawerOverlay[data-state='closed'] {
+  animation: fadeOut 0.15s ease-in;
 }
 
 @keyframes fadeIn {
@@ -16,31 +23,63 @@
   to { opacity: 1; }
 }
 
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 .drawerPanel {
-  width: 100%;
-  max-width: 660px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  max-width: 100vw;
   height: 100%;
-  /* NỀN ĐẶC HOÀN TOÀN - Tuyệt đối không để lộ nội dung bên dưới */
-  background-color: #ffffff;
-  color: #1e293b;
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--rm-bg-card);
+  color: var(--rm-text-main);
   box-shadow: -10px 0 35px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  animation: slideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
-  border-left: 1px solid #e2e8f0;
+  border-left: none;
+  outline: none;
+  z-index: 9995;
 }
 
-:global([data-theme='dark']) .drawerPanel {
-  background-color: #18191a;
-  color: #f1f5f9;
-  border-left: 1px solid #2e2e32;
-  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+@media (min-width: 768px) {
+  .drawerPanel {
+    width: 100%;
+    max-width: 660px;
+    border-left: 1px solid var(--rm-border);
+  }
+}
+
+.drawerPanel[data-state='open'] {
+  animation: slideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawerPanel[data-state='closed'] {
+  animation: slideOut 0.2s ease-in;
 }
 
 @keyframes slideIn {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+:global([data-theme='dark']) .drawerPanel {
+  background-color: var(--rm-bg-card);
+  color: var(--rm-text-main);
+  border-left-color: var(--rm-border);
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
 }
 
 /* ===== DRAWER HEADER ===== */
@@ -907,5 +946,81 @@
 .addRefChildBtn:hover:not(:disabled) {
   background: rgba(37, 194, 160, 0.08);
 }
+
+/* ===== REPLACEMENTS FOR INLINE STYLES ===== */
+.descriptionMarkdown {
+  margin-top: 0.45rem;
+}
+
+.editActionButtons {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.imageInserterForm {
+  margin-bottom: 0.85rem;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid #3b82f6;
+  padding: 1rem;
+  border-radius: var(--rm-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.imageInserterTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+:global([data-theme='dark']) .imageInserterTitle {
+  color: #60a5fa;
+}
+
+.inputUrl {
+  flex: 2;
+  min-width: 200px;
+}
+
+.inputAlt {
+  flex: 1;
+  min-width: 140px;
+}
+
+.insertImageBtnSubmit {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.resourceBadgeMargin {
+  margin-right: 0.5rem;
+}
+
+.resourceUrl {
+  font-size: 0.8rem;
+  color: var(--rm-text-muted);
+  margin-left: 0.5rem;
+  word-break: break-all;
+}
+
+.addResourceLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--rm-text-main);
+}
+
+.addResourceInput {
+  flex: 1;
+  min-width: 140px;
+}
+
+.emptyChildNotice {
+  font-size: 0.85rem;
+  color: var(--rm-text-muted);
+  margin: 0.35rem 0;
+}
+
 
 

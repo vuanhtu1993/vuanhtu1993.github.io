@@ -606,7 +606,7 @@
       "id": "Z1oGzjFOUVhGFXuY-vJL",
       "name": "Z1oGzjFOUVhGFXuY-vJL",
       "title": "Building REST APIs",
-      "description": "Building REST APIs is one of the primary use cases for NestJS. Using decorators like @Controller(), @Get(), @Post(), @Put(), @Delete(), NestJS provides an elegant way to define routes and handle HTTP requests. Understanding request payloads, query parameters, route parameters, and DTOs (Data Transfer Objects) is essential for building robust APIs.",
+      "description": "Building REST APIs is one of the primary use cases for NestJS. Using decorators like @Controller(), @Get(), @Post(), @Put(), @Delete(), NestJS provides an elegant way to define routes and handle HTTP requests. Understanding request payloads, query parameters, route parameters, and DTOs (Data Transfer Objects) is essential for building robust APIs.\n![HTTP Request](https://miro.medium.com/v2/resize:fit:1200/1*u3yi6exZDRG3uGwnhsiJwg.jpeg)",
       "resources": [
         {
           "type": "official",
@@ -1090,7 +1090,7 @@
       "id": "aPma34T9jfvypiRT9V21",
       "name": "aPma34T9jfvypiRT9V21",
       "title": "Middleware",
-      "description": "Middleware is a function that is called before the route handler. Middleware functions have access to the request and response objects, and the next() middleware function. They can execute code, modify request/response objects, end the request-response cycle, or call the next middleware. NestJS supports both class-based and functional middleware.",
+      "description": "Middleware is a function that is called before the route handler. Middleware functions have access to the request and response objects, and the next() middleware function. They can execute code, modify request/response objects, end the request-response cycle, or call the next middleware. NestJS supports both class-based and functional middleware.\n```mermaid\ngraph LR\n    classDef comp fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;\n    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;\n    classDef module fill:#e8f5e9,stroke:#4caf50,color:#000;\n    \n    Req([🌐 Request]) --> MW:::comp\n    \n    subgraph MW [Middleware - Tiền xử lý]\n        direction LR\n        GlobalMW(Global Scope):::global --> ModuleMW(Module Scope):::module\n    end\n    \n    MW --> Next([Tiếp tục luồng...])\n```",
       "resources": [
         {
           "type": "official",
@@ -1229,7 +1229,7 @@
       "id": "gYB3R8LfYENFWNfJXhfz",
       "name": "gYB3R8LfYENFWNfJXhfz",
       "title": "Guards",
-      "description": "Guards determine whether a given request will be handled by the route handler, typically used for authentication and authorization. A guard is a class implementing the CanActivate interface with a canActivate() method that returns a boolean. Guards execute after middleware but before interceptors and pipes.",
+      "description": "Guards determine whether a given request will be handled by the route handler, typically used for authentication and authorization. A guard is a class implementing the CanActivate interface with a canActivate() method that returns a boolean. Guards execute after middleware but before interceptors and pipes.\n```mermaid\ngraph LR\n    classDef comp fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;\n    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;\n    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;\n    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;\n    \n    Req([Từ Middleware]) --> GD:::comp\n    \n    subgraph GD [Guard - Trạm gác bảo vệ]\n        direction LR\n        GlobalGuard(Global Scope):::global --> ControllerGuard(Controller Scope):::controller --> RouteGuard(Method Scope):::route\n    end\n    \n    GD -- Cho phép --> Next([Đến Interceptor...])\n    GD -. Từ chối .-> Error([❌ 403 Forbidden])\n```",
       "resources": [
         {
           "type": "official",
@@ -1373,7 +1373,7 @@
       "id": "5WsmpXFJppbDIycvYo6H",
       "name": "5WsmpXFJppbDIycvYo6H",
       "title": "Interceptors and Pipes",
-      "description": "Interceptors and Pipes are two powerful NestJS features. Pipes transform and validate input data before it reaches the route handler. Interceptors wrap the route handler execution, allowing you to add extra logic before/after handler execution, transform results, extend behavior, and override functions. Both use the @Injectable() decorator and can be scoped globally, per-controller, or per-route.",
+      "description": "Interceptors and Pipes are two powerful NestJS features. Pipes transform and validate input data before it reaches the route handler. Interceptors wrap the route handler execution, allowing you to add extra logic before/after handler execution, transform results, extend behavior, and override functions. Both use the @Injectable() decorator and can be scoped globally, per-controller, or per-route.\n<br>\n**Intercepter pre and post**\n```mermaid\ngraph TD\n    classDef req fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;\n    classDef res fill:#4a90e2,stroke:#2b3440,stroke-width:2px,color:#fff;\n    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;\n    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;\n    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;\n    \n    Req([Từ Guard]) --> IntPre:::req\n    \n    subgraph IntPre [Interceptor Pre - Can thiệp trước]\n        direction LR\n        GlobalIntPre(Global Scope):::global --> ControllerIntPre(Controller Scope):::controller --> RouteIntPre(Method Scope):::route\n    end\n    \n    IntPre --> Next([Đến Pipe & Handler...])\n    HandlerReturn([Kết quả từ Handler Controller]) --> IntPost:::res\n    \n    subgraph IntPost [Interceptor Post - Gói Response]\n        direction RL\n        RouteIntPost(Method Scope):::route --> ControllerIntPost(Controller Scope):::controller --> GlobalIntPost(Global Scope):::global\n    end\n    \n    IntPost --> Res([Response gửi về Client])\n```\n\n**Pipes**\n```mermaid\ngraph LR\n    classDef comp fill:#2b3440,stroke:#8b9eb3,stroke-width:2px,color:#fff;\n    classDef global fill:#e1f5fe,stroke:#03a9f4,color:#000;\n    classDef controller fill:#e8f5e9,stroke:#4caf50,color:#000;\n    classDef route fill:#fff3e0,stroke:#ff9800,color:#000;\n    \n    Req([Data từ Request]) --> PP:::comp\n    \n    subgraph PP [4. Pipe - Bộ lọc dữ liệu tinh]\n        direction LR\n        GlobalPipe(Global Scope):::global --> ControllerPipe(Controller Scope):::controller --> RoutePipe(Method Scope):::route --> ParamPipe(Tham số):::route\n    end\n    \n    PP -- Dữ liệu chuẩn --> HTTPHandler((Xử lý HTTP <br/>Controller & Service))\n    PP -. Data lỗi .-> Error([❌ 400 Bad Request])\n```",
       "resources": [
         {
           "type": "official",

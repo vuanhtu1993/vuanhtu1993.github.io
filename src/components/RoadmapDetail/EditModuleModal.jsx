@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import MarkdownRenderer from '../shared/MarkdownRenderer';
 import styles from './EditModuleModal.module.css';
 
@@ -21,16 +22,6 @@ export default function EditModuleModal({
     }
   }, [module, isOpen]);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen && !isSaving) {
-        onCancel();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onCancel, isSaving]);
-
   if (!isOpen || !module) return null;
 
   const handleSubmit = (e) => {
@@ -43,19 +34,22 @@ export default function EditModuleModal({
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={isSaving ? undefined : onCancel}>
-      <div className={styles.modalDialog} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>Chỉnh sửa Chặng Module</h3>
-          <button
-            type="button"
-            className={styles.closeIconBtn}
-            onClick={onCancel}
-            disabled={isSaving}
-          >
-            ✕
-          </button>
-        </div>
+    <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open && !isSaving) onCancel(); }}>
+      <Dialog.Portal>
+        <Dialog.Overlay className={styles.modalOverlay} />
+        <Dialog.Content className={styles.modalDialog}>
+          <div className={styles.modalHeader}>
+            <Dialog.Title className={styles.modalTitle}>Chỉnh sửa Chặng Module</Dialog.Title>
+            <Dialog.Close asChild>
+              <button
+                type="button"
+                className={styles.closeIconBtn}
+                disabled={isSaving}
+              >
+                ✕
+              </button>
+            </Dialog.Close>
+          </div>
 
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
@@ -119,7 +113,8 @@ export default function EditModuleModal({
             </button>
           </div>
         </form>
-      </div>
-    </div>
-  );
+      </Dialog.Content>
+    </Dialog.Portal>
+  </Dialog.Root>
+);
 }

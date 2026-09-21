@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import MarkdownRenderer from '../shared/MarkdownRenderer';
 import styles from './AddModuleModal.module.css';
 
@@ -38,17 +39,6 @@ export default function AddModuleModal({
     }
   }, [isOpen, insertPosition]);
 
-  // Đóng modal khi bấm ESC
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen && !isSaving) {
-        onCancel();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onCancel, isSaving]);
-
   if (!isOpen) return null;
 
   // Tính toán insertPosition object gửi lên API
@@ -75,25 +65,28 @@ export default function AddModuleModal({
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={isSaving ? undefined : onCancel}>
-      <div className={styles.modalDialog} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalHeader}>
-          <div>
-            <h3 className={styles.modalTitle}>Thêm Chặng mới (Module)</h3>
-            <p className={styles.modalSubtitle}>
-              Tạo một chặng kiến thức mới trên trục thời gian Roadmap
-            </p>
+    <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open && !isSaving) onCancel(); }}>
+      <Dialog.Portal>
+        <Dialog.Overlay className={styles.modalOverlay} />
+        <Dialog.Content className={styles.modalDialog}>
+          <div className={styles.modalHeader}>
+            <div>
+              <Dialog.Title className={styles.modalTitle}>Thêm Chặng mới (Module)</Dialog.Title>
+              <Dialog.Description className={styles.modalSubtitle}>
+                Tạo một chặng kiến thức mới trên trục thời gian Roadmap
+              </Dialog.Description>
+            </div>
+            <Dialog.Close asChild>
+              <button
+                type="button"
+                className={styles.closeIconBtn}
+                disabled={isSaving}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </Dialog.Close>
           </div>
-          <button
-            type="button"
-            className={styles.closeIconBtn}
-            onClick={onCancel}
-            disabled={isSaving}
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
 
         <form onSubmit={handleSubmit}>
           {/* Dropdown chọn vị trí chặng */}
@@ -185,7 +178,8 @@ export default function AddModuleModal({
             </button>
           </div>
         </form>
-      </div>
-    </div>
-  );
+      </Dialog.Content>
+    </Dialog.Portal>
+  </Dialog.Root>
+);
 }

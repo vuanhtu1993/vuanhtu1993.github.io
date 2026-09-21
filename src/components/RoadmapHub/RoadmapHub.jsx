@@ -113,20 +113,22 @@ export default function RoadmapHub({ onSelectRoadmap }) {
 
       {/* Filter & Search Controls */}
       <div className={styles.filterControls}>
-        <div className={styles.categoryPills}>
-          {CATEGORIES.map((cat) => {
-            const isActive = selectedCategory === cat.key;
-            return (
-              <button
-                key={cat.key}
-                type="button"
-                className={`${styles.categoryPill} ${isActive ? styles.categoryPillActive : ''}`}
-                onClick={() => setSelectedCategory(cat.key)}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
+        <div className={styles.categoryPillsWrapper}>
+          <div className={styles.categoryPills}>
+            {CATEGORIES.map((cat) => {
+              const isActive = selectedCategory === cat.key;
+              return (
+                <button
+                  key={cat.key}
+                  type="button"
+                  className={`${styles.categoryPill} ${isActive ? styles.categoryPillActive : ''}`}
+                  onClick={() => setSelectedCategory(cat.key)}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className={styles.searchWrapper}>
@@ -172,7 +174,6 @@ export default function RoadmapHub({ onSelectRoadmap }) {
                 <div>
                   <div className={styles.cardHeader}>
                     <div className={styles.techBadge}>{badgeText}</div>
-                    <span className={styles.categoryBadge}>{rm.categoryNameVi?.split(' ')[0] || 'Kỹ năng'}</span>
                   </div>
 
                   <h3 className={styles.cardTitle}>{rm.title}</h3>

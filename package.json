@@ -37,6 +37,8 @@
     "@mozilla/readability": "^0.6.0",
     "@napi-rs/canvas": "^0.1.100",
     "@playwright/browser-chromium": "^1.60.0",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@radix-ui/react-tabs": "^1.1.21",
     "canvas": "^3.2.3",
     "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",

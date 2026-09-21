@@ -2116,28 +2116,6 @@
       "nextModules": [],
       "subtopics": [
         {
-          "_id": "6aab5fc513e4b2aeae8f4462",
-          "roadmapSlug": "system-design",
-          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
-          "order": "19.1",
-          "name": "health-monitoring",
-          "nodeId": "hkjYvLoVt9xKDzubm0Jy3",
-          "title": "Health Monitoring",
-          "description": "Health monitoring tracks whether individual components of a system are running and responding correctly, typically through periodic health check requests. A failing health check can trigger alerts or automatic actions, like removing an unhealthy instance from a load balancer's rotation. This is usually the most basic and immediate layer of monitoring.",
-          "content": "# Health Monitoring\n \nHealth monitoring tracks whether individual components of a system are running and responding correctly, typically through periodic health check requests. A failing health check can trigger alerts or automatic actions, like removing an unhealthy instance from a load balancer's rotation. This is usually the most basic and immediate layer of monitoring.\n\nVisit the following resources to learn more:\n\n- [@article@Health Monitoring of a System](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#health-monitoring)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Health Monitoring of a System",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#health-monitoring"
-            }
-          ],
-          "parentTopic": {
-            "id": "hDFYlGFYwcwWXLmrxodFX",
-            "title": "Monitoring"
-          }
-        },
-        {
           "_id": "6aab5fc513e4b2aeae8f446b",
           "roadmapSlug": "system-design",
           "moduleId": "hDFYlGFYwcwWXLmrxodFX",
@@ -2157,6 +2135,28 @@
               "type": "article",
               "title": "Instrumenting using Open Telemetry",
               "url": "https://opentelemetry.io/docs/concepts/what-is-opentelemetry"
+            }
+          ],
+          "parentTopic": {
+            "id": "hDFYlGFYwcwWXLmrxodFX",
+            "title": "Monitoring"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4462",
+          "roadmapSlug": "system-design",
+          "moduleId": "hDFYlGFYwcwWXLmrxodFX",
+          "order": "19.1",
+          "name": "health-monitoring",
+          "nodeId": "hkjYvLoVt9xKDzubm0Jy3",
+          "title": "Health Monitoring",
+          "description": "Health monitoring tracks whether individual components of a system are running and responding correctly, typically through periodic health check requests. A failing health check can trigger alerts or automatic actions, like removing an unhealthy instance from a load balancer's rotation. This is usually the most basic and immediate layer of monitoring.",
+          "content": "# Health Monitoring\n \nHealth monitoring tracks whether individual components of a system are running and responding correctly, typically through periodic health check requests. A failing health check can trigger alerts or automatic actions, like removing an unhealthy instance from a load balancer's rotation. This is usually the most basic and immediate layer of monitoring.\n\nVisit the following resources to learn more:\n\n- [@article@Health Monitoring of a System](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#health-monitoring)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Health Monitoring of a System",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#health-monitoring"
             }
           ],
           "parentTopic": {
@@ -3366,28 +3366,6 @@
       "nextModules": [],
       "subtopics": [
         {
-          "_id": "6aab5fc513e4b2aeae8f4490",
-          "roadmapSlug": "system-design",
-          "moduleId": "extra-topics",
-          "order": "28.1",
-          "name": "backends-for-frontend",
-          "nodeId": "n4It-lr7FFtSY83DcGydX",
-          "title": "Backends for Frontend",
-          "description": "The backends for frontend pattern creates separate backend services tailored to the specific needs of different client types, such as mobile apps versus web browsers, rather than exposing one generic backend to all clients. Each backend can shape its API and responses to fit what that particular client needs. This avoids a single backend having to compromise between very different client requirements.",
-          "content": "# Backends for Frontend\n \nThe backends for frontend pattern creates separate backend services tailored to the specific needs of different client types, such as mobile apps versus web browsers, rather than exposing one generic backend to all clients. Each backend can shape its API and responses to fit what that particular client needs. This avoids a single backend having to compromise between very different client requirements.\n\nVisit the following resources to learn more:\n\n- [@article@Backends for Frontends pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends)",
-          "resources": [
-            {
-              "type": "article",
-              "title": "Backends for Frontends pattern",
-              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends"
-            }
-          ],
-          "parentTopic": {
-            "id": "extra-topics",
-            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
-          }
-        },
-        {
           "_id": "6aab5fc513e4b2aeae8f4499",
           "roadmapSlug": "system-design",
           "moduleId": "extra-topics",
@@ -3402,6 +3380,28 @@
               "type": "article",
               "title": "Gateway Aggregation pattern",
               "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation"
+            }
+          ],
+          "parentTopic": {
+            "id": "extra-topics",
+            "title": "Các Chủ Đề Mở Rộng & Bổ Trợ"
+          }
+        },
+        {
+          "_id": "6aab5fc513e4b2aeae8f4490",
+          "roadmapSlug": "system-design",
+          "moduleId": "extra-topics",
+          "order": "28.1",
+          "name": "backends-for-frontend",
+          "nodeId": "n4It-lr7FFtSY83DcGydX",
+          "title": "Backends for Frontend",
+          "description": "The backends for frontend pattern creates separate backend services tailored to the specific needs of different client types, such as mobile apps versus web browsers, rather than exposing one generic backend to all clients. Each backend can shape its API and responses to fit what that particular client needs. This avoids a single backend having to compromise between very different client requirements.",
+          "content": "# Backends for Frontend\n \nThe backends for frontend pattern creates separate backend services tailored to the specific needs of different client types, such as mobile apps versus web browsers, rather than exposing one generic backend to all clients. Each backend can shape its API and responses to fit what that particular client needs. This avoids a single backend having to compromise between very different client requirements.\n\nVisit the following resources to learn more:\n\n- [@article@Backends for Frontends pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends)",
+          "resources": [
+            {
+              "type": "article",
+              "title": "Backends for Frontends pattern",
+              "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends"
             }
           ],
           "parentTopic": {

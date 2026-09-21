@@ -4,6 +4,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import { useLocation, useHistory } from '@docusaurus/router';
 import RoadmapHub from '@site/src/components/RoadmapHub/RoadmapHub';
 import RoadmapDetail from '@site/src/components/RoadmapDetail/RoadmapDetail';
+import styles from './RoadmapPage.module.css';
 
 function RoadmapApp() {
   const location = useLocation();
@@ -34,7 +35,7 @@ export default function RoadmapPage() {
       title="Developer Roadmaps"
       description="Bản đồ và lộ trình phát triển kỹ thuật phần mềm toàn diện, học tuần tự theo từng chặng (Phased Milestones)."
     >
-      <BrowserOnly fallback={<div style={{ padding: '4rem 1rem', textAlign: 'center' }}>Đang nạp lộ trình...</div>}>
+      <BrowserOnly fallback={<div className={styles.loadingFallback}>Đang nạp lộ trình...</div>}>
         {() => <RoadmapApp />}
       </BrowserOnly>
     </Layout>
