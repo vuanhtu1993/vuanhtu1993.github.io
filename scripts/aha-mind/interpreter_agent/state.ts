@@ -95,8 +95,8 @@ export interface InterpreterState {
 
 export const StateAnnotation = Annotation.Root({
   shouldTranslate: Annotation<boolean>({
-    reducer: (x, y) => y ?? x ?? false,
-    default: () => false,
+    reducer: (x, y) => y ?? x ?? true,
+    default: () => true,
   }),
   pdfPath: Annotation<string>({
     reducer: (x, y) => y ?? x ?? "",

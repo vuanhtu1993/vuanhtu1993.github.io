@@ -14,7 +14,7 @@
  * - Nếu hết → kết thúc (END)
  *
  * Cách dùng:
- *   npm run aha-mind:interpreter -- --pdf paper/my-book.pdf --title "Book Title" [--author "Author Name"] [--chapters 1,3,5]
+ *   npm run aha-mind:interpreter -- --pdf paper/my-book.pdf --title "Book Title" [--pages 10-20] [--no-translate]
  */
 
 import "dotenv/config";
@@ -28,6 +28,7 @@ import { translatorNode } from "./nodes/translator";
 import { unmaskerNode } from "./nodes/unmasker";
 import { mdxExporterNode } from "./nodes/mdx_exporter";
 import { InterpreterState } from "./state";
+import { geminiService } from "../utils/gemini";
 import * as path from "path";
 
 // ─── Chapter Loop Logic ───────────────────────────────────────────────────────
@@ -173,7 +174,13 @@ function parseArgs(): {
   const authorArg = getMultiWord("--author") ?? "Unknown Author";
   const pagesArg = getMultiWord("--pages");
   const noiseArg = getArray("--noise");
-  const shouldTranslate = args.includes("--translate");
+
+  // ── Translation Flag (Mặc định: true, tắt bằng --no-translate hoặc --translate false) ──
+  const isDisableTranslate = 
+    args.includes("--no-translate") || 
+    args.includes("--translate=false") || 
+    getMultiWord("--translate") === "false";
+  const shouldTranslate = !isDisableTranslate;
 
   let startPage = 1;
   let endPage = Infinity;
@@ -230,7 +237,12 @@ ${"=".repeat(60)}
 ${"=".repeat(60)}
 `);
 
-
+  // ── Startup Key Validation ──
+  // Kiểm tra tất cả API keys TRƯỚC khi pipeline chạy.
+  // Chỉ cần validate khi có bước translate (gọi Gemini).
+  if (shouldTranslate) {
+    await geminiService.validateKeys();
+  }
 
   const today = new Date().toISOString().split("T")[0];
   const bookSlug = createSlug(title);

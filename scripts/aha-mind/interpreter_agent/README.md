@@ -7,17 +7,18 @@ Pipeline tự động dịch sách kỹ thuật PDF sang bài blog MDX tiếng V
 ## Cách dùng
 
 ```bash
-# Cú pháp đầy đủ
+# Cú pháp cơ bản (Mặc định tự động dịch sang Tiếng Việt)
 npm run aha-mind:interpreter -- \
   --pdf paper/my-book.pdf \
   --title "Tên Sách Tiếng Anh" \
-  --author "Tên Tác Giả"
+  --author "Tên Tác Giả" \
+  --pages 1-10
 
-# Ví dụ với whitepaper LLM
+# Nếu chỉ muốn trích xuất và giữ nguyên tiếng Anh (không dịch):
 npm run aha-mind:interpreter -- \
-  --pdf "paper/whitepaper_Foundational Large Language models & text generation_v2.pdf" \
-  --title "Foundational Large Language Models and Text Generation" \
-  --author "Google"
+  --pdf paper/my-book.pdf \
+  --title "Tên Sách Tiếng Anh" \
+  --no-translate
 ```
 
 **Output:** `blog/aha-interpreter/<book-slug>/chapter-01.mdx`, `chapter-02.mdx`, ...
