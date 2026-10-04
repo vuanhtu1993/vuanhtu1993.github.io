@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-28T10:12:21.899Z",
+  "generatedAt": "2026-10-04T07:22:57.799Z",
   "source": "MongoDB Atlas (Database: stories)",
-  "totalRoadmaps": 10,
-  "totalModules": 157,
-  "totalTopics": 575,
+  "totalRoadmaps": 11,
+  "totalModules": 179,
+  "totalTopics": 683,
   "categories": [
     {
       "key": "role-based",
@@ -24,7 +24,7 @@
       "key": "skill-based",
       "nameVi": "Theo Kỹ Năng (Skill-based)",
       "nameEn": "Skill-based Roadmaps",
-      "count": 5,
+      "count": 6,
       "roadmaps": [
         {
           "slug": "nestjs",
@@ -60,6 +60,13 @@
           "moduleCount": 17,
           "topicCount": 94,
           "filePath": "skill-based/sql.json"
+        },
+        {
+          "slug": "cpp",
+          "title": "C++",
+          "moduleCount": 22,
+          "topicCount": 108,
+          "filePath": "skill-based/cpp.json"
         }
       ]
     },
