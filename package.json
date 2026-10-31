@@ -39,6 +39,7 @@
     "@playwright/browser-chromium": "^1.60.0",
     "@radix-ui/react-dialog": "^1.1.23",
     "@radix-ui/react-tabs": "^1.1.21",
+    "axios": "^1.21.0",
     "canvas": "^3.2.3",
     "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",
@@ -63,7 +64,8 @@
     "turndown-plugin-gfm": "^1.0.2",
     "typed.js": "^2.0.15",
     "xlsx": "^0.18.5",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "zod-to-json-schema": "^3.25.2"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.7.0",
