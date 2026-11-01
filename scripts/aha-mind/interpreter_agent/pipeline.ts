@@ -29,6 +29,7 @@ import { unmaskerNode } from "./nodes/unmasker";
 import { mdxExporterNode } from "./nodes/mdx_exporter";
 import { InterpreterState } from "./state";
 import { geminiService } from "../utils/gemini";
+import { hiveService } from "../utils/hive";
 import * as path from "path";
 
 // ─── Chapter Loop Logic ───────────────────────────────────────────────────────
