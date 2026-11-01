@@ -1,0 +1,89 @@
+---
+title: "Run Claude Code behind a corporate launcher - Claude Code Docs"
+source_url: "https://code.claude.com/docs/en/corporate-launcher"
+crawled_at: "2026-11-01T16:44:31.110Z"
+---
+
+Deployment
+
+Route the processes Claude Code starts from its own binary, including the background service and every agent view session, through a required launcher with CLAUDE\_CODE\_PROCESS\_WRAPPER or the processWrapper setting.
+
+Some organizations require every process on a workstation to start through a mandatory launcher. The launcher applies the sandbox, network controls, or credential injection that the company’s security posture depends on, and a binary that starts without it is a policy violation. `CLAUDE_CODE_PROCESS_WRAPPER` starts every process Claude Code launches from its own binary through your launcher: the [background service](https://code.claude.com/docs/en/agent-view#the-supervisor-process), every session it hosts in [agent view](https://code.claude.com/docs/en/agent-view), and Claude Code’s relaunches after an update. Set it to your launcher’s absolute path, and Claude Code runs the launcher with the Claude Code command as its arguments. A launcher that wraps the `claude` command on your `PATH` can’t reach the background service or the sessions it hosts, because they start from the binary’s direct path without looking up `claude`.
+
+## What the launcher covers
+
+With `CLAUDE_CODE_PROCESS_WRAPPER` set, Claude Code starts each of the following processes through your launcher:
+
+-   The background service that `claude agents` and background sessions start on demand.
+-   The terminal host and the Claude Code session inside every agent view row, including the warm standby sessions the service keeps ready.
+-   Sessions the service respawns after an update or a crash.
+-   The relaunch Claude Code performs of itself to finish installing an update, including agent view’s restart-for-update action.
+-   The session processes that [Remote Control](https://code.claude.com/docs/en/remote-control) starts. Requires Claude Code v2.1.210 or later.
+-   The split-pane teammate sessions that [agent teams](https://code.claude.com/docs/en/agent-teams) start in tmux or iTerm2. Teammate panes are interactive rather than background processes, but Claude Code starts them from its own binary, so the launcher covers them. Requires Claude Code v2.1.210 or later.
+
+On Windows, the variable is ignored: the launcher contract depends on `exec`, which Windows doesn’t support. A Windows machine with the variable set runs every process unwrapped and keeps working, and the only signal is a warning in the [debug log](https://code.claude.com/docs/en/troubleshooting). If your launcher policy covers Windows, the variable doesn’t satisfy it there: count Windows machines as unwrapped when you plan the rollout.
+
+### Processes that start outside the launcher
+
+The following processes don’t start through the launcher:
+
+-   A session you start yourself in a terminal, which runs however you invoked it. To cover these sessions, put a script named `claude` in a directory earlier on `PATH` that runs your launcher with the real binary; don’t replace the managed symlink. The background service and its sessions start without a `PATH` lookup, so the two launchers don’t stack there.
+-   A session opened from a `claude-cli://` deep link, which starts in a new terminal without your launcher. To prevent deep links from opening sessions for a new user, set [`disableDeepLinkRegistration`](https://code.claude.com/docs/en/settings-reference#disabledeeplinkregistration) to `"disable"` before that user first runs Claude Code. For a user who already has a [registered handler](https://code.claude.com/docs/en/deep-links#registration-and-supported-platforms), deep links keep opening sessions, because the setting doesn’t remove the handler.
+-   The relaunch that `--worktree` combined with `--tmux` performs: the terminal multiplexer starts that pane, not Claude Code’s binary.
+-   The native-messaging host that [Claude in Chrome](https://code.claude.com/docs/en/chrome) registers: the browser starts it, not Claude Code’s binary.
+
+### Helper process names in process monitors
+
+With a launcher configured, `ps` and Activity Monitor no longer show Claude Code’s `claude bg-pty-host` and `claude bg-spare` labels for the background helper processes, because the launcher’s `exec` rebuilds the argument list. Losing the labels is a side effect, not concealment: the processes are otherwise unchanged, and Claude Code identifies its own processes by binary path, never by display name.
+
+## Set up the launcher
+
+1
+
+2
+
+3
+
+4
+
+## The launcher contract
+
+When the launcher can’t run, Claude Code refuses to start the process instead of starting it unwrapped. On Windows, [the variable is ignored](#what-the-launcher-covers) and processes start unwrapped. Claude Code holds the script to these rules:
+
+-   **End with `exec "$@"`.** A launcher that forks a child and exits leaves an orphaned Claude Code process the background service can’t track. Agent view marks such a session failed with a message naming the launcher, and the service reaps what the launcher left behind.
+-   **Don’t reorder, absorb, or add to Claude Code’s arguments.** Remove the launcher’s [own arguments](#pass-arguments-to-the-launcher), which come first, and pass the rest to `exec` as it arrived.
+-   **Pass every inherited environment variable through to `exec`.** Adding variables, such as injected credentials, is fine; dropping inherited ones is not.
+    -   The per-session authentication tokens, the model and provider selection, and `CLAUDE_CODE_PROCESS_WRAPPER` itself all travel on the inherited environment, so a launcher that rebuilds it from an allow list breaks the sessions it starts, and `/status` reports a launcher mismatch.
+    -   If the launcher must enter a namespace or sandbox that resets the environment, re-export the inherited environment inside it verbatim.
+-   **Reach `exec` within about three seconds each time the launcher runs.** A background session can run the launcher three times in series before its first output. Do slow work such as a single sign-on exchange lazily or from a cache, and give any step that waits on the network its own time limit.
+-   **Tolerate being invoked from inside itself.** Claude Code applies the launcher to every nested self-spawn, so a launcher that acquires an exclusive resource must detect that it already holds it.
+-   **Don’t write to the terminal or standard output before Claude Code starts.** Anything printed before the `exec` is reported as the crash cause if the session dies before initializing. Text on standard output also reaches a program that reads Claude Code’s output, such as a script that parses `claude -p` results.
+-   **Don’t depend on how arguments are spelled.** A flag’s value can arrive as its own argument, `--flag value`, or joined to the flag, `--flag=value`. Which form a flag uses can change between versions.
+-   **Run `exec` from the directory the launcher started in.** Claude Code works in the directory it starts in, so a launcher that changes directory can start a session in the wrong project. If the launcher must enter a namespace or sandbox that resets the working directory, change back to the starting directory inside it, before the `exec`.
+-   **Don’t read standard input.** A command that reads it before the `exec`, such as one that asks for a password, can wait for input that doesn’t come and leave the session stuck. It can also take input meant for Claude Code, and the session can then run without that input and report no error. Redirect such a command’s input from `/dev/null`.
+-   **Call other programs by absolute path.** The launcher can start with a `PATH` that lacks the directories your shell profile adds.
+
+### Format of the launcher value
+
+`CLAUDE_CODE_PROCESS_WRAPPER` and the `processWrapper` setting take the same format. For most launchers, the value is the script’s absolute path, like `/opt/corp/launcher`. To pass your launcher arguments of its own, write them after the path. Claude Code parses the value as an argument list, not a shell command:
+
+-   Whitespace separates tokens, and double quotes group a token that contains spaces. A single quote is an ordinary character, so `'a b'` is two tokens.
+-   A value that starts with `[` is read as a JSON string array, such as `["/opt/corp/launcher", "--profile", "cc"]`.
+-   Shell syntax doesn’t work: there is no variable expansion or globbing, and an unquoted operator such as `;`, `|`, `&`, or `$(` is rejected as a configuration error rather than reinterpreted.
+
+When the value can’t be used, Claude Code refuses to start the affected process and [reports the reason](https://code.claude.com/docs/en/errors#claude_code_process_wrapper-launcher-errors). In a settings file, write the array form inside a JSON string and escape its quotes: `"[\"/opt/corp/launcher\", \"--profile\", \"cc\"]"`.
+
+### Pass arguments to the launcher
+
+Write the launcher’s own arguments after its path in [the value](#format-of-the-launcher-value), and remove them in the script before the `exec` call. They reach the script first, ahead of the Claude Code command. The following script, written for the value `/opt/corp/launcher --profile cc`, saves the profile name and then removes both arguments with `shift`:
+
+Use the [Verify step](#set-up-the-launcher) to see the launch command Claude Code resolved from the value.
+
+## Relationship to `CLAUDE_CODE_SHELL_PREFIX`
+
+`CLAUDE_CODE_PROCESS_WRAPPER` wraps Claude Code’s own processes and passes the command through as separate argv tokens for the launcher to `exec`. [`CLAUDE_CODE_SHELL_PREFIX`](https://code.claude.com/docs/en/env-vars) wraps the shell commands Claude runs on your behalf, such as Bash tool calls, hooks, and the commands that start stdio MCP servers, and passes each one as a single shell-quoted string in `$1` for the wrapper to re-evaluate. A launcher written for one doesn’t work as the other.
+
+-   [Agent view](https://code.claude.com/docs/en/agent-view): the background sessions and supervisor process the launcher covers
+-   [Environment variables](https://code.claude.com/docs/en/env-vars): the `CLAUDE_CODE_PROCESS_WRAPPER` reference entry
+-   [Managed settings](https://code.claude.com/docs/en/permissions#managed-settings): deliver the `env` block across a fleet
+-   [Launcher error reference](https://code.claude.com/docs/en/errors#claude_code_process_wrapper-launcher-errors): the refusal messages and how to recover

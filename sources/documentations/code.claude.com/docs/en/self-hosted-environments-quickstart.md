@@ -1,0 +1,89 @@
+---
+title: "Self-hosted environments quickstart - Claude Code Docs"
+source_url: "https://code.claude.com/docs/en/self-hosted-environments-quickstart"
+crawled_at: "2026-11-01T16:42:50.322Z"
+---
+
+Self-hosted environments
+
+Set up your first self-hosted environment: install Claude Code, create the environment, start a runner, and route a session to it.
+
+A [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments) runs Claude Code [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web) on infrastructure your organization operates, executed by runner processes you deploy. This quickstart stands up your first one, the smallest that works: one runner on a single host, running one test session. There are two steps: [create the environment, start a runner, and route a session to it](#set-up-an-environment-and-runner), then [message that session from your terminal](#send-a-follow-up-message-to-a-running-session). You’ll move between two surfaces: claude.ai for creating the environment, checking its status, and routing a session, and a terminal on the host for everything the runner does. By the end you’ll have an environment on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments), a runner polling for work, and a session running on your host. Before you connect real repositories or internal systems, work through [Deploy to production](https://code.claude.com/docs/en/self-hosted-environments-deploy), which covers the security posture, egress control, git credentials, and orchestration.
+
+## Prerequisites
+
+### Organization and roles
+
+The claude.ai side needs:
+
+-   **Allow self-hosted environments** turned on by an [Owner](https://code.claude.com/docs/en/cloud-environments#organization-shared-environments) on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments); the **New** button doesn’t appear until it is. If you don’t hold the role, someone who does can create the environment and hand you its secret; the runner and terminal steps on this page need no claude.ai role, and where a step checks status in the admin UI, the runner’s own log lines give you the same signal.
+-   The [GitHub connector](https://claude.ai/admin-settings/connectors) turned on by an Owner, and each developer’s own [GitHub connection](https://code.claude.com/docs/en/web-quickstart#connect-github), so they can pick github.com repositories when they start sessions.
+
+### Host and network
+
+The runner host needs:
+
+-   A Linux or macOS host or container with outbound HTTPS to `api.anthropic.com`, to `claude.ai` and the download hosts it redirects to for the install step below, and to your git host for the clone; the [network requirements table](https://code.claude.com/docs/en/self-hosted-environments-deploy#network-requirements) has the full list. Windows isn’t supported as a runner host; run the runner in a Linux container instead. Developer workstations aren’t affected, since sessions start from claude.ai in a browser.
+-   A repository for the test session: a public one, or one this host can already clone by its HTTPS URL without being asked for credentials. An SSH key alone isn’t enough, because the runner clones the repository’s `https://` URL. To clone over SSH instead, see [Rewrite git URLs for private networks](https://code.claude.com/docs/en/self-hosted-environments-deploy#rewrite-git-urls-for-private-networks).
+-   A clock synchronized to real time, for example with NTP.
+
+### Software on the runner host
+
+Install on the host before you start:
+
+-   **Claude Code v2.1.224 or later**, with any of the [standard install methods](https://code.claude.com/docs/en/setup). The runner is part of the standard `claude` binary, and earlier versions don’t recognize the `self-hosted-runner` subcommand. A runner that serves Claude Tag sessions needs v2.1.229 or later and `python3` on its `PATH`, since the [hooks the control plane supplies](https://code.claude.com/docs/en/self-hosted-environments-configuration#how-each-session%E2%80%99s-config-is-assembled) for those sessions run `python3`. To pin the exact version your fleet runs, see [Install a specific version](https://code.claude.com/docs/en/setup#install-a-specific-version). For container images, see the Dockerfile in [Deploy to production](https://code.claude.com/docs/en/self-hosted-environments-deploy#build-the-runner-image).
+-   **Git 2.24 or newer**. Some git options on the deploy page need newer versions; [Configure git](https://code.claude.com/docs/en/self-hosted-environments-deploy#configure-git) states each floor.
+
+Confirm the host is ready:
+
+A ready host prints the runner’s usage text, listing flags such as `--environment-secret-file`. On versions older than 2.1.224, the command prints the general `claude --help` output instead. If you see that output, [update Claude Code](https://code.claude.com/docs/en/setup#update-claude-code). If you run `claude` from a container image, [rebuild the image](https://code.claude.com/docs/en/self-hosted-environments-deploy#build-the-runner-image) with version 2.1.224 or later.
+
+## Set up an environment and runner
+
+Use either the [guided setup](#run-the-guided-setup) or the [manual steps](#set-up-manually). The guided setup is a single command that starts an interactive Claude Code session and walks you through the rest. Use the manual steps instead on a host where an interactive session isn’t possible. Also use them when someone who holds the Owner role created the environment and handed you its secret, since the guided setup needs an Owner sign-in.
+
+### Run the guided setup
+
+The guided setup walks you through creating the environment in the admin UI, starts a local runner with the secret file you save, confirms that the runner registers, and writes a cheat sheet to `./runner-setup/CHEAT-SHEET.md`. Before you run it, confirm your sign-in and version:
+
+-   **Sign-in**: run it on a machine where you’ve signed in with `claude auth login` using an account that holds an Owner role. With only an API key or a third-party model provider, the session starts but its organization checks fail.
+-   **Version**: confirm the [version check](#software-on-the-runner-host) passed. On versions older than 2.1.224, the setup command starts a Claude session with the words as the prompt instead of the guided setup.
+
+To start the guided setup, run the setup subcommand in your shell and follow the prompts:
+
+The setup doesn’t start a test session itself: it tells you to start one at claude.ai/code. The setup’s last step stops the runner it started. If you leave the setup before that step, the runner keeps running. To keep going after the last step, start the runner again in your shell with the command in `./runner-setup/CHEAT-SHEET.md`, then [route a session to the environment](#route-a-session).
+
+### Set up manually
+
+Create the environment on claude.ai, start the runner from a terminal on the host, then return to claude.ai to confirm the runner appears and route a session to it. If someone who holds the Owner role already created the environment and handed you its secret, start at step 2.
+
+1
+
+2
+
+3
+
+4
+
+### If the runner exits
+
+If the runner exits during this quickstart, start it again. The runner can exit on its own:
+
+-   **Nothing left running**: the log shows `[runner:exit] account workload drained — exiting`. The runner [exits by design](https://code.claude.com/docs/en/self-hosted-environments#runner-lifecycle) once it’s no longer running any session, for example:
+    -   **You archived or deleted the session**: start the runner again
+    -   **The session failed to start**: [fix the cause](#session-doesnt-start), then start the runner again
+-   **Lost contact**: the log shows a `[runner:fatal]` line with `runner record gone server-side` or with `poll auth failed`. If the runner loses contact with Anthropic for a while, for example because the host sleeps, it can exit when it next reaches Anthropic.
+
+A finished turn doesn’t end your test session. After the first turn the session is still attached and the runner is still up, so you can [send the session a follow-up message](#send-a-follow-up-message-to-a-running-session) without restarting the runner first. For production, deploy the runner under an orchestrator that restarts it on exit and waits longer between restarts when the runner keeps exiting right after it starts. See [Deploy to production](https://code.claude.com/docs/en/self-hosted-environments-deploy) and [When the runner exits](https://code.claude.com/docs/en/self-hosted-environments-deploy#when-the-runner-exits).
+
+## Send a follow-up message to a running session
+
+Once a session is running on your environment, send it a follow-up from the `claude` CLI on any machine where you’re logged in with `claude auth login`; the command doesn’t need to run from the machine that started the session. The command posts one message:
+
+For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session’s claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, and the account and policy requirements are on [Send follow-ups from the CLI](https://code.claude.com/docs/en/claude-code-on-the-web#send-follow-ups-from-the-cli), since the command works the same against Anthropic-hosted sessions.
+
+## What’s next
+
+-   [Deploy to production](https://code.claude.com/docs/en/self-hosted-environments-deploy): harden the deployment, control egress, configure git credentials, and run the fleet under Kubernetes or Compose
+-   [Customize sessions](https://code.claude.com/docs/en/self-hosted-environments-configuration): wrapper scripts, lifecycle hooks, on-demand runners, MCP servers, and permissions
+-   [Test end to end](https://code.claude.com/docs/en/self-hosted-environments-testing): a CI smoke test that dispatches a session and reads Claude’s replies
