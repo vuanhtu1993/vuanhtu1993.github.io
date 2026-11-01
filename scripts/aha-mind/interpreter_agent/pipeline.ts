@@ -130,6 +130,7 @@ function parseArgs(): {
   pageRange: { start: number; end: number };
   noisePatterns: string[];
   shouldTranslate: boolean;
+  provider: "gemini" | "hive";
 } {
   const args = process.argv.slice(2);
 
@@ -175,10 +176,14 @@ function parseArgs(): {
   const pagesArg = getMultiWord("--pages");
   const noiseArg = getArray("--noise");
 
+  // ── Provider Flag (Mặc định: ưu tiên hive nếu có HIVE_API_KEY, hoặc chọn qua --provider gemini|hive) ──
+  const rawProvider = getMultiWord("--provider") || process.env.INTERPRETER_PROVIDER || (process.env.HIVE_API_KEY ? "hive" : "gemini");
+  const provider: "gemini" | "hive" = rawProvider.toLowerCase() === "gemini" ? "gemini" : "hive";
+
   // ── Translation Flag (Mặc định: true, tắt bằng --no-translate hoặc --translate false) ──
-  const isDisableTranslate = 
-    args.includes("--no-translate") || 
-    args.includes("--translate=false") || 
+  const isDisableTranslate =
+    args.includes("--no-translate") ||
+    args.includes("--translate=false") ||
     getMultiWord("--translate") === "false";
   const shouldTranslate = !isDisableTranslate;
 
@@ -196,31 +201,32 @@ function parseArgs(): {
 
   if (!pdfArg) {
     console.error("❌ Thiếu tham số --pdf");
-    console.log("👉 Cách dùng: npm run aha-mind:interpreter -- --pdf paper/book.pdf --title \"Book Title\" --pages 10-20");
+    console.log("👉 Cách dùng: npm run aha-mind:interpreter -- --pdf paper/book.pdf --title \"Book Title\" --pages 10-20 [--provider hive|gemini]");
     process.exit(1);
   }
   if (!titleArg) {
     console.error("❌ Thiếu tham số --title");
-    console.log("👉 Cách dùng: npm run aha-mind:interpreter -- --pdf paper/book.pdf --title \"Book Title\" --pages 10-20");
+    console.log("👉 Cách dùng: npm run aha-mind:interpreter -- --pdf paper/book.pdf --title \"Book Title\" --pages 10-20 [--provider hive|gemini]");
     process.exit(1);
   }
 
   const pdfPath = path.resolve(process.cwd(), pdfArg);
 
-  return { 
-    pdfPath, 
-    title: titleArg, 
-    author: authorArg, 
+  return {
+    pdfPath,
+    title: titleArg,
+    author: authorArg,
     pageRange: { start: startPage, end: endPage },
     noisePatterns: noiseArg,
-    shouldTranslate
+    shouldTranslate,
+    provider
   };
 }
 
 // ─── Main Runner ──────────────────────────────────────────────────────────────
 
 async function runPipeline() {
-  const { pdfPath, title, author, pageRange, noisePatterns, shouldTranslate } = parseArgs();
+  const { pdfPath, title, author, pageRange, noisePatterns, shouldTranslate, provider } = parseArgs();
 
   const pagesDisplay = pageRange.end === Infinity
     ? `Từ trang ${pageRange.start} đến hết`
@@ -234,14 +240,18 @@ ${"=".repeat(60)}
   ✍️  Tác giả: ${author}
   📄 Pages: ${pagesDisplay}
   🌐 Dịch sang Tiếng Việt: ${shouldTranslate ? "Có" : "Không"}
+  ⚡ LLM Provider: ${provider.toUpperCase()}
 ${"=".repeat(60)}
 `);
 
   // ── Startup Key Validation ──
-  // Kiểm tra tất cả API keys TRƯỚC khi pipeline chạy.
-  // Chỉ cần validate khi có bước translate (gọi Gemini).
+  // Kiểm tra API keys TRƯỚC khi pipeline chạy dựa theo Provider được chọn.
   if (shouldTranslate) {
-    await geminiService.validateKeys();
+    if (provider === "hive") {
+      await hiveService.validateKey();
+    } else {
+      await geminiService.validateKeys();
+    }
   }
 
   const today = new Date().toISOString().split("T")[0];
@@ -251,6 +261,7 @@ ${"=".repeat(60)}
   const finalState = await app.invoke(
     {
       shouldTranslate,
+      provider,
       pdfPath,
       bookMetadata: {
         title,
@@ -290,4 +301,4 @@ runPipeline().catch((err) => {
   process.exit(1);
 });
 // Example:
-// pnpm aha-mind:interpreter --pdf /Users/anhtus/Documents/Development/Documentary/vuanhtu1993.github.io/sources/books/System Design Interview by Alex Xu.pdf --title "System design interview" --pages 220-243
+// pnpm aha-mind:interpreter --pdf 'documentary.pdf' --title "Documentary Film" --pages 220-243

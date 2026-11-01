@@ -26,6 +26,7 @@ import * as fs from "fs";
 import { InterpreterState } from "../state";
 import { GLOSSARY_PATH, LLM_CONFIG, CHUNKING } from "../config";
 import { geminiService } from "../../utils/gemini";
+import { hiveService } from "../../utils/hive";
 
 // ─── Prompt Engineering ───────────────────────────────────────────────────────
 
@@ -236,8 +237,14 @@ export const translatorNode = async (
           content: chunk,
         });
 
-        // geminiService.invoke sẽ tự động handle key rotation nếu gặp 429
-        const response = await geminiService.invoke(messages);
+        // Điều hướng gọi LLM theo provider được cấu hình (mặc định: hive)
+        const provider = state.provider || "hive";
+        let response: { content: string };
+        if (provider === "hive") {
+          response = await hiveService.invoke(messages);
+        } else {
+          response = await geminiService.invoke(messages);
+        }
 
         translated = typeof response.content === "string"
           ? response.content

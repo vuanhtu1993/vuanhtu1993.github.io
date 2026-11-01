@@ -52,6 +52,9 @@ export interface InterpreterState {
   /** Phạm vi trang cần dịch (vd: start 10, end 20). Nếu end = Infinity -> đến hết. */
   pageRange: { start: number; end: number };
 
+  /** LLM Provider sử dụng (gemini hoặc hive) */
+  provider?: "gemini" | "hive";
+
   // ── Phase 1: Parse ──
   /** Toàn bộ raw text của PDF (trước khi tách chapter) */
   rawPdfText: string;
@@ -109,6 +112,10 @@ export const StateAnnotation = Annotation.Root({
   pageRange: Annotation<{ start: number; end: number }>({
     reducer: (x, y) => y ?? x ?? { start: 1, end: Infinity },
     default: () => ({ start: 1, end: Infinity }),
+  }),
+  provider: Annotation<"gemini" | "hive">({
+    reducer: (x, y) => y ?? x ?? "hive",
+    default: () => "hive",
   }),
   rawPdfText: Annotation<string>({
     reducer: (x, y) => y ?? x ?? "",
