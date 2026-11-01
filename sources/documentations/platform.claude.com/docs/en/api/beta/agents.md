@@ -1,0 +1,1005 @@
+---
+title: "Agents - Claude API Reference"
+source_url: "https://platform.claude.com/docs/en/api/beta/agents"
+crawled_at: "2026-11-01T16:23:40.619Z"
+---
+
+##### Models
+
+BetaManagedAgentsAdvisor object{ type: "advisor", model }
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+type: "advisor"
+
+model: string
+
+The advisor model id.
+
+BetaManagedAgentsAgent object{ type: "agent", id, archived\_at, 13 more }
+
+A Managed Agents `agent`.
+
+BetaManagedAgentsAgentReference object{ type: "agent", id, version }
+
+A resolved agent reference with a concrete version.
+
+type: "agent"
+
+id: string
+
+version: number
+
+formatint32
+
+Configuration for a specific agent tool.
+
+One of the following:
+
+Configuration override for a specific tool within a toolset.
+
+One of the following:
+
+BetaManagedAgentsAgentToolsetDefaultConfig object{ enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+BetaManagedAgentsAgentToolsetDefaultConfigParams object{ enabled, permission\_policy }
+
+Default configuration for all tools in a toolset.
+
+BetaManagedAgentsAgentToolset20260401 object{ type: "agent\_toolset\_20260401", configs, default\_config }
+
+BetaManagedAgentsAgentToolset20260401BashInput object{ command, restart, timeout\_ms }
+
+Input payload for the `bash` tool of the `agent_toolset_20260401` toolset. All fields are optional; a normal invocation supplies `command`, while `restart=true` (with no `command`) reboots the runner-side bash session.
+
+command: optional string
+
+Shell command to execute. Omit only when `restart` is true.
+
+restart: optional boolean
+
+When true, restart the persistent bash session instead of running a command. Subsequent calls without `restart` will run against the fresh session.
+
+timeout\_ms: optional number
+
+Per-call timeout in milliseconds. Defaults to the runner-wide tool timeout when omitted or zero.
+
+minimum0
+
+BetaManagedAgentsAgentToolset20260401EditInput object{ file\_path, new\_string, old\_string, replace\_all }
+
+Input payload for the `edit` tool. Performs a string replacement in the named file; by default `old_string` must occur exactly once.
+
+file\_path: string
+
+Path of the file to edit.
+
+new\_string: string
+
+Replacement text.
+
+old\_string: string
+
+Substring to find and replace.
+
+replace\_all: optional boolean
+
+When true, replace every occurrence of `old_string` instead of requiring a unique match.
+
+BetaManagedAgentsAgentToolset20260401GlobInput object{ pattern, path }
+
+Input payload for the `glob` tool. Returns paths matching a doublestar glob pattern, newest first.
+
+pattern: string
+
+Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns are only permitted when the runner is configured to allow them.
+
+path: optional string
+
+Optional directory root to search under. Defaults to the runner's working directory.
+
+BetaManagedAgentsAgentToolset20260401GrepInput object{ pattern, path }
+
+Input payload for the `grep` tool. Searches file contents for a regular expression, returning matching lines.
+
+pattern: string
+
+Regular expression to search for.
+
+path: optional string
+
+Optional directory root to search under. Defaults to the runner's working directory.
+
+BetaManagedAgentsAgentToolset20260401Params object{ type: "agent\_toolset\_20260401", configs, default\_config }
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+BetaManagedAgentsAgentToolset20260401ReadInput object{ file\_path, view\_range }
+
+Input payload for the `read` tool. Reads file contents relative to the runner's working directory (or absolute when the runner permits).
+
+file\_path: string
+
+Path of the file to read.
+
+view\_range: optional array of number
+
+Optional `[start_line, end_line]` 1-indexed inclusive range. When omitted the entire file is returned. `end_line` of 0 or negative means "to end of file".
+
+minItems2
+
+maxItems2
+
+BetaManagedAgentsAgentToolset20260401WriteInput object{ content, file\_path }
+
+Input payload for the `write` tool. Writes (overwriting) the entire file contents.
+
+content: string
+
+Full file contents to write.
+
+file\_path: string
+
+Path of the file to write.
+
+BetaManagedAgentsAlwaysAllowPolicy object{ type: "always\_allow" }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy object{ type: "always\_ask" }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAnthropicSkill object{ type: "anthropic", skill\_id, version }
+
+A resolved Anthropic-managed skill.
+
+type: "anthropic"
+
+skill\_id: string
+
+version: string
+
+BetaManagedAgentsAnthropicSkillParams object{ type: "anthropic", skill\_id, version }
+
+An Anthropic-managed skill.
+
+type: "anthropic"
+
+skill\_id: string
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+minLength1
+
+maxLength64
+
+version: optional string or null
+
+Version to pin. Defaults to latest if omitted.
+
+minLength1
+
+maxLength64
+
+BetaManagedAgentsAutoPolicy object{ type: "auto" }
+
+The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+type: "auto"
+
+BetaManagedAgentsAWSRoleExecutionIdentity object{ type: "aws\_role", role\_arn }
+
+An AWS IAM role principal as returned in API responses.
+
+type: "aws\_role"
+
+role\_arn: string
+
+The IAM role's ARN.
+
+BetaManagedAgentsAWSRoleExecutionIdentityParams object{ type: "aws\_role", role\_arn }
+
+An AWS IAM role principal.
+
+type: "aws\_role"
+
+role\_arn: string
+
+The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
+
+maxLength2048
+
+BetaManagedAgentsBashToolConfig object{ type: "bash", enabled, name, permission\_policy }
+
+Configuration for the bash tool.
+
+BetaManagedAgentsBashToolConfigParams object{ type: "bash", name, enabled, permission\_policy }
+
+Configuration override for the bash tool.
+
+BetaManagedAgentsCustomSkill object{ type: "custom", skill\_id, version }
+
+A resolved user-created custom skill.
+
+type: "custom"
+
+skill\_id: string
+
+version: string
+
+BetaManagedAgentsCustomSkillParams object{ type: "custom", skill\_id, version }
+
+A user-created custom skill.
+
+type: "custom"
+
+skill\_id: string
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+minLength1
+
+maxLength64
+
+version: optional string or null
+
+Version to pin. Defaults to latest if omitted.
+
+minLength1
+
+maxLength64
+
+BetaManagedAgentsCustomTool object{ type: "custom", description, input\_schema, name }
+
+A custom tool as returned in API responses.
+
+type: "custom"
+
+description: string
+
+JSON Schema for custom tool input parameters.
+
+type: "object"
+
+properties: optional map\[unknown\] or null
+
+required: optional array of string or null
+
+name: string
+
+BetaManagedAgentsCustomToolInputSchema object{ type: "object", properties, required }
+
+JSON Schema for custom tool input parameters.
+
+type: "object"
+
+properties: optional map\[unknown\] or null
+
+required: optional array of string or null
+
+BetaManagedAgentsCustomToolParams object{ type: "custom", description, input\_schema, name }
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+type: "custom"
+
+description: string
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool.
+
+minLength1
+
+JSON Schema defining the expected input parameters for the tool.
+
+type: "object"
+
+properties: optional map\[unknown\] or null
+
+required: optional array of string or null
+
+name: string
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+minLength1
+
+maxLength128
+
+BetaManagedAgentsEditToolConfig object{ type: "edit", enabled, name, permission\_policy }
+
+Configuration for the edit tool.
+
+BetaManagedAgentsEditToolConfigParams object{ type: "edit", name, enabled, permission\_policy }
+
+Configuration override for the edit tool.
+
+BetaManagedAgentsEffortHigh object{ type: "high" }
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+BetaManagedAgentsEffortLow object{ type: "low" }
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+BetaManagedAgentsEffortMax object{ type: "max" }
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
+
+BetaManagedAgentsEffortMedium object{ type: "medium" }
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+BetaManagedAgentsEffortXhigh object{ type: "xhigh" }
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+Execution principal for runs of this agent as returned in API responses.
+
+One of the following:
+
+BetaManagedAgentsAWSRoleExecutionIdentity object{ type: "aws\_role", role\_arn }
+
+An AWS IAM role principal as returned in API responses.
+
+type: "aws\_role"
+
+role\_arn: string
+
+The IAM role's ARN.
+
+BetaManagedAgentsServiceAccountExecutionIdentity object{ type: "service\_account" }
+
+The Anthropic-managed service account as returned in API responses.
+
+type: "service\_account"
+
+Execution principal for runs of this agent: `service_account` (the default) or `aws_role`.
+
+One of the following:
+
+BetaManagedAgentsAWSRoleExecutionIdentityParams object{ type: "aws\_role", role\_arn }
+
+An AWS IAM role principal.
+
+type: "aws\_role"
+
+role\_arn: string
+
+The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
+
+maxLength2048
+
+BetaManagedAgentsServiceAccountExecutionIdentityParams object{ type: "service\_account" }
+
+The Anthropic-managed service account — the default execution principal. Carries no identifier.
+
+type: "service\_account"
+
+BetaManagedAgentsGlobToolConfig object{ type: "glob", enabled, name, permission\_policy }
+
+Configuration for the glob tool.
+
+BetaManagedAgentsGlobToolConfigParams object{ type: "glob", name, enabled, permission\_policy }
+
+Configuration override for the glob tool.
+
+BetaManagedAgentsGrepToolConfig object{ type: "grep", enabled, name, permission\_policy }
+
+Configuration for the grep tool.
+
+BetaManagedAgentsGrepToolConfigParams object{ type: "grep", name, enabled, permission\_policy }
+
+Configuration override for the grep tool.
+
+BetaManagedAgentsMCPServerURLDefinition object{ type: "url", name, url }
+
+URL-based MCP server connection as returned in API responses.
+
+type: "url"
+
+name: string
+
+url: string
+
+BetaManagedAgentsMCPToolConfig object{ enabled, name, permission\_policy }
+
+Resolved configuration for a specific MCP tool.
+
+BetaManagedAgentsMCPToolConfigParams object{ name, enabled, permission\_policy }
+
+Configuration override for a specific MCP tool.
+
+BetaManagedAgentsMCPToolset object{ type: "mcp\_toolset", configs, default\_config, mcp\_server\_name }
+
+BetaManagedAgentsMCPToolsetDefaultConfig object{ enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+BetaManagedAgentsMCPToolsetDefaultConfigParams object{ enabled, permission\_policy }
+
+Default configuration for all tools from an MCP server.
+
+BetaManagedAgentsMCPToolsetParams object{ type: "mcp\_toolset", mcp\_server\_name, configs, default\_config }
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+BetaManagedAgentsModel = "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+BetaManagedAgentsModelConfig object{ id, effort, inference\_geo, speed }
+
+Model identifier and configuration.
+
+BetaManagedAgentsModelConfigParams object{ id, effort, inference\_geo, speed }
+
+An object that defines additional configuration control over model use
+
+Whether the session's primary thread can consult an advisor model.
+
+One of the following:
+
+BetaManagedAgentsMultiagentAdvisorEnabled object{ type: "enabled", model }
+
+The session's primary thread can consult `model` mid-turn.
+
+type: "enabled"
+
+model: string
+
+The advisor model id.
+
+BetaManagedAgentsMultiagentAdvisorDisabled object{ type: "disabled" }
+
+The agent has no advisor.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentAdvisorDisabled object{ type: "disabled" }
+
+The agent has no advisor.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentAdvisorDisabledParams object{ type: "disabled" }
+
+The agent has no advisor.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentAdvisorEnabled object{ type: "enabled", model }
+
+The session's primary thread can consult `model` mid-turn.
+
+type: "enabled"
+
+model: string
+
+The advisor model id.
+
+BetaManagedAgentsMultiagentAdvisorEnabledParams object{ type: "enabled", model }
+
+The session's primary thread can consult `model` mid-turn.
+
+type: "enabled"
+
+model: string
+
+A Claude model id. The model must be permitted as an advisor for this agent's model.
+
+minLength1
+
+maxLength256
+
+Whether the session's primary thread can consult an advisor model.
+
+One of the following:
+
+BetaManagedAgentsMultiagentAdvisorEnabledParams object{ type: "enabled", model }
+
+The session's primary thread can consult `model` mid-turn.
+
+type: "enabled"
+
+model: string
+
+A Claude model id. The model must be permitted as an advisor for this agent's model.
+
+minLength1
+
+maxLength256
+
+BetaManagedAgentsMultiagentAdvisorDisabledParams object{ type: "disabled" }
+
+The agent has no advisor.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentCoordinator object{ type: "coordinator", agents }
+
+Resolved coordinator topology with a concrete agent roster.
+
+BetaManagedAgentsMultiagentCoordinatorParams object{ type: "coordinator", agents }
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+Whether the agent can define inline agents. The agent defines an inline agent itself, in a workflow run's plan or when it spawns a session thread, and the inline agent is not saved.
+
+One of the following:
+
+BetaManagedAgentsMultiagentInlineAgentsEnabled object{ type: "enabled" }
+
+The agent can define inline agents.
+
+type: "enabled"
+
+BetaManagedAgentsMultiagentInlineAgentsDisabled object{ type: "disabled" }
+
+The agent cannot define inline agents.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentInlineAgentsDisabled object{ type: "disabled" }
+
+The agent cannot define inline agents.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentInlineAgentsDisabledParams object{ type: "disabled" }
+
+The agent cannot define inline agents.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentInlineAgentsEnabled object{ type: "enabled" }
+
+The agent can define inline agents.
+
+type: "enabled"
+
+BetaManagedAgentsMultiagentInlineAgentsEnabledParams object{ type: "enabled" }
+
+The agent can define inline agents.
+
+type: "enabled"
+
+Whether the agent can define inline agents. The agent defines an inline agent itself, in a workflow run's plan or when it spawns a session thread, and the inline agent is not saved.
+
+One of the following:
+
+BetaManagedAgentsMultiagentInlineAgentsEnabledParams object{ type: "enabled" }
+
+The agent can define inline agents.
+
+type: "enabled"
+
+BetaManagedAgentsMultiagentInlineAgentsDisabledParams object{ type: "disabled" }
+
+The agent cannot define inline agents.
+
+type: "disabled"
+
+One agent in a `predefined_agents` list. It is an agent ID string, an `agent` reference with an optional `version`, or `self` for the agent that owns this configuration.
+
+One of the following:
+
+string
+
+BetaManagedAgentsAgentParams object{ type: "agent", id, version }
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+type: "agent"
+
+id: string
+
+The `agent` ID.
+
+minLength1
+
+maxLength128
+
+version: optional number
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+formatint32
+
+BetaManagedAgentsMultiagentSelfParams object{ type: "self" }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
+BetaManagedAgentsMultiagentSelfParams object{ type: "self" }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
+Whether the agent can spawn session threads.
+
+One of the following:
+
+BetaManagedAgentsMultiagentSubagentsEnabled object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can spawn session threads.
+
+BetaManagedAgentsMultiagentSubagentsDisabled object{ type: "disabled" }
+
+The agent cannot spawn session threads.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentSubagentsDisabled object{ type: "disabled" }
+
+The agent cannot spawn session threads.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentSubagentsDisabledParams object{ type: "disabled" }
+
+The agent cannot spawn session threads.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentSubagentsEnabled object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can spawn session threads.
+
+BetaManagedAgentsMultiagentSubagentsEnabledParams object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can spawn session threads. Each thread runs a predefined agent, which is a saved agent in `predefined_agents`, or an inline agent, which the agent defines when it spawns the thread and which is not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
+
+Whether the agent can spawn session threads.
+
+One of the following:
+
+BetaManagedAgentsMultiagentSubagentsEnabledParams object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can spawn session threads. Each thread runs a predefined agent, which is a saved agent in `predefined_agents`, or an inline agent, which the agent defines when it spawns the thread and which is not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
+
+BetaManagedAgentsMultiagentSubagentsDisabledParams object{ type: "disabled" }
+
+The agent cannot spawn session threads.
+
+type: "disabled"
+
+Whether the agent can start workflow runs.
+
+One of the following:
+
+BetaManagedAgentsMultiagentWorkflowsEnabled object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can start workflow runs.
+
+BetaManagedAgentsMultiagentWorkflowsDisabled object{ type: "disabled" }
+
+The agent cannot start workflow runs.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentWorkflowsDisabled object{ type: "disabled" }
+
+The agent cannot start workflow runs.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentWorkflowsDisabledParams object{ type: "disabled" }
+
+The agent cannot start workflow runs.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagentWorkflowsEnabled object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can start workflow runs.
+
+BetaManagedAgentsMultiagentWorkflowsEnabledParams object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can start workflow runs. Each run follows a plan, a program that the agent writes. A plan can use predefined agents, which are the saved agents in `predefined_agents`, and inline agents, which it defines itself and which are not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
+
+Whether the agent can start workflow runs.
+
+One of the following:
+
+BetaManagedAgentsMultiagentWorkflowsEnabledParams object{ type: "enabled", inline\_agents, predefined\_agents }
+
+The agent can start workflow runs. Each run follows a plan, a program that the agent writes. A plan can use predefined agents, which are the saved agents in `predefined_agents`, and inline agents, which it defines itself and which are not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
+
+BetaManagedAgentsMultiagentWorkflowsDisabledParams object{ type: "disabled" }
+
+The agent cannot start workflow runs.
+
+type: "disabled"
+
+BetaManagedAgentsMultiagent20261001 object{ type: "multiagent\_20261001", advisor, subagents, workflows }
+
+Resolved multiagent configuration with three members, each enabled or disabled on its own.
+
+BetaManagedAgentsMultiagent20261001Params object{ type: "multiagent\_20261001", advisor, subagents, workflows }
+
+Multiagent configuration with three members, each enabled or disabled on its own. On an update, if the agent's stored `multiagent` also has type `multiagent_20261001`, this configuration is merged into the stored one, level by level, instead of replacing it. A key that the update omits keeps its stored value. A key sent as null takes its default, on create as well, so `"workflows": null` enables workflows. An object sent with a `type` other than the stored one replaces the stored object, and the keys that it omits take their defaults. A `predefined_agents` list that is sent replaces the stored list. Every object that is sent needs its `type`, and an enabled `advisor` needs its `model`. Other validation applies to the merged result.
+
+BetaManagedAgentsReadToolConfig object{ type: "read", enabled, name, permission\_policy }
+
+Configuration for the read tool.
+
+BetaManagedAgentsReadToolConfigParams object{ type: "read", name, enabled, permission\_policy }
+
+Configuration override for the read tool.
+
+BetaManagedAgentsServiceAccountExecutionIdentity object{ type: "service\_account" }
+
+The Anthropic-managed service account as returned in API responses.
+
+type: "service\_account"
+
+BetaManagedAgentsServiceAccountExecutionIdentityParams object{ type: "service\_account" }
+
+The Anthropic-managed service account — the default execution principal. Carries no identifier.
+
+type: "service\_account"
+
+BetaManagedAgentsSessionThreadAgent object{ type: "agent", id, description, 8 more }
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+Skill to load in the session container.
+
+One of the following:
+
+BetaManagedAgentsURLMCPServerParams object{ type: "url", name, url }
+
+URL-based MCP server connection.
+
+type: "url"
+
+name: string
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+minLength1
+
+maxLength255
+
+url: string
+
+Endpoint URL for the MCP server.
+
+maxLength2048
+
+BetaManagedAgentsUserLocation object{ type: "approximate", city, country, 2 more }
+
+Approximate user location for search result localization.
+
+type: "approximate"
+
+Location precision. Only "approximate" is supported.
+
+city: optional string or null
+
+City name.
+
+minLength1
+
+maxLength255
+
+country: optional string or null
+
+Two-letter ISO 3166-1 country code, uppercase.
+
+region: optional string or null
+
+Region or state name.
+
+minLength1
+
+maxLength255
+
+timezone: optional string or null
+
+IANA timezone identifier, e.g. "America/Los\_Angeles".
+
+minLength1
+
+maxLength255
+
+BetaManagedAgentsWebFetchToolConfig object{ type: "web\_fetch", enabled, name, 5 more }
+
+Configuration for the web\_fetch tool.
+
+BetaManagedAgentsWebFetchToolConfigParams object{ type: "web\_fetch", name, allowed\_domains, 5 more }
+
+Configuration override for the web\_fetch tool.
+
+BetaManagedAgentsWebFetchURLSourceAll object{ type: "all" }
+
+Every URL from this source may be fetched. This is the default.
+
+type: "all"
+
+BetaManagedAgentsWebFetchURLSourceExcept object{ type: "except", tools }
+
+Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+type: "except"
+
+The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+type: "tool\_reference"
+
+Must be "tool\_reference".
+
+name: string
+
+Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+minLength1
+
+maxLength128
+
+BetaManagedAgentsWebFetchURLSourceNone object{ type: "none" }
+
+This source contributes no URLs that may be fetched.
+
+type: "none"
+
+BetaManagedAgentsWebFetchURLSourceOnly object{ type: "only", tools }
+
+Only the named tools' results contribute URLs that may be fetched.
+
+type: "only"
+
+The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+type: "tool\_reference"
+
+Must be "tool\_reference".
+
+name: string
+
+Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+minLength1
+
+maxLength128
+
+BetaManagedAgentsWebFetchURLSourceShorthand = "all" or "none"
+
+String form of a url\_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+One of the following:
+
+"all"
+
+"none"
+
+Which tools' results contribute URLs that may be fetched.
+
+One of the following:
+
+Which tools' results contribute URLs that may be fetched. Accepts the string "all" or "none", or an object whose type is "all", "none", "only" or "except". Responses use the object form.
+
+One of the following:
+
+BetaManagedAgentsWebFetchURLSourceShorthand = "all" or "none"
+
+String form of a url\_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+One of the following:
+
+"all"
+
+"none"
+
+Which tools' results contribute URLs that may be fetched.
+
+One of the following:
+
+BetaManagedAgentsWebFetchURLSourceToolReference object{ type: "tool\_reference", name }
+
+Names one tool in an only or except list.
+
+type: "tool\_reference"
+
+Must be "tool\_reference".
+
+name: string
+
+Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+minLength1
+
+maxLength128
+
+Whether URLs in the text of user messages may be fetched.
+
+One of the following:
+
+BetaManagedAgentsWebFetchURLSourceAll object{ type: "all" }
+
+Every URL from this source may be fetched. This is the default.
+
+type: "all"
+
+BetaManagedAgentsWebFetchURLSourceNone object{ type: "none" }
+
+This source contributes no URLs that may be fetched.
+
+type: "none"
+
+Whether URLs in the text of user messages may be fetched. Accepts the string "all" or "none", or the object {"type": "all"} or {"type": "none"}. Responses use the object form.
+
+One of the following:
+
+BetaManagedAgentsWebFetchURLSourceShorthand = "all" or "none"
+
+String form of a url\_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+One of the following:
+
+"all"
+
+"none"
+
+Whether URLs in the text of user messages may be fetched.
+
+One of the following:
+
+BetaManagedAgentsWebFetchURLSourceAll object{ type: "all" }
+
+Every URL from this source may be fetched. This is the default.
+
+type: "all"
+
+BetaManagedAgentsWebFetchURLSourceNone object{ type: "none" }
+
+This source contributes no URLs that may be fetched.
+
+type: "none"
+
+BetaManagedAgentsWebFetchURLSources object{ client\_tool\_results, server\_tool\_results, user\_input }
+
+Which sources contribute URLs the web\_fetch tool may fetch. A key that is null was not set and allows every URL from that source.
+
+BetaManagedAgentsWebFetchURLSourcesParams object{ client\_tool\_results, server\_tool\_results, user\_input }
+
+Which sources contribute URLs the web\_fetch tool may fetch. When web\_fetch is limited to URLs the conversation has already shown the model (in a user message, a custom tool's result, or an earlier web\_search or web\_fetch result), each key narrows one of those sources and defaults to "all". Setting all three keys to "none" is rejected.
+
+BetaManagedAgentsWebSearchToolConfig object{ type: "web\_search", enabled, name, 4 more }
+
+Configuration for the web\_search tool.
+
+BetaManagedAgentsWebSearchToolConfigParams object{ type: "web\_search", name, allowed\_domains, 4 more }
+
+Configuration override for the web\_search tool.
+
+BetaManagedAgentsWriteToolConfig object{ type: "write", enabled, name, permission\_policy }
+
+Configuration for the write tool.
+
+BetaManagedAgentsWriteToolConfigParams object{ type: "write", name, enabled, permission\_policy }
+
+Configuration override for the write tool.
