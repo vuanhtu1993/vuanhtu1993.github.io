@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-04T07:22:57.799Z",
+  "generatedAt": "2026-11-01T15:41:54.635Z",
   "source": "MongoDB Atlas (Database: stories)",
-  "totalRoadmaps": 11,
-  "totalModules": 179,
-  "totalTopics": 683,
+  "totalRoadmaps": 13,
+  "totalModules": 238,
+  "totalTopics": 879,
   "categories": [
     {
       "key": "role-based",
@@ -24,7 +24,7 @@
       "key": "skill-based",
       "nameVi": "Theo Kỹ Năng (Skill-based)",
       "nameEn": "Skill-based Roadmaps",
-      "count": 6,
+      "count": 7,
       "roadmaps": [
         {
           "slug": "nestjs",
@@ -67,6 +67,13 @@
           "moduleCount": 22,
           "topicCount": 108,
           "filePath": "skill-based/cpp.json"
+        },
+        {
+          "slug": "c",
+          "title": "C Language",
+          "moduleCount": 25,
+          "topicCount": 123,
+          "filePath": "skill-based/c.json"
         }
       ]
     },
@@ -96,7 +103,7 @@
       "key": "best-practice",
       "nameVi": "Thực Hành Tốt Nhất (Best Practices)",
       "nameEn": "Best Practices",
-      "count": 2,
+      "count": 3,
       "roadmaps": [
         {
           "slug": "api-design",
@@ -111,6 +118,13 @@
           "moduleCount": 28,
           "topicCount": 121,
           "filePath": "best-practice/system-design.json"
+        },
+        {
+          "slug": "ai-agents",
+          "title": "AI Agents",
+          "moduleCount": 34,
+          "topicCount": 73,
+          "filePath": "best-practice/ai-agents.json"
         }
       ]
     }

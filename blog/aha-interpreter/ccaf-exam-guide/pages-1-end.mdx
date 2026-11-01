@@ -1,0 +1,1355 @@
+---
+slug: aha-interpreter-ccaf-exam-guide-pages-1-end
+title: "[ccaf-exam-guide] Từ trang 1 đến cuối"
+date: 2026-11-01
+authors:
+  - anhhtus
+tags:
+  - aha-interpreter
+  - book-notes
+  - auto-translated
+---
+
+:::info 📚 Về bài viết này
+Đây là bản dịch tiếng Việt của **"ccaf-exam-guide"** (Tác giả: Unknown Author).
+Bài được dịch tự động bởi **Aha! Mind Interpreter** — pipeline dịch sách kỹ thuật sử dụng Gemini Flash.
+
+⚠️ *Bản dịch tự động — có thể có lỗi. Vui lòng đối chiếu với bản gốc tiếng Anh khi cần độ chính xác cao.*
+:::
+
+<!-- truncate -->
+
+Chương trình Chứng nhận Claude Hướng dẫn Thi
+
+# Claude Certified Architect – Foundations
+
+### Hướng dẫn Thi
+
+Phiên bản 1.0 · Có hiệu lực từ tháng 7 năm 2026 · Mã kỳ thi: CCAR-F · Hướng dẫn này có thể được thay đổi mà không cần thông báo trước.
+
+## 1. Giới thiệu về Chứng nhận này
+
+Chứng nhận Claude Certified Architect – Foundations xác nhận rằng người hành nghề có thể đưa ra
+
+các quyết định sáng suốt về đánh đổi khi triển khai các giải pháp thực tế với Claude. Kỳ thi này
+
+kiểm tra kiến thức nền tảng về Claude Code, Claude Agent SDK, Claude API và Model
+
+Context Protocol (MCP), những công nghệ cốt lõi được dùng để xây dựng các ứng dụng cấp production với
+
+Claude.
+
+Các câu hỏi trong kỳ thi này được xây dựng dựa trên các tình huống thực tế rút ra từ các use case thực của khách hàng,
+
+bao gồm xây dựng hệ thống agentic cho customer support, thiết kế các pipeline nghiên cứu multi-agent,
+
+tích hợp Claude Code vào các workflow CI/CD, xây dựng các công cụ năng suất cho developer, và trích xuất
+
+dữ liệu có cấu trúc từ các tài liệu phi cấu trúc. Thí sinh không chỉ phải thể hiện kiến thức khái niệm
+
+mà còn cả khả năng phán đoán thực tiễn về kiến trúc, cấu hình và các đánh đổi trong
+
+triển khai production.
+
+Hướng dẫn này là tài liệu tham chiếu có thẩm quyền cho các thí sinh chuẩn bị tham gia kỳ thi. Tài liệu mô tả
+
+nội dung kỳ thi, liệt kê các domain và các task statement được kiểm tra, cung cấp câu hỏi mẫu và
+
+đề xuất các chiến lược ôn tập. Hãy đọc toàn bộ tài liệu trước khi đăng ký lịch thi.
+
+## 2. Đối tượng Mục tiêu
+
+Ứng viên lý tưởng cho chứng nhận này là một solution architect, người thiết kế và triển khai
+
+các ứng dụng production với Claude. Ứng viên này có kinh nghiệm thực hành với:
+
+- Xây dựng các ứng dụng agentic sử dụng Claude Agent SDK, bao gồm multi-agent orchestration,
+
+subagent delegation, tích hợp tool và lifecycle hook
+
+- Cấu hình và tùy chỉnh Claude Code cho các workflow của team sử dụng các file CLAUDE.md, Agent Skills,
+tích hợp MCP server và plan mode
+
+- Thiết kế các interface tool và resource của Model Context Protocol (MCP) để tích hợp với hệ thống backend
+
+- Thiết kế prompt để tạo ra structured output đáng tin cậy, tận dụng JSON schema, ví dụ few-shot
+
+và các pattern trích xuất
+
+Chương trình Chứng nhận Claude Hướng dẫn Thi
+
+- Quản lý context window hiệu quả xuyên suốt các tài liệu dài, các cuộc hội thoại multi-turn và các handoff multi-agent
+
+- Tích hợp Claude vào các pipeline CI/CD để tự động hóa code review, sinh test và phản hồi
+
+pull request
+
+- Đưa ra các quyết định hợp lý về escalation và độ tin cậy, bao gồm xử lý lỗi, các workflow
+
+human-in-the-loop và các pattern tự đánh giá
+
+Ứng viên thường có 6+ tháng kinh nghiệm thực hành xây dựng với Claude API, Agent SDK,
+
+Claude Code và MCP, hiểu cả năng lực lẫn hạn chế của các large language model trong
+
+môi trường production.
+
+## 3. Thông tin Kỳ thi Tóm tắt
+
+Chứng chỉ Claude Certified Architect – Foundations
+
+Mã kỳ thi CCAR-F
+
+Số lượng câu hỏi 60
+
+Định dạng câu hỏi Câu hỏi multiple-choice và multiple-response; mỗi câu nêu rõ số lượng
+câu trả lời cần chọn
+
+Cấu trúc kỳ thi 4 scenario rút ra từ ngân hàng 6 scenario
+
+Giới hạn thời gian 120 phút
+
+Hình thức thi Có giám sát: thi online có giám sát và/hoặc tại test center, theo chính sách của chương trình
+
+Điểm đạt Điểm scaled 720 trên thang điểm 100–1.000
+
+Lệ phí thi 125 USD
+
+Thời hạn hiệu lực 12 tháng kể từ ngày được cấp chứng chỉ
+
+Báo cáo kết quả Đạt/không đạt kèm điểm scaled (100–1.000), cùng với phần trăm câu đúng theo từng domain trên
+báo cáo điểm
+
+Chương trình Chứng nhận Claude Hướng dẫn Thi
+
+## 4. Đề cương Nội dung Kỳ thi (Blueprint)
+
+Blueprint của kỳ thi xác định các content domain được đo lường và trọng số ước tính của từng
+
+domain trong kỳ thi. Trọng số phản ánh tầm quan trọng tương đối của từng domain đối với việc
+
+thực hiện công việc một cách thành thạo, được xác định thông qua phân tích nhiệm vụ công việc. Các tỷ lệ phần trăm biểu thị tỷ lệ ước tính
+
+của các câu hỏi được tính điểm rút ra từ mỗi domain.
+
+Domain Nội dung Trọng số Domain
+
+1 Agentic Architecture & Orchestration 27%
+
+2 Tool Design & MCP Integration 18%
+
+3 Claude Code Configuration & Workflows 20%
+
+4 Prompt Engineering & Structured Output 20%
+
+5 Context Management & Reliability 15%
+
+| Tổng cộng 100%
+
+## 5. Các Scenario của Kỳ thi
+
+Kỳ thi sử dụng các câu hỏi dựa trên scenario. Mỗi scenario trình bày một bối cảnh production thực tế
+
+làm khung cho một tập câu hỏi. Trong kỳ thi, 4 scenario được trình bày và được chọn ngẫu nhiên từ
+
+toàn bộ tập 6 scenario dưới đây.
+
+Scenario 1: Customer Support Resolution Agent
+
+Bạn đang xây dựng một customer support resolution agent sử dụng Claude Agent SDK. Agent xử lý
+
+các yêu cầu có độ mơ hồ cao như trả hàng, tranh chấp hóa đơn và các vấn đề tài khoản. Nó có quyền truy cập vào các
+
+hệ thống backend của bạn thông qua các tool Model Context Protocol (MCP) tùy chỉnh (get_customer, lookup_order,
+
+process_refund, escalate_to_human). Mục tiêu của bạn là đạt 80%+ first-contact resolution trong khi vẫn biết khi nào
+
+cần escalate.
+
+Domain chính: Agentic Architecture & Orchestration, Tool Design & MCP Integration, Context
+
+Management & Reliability
+
+Scenario 2: Code Generation với Claude Code
+
+Chương trình Chứng nhận Claude Hướng dẫn Thi
+
+Bạn đang sử dụng Claude Code để tăng tốc phát triển phần mềm. Team của bạn dùng nó để sinh code,
+
+refactor, debug và viết tài liệu. Bạn cần tích hợp nó vào workflow phát triển của mình
+
+với các slash command tùy chỉnh, cấu hình CLAUDE.md và hiểu khi nào nên dùng plan mode so với
+
+thực thi trực tiếp.
+
+Domain chính: Claude Code Configuration & Workflows, Context Management & Reliability
+
+Scenario 3: Hệ thống Nghiên cứu Multi-Agent
+
+Bạn đang xây dựng một hệ thống nghiên cứu multi-agent sử dụng Claude Agent SDK. Một coordinator agent
+
+ủy thác cho các subagent chuyên biệt: một cái tìm kiếm trên web, một cái phân tích tài liệu, một cái tổng hợp
+
+các phát hiện và một cái tạo báo cáo. Hệ thống nghiên cứu các chủ đề và tạo ra các báo cáo
+
+toàn diện có trích dẫn.
+
+Domain chính: Agentic Architecture & Orchestration, Tool Design & MCP Integration, Context
+
+Management & Reliability
+
+Scenario 4: Năng suất Developer với Claude
+
+Bạn đang xây dựng các công cụ năng suất cho developer sử dụng Claude Agent SDK. Agent giúp các kỹ sư
+
+khám phá các codebase xa lạ, hiểu các hệ thống legacy, sinh code boilerplate và tự động hóa các
+
+tác vụ lặp đi lặp lại. Nó sử dụng các built-in tool (Read, Write, Bash, Grep, Glob) và tích hợp với các
+
+MCP (Model Context Protocol) server.
+
+Domain chính: Tool Design & MCP Integration, Claude Code Configuration & Workflows, Agentic
+
+Architecture & Orchestration
+
+Scenario 5: Claude Code cho Continuous Integration
+
+Bạn đang tích hợp Claude Code vào pipeline Continuous Integration/Continuous Deployment (CI/CD)
+
+của mình. Hệ thống chạy code review tự động, sinh test case và cung cấp phản hồi trên
+
+các pull request. Bạn cần thiết kế các prompt cung cấp phản hồi có thể hành động được và giảm thiểu
+
+false positive.
+
+Domain chính: Claude Code Configuration & Workflows, Prompt Engineering & Structured Output
+
+Scenario 6: Trích xuất Dữ liệu Có cấu trúc
+
+Bạn đang xây dựng một hệ thống trích xuất dữ liệu có cấu trúc sử dụng Claude. Hệ thống trích xuất thông tin
+
+từ các tài liệu phi cấu trúc, validate output bằng các JSON (JavaScript Object Notation)
+
+schema và duy trì độ chính xác cao. Nó phải xử lý các edge case một cách khéo léo và tích hợp với
+
+các hệ thống downstream.
+
+Domain chính: Prompt Engineering & Structured Output, Context Management & Reliability
+
+Chương trình Chứng nhận Claude Hướng dẫn Thi
+
+## 6. Các Mục tiêu Chi tiết theo Domain
+
+Mỗi domain dưới đây liệt kê các task statement được kiểm tra, cùng với kiến thức và kỹ năng được đo lường
+
+tương ứng với từng mục. Các câu hỏi thi được viết dựa trên các mục tiêu này.
+
+## Domain 1: Agentic Architecture & Orchestration
+
+Task Statement 1.1: Thiết kế và triển khai agentic loop cho việc thực thi task tự động
+
+Kiến thức về:
+
+- Vòng đời của agentic loop: gửi request đến Claude, kiểm tra stop_reason ("tool_use" vs
+"end_turn"), thực thi các tool được yêu cầu, và trả kết quả về cho vòng lặp tiếp theo
+
+- Cách tool result được append vào conversation history để model có thể suy luận về hành động
+
+tiếp theo
+
+- Sự khác biệt giữa việc ra quyết định do model dẫn dắt (Claude suy luận xem nên gọi tool nào
+
+tiếp theo dựa trên context) với các decision tree hoặc chuỗi tool được cấu hình sẵn
+
+Kỹ năng về:
+
+- Triển khai control flow của agentic loop sao cho tiếp tục khi stop_reason là "tool_use" và
+kết thúc khi stop_reason là "end_turn"
+
+- Thêm tool result vào conversation context giữa các iteration để model có thể đưa thông tin mới
+
+vào quá trình suy luận của nó
+
+- Tránh các anti-pattern như parse các tín hiệu ngôn ngữ tự nhiên để xác định việc kết thúc loop,
+đặt iteration cap tùy ý làm cơ chế dừng chính, hoặc kiểm tra nội dung text của assistant như một
+dấu hiệu hoàn thành
+
+Task Statement 1.2: Điều phối multi-agent system với pattern coordinator-subagent
+
+Kiến thức về:
+
+- Kiến trúc hub-and-spoke, trong đó một coordinator agent quản lý toàn bộ giao tiếp giữa các
+subagent, xử lý lỗi, và định tuyến thông tin
+
+- Cách subagent hoạt động với context cô lập—chúng không tự động kế thừa conversation history
+của coordinator
+
+- Vai trò của coordinator trong việc phân rã task, delegation, tổng hợp kết quả, và quyết định
+nên gọi subagent nào dựa trên độ phức tạp của query
+
+Claude Certification Program Exam guide
+
+- Rủi ro khi coordinator phân rã task quá hẹp, dẫn đến việc bao phủ không đầy đủ các chủ đề
+nghiên cứu rộng
+
+Kỹ năng về:
+
+- Thiết kế coordinator agent phân tích yêu cầu của query và chọn động subagent nào cần gọi thay
+vì luôn định tuyến qua toàn bộ pipeline
+
+- Phân chia phạm vi nghiên cứu giữa các subagent để giảm thiểu trùng lặp (ví dụ: gán các
+subtopic hoặc loại nguồn khác nhau cho từng agent)
+
+- Triển khai các vòng lặp tinh chỉnh lặp đi lặp lại, trong đó coordinator đánh giá output tổng hợp
+để tìm lỗ hổng, re-delegate cho các subagent tìm kiếm và phân tích với các query có mục tiêu cụ
+thể, và gọi lại synthesis cho đến khi độ bao phủ đủ tốt
+
+- Định tuyến toàn bộ giao tiếp của subagent qua coordinator để đảm bảo observability, xử lý lỗi
+nhất quán, và kiểm soát luồng thông tin
+
+Task Statement 1.3: Cấu hình việc gọi subagent, truyền context, và spawning
+
+Kiến thức về:
+
+- Task tool như là cơ chế để spawn subagent, và yêu cầu rằng allowedTools phải bao gồm "Task"
+để coordinator có thể gọi subagent
+
+- Rằng context của subagent phải được cung cấp tường minh trong prompt—subagent không tự động
+kế thừa context của parent hay chia sẻ memory giữa các lần gọi
+
+- Cấu hình AgentDefinition bao gồm description, system prompt, và các giới hạn tool cho
+
+từng loại subagent
+
+- Quản lý session dựa trên fork để khám phá các hướng tiếp cận khác nhau từ một baseline phân
+tích chung
+
+Kỹ năng về:
+
+- Đưa toàn bộ phát hiện từ các agent trước trực tiếp vào prompt của subagent (ví dụ: truyền kết
+quả web search và output phân tích tài liệu cho subagent synthesis)
+
+- Sử dụng các định dạng dữ liệu có cấu trúc để tách nội dung khỏi metadata (source URL, tên tài
+liệu, số trang) khi truyền context giữa các agent nhằm bảo toàn attribution
+
+- Spawn các subagent song song bằng cách phát ra nhiều Task tool call trong một response duy nhất
+của coordinator thay vì qua các turn riêng biệt
+
+- Thiết kế prompt cho coordinator chỉ rõ mục tiêu nghiên cứu và tiêu chí chất lượng thay vì các
+hướng dẫn thủ tục từng bước, để subagent có thể thích ứng linh hoạt
+
+Claude Certification Program Exam guide
+
+Task Statement 1.4: Triển khai multi-step workflow với các pattern enforcement và handoff
+
+Kiến thức về:
+
+- Sự khác biệt giữa enforcement ở mức lập trình (hook, prerequisite gate) và hướng dẫn dựa trên
+prompt cho việc sắp xếp thứ tự workflow
+
+- Khi yêu cầu tuân thủ mang tính tất định (ví dụ: xác minh danh tính trước các thao tác tài
+chính), chỉ dùng prompt instruction có tỷ lệ thất bại khác không
+
+- Các giao thức handoff có cấu trúc cho việc escalation giữa chừng, bao gồm thông tin khách hàng,
+phân tích root cause, và các hành động được đề xuất
+
+Kỹ năng về:
+
+- Triển khai các prerequisite ở mức lập trình để chặn các tool call downstream cho đến khi các
+bước prerequisite hoàn thành (ví dụ: chặn process_refund cho đến khi get_customer đã trả về một
+customer ID đã được xác minh)
+
+- Phân rã các yêu cầu của khách hàng có nhiều mối quan tâm thành các item riêng biệt, sau đó
+điều tra từng item song song sử dụng context chung trước khi tổng hợp thành một giải pháp thống
+nhất
+
+- Biên soạn các bản tóm tắt handoff có cấu trúc (customer ID, root cause, số tiền hoàn, hành
+động được đề xuất) khi escalate lên human agent—những người không có quyền truy cập vào
+conversation transcript
+
+Task Statement 1.5: Áp dụng Agent SDK hook để chặn tool call và chuẩn hóa dữ liệu
+
+Kiến thức về:
+
+- Các pattern hook (ví dụ: PostToolUse) chặn tool result để biến đổi trước khi model
+
+xử lý chúng
+
+- Các pattern hook chặn các tool call đi ra để thực thi các quy tắc tuân thủ (ví dụ: chặn hoàn
+tiền vượt ngưỡng)
+
+- Sự khác biệt giữa việc dùng hook để có các đảm bảo mang tính tất định với việc dựa vào prompt
+instruction để có sự tuân thủ mang tính xác suất
+
+Kỹ năng về:
+
+- Triển khai PostToolUse hook để chuẩn hóa các định dạng dữ liệu không đồng nhất (Unix timestamp,
+ISO 8601, mã trạng thái dạng số) từ các MCP tool khác nhau trước khi agent xử lý chúng
+
+- Triển khai các hook chặn tool call để chặn các hành động vi phạm policy (ví dụ: hoàn tiền vượt
+quá $500) và chuyển hướng sang các workflow thay thế (ví dụ: escalation lên người)
+
+- Chọn hook thay vì enforcement dựa trên prompt khi các business rule yêu cầu sự tuân thủ
+
+được đảm bảo
+
+Claude Certification Program Exam guide
+
+Task Statement 1.6: Thiết kế chiến lược phân rã task cho các workflow phức tạp
+
+Kiến thức về:
+
+- Khi nào dùng các pipeline tuần tự cố định (prompt chaining) so với phân rã động thích ứng dựa
+trên các phát hiện trung gian
+
+- Các pattern prompt chaining chia nhỏ việc review thành các bước tuần tự (ví dụ: phân tích từng
+file riêng lẻ, sau đó chạy một lượt tích hợp cross-file)
+
+- Giá trị của các kế hoạch điều tra thích ứng, tạo ra các subtask dựa trên những gì được phát
+hiện ở mỗi bước
+
+Kỹ năng về:
+
+- Chọn các pattern phân rã task phù hợp với workflow: prompt chaining cho các review đa khía
+cạnh có thể dự đoán được, phân rã động cho các task điều tra mở
+
+- Chia nhỏ các code review lớn thành các lượt phân tích cục bộ theo từng file cộng với một lượt
+tích hợp cross-file riêng biệt để tránh attention bị pha loãng
+
+- Phân rã các task mở (ví dụ: "thêm test toàn diện cho một legacy codebase") bằng cách trước
+tiên lập bản đồ cấu trúc, xác định các khu vực có tác động cao, sau đó tạo một kế hoạch ưu tiên
+có thể thích ứng khi phát hiện ra các dependency
+
+Task Statement 1.7: Quản lý session state, resumption, và forking
+
+Kiến thức về:
+
+- Việc resume session có tên bằng --resume &lt;session-name> để tiếp tục một cuộc hội thoại
+
+cụ thể trước đó
+
+- fork_session để tạo các nhánh độc lập từ một baseline phân tích chung nhằm khám phá
+
+các hướng tiếp cận khác nhau
+
+- Tầm quan trọng của việc thông báo cho agent về các thay đổi đối với các file đã được phân tích
+trước đó khi resume session sau khi code bị sửa đổi
+
+- Lý do tại sao bắt đầu một session mới với bản tóm tắt có cấu trúc lại đáng tin cậy hơn việc
+resume với các tool result đã cũ
+
+Kỹ năng về:
+
+- Dùng --resume với tên session để tiếp tục các session điều tra có tên qua các phiên làm việc
+
+- Dùng fork_session để tạo các nhánh khám phá song song (ví dụ: so sánh hai chiến lược testing
+hoặc hai hướng refactoring từ một phân tích codebase chung)
+
+- Chọn giữa việc resume session (khi context trước đó phần lớn vẫn còn hợp lệ) và bắt đầu mới
+với các bản tóm tắt được inject vào (khi các tool result trước đó đã cũ)
+
+Claude Certification Program Exam guide
+
+- Thông báo cho một session được resume về những thay đổi file cụ thể để re-analysis có mục tiêu, thay vì yêu cầu khám phá lại toàn bộ
+
+## Domain 2: Tool Design & MCP Integration
+
+Task Statement 2.1: Thiết kế tool interface hiệu quả với description rõ ràng và ranh giới rõ ràng
+
+Kiến thức về:
+
+- Tool description là cơ chế chính mà LLM dùng để chọn tool; description tối giản dẫn đến việc chọn không đáng tin cậy giữa các tool tương tự nhau
+
+- Tầm quan trọng của việc bao gồm input format, example query, edge case và giải thích ranh giới trong tool description
+
+- Cách mà tool description mơ hồ hoặc chồng lấn gây ra misrouting (ví dụ: analyze_content vs analyze_document với description gần như giống hệt nhau)
+
+- Tác động của cách diễn đạt system prompt lên việc chọn tool: instruction nhạy cảm với keyword có thể tạo ra các liên kết tool ngoài ý muốn
+
+Kỹ năng về:
+
+- Viết tool description phân biệt rõ ràng mục đích, input dự kiến, output và thời điểm sử dụng của từng tool so với các lựa chọn tương tự
+
+- Đổi tên tool và cập nhật description để loại bỏ chồng lấn chức năng (ví dụ: đổi tên analyze_content thành extract_web_results với description chuyên cho web)
+
+- Tách các tool generic thành các tool chuyên biệt với input/output contract được định nghĩa (ví dụ: tách một analyze_document generic thành extract_data_points, summarize_content và verify_claim_against_source)
+
+- Rà soát system prompt để tìm các instruction nhạy cảm với keyword có thể ghi đè lên các tool description được viết tốt
+
+Task Statement 2.2: Triển khai structured error response cho MCP tool
+
+Kiến thức về:
+
+- Pattern cờ isError của MCP để truyền đạt lỗi tool về lại agent
+
+- Sự phân biệt giữa transient error (timeout, service không khả dụng), validation error (input không hợp lệ), business error (vi phạm policy) và permission error
+
+Claude Certification Program Exam guide
+
+- Tại sao error response đồng nhất (kiểu "Operation failed" chung chung) khiến agent không thể đưa ra quyết định phục hồi phù hợp
+
+- Sự khác biệt giữa lỗi retryable và non-retryable, và cách trả về structured metadata giúp tránh các lần retry lãng phí
+
+Kỹ năng về:
+
+- Trả về structured error metadata bao gồm errorCategory (transient/validation/permission), boolean isRetryable và description dễ đọc cho con người
+
+- Bao gồm cờ retriable: false và giải thích thân thiện với khách hàng cho các vi phạm business rule để agent có thể truyền đạt phù hợp
+
+- Triển khai local error recovery bên trong subagent cho các transient failure, chỉ propagate lên coordinator những lỗi không thể giải quyết cục bộ, kèm theo partial result và những gì đã được thử
+
+- Phân biệt giữa access failure (cần quyết định retry) và valid empty result (đại diện cho query thành công nhưng không có kết quả khớp)
+
+Task Statement 2.3: Phân bổ tool hợp lý giữa các agent và cấu hình tool choice
+
+Kiến thức về:
+
+- Nguyên tắc rằng cho agent truy cập quá nhiều tool (ví dụ: 18 thay vì 4-5) làm giảm độ tin cậy của việc chọn tool bằng cách tăng độ phức tạp quyết định
+
+- Tại sao agent có tool nằm ngoài chuyên môn của mình có xu hướng dùng sai (ví dụ: một synthesis agent cố gắng thực hiện web search)
+
+- Scoped tool access: chỉ cấp cho agent những tool cần thiết cho vai trò của nó, với một số ít cross-role tool cho các nhu cầu tần suất cao cụ thể
+
+- Các tùy chọn cấu hình tool_choice: "auto", "any" và forced tool selection (\{"type": "tool", "name": "..."\})
+
+Kỹ năng về:
+
+- Giới hạn tool set của mỗi subagent chỉ còn những tool liên quan đến vai trò của nó, ngăn ngừa việc dùng sai chéo chuyên môn
+
+- Thay thế các tool generic bằng các lựa chọn thay thế bị ràng buộc (ví dụ: thay fetch_url bằng load_document có validate document URL)
+
+- Cung cấp scoped cross-role tool cho các nhu cầu tần suất cao (ví dụ: tool verify_fact cho synthesis agent) trong khi route các trường hợp phức tạp qua coordinator
+
+Claude Certification Program Exam guide
+
+- Dùng tool_choice forced selection để đảm bảo một tool cụ thể được gọi trước (ví dụ: ép extract_metadata trước các tool enrichment), sau đó xử lý các bước tiếp theo trong các lượt follow-up
+
+- Đặt tool_choice: "any" để đảm bảo model gọi một tool thay vì trả về text hội thoại
+
+Task Statement 2.4: Tích hợp MCP server vào Claude Code và agent workflow
+
+Kiến thức về:
+
+- MCP server scoping: cấp project (.mcp.json) cho tooling dùng chung của team so với cấp user (~/.claude.json) cho các server cá nhân/thử nghiệm
+
+- Environment variable expansion trong .mcp.json (ví dụ: $\{GITHUB_TOKEN\}) để quản lý credential mà không commit secret
+
+- Rằng các tool từ tất cả MCP server đã cấu hình được phát hiện tại thời điểm kết nối và khả dụng đồng thời cho agent
+
+- MCP resource như một cơ chế để expose content catalog (ví dụ: issue summary, phân cấp documentation, database schema) nhằm giảm các exploratory tool call
+
+Kỹ năng về:
+
+- Cấu hình MCP server dùng chung trong .mcp.json phạm vi project với environment variable expansion cho authentication token
+
+- Cấu hình MCP server cá nhân/thử nghiệm trong ~/.claude.json phạm vi user
+
+- Cải thiện MCP tool description để giải thích chi tiết khả năng và output, ngăn agent ưu tiên các built-in tool (như Grep) hơn các MCP tool có khả năng cao hơn
+
+- Chọn các MCP server cộng đồng có sẵn thay vì tự triển khai cho các tích hợp chuẩn (ví dụ: Jira), dành custom server cho các workflow đặc thù của team
+
+- Expose content catalog dưới dạng MCP resource để cho agent thấy được dữ liệu sẵn có mà không cần các exploratory tool call
+
+Task Statement 2.5: Chọn và áp dụng built-in tool (Read, Write, Edit, Bash, Grep, Glob) một cách hiệu quả
+
+Kiến thức về:
+
+- Grep để tìm kiếm nội dung (tìm trong nội dung file theo pattern như tên hàm, thông báo lỗi hoặc câu lệnh import)
+
+- Glob để khớp pattern đường dẫn file (tìm file theo tên hoặc pattern phần mở rộng)
+
+- Read/Write cho thao tác toàn bộ file; Edit cho các sửa đổi có mục tiêu bằng cách khớp text duy nhất
+
+Claude Certification Program Exam guide
+
+- Khi Edit thất bại do khớp text không duy nhất, dùng Read + Write làm fallback để sửa đổi file đáng tin cậy
+
+Kỹ năng về:
+
+- Chọn Grep để tìm kiếm nội dung code trên toàn codebase (ví dụ: tìm tất cả caller của một hàm, định vị thông báo lỗi)
+
+- Chọn Glob để tìm file khớp pattern đặt tên (ví dụ: **/*.test.tsx)
+
+- Dùng Read để load toàn bộ nội dung file, sau đó dùng Write khi Edit không tìm được anchor text duy nhất
+
+- Xây dựng hiểu biết về codebase một cách tăng dần: bắt đầu với Grep để tìm entry point, sau đó dùng Read để theo dõi import và trace flow, thay vì đọc tất cả file ngay từ đầu
+
+- Trace việc sử dụng hàm qua các wrapper module bằng cách trước tiên xác định tất cả tên được export, sau đó tìm kiếm từng tên trên toàn codebase
+
+## Domain 3: Cấu hình & Workflow của Claude Code
+
+**Task Statement 3.1: Cấu hình các file CLAUDE.md với hierarchy, scoping và tổ chức modular phù hợp**
+
+Kiến thức về:
+
+- Hierarchy cấu hình CLAUDE.md: user-level (~/.claude/CLAUDE.md), project-level (.claude/CLAUDE.md hoặc CLAUDE.md ở root), và directory-level (các file CLAUDE.md trong subdirectory)
+
+- Việc user-level settings chỉ áp dụng cho user đó — các instruction trong ~/.claude/CLAUDE.md không được chia sẻ với đồng đội qua version control
+
+- Cú pháp @import để tham chiếu các file bên ngoài nhằm giữ CLAUDE.md modular (ví dụ: import các file standards cụ thể liên quan đến từng package)
+
+- Thư mục .claude/rules/ để tổ chức các file rule theo chủ đề, thay thế cho một CLAUDE.md nguyên khối
+
+Kỹ năng về:
+
+- Chẩn đoán các vấn đề về hierarchy cấu hình (ví dụ: một thành viên mới không nhận được instruction vì chúng nằm ở user-level thay vì project-level configuration)
+
+- Dùng @import để chọn lọc đưa các file standards liên quan vào CLAUDE.md của từng package dựa trên kiến thức domain của maintainer
+
+- Tách các file CLAUDE.md lớn thành các file chuyên biệt theo chủ đề trong .claude/rules/ (ví dụ: testing.md, api-conventions.md, deployment.md)
+
+Claude Certification Program Exam guide
+
+- Dùng lệnh /memory để kiểm tra những memory file nào đang được load và chẩn đoán hành vi không nhất quán giữa các session
+
+**Task Statement 3.2: Tạo và cấu hình custom slash command và skill**
+
+Kiến thức về:
+
+- Command ở phạm vi project trong .claude/commands/ (chia sẻ qua version control) so với command ở phạm vi user trong ~/.claude/commands/ (cá nhân)
+
+- Skill trong .claude/skills/ với các file SKILL.md hỗ trợ cấu hình frontmatter bao gồm context: fork, allowed-tools và argument-hint
+
+- Tùy chọn frontmatter context: fork để chạy skill trong một sub-agent context biệt lập, ngăn output của skill làm nhiễu cuộc hội thoại chính
+
+- Tùy biến skill cá nhân: tạo các biến thể cá nhân trong ~/.claude/skills/ với tên khác nhau để tránh ảnh hưởng đến đồng đội
+
+Kỹ năng về:
+
+- Tạo slash command ở phạm vi project trong .claude/commands/ để cả team dùng được qua version control
+
+- Dùng context: fork để cô lập các skill tạo ra output dài dòng (ví dụ: phân tích codebase) hoặc context mang tính khám phá (ví dụ: brainstorm các phương án thay thế) khỏi session chính
+
+- Cấu hình allowed-tools trong skill frontmatter để giới hạn quyền truy cập tool trong quá trình thực thi skill (ví dụ: chỉ giới hạn ở thao tác ghi file để ngăn các hành động phá hoại)
+
+- Dùng argument-hint frontmatter để nhắc developer nhập các tham số bắt buộc khi họ gọi skill mà không truyền argument
+
+- Chọn giữa skill (gọi theo nhu cầu cho các workflow đặc thù theo task) và CLAUDE.md (các standards phổ quát luôn được load)
+
+**Task Statement 3.3: Áp dụng path-specific rule để load convention có điều kiện**
+
+Kiến thức về:
+
+- Các file .claude/rules/ với trường paths trong YAML frontmatter chứa glob pattern để kích hoạt rule có điều kiện
+
+- Cách path-scoped rule chỉ load khi đang sửa các file khớp, giúp giảm context không liên quan và tiết kiệm token
+
+- Ưu điểm của glob-pattern rule so với directory-level CLAUDE.md cho các convention trải rộng trên nhiều thư mục (ví dụ: các file test nằm rải rác khắp codebase)
+
+Claude Certification Program Exam guide
+
+Kỹ năng về:
+
+- Tạo các file .claude/rules/ với path scoping trong YAML frontmatter (ví dụ: paths: ["terraform/**/*"]) để rule chỉ load khi đang sửa các file khớp
+
+- Dùng glob pattern trong path-specific rule để áp dụng convention cho file theo loại bất kể vị trí thư mục (ví dụ: **/*.test.tsx cho tất cả file test)
+
+- Chọn path-specific rule thay vì subdirectory CLAUDE.md khi convention phải áp dụng cho các file trải rộng khắp codebase
+
+**Task Statement 3.4: Xác định khi nào dùng plan mode so với thực thi trực tiếp**
+
+Kiến thức về:
+
+- Plan mode được thiết kế cho các task phức tạp liên quan đến thay đổi quy mô lớn, nhiều phương án hợp lý, các quyết định kiến trúc và sửa đổi nhiều file
+
+- Thực thi trực tiếp phù hợp với các thay đổi đơn giản, phạm vi rõ ràng (ví dụ: thêm một validation check vào một hàm)
+
+- Plan mode cho phép khám phá codebase và thiết kế an toàn trước khi cam kết thay đổi, ngăn việc phải làm lại tốn kém
+
+- Explore subagent để cô lập output khám phá dài dòng và trả về bản tóm tắt nhằm bảo toàn context của cuộc hội thoại chính
+
+Kỹ năng về:
+
+- Chọn plan mode cho các task có hệ quả kiến trúc (ví dụ: tái cấu trúc microservice, migration library ảnh hưởng đến 45+ file, chọn giữa các phương án tích hợp với yêu cầu hạ tầng khác nhau)
+
+- Chọn thực thi trực tiếp cho các thay đổi đã hiểu rõ với phạm vi rõ ràng (ví dụ: sửa bug một file với stack trace rõ ràng, thêm một điều kiện validation ngày tháng)
+
+- Dùng Explore subagent cho các giai đoạn khám phá dài dòng để tránh cạn kiệt context window trong các task nhiều giai đoạn
+
+- Kết hợp plan mode để điều tra với thực thi trực tiếp để triển khai (ví dụ: lập kế hoạch migration library, sau đó thực thi phương án đã lên kế hoạch)
+
+**Task Statement 3.5: Áp dụng kỹ thuật tinh chỉnh lặp để cải thiện dần dần**
+
+Kiến thức về:
+
+- Các ví dụ input/output cụ thể là cách hiệu quả nhất để truyền đạt phép biến đổi mong đợi khi mô tả bằng văn xuôi bị diễn giải không nhất quán
+
+Claude Certification Program Exam guide
+
+- Lặp theo hướng test-driven: viết test suite trước, sau đó lặp bằng cách chia sẻ các test failure để dẫn dắt cải thiện dần dần
+
+- Interview pattern: để Claude đặt câu hỏi nhằm làm nổi bật các cân nhắc mà developer có thể chưa lường trước trước khi triển khai
+
+- Khi nào cung cấp tất cả vấn đề trong một message duy nhất (các vấn đề tương tác lẫn nhau) so với sửa tuần tự (các vấn đề độc lập)
+
+Kỹ năng về:
+
+- Cung cấp 2-3 ví dụ input/output cụ thể để làm rõ yêu cầu biến đổi khi mô tả bằng ngôn ngữ tự nhiên cho ra kết quả không nhất quán
+
+- Viết test suite bao phủ hành vi mong đợi, edge case và yêu cầu hiệu năng trước khi triển khai, sau đó lặp bằng cách chia sẻ các test failure
+
+- Dùng interview pattern để làm nổi bật các cân nhắc thiết kế (ví dụ: chiến lược cache invalidation, failure mode) trước khi triển khai giải pháp trong các domain chưa quen thuộc
+
+- Cung cấp các test case cụ thể với input ví dụ và output mong đợi để sửa cách xử lý edge case (ví dụ: giá trị null trong migration script)
+
+- Xử lý nhiều vấn đề tương tác lẫn nhau trong một message chi tiết duy nhất khi các bản sửa tương tác với nhau, so với lặp tuần tự cho các vấn đề độc lập
+
+**Task Statement 3.6: Tích hợp Claude Code vào CI/CD pipeline**
+
+Kiến thức về:
+
+- Flag -p (hoặc --print) để chạy Claude Code ở chế độ non-interactive trong các pipeline tự động
+
+- Các CLI flag --output-format json và --json-schema để đảm bảo output có cấu trúc trong ngữ cảnh CI
+
+- CLAUDE.md là cơ chế cung cấp project context (testing standards, fixture conventions, review criteria) cho Claude Code được gọi từ CI
+
+- Cô lập session context: tại sao cùng một Claude session đã sinh ra code lại kém hiệu quả hơn khi review chính các thay đổi của nó so với một instance review độc lập
+
+Kỹ năng về:
+
+- Chạy Claude Code trong CI với flag -p để tránh bị treo do chờ input tương tác
+
+- Dùng --output-format json với --json-schema để tạo ra các finding có cấu trúc, máy parse được, phục vụ việc tự động đăng dưới dạng inline PR comment
+
+- Đưa các finding từ lần review trước vào context khi chạy lại review sau các commit mới, chỉ dẫn Claude chỉ báo cáo các vấn đề mới hoặc vẫn chưa được xử lý để tránh comment trùng lặp
+
+- Cung cấp các file test hiện có trong context để việc sinh test tránh đề xuất các scenario trùng lặp đã được test suite bao phủ
+
+Claude Certification Program Exam guide
+
+- Ghi lại testing standards, tiêu chí test có giá trị và các fixture sẵn có trong CLAUDE.md để cải thiện chất lượng sinh test và giảm output test ít giá trị
+
+## Domain 4: Prompt Engineering & Structured Output
+
+**Task Statement 4.1: Thiết kế prompt với tiêu chí rõ ràng để cải thiện precision và giảm false positive**
+
+Kiến thức về:
+
+- Tầm quan trọng của tiêu chí rõ ràng so với hướng dẫn mơ hồ (ví dụ: "chỉ flag comment khi hành vi được khẳng định mâu thuẫn với hành vi thực tế của code" so với "kiểm tra xem comment có chính xác không")
+
+- Cách các hướng dẫn chung chung như "hãy thận trọng" hay "chỉ báo cáo các phát hiện có độ tin cậy cao" không cải thiện được precision so với các tiêu chí phân loại cụ thể
+
+- Tác động của tỷ lệ false positive lên niềm tin của developer: các category có false positive cao làm xói mòn niềm tin vào cả những category chính xác
+
+Kỹ năng về:
+
+- Viết các tiêu chí review cụ thể xác định vấn đề nào cần báo cáo (bug, security) so với bỏ qua (style nhỏ, pattern cục bộ), thay vì dựa vào lọc theo độ tin cậy
+
+- Tạm thời vô hiệu hóa các category có false positive cao để khôi phục niềm tin của developer, đồng thời cải thiện prompt cho các category đó
+
+- Định nghĩa tiêu chí severity rõ ràng kèm ví dụ code cụ thể cho từng mức severity để đạt được phân loại nhất quán
+
+**Task Statement 4.2: Áp dụng few-shot prompting để cải thiện tính nhất quán và chất lượng output**
+
+Kiến thức về:
+
+- Few-shot example là kỹ thuật hiệu quả nhất để đạt được output có format nhất quán và có thể hành động được, khi chỉ dùng hướng dẫn chi tiết vẫn cho kết quả không nhất quán
+
+- Vai trò của few-shot example trong việc minh họa cách xử lý các trường hợp mơ hồ (ví dụ: chọn tool cho các request mơ hồ, lỗ hổng test coverage ở cấp branch)
+
+- Cách few-shot example giúp model generalize phán đoán sang các pattern mới thay vì chỉ khớp với các trường hợp đã được chỉ định trước
+
+- Hiệu quả của few-shot example trong việc giảm hallucination ở các task extraction (ví dụ: xử lý các phép đo không chính thức, cấu trúc tài liệu đa dạng)
+
+Claude Certification Program Exam guide
+
+Kỹ năng về:
+
+- Tạo 2-4 few-shot example có mục tiêu cho các scenario mơ hồ, thể hiện lý do tại sao chọn một hành động thay vì các lựa chọn thay thế hợp lý khác
+
+- Bao gồm few-shot example minh họa format output mong muốn cụ thể (location, issue, severity, suggested fix) để đạt được tính nhất quán
+
+- Cung cấp few-shot example phân biệt các pattern code chấp nhận được với vấn đề thực sự để giảm false positive đồng thời cho phép generalization
+
+- Sử dụng few-shot example để minh họa cách xử lý đúng các cấu trúc tài liệu đa dạng (inline citation so với bibliography, section methodology so với chi tiết nhúng)
+
+- Thêm few-shot example thể hiện việc extraction đúng từ các tài liệu có format đa dạng để khắc phục tình trạng extraction rỗng/null cho các field bắt buộc
+
+**Task Statement 4.3: Ép buộc structured output bằng tool use và JSON schema**
+
+Kiến thức về:
+
+- Tool use (tool_use) với JSON schema là cách đáng tin cậy nhất để đảm bảo structured output tuân thủ schema, loại bỏ lỗi cú pháp JSON
+
+- Sự khác biệt giữa tool_choice: "auto" (model có thể trả về text thay vì gọi tool), "any" (model phải gọi một tool nhưng có thể chọn tool nào), và forced tool selection (model phải gọi một tool cụ thể được chỉ định tên)
+
+- Rằng JSON schema nghiêm ngặt thông qua tool use loại bỏ lỗi cú pháp nhưng không ngăn được lỗi ngữ nghĩa (ví dụ: các line item không cộng lại bằng total, giá trị nằm sai field)
+
+- Các cân nhắc thiết kế schema: field required so với optional, field enum với pattern "other" + detail string cho các category có thể mở rộng
+
+Kỹ năng về:
+
+- Định nghĩa extraction tool với JSON schema làm input parameter và trích xuất structured data từ response của tool_use
+
+- Đặt tool_choice: "any" để đảm bảo structured output khi có nhiều extraction schema và loại tài liệu chưa xác định
+
+- Ép buộc một tool cụ thể bằng tool_choice: \{"type": "tool", "name": "extract_metadata"\} để đảm bảo một extraction cụ thể chạy trước các bước enrichment
+
+- Thiết kế các field schema là optional (nullable) khi tài liệu nguồn có thể không chứa thông tin, ngăn model bịa ra giá trị để thỏa mãn các field bắt buộc
+
+- Thêm các giá trị enum như "unclear" cho các trường hợp mơ hồ và "other" + field detail cho việc phân loại có thể mở rộng
+
+Claude Certification Program Exam guide
+
+- Bao gồm các quy tắc chuẩn hóa format trong prompt cùng với output schema nghiêm ngặt để xử lý format nguồn không nhất quán
+
+**Task Statement 4.4: Triển khai validation, retry và feedback loop cho chất lượng extraction**
+
+Kiến thức về:
+
+- Retry-with-error-feedback: thêm các lỗi validation cụ thể vào prompt khi retry để hướng model đi đến chỗ sửa đúng
+
+- Giới hạn của retry: retry không hiệu quả khi thông tin cần thiết đơn giản là không có trong tài liệu nguồn (khác với lỗi format hay cấu trúc)
+
+- Thiết kế feedback loop: theo dõi những code construct nào kích hoạt finding (field detected_pattern) để cho phép phân tích có hệ thống các pattern bị bỏ qua
+
+- Sự khác biệt giữa lỗi validation ngữ nghĩa (giá trị không cộng đúng, đặt sai field) và lỗi cú pháp schema (được loại bỏ nhờ tool use)
+
+Kỹ năng về:
+
+- Triển khai các follow-up request bao gồm tài liệu gốc, extraction thất bại và các lỗi validation cụ thể để model tự sửa
+
+- Xác định khi nào retry sẽ không hiệu quả (ví dụ: thông tin chỉ tồn tại trong một tài liệu bên ngoài không được cung cấp) so với khi nào sẽ thành công (format không khớp, lỗi cấu trúc output)
+
+- Thêm field detected_pattern vào structured finding để cho phép phân tích các pattern false positive khi developer bỏ qua finding
+
+- Thiết kế các luồng validation tự sửa: trích xuất "calculated_total" song song với "stated_total" để flag các sai lệch, thêm boolean "conflict_detected" cho dữ liệu nguồn không nhất quán
+
+**Task Statement 4.5: Thiết kế chiến lược batch processing hiệu quả**
+
+Kiến thức về:
+
+- Message Batches API: tiết kiệm 50% chi phí, cửa sổ xử lý lên đến 24 giờ, không có SLA latency được đảm bảo
+
+- Batch processing phù hợp với các workload không blocking, chịu được latency (báo cáo qua đêm, audit hàng tuần, sinh test ban đêm) và không phù hợp với các workflow blocking (kiểm tra trước khi merge)
+
+- Batch API không hỗ trợ multi-turn tool calling trong một request duy nhất (không thể thực thi tool giữa request và trả kết quả)
+
+- Field custom_id để tương quan các cặp batch request/response
+
+Claude Certification Program Exam guide
+
+Kỹ năng về:
+
+- Khớp cách tiếp cận API với yêu cầu latency của workflow: API đồng bộ cho các kiểm tra blocking trước khi merge, batch API cho phân tích qua đêm/hàng tuần
+
+- Tính toán tần suất submit batch dựa trên ràng buộc SLA (ví dụ: cửa sổ 4 giờ để đảm bảo SLA 30 giờ với batch processing 24 giờ)
+
+- Xử lý batch failure: chỉ resubmit các tài liệu thất bại (được xác định bằng custom_id) với các sửa đổi phù hợp (ví dụ: chunk các tài liệu vượt quá giới hạn context)
+
+- Sử dụng prompt refinement trên một sample set trước khi batch-process khối lượng lớn để tối đa hóa tỷ lệ thành công lần đầu và giảm chi phí resubmit lặp lại
+
+**Task Statement 4.6: Thiết kế kiến trúc review đa instance và đa pass**
+
+Kiến thức về:
+
+- Giới hạn của self-review: model giữ lại reasoning context từ lúc generation, khiến nó ít có khả năng đặt câu hỏi về chính các quyết định của mình trong cùng session
+
+- Các instance review độc lập (không có reasoning context trước đó) hiệu quả hơn trong việc bắt các vấn đề tinh vi so với hướng dẫn self-review hay extended thinking
+
+- Multi-pass review: chia các review lớn thành các pass phân tích cục bộ theo từng file cộng với các pass tích hợp cross-file để tránh attention dilution và các finding mâu thuẫn
+
+Kỹ năng về:
+
+- Sử dụng một Claude instance độc lập thứ hai để review code được sinh ra mà không có reasoning context của generator
+
+- Chia các review đa file lớn thành các pass tập trung theo từng file cho các vấn đề cục bộ, cộng với các pass tích hợp riêng cho phân tích data flow cross-file
+
+- Chạy các pass verification trong đó model tự báo cáo độ tin cậy song song với mỗi finding để cho phép định tuyến review có hiệu chỉnh
+
+- Cấu trúc báo cáo với các phần rõ ràng phân biệt những phát hiện đã được khẳng định chắc chắn với những phát hiện còn đang tranh cãi, giữ nguyên cách mô tả của nguồn gốc và bối cảnh phương pháp luận
+
+- Hoàn thành phân tích tài liệu với các giá trị xung đột được đưa vào và chú thích rõ ràng, để coordinator quyết định cách dung hòa trước khi chuyển sang synthesis
+
+- Yêu cầu subagent đưa ngày công bố hoặc ngày thu thập dữ liệu vào structured output để đảm bảo diễn giải thời gian chính xác
+
+- Render các loại nội dung khác nhau một cách phù hợp trong synthesis output—dữ liệu tài chính dưới dạng bảng, tin tức dưới dạng văn xuôi, phát hiện kỹ thuật dưới dạng danh sách có cấu trúc—thay vì chuyển tất cả về một định dạng đồng nhất
+
+## 7. Cách chuẩn bị
+
+Để chuẩn bị cho kỳ thi chứng chỉ này:
+
+- Xây dựng một agent với Claude Agent SDK: triển khai một agentic loop hoàn chỉnh với tool calling, xử lý lỗi và quản lý session. Luyện tập việc spawn subagent và truyền context giữa chúng.
+
+- Cấu hình Claude Code cho một dự án thực tế: thiết lập CLAUDE.md với một configuration hierarchy, tạo các rule theo path cụ thể trong .claude/rules/, xây dựng custom skill với các tùy chọn frontmatter (context: fork, allowed-tools), và tích hợp ít nhất một MCP server.
+
+Claude Certification Program Exam guide
+
+- Thiết kế và kiểm thử MCP tool: viết tool description phân biệt rõ ràng các tool tương tự nhau. Triển khai structured error response với error category và retryable flag. Kiểm thử độ tin cậy của tool selection với các request mơ hồ.
+
+- Xây dựng một pipeline trích xuất dữ liệu có cấu trúc: dùng tool_use với JSON schema, triển khai validation-retry loop, thiết kế schema với các trường optional/nullable, và luyện tập batch processing với Message Batches API.
+
+- Luyện tập các kỹ thuật prompt engineering: viết few-shot example cho các tình huống mơ hồ. Định nghĩa review criteria rõ ràng để giảm false positive. Thiết kế kiến trúc multi-pass review cho các đợt code review lớn.
+
+- Nghiên cứu các pattern quản lý context: luyện tập trích xuất structured fact từ verbose tool output, triển khai scratchpad file cho các session dài, và thiết kế việc ủy thác cho subagent để quản lý giới hạn context.
+
+- Xem lại các pattern escalation và human-in-the-loop: hiểu khi nào cần escalate (lỗ hổng policy, yêu cầu từ khách hàng, không thể tiến triển) so với tự giải quyết. Luyện tập thiết kế human review workflow với confidence-based routing.
+
+## 8. Bài tập chuẩn bị
+
+Hoàn thành các bài tập thực hành sau để xây dựng sự quen thuộc thực tế với các chủ đề được đề cập trong kỳ thi.
+
+Mỗi bài tập được thiết kế để củng cố kiến thức xuyên suốt một hoặc nhiều domain của kỳ thi.
+
+Bài tập 1: Xây dựng một Multi-Tool Agent với Escalation Logic
+
+Mục tiêu: Luyện tập thiết kế agentic loop với tích hợp tool, xử lý lỗi có cấu trúc, và các pattern escalation.
+
+Các bước:
+
+- Định nghĩa 3-4 MCP tool với mô tả chi tiết, phân biệt rõ ràng mục đích, input kỳ vọng và boundary conditions của từng tool. Bao gồm ít nhất hai tool có chức năng tương tự nhau, đòi hỏi mô tả cẩn thận để tránh nhầm lẫn khi chọn tool.
+
+- Triển khai một agentic loop kiểm tra stop_reason để xác định xem nên tiếp tục thực thi tool hay trình bày phản hồi cuối cùng. Xử lý đúng cả hai stop reason "tool_use" và "end_turn".
+
+- Thêm các phản hồi lỗi có cấu trúc cho tool của bạn: bao gồm errorCategory (transient/validation/permission), boolean isRetryable, và mô tả dễ đọc cho con người. Kiểm thử rằng agent xử lý từng loại lỗi một cách phù hợp (retry các transient error, giải thích business error cho người dùng).
+
+Claude Certification Program Exam guide
+
+- Triển khai một programmatic hook để chặn các tool call nhằm thực thi một business rule (ví dụ: chặn các thao tác vượt quá ngưỡng giá trị), chuyển hướng sang một escalation workflow khi bị kích hoạt.
+
+- Kiểm thử với các multi-concern message (ví dụ: các yêu cầu liên quan đến nhiều vấn đề) và xác minh rằng agent phân rã yêu cầu, xử lý từng concern, và tổng hợp thành một phản hồi thống nhất.
+
+Các domain được củng cố: Domain 1 (Agentic Architecture & Orchestration), Domain 2 (Tool Design & MCP Integration), Domain 5 (Context Management & Reliability)
+
+Bài tập 2: Cấu hình Claude Code cho một Team Development Workflow
+
+Mục tiêu: Luyện tập cấu hình phân cấp CLAUDE.md, custom slash command, path-specific rule, và tích hợp MCP server cho một dự án nhiều developer.
+
+Các bước:
+
+- Tạo một CLAUDE.md ở cấp project với các coding standard và testing convention chung. Xác minh rằng các instruction đặt ở cấp project được áp dụng nhất quán trên tất cả thành viên trong team.
+
+- Tạo các file trong .claude/rules/ với YAML frontmatter glob pattern cho các vùng code khác nhau (ví dụ: paths: ["src/api/**/*"] cho API convention, paths: ["**/*.test.*"] cho testing convention). Kiểm thử rằng các rule chỉ được load khi chỉnh sửa các file khớp pattern.
+
+- Tạo một project-scoped skill trong .claude/skills/ với context: fork và các giới hạn allowed-tools. Xác minh rằng skill chạy trong isolation mà không làm ô nhiễm context của cuộc hội thoại chính.
+
+- Cấu hình một MCP server trong .mcp.json với environment variable expansion cho credential. Thêm một MCP server thử nghiệm cá nhân trong ~/.claude.json và xác minh cả hai đều khả dụng đồng thời.
+
+- Kiểm thử plan mode so với thực thi trực tiếp trên các task có độ phức tạp khác nhau: một bug fix trong một file, một migration thư viện nhiều file, và một feature mới với nhiều cách triển khai hợp lệ. Quan sát khi nào plan mode mang lại giá trị.
+
+Các domain được củng cố: Domain 3 (Claude Code Configuration & Workflows), Domain 2 (Tool Design & MCP Integration)
+
+Bài tập 3: Xây dựng một Structured Data Extraction Pipeline
+
+Mục tiêu: Luyện tập thiết kế JSON schema, sử dụng tool_use cho structured output, triển khai validation-retry loop, và thiết kế chiến lược batch processing.
+
+Các bước:
+
+- Định nghĩa một extraction tool với JSON schema bao gồm các trường required và optional, một enum với pattern "other" + detail string, và các trường nullable cho thông tin có thể không tồn tại trong tài liệu nguồn. Xử lý các tài liệu mà một số trường bị thiếu và xác minh rằng model trả về null thay vì bịa ra giá trị.
+
+Claude Certification Program Exam guide
+
+- Triển khai một validation-retry loop: khi Pydantic hoặc JSON schema validation thất bại, gửi một follow-up request bao gồm tài liệu, kết quả extraction thất bại, và lỗi validation cụ thể. Theo dõi những lỗi nào có thể giải quyết được bằng retry (format mismatch) so với những lỗi không thể (thông tin không có trong nguồn).
+
+- Thêm các few-shot example minh họa việc extraction từ các tài liệu có định dạng đa dạng (ví dụ: inline citation so với bibliography, mô tả dạng narrative so với bảng có cấu trúc) và xác minh việc xử lý đa dạng cấu trúc được cải thiện.
+
+- Thiết kế một chiến lược batch processing: gửi một batch gồm 100 tài liệu bằng Message Batches API, xử lý lỗi theo custom_id, gửi lại các tài liệu thất bại với các điều chỉnh (ví dụ: chunking các tài liệu quá lớn), và tính tổng thời gian xử lý so với các ràng buộc SLA.
+
+- Triển khai một chiến lược human review routing: cho model xuất ra confidence score ở cấp field, route các extraction có độ tin cậy thấp sang human review, và phân tích độ chính xác theo loại tài liệu và theo field để xác minh hiệu năng nhất quán.
+
+Các domain được củng cố: Domain 4 (Prompt Engineering & Structured Output), Domain 5 (Context Management & Reliability)
+
+Bài tập 4: Thiết kế và Debug một Multi-Agent Research Pipeline
+
+Mục tiêu: Luyện tập orchestrate subagent, quản lý context passing, triển khai error propagation, và xử lý synthesis với provenance tracking.
+
+Các bước:
+
+- Xây dựng một coordinator agent ủy thác cho ít nhất hai subagent (ví dụ: web search và document analysis). Đảm bảo allowedTools của coordinator bao gồm "Task" và mỗi subagent nhận được kết quả nghiên cứu trực tiếp trong prompt của nó thay vì dựa vào automatic context inheritance.
+
+- Triển khai thực thi subagent song song bằng cách cho coordinator phát ra nhiều Task tool call trong một phản hồi duy nhất. Đo mức cải thiện latency so với thực thi tuần tự.
+
+- Thiết kế structured output cho subagent tách biệt content khỏi metadata: mỗi finding nên bao gồm một claim, evidence excerpt, source URL/document name, và publication date. Xác minh rằng synthesis subagent giữ nguyên source attribution khi kết hợp các finding.
+
+- Triển khai error propagation: mô phỏng một subagent timeout và xác minh rằng coordinator nhận được structured error context (failure type, attempted query, partial results). Kiểm thử rằng coordinator có thể tiếp tục với partial result và chú thích coverage gap vào output cuối cùng.
+
+- Kiểm thử với dữ liệu nguồn xung đột (ví dụ: hai nguồn đáng tin cậy với số liệu thống kê khác nhau) và xác minh rằng output synthesis giữ nguyên cả hai giá trị kèm source attribution thay vì chọn tùy tiện một giá trị, đồng thời cấu trúc báo cáo để phân biệt các finding đã được xác lập vững chắc với các finding còn tranh cãi.
+
+Các domain được củng cố: Domain 1 (Agentic Architecture & Orchestration), Domain 2 (Tool Design & MCP Integration), Domain 5 (Context Management & Reliability)
+
+Claude Certification Program Exam guide
+
+## 9. Câu hỏi mẫu
+
+Các câu hỏi mẫu sau đây minh họa format và độ khó của bài thi. Chúng được trích từ bài kiểm tra thực hành và bao gồm phần giải thích để hỗ trợ việc học.
+
+Scenario: Customer Support Resolution Agent
+
+Câu hỏi 1: Dữ liệu production cho thấy trong 12% trường hợp, agent của bạn bỏ qua hoàn toàn get_customer và gọi lookup_order chỉ dựa trên tên mà khách hàng tự khai, đôi khi dẫn đến việc nhận diện sai tài khoản và hoàn tiền không chính xác. Thay đổi nào sẽ giải quyết hiệu quả nhất vấn đề reliability này?
+
+A. Thêm một prerequisite ở mức programmatic để chặn các lệnh gọi lookup_order và process_refund cho đến khi get_customer đã trả về một customer ID đã được xác minh.
+
+B. Cải thiện system prompt để nêu rõ rằng việc xác minh khách hàng thông qua get_customer là bắt buộc trước mọi thao tác với order.
+
+C. Thêm các few-shot example cho thấy agent luôn gọi get_customer trước, ngay cả khi khách hàng tự nguyện cung cấp thông tin order.
+
+D. Triển khai một routing classifier phân tích từng request và chỉ bật tập con các tool phù hợp với loại request đó.
+
+Đáp án đúng: A. Khi một chuỗi tool cụ thể là bắt buộc đối với business logic quan trọng (như xác minh danh tính khách hàng trước khi xử lý hoàn tiền), việc enforcement ở mức programmatic mang lại những đảm bảo mang tính deterministic mà các cách tiếp cận dựa trên prompt không thể có được. Các phương án B và C dựa vào sự tuân thủ mang tính xác suất của LLM, điều này không đủ khi sai sót gây ra hậu quả về tài chính. Phương án D giải quyết vấn đề tính sẵn có của tool chứ không phải thứ tự gọi tool, mà đó không phải là vấn đề thực sự.
+
+Câu hỏi 2: Production log cho thấy agent thường xuyên gọi get_customer khi người dùng hỏi về order (ví dụ: "check my order #12345"), thay vì gọi lookup_order. Cả hai tool đều có description tối giản ("Retrieves customer information" / "Retrieves order details") và chấp nhận các định dạng identifier tương tự nhau. Bước đầu tiên hiệu quả nhất để cải thiện độ tin cậy của việc chọn tool là gì?
+
+A. Thêm các few-shot example vào system prompt để minh họa các pattern chọn tool đúng, với 5-8 ví dụ cho thấy các query liên quan đến order được route đến lookup_order.
+
+B. Mở rộng description của mỗi tool để bao gồm các định dạng input mà nó xử lý, các query ví dụ, các edge case, và ranh giới giải thích khi nào nên dùng nó so với các tool tương tự.
+
+C. Triển khai một routing layer phân tích input của người dùng trước mỗi lượt và chọn trước tool phù hợp dựa trên các keyword và pattern identifier được phát hiện.
+
+D. Gộp cả hai tool thành một tool lookup_entity duy nhất chấp nhận bất kỳ identifier nào và tự xác định bên trong nên query backend nào.
+
+Đáp án đúng: B. Tool description là cơ chế chính mà LLM sử dụng để chọn tool. Khi description quá tối giản, model thiếu context để phân biệt giữa các tool tương tự nhau. Phương án B giải quyết trực tiếp nguyên nhân gốc rễ này bằng một cách sửa ít công sức nhưng hiệu quả cao. Các few-shot example (A) làm tăng token overhead mà không khắc phục được vấn đề nền tảng. Một routing layer (C) là over-engineered và bỏ qua khả năng hiểu ngôn ngữ tự nhiên của LLM. Gộp các tool lại (D) là một lựa chọn kiến trúc hợp lý nhưng đòi hỏi nhiều công sức hơn mức mà một "bước đầu tiên" cần có, khi mà vấn đề trước mắt chỉ là description chưa đầy đủ.
+
+Câu hỏi 3: Agent của bạn đạt 55% first-contact resolution, thấp hơn nhiều so với mục tiêu 80%. Log cho thấy nó escalate những case đơn giản (thay thế hư hỏng tiêu chuẩn có ảnh chứng minh) trong khi lại cố gắng tự động xử lý những tình huống phức tạp cần ngoại lệ về policy. Cách hiệu quả nhất để cải thiện việc hiệu chỉnh escalation là gì?
+
+A. Thêm các tiêu chí escalation rõ ràng vào system prompt với các few-shot example minh họa khi nào nên escalate so với khi nào nên tự giải quyết.
+
+B. Cho agent tự báo cáo một confidence score (1-10) trước mỗi phản hồi và tự động route request đến người thật khi confidence xuống dưới một ngưỡng.
+
+C. Triển khai một classifier model riêng được huấn luyện trên dữ liệu ticket lịch sử để dự đoán request nào cần escalation trước khi agent chính bắt đầu xử lý.
+
+D. Triển khai sentiment analysis để phát hiện mức độ thất vọng của khách hàng và tự động escalate khi negative sentiment vượt một ngưỡng.
+
+Đáp án đúng: A. Thêm các tiêu chí escalation rõ ràng cùng với few-shot example giải quyết trực tiếp nguyên nhân gốc rễ: ranh giới quyết định chưa rõ ràng. Đây là phản ứng đầu tiên tương xứng trước khi thêm infrastructure. Phương án B thất bại vì confidence do LLM tự báo cáo được hiệu chỉnh kém—agent vốn đã tự tin một cách sai lầm trên các case khó. Phương án C là over-engineered, đòi hỏi dữ liệu đã gán nhãn và ML infrastructure trong khi việc tối ưu prompt vẫn chưa được thử. Phương án D giải quyết một vấn đề hoàn toàn khác; sentiment không tương quan với độ phức tạp của case, mà đó mới là vấn đề thực sự.
+
+Scenario: Code Generation with Claude Code
+
+Câu hỏi 4: Bạn muốn tạo một custom slash command /review để chạy checklist code review tiêu chuẩn của team. Command này phải sẵn có cho mọi developer khi họ clone hoặc pull repository. Bạn nên tạo file command này ở đâu?
+
+A. Trong thư mục .claude/commands/ trong project repository
+
+B. Trong ~/.claude/commands/ trong thư mục home của từng developer
+
+C. Trong file CLAUDE.md ở thư mục gốc của project
+
+D. Trong một file .claude/config.json với một mảng commands
+
+Đáp án đúng: A. Các custom slash command phạm vi project nên được lưu trong thư mục .claude/commands/ bên trong repository. Những command này được quản lý phiên bản và tự động sẵn có cho tất cả developer khi họ clone hoặc pull repo. Phương án B (~/.claude/commands/) dành cho các command cá nhân không được chia sẻ qua version control. Phương án C (CLAUDE.md) dành cho các instruction và context của project, không phải để định nghĩa command. Phương án D mô tả một cơ chế cấu hình không tồn tại trong Claude Code.
+
+Câu hỏi 5: Bạn được giao nhiệm vụ tái cấu trúc ứng dụng monolithic của team thành microservices. Việc này sẽ liên quan đến thay đổi trên hàng chục file và đòi hỏi các quyết định về ranh giới service và phụ thuộc module. Bạn nên chọn cách tiếp cận nào?
+
+A. Vào plan mode để khám phá codebase, hiểu các phụ thuộc, và thiết kế cách triển khai trước khi thực hiện thay đổi.
+
+B. Bắt đầu với direct execution và thực hiện thay đổi dần dần, để cho quá trình triển khai tự bộc lộ các ranh giới service tự nhiên.
+
+C. Dùng direct execution với các instruction toàn diện từ đầu, mô tả chi tiết chính xác mỗi service nên được cấu trúc như thế nào.
+
+D. Bắt đầu ở direct execution mode và chỉ chuyển sang plan mode nếu gặp phải độ phức tạp bất ngờ trong quá trình triển khai.
+
+Đáp án đúng: A. Plan mode được thiết kế cho các task phức tạp liên quan đến thay đổi quy mô lớn, nhiều cách tiếp cận khả thi, và các quyết định kiến trúc—đúng chính xác những gì mà việc tái cấu trúc từ monolith sang microservices đòi hỏi. Nó cho phép khám phá codebase và thiết kế một cách an toàn trước khi cam kết thực hiện thay đổi. Phương án B có nguy cơ làm lại tốn kém khi các phụ thuộc bị phát hiện muộn. Phương án C giả định rằng bạn đã biết cấu trúc đúng mà không cần khám phá code. Phương án D bỏ qua việc độ phức tạp đã được nêu rõ ngay trong yêu cầu, chứ không phải là thứ có thể xuất hiện sau này.
+
+Câu hỏi 6: Codebase của bạn có những khu vực riêng biệt với các convention coding khác nhau: các React component dùng functional style với hooks, các API handler dùng async/await với cách xử lý lỗi cụ thể, và các database model theo repository pattern. Các file test nằm rải rác khắp codebase bên cạnh code mà chúng test (ví dụ: Button.test.tsx nằm cạnh Button.tsx), và bạn muốn tất cả test đều tuân theo cùng một convention bất kể vị trí. Cách nào dễ bảo trì nhất để đảm bảo Claude tự động áp dụng đúng convention khi sinh code?
+
+A. Tạo các file rule trong .claude/rules/ với YAML frontmatter chỉ định các glob pattern để áp dụng convention có điều kiện dựa trên đường dẫn file
+
+B. Gộp tất cả convention vào file CLAUDE.md ở thư mục gốc dưới các header cho từng khu vực, dựa vào việc Claude tự suy ra phần nào áp dụng
+
+đó là nơi các developer phải chờ kết quả, nhưng lại lý tưởng cho các batch job chạy qua đêm như báo cáo technical debt. Option B sai vì dựa vào việc hoàn thành "often faster" là không chấp nhận được đối với các workflow dạng blocking.
+
+Option C phản ánh một hiểu lầm — kết quả batch có thể được tương quan bằng các trường custom_id. Option D thêm độ phức tạp không cần thiết trong khi giải pháp đơn giản hơn là khớp từng API với use case phù hợp của nó.
+
+Câu 12: Một pull request sửa đổi 14 file trong module stock tracking. Việc review một lượt duy nhất của bạn, phân tích tất cả các file cùng nhau, tạo ra kết quả không nhất quán: feedback chi tiết cho một số file nhưng nhận xét hời hợt cho những file khác, bỏ sót các bug rõ ràng, và feedback mâu thuẫn — đánh dấu một pattern là có vấn đề ở file này trong khi lại chấp thuận đoạn code y hệt ở file khác trong cùng PR. Bạn nên tái cấu trúc việc review như thế nào?
+
+A. Chia thành các lượt tập trung: phân tích từng file riêng lẻ để tìm các vấn đề cục bộ, sau đó chạy một lượt riêng tập trung vào integration để kiểm tra luồng dữ liệu xuyên file.
+
+B. Yêu cầu developer chia các PR lớn thành các submission nhỏ hơn gồm 3-4 file trước khi automated review chạy.
+
+Claude Certification Program Exam guide
+
+C. Chuyển sang model tier cao hơn với context window lớn hơn để cung cấp đủ attention cho cả 14 file trong một lượt.
+
+D. Chạy ba lượt review độc lập trên toàn bộ PR và chỉ đánh dấu các vấn đề xuất hiện trong ít nhất hai trong ba lượt chạy.
+
+Đáp án đúng: A. Việc chia review thành các lượt tập trung giải quyết trực tiếp nguyên nhân gốc: sự pha loãng attention khi xử lý nhiều file cùng lúc. Phân tích từng file đảm bảo độ sâu nhất quán, trong khi một lượt integration riêng bắt được các vấn đề xuyên file. Option B chuyển gánh nặng sang developer mà không cải thiện hệ thống. Option C hiểu sai rằng context window lớn hơn không giải quyết được các vấn đề về chất lượng attention. Option D thực ra sẽ kìm hãm việc phát hiện bug thật bằng cách yêu cầu sự đồng thuận trên các vấn đề mà có thể chỉ được bắt một cách không liên tục.
+
+## 10. Cách Bài Thi Được Chấm Điểm
+
+Bài thi Claude Certified Architect – Foundations là một đánh giá theo tiêu chí tham chiếu: mỗi thí sinh được đo lường dựa trên một tiêu chuẩn hiệu suất cố định, không phải so với các thí sinh khác. Bạn đậu bằng cách thể hiện kiến thức và kỹ năng được định nghĩa trong blueprint, không phải bằng cách vượt trội hơn một tỷ lệ phần trăm đồng nghiệp nào đó.
+
+Tiêu chuẩn đậu. Điểm đậu được thiết lập thông qua một nghiên cứu standard-setting chính thức, trong đó các chuyên gia chủ đề đã được đào tạo đánh giá mức hiệu suất kỳ vọng của một thí sinh đủ tiêu chuẩn tối thiểu. Điểm được báo cáo trên thang điểm scaled từ 100–1.000, và cut score là 720. Các mô hình scaled scoring giúp quy đổi điểm số giữa nhiều exam form có thể có mức độ khó hơi khác nhau.
+
+Báo cáo kết quả. Kết quả của bạn được báo cáo dưới dạng trạng thái pass hoặc fail kèm theo scaled score từ 100 đến 1.000. Báo cáo điểm của bạn cũng hiển thị phần trăm các item bạn trả lời đúng trong mỗi content domain. Các phần trăm ở cấp section được cung cấp để giúp bạn hiểu hiệu suất của mình và không được dùng để xác định kết quả pass hay fail, vốn dựa trên tổng scaled score của bạn.
+
+## 11. Đăng Ký và Lên Lịch Thi
+
+Việc đăng ký và lên lịch được xử lý thông qua Anthropic Partner Academy và Pearson VUE:
+
+1. Truy cập trang certification cho bài thi của bạn trên Anthropic Partner Academy và xem lại chi tiết bài thi.
+
+2. Tải Exam Guide và xem lại Certification Terms and Conditions cùng Certification Exam Policy trước khi đăng ký.
+
+Claude Certification Program Exam guide
+
+3. Đăng ký bài thi và hoàn tất thanh toán. Phí hiển thị khi thanh toán phản ánh bất kỳ khoản giảm giá nào áp dụng cho partner tier của bạn.
+
+4. Làm theo hướng dẫn xác nhận để tạo tài khoản Pearson VUE, sau đó đăng nhập để lên lịch buổi thi của bạn.
+
+5. Chọn một ngày còn trống và chọn hình thức online proctoring hoặc một Pearson test center. Bài thi được cung cấp bởi Pearson VUE.
+
+6. Bạn có thể hủy hoặc dời lịch tối đa 24 giờ trước giờ hẹn. Các thay đổi được thực hiện trong vòng 24 giờ sẽ mất phí thi.
+
+## 12. Các Chính Sách Bài Thi
+
+Nhận dạng
+
+Vào ngày thi, bạn phải xuất trình giấy tờ tùy thân có ảnh do chính phủ cấp, còn hiệu lực và chưa hết hạn. Tên trên ID của bạn phải khớp chính xác với tên trên đăng ký của bạn. Nếu bạn cần sửa tên trên [đăng ký của mình, hãy liên hệ certifcations-support@anthropic.com](mailto:certifications-support@anthropic.com) trước khi lên lịch thi.
+
+Hỗ trợ đặc biệt
+
+Các hỗ trợ hợp lý có sẵn cho những thí sinh có khuyết tật hoặc nhu cầu được ghi nhận, theo quy định của pháp luật hiện hành. Các hỗ trợ phải được yêu cầu và phê duyệt bởi Pearson VUE trước khi bạn lên lịch thi. Không lên lịch hẹn cho đến khi yêu cầu của bạn đã được [phê duyệt. Yêu cầu hỗ trợ tại pearsonvue.com/us/en/test-takers/accommodations.](https://www.pearsonvue.com/us/en/test-takers/accommodations/pearson_approve.anthropic.html)
+
+Chính sách thi lại
+
+Những thí sinh không đậu có thể thi lại sau một khoảng thời gian chờ bắt buộc. Thời gian chờ tăng lên theo mỗi lần thi trượt: 14 ngày sau lần đầu, 30 ngày sau lần thứ hai, và 90 ngày sau lần thứ ba. Bạn có thể thi một bài thi tối đa bốn lần trong một khoảng thời gian mười hai tháng cuốn chiếu. Các giới hạn áp dụng theo từng bài thi, vì vậy việc trượt một bài thi không ngăn bạn đăng ký một bài thi khác. Phí thi áp dụng cho mỗi lần thi.
+
+Vắng mặt và đến muộn
+
+Những thí sinh không có mặt cho một bài thi đã lên lịch, hoặc đến sau khung thời gian đến muộn được cho phép, sẽ mất phí thi và phải đăng ký lại. Các hạn chót hủy và dời lịch được mô tả trong Mục 11.
+
+Claude Certification Program Exam guide
+
+## 13. Trải Nghiệm Ngày Thi và Quy Tắc Ứng Xử
+
+Bài thi được quản lý trong một môi trường được giám sát, chuẩn hóa và bảo mật. Dù bạn thi online hay tại một Pearson VUE test center, các quy tắc sau đây đều áp dụng để bảo vệ tính toàn vẹn của chứng chỉ cho tất cả những ai sở hữu nó.
+
+Trong suốt bài thi, bạn phải:
+
+- Duy trì trong tầm nhìn của proctor và webcam trong toàn bộ buổi thi, nếu thi online
+
+- Giữ không gian làm việc của bạn sạch sẽ, không có ghi chú, sách, điện thoại, màn hình phụ và các tài liệu khác
+
+- Không giao tiếp với bất kỳ người nào khác trong suốt bài thi
+
+- Không chụp, sao chép, chụp ảnh hoặc tái tạo bất kỳ nội dung bài thi nào dưới bất kỳ hình thức nào
+
+Các vật dụng bị cấm bao gồm điện thoại di động, smart watch, tai nghe, tài liệu học tập và bất kỳ thiết bị ghi âm nào. Các vật dụng được phép, nếu có, chẳng hạn như giấy nháp do proctor cung cấp, được quy định bởi Pearson VUE.
+
+Hậu quả của hành vi sai trái. Gian lận, cố gắng truy cập các tài nguyên bị cấm, hoặc tiết lộ nội dung bài thi có thể dẫn đến việc vô hiệu hóa kết quả của bạn, thu hồi chứng chỉ của bạn, và cấm thi trong tương lai.
+
+## 14. Bảo Mật và Thỏa Thuận Không Tiết Lộ
+
+Trước khi bài thi bắt đầu, bạn phải chấp nhận một thỏa thuận bảo mật và không tiết lộ. Bằng việc chấp nhận, bạn đồng ý rằng tất cả nội dung bài thi, bao gồm câu hỏi, lựa chọn đáp án và các scenario, là tài sản bảo mật và độc quyền của Anthropic, và rằng bạn sẽ không tiết lộ, tái tạo hoặc phân phối bất kỳ phần nào của nó. Nếu bạn không chấp nhận thỏa thuận, buổi thi kết thúc và không có hoàn tiền.
+
+## 15. Duy Trì Chứng Chỉ và Tái Chứng Nhận
+
+Chứng chỉ Claude Certified Architect – Foundations có hiệu lực trong 12 tháng kể từ ngày được cấp. Bởi vì công nghệ nền tảng phát triển nhanh chóng, chứng chỉ có giới hạn thời gian để những người sở hữu duy trì kiến thức hiện hành.
+
+Để gia hạn đúng hạn, bạn xem lại những gì đã thay đổi kể từ khi bạn được chứng nhận và hoàn thành một bài đánh giá miễn phí, không có giám sát trên Anthropic Partner Academy. Không có phí cho việc gia hạn đúng hạn. Nếu chứng chỉ của bạn hết hạn, bạn phải thi lại toàn bộ bài thi với mức phí đầy đủ để lấy lại trạng thái chứng nhận.
+
+Claude Certification Program Exam guide
+
+Nếu nội dung bài thi thay đổi đáng kể, Anthropic có thể yêu cầu những người sở hữu thi lại toàn bộ bài thi để tái chứng nhận thay vì hoàn thành bài đánh giá gia hạn.
+
+Những người sở hữu vẫn phải tuân theo các quy tắc ứng xử được mô tả trong Mục 13.
+
+## 16. Hỗ trợ ứng viên, Khiếu nại và Quyền riêng tư
+
+Hỗ trợ
+
+[Để chỉnh sửa tên trên đăng ký của bạn, hãy liên hệ certifcations-support@anthropic.com. Đối với tất cả các](mailto:certifications-support@anthropic.com)
+
+câu hỏi khác, bao gồm đăng ký, lên lịch thi, hỗ trợ đặc biệt và kết quả thi, hãy liên hệ bộ phận hỗ trợ của Pearson VUE
+
+[tại pearsonvue.com/us/en/anthropic.html.](https://www.pearsonvue.com/us/en/anthropic.html#contact)
+
+Khiếu nại và phản ánh
+
+Bạn có thể khiếu nại một quyết định trong vòng 14 ngày kể từ ngày bạn được thông báo về quyết định đó, hoặc đối với băn khoăn về
+
+kết quả thi của bạn, trong vòng 14 ngày kể từ ngày thi. Gửi khiếu nại đến bộ phận hỗ trợ của Pearson VUE tại đường link
+
+trên. Các khiếu nại được xem xét theo chính sách khiếu nại của chương trình. Kết quả thiết lập chuẩn (standard-setting) và
+
+nội dung của từng câu hỏi thi không thuộc phạm vi có thể khiếu nại.
+
+Quyền riêng tư
+
+Dữ liệu cá nhân được thu thập trong quá trình đăng ký và thi được xử lý theo chính sách quyền riêng tư của Anthropic,
+
+chính sách quyền riêng tư của Pearson VUE và luật bảo vệ dữ liệu hiện hành.
+
+## 17. Phụ lục
+
+Các công nghệ và khái niệm
+
+Danh sách sau đây bao gồm các công nghệ và khái niệm có thể xuất hiện trong bài thi:
+
+- Claude Agent SDK — định nghĩa agent, agentic loop, xử lý stop_reason, hooks (PostToolUse,
+
+chặn lời gọi tool), sinh subagent thông qua Task tool, cấu hình allowedTools
+
+- Model Context Protocol (MCP) — MCP server, MCP tool, MCP resource, cờ isError, mô tả tool,
+
+phân phối tool, cấu hình .mcp.json, mở rộng biến môi trường
+
+Claude Certification Program Exam guide
+
+- Claude Code — thứ bậc cấu hình CLAUDE.md (user/project/directory), .claude/rules/ với
+YAML frontmatter phạm vi theo đường dẫn, .claude/commands/ cho slash command, .claude/skills/ với
+
+SKILL.md frontmatter (context: fork, allowed-tools, argument-hint), plan mode, thực thi trực tiếp,
+
+lệnh /memory, /compact, --resume, fork_session, Explore subagent
+
+- Claude Code CLI — cờ -p / --print cho chế độ non-interactive, --output-format json, --json-schema cho
+
+đầu ra CI có cấu trúc
+
+- Claude API — tool_use với JSON schema, các tùy chọn tool_choice ("auto", "any", chọn tool bắt buộc),
+
+các giá trị stop_reason ("tool_use", "end_turn"), max_tokens, system prompt
+
+- Message Batches API — tiết kiệm 50% chi phí, cửa sổ xử lý tối đa 24 giờ, custom_id để
+
+tương quan request/response, polling để kiểm tra hoàn tất, không hỗ trợ multi-turn tool calling
+
+- JSON Schema — trường bắt buộc so với tùy chọn, kiểu enum, trường nullable, mẫu "other" + chuỗi chi tiết,
+
+strict mode để loại bỏ lỗi cú pháp
+
+- Pydantic — kiểm tra schema, lỗi kiểm tra ngữ nghĩa, vòng lặp validation-retry
+
+- Các tool tích hợp — Read, Write, Edit, Bash, Grep, Glob — mục đích và tiêu chí lựa chọn của chúng
+
+- Few-shot prompting — ví dụ có chủ đích cho các tình huống mơ hồ, minh họa định dạng,
+
+khả năng tổng quát hóa cho các mẫu mới
+
+- Prompt chaining — phân rã tác vụ tuần tự thành các lượt xử lý tập trung
+
+- Quản lý context window — ngân sách token, tóm tắt lũy tiến, hiệu ứng lost-in-the-middle,
+
+trích xuất context, file scratchpad
+
+- Quản lý session — khôi phục session, fork_session, session có tên, cô lập context session
+
+- Chấm điểm độ tin cậy — độ tin cậy theo từng trường, hiệu chỉnh bằng tập validation có nhãn, lấy mẫu
+
+phân tầng để đo tỷ lệ lỗi
+
+Các chủ đề trong phạm vi thi
+
+Các chủ đề sau đây được kiểm tra rõ ràng trong bài thi:
+
+- Triển khai agentic loop: luồng điều khiển dựa trên stop_reason, xử lý kết quả tool, điều kiện
+
+kết thúc vòng lặp
+
+- Điều phối multi-agent: mẫu coordinator-subagent, phân rã tác vụ, thực thi subagent song song,
+
+vòng lặp tinh chỉnh lặp đi lặp lại
+
+- Quản lý context của subagent: truyền context tường minh, lưu trạng thái có cấu trúc, phục hồi
+
+sau sự cố bằng manifest
+
+- Thiết kế giao diện tool: viết mô tả tool hiệu quả, tách so với gộp tool, đặt tên tool
+
+để giảm mơ hồ
+
+Claude Certification Program Exam guide
+
+- Thiết kế MCP tool và resource: resource cho danh mục nội dung, tool cho hành động, chất lượng mô tả
+để tăng mức độ sử dụng
+
+- Cấu hình MCP server: phạm vi project so với user, mở rộng biến môi trường, truy cập đồng thời
+
+nhiều server
+
+- Xử lý và lan truyền lỗi: phản hồi lỗi có cấu trúc, lỗi tạm thời so với lỗi nghiệp vụ so với lỗi quyền hạn,
+
+phục hồi cục bộ trước khi escalate
+
+- Ra quyết định escalate: tiêu chí tường minh, tôn trọng tùy chọn của khách hàng, xác định
+
+lỗ hổng chính sách
+
+- Cấu hình CLAUDE.md: thứ bậc (user/project/directory), mẫu @import, .claude/rules/ với
+
+glob pattern
+
+- Custom command và skill: phạm vi project so với user, context: fork, allowed-tools, argument-hint
+
+trong frontmatter
+
+- Plan mode so với thực thi trực tiếp: đánh giá độ phức tạp, quyết định kiến trúc, thay đổi một file
+
+- Tinh chỉnh lặp đi lặp lại: ví dụ input/output, lặp dựa trên test, mẫu phỏng vấn, giải quyết vấn đề
+
+tuần tự so với song song
+
+- Đầu ra có cấu trúc thông qua tool_use: thiết kế schema, cấu hình tool_choice, trường nullable để ngăn
+
+hallucination
+
+- Few-shot prompting: nhắm vào tình huống mơ hồ, nhất quán định dạng, giảm dương tính giả
+
+- Xử lý batch: mức độ phù hợp của Message Batches API, đánh giá khả năng chịu độ trễ, xử lý
+
+lỗi theo custom_id
+
+- Tối ưu context window: cắt bớt đầu ra tool dài dòng, trích xuất dữ kiện có cấu trúc, sắp xếp đầu vào
+
+có ý thức về vị trí
+
+- Quy trình con người review: hiệu chỉnh độ tin cậy, lấy mẫu phân tầng, phân đoạn độ chính xác theo
+
+loại tài liệu và trường
+
+- Nguồn gốc thông tin: ánh xạ claim-source, xử lý dữ liệu theo thời gian, chú thích xung đột,
+
+báo cáo lỗ hổng phạm vi bao phủ
+
+Các chủ đề ngoài phạm vi thi
+
+Các chủ đề liên quan sau đây sẽ không xuất hiện trong bài thi:
+
+- Fine-tuning model Claude hoặc huấn luyện model tùy chỉnh
+
+- Xác thực, thanh toán hoặc quản lý tài khoản của Claude API
+
+- Triển khai chi tiết các ngôn ngữ lập trình hoặc framework cụ thể (ngoài những gì cần thiết
+
+cho cấu hình tool và schema)
+
+- Triển khai hoặc host MCP server (hạ tầng, mạng, điều phối container)
+
+Claude Certification Program Exam guide
+
+- Kiến trúc nội bộ, quy trình huấn luyện hoặc trọng số model của Claude
+
+- Constitutional AI, RLHF hoặc các phương pháp huấn luyện an toàn
+
+- Chi tiết triển khai embedding model hoặc vector database
+
+- Computer use (tự động hóa trình duyệt, tương tác desktop)
+
+- Khả năng phân tích hình ảnh/thị giác
+
+- Triển khai Streaming API hoặc server-sent event
+
+- Rate limiting, quota hoặc tính toán giá của API
+
+- OAuth, luân chuyển API key hoặc chi tiết giao thức xác thực
+
+- Cấu hình nhà cung cấp cloud cụ thể (AWS, GCP, Azure)
+
+- Benchmark hiệu năng hoặc các chỉ số so sánh model
+
+- Chi tiết triển khai prompt caching (ngoài việc biết nó tồn tại)
+
+- Thuật toán đếm token hoặc chi tiết tokenization
+
+## 18. Kiểm soát tài liệu
+
+Phiên bản Tóm tắt thay đổi Ngày
+
+1.0 Cập nhật định dạng và bố cục Tháng 7 năm 2026
+
+0.2 Bản nháp sửa đổi Tháng 6 năm 2026
+
+0.1 Bản nháp đầu tiên Tháng 2 năm 2026
+
+---
+
+*Made by Anh Tu - Share to be share*
