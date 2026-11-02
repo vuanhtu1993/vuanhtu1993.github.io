@@ -1,5 +1,9 @@
+packages:
+  - '.'
+
 allowBuilds:
   '@playwright/browser-chromium': true
   canvas: true
   core-js: true
   esbuild: true
+
