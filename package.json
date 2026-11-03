@@ -36,7 +36,6 @@
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@mozilla/readability": "^0.6.0",
     "@napi-rs/canvas": "^0.1.100",
-    "@playwright/browser-chromium": "^1.60.0",
     "@radix-ui/react-dialog": "^1.1.23",
     "@radix-ui/react-tabs": "^1.1.21",
     "axios": "^1.21.0",
@@ -51,7 +50,6 @@
     "mongodb": "^7.6.0",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^5.7.284",
-    "playwright": "^1.60.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -72,6 +70,7 @@
     "@types/jsdom": "^28.0.1",
     "@types/mozilla-readability": "^0.2.1",
     "@types/pdf-parse": "^1.1.5",
+    "playwright": "^1.60.0",
     "tsx": "^4.21.0"
   },
   "browserslist": {
